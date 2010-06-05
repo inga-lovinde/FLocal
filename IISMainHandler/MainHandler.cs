@@ -11,10 +11,10 @@ namespace FLocal.IISHandler {
             get { return true; }
         }
 
-        public void ProcessRequest(HttpContext context) {
-            using(ISpecificHandler handler = HandlersFactory.getHandler(context)) {
-                handler.Handle();
-            }
+        public void ProcessRequest(HttpContext httpcontext) {
+            WebContext context = new WebContext(httpcontext);
+            ISpecificHandler handler = HandlersFactory.getHandler(context);
+            handler.Handle(context);
         }
 
     }

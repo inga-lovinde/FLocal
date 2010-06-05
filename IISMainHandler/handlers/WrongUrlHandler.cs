@@ -7,11 +7,9 @@ using System.Web;
 namespace FLocal.IISHandler.handlers {
     class WrongUrlHandler : ISpecificHandler  {
 
-        public void Handle() {
+        public void Handle(WebContext context) {
             throw new HttpException(404, "page not found");
         }
-
-        public void Dispose() { }
 
     }
 }

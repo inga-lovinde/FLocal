@@ -13,5 +13,9 @@ namespace FLocal.IISHandler {
             response.Write((char)0x0a);
         }
 
+        public static string[] Split(this string str, string separator, StringSplitOptions options) {
+            return str.Split(new string[] { separator }, options);
+        }
+
     }
 }

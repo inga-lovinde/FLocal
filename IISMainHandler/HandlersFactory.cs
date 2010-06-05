@@ -7,9 +7,11 @@ using System.Web;
 namespace FLocal.IISHandler {
     class HandlersFactory {
 
-        public static ISpecificHandler getHandler(HttpContext context) {
-            //return new handlers.DebugHandler(context);
-            return new handlers.WrongUrlHandler();
+        public static ISpecificHandler getHandler(WebContext context) {
+            string[] requestParts = context.httprequest.Path.Split("/", StringSplitOptions.RemoveEmptyEntries);
+            if(requestParts.Length < 1) return new handlers.RootHandler();
+            return new handlers.DebugHandler(requestParts[0]);
+            //return new handlers.WrongUrlHandler();
         }
 
     }

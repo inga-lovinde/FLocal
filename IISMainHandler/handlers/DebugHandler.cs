@@ -7,20 +7,17 @@ using System.Web;
 namespace FLocal.IISHandler.handlers {
     class DebugHandler : ISpecificHandler {
 
-        private HttpContext context;
+        private string type;
 
-        public DebugHandler(HttpContext context) {
-            this.context = context;
+        public DebugHandler(string type) {
+            this.type = type;
         }
 
-        public void Handle() {
-            context.Response.ContentType = "text/plain";
-            context.Response.WriteLine("Path: " + context.Request.Path);
-            context.Response.WriteLine("PathInfo: " + context.Request.PathInfo);
-        }
-
-        public void Dispose() {
-            this.context = null;
+        public void Handle(WebContext context) {
+            context.httpresponse.ContentType = "text/plain";
+            context.httpresponse.WriteLine("Page: " + this.type);
+            context.httpresponse.WriteLine("Path: " + context.httprequest.Path);
+            context.httpresponse.WriteLine("PathInfo: " + context.httprequest.PathInfo);
         }
 
     }

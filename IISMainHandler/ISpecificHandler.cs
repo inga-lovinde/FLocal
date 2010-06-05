@@ -5,9 +5,9 @@ using System.Text;
 using System.Web;
 
 namespace FLocal.IISHandler {
-    interface ISpecificHandler : IDisposable {
+    interface ISpecificHandler {
 
-        void Handle();
+        void Handle(WebContext context);
 
     }
 }
