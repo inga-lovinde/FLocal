@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual C# Express 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IISMainHandler", "IISMainHandler\IISMainHandler.csproj", "{9A902732-E7F1-4F41-869B-316AF2254B36}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{6F532626-E9F8-498E-9683-1538E7CD62CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{CE888859-9E46-41F7-91CE-8EC106F3A625}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +17,14 @@ Global
 		{9A902732-E7F1-4F41-869B-316AF2254B36}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A902732-E7F1-4F41-869B-316AF2254B36}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A902732-E7F1-4F41-869B-316AF2254B36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F532626-E9F8-498E-9683-1538E7CD62CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F532626-E9F8-498E-9683-1538E7CD62CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F532626-E9F8-498E-9683-1538E7CD62CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F532626-E9F8-498E-9683-1538E7CD62CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE888859-9E46-41F7-91CE-8EC106F3A625}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE888859-9E46-41F7-91CE-8EC106F3A625}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE888859-9E46-41F7-91CE-8EC106F3A625}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE888859-9E46-41F7-91CE-8EC106F3A625}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
