@@ -4,6 +4,6 @@ using System.Linq;
 using System.Text;
 
 namespace FLocal.IISHandler.designs {
-    class Lite : IDesign {
-    }
+	class Lite : IDesign {
+	}
 }

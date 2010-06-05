@@ -5,11 +5,11 @@ using System.Text;
 using System.Xml.Linq;
 
 namespace FLocal.IISHandler {
-    class TemplateEngine {
+	class TemplateEngine {
 
-        public static string Compile(string pathToTemplate, XDocument data) {
-            throw new NotImplementedException();
-        }
+		public static string Compile(string pathToTemplate, XDocument data) {
+			throw new NotImplementedException();
+		}
 
-    }
+	}
 }

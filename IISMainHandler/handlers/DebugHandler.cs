@@ -5,20 +5,20 @@ using System.Text;
 using System.Web;
 
 namespace FLocal.IISHandler.handlers {
-    class DebugHandler : ISpecificHandler {
+	class DebugHandler : ISpecificHandler {
 
-        private string type;
+		private string type;
 
-        public DebugHandler(string type) {
-            this.type = type;
-        }
+		public DebugHandler(string type) {
+			this.type = type;
+		}
 
-        public void Handle(WebContext context) {
-            context.httpresponse.ContentType = "text/plain";
-            context.httpresponse.WriteLine("Page: " + this.type);
-            context.httpresponse.WriteLine("Path: " + context.httprequest.Path);
-            context.httpresponse.WriteLine("PathInfo: " + context.httprequest.PathInfo);
-        }
+		public void Handle(WebContext context) {
+			context.httpresponse.ContentType = "text/plain";
+			context.httpresponse.WriteLine("Page: " + this.type);
+			context.httpresponse.WriteLine("Path: " + context.httprequest.Path);
+			context.httpresponse.WriteLine("PathInfo: " + context.httprequest.PathInfo);
+		}
 
-    }
+	}
 }

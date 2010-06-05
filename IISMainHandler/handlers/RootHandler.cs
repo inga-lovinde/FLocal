@@ -7,18 +7,18 @@ using System.Xml.Linq;
 
 namespace FLocal.IISHandler.handlers {
 
-    class RootHandler : AbstractGetHandler {
+	class RootHandler : AbstractGetHandler {
 
-        override protected string templateName {
-            get {
-                throw new NotImplementedException();
-            }
-        }
+		override protected string templateName {
+			get {
+				throw new NotImplementedException();
+			}
+		}
 
-        override protected XDocument getData(WebContext context) {
-            throw new NotImplementedException();
-        }
+		override protected XDocument getData(WebContext context) {
+			throw new NotImplementedException();
+		}
 
-    }
+	}
 
 }
