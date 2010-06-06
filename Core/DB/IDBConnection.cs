@@ -11,13 +11,15 @@ namespace FLocal.Core.DB {
 
 		int[] LoadIdsByConditions(ITableSpec table, conditions.AbstractCondition conditions, Diapasone diapasone, JoinSpec[] joins, SortSpec[] sorts);
 
-		ILock lockTable(ITableSpec table);
+		Transaction beginTransaction();
 
-		ILock lockRow(ITableSpec table, int id);
+		ILock lockTable(Transaction transaction, ITableSpec table);
 
-		void update(ITableSpec table, int id, Dictionary<string, string> data);
+		ILock lockRow(Transaction transaction, ITableSpec table, int id);
 
-		void delete(ITableSpec table, int id); //do we really need this?
+		void update(Transaction transaction, ITableSpec table, int id, Dictionary<string, string> data);
+
+		void delete(Transaction transaction, ITableSpec table, int id); //do we really need this?
 
 	}
 
