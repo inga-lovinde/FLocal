@@ -18,6 +18,7 @@ namespace FLocal.IISHandler.handlers {
 			context.httpresponse.WriteLine("Page: " + this.type);
 			context.httpresponse.WriteLine("Path: " + context.httprequest.Path);
 			context.httpresponse.WriteLine("PathInfo: " + context.httprequest.PathInfo);
+			context.httpresponse.WriteLine("AppInfo: " + context.config.AppInfo);
 		}
 
 	}

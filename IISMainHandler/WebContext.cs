@@ -27,6 +27,12 @@ namespace FLocal.IISHandler {
 			}
 		}
 
+		public Common.Config config {
+			get {
+				return Common.Config.instance;
+			}
+		}
+
 		public WebContext(HttpContext httpcontext) {
 			this.httpcontext = httpcontext;
 		}

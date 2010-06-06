@@ -64,6 +64,7 @@
     <Compile Include="DB\ITableSpec.cs" />
     <Compile Include="DB\JoinSpec.cs" />
     <Compile Include="DB\SortSpec.cs" />
+    <Compile Include="DB\Transaction.cs" />
     <Compile Include="delegates\Lazy.cs" />
     <Compile Include="delegates\Predicate.cs" />
     <Compile Include="exceptions\CriticalException.cs" />

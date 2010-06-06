@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Collections.Specialized;
 
 namespace FLocal.Core {
 
 	public class Config<T> where T : Config<T> {
 
-		private static T _instance;
+		private static T _instance = null;
 
 		public static T instance {
 			get {
@@ -16,13 +17,28 @@ namespace FLocal.Core {
 			}
 		}
 
-		protected Config() {
+		private NameValueCollection data;
+
+		public string AppInfo {
+			get {
+				return data["AppInfo"];
+			}
+		}
+
+		protected Config(NameValueCollection data) {
+			this.data = data;
 		}
 
 		protected static void doInit(Func<T> configCreator) {
 			if(_instance != null) throw new FLocalException("already initialized");
-			lock(_instance) {
+			lock(typeof(Config<T>)) {
 				if(_instance != null) throw new FLocalException("already initialized");
+				_instance = configCreator();
+			}
+		}
+
+		protected static void doReInit(Func<T> configCreator) {
+			lock(typeof(Config<T>)) {
 				_instance = configCreator();
 			}
 		}
