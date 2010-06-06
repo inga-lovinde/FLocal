@@ -5,16 +5,24 @@ using System.Text;
 
 namespace FLocal.Core.DB {
 
-	abstract class Transaction : IDisposable {
+	abstract public class Transaction : IDisposable {
+
+		protected Transaction() {
+			this.finalized = false;
+		}
 
 		abstract protected void do_Commit();
 
 		abstract protected void do_Rollback();
 
-		private bool finalized = false;
+		public bool finalized {
+			get;
+			private set;
+		}
 
 		public void Commit() {
 			lock(this) {
+				if(this.finalized) throw new CriticalException("Already finalized");
 				this.do_Commit();
 				this.finalized = true;
 			}
@@ -22,6 +30,7 @@ namespace FLocal.Core.DB {
 
 		public void Rollback() {
 			lock(this) {
+				if(this.finalized) throw new CriticalException("Already finalized");
 				this.do_Rollback();
 				this.finalized = true;
 			}

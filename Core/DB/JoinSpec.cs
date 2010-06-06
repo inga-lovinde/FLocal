@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace FLocal.Core.DB {
-	class JoinSpec {
+	public class JoinSpec {
 
 		public readonly ColumnSpec mainColumn;
 

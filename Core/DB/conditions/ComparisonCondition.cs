@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace FLocal.Core.DB.conditions {
-	class ComparisonCondition : SimpleCondition {
+	public class ComparisonCondition : SimpleCondition {
 
 		public readonly ColumnSpec left;
 		public readonly ComparisonType comparison;

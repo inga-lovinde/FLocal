@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace FLocal.Core.DB.conditions {
-	enum ComparisonType {
+	public enum ComparisonType {
 		EQUAL,
 		NOTEQUAL,
 		LESSTHAN,

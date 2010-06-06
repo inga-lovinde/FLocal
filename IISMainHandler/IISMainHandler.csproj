@@ -74,6 +74,10 @@
       <Project>{6F532626-E9F8-498E-9683-1538E7CD62CB}</Project>
       <Name>Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MySQLConnector\MySQLConnector.csproj">
+      <Project>{E38DE5B1-F9C2-43BA-A5DF-0743ABD4DFC7}</Project>
+      <Name>MySQLConnector</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

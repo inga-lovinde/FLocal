@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace FLocal.Core.DB {
-	class SortSpec {
+	public class SortSpec {
 
 		public readonly ColumnSpec column;
 	

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace FLocal.Core.DB {
-	class ColumnOrValue {
+	public class ColumnOrValue {
 
 		private bool _isColumn;
 

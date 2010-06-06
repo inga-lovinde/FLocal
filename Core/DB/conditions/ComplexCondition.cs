@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace FLocal.Core.DB.conditions {
-	class ComplexCondition : AbstractCondition {
+	public class ComplexCondition : AbstractCondition {
 
 		public readonly ConditionsJoinType type;
 

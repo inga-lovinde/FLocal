@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace FLocal.Core.DB.conditions {
-	class MultiValueCondition : SimpleCondition {
+	public class MultiValueCondition : SimpleCondition {
 
 		public readonly ColumnSpec column;
 
