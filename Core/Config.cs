@@ -43,5 +43,11 @@ namespace FLocal.Core {
 			}
 		}
 
+		public static bool isInitialized {
+			get {
+				return _instance != null;
+			}
+		}
+
 	}
 }

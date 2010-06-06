@@ -19,6 +19,7 @@ namespace FLocal.IISHandler.handlers {
 			context.httpresponse.WriteLine("Path: " + context.httprequest.Path);
 			context.httpresponse.WriteLine("PathInfo: " + context.httprequest.PathInfo);
 			context.httpresponse.WriteLine("AppInfo: " + context.config.AppInfo);
+			context.httpresponse.WriteLine("InitTime: " + context.config.InitTime);
 		}
 
 	}

@@ -8,7 +8,10 @@ namespace FLocal.Common {
 
 	public class Config : FLocal.Core.Config<Config> {
 
+		public readonly string InitTime;
+
 		protected Config(NameValueCollection data) : base(data) {
+			this.InitTime = DateTime.Now.ToLongTimeString();
 		}
 
 		public static void Init(NameValueCollection data) {

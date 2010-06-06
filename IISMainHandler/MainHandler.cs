@@ -13,7 +13,7 @@ namespace FLocal.IISHandler {
 		}
 
 		public void ProcessRequest(HttpContext httpcontext) {
-			FLocal.Common.Config.ReInit(ConfigurationManager.AppSettings);
+			if(!FLocal.Common.Config.isInitialized) FLocal.Common.Config.Init(ConfigurationManager.AppSettings);
 
 			WebContext context = new WebContext(httpcontext);
 			ISpecificHandler handler = HandlersFactory.getHandler(context);
