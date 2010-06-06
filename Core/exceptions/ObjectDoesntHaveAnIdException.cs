@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FLocal.Core {
 
-    partial class ObjectDoesntHaveAnIdException : FLocalException {
+    public partial class ObjectDoesntHaveAnIdException : FLocalException {
 
         public ObjectDoesntHaveAnIdException()
             : base("Object doesn't have an id") {

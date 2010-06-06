@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace FLocal.Core {
 
-	abstract class DataObject<TKey, T> : IDataObject<TKey, T>
+	abstract public class DataObject<TKey, T> : IDataObject<TKey, T>
         where T : DataObject<TKey, T>, new()
         where TKey : struct {
 
@@ -48,7 +48,7 @@ namespace FLocal.Core {
             this.AfterCreate();
         }
 
-        public static Registry<TKey, T> registry {
+        private static Registry<TKey, T> registry {
             get {
                 return Registry<TKey, T>.instance;
             }

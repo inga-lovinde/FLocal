@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FLocal.Core {
 
-    partial class FLocalException : ApplicationException {
+    public partial class FLocalException : ApplicationException {
 
         public readonly string FullStackTrace;
 

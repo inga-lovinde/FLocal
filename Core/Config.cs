@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FLocal.Core {
 
-	class Config<T> where T : Config<T> {
+	public class Config<T> where T : Config<T> {
 
 		private static Config<T> _instance;
 
