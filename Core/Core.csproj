@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config.cs" />
     <Compile Include="DataObject.cs" />
     <Compile Include="delegates\Lazy.cs" />
     <Compile Include="delegates\Predicate.cs" />
