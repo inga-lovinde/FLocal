@@ -47,6 +47,23 @@
   <ItemGroup>
     <Compile Include="Config.cs" />
     <Compile Include="DataObject.cs" />
+    <Compile Include="DB\conditions\AbstractCondition.cs" />
+    <Compile Include="DB\ColumnOrValue.cs" />
+    <Compile Include="DB\ColumnSpec.cs" />
+    <Compile Include="DB\conditions\ComparisonCondition.cs" />
+    <Compile Include="DB\conditions\ComparisonType.cs" />
+    <Compile Include="DB\conditions\ComplexCondition.cs" />
+    <Compile Include="DB\conditions\ConditionsJoinType.cs" />
+    <Compile Include="DB\conditions\IsNullCondition.cs" />
+    <Compile Include="DB\conditions\MultiValueCondition.cs" />
+    <Compile Include="DB\conditions\NotIsNullCondition.cs" />
+    <Compile Include="DB\conditions\SimpleCondition.cs" />
+    <Compile Include="DB\Diapasone.cs" />
+    <Compile Include="DB\IDBConnection.cs" />
+    <Compile Include="DB\ILock.cs" />
+    <Compile Include="DB\ITableSpec.cs" />
+    <Compile Include="DB\JoinSpec.cs" />
+    <Compile Include="DB\SortSpec.cs" />
     <Compile Include="delegates\Lazy.cs" />
     <Compile Include="delegates\Predicate.cs" />
     <Compile Include="exceptions\CriticalException.cs" />
