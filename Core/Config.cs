@@ -6,7 +6,7 @@ using System.Collections.Specialized;
 
 namespace FLocal.Core {
 
-	public class Config<T> where T : Config<T> {
+	public abstract class Config<T> : IDisposable where T : Config<T> {
 
 		private static T _instance = null;
 
@@ -47,6 +47,9 @@ namespace FLocal.Core {
 			get {
 				return _instance != null;
 			}
+		}
+
+		public virtual void Dispose() {
 		}
 
 	}

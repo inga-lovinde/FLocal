@@ -47,10 +47,9 @@ namespace FLocal.Core {
 			return this.Get(id, forLoadingFromHash);
         }
 
-/*        public bool IsCached(TKey id) {
-            if(this.locks.Contains(id)) throw new CriticalException("locked");
+        public bool IsCached(TKey id) {
             return this.storage.ContainsKey(id);
-        }*/
+        }
 
 		internal void Delete(TKey[] idsToDelete) {
 			foreach(TKey id in idsToDelete) {

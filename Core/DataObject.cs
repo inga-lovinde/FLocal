@@ -29,7 +29,7 @@ namespace FLocal.Core {
 
         private bool isJustCreated;
 
-        internal DataObject() {
+        protected DataObject() {
             Debug.Assert(this is T);
             this.isJustCreated = true;
             this._id = null;
@@ -38,6 +38,14 @@ namespace FLocal.Core {
         public static T LoadById(TKey id) {
             return registry.Get(id, false);
         }
+
+		protected static Dictionary<TKey, T> LoadByIdsForLoadingFromHash(List<TKey> ids) {
+			Dictionary<TKey, T> res = new Dictionary<TKey,T>();
+			foreach(TKey id in ids) {
+				res[id] = registry.Get(id, true);
+			}
+			return res;
+		}
 
         protected virtual void AfterCreate(bool forLoadingFromHash) { }
 

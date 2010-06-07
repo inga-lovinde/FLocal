@@ -10,8 +10,11 @@ namespace FLocal.Common {
 
 		public readonly string InitTime;
 
+		public readonly Core.DB.IDBConnection mainConnection;
+
 		protected Config(NameValueCollection data) : base(data) {
 			this.InitTime = DateTime.Now.ToLongTimeString();
+			this.mainConnection = new MySQLConnector.Connection(data["connectionString"]);
 		}
 
 		public static void Init(NameValueCollection data) {
@@ -20,6 +23,11 @@ namespace FLocal.Common {
 
 		public static void ReInit(NameValueCollection data) {
 			doReInit(() => new Config(data));
+		}
+
+		public override void Dispose() {
+			this.mainConnection.Dispose();
+			base.Dispose();
 		}
 
 	}
