@@ -27,84 +27,87 @@ namespace FLocal.MySQLConnector {
 		}
 
 		public List<Dictionary<string, string>> LoadByIds(ITableSpec table, List<string> ids) {
-			using(MySqlCommand command = this.connection.CreateCommand()) {
-				command.CommandType = System.Data.CommandType.Text;
+			lock(this) {
+				using(MySqlCommand command = this.connection.CreateCommand()) {
+					command.CommandType = System.Data.CommandType.Text;
 
-				ParamsHolder paramsHolder = new ParamsHolder();
-				List<string> placeholder = new List<string>();
-				foreach(string id in ids) {
-					placeholder.Add("@" + paramsHolder.Add(id));
-				}
+					ParamsHolder paramsHolder = new ParamsHolder();
+					List<string> placeholder = new List<string>();
+					foreach(string id in ids) {
+						placeholder.Add("@" + paramsHolder.Add(id));
+					}
 
-				command.CommandText = "SELECT * FROM " + table.compile() + " WHERE " + table.getIdSpec().compile() + " IN (" + string.Join(", ", placeholder.ToArray()) + ")";
-				foreach(KeyValuePair<string, string> kvp in paramsHolder.data) {
-					command.Parameters.AddWithValue(kvp.Key, kvp.Value);
-				}
+					command.CommandText = "SELECT * FROM " + table.compile() + " WHERE " + table.getIdSpec().compile() + " IN (" + string.Join(", ", placeholder.ToArray()) + ")";
+					foreach(KeyValuePair<string, string> kvp in paramsHolder.data) {
+						command.Parameters.AddWithValue(kvp.Key, kvp.Value);
+					}
 
-				Dictionary<string, Dictionary<string, string>> rawResult = new Dictionary<string, Dictionary<string, string>>();
-				using(MySqlDataReader reader = command.ExecuteReader()) {
-					while(reader.Read()) {
-						Dictionary<string, string> row = new Dictionary<string,string>();
-						for(int i=0; i<reader.FieldCount; i++) {
-							row.Add(reader.GetName(i), reader.GetString(i));
+					Dictionary<string, Dictionary<string, string>> rawResult = new Dictionary<string, Dictionary<string, string>>();
+					using(MySqlDataReader reader = command.ExecuteReader()) {
+						while(reader.Read()) {
+							Dictionary<string, string> row = new Dictionary<string,string>();
+							for(int i=0; i<reader.FieldCount; i++) {
+								row.Add(reader.GetName(i), reader.GetString(i));
+							}
+							rawResult.Add(row[table.idName], row);
 						}
-						rawResult.Add(row[table.idName], row);
 					}
-				}
 
-				List<Dictionary<string, string>> result = new List<Dictionary<string,string>>();
-				foreach(string id in ids) {
-					if(rawResult.ContainsKey(id)) {
-						result.Add(rawResult[id]);
+					List<Dictionary<string, string>> result = new List<Dictionary<string,string>>();
+					foreach(string id in ids) {
+						if(rawResult.ContainsKey(id)) {
+							result.Add(rawResult[id]);
+						}
 					}
+					return result;
 				}
-				return result;
 			}
 		}
 
 		public List<string> LoadIdsByConditions(ITableSpec table, FLocal.Core.DB.conditions.AbstractCondition conditions, Diapasone diapasone, JoinSpec[] joins, SortSpec[] sorts) {
+			lock(this) {
+				using(MySqlCommand command = this.connection.CreateCommand()) {
 
-			using(MySqlCommand command = this.connection.CreateCommand()) {
+					command.CommandType = System.Data.CommandType.Text;
 
-				command.CommandType = System.Data.CommandType.Text;
+					var conditionsCompiled = ConditionCompiler.Compile(conditions);
+					string queryConditions = conditionsCompiled.Key;
+					ParamsHolder paramsHolder = conditionsCompiled.Value;
 
-				var conditionsCompiled = ConditionCompiler.Compile(conditions);
-				string queryConditions = conditionsCompiled.Key;
-				ParamsHolder paramsHolder = conditionsCompiled.Value;
+					string queryJoins = "";
 
-				string queryJoins = "";
-
-				string querySorts = "";
-				{
-				}
-
-				string queryMain = "FROM " + table.compile() + " " + queryJoins + " WHERE " + queryConditions;
-
-				foreach(KeyValuePair<string, string> kvp in paramsHolder.data) {
-					command.Parameters.AddWithValue(kvp.Key, kvp.Value);
-				}
-
-				command.CommandText = "SELECT COUNT(*) " + queryMain;
-				object rawCount = command.ExecuteScalar();
-				int count = (int)rawCount;
-				if(count < 1) {
-					diapasone.total = 0;
-					return new List<string>();
-				} else {
-					diapasone.total = count;
-					string queryLimits = "";
-					if(diapasone.count >= 0) {
-						queryLimits = "LIMIT " + diapasone.count + " OFFSET " + diapasone.start;
+					string querySorts = "";
+					{
 					}
-					command.CommandText = "SELECT " + table.compile() + ".* " + queryMain + " " + querySorts + " " + queryLimits;
 
-					List<string> result = new List<string>();
-					using(MySqlDataReader reader = command.ExecuteReader()) {
-						while(reader.Read()) {
-							result.Add(reader.GetString(0));
+					string queryMain = "FROM " + table.compile() + " " + queryJoins + " WHERE " + queryConditions;
+
+					foreach(KeyValuePair<string, string> kvp in paramsHolder.data) {
+						command.Parameters.AddWithValue(kvp.Key, kvp.Value);
+					}
+
+					command.CommandText = "SELECT COUNT(*) " + queryMain;
+					object rawCount = command.ExecuteScalar();
+					int count = (int)rawCount;
+					if(count < 1) {
+						diapasone.total = 0;
+						return new List<string>();
+					} else {
+						diapasone.total = count;
+						string queryLimits = "";
+						if(diapasone.count >= 0) {
+							queryLimits = "LIMIT " + diapasone.count + " OFFSET " + diapasone.start;
 						}
+						command.CommandText = "SELECT " + table.compile() + ".* " + queryMain + " " + querySorts + " " + queryLimits;
+
+						List<string> result = new List<string>();
+						using(MySqlDataReader reader = command.ExecuteReader()) {
+							while(reader.Read()) {
+								result.Add(reader.GetString(0));
+							}
+						}
+						return result;
 					}
-					return result;
 				}
 			}
 		}
