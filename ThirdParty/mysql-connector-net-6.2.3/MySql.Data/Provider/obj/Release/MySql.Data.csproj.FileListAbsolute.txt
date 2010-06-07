@@ -1,0 +1,8 @@
+D:\penartur\Documents\Visual Studio 2008\Projects\FLocal\trunk\ThirdParty\mysql-connector-net-6.2.3\MySql.Data\Provider\obj\Release\ResolveAssemblyReference.cache
+D:\penartur\Documents\Visual Studio 2008\Projects\FLocal\trunk\ThirdParty\mysql-connector-net-6.2.3\MySql.Data\Provider\obj\Release\MySql.Data.MySqlClient.Properties.Resources.resources
+D:\penartur\Documents\Visual Studio 2008\Projects\FLocal\trunk\ThirdParty\mysql-connector-net-6.2.3\MySql.Data\Provider\obj\Release\MySql.Data.csproj.GenerateResource.Cache
+D:\penartur\Documents\Visual Studio 2008\Projects\FLocal\trunk\ThirdParty\mysql-connector-net-6.2.3\MySql.Data\Provider\bin\Release\MySql.Data.dll
+D:\penartur\Documents\Visual Studio 2008\Projects\FLocal\trunk\ThirdParty\mysql-connector-net-6.2.3\MySql.Data\Provider\bin\Release\MySql.Data.xml
+D:\penartur\Documents\Visual Studio 2008\Projects\FLocal\trunk\ThirdParty\mysql-connector-net-6.2.3\MySql.Data\Provider\obj\Release\MySql.Data.dll
+D:\penartur\Documents\Visual Studio 2008\Projects\FLocal\trunk\ThirdParty\mysql-connector-net-6.2.3\MySql.Data\Provider\bin\Release\MySql.Data.pdb
+D:\penartur\Documents\Visual Studio 2008\Projects\FLocal\trunk\ThirdParty\mysql-connector-net-6.2.3\MySql.Data\Provider\obj\Release\MySql.Data.pdb
