@@ -40,6 +40,7 @@ namespace FLocal.MySQLConnector {
 					}
 
 					command.CommandText = "SELECT * FROM " + table.compile() + " WHERE " + table.getIdSpec().compile() + " IN (" + string.Join(", ", placeholder.ToArray()) + ")";
+					command.Prepare();
 					foreach(KeyValuePair<string, string> kvp in paramsHolder.data) {
 						command.Parameters.AddWithValue(kvp.Key, kvp.Value);
 					}

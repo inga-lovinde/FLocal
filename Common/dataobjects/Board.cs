@@ -53,7 +53,7 @@ namespace FLocal.Common.dataobjects {
 
 		protected override void doFromHash(Dictionary<string, string> data) {
 			this._name = data["name"];
-			this._description = data["description"];
+			this._description = data["comment"];
 			this._lastPostId = int.Parse(data["lastPostId"]);
 			this._categoryId = int.Parse(data["categoryId"]);
 		}

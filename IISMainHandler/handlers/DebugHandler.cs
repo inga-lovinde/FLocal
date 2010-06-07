@@ -26,13 +26,11 @@ namespace FLocal.IISHandler.handlers {
 					context.httpresponse.WriteLine(transaction.GetHashCode().ToString());
 				}
 			}
-			if(context.httprequest.Path == "/boards") {
-				/*Board board = Board.LoadById(1);
+			if(context.httprequest.Path == "/boards/") {
+				Board board = Board.LoadById(1);
 				context.httpresponse.WriteLine("name: " + board.name);
 				context.httpresponse.WriteLine("description: " + board.description);
-				context.httpresponse.WriteLine("categoryname: " + board.category.name);*/
-				Category category = Category.LoadById(1);
-				context.httpresponse.WriteLine("categoryname: " + category.name);
+				context.httpresponse.WriteLine("categoryname: " + board.category.name);
 			}
 		}
 
