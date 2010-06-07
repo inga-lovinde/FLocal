@@ -19,7 +19,8 @@ namespace FLocal.MySQLConnector {
 		public Transaction(Connection connection, System.Data.IsolationLevel iso) : base() {
 			this.sqlconnection = connection.createConnection();
 			try {
-				this.sqltransaction = this.sqlconnection.BeginTransaction(iso);
+				//for some reason, call to BeginTransaction with IsolationLevel set fails somewhere deep in mysql library
+				this.sqltransaction = this.sqlconnection.BeginTransaction();
 			} catch(Exception e) {
 				this.close();
 				throw e;
