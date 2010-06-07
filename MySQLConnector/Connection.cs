@@ -8,7 +8,7 @@ using FLocal.Core.DB;
 
 namespace FLocal.MySQLConnector {
 
-	class Connection : IDBConnection {
+	public class Connection : IDBConnection {
 
 		private MySqlConnection connection;
 		private string connectionString;
@@ -23,6 +23,7 @@ namespace FLocal.MySQLConnector {
 
 		internal MySqlConnection createConnection() {
 			MySqlConnection connection = new MySqlConnection(this.connectionString);
+			connection.Open();
 			return connection;
 		}
 
