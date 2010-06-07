@@ -102,6 +102,7 @@ namespace MySql.Data.Types
 			if (nullVal)
 				return new MySqlInt32((this as IMySqlValue).MySqlDbType, true);
 
+			packet.Encoding = System.Text.Encoding.ASCII;
 			if (length == -1)
 				return new MySqlInt32((this as IMySqlValue).MySqlDbType,
                      packet.ReadInteger(4));

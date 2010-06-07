@@ -92,6 +92,7 @@ namespace MySql.Data.Types
 			if (nullVal)
 				return new MySqlInt16(true);
 
+			packet.Encoding = System.Text.Encoding.ASCII;
 			if (length == -1)
                 return new MySqlInt16((short)packet.ReadInteger(2));
 			else
