@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FLocal.Core {
 
-	interface IDataObject<TKey, TData> /*: IDataObject<TKey>*/
+	public abstract class IDataObject<TKey, TData>
         where TData : IDataObject<TKey, TData>, new()
         where TKey : struct {
 
@@ -13,13 +13,15 @@ namespace FLocal.Core {
 
         //static TData CreateByIdFromRegistry(TKey id);
 
-        void CreateByIdFromRegistry(TKey id);
+        internal abstract void CreateByIdFromRegistry(TKey id, bool forLoadingFromHash);
 
         //TKey GetId();
 
-        TKey id {
+        public abstract TKey id {
             get;
         }
+
+		internal abstract void markAsDeletedFromRegistry();
 
     }
 

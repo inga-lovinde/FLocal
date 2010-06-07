@@ -8,42 +8,66 @@ namespace FLocal.Core {
         where TData : IDataObject<TKey, TData>, new()
         where TKey : struct {
 
-        public static readonly Registry<TKey, TData> instance = new Registry<TKey,TData>();
+        internal static readonly Registry<TKey, TData> instance = new Registry<TKey,TData>();
 
         private Dictionary<TKey, TData> storage;
 
-        private HashSet<TKey> locks;
+        private Dictionary<TKey, object> locks;
 
-        protected Registry() {
+        private Registry() {
             this.storage = new Dictionary<TKey,TData>();
-            this.locks = new HashSet<TKey>();
+            this.locks = new Dictionary<TKey, object>();
         }
         
-        public TData Get(TKey id) {
-            if(this.locks.Contains(id)) throw new CriticalException("Locked");
-            if(!this.storage.ContainsKey(id)) {
-                try {
-                    this.locks.Add(id);
+        internal TData Get(TKey id, bool forLoadingFromHash) {
+            if(!this.locks.ContainsKey(id)) {
+				lock(this.locks) {
+					if(!this.locks.ContainsKey(id)) {
+						this.locks.Add(id, new object());
+					}
+				}
+			}
+            lock(this.locks[id]) {
+				if(!this.storage.ContainsKey(id)) {
 
-                    //this.storage[id] = IDataObject<TKey, TData>.CreateByIdFromRegistry(id);
-                    //this.storage[id] = TData.CreateByIdFromRegistry(id);
-                    TData obj = new TData();
-                    obj.CreateByIdFromRegistry(id);
-                    this.storage[id] = obj;
-
-                    this.locks.Remove(id);
-                } catch(FLocalException e) {
-                    this.locks.Remove(id);
-                    throw e;
-                }
+					//this.storage[id] = IDataObject<TKey, TData>.CreateByIdFromRegistry(id);
+					//this.storage[id] = TData.CreateByIdFromRegistry(id);
+					TData obj = new TData();
+					obj.CreateByIdFromRegistry(id, forLoadingFromHash);
+					this.storage[id] = obj;
+				}
             }
-            return this.storage[id];
+
+			lock(this.locks) {
+				if(this.storage.ContainsKey(id)) {
+					return this.storage[id];
+				}
+			}
+
+			return this.Get(id, forLoadingFromHash);
         }
 
-        public bool IsCached(TKey id) {
+/*        public bool IsCached(TKey id) {
             if(this.locks.Contains(id)) throw new CriticalException("locked");
             return this.storage.ContainsKey(id);
-        }
+        }*/
+
+		internal void Delete(TKey[] idsToDelete) {
+			foreach(TKey id in idsToDelete) {
+				lock(this.locks[id]) {
+					IDataObject<TKey, TData> obj = null;
+					lock(this.locks) {
+						if(this.storage.ContainsKey(id)) {
+							obj = this.storage[id];
+							this.storage.Remove(id);
+						}
+					}
+					if(obj != null) {
+						obj.markAsDeletedFromRegistry();
+					}
+				}
+			}
+		}
 
     }
 

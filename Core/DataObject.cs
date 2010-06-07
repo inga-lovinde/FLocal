@@ -12,7 +12,7 @@ namespace FLocal.Core {
 
         private TKey? _id;
 
-        public TKey id {
+        public override TKey id {
             get {
                 if(this.isNewObject) {
                     throw new ObjectDoesntHaveAnIdException();
@@ -21,7 +21,7 @@ namespace FLocal.Core {
             }
         }
 
-        public bool isNewObject {
+        private bool isNewObject {
             get {
                 return !this._id.HasValue;
             }
@@ -29,24 +29,27 @@ namespace FLocal.Core {
 
         private bool isJustCreated;
 
-        public DataObject() {
+        internal DataObject() {
             Debug.Assert(this is T);
             this.isJustCreated = true;
             this._id = null;
         }
 
         public static T LoadById(TKey id) {
-            return registry.Get(id);
+            return registry.Get(id, false);
         }
 
-        protected virtual void AfterCreate() { }
+        protected virtual void AfterCreate(bool forLoadingFromHash) { }
 
-        public void CreateByIdFromRegistry(TKey id) {
+        internal override void CreateByIdFromRegistry(TKey id, bool forLoadingFromHash) {
             if(!this.isJustCreated) throw new CriticalException("Object already has an id");
             this._id = id;
             this.isJustCreated = false;
-            this.AfterCreate();
+            this.AfterCreate(forLoadingFromHash);
         }
+
+		internal override void markAsDeletedFromRegistry() {
+		}
 
         private static Registry<TKey, T> registry {
             get {
