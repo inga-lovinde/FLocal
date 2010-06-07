@@ -19,6 +19,7 @@ namespace FLocal.MySQLConnector {
 			this.connection = new MySqlConnection(connectionString);
 			this.connection.Open();
 			this.connectionString = connectionString;
+			this.transactions = new HashSet<Transaction>();
 		}
 
 		internal MySqlConnection createConnection() {
