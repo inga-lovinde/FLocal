@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySQLConnector", "MySQLConn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySql.Data", "ThirdParty\mysql-connector-net-6.2.3\MySql.Data\Provider\MySql.Data.csproj", "{E9DF5ED1-4CBD-4226-B931-9A51610AC14D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Builder", "Builder\Builder.csproj", "{D8D6EFEC-76D7-4870-BD71-C90FA6D7368A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,12 @@ Global
 		{E9DF5ED1-4CBD-4226-B931-9A51610AC14D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E9DF5ED1-4CBD-4226-B931-9A51610AC14D}.Release|x86.ActiveCfg = Release|x86
 		{E9DF5ED1-4CBD-4226-B931-9A51610AC14D}.Release|x86.Build.0 = Release|x86
+		{D8D6EFEC-76D7-4870-BD71-C90FA6D7368A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8D6EFEC-76D7-4870-BD71-C90FA6D7368A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8D6EFEC-76D7-4870-BD71-C90FA6D7368A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D8D6EFEC-76D7-4870-BD71-C90FA6D7368A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8D6EFEC-76D7-4870-BD71-C90FA6D7368A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8D6EFEC-76D7-4870-BD71-C90FA6D7368A}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
