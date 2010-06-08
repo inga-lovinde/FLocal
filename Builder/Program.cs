@@ -6,14 +6,16 @@ using System.IO;
 //using Microsoft.Tools.WindowsInstallerXml;
 //using System.Xml;
 using System.Diagnostics;
+using System.Configuration;
 
 namespace Builder {
 	class Program {
 		static void Main(string[] args) {
 
-			const string WIXPATH = "C:\\Program Files (x86)\\Windows Installer XML v3\\bin\\";
-
 			try {
+
+				string WIXPATH = ConfigurationManager.AppSettings["WiXPath"];
+				string SVNPATH = ConfigurationManager.AppSettings["SVNPath"];
 				
 				if(args.Length != 1) throw new ApplicationException("You should specify project name first");
 
