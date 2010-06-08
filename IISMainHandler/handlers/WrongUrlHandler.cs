@@ -8,7 +8,7 @@ namespace FLocal.IISHandler.handlers {
 	class WrongUrlHandler : ISpecificHandler  {
 
 		public void Handle(WebContext context) {
-			throw new HttpException(404, "page not found");
+			throw new HttpException(400, "wrong url");
 		}
 
 	}

@@ -12,9 +12,12 @@ namespace FLocal.Common {
 
 		public readonly Core.DB.IDBConnection mainConnection;
 
+		public readonly string dataDir;
+
 		protected Config(NameValueCollection data) : base(data) {
 			this.InitTime = DateTime.Now.ToLongTimeString();
-			this.mainConnection = new MySQLConnector.Connection(data["connectionString"]);
+			this.mainConnection = new MySQLConnector.Connection(data["ConnectionString"]);
+			this.dataDir = data["DataDir"];
 		}
 
 		public static void Init(NameValueCollection data) {

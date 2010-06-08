@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml.Linq;
 
 namespace FLocal.Common.dataobjects {
 	public class Board : SqlObject<Board> {
@@ -56,6 +57,13 @@ namespace FLocal.Common.dataobjects {
 			this._description = data["comment"];
 			this._lastPostId = int.Parse(data["lastPostId"]);
 			this._categoryId = int.Parse(data["categoryId"]);
+		}
+
+		public XElement exportToXml() {
+			return new XElement("board",
+				new XElement("name", this.name),
+				new XElement("description", this.description)
+			);
 		}
 
 	}
