@@ -9,15 +9,17 @@ namespace FLocal.IISHandler {
 	class HandlersFactory {
 
 		public static ISpecificHandler getHandler(WebContext context) {
-			if(!context.httprequest.Path.EndsWith("/")) {
-				return new handlers.WrongUrlHandler();
+//			if(!context.httprequest.Path.EndsWith("/")) {
+//				return new handlers.WrongUrlHandler();
 //				throw new FLocalException("Malformed url");
-			}
+//			}
 			string[] requestParts = context.httprequest.Path.Split("/", StringSplitOptions.RemoveEmptyEntries);
 			if(requestParts.Length < 1) return new handlers.RootHandler();
 			switch(requestParts[0]) {
 				case "boards":
 					return new handlers.BoardsHandler();
+				case "static":
+					return new handlers.StaticHandler(requestParts);
 				default:
 					return new handlers.DebugHandler(requestParts[0]);
 			}

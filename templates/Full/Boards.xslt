@@ -4,13 +4,9 @@
 	<xsl:template match="/root">
 		<html>
 			<head>
-				<base href="http://forumlocal.ru/"/>
-				<link rel="stylesheet" href="/stylesheets/global.css" type="text/css" />
-				<link rel="stylesheet" href="/stylesheets/coffeehaus.css" type="text/css" />
-				<link rel="stylesheet" href="/stylesheets/decoration.css" type="text/css" />
-				<link type="text/css" rel="stylesheet" href="SyntaxHighlighter/styles/shCore.css"/>
-				<link type="text/css" rel="stylesheet" href="SyntaxHighlighter/styles/shThemeDefault.css"/>
-				<link rel="shortcut icon" href="/favicons/smirk.ico" type="image/x-icon" />
+				<link rel="stylesheet" href="/static/css/global.css" type="text/css" />
+				<link rel="stylesheet" href="/static/css/coffeehaus.css" type="text/css" />
+				<link rel="shortcut icon" href="/static/favicons/smirk.ico" type="image/x-icon" />
 				<title><xsl:value-of select="title"/></title>
 			</head>
 			<body>
@@ -108,10 +104,10 @@
 									<td class="small" valign="top">
 										<b>Легенда:</b>
 										<br />
-										<img src="/images/newposts.gif" alt="*" />
+										<img src="/static/images/newposts.gif" alt="*" />
 										Новые сообщения
 										<br />
-										<img src="/images/nonewposts.gif" alt="*" />
+										<img src="/static/images/nonewposts.gif" alt="*" />
 										Нет новых сообщений
 									</td>
 								</tr>
@@ -142,7 +138,7 @@
 			<td valign="top" width="1%" class="darktable">
 				<a href="/ubbthreads.php?Cat=&amp;C=&amp;check=Common&amp;src=">
 					<xsl:attribute name="onClick">if (!confirm('Пометить все сообщения как прочитанные?')) {event.returnValue=false; return false;}</xsl:attribute>
-					<img border="0" width="17" height="21" src="/images/newposts.gif" alt=""/>
+					<img border="0" width="17" height="21" src="/static/images/newposts.gif" alt=""/>
 				</a>
 			</td>
 			<td width="55%" class="darktable">

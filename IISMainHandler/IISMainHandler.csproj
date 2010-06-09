@@ -56,6 +56,7 @@
     <Compile Include="handlers\BoardsHandler.cs" />
     <Compile Include="handlers\DebugHandler.cs" />
     <Compile Include="handlers\RootHandler.cs" />
+    <Compile Include="handlers\StaticHandler.cs" />
     <Compile Include="handlers\WrongUrlHandler.cs" />
     <Compile Include="ISpecificHandler.cs" />
     <Compile Include="MainHandler.cs" />
@@ -74,14 +75,6 @@
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{6F532626-E9F8-498E-9683-1538E7CD62CB}</Project>
       <Name>Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MySQLConnector\MySQLConnector.csproj">
-      <Project>{E38DE5B1-F9C2-43BA-A5DF-0743ABD4DFC7}</Project>
-      <Name>MySQLConnector</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ThirdParty\mysql-connector-net-6.2.3\MySql.Data\Provider\MySql.Data.csproj">
-      <Project>{E9DF5ED1-4CBD-4226-B931-9A51610AC14D}</Project>
-      <Name>MySql.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

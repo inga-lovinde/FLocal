@@ -13,6 +13,12 @@ namespace FLocal.IISHandler {
 		}
 
 		public void ProcessRequest(HttpContext httpcontext) {
+
+			Uri referer = httpcontext.Request.UrlReferrer;
+			if(referer != null && referer.PathAndQuery.StartsWith("/static")) {
+				throw new HttpException(403, "You have come from the static page");
+			}
+
 			if(!FLocal.Common.Config.isInitialized) FLocal.Common.Config.Init(ConfigurationManager.AppSettings);
 
 			WebContext context = new WebContext(httpcontext);
