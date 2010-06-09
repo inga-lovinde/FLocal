@@ -1,0 +1,165 @@
+.decoration_0 {
+  position:absolute;
+  z-index:500;
+  width:800px;
+  height:25px;
+  top:-100px;
+  left:0px;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/decoration_0.png', sizingMethod='crop');
+  background-repeat: repeat-x;
+}
+.decoration_0[class]
+{
+  background-image: url('/images/decoration_0.png');
+}
+
+.decoration_1 {
+  position:absolute;
+  z-index:500;
+  width:1000px;
+  height:40px;
+  top:-100px;
+  left:0px;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/decoration_8.png', sizingMethod='crop');
+  background-repeat: repeat-x;
+}
+.decoration_1[class]
+{
+  background-image: url('/images/decoration_8.png');
+}
+.decoration_2 {
+  position:absolute;
+  z-index:500;
+  width:800px;
+  height:40px;
+  top:-100px;
+  left:0px;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/decoration_2.png', sizingMethod='crop');
+  background-repeat: no-repeat;
+}
+.decoration_2[class]
+{
+  background-image: url('/images/decoration_2.png');
+}
+.decoration_3 {
+  position:absolute;
+  z-index:500;
+  width:1000px;
+  height:25px;
+  top:-100px;
+  left:0px;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/decoration_3.png', sizingMethod='crop');
+  background-repeat: repeat-x;
+}
+.decoration_3[class]
+{
+  background-image: url('/images/decoration_3.png');
+}
+.decoration_4 {
+  position:absolute;
+  z-index:500;
+  width:1000px;
+  height:30px;
+  top:-100px;
+  left:0px;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/decoration_4.png', sizingMethod='crop');
+  background-repeat: repeat-x;
+}
+.decoration_4[class]
+{
+  background-image: url('/images/decoration_4.png');
+}
+.decoration_5 {
+  position:absolute;
+  z-index:500;
+  width:1000px;
+  height:40px;
+  top:-100px;
+  left:0px;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/decoration_5.png', sizingMethod='crop');
+  background-repeat: repeat-x;
+}
+.decoration_5[class]
+{
+  background-image: url('/images/decoration_5.png');
+}
+.decoration_6 {
+  position:absolute;
+  z-index:500;
+  width:1000px;
+  height:25px;
+  top:-100px;
+  left:0px;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/decoration_6.png', sizingMethod='crop');
+  background-repeat: repeat-x;
+}
+.decoration_6[class]
+{
+  background-image: url('/images/decoration_6.png');
+}
+.decoration_7 {
+  position:absolute;
+  z-index:500;
+  width:1000px;
+  height:30px;
+  top:-100px;
+  left:0px;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/decoration_7.png', sizingMethod='crop');
+  background-repeat: repeat-x;
+}
+.decoration_7[class]
+{
+  background-image: url('/images/decoration_7.png');
+}
+
+.decoration_tree {
+  position:absolute;
+  z-index:500;
+  width:386px;
+  height:500px;
+  top:-500px;
+  left:0px;
+/*  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/ct.png', sizingMethod='crop'); */
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/no_ct.png', sizingMethod='crop');
+  background-repeat: no-repeat;
+}
+.decoration_tree[class]
+{
+/*  background-image: url('/images/ct.png');*/
+    background-image: url('/images/no_ct.png');
+
+}
+.decoration_snowman {
+  position:absolute;
+  z-index:500;
+  width:386px;
+  height:500px;
+  top:-500px;
+  left:0px;
+/*  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/ct.png', sizingMethod='crop'); */
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/snowman.png', sizingMethod='crop');
+  background-repeat: no-repeat;
+}
+.decoration_snowman[class]
+{
+/*  background-image: url('/images/ct.png');*/
+    background-image: url('/images/snowman.png');
+
+}
+.decoration_pile {
+  position:absolute;
+  z-index:500;
+  width:198px;
+  height:175px;
+  top:-500px;
+  left:0px;
+/*  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/ct.png', sizingMethod='crop'); */
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/pile.png', sizingMethod='crop');
+  background-repeat: no-repeat;
+}
+.decoration_pile[class]
+{
+/*  background-image: url('/images/ct.png');*/
+    background-image: url('/images/pile.png');
+
+}

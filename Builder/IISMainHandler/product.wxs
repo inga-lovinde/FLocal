@@ -60,6 +60,9 @@
 			<Component Id="Templates.7z" Guid="B41F4142-A39C-43BE-8D20-F31BFFA9B483">
 				<File Id="Templates.7z" Source="Templates.7z" KeyPath="yes" Checksum="yes"/>
 			</Component>
+			<Component Id="Static.7z" Guid="C5D6456D-39B0-40E1-8DB1-0950199B15D2">
+				<File Id="Static.7z" Source="Static.7z" KeyPath="yes" Checksum="yes"/>
+			</Component>
 			<Component Id="_7z.exe" Guid="57AD7901-2C9B-4349-ABD8-C8FBA82F2724">
 				<File Id="_7z.exe" Name="7z.exe" Source="7z.exe" KeyPath="yes" Checksum="yes"/>
 			</Component>
@@ -91,11 +94,18 @@
 			<Feature Id="Templates" Title="Templates" Level="1">
 				<ComponentRef Id="Templates.7z"/>
 			</Feature>
+			<Feature Id="Static" Title="Static images css etc" Level="1">
+				<ComponentRef Id="Static.7z"/>
+			</Feature>
 		</Feature>
 
 		<CustomAction Id="InstallTemplates" FileKey="_7z.exe" ExeCommand="x &quot;C:\Program Files\FLocal\Templates.7z&quot; -oC:\inetpub\flocal-main\data\templates\ -aoa -y" Execute="deferred" Impersonate="no" Return="check"/>
+		<CustomAction Id="InstallStatic" FileKey="_7z.exe" ExeCommand="x &quot;C:\Program Files\FLocal\Static.7z&quot; -oC:\inetpub\flocal-main\data\Static\ -aoa -y" Execute="deferred" Impersonate="no" Return="check"/>
 		<InstallExecuteSequence>
 			<Custom Action="InstallTemplates" Before="InstallFinalize">
+				<![CDATA[NOT REMOVE]]>
+			</Custom>
+			<Custom Action="InstallStatic" Before="InstallFinalize">
 				<![CDATA[NOT REMOVE]]>
 			</Custom>
 		</InstallExecuteSequence>

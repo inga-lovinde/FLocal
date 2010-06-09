@@ -1,0 +1,52 @@
+.message_out 
+{
+  color: #880000;
+}
+.message_out A:link
+{
+  color: #880000;
+}
+.message_out A:visited
+{
+  color: #880000;
+}
+.message_in
+{
+  color: #000088;
+}
+.message_in A:link
+{
+  color: #000088;
+}
+.message_in A:visited
+{
+  color: #000088;
+}
+.rating_positive
+{
+  color: #007F00;
+}
+.rating_positive_postlist
+{
+  color: #007F00;
+}
+.rating_negative
+{
+}
+
+.lite_r_span
+{
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.math{background-color:#FFFFFF;border:3pt solid #FFFFFF;}
+
+pre 
+{ 
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin: 10px;
+  width: 99%;
+}
+
