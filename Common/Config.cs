@@ -14,10 +14,13 @@ namespace FLocal.Common {
 
 		public readonly string dataDir;
 
+		public readonly string DirSeparator;
+
 		protected Config(NameValueCollection data) : base(data) {
 			this.InitTime = DateTime.Now.ToLongTimeString();
 			this.mainConnection = new MySQLConnector.Connection(data["ConnectionString"]);
 			this.dataDir = data["DataDir"];
+			this.DirSeparator = System.IO.Path.DirectorySeparatorChar.ToString();
 		}
 
 		public static void Init(NameValueCollection data) {

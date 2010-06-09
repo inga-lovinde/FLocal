@@ -5,5 +5,10 @@ using System.Text;
 
 namespace FLocal.IISHandler.designs {
 	interface IDesign {
+
+		string fsname {
+			get;
+		}
+
 	}
 }

@@ -23,7 +23,7 @@ namespace FLocal.IISHandler {
 
 		public designs.IDesign design {
 			get {
-				throw new NotImplementedException();
+				return new designs.Classic();
 			}
 		}
 
@@ -39,7 +39,7 @@ namespace FLocal.IISHandler {
 
 		public string Transform(string templateName, System.Xml.Linq.XDocument data) {
 			//TODO: this should work according to design!
-			return TemplateEngine.Compile(templateName, data);
+			return TemplateEngine.Compile(this.design.fsname + this.config.DirSeparator + templateName, data);
 		}
 
 	}

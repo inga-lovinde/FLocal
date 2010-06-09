@@ -22,7 +22,7 @@ namespace FLocal.IISHandler {
 					lock(this.locker) {
 						if(!this.cache.ContainsKey(templateName)) {
 							XslCompiledTransform xslt = new XslCompiledTransform();
-							xslt.Load(FLocal.Common.Config.instance.dataDir + templateName);
+							xslt.Load(FLocal.Common.Config.instance.dataDir + "Templates" + FLocal.Common.Config.instance.DirSeparator + templateName);
 							this.cache[templateName] = xslt;
 						}
 					}
