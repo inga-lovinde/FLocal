@@ -1,17 +1,8 @@
 <?xml version="1.0" encoding="Windows-1251"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml">
-	<xsl:import href="Header.xslt"/>
+	<xsl:import href="elems\Main.xslt"/>
 	<xsl:output method="xml" indent="yes" encoding="UTF-8"/>
-	<xsl:template match="/root">
-		<html>
-			<head>
-				<link rel="stylesheet" href="/static/css/global.css" type="text/css" />
-				<link rel="stylesheet" href="/static/css/coffeehaus.css" type="text/css" />
-				<link rel="shortcut icon" href="/static/favicons/smirk.ico" type="image/x-icon" />
-				<title><xsl:value-of select="title"/></title>
-			</head>
-			<body>
-				<xsl:call-template name="header"/>
+	<xsl:template name="specific">
 				<table width="95%" align="center" class="tablesurround" cellspacing="1" cellpadding="1">
 					<tr>
 						<td>
@@ -68,9 +59,6 @@
 						</td>
 					</tr>
 				</table>
-				<br />
-			</body>
-		</html>
 	</xsl:template>
 
 	<xsl:template match="category">
@@ -121,23 +109,3 @@
 		</tr>
 	</xsl:template>
 </xsl:stylesheet>
-
-<!--
-        <h1>Persons</h1>
-        <ul>
-          <xsl:apply-templates select="person">
-            <xsl:sort select="family-name" />
-          </xsl:apply-templates>
-        </ul>
-      </body>
-    </html>
-  </xsl:template>
- 
-  <xsl:template match="person">
-    <li>
-      <xsl:value-of select="family-name"/><xsl:text>, </xsl:text>
-      <xsl:value-of select="name"/>
-    </li>
-  </xsl:template>
- 
--->
