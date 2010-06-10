@@ -39,7 +39,7 @@ namespace FLocal.Core {
             return registry.Get(id, false);
         }
 
-		protected static Dictionary<TKey, T> LoadByIdsForLoadingFromHash(List<TKey> ids) {
+		protected static Dictionary<TKey, T> LoadByIdsForLoadingFromHash(IEnumerable<TKey> ids) {
 			Dictionary<TKey, T> res = new Dictionary<TKey,T>();
 			foreach(TKey id in ids) {
 				res[id] = registry.Get(id, true);

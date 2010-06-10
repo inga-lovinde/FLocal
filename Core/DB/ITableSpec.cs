@@ -21,6 +21,10 @@ namespace FLocal.Core.DB {
 			return new ColumnSpec(table, table.idName);
 		}
 
+		public static ColumnSpec getColumnSpec(this ITableSpec table, string column) {
+			return new ColumnSpec(table, column);
+		}
+
 	}
 
 }

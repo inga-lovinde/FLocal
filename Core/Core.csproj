@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cache.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="DataObject.cs" />
     <Compile Include="DB\conditions\AbstractCondition.cs" />
@@ -54,8 +55,10 @@
     <Compile Include="DB\conditions\ComparisonType.cs" />
     <Compile Include="DB\conditions\ComplexCondition.cs" />
     <Compile Include="DB\conditions\ConditionsJoinType.cs" />
+    <Compile Include="DB\conditions\EmptyCondition.cs" />
     <Compile Include="DB\conditions\IsNullCondition.cs" />
     <Compile Include="DB\conditions\MultiValueCondition.cs" />
+    <Compile Include="DB\conditions\NotEmptyCondition.cs" />
     <Compile Include="DB\conditions\NotIsNullCondition.cs" />
     <Compile Include="DB\conditions\SimpleCondition.cs" />
     <Compile Include="DB\Diapasone.cs" />

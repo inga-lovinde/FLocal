@@ -4,6 +4,6 @@ using System.Linq;
 using System.Text;
 
 namespace FLocal.Core.DB.conditions {
-	public abstract class SimpleCondition : AbstractCondition {
+	public abstract class SimpleCondition : NotEmptyCondition {
 	}
 }

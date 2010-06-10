@@ -24,21 +24,7 @@ namespace FLocal.IISHandler.handlers {
 			return new XDocument(
 				new XElement("root",
 					new XElement("title", Config.instance.AppInfo),
-					new XElement("categories",
-						new XElement("category",
-							new XElement("name", board1.category.name),
-							new XElement("boards",
-								board1.exportToXml(),
-								board2.exportToXml()
-							)
-						),
-						new XElement("category",
-							new XElement("name", board3.category.name),
-							new XElement("boards",
-								board3.exportToXml()
-							)
-						)
-					)
+					new XElement("categories", from category in Category.allCategories select category.exportToXmlForMainPage())
 				)
 			);
 		}

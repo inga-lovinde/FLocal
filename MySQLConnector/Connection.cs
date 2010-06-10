@@ -42,7 +42,7 @@ namespace FLocal.MySQLConnector {
 						placeholder.Add(this.traits.markParam(paramsHolder.Add(id)));
 					}
 
-					command.CommandText = "SELECT * FROM " + table.compile(this.traits) + " WHERE " + table.getIdSpec().compile(this.traits) + " = " + string.Join(", ", placeholder.ToArray()) + "";
+					command.CommandText = "SELECT * FROM " + table.compile(this.traits) + " WHERE " + table.getIdSpec().compile(this.traits) + " IN (" + string.Join(", ", placeholder.ToArray()) + ")";
 					//command.Prepare();
 					foreach(KeyValuePair<string, string> kvp in paramsHolder.data) {
 						command.AddParameter(kvp.Key, kvp.Value);
@@ -78,7 +78,8 @@ namespace FLocal.MySQLConnector {
 					command.CommandType = System.Data.CommandType.Text;
 
 					var conditionsCompiled = ConditionCompiler.Compile(conditions, this.traits);
-					string queryConditions = conditionsCompiled.Key;
+					string queryConditions = "";
+					if(conditionsCompiled.Key != "") queryConditions = "WHERE " + conditionsCompiled.Key;
 					ParamsHolder paramsHolder = conditionsCompiled.Value;
 
 					string queryJoins = "";
@@ -89,13 +90,19 @@ namespace FLocal.MySQLConnector {
 					}
 
 					string querySorts = "";
-					{
-						if(sorts.Length > 0) {
-							throw new NotImplementedException();
+					if(sorts.Length > 0) {
+						List<string> sortParts = new List<string>();
+						foreach(SortSpec sortSpec in sorts) {
+							if(sortSpec.ascending) {
+								sortParts.Add(sortSpec.column.compile(this.traits) + " ASC");
+							} else {
+								sortParts.Add(sortSpec.column.compile(this.traits) + " DESC");
+							}
 						}
+						querySorts = "ORDER BY " + string.Join(", ", sortParts.ToArray());
 					}
 
-					string queryMain = "FROM " + table.compile(this.traits) + " " + queryJoins + " WHERE " + queryConditions;
+					string queryMain = "FROM " + table.compile(this.traits) + " " + queryJoins + " " + queryConditions;
 
 					foreach(KeyValuePair<string, string> kvp in paramsHolder.data) {
 						command.AddParameter(kvp.Key, kvp.Value);
@@ -103,7 +110,7 @@ namespace FLocal.MySQLConnector {
 
 					command.CommandText = "SELECT COUNT(*) " + queryMain;
 					object rawCount = command.ExecuteScalar();
-					int count = (int)rawCount;
+					long count = (long)rawCount;
 					if(count < 1) {
 						diapasone.total = 0;
 						return new List<string>();

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FLocal.Core {
 	
-	static class ExtensionMethods {
+	public static class ExtensionMethods {
 
         public static Dictionary<TKey, TValue> ToDictionary<TKey, TValue>(this IEnumerable<KeyValuePair<TKey, TValue>> kvps) {
 
@@ -48,6 +48,10 @@ namespace FLocal.Core {
         public static string ToPrintableString(this bool val) {
             return val ? "Enabled" : "Disabled";
         }
+
+		public static string ToPrintableString<T>(this IEnumerable<T> list) {
+			return string.Join(",", (from elem in list select elem.ToString()).ToArray());
+		}
 
         public static string ToXmlApiRequestString(this bool val) {
             return val ? "1" : "0";
@@ -202,7 +206,7 @@ namespace FLocal.Core {
             return from elem in list select replacer(elem);
         }
 
-        public static string ToStringOnFail(this bool test, Lazy<string> onFail) {
+        internal static string ToStringOnFail(this bool test, Lazy<string> onFail) {
             return test ? "" : onFail();
         }
 

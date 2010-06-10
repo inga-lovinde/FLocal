@@ -82,7 +82,7 @@ namespace FLocal.MySQLConnector {
 
 		private string CompileCondition(ComplexCondition condition) {
 			List<string> parts = new List<string>();
-			foreach(AbstractCondition innerCondition in condition.innerConditions) {
+			foreach(NotEmptyCondition innerCondition in condition.innerConditions) {
 				parts.Add("(" + CompileCondition(innerCondition) + ")");
 			}
 
@@ -96,11 +96,25 @@ namespace FLocal.MySQLConnector {
 			}
 		}
 
-		private string CompileCondition(AbstractCondition condition) {
+		private string CompileCondition(NotEmptyCondition condition) {
 			if(condition is ComplexCondition) {
 				return CompileCondition((ComplexCondition)condition);
 			} else if(condition is SimpleCondition) {
 				return CompileCondition((SimpleCondition)condition);
+			} else {
+				throw new NotImplementedException();
+			}
+		}
+
+		private string CompileCondition(EmptyCondition condition) {
+			return "";
+		}
+
+		private string CompileCondition(AbstractCondition condition) {
+			if(condition is NotEmptyCondition) {
+				return CompileCondition((NotEmptyCondition)condition);
+			} else if(condition is EmptyCondition) {
+				return CompileCondition((EmptyCondition)condition);
 			} else {
 				throw new NotImplementedException();
 			}

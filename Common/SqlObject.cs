@@ -22,7 +22,11 @@ namespace FLocal.Common {
 
 		abstract protected void doFromHash(Dictionary<string, string> data);
 
-		protected void fromHash(Dictionary<string, string> data) {
+		/// <summary>
+		/// Note that this method does not updates isLoaded field!
+		/// </summary>
+		/// <param name="data"></param>
+		private void fromHash(Dictionary<string, string> data) {
 			lock(this.lockFiller) {
 				if(data[this.table.idName] != this.id.ToString()) {
 					throw new CriticalException("Id mismatch");
@@ -31,6 +35,10 @@ namespace FLocal.Common {
 			}
 		}
 
+		/// <summary>
+		/// Note that this method does not updates isLoaded field!
+		/// </summary>
+		/// <param name="data"></param>
 		private void doLoad() {
 			this.fromHash(Config.instance.mainConnection.LoadById(this.table, this.id.ToString()));
 		}
@@ -43,17 +51,30 @@ namespace FLocal.Common {
 			}
 		}
 
-		protected void LoadIfNotLoaded() {
+		protected void LoadFromHash(Dictionary<string, string> data) {
 			lock(this.lockInitializer) {
-				if(!this.isLoaded) {
-					this.doLoad();
-					this.isLoaded = true;
+				if(this.isLoaded) throw new CriticalException("already initialized");
+				this.fromHash(data);
+				this.isLoaded = true;
+			}
+		}
+
+		protected void LoadIfNotLoaded() {
+			if(!this.isLoaded) {
+				lock(this.lockInitializer) {
+					if(!this.isLoaded) {
+						this.doLoad();
+						this.isLoaded = true;
+					}
 				}
 			}
 		}
 
 		public void ReLoad() {
-			this.doLoad();
+			lock(this.lockInitializer) {
+				this.doLoad();
+				this.isLoaded = true;
+			}
 		}
 
 		protected override void AfterCreate(bool forLoadingFromHash) {
@@ -61,7 +82,7 @@ namespace FLocal.Common {
 			if(!forLoadingFromHash) this.Load();
 		}
 
-		public static List<T> LoadByIds(List<int> ids) {
+		public static List<T> LoadByIds(IEnumerable<int> ids) {
 
 			Dictionary<int, T> rawRes = LoadByIdsForLoadingFromHash(ids);
 			
@@ -72,19 +93,23 @@ namespace FLocal.Common {
 				}
 			}
 
+			List<int> loadedIds = new List<int>();
 			if(idsToQuery.Count > 0) {
 				ITableSpec table = rawRes[idsToQuery[0]].table;
 				List<Dictionary<string, string>> rawData = Config.instance.mainConnection.LoadByIds(table, new List<string>(from int id in idsToQuery select id.ToString()));
 				foreach(Dictionary<string, string> row in rawData) {
 					int id = int.Parse(row[table.idName]);
+					loadedIds.Add(id);
 					if(!rawRes.ContainsKey(id)) throw new CriticalException("wrong id");
-					rawRes[id].fromHash(row);
+					rawRes[id].LoadFromHash(row);
 				}
 			}
 
 			List<T> res = new List<T>();
 			foreach(int id in ids) {
-				if(!rawRes[id].isLoaded) throw new CriticalException("not loaded");
+				if(!rawRes[id].isLoaded) {
+					throw new CriticalException("#" + id + " not loaded (all ids (" + ids.ToPrintableString() + "), idsToQuery (" + idsToQuery.ToPrintableString() + "), loaded ids (" + loadedIds.ToPrintableString() + ")");
+				}
 				res.Add(rawRes[id]);
 			}
 
