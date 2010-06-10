@@ -18,7 +18,7 @@ namespace FLocal.Common {
 
 		protected Config(NameValueCollection data) : base(data) {
 			this.InitTime = DateTime.Now.ToLongTimeString();
-			this.mainConnection = new MySQLConnector.Connection(data["ConnectionString"]);
+			this.mainConnection = new MySQLConnector.Connection(MySQLConnector.MySQLProvider.instance, data["ConnectionString"]);
 			this.dataDir = data["DataDir"];
 			this.DirSeparator = System.IO.Path.DirectorySeparatorChar.ToString();
 		}

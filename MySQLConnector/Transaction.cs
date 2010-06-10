@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using MySql.Data.MySqlClient;
 using FLocal.Core;
+using System.Data.Common;
 
 namespace FLocal.MySQLConnector {
 	class Transaction : Core.DB.Transaction {
 
-		internal MySqlConnection sqlconnection;
-		internal MySqlTransaction sqltransaction;
+		internal DbConnection sqlconnection;
+		internal DbTransaction sqltransaction;
 
 		public bool finalizedImpl {
 			get;

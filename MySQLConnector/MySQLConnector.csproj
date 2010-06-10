@@ -48,6 +48,8 @@
     <Compile Include="ConditionCompiler.cs" />
     <Compile Include="Connection.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="IDBProvider.cs" />
+    <Compile Include="MySQLProvider.cs" />
     <Compile Include="ParamsHolder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Transaction.cs" />
