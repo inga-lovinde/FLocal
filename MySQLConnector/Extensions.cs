@@ -9,12 +9,12 @@ using System.Data.Common;
 namespace FLocal.MySQLConnector {
 	static class Extensions {
 
-		public static string compile(this ITableSpec table) {
-			return "`" + MySqlHelper.EscapeString(table.name) + "`";
+		public static string compile(this ITableSpec table, IDBTraits traits) {
+			return traits.escapeIdentifier(table.name);
 		}
 
-		public static string compile(this ColumnSpec column) {
-			return column.table.compile() + ".`" + MySqlHelper.EscapeString(column.name) + "`";
+		public static string compile(this ColumnSpec column, IDBTraits traits) {
+			return column.table.compile(traits) + "." + traits.escapeIdentifier(column.name);
 		}
 	
 		public static void AddParameter(this DbCommand command, string name, string value) {

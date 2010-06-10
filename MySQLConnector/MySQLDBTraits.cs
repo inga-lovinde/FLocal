@@ -6,9 +6,9 @@ using System.Data.Common;
 using MySql.Data.MySqlClient;
 
 namespace FLocal.MySQLConnector {
-	public class MySQLProvider : IDBProvider {
+	public class MySQLDBTraits : IDBTraits {
 
-		public static readonly MySQLProvider instance = new MySQLProvider();
+		public static readonly MySQLDBTraits instance = new MySQLDBTraits();
 
 		public DbConnection createConnection(string connectionString) {
 			return new MySqlConnection(connectionString);
@@ -16,6 +16,10 @@ namespace FLocal.MySQLConnector {
 
 		public long LastInsertId(DbCommand command) {
 			return ((MySqlCommand)command).LastInsertedId;
+		}
+
+		public string escapeIdentifier(string identifier) {
+			return "`" + MySqlHelper.EscapeString(identifier) + "`";
 		}
 
 	}

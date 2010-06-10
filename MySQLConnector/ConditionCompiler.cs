@@ -9,21 +9,23 @@ namespace FLocal.MySQLConnector {
 	class ConditionCompiler {
 
 		private readonly ParamsHolder paramsholder;
+		private readonly IDBTraits traits;
 
-		private ConditionCompiler() {
+		private ConditionCompiler(IDBTraits traits) {
 			this.paramsholder = new ParamsHolder();
+			this.traits = traits;
 		}
 
 		private string getName(ColumnOrValue cov) {
 			if(cov.isColumn) {
-				return cov.column.compile();
+				return cov.column.compile(this.traits);
 			} else {
 				return "@" + this.paramsholder.Add(cov.value);
 			}
 		}
 
 		private string CompileCondition(ComparisonCondition condition) {
-			string left = condition.left.compile();
+			string left = condition.left.compile(this.traits);
 			string right = getName(condition.right);
 			switch(condition.comparison) {
 				case ComparisonType.EQUAL:
@@ -44,11 +46,11 @@ namespace FLocal.MySQLConnector {
 		}
 
 		private string CompileCondition(IsNullCondition condition) {
-			return condition.column.compile() + " IS NULL";
+			return condition.column.compile(this.traits) + " IS NULL";
 		}
 
 		private string CompileCondition(NotIsNullCondition condition) {
-			return condition.column.compile() + " NOT IS NULL";
+			return condition.column.compile(this.traits) + " NOT IS NULL";
 		}
 
 		private string CompileCondition(MultiValueCondition condition) {
@@ -58,9 +60,9 @@ namespace FLocal.MySQLConnector {
 			}
 
 			if(condition.inclusive) {
-				return condition.column.compile() + " IN (" + string.Join(", ", valueParams.ToArray()) + ")";
+				return condition.column.compile(this.traits) + " IN (" + string.Join(", ", valueParams.ToArray()) + ")";
 			} else {
-				return condition.column.compile() + " IN (" + string.Join(", ", valueParams.ToArray()) + ")";
+				return condition.column.compile(this.traits) + " IN (" + string.Join(", ", valueParams.ToArray()) + ")";
 			}
 		}
 
@@ -104,8 +106,8 @@ namespace FLocal.MySQLConnector {
 			}
 		}
 
-		public static KeyValuePair<string, ParamsHolder> Compile(AbstractCondition condition) {
-			ConditionCompiler compiler = new ConditionCompiler();
+		public static KeyValuePair<string, ParamsHolder> Compile(AbstractCondition condition, IDBTraits traits) {
+			ConditionCompiler compiler = new ConditionCompiler(traits);
 			string compiled = compiler.CompileCondition(condition);
 			return new KeyValuePair<string,ParamsHolder>(compiled, compiler.paramsholder);
 		}
