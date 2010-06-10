@@ -75,6 +75,8 @@ namespace Builder {
 					revNumber = int.Parse(document.GetElementsByTagName("entry")[0].Attributes["revision"].Value);
 				}
 
+				Console.WriteLine("Version number: 1." + revNumber + "." + buildNumber + ".0");
+
 				using(TempFile tempFile = new TempFile()) {
 
 					string wxsData;

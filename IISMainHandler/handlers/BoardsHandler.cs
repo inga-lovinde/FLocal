@@ -20,7 +20,7 @@ namespace FLocal.IISHandler.handlers {
 		override protected XDocument getData(WebContext context) {
 			Board board1 = Board.LoadById(1);
 			Board board2 = Board.LoadById(2);
-			Board board3 = Board.LoadById(3);
+			Board board3 = Board.LoadById(4);
 			return new XDocument(
 				new XElement("root",
 					new XElement("title", Config.instance.AppInfo),

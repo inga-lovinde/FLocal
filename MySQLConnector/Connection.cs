@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data.Common;
-using MySql.Data.MySqlClient;
 using FLocal.Core;
 using FLocal.Core.DB;
 
@@ -40,11 +39,11 @@ namespace FLocal.MySQLConnector {
 					ParamsHolder paramsHolder = new ParamsHolder();
 					List<string> placeholder = new List<string>();
 					foreach(string id in ids) {
-						placeholder.Add("@" + paramsHolder.Add(id));
+						placeholder.Add(this.traits.markParam(paramsHolder.Add(id)));
 					}
 
-					command.CommandText = "SELECT * FROM " + table.compile(this.traits) + " WHERE " + table.getIdSpec().compile(this.traits) + " IN (" + string.Join(", ", placeholder.ToArray()) + ")";
-					command.Prepare();
+					command.CommandText = "SELECT * FROM " + table.compile(this.traits) + " WHERE " + table.getIdSpec().compile(this.traits) + " = " + string.Join(", ", placeholder.ToArray()) + "";
+					//command.Prepare();
 					foreach(KeyValuePair<string, string> kvp in paramsHolder.data) {
 						command.AddParameter(kvp.Key, kvp.Value);
 					}
@@ -54,7 +53,8 @@ namespace FLocal.MySQLConnector {
 						while(reader.Read()) {
 							Dictionary<string, string> row = new Dictionary<string,string>();
 							for(int i=0; i<reader.FieldCount; i++) {
-								row.Add(reader.GetName(i), reader.GetString(i));
+//								throw new CriticalException("Name: " + reader.GetName(i));
+								row.Add(reader.GetName(i), reader.GetValue(i).ToString());
 							}
 							rawResult.Add(row[table.idName], row);
 						}
@@ -118,7 +118,7 @@ namespace FLocal.MySQLConnector {
 						List<string> result = new List<string>();
 						using(DbDataReader reader = command.ExecuteReader()) {
 							while(reader.Read()) {
-								result.Add(reader.GetString(0));
+								result.Add(reader.GetValue(0).ToString());
 							}
 						}
 						return result;
@@ -158,7 +158,7 @@ namespace FLocal.MySQLConnector {
 				using(DbCommand command = transaction.sqlconnection.CreateCommand()) {
 					command.Transaction = transaction.sqltransaction;
 					command.CommandType = System.Data.CommandType.Text;
-					command.CommandText = "SELECT * FROM " + table.compile(this.traits) + " where " + table.getIdSpec().compile(this.traits) + " = @id FOR UPDATE";
+					command.CommandText = "SELECT * FROM " + table.compile(this.traits) + " where " + table.getIdSpec().compile(this.traits) + " = " + this.traits.markParam("id") + " FOR UPDATE";
 					command.AddParameter("id", id);
 					command.ExecuteNonQuery();
 				}
@@ -172,13 +172,12 @@ namespace FLocal.MySQLConnector {
 					List<string> updates = new List<string>();
 					ParamsHolder paramsholder = new ParamsHolder();
 					foreach(KeyValuePair<string, string> kvp in data) {
-						string paramname = paramsholder.Add(kvp.Value);
-						updates.Add(this.traits.escapeIdentifier(kvp.Key) + " = @" + paramname);
+						updates.Add(this.traits.escapeIdentifier(kvp.Key) + " = " + this.traits.markParam(paramsholder.Add(kvp.Value)));
 					}
 
 					command.Transaction = transaction.sqltransaction;
 					command.CommandType = System.Data.CommandType.Text;
-					command.CommandText = "UPDATE " + table.compile(traits) + " set " + String.Join(", ", updates.ToArray()) + " where " + table.getIdSpec().compile(this.traits) + " = @id";
+					command.CommandText = "UPDATE " + table.compile(traits) + " set " + String.Join(", ", updates.ToArray()) + " where " + table.getIdSpec().compile(this.traits) + " = " + this.traits.markParam("id");
 					command.AddParameter("id", id);
 					foreach(KeyValuePair<string, string> kvp in paramsholder.data) {
 						command.AddParameter(kvp.Key, kvp.Value);
@@ -195,8 +194,7 @@ namespace FLocal.MySQLConnector {
 					List<string> updates = new List<string>();
 					ParamsHolder paramsholder = new ParamsHolder();
 					foreach(KeyValuePair<string, string> kvp in data) {
-						string paramname = paramsholder.Add(kvp.Value);
-						updates.Add(this.traits.escapeIdentifier(kvp.Key) + " = @" + paramname);
+						updates.Add(this.traits.escapeIdentifier(kvp.Key) + " = " + this.traits.markParam(paramsholder.Add(kvp.Value)));
 					}
 
 					command.Transaction = transaction.sqltransaction;
@@ -206,7 +204,7 @@ namespace FLocal.MySQLConnector {
 						command.AddParameter(kvp.Key, kvp.Value);
 					}
 					command.ExecuteNonQuery();
-					return this.traits.LastInsertId(command).ToString();
+					return this.traits.LastInsertId(command, table).ToString();
 				}
 			}
 		}

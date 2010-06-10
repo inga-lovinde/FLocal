@@ -9,8 +9,8 @@ namespace FLocal.Common.dataobjects {
 
 		private class TableSpec : FLocal.Core.DB.ITableSpec {
 			public static readonly TableSpec instance = new TableSpec();
-			public string name { get { return "boards"; } }
-			public string idName { get { return "id"; } }
+			public string name { get { return "Boards"; } }
+			public string idName { get { return "Id"; } }
 		}
 
 		protected override FLocal.Core.DB.ITableSpec table { get { return TableSpec.instance; } }
@@ -31,11 +31,11 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
-		private int _lastPostId;
+		private int? _lastPostId;
 		public int lastPostId {
 			get {
 				this.LoadIfNotLoaded();
-				return this._lastPostId;
+				return this._lastPostId.Value;
 			}
 		}
 
@@ -53,10 +53,14 @@ namespace FLocal.Common.dataobjects {
 		}
 
 		protected override void doFromHash(Dictionary<string, string> data) {
-			this._name = data["name"];
-			this._description = data["comment"];
-			this._lastPostId = int.Parse(data["lastPostId"]);
-			this._categoryId = int.Parse(data["categoryId"]);
+			this._name = data["Name"];
+			this._description = data["Comment"];
+			if(data["LastPostId"] != "") {
+				this._lastPostId = int.Parse(data["LastPostId"]);
+			} else {
+				this._lastPostId = null;
+			}
+			this._categoryId = int.Parse(data["CategoryId"]);
 		}
 
 		public XElement exportToXml() {

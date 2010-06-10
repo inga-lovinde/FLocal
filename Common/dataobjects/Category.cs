@@ -8,8 +8,8 @@ namespace FLocal.Common.dataobjects {
 
 		private class TableSpec : FLocal.Core.DB.ITableSpec {
 			public static readonly TableSpec instance = new TableSpec();
-			public string name { get { return "categories"; } }
-			public string idName { get { return "id"; } }
+			public string name { get { return "Categories"; } }
+			public string idName { get { return "Id"; } }
 		}
 
 		protected override FLocal.Core.DB.ITableSpec table { get { return TableSpec.instance; } }
@@ -23,7 +23,7 @@ namespace FLocal.Common.dataobjects {
 		}
 
 		protected override void doFromHash(Dictionary<string, string> data) {
-			this._name = data["name"];
+			this._name = data["Name"];
 		}
 
 	}

@@ -20,7 +20,7 @@ namespace FLocal.MySQLConnector {
 			if(cov.isColumn) {
 				return cov.column.compile(this.traits);
 			} else {
-				return "@" + this.paramsholder.Add(cov.value);
+				return this.traits.markParam(this.paramsholder.Add(cov.value));
 			}
 		}
 
