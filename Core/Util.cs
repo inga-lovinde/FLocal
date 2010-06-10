@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FLocal.Core {
 
-    class Util {
+    public class Util {
 
         private static bool? _isRunningOnMono;
         

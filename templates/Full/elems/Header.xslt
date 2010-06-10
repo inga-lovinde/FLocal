@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="Windows-1251"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml">
-	<xsl:output method="xml" indent="yes" encoding="UTF-8"/>
 	<xsl:template name="header">
 		<table border="0" cellpadding="2" cellspacing="0" width="95%" class="tableborders" align="center">
 			<tr>

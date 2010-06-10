@@ -99,16 +99,29 @@ namespace FLocal.Common.dataobjects {
 			this._description = data[TableSpec.FIELD_DESCRIPTION];
 		}
 
+		private bool hasNewPosts() {
+			return Core.Util.RandomInt(0, 1) == 0;
+		}
+
+		private XElement exportLastPostInfo() {
+			if(!this.lastPostId.HasValue) {
+				return new XElement("none");
+			} else {
+				throw new NotImplementedException();
+			}
+		}
+
 		public XElement exportToXmlForMainPage() {
 			return new XElement("board",
 				new XElement("id", this.id),
 				new XElement("sortOrder", this.sortOrder),
 				new XElement("categoryId", this.categoryId),
-				new XElement("lastPostId", this.lastPostId),
 				new XElement("totalPosts", this.totalPosts),
 				new XElement("totalThreads", this.totalThreads),
 				new XElement("name", this.name),
-				new XElement("description", this.description)
+				new XElement("description", this.description),
+				new XElement("hasNewPosts", this.hasNewPosts() ? "true" : "false"),
+				new XElement("lastPostInfo", this.exportLastPostInfo())
 			);
 		}
 
