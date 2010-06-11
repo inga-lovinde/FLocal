@@ -64,10 +64,15 @@ namespace Builder {
 				}
 
 				int revNumber;
-				ProcessStartInfo svnInfo = new ProcessStartInfo(SVNPATH + "svn", "info --xml");
+				ProcessStartInfo svnInfo = new ProcessStartInfo(SVNPATH + "svn");
 				svnInfo.WorkingDirectory = (new DirectoryInfo(".")).Parent.FullName;
 				svnInfo.UseShellExecute = false;
 				svnInfo.RedirectStandardOutput = true;
+				svnInfo.Arguments = "up --depth=empty";
+				using(Process svn = Process.Start(svnInfo)) {
+					svn.WaitForExit();
+				}
+				svnInfo.Arguments = "info --xml";
 				using(Process svn = Process.Start(svnInfo)) {
 					svn.WaitForExit();
 					XmlDocument document = new XmlDocument();
