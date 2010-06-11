@@ -10,5 +10,12 @@ namespace FLocal.IISHandler.designs {
 				return "Full";
 			}
 		}
+
+		string FLocal.Common.IOutputParams.preprocessBodyIntermediate(string bodyIntermediate) {
+			return bodyIntermediate.
+				Replace("<f:img><f:src>", "<img src=\"").
+				Replace("</f:src><f:alt>", "\" alt=\"").
+				Replace("</f:alt></f:img>", "\"/>");
+		}
 	}
 }

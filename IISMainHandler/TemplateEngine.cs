@@ -34,7 +34,7 @@ namespace FLocal.IISHandler {
 
 		public static string Compile(string templateName, XDocument data) {
 			StringBuilder builder = new StringBuilder();
-			using(XmlWriter writer = XmlWriter.Create(builder, new XmlWriterSettings { Indent = true, NewLineHandling = NewLineHandling.None})) {
+			using(XmlWriter writer = XmlWriter.Create(builder, new XmlWriterSettings { Indent = false })) {
 				using(XmlReader reader = data.CreateReader()) {
 					TemplateCacher.instance.getCompiledTransform(templateName).Transform(reader, writer);
 				}

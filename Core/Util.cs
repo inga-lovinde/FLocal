@@ -112,6 +112,14 @@ namespace FLocal.Core {
             return RandomString(length, RandomSource.LETTERS);
         }
 
+		public static int? ParseInt(string raw) {
+			if(raw == "") {
+				return null;
+			} else {
+				return int.Parse(raw);
+			}
+		}
+
     }
 
 }

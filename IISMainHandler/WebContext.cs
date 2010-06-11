@@ -5,7 +5,7 @@ using System.Text;
 using System.Web;
 
 namespace FLocal.IISHandler {
-	class WebContext {
+	class WebContext : Common.UserContext {
 
 		public readonly HttpContext httpcontext;
 
@@ -21,15 +21,21 @@ namespace FLocal.IISHandler {
 			}
 		}
 
-		public designs.IDesign design {
+		public override Common.dataobjects.IUserSettings userSettings {
 			get {
-				return new designs.Classic();
+				return new Common.dataobjects.AnonymousUserSettings();
 			}
 		}
 
-		public Common.Config config {
+		public override Common.IOutputParams outputParams {
 			get {
-				return Common.Config.instance;
+				return this.design;
+			}
+		}
+
+		public designs.IDesign design {
+			get {
+				return new designs.Classic();
 			}
 		}
 

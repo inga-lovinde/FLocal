@@ -96,11 +96,11 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
-		public XElement exportToXmlForMainPage() {
+		public XElement exportToXmlForMainPage(UserContext context) {
 			return new XElement("category",
 				new XElement("name", this.name),
 				new XElement("sortOrder", this.sortOrder),
-				new XElement("boards", from board in this.subBoards select board.exportToXmlForMainPage())
+				new XElement("boards", from board in this.subBoards select board.exportToXmlForMainPage(context))
 			);
 		}
 

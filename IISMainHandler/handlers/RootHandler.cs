@@ -15,7 +15,7 @@ namespace FLocal.IISHandler.handlers {
 			}
 		}
 
-		override protected XDocument getData(WebContext context) {
+		override protected XElement[] getSpecificData(WebContext context) {
 			throw new NotImplementedException();
 		}
 

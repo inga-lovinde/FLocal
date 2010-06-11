@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
+using FLocal.Core;
+using FLocal.Core.DB;
 
 namespace FLocal.Common.dataobjects {
 	public class Board : SqlObject<Board> {
@@ -17,6 +19,7 @@ namespace FLocal.Common.dataobjects {
 			public const string FIELD_TOTALTHREADS = "TotalThreads";
 			public const string FIELD_NAME = "Name";
 			public const string FIELD_DESCRIPTION = "Comment";
+			public const string FIELD_PARENTBOARDID = "ParentBoardId";
 			public static readonly TableSpec instance = new TableSpec();
 			public string name { get { return TABLE; } }
 			public string idName { get { return FIELD_ID; } }
@@ -32,8 +35,8 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 		
-		private int _categoryId;
-		public int categoryId {
+		private int? _categoryId;
+		public int? categoryId {
 			get {
 				this.LoadIfNotLoaded();
 				return this._categoryId;
@@ -41,7 +44,7 @@ namespace FLocal.Common.dataobjects {
 		}
 		public Category category {
 			get {
-				return Category.LoadById(this.categoryId);
+				return Category.LoadById(this.categoryId.Value);
 			}
 		}
 
@@ -85,22 +88,54 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
+		private int? _parentBoardId;
+		public int? parentBoardId {
+			get {
+				this.LoadIfNotLoaded();
+				return this._parentBoardId;
+			}
+		}
+
 		protected override void doFromHash(Dictionary<string, string> data) {
 			this._sortOrder = int.Parse(data[TableSpec.FIELD_SORTORDER]);
-			this._categoryId = int.Parse(data[TableSpec.FIELD_CATEGORYID]);
-			if(data[TableSpec.FIELD_LASTPOSTID] != "") {
-				this._lastPostId = int.Parse(data[TableSpec.FIELD_LASTPOSTID]);
-			} else {
-				this._lastPostId = null;
-			}
+			this._categoryId = Util.ParseInt(data[TableSpec.FIELD_CATEGORYID]);
+			this._lastPostId = Util.ParseInt(data[TableSpec.FIELD_LASTPOSTID]);
 			this._totalPosts = int.Parse(data[TableSpec.FIELD_TOTALPOSTS]);
 			this._totalThreads = int.Parse(data[TableSpec.FIELD_TOTALTHREADS]);
 			this._name = data[TableSpec.FIELD_NAME];
 			this._description = data[TableSpec.FIELD_DESCRIPTION];
+			this._parentBoardId = Util.ParseInt(data[TableSpec.FIELD_PARENTBOARDID]);
+		}
+
+		private readonly object subBoards_Locker = new object();
+		public IEnumerable<Board> subBoards {
+			get {
+				return
+					from id in Cache<IEnumerable<int>>.instance.get(
+						this.subBoards_Locker,
+						() => {
+							IEnumerable<int> ids = from stringId in Config.instance.mainConnection.LoadIdsByConditions(
+								TableSpec.instance,
+								new FLocal.Core.DB.conditions.ComparisonCondition(
+									TableSpec.instance.getColumnSpec(Board.TableSpec.FIELD_PARENTBOARDID),
+									FLocal.Core.DB.conditions.ComparisonType.EQUAL,
+									this.id.ToString()
+								),
+								Diapasone.unlimited,
+								new JoinSpec[0]
+							) select int.Parse(stringId);
+							Board.LoadByIds(ids);
+							return ids;
+						}
+					)
+					let board = Board.LoadById(id)
+					orderby board.sortOrder, board.id
+					select board;
+			}
 		}
 
 		private bool hasNewPosts() {
-			return Core.Util.RandomInt(0, 1) == 0;
+			return Core.Util.RandomInt(0, 1000) < 500;
 		}
 
 		private XElement exportLastPostInfo() {
@@ -111,8 +146,8 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
-		public XElement exportToXmlForMainPage() {
-			return new XElement("board",
+		public XElement exportToXmlForMainPage(UserContext context) {
+			XElement result = new XElement("board",
 				new XElement("id", this.id),
 				new XElement("sortOrder", this.sortOrder),
 				new XElement("categoryId", this.categoryId),
@@ -123,6 +158,14 @@ namespace FLocal.Common.dataobjects {
 				new XElement("hasNewPosts", this.hasNewPosts() ? "true" : "false"),
 				new XElement("lastPostInfo", this.exportLastPostInfo())
 			);
+
+			if(!this.parentBoardId.HasValue) {
+				result.Add(new XElement("subBoards",
+					from board in this.subBoards select board.exportToXmlForMainPage(context)
+				));
+			}
+
+			return result;
 		}
 
 	}

@@ -106,6 +106,14 @@
 						</td>
 						<td class="forumdescript"><xsl:value-of select="description"/></td>
 					</tr>
+					<xsl:if test="subBoards/board">
+						<tr>
+							<td class="forumdescript">&#160;</td>
+							<td class="forumdescript" style="padding-top:0.3em">
+								<xsl:apply-templates select="subBoards/board"/>
+							</td>
+						</tr>
+					</xsl:if>
 				</table>
 			</td>
 			<td width="7%" align="center" class="threadtotal" nowrap="nowrap"><xsl:value-of select="totalThreads"/></td>
@@ -133,5 +141,14 @@
 				N/A
 			</xsl:otherwise>
 		</xsl:choose>
+	</xsl:template>
+
+	<xsl:template match="subBoards/board">
+		<span style="margin-left:0.5em;margin-right:0.5em">
+			<a>
+				<xsl:attribute name="href">/Threads/<xsl:value-of select="id"/>/</xsl:attribute>
+				<xsl:value-of select="description"/>
+			</a>
+		</span>
 	</xsl:template>
 </xsl:stylesheet>
