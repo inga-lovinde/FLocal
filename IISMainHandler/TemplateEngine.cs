@@ -33,13 +33,13 @@ namespace FLocal.IISHandler {
 		}
 
 		public static string Compile(string templateName, XDocument data) {
-			XDocument result = new XDocument();
-			using(XmlWriter writer = result.CreateWriter()) {
+			StringBuilder builder = new StringBuilder();
+			using(XmlWriter writer = XmlWriter.Create(builder, new XmlWriterSettings { Indent = true, NewLineHandling = NewLineHandling.None})) {
 				using(XmlReader reader = data.CreateReader()) {
 					TemplateCacher.instance.getCompiledTransform(templateName).Transform(reader, writer);
 				}
 			}
-			return result.ToString();
+			return builder.ToString();
 		}
 
 	}
