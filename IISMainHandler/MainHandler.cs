@@ -19,7 +19,13 @@ namespace FLocal.IISHandler {
 				throw new HttpException(403, "You have come from the static page");
 			}
 
-			if(!FLocal.Common.Config.isInitialized) FLocal.Common.Config.Init(ConfigurationManager.AppSettings);
+			if(!FLocal.Common.Config.isInitialized) {
+				lock(typeof(FLocal.Common.Config)) {
+					if(!FLocal.Common.Config.isInitialized) {
+						FLocal.Common.Config.Init(ConfigurationManager.AppSettings);
+					}
+				}
+			}
 
 			WebContext context = new WebContext(httpcontext);
 			ISpecificHandler handler = HandlersFactory.getHandler(context);
