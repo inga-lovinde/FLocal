@@ -46,6 +46,9 @@ namespace FLocal.IISHandler.handlers {
 				throw new HttpException(403, "wrong file type");
 			}
 
+			context.httpresponse.CacheControl = HttpCacheability.Public.ToString();
+			context.httpresponse.Expires = 1440;
+
 			context.httpresponse.WriteFile(fileinfo.FullName);
 		}
 
