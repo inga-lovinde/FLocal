@@ -53,6 +53,7 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="HandlersFactory.cs" />
     <Compile Include="handlers\AbstractGetHandler.cs" />
+    <Compile Include="handlers\BoardHandler.cs" />
     <Compile Include="handlers\BoardsHandler.cs" />
     <Compile Include="handlers\DebugHandler.cs" />
     <Compile Include="handlers\RootHandler.cs" />

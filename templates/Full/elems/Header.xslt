@@ -8,17 +8,20 @@
 						<tr>
 							<td width="100%" class="topmenu" align="center">
 								<a href ="/" >Root</a>
-								| <a href ="http://google.com/" target="_blank">Google</a>
-								| <a href ="http://yandex.ru/" target="_blank">Yandex</a>
-								| <a href ="http://mail.ru" target="_blank">Mail.ru</a>
-								| <a href ="http://www.vedomosti.ru/" target="_blank">Vedomosti</a>
-								| <a href ="http://www.afisha.ru/" target="_blank">Afisha</a>
-								| <a href ="http://weather.yandex.ru/27612/" target="_blank">Weather</a>
-								| <a href ="/sendmail.php" target="_blank">LAN Support</a>
-							</td>
-						</tr>
-						<tr>
-							<td width="100%" colspan="3" height="1" class="tableborders">
+								<span> | </span>
+								<a href ="http://google.com/" target="_blank">Google</a>
+								<span> | </span>
+								<a href ="http://yandex.ru/" target="_blank">Yandex</a>
+								<span> | </span>
+								<a href ="http://mail.ru" target="_blank">Mail.ru</a>
+								<span> | </span>
+								<a href ="http://www.vedomosti.ru/" target="_blank">Vedomosti</a>
+								<span> | </span>
+								<a href ="http://www.afisha.ru/" target="_blank">Afisha</a>
+								<span> | </span>
+								<a href ="http://weather.yandex.ru/27612/" target="_blank">Weather</a>
+								<span> | </span>
+								<a href ="/sendmail.php" target="_blank">LAN Support</a>
 							</td>
 						</tr>
 					</table>
@@ -31,18 +34,19 @@
 					<table width="100%" class="tableborders" cellpadding="3" cellspacing="1">
 						<tr>
 							<td align="center" class="menubar">
-								<a href = "/ubbthreads.php?Cat=" target="_top">Список форумов</a>
-								 |
+								<a href = "/Boards/" target="_top">Список форумов</a>
+								<span> | </span>
 								<a href = "/word-search.php" target="_top">Поиск</a>
-								 |
+								<span> | </span>
 								<a href = "/login.php?Cat=" target="_top">My Home</a>
-								 |
+								<span> | </span>
 								<a href = "/online.php?Cat=" target="_top">Кто в онлайне</a>
-								 |
+								<span> | </span>
 								<a href = "/faq_russian.php" target="_top">FAQ</a>
-								 |
+								<span> | </span>
 								<a href = "/logout.php?key=8b46d53aaa0096f6695478f81503082c" target="_top">Выход</a>
-								 | <a href="/showmembers.php?Cat=&amp;page=1" target="_top">Пользователи</a>
+								<span> | </span>
+								<a href="/showmembers.php?Cat=&amp;page=1" target="_top">Пользователи</a>
 							</td>
 						</tr>
 					</table>

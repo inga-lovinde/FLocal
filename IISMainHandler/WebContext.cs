@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
+using FLocal.Core;
 
 namespace FLocal.IISHandler {
 	class WebContext : Common.UserContext {
@@ -12,6 +13,13 @@ namespace FLocal.IISHandler {
 		public HttpRequest httprequest {
 			get {
 				return this.httpcontext.Request;
+			}
+		}
+
+		private object requestParts_Locker = new object();
+		public string[] requestParts {
+			get {
+				return Cache<string[]>.instance.get(requestParts_Locker, () => this.httprequest.Path.Split("/", StringSplitOptions.RemoveEmptyEntries));
 			}
 		}
 

@@ -13,15 +13,16 @@ namespace FLocal.IISHandler {
 //				return new handlers.WrongUrlHandler();
 //				throw new FLocalException("Malformed url");
 //			}
-			string[] requestParts = context.httprequest.Path.Split("/", StringSplitOptions.RemoveEmptyEntries);
-			if(requestParts.Length < 1) return new handlers.RootHandler();
-			switch(requestParts[0]) {
+			if(context.requestParts.Length < 1) return new handlers.RootHandler();
+			switch(context.requestParts[0].ToLower()) {
 				case "boards":
 					return new handlers.BoardsHandler();
+				case "board":
+					return new handlers.BoardHandler();
 				case "static":
-					return new handlers.StaticHandler(requestParts);
+					return new handlers.StaticHandler(context.requestParts);
 				default:
-					return new handlers.DebugHandler(requestParts[0]);
+					return new handlers.DebugHandler(context.requestParts[0]);
 			}
 		}
 

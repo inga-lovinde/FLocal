@@ -14,30 +14,34 @@
 				<xsl:call-template name="header"/>
 				<xsl:call-template name="specific"/>
 				<br />
-Data used for authoring this XHTML document:
+<span>Data used for authoring this XHTML document:</span>
 <xmp><xsl:copy-of select="/"/></xmp>
 			</body>
 		</html>
 	</xsl:template>
 
+	<xsl:template match="parent" mode="breadcrumbsPart">
+		<xsl:apply-templates select="*/parent" mode="breadcrumbsPart"/>
+		<xsl:if test="category/id">
+			<a>
+				<xsl:attribute name="href">/Boards/</xsl:attribute>
+				<xsl:value-of select="category/name"/>
+			</a>
+			<span> &gt;&gt; </span>
+		</xsl:if>
+		<xsl:if test="board/id">
+			<a>
+				<xsl:attribute name="href">/Board/<xsl:value-of select="board/id"/>/</xsl:attribute>
+				<xsl:value-of select="board/name"/>
+			</a>
+			<span> &gt;&gt; </span>
+		</xsl:if>
+	</xsl:template>
+
+	<xsl:template match="currentBoard" mode="breadcrumbs">
+		<xsl:apply-templates select="*/parent" mode="breadcrumbsPart"/>
+		<xsl:value-of select="board/name"/>
+	</xsl:template>
+
 </xsl:stylesheet>
 
-<!--
-        <h1>Persons</h1>
-        <ul>
-          <xsl:apply-templates select="person">
-            <xsl:sort select="family-name" />
-          </xsl:apply-templates>
-        </ul>
-      </body>
-    </html>
-  </xsl:template>
- 
-  <xsl:template match="person">
-    <li>
-      <xsl:value-of select="family-name"/><xsl:text>, </xsl:text>
-      <xsl:value-of select="name"/>
-    </li>
-  </xsl:template>
- 
--->

@@ -50,3 +50,21 @@ pre
   width: 99%;
 }
 
+[type=button].iconize, [type=submit].iconize {
+	padding-left:16px;
+	background-position:center left;
+	background-repeat:no-repeat;
+	font-size:10px;
+}
+
+.separate {
+	padding-left:0.2em;
+	padding-right:0.2em;
+}
+
+.tablesurround, .tableborders {
+	border-collapse:collapse;
+}
+.tablesurround > tr > td, .tableborders > tr > td {
+	border:solid 1px black;
+}

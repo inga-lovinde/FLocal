@@ -11,12 +11,12 @@ namespace FLocal.IISHandler.handlers {
 
 		override protected string templateName {
 			get {
-				throw new NotImplementedException();
+				return "Root.xslt";
 			}
 		}
 
 		override protected XElement[] getSpecificData(WebContext context) {
-			throw new NotImplementedException();
+			return new XElement[0];
 		}
 
 	}

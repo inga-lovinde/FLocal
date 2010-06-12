@@ -95,6 +95,11 @@ namespace FLocal.Common.dataobjects {
 				return this._parentBoardId;
 			}
 		}
+		public Board parentBoard {
+			get {
+				return Board.LoadById(this.parentBoardId.Value);
+			}
+		}
 
 		protected override void doFromHash(Dictionary<string, string> data) {
 			this._sortOrder = int.Parse(data[TableSpec.FIELD_SORTORDER]);
@@ -146,7 +151,16 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
-		public XElement exportToXmlForMainPage(UserContext context) {
+		public XElement exportToXmlSimpleWithParent(UserContext context) {
+			return new XElement("board",
+				new XElement("id", this.id),
+				new XElement("name", this.name),
+				new XElement("description", this.description),
+				new XElement("parent", this.parentBoardId.HasValue ? this.parentBoard.exportToXmlSimpleWithParent(context) : this.category.exportToXmlSimple(context))
+			);
+		}
+
+		public XElement exportToXml(UserContext context, bool includeSubBoards) {
 			XElement result = new XElement("board",
 				new XElement("id", this.id),
 				new XElement("sortOrder", this.sortOrder),
@@ -159,9 +173,9 @@ namespace FLocal.Common.dataobjects {
 				new XElement("lastPostInfo", this.exportLastPostInfo())
 			);
 
-			if(!this.parentBoardId.HasValue) {
+			if(includeSubBoards) {
 				result.Add(new XElement("subBoards",
-					from board in this.subBoards select board.exportToXmlForMainPage(context)
+					from board in this.subBoards select board.exportToXml(context, false)
 				));
 			}
 
