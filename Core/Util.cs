@@ -120,6 +120,19 @@ namespace FLocal.Core {
 			}
 		}
 
+		public static DateTime? ParseDateTimeFromTimestamp(string raw) {
+			if(raw == "") {
+				return null;
+			} else {
+				long timestamp = long.Parse(raw);
+				if(timestamp < 1) {
+					return null;
+				} else {
+					return new DateTime(timestamp);
+				}
+			}
+		}
+
     }
 
 }

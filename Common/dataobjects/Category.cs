@@ -95,6 +95,9 @@ namespace FLocal.Common.dataobjects {
 					select board;
 			}
 		}
+		internal void subBoards_Reset() {
+			Cache<IEnumerable<int>>.instance.delete(this.subBoards_Locker);
+		}
 
 		public XElement exportToXmlSimple(UserContext context) {
 			return new XElement("category",

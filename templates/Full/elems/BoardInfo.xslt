@@ -60,11 +60,11 @@
 	<xsl:template match="lastPostInfo">
 		<xsl:choose>
 			<xsl:when test="post">
-				<xsl:value-of select="post/date"/><br />
+				<xsl:value-of select="post/postDate"/><br />
 				<a>
-					<xsl:attribute name="href">/Thread/NOTIMPLEMENTED/p<xsl:value-of select="post/id"/>/</xsl:attribute>
-					<span>от</span>
-					<xsl:value-of select="post/user/name"/>
+					<xsl:attribute name="href">/Thread/<xsl:value-of select="post/threadId"/>/e<xsl:value-of select="post/id"/>/</xsl:attribute>
+					<span>от </span>
+					<xsl:value-of select="post/poster/user/name"/>
 				</a>
 			</xsl:when>
 			<xsl:otherwise>

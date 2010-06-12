@@ -32,6 +32,8 @@ namespace FLocal.IISHandler.handlers {
 				context.httpresponse.WriteLine("description: " + board.description);
 				context.httpresponse.WriteLine("categoryname: " + board.category.name);
 			}
+
+			Thread.LoadById(1).ReLoad();
 		}
 
 	}

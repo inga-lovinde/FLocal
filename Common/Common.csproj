@@ -50,6 +50,9 @@
     <Compile Include="dataobjects\Category.cs" />
     <Compile Include="dataobjects\IUserSettings.cs" />
     <Compile Include="dataobjects\AnonymousUserSettings.cs" />
+    <Compile Include="dataobjects\Post.cs" />
+    <Compile Include="dataobjects\Thread.cs" />
+    <Compile Include="dataobjects\User.cs" />
     <Compile Include="IOutputParams.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlObject.cs" />

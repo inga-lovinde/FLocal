@@ -49,6 +49,10 @@ namespace FLocal.Core {
             return val ? "Enabled" : "Disabled";
         }
 
+		public static string ToPlainString(this bool val) {
+			return val ? "true" : "false";
+		}
+
 		public static string ToPrintableString<T>(this IEnumerable<T> list) {
 			return string.Join(",", (from elem in list select elem.ToString()).ToArray());
 		}

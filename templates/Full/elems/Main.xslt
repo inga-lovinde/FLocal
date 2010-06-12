@@ -38,9 +38,9 @@
 		</xsl:if>
 	</xsl:template>
 
-	<xsl:template match="currentBoard" mode="breadcrumbs">
+	<xsl:template match="currentLocation" mode="breadcrumbs">
 		<xsl:apply-templates select="*/parent" mode="breadcrumbsPart"/>
-		<xsl:value-of select="board/name"/>
+		<xsl:value-of select="*/name"/>
 	</xsl:template>
 
 </xsl:stylesheet>

@@ -9,11 +9,11 @@ using FLocal.Common.dataobjects;
 
 namespace FLocal.IISHandler.handlers {
 
-	class BoardHandler : AbstractGetHandler {
+	class ThreadHandler : AbstractGetHandler {
 
 		override protected string templateName {
 			get {
-				return "Board.xslt";
+				return "Thread.xslt";
 			}
 		}
 
@@ -21,8 +21,7 @@ namespace FLocal.IISHandler.handlers {
 			Board board = Board.LoadById(int.Parse(context.requestParts[1]));
 			return new XElement[] {
 				new XElement("currentLocation", board.exportToXmlSimpleWithParent(context)),
-				new XElement("boards", from subBoard in board.subBoards select subBoard.exportToXml(context, true)),
-				new XElement("threads", from thread in board.getThreads(FLocal.Core.DB.Diapasone.unlimited, context) select thread.exportToXml(context))
+				new XElement("boards", from subBoard in board.subBoards select subBoard.exportToXml(context, true))
 			};
 		}
 

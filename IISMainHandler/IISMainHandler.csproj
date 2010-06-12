@@ -58,6 +58,7 @@
     <Compile Include="handlers\DebugHandler.cs" />
     <Compile Include="handlers\RootHandler.cs" />
     <Compile Include="handlers\StaticHandler.cs" />
+    <Compile Include="handlers\ThreadHandler.cs" />
     <Compile Include="handlers\WrongUrlHandler.cs" />
     <Compile Include="ISpecificHandler.cs" />
     <Compile Include="MainHandler.cs" />

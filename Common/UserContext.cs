@@ -20,6 +20,16 @@ namespace FLocal.Common {
 			get;
 		}
 
+		abstract public string formatDateTime(DateTime dateTime);
+
+	}
+
+	public static class UserContext_Extensions {
+		
+		public static string ToString(this DateTime dateTime, UserContext context) {
+			return context.formatDateTime(dateTime);
+		}
+
 	}
 
 }

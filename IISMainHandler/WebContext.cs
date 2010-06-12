@@ -47,8 +47,15 @@ namespace FLocal.IISHandler {
 			}
 		}
 
+		public override string formatDateTime(DateTime dateTime) {
+			return dateTime.ToString();
+		}
+
+		public DateTime requestTime;
+
 		public WebContext(HttpContext httpcontext) {
 			this.httpcontext = httpcontext;
+			this.requestTime = DateTime.Now;
 		}
 
 		public string Transform(string templateName, System.Xml.Linq.XDocument data) {

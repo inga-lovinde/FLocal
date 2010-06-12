@@ -5,6 +5,7 @@ using System.Text;
 using System.Xml.Linq;
 using FLocal.Core;
 using FLocal.Core.DB;
+using FLocal.Core.DB.conditions;
 
 namespace FLocal.Common.dataobjects {
 	public class Board : SqlObject<Board> {
@@ -53,6 +54,11 @@ namespace FLocal.Common.dataobjects {
 			get {
 				this.LoadIfNotLoaded();
 				return this._lastPostId;
+			}
+		}
+		public Post lastPost {
+			get {
+				return Post.LoadById(this.lastPostId.Value);
 			}
 		}
 
@@ -138,16 +144,19 @@ namespace FLocal.Common.dataobjects {
 					select board;
 			}
 		}
+		internal void subBoards_Reset() {
+			Cache<IEnumerable<int>>.instance.delete(this.subBoards_Locker);
+		}
 
 		private bool hasNewPosts() {
 			return Core.Util.RandomInt(0, 1000) < 500;
 		}
 
-		private XElement exportLastPostInfo() {
+		private XElement exportLastPostInfo(UserContext context) {
 			if(!this.lastPostId.HasValue) {
 				return new XElement("none");
 			} else {
-				throw new NotImplementedException();
+				return this.lastPost.exportToXmlWithoutThread(context);
 			}
 		}
 
@@ -169,8 +178,8 @@ namespace FLocal.Common.dataobjects {
 				new XElement("totalThreads", this.totalThreads),
 				new XElement("name", this.name),
 				new XElement("description", this.description),
-				new XElement("hasNewPosts", this.hasNewPosts() ? "true" : "false"),
-				new XElement("lastPostInfo", this.exportLastPostInfo())
+				new XElement("hasNewPosts", this.hasNewPosts().ToPlainString()),
+				new XElement("lastPostInfo", this.exportLastPostInfo(context))
 			);
 
 			if(includeSubBoards) {
@@ -180,6 +189,31 @@ namespace FLocal.Common.dataobjects {
 			}
 
 			return result;
+		}
+
+		public IEnumerable<Thread> getThreads(Diapasone diapasone, UserContext context) {
+			return Thread.LoadByIds(
+				from stringId in Config.instance.mainConnection.LoadIdsByConditions(
+					Thread.TableSpec.instance,
+					new ComparisonCondition(
+						Thread.TableSpec.instance.getColumnSpec(Thread.TableSpec.FIELD_BOARDID),
+						ComparisonType.EQUAL,
+						this.id.ToString()
+					),
+					diapasone,
+					new JoinSpec[0],
+					new SortSpec[] {
+						new SortSpec(
+							Thread.TableSpec.instance.getColumnSpec(Thread.TableSpec.FIELD_ISANNOUNCEMENT),
+							false
+						),
+						new SortSpec(
+							Thread.TableSpec.instance.getColumnSpec(Thread.TableSpec.FIELD_LASTPOSTDATE),
+							true
+						),
+					}
+				) select int.Parse(stringId)
+			);
 		}
 
 	}

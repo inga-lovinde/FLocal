@@ -54,7 +54,14 @@ namespace FLocal.MySQLConnector {
 							Dictionary<string, string> row = new Dictionary<string,string>();
 							for(int i=0; i<reader.FieldCount; i++) {
 //								throw new CriticalException("Name: " + reader.GetName(i));
-								row.Add(reader.GetName(i), reader.GetValue(i).ToString());
+								object value = reader.GetValue(i);
+								string sValue;
+								if(value is DateTime) {
+									sValue = ((DateTime)value).Ticks.ToString();
+								} else {
+									sValue = value.ToString();
+								}
+								row.Add(reader.GetName(i), sValue);
 							}
 							rawResult.Add(row[table.idName], row);
 						}
