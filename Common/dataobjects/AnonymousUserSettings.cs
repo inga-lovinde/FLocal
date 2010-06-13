@@ -8,13 +8,13 @@ namespace FLocal.Common.dataobjects {
 
 		public int threadsPerPage {
 			get {
-				return 20;
+				return 40;
 			}
 		}
 
 		public int postsPerPage {
 			get {
-				return 40;
+				return 20;
 			}
 		}
 

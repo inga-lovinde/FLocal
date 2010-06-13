@@ -150,8 +150,8 @@ namespace FLocal.Common.dataobjects {
 			);
 		}
 
-		public XElement exportToXml(UserContext context) {
-			return new XElement("thread",
+		public XElement exportToXml(UserContext context, bool includeFirstPost) {
+			XElement result = new XElement("thread",
 				new XElement("id", this.id),
 				new XElement("firstPostId", this.firstPostId),
 				new XElement("topicstarter", this.topicstarter.exportToXmlForViewing(context)),
@@ -166,6 +166,10 @@ namespace FLocal.Common.dataobjects {
 				new XElement("bodyShort", this.firstPost.bodyShort),
 				context.formatTotalPosts(this.totalPosts)
 			);
+			if(includeFirstPost) {
+				result.Add(new XElement("firstPost", this.firstPost.exportToXmlWithoutThread(context, false)));
+			}
+			return result;
 		}
 
 		public IEnumerable<Post> getPosts(Diapasone diapasone, UserContext context) {

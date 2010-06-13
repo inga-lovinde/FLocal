@@ -57,6 +57,7 @@
     <Compile Include="handlers\BoardsHandler.cs" />
     <Compile Include="handlers\DebugHandler.cs" />
     <Compile Include="handlers\PostHandler.cs" />
+    <Compile Include="handlers\response\BoardAsThread.cs" />
     <Compile Include="handlers\RootHandler.cs" />
     <Compile Include="handlers\StaticHandler.cs" />
     <Compile Include="handlers\ThreadHandler.cs" />

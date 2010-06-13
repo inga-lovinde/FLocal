@@ -19,6 +19,8 @@ namespace FLocal.IISHandler {
 					return new handlers.BoardsHandler();
 				case "board":
 					return new handlers.BoardHandler();
+				case "boardasthread":
+					return new handlers.BoardAsThreadHandler();
 				case "thread":
 					return new handlers.ThreadHandler();
 				case "post":
