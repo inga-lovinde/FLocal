@@ -19,6 +19,10 @@ namespace FLocal.IISHandler {
 					return new handlers.BoardsHandler();
 				case "board":
 					return new handlers.BoardHandler();
+				case "thread":
+					return new handlers.ThreadHandler();
+				case "post":
+					return new handlers.PostHandler();
 				case "static":
 					return new handlers.StaticHandler(context.requestParts);
 				default:

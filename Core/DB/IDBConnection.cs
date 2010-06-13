@@ -10,6 +10,8 @@ namespace FLocal.Core.DB {
 
 		List<string> LoadIdsByConditions(ITableSpec table, conditions.AbstractCondition conditions, Diapasone diapasone, JoinSpec[] joins, SortSpec[] sorts);
 
+		long GetCountByConditions(ITableSpec table, conditions.AbstractCondition conditions, JoinSpec[] joins);
+
 		Transaction beginTransaction(System.Data.IsolationLevel iso);
 
 		void lockTable(Transaction transaction, ITableSpec table);

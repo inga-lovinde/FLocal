@@ -5,6 +5,7 @@ using System.Text;
 using System.Xml.Linq;
 using FLocal.Core;
 using FLocal.Core.DB;
+using FLocal.Core.DB.conditions;
 
 namespace FLocal.Common.dataobjects {
 	public class Thread : SqlObject<Thread> {
@@ -152,17 +153,39 @@ namespace FLocal.Common.dataobjects {
 		public XElement exportToXml(UserContext context) {
 			return new XElement("thread",
 				new XElement("id", this.id),
-				new XElement("firstPostId", this.firstPost.exportToXmlWithoutThread(context)),
+				new XElement("firstPostId", this.firstPostId),
 				new XElement("topicstarter", this.topicstarter.exportToXmlForViewing(context)),
 				new XElement("title", this.title),
 				new XElement("lastPostId", this.lastPostId),
-				new XElement("lastPostDate", this.lastPostDate.ToString(context)),
+				new XElement("lastPostDate", this.lastPostDate.ToXml()),
 				new XElement("isAnnouncement", this.isAnnouncement),
 				new XElement("isLocked", this.isLocked),
 				new XElement("totalPosts", this.totalPosts),
 				new XElement("totalViews", this.totalViews),
 				new XElement("hasNewPosts", this.hasNewPosts()),
-				new XElement("body", this.firstPost.body)
+				new XElement("bodyShort", this.firstPost.bodyShort),
+				context.formatTotalPosts(this.totalPosts)
+			);
+		}
+
+		public IEnumerable<Post> getPosts(Diapasone diapasone, UserContext context) {
+			return Post.LoadByIds(
+				from stringId in Config.instance.mainConnection.LoadIdsByConditions(
+					Post.TableSpec.instance,
+					new ComparisonCondition(
+						Post.TableSpec.instance.getColumnSpec(Post.TableSpec.FIELD_THREADID),
+						ComparisonType.EQUAL,
+						this.id.ToString()
+					),
+					diapasone,
+					new JoinSpec[0],
+					new SortSpec[] {
+						new SortSpec(
+							Post.TableSpec.instance.getIdSpec(),
+							true
+						),
+					}
+				) select int.Parse(stringId)
 			);
 		}
 

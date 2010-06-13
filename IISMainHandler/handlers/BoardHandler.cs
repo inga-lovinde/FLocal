@@ -6,6 +6,7 @@ using System.Web;
 using System.Xml.Linq;
 using FLocal.Common;
 using FLocal.Common.dataobjects;
+using FLocal.Core.DB;
 
 namespace FLocal.IISHandler.handlers {
 
@@ -19,10 +20,15 @@ namespace FLocal.IISHandler.handlers {
 
 		override protected XElement[] getSpecificData(WebContext context) {
 			Board board = Board.LoadById(int.Parse(context.requestParts[1]));
+			PageOuter pageOuter = PageOuter.createFromGet(context.requestParts, context.userSettings.threadsPerPage);
+			IEnumerable<Thread> threads = board.getThreads(pageOuter, context);
 			return new XElement[] {
 				new XElement("currentLocation", board.exportToXmlSimpleWithParent(context)),
 				new XElement("boards", from subBoard in board.subBoards select subBoard.exportToXml(context, true)),
-				new XElement("threads", from thread in board.getThreads(FLocal.Core.DB.Diapasone.unlimited, context) select thread.exportToXml(context))
+				new XElement("threads", 
+					from thread in threads select thread.exportToXml(context),
+					pageOuter.exportToXml(1, 5, 1)
+				)
 			};
 		}
 

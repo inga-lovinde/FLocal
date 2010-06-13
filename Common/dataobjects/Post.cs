@@ -20,6 +20,7 @@ namespace FLocal.Common.dataobjects {
 			public const string FIELD_TITLE = "Title";
 			public const string FIELD_BODY = "Body";
 			public const string FIELD_THREADID = "ThreadId";
+			public const string FIELD_PARENTPOSTID = "ParentPostId";
 			public static readonly TableSpec instance = new TableSpec();
 			public string name { get { return TABLE; } }
 			public string idName { get { return FIELD_ID; } }
@@ -88,6 +89,11 @@ namespace FLocal.Common.dataobjects {
 				return this._body;
 			}
 		}
+		public string bodyShort {
+			get {
+				return this.body.Replace("<br />", Util.EOL).Substring(0, Math.Min(1000, this.body.IndexOf("<")));
+			}
+		}
 
 		private int _threadId;
 		public int threadId {
@@ -102,6 +108,19 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
+		private int? _parentPostId;
+		public int? parentPostId {
+			get {
+				this.LoadIfNotLoaded();
+				return this._parentPostId;
+			}
+		}
+		public Post parentPost {
+			get {
+				return Post.LoadById(this.parentPostId.Value);
+			}
+		}
+
 		protected override void doFromHash(Dictionary<string, string> data) {
 			this._posterId = int.Parse(data[TableSpec.FIELD_POSTERID]);
 			this._postDate = new DateTime(long.Parse(data[TableSpec.FIELD_POSTDATE]));
@@ -111,20 +130,36 @@ namespace FLocal.Common.dataobjects {
 			this._title = data[TableSpec.FIELD_TITLE];
 			this._body = data[TableSpec.FIELD_BODY];
 			this._threadId = int.Parse(data[TableSpec.FIELD_THREADID]);
+			this._parentPostId = Util.ParseInt(data[TableSpec.FIELD_PARENTPOSTID]);
 		}
 
-		public XElement exportToXmlWithoutThread(UserContext context) {
+		public XElement exportToXmlSimpleWithParent(UserContext context) {
 			return new XElement("post",
 				new XElement("id", this.id),
+				new XElement("name", this.title),
+				new XElement("parent", this.thread.exportToXmlSimpleWithParent(context))
+			);
+		}
+
+		public XElement exportToXmlWithoutThread(UserContext context, bool includeParentPost) {
+			XElement result = new XElement("post",
+				new XElement("id", this.id),
 				new XElement("poster", this.poster.exportToXmlForViewing(context)),
-				new XElement("postDate", this.postDate.ToString(context)),
-				new XElement("lastChangeDate", this.postDate.ToString(context)),
+				new XElement("postDate", this.postDate.ToXml()),
+				new XElement("lastChangeDate", this.postDate.ToXml()),
 				new XElement("revision", this.revision),
 				new XElement("layer", this.layer),
 				new XElement("title", this.title),
 				new XElement("body", this.body),
+				new XElement("bodyShort", this.bodyShort),
 				new XElement("threadId", this.threadId)
 			);
+			if(includeParentPost) {
+				if(this.parentPostId.HasValue) {
+					result.Add(new XElement("parentPost", this.parentPost.exportToXmlWithoutThread(context, false)));
+				}
+			}
+			return result;
 		}
 
 	}

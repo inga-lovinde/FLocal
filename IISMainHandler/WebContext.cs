@@ -51,6 +51,10 @@ namespace FLocal.IISHandler {
 			return dateTime.ToString();
 		}
 
+		public override System.Xml.Linq.XElement formatTotalPosts(long posts) {
+			return PageOuter.create(this.userSettings.postsPerPage, posts).exportToXml(2, 0, 2);
+		}
+
 		public DateTime requestTime;
 
 		public WebContext(HttpContext httpcontext) {

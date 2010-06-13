@@ -6,6 +6,9 @@ using System.Web;
 using System.Xml.Linq;
 using FLocal.Common;
 using FLocal.Common.dataobjects;
+using FLocal.Core;
+using FLocal.Core.DB;
+using FLocal.Core.DB.conditions;
 
 namespace FLocal.IISHandler.handlers {
 
@@ -18,10 +21,42 @@ namespace FLocal.IISHandler.handlers {
 		}
 
 		override protected XElement[] getSpecificData(WebContext context) {
-			Board board = Board.LoadById(int.Parse(context.requestParts[1]));
+			Thread thread = Thread.LoadById(int.Parse(context.requestParts[1]));
+			PageOuter pageOuter = PageOuter.createFromGet(
+				context.requestParts,
+				context.userSettings.postsPerPage,
+				new Dictionary<char,Func<long>> {
+					{
+						'p',
+						() => Config.instance.mainConnection.GetCountByConditions(
+							Post.TableSpec.instance,
+							new ComplexCondition(
+								ConditionsJoinType.AND,
+								new List<NotEmptyCondition> {
+									new ComparisonCondition(
+										Post.TableSpec.instance.getColumnSpec(Post.TableSpec.FIELD_THREADID),
+										ComparisonType.EQUAL,
+										thread.id.ToString()
+									),
+									new ComparisonCondition(
+										Post.TableSpec.instance.getIdSpec(),
+										ComparisonType.LESSTHAN,
+										int.Parse(context.requestParts[2].PHPSubstring(1)).ToString()
+									),
+								}
+							),
+							new JoinSpec[0]
+						)
+					}
+				}
+			);
+			IEnumerable<Post> posts = thread.getPosts(pageOuter, context);
 			return new XElement[] {
-				new XElement("currentLocation", board.exportToXmlSimpleWithParent(context)),
-				new XElement("boards", from subBoard in board.subBoards select subBoard.exportToXml(context, true))
+				new XElement("currentLocation", thread.exportToXmlSimpleWithParent(context)),
+				new XElement("posts",
+					from post in posts select post.exportToXmlWithoutThread(context, true),
+					pageOuter.exportToXml(2, 5, 2)
+				)
 			};
 		}
 

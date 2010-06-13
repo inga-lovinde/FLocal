@@ -8,19 +8,19 @@
 						<tr>
 							<td width="100%" class="topmenu" align="center">
 								<a href ="/" >Root</a>
-								<span> | </span>
+								<xsl:text> | </xsl:text>
 								<a href ="http://google.com/" target="_blank">Google</a>
-								<span> | </span>
+								<xsl:text> | </xsl:text>
 								<a href ="http://yandex.ru/" target="_blank">Yandex</a>
-								<span> | </span>
+								<xsl:text> | </xsl:text>
 								<a href ="http://mail.ru" target="_blank">Mail.ru</a>
-								<span> | </span>
+								<xsl:text> | </xsl:text>
 								<a href ="http://www.vedomosti.ru/" target="_blank">Vedomosti</a>
-								<span> | </span>
+								<xsl:text> | </xsl:text>
 								<a href ="http://www.afisha.ru/" target="_blank">Afisha</a>
-								<span> | </span>
+								<xsl:text> | </xsl:text>
 								<a href ="http://weather.yandex.ru/27612/" target="_blank">Weather</a>
-								<span> | </span>
+								<xsl:text> | </xsl:text>
 								<a href ="/sendmail.php" target="_blank">LAN Support</a>
 							</td>
 						</tr>
@@ -34,19 +34,19 @@
 					<table width="100%" class="tableborders" cellpadding="3" cellspacing="1">
 						<tr>
 							<td align="center" class="menubar">
-								<a href = "/Boards/" target="_top">Список форумов</a>
-								<span> | </span>
-								<a href = "/word-search.php" target="_top">Поиск</a>
-								<span> | </span>
-								<a href = "/login.php?Cat=" target="_top">My Home</a>
-								<span> | </span>
-								<a href = "/online.php?Cat=" target="_top">Кто в онлайне</a>
-								<span> | </span>
-								<a href = "/faq_russian.php" target="_top">FAQ</a>
-								<span> | </span>
-								<a href = "/logout.php?key=8b46d53aaa0096f6695478f81503082c" target="_top">Выход</a>
-								<span> | </span>
-								<a href="/showmembers.php?Cat=&amp;page=1" target="_top">Пользователи</a>
+								<a href="/Boards/" target="_top">Список форумов</a>
+								<xsl:text> | </xsl:text>
+								<a target="_top">Поиск</a>
+								<xsl:text> | </xsl:text>
+								<a target="_top">My Home</a>
+								<xsl:text> | </xsl:text>
+								<a target="_top">Кто в онлайне</a>
+								<xsl:text> | </xsl:text>
+								<a target="_top">FAQ</a>
+								<xsl:text> | </xsl:text>
+								<a target="_top">Выход</a>
+								<xsl:text> | </xsl:text>
+								<a target="_top">Пользователи</a>
 							</td>
 						</tr>
 					</table>

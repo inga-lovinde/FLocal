@@ -133,6 +133,12 @@ namespace FLocal.Core {
 			}
 		}
 
+		public static string EOL {
+			get {
+				return new string(new char[] { (char)0x0d, (char)0x0a });
+			}
+		}
+
     }
 
 }

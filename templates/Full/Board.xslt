@@ -38,13 +38,13 @@
 															<img alt="Предыдущая страница" border="0" width="12" height="15" style="vertical-align: text-bottom">
 																<xsl:attribute name="src">/static/images/greyprevious.gif</xsl:attribute>
 															</img>
-															<span>Пред.</span>
+															<xsl:text>Пред.</xsl:text>
 														</a>
 													</td>
 													<td class="navigation" nowrap="nowrap">
 														<a href="/ubbthreads.php?Cat=&amp;C=1">
 															<img src="/static/images/all.gif" alt="Список форумов" border="0" width="19" height="15" style="vertical-align: text-bottom" />
-															<span>Список</span>
+															<xsl:text>Список</xsl:text>
 														</a>
 													</td>
 													<td class="navigation" nowrap="nowrap">
@@ -53,7 +53,7 @@
 															<img alt="Следующая страница" border="0" width="14" height="15" style="vertical-align: text-bottom">
 																<xsl:attribute name="src">/static/images/next.gif</xsl:attribute>
 															</img>
-															<span>След.</span>
+															<xsl:text>След.</xsl:text>
 														</a>
 													</td>
 													<td class="navigation">
@@ -103,107 +103,11 @@
 						<tr class="tdheader">
 							<td colspan="5">
 								<font class="onbody">
-									<span class="separate">страницы:</span>
-									<a class="separate">0</a>
-									<a class="separate">
-										<xsl:attribute name="href">/Board/1/p20/</xsl:attribute>
-										<span>20</span>
-									</a>
-									<a class="separate">
-										<xsl:attribute name="href">/Board/1/p40/</xsl:attribute>
-										<span>40</span>
-									</a>
-									<a class="separate">
-										<xsl:attribute name="href">/Board/1/p60/</xsl:attribute>
-										<span>60</span>
-									</a>
+									<xsl:text>страницы:</xsl:text>
+									<xsl:apply-templates select="threads/pageOuter" mode="withCurrent">
+										<xsl:with-param name="baseLink">/Board/<xsl:value-of select="currentLocation/board/id"/>/</xsl:with-param>
+									</xsl:apply-templates>
 								</font>
-							</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-		</table>
-		<br />
-		<table width="95%" align="center" cellpadding="1" cellspacing="1" class="tablesurround">
-			<tr>
-				<td>
-					<table cellpadding="3" cellspacing="1" width="100%" border="0" class="tableborders">
-						<tr class="tdheader">
-							<td colspan="3">Дополнительная информация</td>
-						</tr>
-						<tr class="lighttable">
-							<td width="33%" class="small" valign="top">
-								<span>11 зарегистрированных и 1 анонимных пользователей просматривают этот форум.</span>
-								<br />
-								<br />
-								<span>Модераторы:</span>
-								<a class="separate" href="/showprofile.php?User=Sash&amp;What=ubbthreads">Sash</a>
-								<a class="separate" href="/showprofile.php?User=DeadmoroZ&amp;What=ubbthreads">DeadmoroZ</a>&#160;
-								<br />
-								<br />
-							</td>
-							<td valign="top" align="left" class="small" width="33%">
-								<b>Права</b>
-								<table style="margin-left:4em">
-									<tr><td>Вы можете создавать новые темы</td></tr>
-									<tr><td>Вы можете отвечать на сообщения</td></tr>
-									<tr><td>HTML отключен</td></tr>
-									<tr><td>UBBCode включен</td></tr>
-								</table>
-							</td>
-							<td class="small" valign="top">
-								<b>Легенда:</b>
-								<table style="margin-left:4em">
-									<tr>
-										<td><img src="/static/images/book-notread.gif" alt="" style="vertical-align: text-bottom" /></td>
-										<td><span>Новые сообщения</span></td>
-									</tr>
-									<tr>
-										<td><img src="/static/images/book-read.gif" alt="" style="vertical-align: text-bottom" /></td>
-										<td><span>Нет новых сообщений</span></td>
-									</tr>
-									<tr>
-										<td><img src="/static/images/chat-notread.gif" alt="" style="vertical-align: text-bottom" /></td>
-										<td><span>Новые сообщения</span></td>
-									</tr>
-									<tr>
-										<td><img src="/static/images/chat-read.gif" alt="" style="vertical-align: text-bottom" /></td>
-										<td><span>Нет новых сообщений</span></td>
-									</tr>
-								</table>
-							</td>
-						</tr>
-						<tr class="lighttable">
-							<td align="left" width="33%" class="small">
-								<form method="get" action="/dosearch.php">
-									<span>Поиск в форуме</span>
-									<input type="text" name="Words" class="formboxes" style="font-size:10px" />
-									<input type="submit" name="textsearch" value="Поиск" class="buttons" style="font-size:10px" />
-								</form>
-							</td>
-							<td align="left" width="33%" class="small">
-								<form method="post" action="/addfav.php?Cat=&amp;Board=Common&amp;type=board&amp;src=&amp;showlite=">
-									<input type="submit" value="В фавориты!" class="buttons iconize" style="background-image:url('/images/favorites.gif');" />
-								</form>
-								<form method="post" action="/togglesub.php?Cat=&amp;Board=Common&amp;page=0&amp;src=&amp;sb=5&amp;o=">
-									<input type="submit" value="Спрятать" class="buttons iconize" style="background-image:url('/images/hide.gif');" />
-								</form>
-								<form action="/changerss.php?Cat=&amp;rss_board_add=Common&amp;src=" method="post">
-									<input type="submit" value="&#160;&#160;" class="buttons iconize" style="width:32px;background-image:url('/images/rss.png');" />
-								</form>
-							</td>
-							<td align="left" class="small">
-								<form method="post" action="/jumper.php">
-									<span>Переход в</span>
-									<select name="board" class="formboxes" style="font-size:10px" >
-										<option value ="-CATJUMP-1">-General-</option>
-										<option value="Common" selected="selected">&#160;&#160;&#160;Common</option>
-										<option value="current" >&#160;&#160;&#160;Current</option>
-										<option value="University" >&#160;&#160;&#160;University</option>
-									</select>
-									<input type="submit" style="font-size:10px" name="Jump" value="Перейти" class="buttons" />
-								</form>
 							</td>
 						</tr>
 					</table>

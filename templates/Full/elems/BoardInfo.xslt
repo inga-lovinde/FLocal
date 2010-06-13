@@ -29,7 +29,7 @@
 						<td class="forumdescript" style="padding-right:0.5em">
 							<a href="/apostlist.php?Cat=&amp;Board=Common">
 								<xsl:attribute name="href">/Board/<xsl:value-of select="id"/>/</xsl:attribute>
-								<span>A</span>
+								<xsl:text>A</xsl:text>
 							</a>
 						</td>
 						<td class="forumdescript"><xsl:value-of select="description"/></td>
@@ -51,7 +51,7 @@
 			</td>
 			<td width="10%" class="modcolumn" align="center">
 				<a href="/showprofile.php?User=Sash&amp;What=ubbthreads">Sash</a>
-				<span>, </span>
+				<xsl:text>, </xsl:text>
 				<a href="/showprofile.php?User=DeadmoroZ&amp;What=ubbthreads">DeadmoroZ</a>
 			</td>
 		</tr>
@@ -60,25 +60,24 @@
 	<xsl:template match="lastPostInfo">
 		<xsl:choose>
 			<xsl:when test="post">
-				<xsl:value-of select="post/postDate"/><br />
+				<xsl:apply-templates select="post/postDate/date" mode="dateTime"/><br />
 				<a>
-					<xsl:attribute name="href">/Thread/<xsl:value-of select="post/threadId"/>/e<xsl:value-of select="post/id"/>/</xsl:attribute>
-					<span>от </span>
+					<xsl:attribute name="href">/Thread/<xsl:value-of select="post/threadId"/>/p<xsl:value-of select="post/id"/>/</xsl:attribute>
+					<xsl:text>от </xsl:text>
 					<xsl:value-of select="post/poster/user/name"/>
 				</a>
 			</xsl:when>
 			<xsl:otherwise>
-				<span>N/A</span>
+				<xsl:text>N/A</xsl:text>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
 
 	<xsl:template match="subBoards/board">
-		<span style="margin-left:0.5em;margin-right:0.5em">
-			<a>
-				<xsl:attribute name="href">/Board/<xsl:value-of select="id"/>/</xsl:attribute>
-				<xsl:value-of select="name"/>
-			</a>
-		</span>
+		<xsl:text> </xsl:text>
+		<a>
+			<xsl:attribute name="href">/Board/<xsl:value-of select="id"/>/</xsl:attribute>
+			<xsl:value-of select="name"/>
+		</a>
 	</xsl:template>
 </xsl:stylesheet>

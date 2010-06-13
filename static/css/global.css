@@ -68,3 +68,6 @@ pre
 .tablesurround > tr > td, .tableborders > tr > td {
 	border:solid 1px black;
 }
+.navigation {
+	margin:3px;
+}

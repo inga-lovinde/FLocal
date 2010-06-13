@@ -141,6 +141,36 @@ namespace FLocal.MySQLConnector {
 			}
 		}
 
+		public long GetCountByConditions(ITableSpec table, FLocal.Core.DB.conditions.AbstractCondition conditions, JoinSpec[] joins) {
+			lock(this) {
+				using(DbCommand command = this.connection.CreateCommand()) {
+
+					command.CommandType = System.Data.CommandType.Text;
+
+					var conditionsCompiled = ConditionCompiler.Compile(conditions, this.traits);
+					string queryConditions = "";
+					if(conditionsCompiled.Key != "") queryConditions = "WHERE " + conditionsCompiled.Key;
+					ParamsHolder paramsHolder = conditionsCompiled.Value;
+
+					string queryJoins = "";
+					{
+						if(joins.Length > 0) {
+							throw new NotImplementedException();
+						}
+					}
+
+
+					command.CommandText = "SELECT COUNT(*) " + "FROM " + table.compile(this.traits) + " " + queryJoins + " " + queryConditions;
+					foreach(KeyValuePair<string, string> kvp in paramsHolder.data) {
+						command.AddParameter(kvp.Key, kvp.Value);
+					}
+					object rawCount = command.ExecuteScalar();
+					long count = (long)rawCount;
+					return count;
+				}
+			}
+		}
+
 		public FLocal.Core.DB.Transaction beginTransaction(System.Data.IsolationLevel iso) {
 			lock(this) {
 				Transaction transaction = new Transaction(this, iso);

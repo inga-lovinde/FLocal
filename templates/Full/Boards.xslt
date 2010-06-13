@@ -22,17 +22,17 @@
 								</tr>
 								<tr class="lighttable">
 									<td width="45%" class="small" valign="top">
-										<span>Вы вошли в форум как summersun</span>
+										<xsl:text>Вы вошли в форум как summersun</xsl:text>
 										<br />
-										<span>18983 Зарегистрированных пользователей.</span>
+										<xsl:text>18983 Зарегистрированных пользователей.</xsl:text>
 										<br />
-										<span>Приветствуем нового пользователя,</span>
+										<xsl:text>Приветствуем нового пользователя, </xsl:text>
 										<a href="/showprofile.php?User=_PC&amp;What=ubbthreads">_PC</a>
 										<br />
-										<span>Сейчас 222 зарегистрированных и 54 анонимных пользователей в онлайне.</span>
+										<xsl:text>Сейчас 222 зарегистрированных и 54 анонимных пользователей в онлайне.</xsl:text>
 										<br />
 										<a href="/editdisplay.php?Cat=#offset">Текущее время:</a>
-										<span>08.06.2010 14:17, Вторник</span>
+										<xsl:text> 08.06.2010 14:17, Вторник</xsl:text>
 									</td>
 									<td width="30%" class="small" valign="top">
 										<b>Просмотр новых сообщений</b>
@@ -49,10 +49,10 @@
 										<b>Легенда:</b>
 										<br />
 										<img src="/static/images/newposts.gif" alt="*" />
-										<span>Новые сообщения</span>
+										<xsl:text>Новые сообщения</xsl:text>
 										<br />
 										<img src="/static/images/nonewposts.gif" alt="*" />
-										<span>Нет новых сообщений</span>
+										<xsl:text>Нет новых сообщений</xsl:text>
 									</td>
 								</tr>
 							</table>

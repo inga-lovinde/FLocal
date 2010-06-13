@@ -4,7 +4,7 @@
 	<xsl:template match="thread">
 		<tr>
 			<td align="left" class="lighttable">
-				<xsl:attribute name="title"><xsl:value-of select="body"/></xsl:attribute>
+				<xsl:attribute name="title"><xsl:value-of select="bodyShort"/></xsl:attribute>
 				<img alt="*" hspace="5" style="vertical-align: text-bottom">
 					<xsl:choose>
 						<xsl:when test="hasNewPosts='true'">
@@ -23,14 +23,9 @@
 					<xsl:value-of select="title"/>
 				</a>
 				<span class="small" style="margin-left:1.5em">
-					<a class="separate">
-						<xsl:attribute name="href">/Thread/<xsl:value-of select="id"/>/0/</xsl:attribute>
-						<span>0</span>
-					</a>
-					<a class="separate">
-						<xsl:attribute name="href">/Thread/<xsl:value-of select="id"/>/20/</xsl:attribute>
-						<span>20</span>
-					</a>
+					<xsl:apply-templates select="pageOuter" mode="withoutCurrent">
+						<xsl:with-param name="baseLink">/Thread/<xsl:value-of select="id"/>/</xsl:with-param>
+					</xsl:apply-templates>
 				</span>
 			</td>
 			<td align="left" nowrap="nowrap" class="lighttable">
@@ -55,7 +50,7 @@
 				</a>
 			</td>
 			<td nowrap="nowrap" align="center" class="lighttable">
-				<xsl:value-of select="lastPostDate"/>
+				<xsl:apply-templates select="lastPostDate/date" mode="dateTime"/>
 			</td>
 		</tr>
 	</xsl:template>

@@ -14,8 +14,8 @@
 				<xsl:call-template name="header"/>
 				<xsl:call-template name="specific"/>
 				<br />
-<span>Data used for authoring this XHTML document:</span>
-<xmp><xsl:copy-of select="/"/></xmp>
+				<xsl:text>Data used for authoring this XHTML document:</xsl:text>
+				<xmp><xsl:copy-of select="/"/></xmp>
 			</body>
 		</html>
 	</xsl:template>
@@ -27,20 +27,106 @@
 				<xsl:attribute name="href">/Boards/</xsl:attribute>
 				<xsl:value-of select="category/name"/>
 			</a>
-			<span> &gt;&gt; </span>
+			<xsl:text> &gt;&gt; </xsl:text>
 		</xsl:if>
 		<xsl:if test="board/id">
 			<a>
 				<xsl:attribute name="href">/Board/<xsl:value-of select="board/id"/>/</xsl:attribute>
 				<xsl:value-of select="board/name"/>
 			</a>
-			<span> &gt;&gt; </span>
+			<xsl:text> &gt;&gt; </xsl:text>
+		</xsl:if>
+		<xsl:if test="thread/id">
+			<a>
+				<xsl:attribute name="href">/Thread/<xsl:value-of select="thread/id"/>/</xsl:attribute>
+				<xsl:value-of select="thread/name"/>
+			</a>
+			<xsl:text> &gt;&gt; </xsl:text>
 		</xsl:if>
 	</xsl:template>
 
 	<xsl:template match="currentLocation" mode="breadcrumbs">
 		<xsl:apply-templates select="*/parent" mode="breadcrumbsPart"/>
 		<xsl:value-of select="*/name"/>
+	</xsl:template>
+
+	<xsl:template match="date" mode="dateTime">
+		<span nowrap="nowrap">
+			<xsl:value-of select="year"/>
+			<xsl:text>-</xsl:text>
+			<xsl:value-of select="month"/>
+			<xsl:text>-</xsl:text>
+			<xsl:value-of select="mday"/>
+			<xsl:text> </xsl:text>
+			<xsl:value-of select="hour"/>
+			<xsl:text>:</xsl:text>
+			<xsl:value-of select="minute"/>
+			<xsl:text>:</xsl:text>
+			<xsl:value-of select="second"/>
+		</span>
+	</xsl:template>
+
+	<xsl:template match="date" mode="date">
+		<span nowrap="nowrap">
+			<xsl:value-of select="year"/>
+			<xsl:text>-</xsl:text>
+			<xsl:value-of select="month"/>
+			<xsl:text>-</xsl:text>
+			<xsl:value-of select="mday"/>
+		</span>
+	</xsl:template>
+
+	<xsl:template match="pageOuter/pages/page" mode="withoutCurrent">
+		<xsl:param name="baseLink"/>
+		<xsl:param name="selected">-1</xsl:param>
+		<xsl:if test="current() != '0'">
+			<xsl:text>|</xsl:text>
+		</xsl:if>
+		<a class="separate">
+			<xsl:if test="current() != $selected">
+				<xsl:attribute name="href"><xsl:value-of select="$baseLink"/><xsl:value-of select="current()"/></xsl:attribute>
+			</xsl:if>
+			<xsl:value-of select="current()"/>
+		</a>
+	</xsl:template>
+
+	<xsl:template match="pageOuter" mode="withoutCurrent">
+		<xsl:param name="baseLink"/>
+		<xsl:apply-templates select="pages/page" mode="withoutCurrent">
+			<xsl:with-param name="baseLink"><xsl:value-of select="$baseLink"/></xsl:with-param>
+			<xsl:with-param name="selected">-1</xsl:with-param>
+		</xsl:apply-templates>
+	</xsl:template>
+
+	<xsl:template match="pageOuter" mode="withCurrent">
+		<xsl:param name="baseLink"/>
+		<xsl:apply-templates select="pages/page" mode="withoutCurrent">
+			<xsl:with-param name="baseLink"><xsl:value-of select="$baseLink"/></xsl:with-param>
+			<xsl:with-param name="selected">
+				<xsl:choose>
+					<xsl:when test="unlimited='false'">
+						<xsl:value-of select="start"/>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:text>-1</xsl:text>
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:with-param>
+		</xsl:apply-templates>
+		<xsl:text>|</xsl:text>
+		<a class="separate">
+			<xsl:if test="unlimited='false'">
+				<xsl:attribute name="href"><xsl:value-of select="$baseLink"/>all</xsl:attribute>
+			</xsl:if>
+			<xsl:text>все</xsl:text>
+		</a>
+		<xsl:if test="next">
+			<xsl:text>|</xsl:text>
+			<a class="separate">
+				<xsl:attribute name="href"><xsl:value-of select="$baseLink"/><xsl:value-of select="next"/></xsl:attribute>
+				<xsl:text>Следующая страница</xsl:text>
+			</a>
+		</xsl:if>
 	</xsl:template>
 
 </xsl:stylesheet>

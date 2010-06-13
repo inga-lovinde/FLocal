@@ -56,12 +56,14 @@
     <Compile Include="handlers\BoardHandler.cs" />
     <Compile Include="handlers\BoardsHandler.cs" />
     <Compile Include="handlers\DebugHandler.cs" />
+    <Compile Include="handlers\PostHandler.cs" />
     <Compile Include="handlers\RootHandler.cs" />
     <Compile Include="handlers\StaticHandler.cs" />
     <Compile Include="handlers\ThreadHandler.cs" />
     <Compile Include="handlers\WrongUrlHandler.cs" />
     <Compile Include="ISpecificHandler.cs" />
     <Compile Include="MainHandler.cs" />
+    <Compile Include="PageOuter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TemplateEngine.cs" />
     <Compile Include="WebContext.cs" />

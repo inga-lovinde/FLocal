@@ -156,7 +156,7 @@ namespace FLocal.Common.dataobjects {
 			if(!this.lastPostId.HasValue) {
 				return new XElement("none");
 			} else {
-				return this.lastPost.exportToXmlWithoutThread(context);
+				return this.lastPost.exportToXmlWithoutThread(context, false);
 			}
 		}
 

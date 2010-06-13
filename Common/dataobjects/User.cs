@@ -105,7 +105,7 @@ namespace FLocal.Common.dataobjects {
 		public XElement exportToXmlForViewing(UserContext context) {
 			return new XElement("user",
 				new XElement("id", this.id),
-				new XElement("regDate", this.regDate.ToString(context)),
+				new XElement("regDate", this.regDate.ToXml()),
 				new XElement("totalPosts", this.totalPosts),
 				new XElement("signature", this.signature),
 				new XElement("title", this.title),

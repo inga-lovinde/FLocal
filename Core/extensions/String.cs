@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FLocal.Core {
 
-	static class StringExtension {
+	public static class StringExtension {
 
         public static string PHPSubstring(this string str, int start, int length) {
             if(start > str.Length) {

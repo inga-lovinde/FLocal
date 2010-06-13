@@ -9,8 +9,7 @@ namespace FLocal.IISHandler {
 
 		public static void WriteLine(this HttpResponse response, string toWrite) {
 			response.Write(toWrite);
-			response.Write((char)0x0d);
-			response.Write((char)0x0a);
+			response.Write(Core.Util.EOL);
 		}
 
 		public static string[] Split(this string str, string separator, StringSplitOptions options) {
