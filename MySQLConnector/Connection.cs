@@ -31,49 +31,53 @@ namespace FLocal.MySQLConnector {
 			return connection;
 		}
 
+		private List<Dictionary<string, string>> _LoadByIds(DbCommand command, ITableSpec table, List<string> ids, bool forUpdate) {
+			command.CommandType = System.Data.CommandType.Text;
+
+			ParamsHolder paramsHolder = new ParamsHolder();
+			List<string> placeholder = new List<string>();
+			foreach(string id in ids) {
+				placeholder.Add(this.traits.markParam(paramsHolder.Add(id)));
+			}
+
+			command.CommandText = "SELECT * FROM " + table.compile(this.traits) + " WHERE " + table.getIdSpec().compile(this.traits) + " IN (" + string.Join(", ", placeholder.ToArray()) + ")" + (forUpdate ? " FOR UPDATE" : "");
+			//command.Prepare();
+			foreach(KeyValuePair<string, string> kvp in paramsHolder.data) {
+				command.AddParameter(kvp.Key, kvp.Value);
+			}
+
+			Dictionary<string, Dictionary<string, string>> rawResult = new Dictionary<string, Dictionary<string, string>>();
+			using(DbDataReader reader = command.ExecuteReader()) {
+				while(reader.Read()) {
+					Dictionary<string, string> row = new Dictionary<string,string>();
+					for(int i=0; i<reader.FieldCount; i++) {
+//								throw new CriticalException("Name: " + reader.GetName(i));
+						object value = reader.GetValue(i);
+						string sValue;
+						if(value is DateTime) {
+							sValue = ((DateTime)value).Ticks.ToString();
+						} else {
+							sValue = value.ToString();
+						}
+						row.Add(reader.GetName(i), sValue);
+					}
+					rawResult.Add(row[table.idName], row);
+				}
+			}
+
+			List<Dictionary<string, string>> result = new List<Dictionary<string,string>>();
+			foreach(string id in ids) {
+				if(rawResult.ContainsKey(id)) {
+					result.Add(rawResult[id]);
+				}
+			}
+			return result;
+		}
+
 		public List<Dictionary<string, string>> LoadByIds(ITableSpec table, List<string> ids) {
 			lock(this) {
 				using(DbCommand command = this.connection.CreateCommand()) {
-					command.CommandType = System.Data.CommandType.Text;
-
-					ParamsHolder paramsHolder = new ParamsHolder();
-					List<string> placeholder = new List<string>();
-					foreach(string id in ids) {
-						placeholder.Add(this.traits.markParam(paramsHolder.Add(id)));
-					}
-
-					command.CommandText = "SELECT * FROM " + table.compile(this.traits) + " WHERE " + table.getIdSpec().compile(this.traits) + " IN (" + string.Join(", ", placeholder.ToArray()) + ")";
-					//command.Prepare();
-					foreach(KeyValuePair<string, string> kvp in paramsHolder.data) {
-						command.AddParameter(kvp.Key, kvp.Value);
-					}
-
-					Dictionary<string, Dictionary<string, string>> rawResult = new Dictionary<string, Dictionary<string, string>>();
-					using(DbDataReader reader = command.ExecuteReader()) {
-						while(reader.Read()) {
-							Dictionary<string, string> row = new Dictionary<string,string>();
-							for(int i=0; i<reader.FieldCount; i++) {
-//								throw new CriticalException("Name: " + reader.GetName(i));
-								object value = reader.GetValue(i);
-								string sValue;
-								if(value is DateTime) {
-									sValue = ((DateTime)value).Ticks.ToString();
-								} else {
-									sValue = value.ToString();
-								}
-								row.Add(reader.GetName(i), sValue);
-							}
-							rawResult.Add(row[table.idName], row);
-						}
-					}
-
-					List<Dictionary<string, string>> result = new List<Dictionary<string,string>>();
-					foreach(string id in ids) {
-						if(rawResult.ContainsKey(id)) {
-							result.Add(rawResult[id]);
-						}
-					}
-					return result;
+					return this._LoadByIds(command, table, ids, false);
 				}
 			}
 		}
@@ -205,6 +209,16 @@ namespace FLocal.MySQLConnector {
 					command.CommandText = "SELECT * FROM " + table.compile(this.traits) + " where " + table.getIdSpec().compile(this.traits) + " = " + this.traits.markParam("id") + " FOR UPDATE";
 					command.AddParameter("id", id);
 					command.ExecuteNonQuery();
+				}
+			}
+		}
+
+		public List<Dictionary<string, string>> LoadByIds(FLocal.Core.DB.Transaction _transaction, ITableSpec table, List<string> ids) {
+			Transaction transaction = (Transaction)_transaction;
+			lock(transaction) {
+				using(DbCommand command = transaction.sqlconnection.CreateCommand()) {
+					command.Transaction = transaction.sqltransaction;
+					return this._LoadByIds(command, table, ids, true);
 				}
 			}
 		}

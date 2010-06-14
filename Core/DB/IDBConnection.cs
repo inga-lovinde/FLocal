@@ -18,6 +18,8 @@ namespace FLocal.Core.DB {
 
 		void lockRow(Transaction transaction, ITableSpec table, string id);
 
+		List<Dictionary<string, string>> LoadByIds(Transaction transaction, ITableSpec table, List<string> ids);
+
 		void update(Transaction transaction, ITableSpec table, string id, Dictionary<string, string> data);
 
 		string insert(Transaction transaction, ITableSpec table, Dictionary<string, string> data);
