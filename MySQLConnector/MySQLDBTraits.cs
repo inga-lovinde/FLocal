@@ -27,5 +27,10 @@ namespace FLocal.MySQLConnector {
 			return "@" + param;
 		}
 
+		public bool supportsIsolationLevel() {
+			//for some reason, call to BeginTransaction with IsolationLevel set fails somewhere deep in mysql library
+			return false;
+		}
+
 	}
 }

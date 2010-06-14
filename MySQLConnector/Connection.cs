@@ -10,7 +10,7 @@ namespace FLocal.MySQLConnector {
 
 	public class Connection : IDBConnection {
 
-		private IDBTraits traits;
+		internal readonly IDBTraits traits;
 
 		private DbConnection connection;
 		private string connectionString;

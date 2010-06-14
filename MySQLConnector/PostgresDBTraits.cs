@@ -35,5 +35,9 @@ namespace FLocal.MySQLConnector {
 			return ":" + param;
 		}
 
+		public bool supportsIsolationLevel() {
+			return true;
+		}
+
 	}
 }

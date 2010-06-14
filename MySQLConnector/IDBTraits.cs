@@ -16,5 +16,7 @@ namespace FLocal.MySQLConnector {
 
 		string markParam(string param);
 
+		bool supportsIsolationLevel();
+
 	}
 }
