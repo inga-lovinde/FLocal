@@ -22,7 +22,12 @@ namespace FLocal.Core {
 					}
 				}
 			}
-			return this.cache[id];
+			lock(id) {
+				if(this.cache.ContainsKey(id)) {
+					return this.cache[id];
+				}
+			}
+			return this.get(id, getter);
 		}
 
 		public void delete(object id) {
