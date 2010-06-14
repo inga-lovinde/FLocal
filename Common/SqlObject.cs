@@ -11,7 +11,7 @@ namespace FLocal.Common {
 		protected SqlObject() : base() {
 		}
 
-		abstract protected ITableSpec table {
+		abstract protected ISqlObjectTableSpec table {
 			get;
 		}
 
@@ -114,6 +114,11 @@ namespace FLocal.Common {
 			}
 
 			return res;
+		}
+
+		protected static void Refresh(int id) {
+			Dictionary<int, T> objects = LoadByIdsForLoadingFromHash(new List<int>() { id });
+			objects[id].ReLoad();
 		}
 
 	}

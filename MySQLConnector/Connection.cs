@@ -194,7 +194,7 @@ namespace FLocal.MySQLConnector {
 				using(DbCommand command = transaction.sqlconnection.CreateCommand()) {
 					command.Transaction = transaction.sqltransaction;
 					command.CommandType = System.Data.CommandType.Text;
-					command.CommandText = "LOCK TABLES " + table.compile(this.traits);
+					command.CommandText = "LOCK TABLE " + table.compile(this.traits);
 					command.ExecuteNonQuery();
 				}
 			}
@@ -240,6 +240,7 @@ namespace FLocal.MySQLConnector {
 					foreach(KeyValuePair<string, string> kvp in paramsholder.data) {
 						command.AddParameter(kvp.Key, kvp.Value);
 					}
+//					throw new CriticalException(command.CommandText + "; parameters: " + string.Join(", ", (from DbParameter parameter in command.Parameters select parameter.ParameterName + "='" + parameter.Value.ToString() + "'").ToArray()));
 					command.ExecuteNonQuery();
 				}
 			}

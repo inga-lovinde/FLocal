@@ -51,6 +51,7 @@ namespace FLocal.IISHandler.handlers {
 				}
 			);
 			IEnumerable<Post> posts = thread.getPosts(pageOuter, context);
+			thread.incrementViewsCounter();
 			return new XElement[] {
 				new XElement("currentLocation", thread.exportToXmlSimpleWithParent(context)),
 				new XElement("posts",

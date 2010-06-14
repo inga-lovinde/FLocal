@@ -45,6 +45,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="actions\AbstractFieldValue.cs" />
+    <Compile Include="actions\AbstractChange.cs" />
+    <Compile Include="actions\ChangeSet.cs" />
+    <Compile Include="actions\IncrementFieldValue.cs" />
+    <Compile Include="actions\InsertChange.cs" />
+    <Compile Include="actions\InsertOrUpdateChange.cs" />
+    <Compile Include="actions\ReferenceFieldValue.cs" />
+    <Compile Include="actions\ScalarFieldValue.cs" />
+    <Compile Include="actions\UpdateChange.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="dataobjects\Board.cs" />
     <Compile Include="dataobjects\Category.cs" />
@@ -54,6 +63,7 @@
     <Compile Include="dataobjects\Thread.cs" />
     <Compile Include="dataobjects\User.cs" />
     <Compile Include="IOutputParams.cs" />
+    <Compile Include="ISqlObjectTableSpec.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlObject.cs" />
     <Compile Include="UserContext.cs" />

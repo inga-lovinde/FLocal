@@ -41,7 +41,7 @@ namespace FLocal.MySQLConnector {
 				case ComparisonType.NOTEQUAL:
 					return left + " != " + right;
 				default:
-					throw new NotImplementedException();
+					throw new NotSupportedException();
 			}
 		}
 
@@ -76,7 +76,7 @@ namespace FLocal.MySQLConnector {
 			} else if(condition is MultiValueCondition) {
 				return CompileCondition((MultiValueCondition)condition);
 			} else {
-				throw new NotImplementedException();
+				throw new NotSupportedException();
 			}
 		}
 
@@ -92,7 +92,7 @@ namespace FLocal.MySQLConnector {
 				case ConditionsJoinType.OR:
 					return string.Join(" OR ", parts.ToArray());
 				default:
-					throw new NotImplementedException();
+					throw new NotSupportedException();
 			}
 		}
 
@@ -102,7 +102,7 @@ namespace FLocal.MySQLConnector {
 			} else if(condition is SimpleCondition) {
 				return CompileCondition((SimpleCondition)condition);
 			} else {
-				throw new NotImplementedException();
+				throw new NotSupportedException();
 			}
 		}
 
@@ -116,7 +116,7 @@ namespace FLocal.MySQLConnector {
 			} else if(condition is EmptyCondition) {
 				return CompileCondition((EmptyCondition)condition);
 			} else {
-				throw new NotImplementedException();
+				throw new NotSupportedException();
 			}
 		}
 

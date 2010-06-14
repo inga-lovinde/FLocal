@@ -6,11 +6,12 @@ using System.Xml.Linq;
 using FLocal.Core;
 using FLocal.Core.DB;
 using FLocal.Core.DB.conditions;
+using FLocal.Common.actions;
 
 namespace FLocal.Common.dataobjects {
 	public class Thread : SqlObject<Thread> {
 
-		public class TableSpec : FLocal.Core.DB.ITableSpec {
+		public class TableSpec : ISqlObjectTableSpec {
 			public const string TABLE = "Threads";
 			public const string FIELD_ID = "Id";
 			public const string FIELD_BOARDID = "BoardId";
@@ -26,9 +27,10 @@ namespace FLocal.Common.dataobjects {
 			public static readonly TableSpec instance = new TableSpec();
 			public string name { get { return TABLE; } }
 			public string idName { get { return FIELD_ID; } }
+			public void refreshSqlObject(int id) { Refresh(id); }
 		}
 
-		protected override FLocal.Core.DB.ITableSpec table { get { return TableSpec.instance; } }
+		protected override ISqlObjectTableSpec table { get { return TableSpec.instance; } }
 
 		private int _boardId;
 		public int boardId {
@@ -193,5 +195,25 @@ namespace FLocal.Common.dataobjects {
 			);
 		}
 
+		public void incrementViewsCounter() {
+			using(ChangeSet changeSet = new ChangeSet()) {
+				changeSet.Add(new UpdateChange(
+					TableSpec.instance,
+					new Dictionary<string,AbstractFieldValue>() {
+						{
+							TableSpec.FIELD_TOTALVIEWS,
+							new IncrementFieldValue()
+						}
+					},
+					this.id
+				));
+				using(Transaction transaction = Config.instance.mainConnection.beginTransaction()) {
+					changeSet.Apply(transaction);
+					transaction.Commit();
+				}
+			}
+		}
+
 	}
+
 }

@@ -9,7 +9,7 @@ using FLocal.Core.DB;
 namespace FLocal.Common.dataobjects {
 	public class User : SqlObject<User> {
 
-		public class TableSpec : FLocal.Core.DB.ITableSpec {
+		public class TableSpec : ISqlObjectTableSpec {
 			public const string TABLE = "Users";
 			public const string FIELD_ID = "Id";
 			public const string FIELD_REGDATE = "RegDate";
@@ -23,9 +23,10 @@ namespace FLocal.Common.dataobjects {
 			public static readonly TableSpec instance = new TableSpec();
 			public string name { get { return TABLE; } }
 			public string idName { get { return FIELD_ID; } }
+			public void refreshSqlObject(int id) { Refresh(id); }
 		}
 
-		protected override FLocal.Core.DB.ITableSpec table { get { return TableSpec.instance; } }
+		protected override ISqlObjectTableSpec table { get { return TableSpec.instance; } }
 
 		private DateTime _regDate;
 		public DateTime regDate {
