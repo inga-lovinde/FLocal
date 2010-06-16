@@ -49,12 +49,12 @@
 			<Component Id="IISMainHandler.pdb" Guid="4F5F1280-8EC8-4C56-80F4-8C810F0C839F">
 				<File Id="IISMainHandler.pdb" Source="..\..\IISMainHandler\bin\Release\IISMainHandler.pdb" KeyPath="yes" Checksum="yes"/>
 			</Component>
-			<Component Id="MySql.Data.dll" Guid="90646729-6B21-4BEE-94C3-F39F5288EFB3">
+			<!--Component Id="MySql.Data.dll" Guid="90646729-6B21-4BEE-94C3-F39F5288EFB3">
 				<File Id="MySql.Data.dll" Source="..\..\ThirdParty\mysql-connector-net-6.2.3\MySql.Data\Provider\bin\Release\MySql.Data.dll" KeyPath="yes" Checksum="yes"/>
 			</Component>
 			<Component Id="MySql.Data.pdb" Guid="7105BA2A-A10A-4E41-AA4F-30FA66499BE6">
 				<File Id="MySql.Data.pdb" Source="..\..\ThirdParty\mysql-connector-net-6.2.3\MySql.Data\Provider\bin\Release\MySql.Data.pdb" KeyPath="yes" Checksum="yes"/>
-			</Component>
+			</Component-->
 		</DirectoryRef>
 		<DirectoryRef Id="APPLICATIONROOTDIRECTORY">
 			<Component Id="Templates.7z" Guid="B41F4142-A39C-43BE-8D20-F31BFFA9B483">
@@ -79,16 +79,16 @@
 			<ComponentRef Id='Common.dll' />
 			<ComponentRef Id='Common.pdb' />
 		</Feature>
-		<Feature Id='MySQLConnector' Title='Adapter to MySql Connector/NET' Level='1'>
+		<Feature Id='MySQLConnector' Title='Adapter to DbConnection' Level='1'>
 			<ComponentRef Id='MySQLConnector.dll' />
 			<ComponentRef Id='MySQLConnector.pdb' />
 		</Feature>
-		<Feature Id='ThirdParty' Title='ThirdParty libraries/tools' Level='1'>
+		<!--Feature Id='ThirdParty' Title='ThirdParty libraries/tools' Level='1'>
 			<Feature Id='MySql.Data' Title='MySql Connector/NET' Level='1'>
 				<ComponentRef Id='MySql.Data.dll' />
 				<ComponentRef Id='MySql.Data.pdb' />
 			</Feature>
-		</Feature>
+		</Feature-->
 		<Feature Id="Data" Title="Various data sets" Level="1">
 			<ComponentRef Id="_7z.exe"/>
 			<Feature Id="Templates" Title="Templates" Level="1">
