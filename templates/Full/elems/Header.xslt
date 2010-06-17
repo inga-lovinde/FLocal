@@ -38,7 +38,8 @@
 								<xsl:text> | </xsl:text>
 								<a target="_top">Поиск</a>
 								<xsl:text> | </xsl:text>
-								<a target="_top">My Home</a>
+								<!--a target="_top">My Home</a-->
+								<a href="/Login/" target="_top">Вход</a>
 								<xsl:text> | </xsl:text>
 								<a target="_top">Кто в онлайне</a>
 								<xsl:text> | </xsl:text>

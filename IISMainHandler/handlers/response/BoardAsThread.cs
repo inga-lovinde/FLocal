@@ -8,7 +8,7 @@ using FLocal.Common;
 using FLocal.Common.dataobjects;
 using FLocal.Core.DB;
 
-namespace FLocal.IISHandler.handlers {
+namespace FLocal.IISHandler.handlers.response {
 
 	class BoardAsThreadHandler : AbstractGetHandler {
 

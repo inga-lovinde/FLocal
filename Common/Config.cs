@@ -16,11 +16,17 @@ namespace FLocal.Common {
 
 		public readonly string DirSeparator;
 
+		public readonly string SaltMigration;
+		
+		public readonly string SaltPasswords;
+
 		protected Config(NameValueCollection data) : base(data) {
 			this.InitTime = DateTime.Now.ToLongTimeString();
 			this.mainConnection = new MySQLConnector.Connection(data["ConnectionString"], MySQLConnector.PostgresDBTraits.instance);
 			this.dataDir = data["DataDir"];
 			this.DirSeparator = System.IO.Path.DirectorySeparatorChar.ToString();
+			this.SaltMigration = data["SaltMigration"];
+			this.SaltPasswords = data["SaltPasswords"];
 		}
 
 		public static void Init(NameValueCollection data) {

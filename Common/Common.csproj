@@ -55,6 +55,7 @@
     <Compile Include="actions\ScalarFieldValue.cs" />
     <Compile Include="actions\UpdateChange.cs" />
     <Compile Include="Config.cs" />
+    <Compile Include="dataobjects\Account.cs" />
     <Compile Include="dataobjects\Board.cs" />
     <Compile Include="dataobjects\Category.cs" />
     <Compile Include="dataobjects\IUserSettings.cs" />

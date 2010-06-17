@@ -1,0 +1,43 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using FLocal.Core;
+using FLocal.Common;
+using System.Xml.Linq;
+using FLocal.Common.dataobjects;
+
+namespace FLocal.IISHandler.handlers.response {
+	class MigrateAccountHandler : AbstractGetHandler {
+
+		protected override string templateName {
+			get {
+				return "MigrateAccount.xslt";
+			}
+		}
+
+		protected override System.Xml.Linq.XElement[] getSpecificData(WebContext context) {
+			string username;
+			if(context.httprequest.Form["username"] != "") {
+				username = context.httprequest.Form["username"];
+			} else {
+				if(context.requestParts.Length != 2) {
+					throw new CriticalException("Username is not specified");
+				}
+				username = context.requestParts[1];
+			}
+			User user = User.LoadByName(username);
+			Account account = Account.LoadByUser(user);
+			if(!account.needsMigration) throw new FLocalException("Already migrated");
+			string key = Util.RandomString(8, Util.RandomSource.LETTERS_DIGITS);
+			return new XElement[] {
+				new XElement("migrationInfo",
+					new XElement("accountId", account.id),
+					new XElement("key", key),
+					new XElement("check", Util.md5(key + " " + Config.instance.SaltMigration + " " + account.id))
+				),
+			};
+		}
+
+	}
+}

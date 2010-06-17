@@ -19,6 +19,7 @@ namespace FLocal.Common.actions {
 				return Cache<IEnumerable<string>>.instance.get(
 					tablesLockOrder_locker,
 					() => new List<string>() {
+						"Accounts",
 						"Boards",
 						"Threads",
 						"Posts",

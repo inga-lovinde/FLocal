@@ -53,7 +53,7 @@
 													</td>
 													<td class="navigation" nowrap="nowrap">
 														<a>
-															<xsl:attribute name="href">/Thread/<xsl:value-of select="currentLocation/post/parent/thread/id"/>/p<xsl:value-of select="currentLocation/post/id"/>/</xsl:attribute>
+															<xsl:attribute name="href">/Thread/<xsl:value-of select="currentLocation/post/parent/thread/id"/>/p<xsl:value-of select="currentLocation/post/id"/></xsl:attribute>
 															<img alt="*" src="/static/images/flat.gif" style="vertical-align: text-bottom" />
 															<xsl:text>Плоский</xsl:text>
 														</a>

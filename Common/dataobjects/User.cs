@@ -5,6 +5,7 @@ using System.Text;
 using System.Xml.Linq;
 using FLocal.Core;
 using FLocal.Core.DB;
+using FLocal.Core.DB.conditions;
 
 namespace FLocal.Common.dataobjects {
 	public class User : SqlObject<User> {
@@ -90,6 +91,34 @@ namespace FLocal.Common.dataobjects {
 				this.LoadIfNotLoaded();
 				return this._showPostsToUsers;
 			}
+		}
+
+		private static Dictionary<string, int> id2user = new Dictionary<string,int>();
+		public static User LoadByName(string name) {
+			if(!id2user.ContainsKey(name)) {
+				lock(id2user) {
+					if(!id2user.ContainsKey(name)) {
+						List<string> ids = Config.instance.mainConnection.LoadIdsByConditions(
+							TableSpec.instance,
+							new ComparisonCondition(
+								TableSpec.instance.getColumnSpec(TableSpec.FIELD_NAME),
+								ComparisonType.EQUAL,
+								name
+							),
+							Diapasone.unlimited,
+							new JoinSpec[0]
+						);
+						if(ids.Count > 1) {
+							throw new CriticalException("not unique");
+						} else if(ids.Count == 1) {
+							id2user[name] = int.Parse(ids[0]);
+						} else {
+							throw new NotFoundInDBException();
+						}
+					}
+				}
+			}
+			return User.LoadById(id2user[name]);
 		}
 
 		protected override void doFromHash(Dictionary<string, string> data) {
