@@ -1,5 +1,0 @@
-D:\penartur\Documents\Visual Studio 2008\Projects\FLocal\trunk\Importer\obj\Release\ResolveAssemblyReference.cache
-D:\penartur\Documents\Visual Studio 2008\Projects\FLocal\trunk\Importer\bin\Release\Importer.dll
-D:\penartur\Documents\Visual Studio 2008\Projects\FLocal\trunk\Importer\bin\Release\Importer.pdb
-D:\penartur\Documents\Visual Studio 2008\Projects\FLocal\trunk\Importer\obj\Release\Importer.dll
-D:\penartur\Documents\Visual Studio 2008\Projects\FLocal\trunk\Importer\obj\Release\Importer.pdb
