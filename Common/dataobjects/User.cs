@@ -21,6 +21,7 @@ namespace FLocal.Common.dataobjects {
 			public const string FIELD_NAME = "Name";
 			public const string FIELD_USERGROUPID = "UserGroupId";
 			public const string FIELD_SHOWPOSTSTOUSERS = "ShowPostsToUsers";
+			public const string FIELD_BIOGRAPHY = "Biography";
 			public static readonly TableSpec instance = new TableSpec();
 			public string name { get { return TABLE; } }
 			public string idName { get { return FIELD_ID; } }
@@ -93,6 +94,14 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
+		private string _biography;
+		public string biography {
+			get {
+				this.LoadIfNotLoaded();
+				return this._biography;
+			}
+		}
+
 		private static Dictionary<string, int> id2user = new Dictionary<string,int>();
 		public static User LoadByName(string name) {
 			if(!id2user.ContainsKey(name)) {
@@ -130,6 +139,7 @@ namespace FLocal.Common.dataobjects {
 			this._name = data[TableSpec.FIELD_NAME];
 			this._userGroupId = int.Parse(data[TableSpec.FIELD_USERGROUPID]);
 			this._showPostsToUsers = data[TableSpec.FIELD_SHOWPOSTSTOUSERS];
+			this._biography = data[TableSpec.FIELD_BIOGRAPHY];
 		}
 
 		public XElement exportToXmlForViewing(UserContext context) {

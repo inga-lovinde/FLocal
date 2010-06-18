@@ -55,6 +55,12 @@
 			<Component Id="Importer.pdb" Guid="6AE31E67-EFC6-471B-BB55-0DF628399D35">
 				<File Id="Importer.pdb" Source="..\..\Importer\bin\Release\Importer.pdb" KeyPath="yes" Checksum="yes"/>
 			</Component>
+			<Component Id="ImportConsole.exe" Guid="45962809-9BE4-4792-9759-21C49FCA57F7">
+				<File Id="ImportConsole.exe" Source="..\..\ImportConsole\bin\Release\ImportConsole.exe" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="ImportConsole.pdb" Guid="6E5DCF23-7247-4DE0-BB6D-1A8463723437">
+				<File Id="ImportConsole.pdb" Source="..\..\ImportConsole\bin\Release\ImportConsole.pdb" KeyPath="yes" Checksum="yes"/>
+			</Component>
 			<!--Component Id="MySql.Data.dll" Guid="90646729-6B21-4BEE-94C3-F39F5288EFB3">
 				<File Id="MySql.Data.dll" Source="..\..\ThirdParty\mysql-connector-net-6.2.3\MySql.Data\Provider\bin\Release\MySql.Data.dll" KeyPath="yes" Checksum="yes"/>
 			</Component>
@@ -77,9 +83,15 @@
 			<ComponentRef Id='IISMainHandler.dll' />
 			<ComponentRef Id='IISMainHandler.pdb' />
 		</Feature>
-		<Feature Id='Importer' Title='Importer' Level='1'>
-			<ComponentRef Id='Importer.dll' />
-			<ComponentRef Id='Importer.pdb' />
+		<Feature Id='Import' Title='Import utilities' Level='1'>
+			<Feature Id='Importer' Title='Importer library' Level='1'>
+				<ComponentRef Id='Importer.dll' />
+				<ComponentRef Id='Importer.pdb' />
+			</Feature>
+			<Feature Id='ImportConsole' Title='Import console' Level='1'>
+				<ComponentRef Id='ImportConsole.exe' />
+				<ComponentRef Id='ImportConsole.pdb' />
+			</Feature>
 		</Feature>
 		<Feature Id='Core' Title='Core library' Level='1'>
 			<ComponentRef Id='Core.dll' />

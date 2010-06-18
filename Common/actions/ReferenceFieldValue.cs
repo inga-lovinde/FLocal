@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace FLocal.Common.actions {
-	class ReferenceFieldValue : AbstractFieldValue {
+	public class ReferenceFieldValue : AbstractFieldValue {
 
 		public readonly AbstractChange referenced;
 

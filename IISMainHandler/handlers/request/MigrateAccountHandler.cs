@@ -30,7 +30,7 @@ namespace FLocal.IISHandler.handlers.request {
 		protected override XElement[] Do(WebContext context) {
 			Account account = Account.LoadById(int.Parse(context.httprequest.Form["accountId"]));
 			if(!account.needsMigration) throw new FLocalException("Already migrated");
-			string userInfo = ShallerGateway.getUserInfo(account.user.name);
+			string userInfo = ShallerGateway.getUserInfoAsString(account.user.name);
 			Regex regex = new Regex("\\(fhn\\:([a-z0-9]+)\\)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
 			Match match = regex.Match(userInfo);
 			if(!match.Success) throw new FLocalException("not found");

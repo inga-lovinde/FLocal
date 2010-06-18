@@ -20,6 +20,7 @@ namespace FLocal.Common.actions {
 					tablesLockOrder_locker,
 					() => new List<string>() {
 						"Accounts",
+						"Users",
 						"Boards",
 						"Threads",
 						"Posts",

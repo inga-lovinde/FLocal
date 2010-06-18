@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace FLocal.Common.actions {
-	class ScalarFieldValue : AbstractFieldValue {
+	public class ScalarFieldValue : AbstractFieldValue {
 
 		private readonly string scalar;
 

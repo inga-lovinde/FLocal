@@ -5,7 +5,7 @@ using System.Text;
 using FLocal.Core.DB;
 
 namespace FLocal.Common.actions {
-	class InsertChange : AbstractChange {
+	public class InsertChange : AbstractChange {
 
 		private int? id;
 

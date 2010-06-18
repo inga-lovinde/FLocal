@@ -5,7 +5,7 @@ using System.Text;
 using FLocal.Core.DB;
 
 namespace FLocal.Common.actions {
-	abstract class AbstractChange {
+	abstract public class AbstractChange {
 
 		private bool isApplied;
 

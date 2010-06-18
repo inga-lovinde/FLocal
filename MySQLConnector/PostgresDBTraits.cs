@@ -22,7 +22,7 @@ namespace FLocal.MySQLConnector {
 					newCommand.Transaction = command.Transaction;
 				}
 				newCommand.CommandType = System.Data.CommandType.Text;
-				newCommand.CommandText = "SELECT CURRVAL(" + this.escapeIdentifier(sequenceName) + ")";
+				newCommand.CommandText = "SELECT CURRVAL('" + this.escapeIdentifier(sequenceName) + "')";
 				return (long)newCommand.ExecuteScalar();
 			}
 		}
