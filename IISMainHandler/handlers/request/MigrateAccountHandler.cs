@@ -19,6 +19,14 @@ namespace FLocal.IISHandler.handlers.request {
 			}
 		}
 
+		protected override bool shouldBeLoggedIn {
+			get { return false; }
+		}
+
+		protected override bool shouldBeGuest {
+			get { return true; }
+		}
+
 		protected override XElement[] Do(WebContext context) {
 			Account account = Account.LoadById(int.Parse(context.httprequest.Form["accountId"]));
 			if(!account.needsMigration) throw new FLocalException("Already migrated");

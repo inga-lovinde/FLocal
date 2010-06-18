@@ -38,14 +38,25 @@
 								<xsl:text> | </xsl:text>
 								<a target="_top">Поиск</a>
 								<xsl:text> | </xsl:text>
-								<!--a target="_top">My Home</a-->
-								<a href="/Login/" target="_top">Вход</a>
+								<a target="_top">My Home</a>
+								<xsl:text> | </xsl:text>
+								<a target="_top">
+									<xsl:if test="session/notLoggedIn">
+										<xsl:attribute name="href">/Login/</xsl:attribute>
+									</xsl:if>
+									<xsl:text>Вход</xsl:text>
+								</a>
 								<xsl:text> | </xsl:text>
 								<a target="_top">Кто в онлайне</a>
 								<xsl:text> | </xsl:text>
 								<a target="_top">FAQ</a>
 								<xsl:text> | </xsl:text>
-								<a target="_top">Выход</a>
+								<a target="_top">
+									<xsl:if test="session/sessionKey">
+										<xsl:attribute name="href">/do/Logout/?sessionKey=<xsl:value-of select="session/sessionKey"/></xsl:attribute>
+									</xsl:if>
+									<xsl:text>Выход</xsl:text>
+								</a>
 								<xsl:text> | </xsl:text>
 								<a target="_top">Пользователи</a>
 							</td>

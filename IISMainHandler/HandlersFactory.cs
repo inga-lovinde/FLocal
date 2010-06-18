@@ -36,6 +36,10 @@ namespace FLocal.IISHandler {
 						return new handlers.WrongUrlHandler();
 					} else {
 						switch(context.requestParts[1].ToLower()) {
+							case "login":
+								return new handlers.request.LoginHandler();
+							case "logout":
+								return new handlers.request.LogoutHandler();
 							case "migrateaccount":
 								return new handlers.request.MigrateAccountHandler();
 							default:

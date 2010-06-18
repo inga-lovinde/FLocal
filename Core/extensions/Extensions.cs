@@ -226,5 +226,9 @@ namespace FLocal.Core {
             return decimal.ToInt64(number);
         }
 
+		public static string ToUTCString(this DateTime date) {
+			return date.ToUniversalTime().ToString("u");
+		}
+
     }
 }

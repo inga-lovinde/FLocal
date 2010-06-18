@@ -54,6 +54,7 @@
     <Compile Include="actions\ReferenceFieldValue.cs" />
     <Compile Include="actions\ScalarFieldValue.cs" />
     <Compile Include="actions\UpdateChange.cs" />
+    <Compile Include="actions\ChangeSetUtil.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="dataobjects\Account.cs" />
     <Compile Include="dataobjects\Board.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="dataobjects\IUserSettings.cs" />
     <Compile Include="dataobjects\AnonymousUserSettings.cs" />
     <Compile Include="dataobjects\Post.cs" />
+    <Compile Include="dataobjects\Session.cs" />
     <Compile Include="dataobjects\Thread.cs" />
     <Compile Include="dataobjects\User.cs" />
     <Compile Include="IOutputParams.cs" />

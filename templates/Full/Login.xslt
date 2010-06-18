@@ -21,7 +21,7 @@
 							<td class="lighttable"> 
 								<form method="post" action="/do/Login/">
 									<xsl:text>Логин</xsl:text><br /> 
-									<input type="text" name="username" class="formboxes" /><br/>
+									<input type="text" name="name" class="formboxes" /><br/>
 									<xsl:text>Пароль</xsl:text><br/> 
 									<input type="password" name="password" class="formboxes" /><br/>
 									<input type="submit" name="buttlogin" value="Войти!" class="buttons" /> 

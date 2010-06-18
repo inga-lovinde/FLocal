@@ -251,25 +251,37 @@ namespace FLocal.MySQLConnector {
 			lock(transaction) {
 				using(DbCommand command = transaction.sqlconnection.CreateCommand()) {
 					List<string> updates = new List<string>();
+					List<string> updatesPlaceholders = new List<string>();
 					ParamsHolder paramsholder = new ParamsHolder();
 					foreach(KeyValuePair<string, string> kvp in data) {
-						updates.Add(this.traits.escapeIdentifier(kvp.Key) + " = " + this.traits.markParam(paramsholder.Add(kvp.Value)));
+						updates.Add(this.traits.escapeIdentifier(kvp.Key));
+						updatesPlaceholders.Add(this.traits.markParam(paramsholder.Add(kvp.Value)));
 					}
 
 					command.Transaction = transaction.sqltransaction;
 					command.CommandType = System.Data.CommandType.Text;
-					command.CommandText = "INSERT INTO " + table.compile(this.traits) + " SET " + String.Join(", ", updates.ToArray());
+					command.CommandText = "INSERT INTO " + table.compile(this.traits) + " (" + String.Join(", ", updates.ToArray()) + ") VALUES (" + String.Join(", ", updatesPlaceholders.ToArray()) + ")";
 					foreach(KeyValuePair<string, string> kvp in paramsholder.data) {
 						command.AddParameter(kvp.Key, kvp.Value);
 					}
 					command.ExecuteNonQuery();
+					if(data.ContainsKey(table.idName)) return data[table.idName];
 					return this.traits.LastInsertId(command, table).ToString();
 				}
 			}
 		}
 
-		public void delete(FLocal.Core.DB.Transaction transaction, ITableSpec table, string id) {
-			throw new NotImplementedException();
+		public void delete(FLocal.Core.DB.Transaction _transaction, ITableSpec table, string id) {
+			Transaction transaction = (Transaction)_transaction;
+			lock(transaction) {
+				using(DbCommand command = transaction.sqlconnection.CreateCommand()) {
+					command.Transaction = transaction.sqltransaction;
+					command.CommandType = System.Data.CommandType.Text;
+					command.CommandText = "DELETE FROM " + table.compile(traits) + " where " + table.getIdSpec().compile(this.traits) + " = " + this.traits.markParam("id");
+					command.AddParameter("id", id);
+					command.ExecuteNonQuery();
+				}
+			}
 		}
 
 		public void Dispose() {

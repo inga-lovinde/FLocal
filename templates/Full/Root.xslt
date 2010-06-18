@@ -37,7 +37,14 @@
 				<table width="95%" align="center" cellpadding="1" cellspacing="1" class="tablesurround">
 					<tr>
 						<td>
-							Hello, summersun (External IP).
+							<xsl:choose>
+								<xsl:when test="session/user">
+									<xsl:text>Hello, </xsl:text><xsl:value-of select="session/user/name"/>
+								</xsl:when>
+								<xsl:otherwise>
+									<xsl:text>Hello, Guest</xsl:text>
+								</xsl:otherwise>
+							</xsl:choose>
 							<table cellpadding="1" cellspacing="0" width="100%" class="tableborders" height="100%">
 								<tr class="menubar">
 									<td align="left" width="50%" id="decor">

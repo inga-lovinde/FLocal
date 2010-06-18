@@ -15,8 +15,9 @@ namespace FLocal.Common.dataobjects {
 			public const string TABLE = "Accounts";
 			public const string FIELD_ID = "Id";
 			public const string FIELD_USERID = "UserId";
-			public const string FIELD_PASSWORD = "Password";
+			public const string FIELD_PASSWORDHASH = "Password";
 			public const string FIELD_NEEDSMIGRATION = "NeedsMigration";
+			public const string FIELD_NAME = "Name";
 			public static readonly TableSpec instance = new TableSpec();
 			public string name { get { return TABLE; } }
 			public string idName { get { return FIELD_ID; } }
@@ -38,11 +39,11 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
-		private string _password;
-		private string password {
+		private string _passwordHash;
+		private string passwordHash {
 			get {
 				this.LoadIfNotLoaded();
-				return this._password;
+				return this._passwordHash;
 			}
 		}
 
@@ -56,21 +57,22 @@ namespace FLocal.Common.dataobjects {
 
 		protected override void doFromHash(Dictionary<string, string> data) {
 			this._userId = int.Parse(data[TableSpec.FIELD_USERID]);
-			this._password = data[TableSpec.FIELD_PASSWORD];
+			this._passwordHash = data[TableSpec.FIELD_PASSWORDHASH];
 			this._needsMigration = Util.string2bool(data[TableSpec.FIELD_NEEDSMIGRATION]);
 		}
 
-		private static Dictionary<int, int> userid2id = new Dictionary<int, int>();
-		public static Account LoadByUser(User user) {
-			if(!userid2id.ContainsKey(user.id)) {
-				lock(userid2id) {
-					if(!userid2id.ContainsKey(user.id)) {
+		private static Dictionary<string, int> name2id = new Dictionary<string, int>();
+		public static Account LoadByName(string _name) {
+			string name = _name.ToLower();
+			if(!name2id.ContainsKey(name)) {
+				lock(name2id) {
+					if(!name2id.ContainsKey(name)) {
 						List<string> ids = Config.instance.mainConnection.LoadIdsByConditions(
 							TableSpec.instance,
 							new ComparisonCondition(
-								TableSpec.instance.getColumnSpec(TableSpec.FIELD_USERID),
+								TableSpec.instance.getColumnSpec(TableSpec.FIELD_NAME),
 								ComparisonType.EQUAL,
-								user.id.ToString()
+								name
 							),
 							Diapasone.unlimited,
 							new JoinSpec[0]
@@ -78,39 +80,43 @@ namespace FLocal.Common.dataobjects {
 						if(ids.Count > 1) {
 							throw new CriticalException("not unique");
 						} else if(ids.Count == 1) {
-							userid2id[user.id] = int.Parse(ids[0]);
+							name2id[name] = int.Parse(ids[0]);
 						} else {
 							throw new NotFoundInDBException();
 						}
 					}
 				}
 			}
-			return Account.LoadById(userid2id[user.id]);
+			return Account.LoadById(name2id[name]);
+		}
+
+		private string hashPassword(string password) {
+			return Util.md5(password + " " + Config.instance.SaltMigration + " " + this.id);
 		}
 
 		public void updatePassword(string newPassword) {
-			using(ChangeSet changeSet = new ChangeSet()) {
-				changeSet.Add(
-					new UpdateChange(
-						TableSpec.instance,
-						new Dictionary<string, AbstractFieldValue>() {
-							{
-								TableSpec.FIELD_PASSWORD,
-								new ScalarFieldValue(Util.md5(newPassword + " " + Config.instance.SaltMigration + " " + this.id))
-							},
-							{
-								TableSpec.FIELD_NEEDSMIGRATION,
-								new ScalarFieldValue("0")
-							},
+			ChangeSetUtil.ApplyChanges(new AbstractChange[] {
+				new UpdateChange(
+					TableSpec.instance,
+					new Dictionary<string, AbstractFieldValue>() {
+						{
+							TableSpec.FIELD_PASSWORDHASH,
+							new ScalarFieldValue(this.hashPassword(newPassword))
 						},
-						this.id
-					)
-				);
-				using(Transaction transaction = Config.instance.mainConnection.beginTransaction()) {
-					changeSet.Apply(transaction);
-					transaction.Commit();
-				}
-			}
+						{
+							TableSpec.FIELD_NEEDSMIGRATION,
+							new ScalarFieldValue("0")
+						},
+					},
+					this.id
+				)
+			});
+		}
+
+		public static Account tryAuthorize(string name, string password) {
+			Account account = LoadByName(name);
+			if(account.passwordHash != account.hashPassword(password)) throw new NotFoundInDBException();
+			return account;
 		}
 
 	}

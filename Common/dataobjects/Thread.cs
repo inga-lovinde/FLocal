@@ -196,8 +196,8 @@ namespace FLocal.Common.dataobjects {
 		}
 
 		public void incrementViewsCounter() {
-			using(ChangeSet changeSet = new ChangeSet()) {
-				changeSet.Add(new UpdateChange(
+			ChangeSetUtil.ApplyChanges(new AbstractChange[] {
+				new UpdateChange(
 					TableSpec.instance,
 					new Dictionary<string,AbstractFieldValue>() {
 						{
@@ -206,12 +206,8 @@ namespace FLocal.Common.dataobjects {
 						}
 					},
 					this.id
-				));
-				using(Transaction transaction = Config.instance.mainConnection.beginTransaction()) {
-					changeSet.Apply(transaction);
-					transaction.Commit();
-				}
-			}
+				)
+			});
 		}
 
 	}

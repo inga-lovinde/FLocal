@@ -9,7 +9,7 @@ namespace FLocal.Common.actions {
 
 		private int? id;
 
-		public InsertChange(ISqlObjectTableSpec tableSpec, Dictionary<string, AbstractFieldValue> data, int id)
+		public InsertChange(ISqlObjectTableSpec tableSpec, Dictionary<string, AbstractFieldValue> data)
 			: base(tableSpec, data) {
 			this.id = null;
 		}

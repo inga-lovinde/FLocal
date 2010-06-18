@@ -65,6 +65,10 @@ namespace FLocal.Core {
             }
         }
 
+		protected void deleteFromRegistry() {
+			registry.Delete(new TKey[] { this.id });
+		}
+
     }
 
 }

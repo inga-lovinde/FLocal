@@ -11,7 +11,7 @@ namespace FLocal.Common.actions {
 	/// Note that you should create ChangeSet instances outside of transactions they're using!
 	/// Otherwise, there will be a 100% DB deadlock in Dispose (or data in registry won't update)
 	/// </summary>
-	class ChangeSet : IDisposable {
+	internal class ChangeSet : IDisposable {
 
 		private static readonly object tablesLockOrder_locker = new object();
 		private static IEnumerable<string> tablesLockOrder {
@@ -23,6 +23,7 @@ namespace FLocal.Common.actions {
 						"Boards",
 						"Threads",
 						"Posts",
+						"Sessions",
 					}
 				);
 			}

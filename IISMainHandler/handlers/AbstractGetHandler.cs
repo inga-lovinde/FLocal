@@ -18,6 +18,7 @@ namespace FLocal.IISHandler.handlers {
 			return new XDocument(
 				new XElement("root",
 					new XElement("title", Config.instance.AppInfo),
+					context.exportSession(),
 					this.getSpecificData(context)
 				)
 			);

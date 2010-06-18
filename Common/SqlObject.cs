@@ -6,7 +6,9 @@ using FLocal.Core;
 using FLocal.Core.DB;
 
 namespace FLocal.Common {
-	abstract public class SqlObject<T> : Core.DataObject<int, T> where T : SqlObject<T>, new() {
+	abstract public class SqlObject<TKey, T> : Core.DataObject<TKey, T>
+		where T : SqlObject<TKey, T>, new()
+		where TKey : struct {
 
 		protected SqlObject() : base() {
 		}
@@ -15,7 +17,15 @@ namespace FLocal.Common {
 			get;
 		}
 
-		private bool isLoaded = false;
+		private bool _isLoaded = false;
+		protected bool isLoaded {
+			get {
+				return this._isLoaded;
+			}
+			private set {
+				this._isLoaded = value;
+			}
+		}
 
 		private object lockFiller = new object();
 		private object lockInitializer = new object();
@@ -82,6 +92,15 @@ namespace FLocal.Common {
 			if(!forLoadingFromHash) this.Load();
 		}
 
+		protected static void Refresh(TKey id) {
+			Dictionary<TKey, T> objects = LoadByIdsForLoadingFromHash(new List<TKey>() { id });
+			objects[id].ReLoad();
+		}
+
+	}
+
+	abstract public class SqlObject<T> : SqlObject<int, T> where T : SqlObject<T>, new() {
+
 		public static List<T> LoadByIds(IEnumerable<int> ids) {
 
 			Dictionary<int, T> rawRes = LoadByIdsForLoadingFromHash(ids);
@@ -116,10 +135,6 @@ namespace FLocal.Common {
 			return res;
 		}
 
-		protected static void Refresh(int id) {
-			Dictionary<int, T> objects = LoadByIdsForLoadingFromHash(new List<int>() { id });
-			objects[id].ReLoad();
-		}
-
 	}
+
 }

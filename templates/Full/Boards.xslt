@@ -22,7 +22,14 @@
 								</tr>
 								<tr class="lighttable">
 									<td width="45%" class="small" valign="top">
-										<xsl:text>Вы вошли в форум как summersun</xsl:text>
+										<xsl:choose>
+											<xsl:when test="session/user">
+												<xsl:text>Вы вошли в форум как </xsl:text><xsl:value-of select="session/user/name"/>
+											</xsl:when>
+											<xsl:otherwise>
+												<xsl:text>Вы не вошли в форум</xsl:text>
+											</xsl:otherwise>
+										</xsl:choose>
 										<br />
 										<xsl:text>18983 Зарегистрированных пользователей.</xsl:text>
 										<br />

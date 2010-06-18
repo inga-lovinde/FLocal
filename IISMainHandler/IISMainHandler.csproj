@@ -58,6 +58,8 @@
     <Compile Include="handlers\DebugHandler.cs" />
     <Compile Include="handlers\PostHandler.cs" />
     <Compile Include="handlers\request\AbstractPostHandler.cs" />
+    <Compile Include="handlers\request\LoginHandler.cs" />
+    <Compile Include="handlers\request\LogoutHandler.cs" />
     <Compile Include="handlers\request\MigrateAccountHandler.cs" />
     <Compile Include="handlers\response\BoardAsThread.cs" />
     <Compile Include="handlers\response\LoginHandler.cs" />

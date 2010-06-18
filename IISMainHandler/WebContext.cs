@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using FLocal.Core;
+using FLocal.Common.dataobjects;
+using System.Xml.Linq;
 
 namespace FLocal.IISHandler {
 	class WebContext : Common.UserContext {
@@ -57,14 +59,48 @@ namespace FLocal.IISHandler {
 
 		public DateTime requestTime;
 
+		public Session session;
+
 		public WebContext(HttpContext httpcontext) {
 			this.httpcontext = httpcontext;
 			this.requestTime = DateTime.Now;
+			HttpCookie sessionCookie = this.httprequest.Cookies["session"];
+			if(sessionCookie != null && sessionCookie.Value != null && sessionCookie.Value != "") {
+				try {
+					this.session = Session.LoadByKey(sessionCookie.Value);
+					sessionCookie.Expires = DateTime.Now.AddDays(3);
+					this.httpresponse.AppendCookie(sessionCookie);
+				} catch(NotFoundInDBException) {
+					sessionCookie.Value = "";
+					sessionCookie.Expires = DateTime.Now.AddDays(-1);
+					this.httpresponse.AppendCookie(sessionCookie);
+					//throw; //TODO: remove me!
+				}
+			}
 		}
 
 		public string Transform(string templateName, System.Xml.Linq.XDocument data) {
 			//TODO: this should work according to design!
 			return TemplateEngine.Compile(this.design.fsname + this.config.DirSeparator + templateName, data);
+		}
+
+		public XElement exportSession() {
+			if(this.session != null) {
+				return session.exportToXml(this);
+			} else {
+				return new XElement("session",
+					new XElement("notLoggedIn", true)
+				);
+			}
+		}
+
+		public HttpCookie createCookie(string name) {
+			HttpCookie result = new HttpCookie(name);
+			result.HttpOnly = true;
+			result.Secure = true;
+			result.Domain = "." + String.Join(".", this.httprequest.Url.Host.Split(".", StringSplitOptions.RemoveEmptyEntries).Slice(1).ToArray());
+			result.Path = "/";
+			return result;
 		}
 
 	}

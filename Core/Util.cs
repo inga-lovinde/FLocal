@@ -165,6 +165,15 @@ namespace FLocal.Core {
 			return sBuilder.ToString();
 		}
 
+		public static bool throws<TException>(Action action) where TException : Exception {
+			try {
+				action();
+				return false;
+			} catch(TException) {
+				return true;
+			}
+		}
+
     }
 
 }

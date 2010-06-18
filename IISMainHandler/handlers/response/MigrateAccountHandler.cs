@@ -26,8 +26,7 @@ namespace FLocal.IISHandler.handlers.response {
 				}
 				username = context.requestParts[1];
 			}
-			User user = User.LoadByName(username);
-			Account account = Account.LoadByUser(user);
+			Account account = Account.LoadByName(username);
 			if(!account.needsMigration) throw new FLocalException("Already migrated");
 			string key = Util.RandomString(8, Util.RandomSource.LETTERS_DIGITS);
 			return new XElement[] {

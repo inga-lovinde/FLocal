@@ -42,6 +42,13 @@ namespace FLocal.Common {
 			base.Dispose();
 		}
 
+		public static void Transactional(Action<Core.DB.Transaction> action) {
+			using(Core.DB.Transaction transaction = Core.DB.IDBConnectionExtensions.beginTransaction(instance.mainConnection)) {
+				action(transaction);
+				transaction.Commit();
+			}
+		}
+
 	}
 
 }
