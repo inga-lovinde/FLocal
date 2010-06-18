@@ -38,6 +38,12 @@ namespace FLocal.IISHandler.handlers.request {
 		}
 
 		public void Handle(WebContext context) {
+
+			Uri referer = context.httprequest.UrlReferrer;
+			if(referer == null || referer.Host != context.httprequest.Url.Host) {
+				throw new System.Web.HttpException(403, "Wrong referer");
+			}
+
 			if(this.shouldBeGuest && context.session != null) throw new FLocalException("Should be guest");
 			if(this.shouldBeLoggedIn && context.session == null) throw new FLocalException("Should be anonymous");
 			context.httpresponse.Write(context.Transform(this.templateName, this.getData(context)));
