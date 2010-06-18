@@ -10,6 +10,12 @@ using System.IO;
 namespace FLocal.Importer {
 	class ShallerConnector {
 
+		public static Encoding encoding {
+			get {
+				return Encoding.GetEncoding(1251);
+			}
+		}
+
 		public static string getPageContent(string requestUrl, Dictionary<string, string> postData, CookieContainer cookies) {
 			string baseUrl = ConfigurationManager.AppSettings["Importer_BaseUrl"];
 			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(baseUrl + requestUrl);
@@ -21,9 +27,9 @@ namespace FLocal.Importer {
 
 				StringBuilder postBuilder = new StringBuilder();
 				foreach(KeyValuePair<string, string> kvp in postData) {
-					postBuilder.Append(HttpUtility.UrlEncode(kvp.Key));
+					postBuilder.Append(HttpUtility.UrlEncode(kvp.Key, encoding));
 					postBuilder.Append('=');
-					postBuilder.Append(HttpUtility.UrlEncode(kvp.Value));
+					postBuilder.Append(HttpUtility.UrlEncode(kvp.Value, encoding));
 				}
 
 				byte[] postBytes = Encoding.ASCII.GetBytes(postBuilder.ToString());
@@ -39,7 +45,7 @@ namespace FLocal.Importer {
 			request.UserAgent = "ShallerConnector v0.1";
 			HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 			cookies.Add(response.Cookies);
-			using(StreamReader reader = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding(1251))) {
+			using(StreamReader reader = new StreamReader(response.GetResponseStream(), encoding)) {
 				return reader.ReadToEnd();
 			}
 		}

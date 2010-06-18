@@ -9,7 +9,8 @@ namespace FLocal.Importer {
 	public class ShallerGateway {
 
 		public static string getUserInfoAsString(string userName) {
-			return ShallerConnector.getPageContent("showprofile.php?User=" + userName + "&What=login&showlite=l", new Dictionary<string,string>(), new System.Net.CookieContainer());
+			//if(userName != HttpUtility.UrlEncode(userName, ShallerConnector.encoding)) throw new ApplicationException("'" + userName + "':showprofile.php?User=" + HttpUtility.UrlEncode(userName, ShallerConnector.encoding) + "&What=login&showlite=l");
+			return ShallerConnector.getPageContent("showprofile.php?User=" + HttpUtility.UrlEncode(userName, ShallerConnector.encoding) + "&What=login&showlite=l", new Dictionary<string,string>(), new System.Net.CookieContainer());
 		}
 
 		private static Dictionary<string, Regex> regexInfoCache = new Dictionary<string, Regex>();
@@ -50,7 +51,7 @@ namespace FLocal.Importer {
 			MatchCollection matches = matcher.Matches(content);
 			HashSet<string> result = new HashSet<string>();
 			foreach(Match match in matches) {
-				result.Add(match.Groups[1].Value);
+				result.Add(HttpUtility.UrlDecode(match.Groups[1].Value, ShallerConnector.encoding).Trim());
 			}
 			return result;
 		}

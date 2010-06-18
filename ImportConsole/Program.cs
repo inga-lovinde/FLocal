@@ -42,7 +42,7 @@ namespace FLocal.ImportConsole {
 					AbstractChange addAccount = new InsertChange(
 						Account.TableSpec.instance,
 						new Dictionary<string,AbstractFieldValue>() {
-							{ Account.TableSpec.FIELD_NAME, new ScalarFieldValue(userName) },
+							{ Account.TableSpec.FIELD_NAME, new ScalarFieldValue(userName.ToLower()) },
 							{ Account.TableSpec.FIELD_NEEDSMIGRATION, new ScalarFieldValue("1") },
 							{ Account.TableSpec.FIELD_PASSWORDHASH, new ScalarFieldValue("*") },
 							{ Account.TableSpec.FIELD_USERID, new ReferenceFieldValue(addUser) },
