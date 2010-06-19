@@ -54,15 +54,15 @@
 		<span nowrap="nowrap">
 			<xsl:value-of select="year"/>
 			<xsl:text>-</xsl:text>
-			<xsl:value-of select="month"/>
+			<xsl:value-of select="format-number(month, '00')"/>
 			<xsl:text>-</xsl:text>
-			<xsl:value-of select="mday"/>
+			<xsl:value-of select="format-number(mday, '00')"/>
 			<xsl:text> </xsl:text>
-			<xsl:value-of select="hour"/>
+			<xsl:value-of select="format-number(hour, '00')"/>
 			<xsl:text>:</xsl:text>
-			<xsl:value-of select="minute"/>
+			<xsl:value-of select="format-number(minute, '00')"/>
 			<xsl:text>:</xsl:text>
-			<xsl:value-of select="second"/>
+			<xsl:value-of select="format-number(second, '00')"/>
 		</span>
 	</xsl:template>
 
@@ -70,9 +70,9 @@
 		<span nowrap="nowrap">
 			<xsl:value-of select="year"/>
 			<xsl:text>-</xsl:text>
-			<xsl:value-of select="month"/>
+			<xsl:value-of select="format-number(month, '00')"/>
 			<xsl:text>-</xsl:text>
-			<xsl:value-of select="mday"/>
+			<xsl:value-of select="format-number(mday, '00')"/>
 		</span>
 	</xsl:template>
 
