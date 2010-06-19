@@ -16,6 +16,23 @@ namespace FLocal.IISHandler.handlers {
 			this.requestParts = requestParts;
 		}
 
+		private static Dictionary<string, string> extension2mime = new Dictionary<string,string>();
+		private static string getMimeByExtension(string extension) {
+			if(!extension2mime.ContainsKey(extension)) {
+				lock(extension2mime) {
+					if(!extension2mime.ContainsKey(extension)) {
+						RegistryKey regKey = Registry.ClassesRoot.OpenSubKey(extension);
+						if (regKey != null && regKey.GetValue("Content Type") != null) {
+							extension2mime[extension] = regKey.GetValue("Content Type").ToString();
+						} else {
+							return null;
+						}
+					}
+				}
+			}
+			return extension2mime[extension];
+		}
+
 		public void Handle(WebContext context) {
 			if(this.requestParts.Length < 2) {
 				throw new HttpException(403, "listing not allowed");
@@ -39,9 +56,9 @@ namespace FLocal.IISHandler.handlers {
 				throw new HttpException(403, "forbidden");
 			}
 			
-			RegistryKey regKey = Registry.ClassesRoot.OpenSubKey(fileinfo.Extension);
-			if (regKey != null && regKey.GetValue("Content Type") != null) {
-				context.httpresponse.ContentType = regKey.GetValue("Content Type").ToString();
+			string mime = getMimeByExtension(fileinfo.Extension);
+			if(mime != null) {
+				context.httpresponse.ContentType = mime;
 			} else {
 				throw new HttpException(403, "wrong file type");
 			}
