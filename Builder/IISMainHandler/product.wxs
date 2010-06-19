@@ -61,6 +61,9 @@
 			<Component Id="ImportConsole.pdb" Guid="6E5DCF23-7247-4DE0-BB6D-1A8463723437">
 				<File Id="ImportConsole.pdb" Source="..\..\ImportConsole\bin\Release\ImportConsole.pdb" KeyPath="yes" Checksum="yes"/>
 			</Component>
+			<Component Id="NConsoler.dll" Guid="F39FD087-8961-4871-9D59-FDB83002BC91">
+				<File Id="NConsoler.dll" Source="..\..\ThirdParty\NConsoler\NConsoler.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
 			<!--Component Id="MySql.Data.dll" Guid="90646729-6B21-4BEE-94C3-F39F5288EFB3">
 				<File Id="MySql.Data.dll" Source="..\..\ThirdParty\mysql-connector-net-6.2.3\MySql.Data\Provider\bin\Release\MySql.Data.dll" KeyPath="yes" Checksum="yes"/>
 			</Component>
@@ -105,12 +108,15 @@
 			<ComponentRef Id='MySQLConnector.dll' />
 			<ComponentRef Id='MySQLConnector.pdb' />
 		</Feature>
-		<!--Feature Id='ThirdParty' Title='ThirdParty libraries/tools' Level='1'>
-			<Feature Id='MySql.Data' Title='MySql Connector/NET' Level='1'>
+		<Feature Id='ThirdParty' Title='ThirdParty libraries/tools' Level='1'>
+			<Feature Id='NConsoler' Title='NConsoler' Level='1'>
+				<ComponentRef Id='NConsoler.dll' />
+			</Feature>
+			<!--Feature Id='MySql.Data' Title='MySql Connector/NET' Level='1'>
 				<ComponentRef Id='MySql.Data.dll' />
 				<ComponentRef Id='MySql.Data.pdb' />
-			</Feature>
-		</Feature-->
+			</Feature-->
+		</Feature>
 		<Feature Id="Data" Title="Various data sets" Level="1">
 			<ComponentRef Id="_7z.exe"/>
 			<Feature Id="Templates" Title="Templates" Level="1">

@@ -41,13 +41,17 @@ namespace FLocal.IISHandler {
 			}
 		}
 
-		public static PageOuter createFromGet(string[] requestParts, long perPage, Dictionary<char, Func<long>> customAction) {
+		/*public static PageOuter createFromGet(string[] requestParts, long perPage, Dictionary<char, Func<long>> customAction) {
 			return createFromGet(requestParts, perPage, customAction, 2);
+		}*/
+
+		public static PageOuter createFromGet(string[] requestParts, long perPage, int offset) {
+			return createFromGet(requestParts, perPage, new Dictionary<char, Func<long>>(), offset);
 		}
 
-		public static PageOuter createFromGet(string[] requestParts, long perPage) {
+		/*public static PageOuter createFromGet(string[] requestParts, long perPage) {
 			return createFromGet(requestParts, perPage, new Dictionary<char,Func<long>>());
-		}
+		}*/
 
 		public XElement exportToXml(int left, int current, int right) {
 			XElement result = new XElement("pageOuter",

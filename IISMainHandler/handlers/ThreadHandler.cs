@@ -48,7 +48,8 @@ namespace FLocal.IISHandler.handlers {
 							new JoinSpec[0]
 						)
 					}
-				}
+				},
+				2
 			);
 			IEnumerable<Post> posts = thread.getPosts(pageOuter, context);
 			thread.incrementViewsCounter();

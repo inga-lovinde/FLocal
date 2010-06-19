@@ -19,7 +19,7 @@ namespace FLocal.IISHandler.handlers.response {
 		}
 
 		override protected XElement[] getSpecificData(WebContext context) {
-			PageOuter pageOuter = PageOuter.createFromGet(context.requestParts, context.userSettings.usersPerPage);
+			PageOuter pageOuter = PageOuter.createFromGet(context.requestParts, context.userSettings.usersPerPage, 1);
 			IEnumerable<User> users = User.getUsers(pageOuter, context);
 			return new XElement[] {
 				new XElement("users", 
