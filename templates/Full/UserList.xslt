@@ -76,16 +76,16 @@
 				<xsl:text>Пользователь</xsl:text>
 			</td>
 			<td>
-				<xsl:text>Not implemented</xsl:text>
+				<xsl:text>TODO</xsl:text>
 			</td>
 			<td>
 				<xsl:value-of select="totalPosts"/>
 			</td>
 			<td>
-				<xsl:text>Not implemented</xsl:text>
+				<xsl:text>TODO</xsl:text>
 			</td>
 			<td>
-				<xsl:text>Not implemented</xsl:text>
+				<xsl:text>TODO</xsl:text>
 			</td>
 			<td>
 				<xsl:apply-templates select="regDate" mode="dateTime"/>
