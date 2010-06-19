@@ -18,5 +18,11 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
+		public int usersPerPage {
+			get {
+				return 50;
+			}
+		}
+
 	}
 }

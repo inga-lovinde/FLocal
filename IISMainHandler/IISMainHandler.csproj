@@ -64,9 +64,11 @@
     <Compile Include="handlers\response\BoardAsThread.cs" />
     <Compile Include="handlers\response\LoginHandler.cs" />
     <Compile Include="handlers\response\MigrateAccountHandler.cs" />
+    <Compile Include="handlers\response\UserInfoHandler.cs" />
     <Compile Include="handlers\RootHandler.cs" />
     <Compile Include="handlers\StaticHandler.cs" />
     <Compile Include="handlers\ThreadHandler.cs" />
+    <Compile Include="handlers\response\UserListHandler.cs" />
     <Compile Include="handlers\WrongUrlHandler.cs" />
     <Compile Include="ISpecificHandler.cs" />
     <Compile Include="MainHandler.cs" />

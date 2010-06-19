@@ -156,5 +156,22 @@ namespace FLocal.Common.dataobjects {
 			);
 		}
 
+		public static IEnumerable<User> getUsers(Diapasone diapasone, UserContext context) {
+			return User.LoadByIds(
+				from stringId in Config.instance.mainConnection.LoadIdsByConditions(
+					User.TableSpec.instance,
+					new EmptyCondition(),
+					diapasone,
+					new JoinSpec[0],
+					new SortSpec[] {
+						new SortSpec(
+							User.TableSpec.instance.getIdSpec(),
+							true
+						),
+					}
+				) select int.Parse(stringId)
+			);
+		}
+
 	}
 }

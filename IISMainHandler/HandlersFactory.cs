@@ -29,6 +29,10 @@ namespace FLocal.IISHandler {
 					return new handlers.response.LoginHandler();
 				case "migrateaccount":
 					return new handlers.response.MigrateAccountHandler();
+				case "users":
+					return new handlers.response.UserListHandler();
+				case "user":
+					return new handlers.response.UserInfoHandler();
 				case "static":
 					return new handlers.StaticHandler(context.requestParts);
 				case "do":

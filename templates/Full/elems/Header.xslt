@@ -58,7 +58,7 @@
 									<xsl:text>Выход</xsl:text>
 								</a>
 								<xsl:text> | </xsl:text>
-								<a target="_top">Пользователи</a>
+								<a href="/Users/" target="_top">Пользователи</a>
 							</td>
 						</tr>
 					</table>
