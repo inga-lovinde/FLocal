@@ -5,7 +5,7 @@
 		<table width="95%" align="center" cellpadding="1" cellspacing="1" class="tablesurround">
 			<tr>
 				<td>
-					<table cellpadding="0" cellspacing="1" width="100%" class="tableborders">
+					<table cellpadding="3" cellspacing="1" width="100%" class="tableborders">
 						<tr class="tdheader">
 							<td align="left" width="15%" nowrap="nowrap">
 								<a>
