@@ -65,7 +65,15 @@
 	</xsl:template>
 
 	<xsl:template match="users/user">
-		<tr class="lighttable">
+		<tr>
+			<xsl:choose>
+				<xsl:when test="even='true'">
+					<xsl:attribute name="class">lighttable</xsl:attribute>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:attribute name="class">darktable</xsl:attribute>
+				</xsl:otherwise>
+			</xsl:choose>
 			<td>
 				<a>
 					<xsl:attribute name="href">/User/<xsl:value-of select="id"/>/</xsl:attribute>

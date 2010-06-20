@@ -3,7 +3,15 @@
 
 	<xsl:template match="thread">
 		<tr>
-			<td align="left" class="lighttable">
+			<xsl:choose>
+				<xsl:when test="even='true'">
+					<xsl:attribute name="class">lighttable</xsl:attribute>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:attribute name="class">darktable</xsl:attribute>
+				</xsl:otherwise>
+			</xsl:choose>
+			<td align="left">
 				<xsl:attribute name="title"><xsl:value-of select="bodyShort"/></xsl:attribute>
 				<img alt="*" hspace="5" style="vertical-align: text-bottom">
 					<xsl:choose>
@@ -28,7 +36,7 @@
 					</xsl:apply-templates>
 				</span>
 			</td>
-			<td align="left" nowrap="nowrap" class="lighttable">
+			<td align="left" nowrap="nowrap">
 				<a>
 					<xsl:attribute name="href">/User/<xsl:value-of select="topicstarter/user/id"/>/</xsl:attribute>
 					<font>
@@ -37,7 +45,7 @@
 					</font>
 				</a>
 			</td>
-			<td align="center" class="lighttable">
+			<td align="center">
 				<xsl:value-of select="totalViews"/>
 			</td>
 			<td align="center" nowrap="nowrap" class="lighttable">
@@ -49,7 +57,7 @@
 					<font class="new2"><i>(41)</i></font>
 				</a>
 			</td>
-			<td nowrap="nowrap" align="center" class="lighttable">
+			<td nowrap="nowrap" align="center">
 				<xsl:apply-templates select="lastPostDate/date" mode="dateTime"/>
 			</td>
 		</tr>
