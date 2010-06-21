@@ -12,7 +12,7 @@ namespace FLocal.IISHandler {
 			get { return true; }
 		}
 
-		public void ProcessRequest(HttpContext httpcontext) {
+		private void doProcessRequest(HttpContext httpcontext) {
 
 			Uri referer = httpcontext.Request.UrlReferrer;
 			if(referer != null && referer.PathAndQuery.StartsWith("/static")) {
@@ -30,6 +30,14 @@ namespace FLocal.IISHandler {
 			WebContext context = new WebContext(httpcontext);
 			ISpecificHandler handler = HandlersFactory.getHandler(context);
 			handler.Handle(context);
+		}
+
+		public void ProcessRequest(HttpContext context) {
+			try {
+				this.doProcessRequest(context);
+			} catch(RedirectException e) {
+				context.Response.Redirect(e.newUrl);
+			}
 		}
 
 	}

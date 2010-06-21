@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections.Specialized;
+using FLocal.Core;
 
 namespace FLocal.Common {
 
-	public class Config : FLocal.Core.Config<Config> {
+	public class Config : Config<Config> {
 
 		public readonly string InitTime;
 
@@ -20,6 +21,10 @@ namespace FLocal.Common {
 		
 		public readonly string SaltPasswords;
 
+		public readonly string SaltUploader;
+
+		public readonly string UploaderUrl;
+
 		protected Config(NameValueCollection data) : base(data) {
 			this.InitTime = DateTime.Now.ToLongTimeString();
 			this.mainConnection = new MySQLConnector.Connection(data["ConnectionString"], MySQLConnector.PostgresDBTraits.instance);
@@ -27,6 +32,8 @@ namespace FLocal.Common {
 			this.DirSeparator = System.IO.Path.DirectorySeparatorChar.ToString();
 			this.SaltMigration = data["SaltMigration"];
 			this.SaltPasswords = data["SaltPasswords"];
+			this.SaltUploader = data["SaltUploader"];
+			this.UploaderUrl = data["UploaderUrl"];
 		}
 
 		public static void Init(NameValueCollection data) {
@@ -44,8 +51,17 @@ namespace FLocal.Common {
 
 		public static void Transactional(Action<Core.DB.Transaction> action) {
 			using(Core.DB.Transaction transaction = Core.DB.IDBConnectionExtensions.beginTransaction(instance.mainConnection)) {
-				action(transaction);
-				transaction.Commit();
+				bool success = false;
+				try {
+					action(transaction);
+					success = true;
+					transaction.Commit();
+				} catch(FLocalException) {
+					if(!success) {
+						transaction.Rollback();
+					}
+					throw;
+				}
 			}
 		}
 

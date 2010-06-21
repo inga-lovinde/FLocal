@@ -5,7 +5,7 @@ using System.Text;
 using System.Web;
 using System.Text.RegularExpressions;
 using System.IO;
-using Microsoft.Win32;
+using FLocal.Core;
 
 namespace FLocal.IISHandler.handlers {
 	class StaticHandler : ISpecificHandler {
@@ -14,23 +14,6 @@ namespace FLocal.IISHandler.handlers {
 
 		public StaticHandler(string[] requestParts) {
 			this.requestParts = requestParts;
-		}
-
-		private static Dictionary<string, string> extension2mime = new Dictionary<string,string>();
-		private static string getMimeByExtension(string extension) {
-			if(!extension2mime.ContainsKey(extension)) {
-				lock(extension2mime) {
-					if(!extension2mime.ContainsKey(extension)) {
-						RegistryKey regKey = Registry.ClassesRoot.OpenSubKey(extension);
-						if (regKey != null && regKey.GetValue("Content Type") != null) {
-							extension2mime[extension] = regKey.GetValue("Content Type").ToString();
-						} else {
-							return null;
-						}
-					}
-				}
-			}
-			return extension2mime[extension];
 		}
 
 		public void Handle(WebContext context) {
@@ -56,7 +39,7 @@ namespace FLocal.IISHandler.handlers {
 				throw new HttpException(403, "forbidden");
 			}
 			
-			string mime = getMimeByExtension(fileinfo.Extension);
+			string mime = Util.getMimeByExtension(fileinfo.Extension);
 			if(mime != null) {
 				context.httpresponse.ContentType = mime;
 			} else {
@@ -66,7 +49,7 @@ namespace FLocal.IISHandler.handlers {
 			context.httpresponse.CacheControl = HttpCacheability.Public.ToString();
 			context.httpresponse.Expires = 1440;
 
-			context.httpresponse.WriteFile(fileinfo.FullName);
+			context.httpresponse.TransmitFile(fileinfo.FullName);
 		}
 
 	}

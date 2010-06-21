@@ -3,3 +3,5 @@
 cd Builder
 Builder IISMainHandler
 move /Y IISMainHandler\product.msi ..\IISMainHandler.msi
+Builder IISUploadHandler
+move /Y IISUploadHandler\product.msi ..\IISUploadHandler.msi

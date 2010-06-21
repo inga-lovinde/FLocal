@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 
 namespace FLocal.Core {
 
@@ -165,6 +166,34 @@ namespace FLocal.Core {
 			return sBuilder.ToString();
 		}
 
+		/// <summary>
+		/// Code sample from http://msdn.microsoft.com/en-us/library/system.security.cryptography.md5.aspx
+		/// </summary>
+		/// <param name="str"></param>
+		/// <returns></returns>
+		public static string md5(Stream inputStream) {
+			inputStream.Position = 0;
+
+			System.Security.Cryptography.HashAlgorithm md5Hasher = System.Security.Cryptography.MD5.Create();
+
+			// Convert the input string to a byte array and compute the hash.
+			byte[] data = md5Hasher.ComputeHash(inputStream);
+
+			// Create a new Stringbuilder to collect the bytes
+			// and create a string.
+			StringBuilder sBuilder = new StringBuilder();
+
+			// Loop through each byte of the hashed data 
+			// and format each one as a hexadecimal string.
+			for (int i = 0; i < data.Length; i++)
+			{
+				sBuilder.Append(data[i].ToString("x2"));
+			}
+
+			// Return the hexadecimal string.
+			return sBuilder.ToString();
+		}
+
 		public static bool throws<TException>(Action action) where TException : Exception {
 			try {
 				action();
@@ -172,6 +201,24 @@ namespace FLocal.Core {
 			} catch(TException) {
 				return true;
 			}
+		}
+
+		private static Dictionary<string, string> extension2mime = new Dictionary<string,string>();
+		public static string getMimeByExtension(string extension) {
+			if(!extension.StartsWith(".")) extension = "." + extension;
+			if(!extension2mime.ContainsKey(extension)) {
+				lock(extension2mime) {
+					if(!extension2mime.ContainsKey(extension)) {
+						Microsoft.Win32.RegistryKey regKey = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(extension);
+						if (regKey != null && regKey.GetValue("Content Type") != null) {
+							extension2mime[extension] = regKey.GetValue("Content Type").ToString();
+						} else {
+							return null;
+						}
+					}
+				}
+			}
+			return extension2mime[extension];
 		}
 
     }

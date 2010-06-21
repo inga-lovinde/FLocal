@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Importer", "Importer\Import
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImportConsole", "ImportConsole\ImportConsole.csproj", "{208B84AF-A5DD-4C20-83D5-160EA243BA43}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IISUploadHandler", "IISUploadHandler\IISUploadHandler.csproj", "{09F13185-3B2A-4FCB-AB6A-750112FFF920}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,12 @@ Global
 		{208B84AF-A5DD-4C20-83D5-160EA243BA43}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{208B84AF-A5DD-4C20-83D5-160EA243BA43}.Release|Any CPU.Build.0 = Release|Any CPU
 		{208B84AF-A5DD-4C20-83D5-160EA243BA43}.Release|x86.ActiveCfg = Release|Any CPU
+		{09F13185-3B2A-4FCB-AB6A-750112FFF920}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09F13185-3B2A-4FCB-AB6A-750112FFF920}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09F13185-3B2A-4FCB-AB6A-750112FFF920}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{09F13185-3B2A-4FCB-AB6A-750112FFF920}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09F13185-3B2A-4FCB-AB6A-750112FFF920}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09F13185-3B2A-4FCB-AB6A-750112FFF920}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

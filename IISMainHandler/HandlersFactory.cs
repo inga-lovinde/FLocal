@@ -14,6 +14,13 @@ namespace FLocal.IISHandler {
 //				throw new FLocalException("Malformed url");
 //			}
 			if(context.requestParts.Length < 1) return new handlers.RootHandler();
+
+			#region legacy
+			if(context.httprequest.Path.ToLower().StartsWith("/user/upload/")) {
+				return new handlers.response.LegacyUploadHandler();
+			}
+			#endregion
+
 			switch(context.requestParts[0].ToLower()) {
 				case "boards":
 					return new handlers.BoardsHandler();
@@ -33,6 +40,8 @@ namespace FLocal.IISHandler {
 					return new handlers.response.UserListHandler();
 				case "user":
 					return new handlers.response.UserInfoHandler();
+				case "uploads":
+					return new handlers.response.UploadHandler();
 				case "static":
 					return new handlers.StaticHandler(context.requestParts);
 				case "do":

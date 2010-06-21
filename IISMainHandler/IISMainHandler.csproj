@@ -50,6 +50,7 @@
     <Compile Include="designs\Classic.cs" />
     <Compile Include="designs\IDesign.cs" />
     <Compile Include="designs\Lite.cs" />
+    <Compile Include="exceptions\RedirectException.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="HandlersFactory.cs" />
     <Compile Include="handlers\AbstractGetHandler.cs" />
@@ -62,8 +63,10 @@
     <Compile Include="handlers\request\LogoutHandler.cs" />
     <Compile Include="handlers\request\MigrateAccountHandler.cs" />
     <Compile Include="handlers\response\BoardAsThread.cs" />
+    <Compile Include="handlers\response\LegacyUploadHandler.cs" />
     <Compile Include="handlers\response\LoginHandler.cs" />
     <Compile Include="handlers\response\MigrateAccountHandler.cs" />
+    <Compile Include="handlers\response\UploadHandler.cs" />
     <Compile Include="handlers\response\UserInfoHandler.cs" />
     <Compile Include="handlers\RootHandler.cs" />
     <Compile Include="handlers\StaticHandler.cs" />
