@@ -120,7 +120,12 @@ namespace FLocal.MySQLConnector {
 					}
 
 					command.CommandText = "SELECT COUNT(*) " + queryMain;
-					object rawCount = command.ExecuteScalar();
+					object rawCount;
+					//try {
+						rawCount = command.ExecuteScalar();
+					//} catch(Npgsql.NpgsqlException e) {
+						//throw new FLocalException("Error while trying to execute " + command.CommandText + ": " + e.Message);
+					//}
 					long count = (long)rawCount;
 					if(count < 1) {
 						diapasone.total = 0;

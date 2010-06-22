@@ -56,7 +56,7 @@ namespace FLocal.MySQLConnector {
 		private string CompileCondition(MultiValueCondition condition) {
 			List<string> valueParams = new List<string>();
 			foreach(string value in condition.values) {
-				valueParams.Add(this.paramsholder.Add(value));
+				valueParams.Add(this.traits.markParam(this.paramsholder.Add(value)));
 			}
 
 			if(condition.inclusive) {
