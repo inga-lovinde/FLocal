@@ -151,7 +151,7 @@ namespace FLocal.Common.dataobjects {
 				new XElement("revision", this.revision),
 				new XElement("layer", this.layer),
 				new XElement("title", this.title),
-				new XElement("body", this.body),
+				new XElement("body", context.outputParams.preprocessBodyIntermediate(this.body)),
 				new XElement("bodyShort", this.bodyShort),
 				new XElement("threadId", this.threadId)
 			);
