@@ -71,7 +71,8 @@ namespace FLocal.IISHandler {
 				pages.Add(i*this.perPage);
 			}
 			{
-				long totalFloor = this.total - (this.total % this.perPage);
+				long last = this.total - 1;
+				long totalFloor = last - (last % this.perPage);
 				for(long i=0; i<left; i++) {
 					pages.Add(totalFloor - i*this.perPage);
 				}
@@ -84,7 +85,7 @@ namespace FLocal.IISHandler {
 			}
 			pages.Add(this.start);
 			result.Add(new XElement("pages",
-				from page in pages where (page >= 0) && (page <= this.total) orderby page select new XElement("page", page)
+				from page in pages where (page >= 0) && (page < this.total) orderby page select new XElement("page", page)
 			));
 			return result;
 		}
