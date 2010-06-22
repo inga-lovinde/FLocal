@@ -1,0 +1,33 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Xml.Linq;
+using FLocal.Common.dataobjects;
+using FLocal.Importer;
+using System.Text.RegularExpressions;
+using FLocal.Core;
+using FLocal.Common;
+using FLocal.Common.actions;
+using System.Web;
+
+namespace FLocal.IISHandler.handlers.request {
+	class UploadHandler : AbstractPostHandler {
+
+		protected override string templateName {
+			get {
+				return "result/Upload.xslt";
+			}
+		}
+
+		protected override XElement[] Do(WebContext context) {
+			HttpPostedFile file = context.httprequest.Files["uploaded"];
+			if(file == null) throw new FLocalException("file not uploaded");
+			Upload upload = UploadManager.UploadFile(file.InputStream, System.IO.Path.GetFileName(file.FileName), DateTime.Now, context.session.account.user, null);
+			return new XElement[] {
+				new XElement("uploadedId", upload.id)
+			};
+		}
+
+	}
+}

@@ -37,9 +37,9 @@ namespace FLocal.Common {
 			"png",
 		};
 
-		public static void UploadFile(Stream fileStream, string _extension, DateTime uploadDate, User uploader, int? id) {
+		public static Upload UploadFile(Stream fileStream, string filename, DateTime uploadDate, User uploader, int? id) {
 			
-			string extension = _extension.ToLower();
+			string extension = filename.Split('.').Last().ToLower();
 
 			if(!allowedExtensions.Contains(extension)) throw new FLocalException("Unsupported extension");
 			if(fileStream.Length > MAX_UPLOAD_FILESIZE) throw new FLocalException("File is too big");
@@ -55,6 +55,9 @@ namespace FLocal.Common {
 				ComparisonType.EQUAL,
 				file_md5
 			);
+
+			int? uploadId = null;
+
 			try {
 				if(Config.instance.mainConnection.GetCountByConditions(Upload.TableSpec.instance, condition, new JoinSpec[0]) > 0) {
 					throw new _AlreadyUploadedException();
@@ -93,7 +96,8 @@ namespace FLocal.Common {
 					row[Upload.TableSpec.FIELD_UPLOADDATE] = uploadDate.ToUTCString();
 					row[Upload.TableSpec.FIELD_USERID] = uploader.id.ToString();
 					row[Upload.TableSpec.FIELD_SIZE] = data.Length.ToString();
-					Config.instance.mainConnection.insert(transaction, Upload.TableSpec.instance, row);
+					row[Upload.TableSpec.FIELD_FILENAME] = filename;
+					uploadId = int.Parse(Config.instance.mainConnection.insert(transaction, Upload.TableSpec.instance, row));
 				});
 			} catch(_AlreadyUploadedException) {
 				throw new AlreadyUploadedException(
@@ -107,6 +111,7 @@ namespace FLocal.Common {
 					)
 				);
 			}
+			return Upload.LoadById(uploadId.Value);
 		}
 
 	}

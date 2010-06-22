@@ -38,6 +38,13 @@
 								<xsl:text> | </xsl:text>
 								<a target="_top">Поиск</a>
 								<xsl:text> | </xsl:text>
+								<a target="_top">
+									<xsl:if test="session/sessionKey">
+										<xsl:attribute name="href">/Upload/List/</xsl:attribute>
+									</xsl:if>
+									<xsl:text>Аплоад</xsl:text>
+								</a>
+								<xsl:text> | </xsl:text>
 								<a target="_top">My Home</a>
 								<xsl:text> | </xsl:text>
 								<a target="_top">

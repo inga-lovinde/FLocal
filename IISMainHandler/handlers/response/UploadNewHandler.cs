@@ -10,17 +10,16 @@ using FLocal.Core.DB;
 using FLocal.Core.DB.conditions;
 
 namespace FLocal.IISHandler.handlers.response {
-	class UploadHandler : AbstractGetHandler {
+	class UploadNewHandler : AbstractGetHandler {
 
 		protected override string templateName {
 			get {
-				return null;
+				return "UploadNew.xslt";
 			}
 		}
 
 		protected override System.Xml.Linq.XElement[] getSpecificData(WebContext context) {
-			Upload upload = Upload.LoadById(int.Parse(context.requestParts[2]));
-			throw new RedirectException(Config.instance.UploaderUrl + "Data/" + upload.hash + "." + upload.extension);
+			return new XElement[0];
 		}
 
 	}

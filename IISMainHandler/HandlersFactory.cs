@@ -40,8 +40,20 @@ namespace FLocal.IISHandler {
 					return new handlers.response.UserListHandler();
 				case "user":
 					return new handlers.response.UserInfoHandler();
-				case "uploads":
-					return new handlers.response.UploadHandler();
+				case "upload":
+					if(context.requestParts.Length < 2) {
+						return new handlers.WrongUrlHandler();
+					}
+					switch(context.requestParts[1].ToLower()) {
+						case "item":
+							return new handlers.response.UploadHandler();
+						case "new":
+							return new handlers.response.UploadNewHandler();
+						case "list":
+							return new handlers.response.UploadListHandler();
+						default:
+							return new handlers.WrongUrlHandler();
+					}
 				case "static":
 					return new handlers.StaticHandler(context.requestParts);
 				case "do":

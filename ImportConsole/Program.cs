@@ -105,7 +105,7 @@ namespace FLocal.ImportConsole {
 							try {
 								UploadManager.UploadFile(
 									info.OpenRead(),
-									parts[1],
+									info.Name,
 									info.LastWriteTime,
 									uploader,
 									id

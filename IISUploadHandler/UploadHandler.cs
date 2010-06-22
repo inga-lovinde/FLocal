@@ -72,6 +72,10 @@ namespace FLocal.IISUploadHandler {
 			if(mime == null) throw new FLocalException("unknown extension '" + fileParts[1] + "'");
 			context.Response.ContentType = mime;
 			
+			context.Response.Cache.SetExpires(DateTime.Now.AddDays(10));
+			context.Response.Cache.SetLastModified(DateTime.Now.AddYears(-1));
+			context.Response.Cache.SetCacheability(HttpCacheability.Public);
+
 			context.Response.TransmitFile(getFilePath(fileParts[0], fileParts[1]));
 		}
 

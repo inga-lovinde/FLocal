@@ -16,6 +16,7 @@ namespace FLocal.Common.dataobjects {
 			public const string FIELD_HASH = "MD5";
 			public const string FIELD_EXTENSION = "Extension";
 			public const string FIELD_SIZE = "Size";
+			public const string FIELD_FILENAME = "Filename";
 			public const string FIELD_UPLOADDATE = "UploadDate";
 			public const string FIELD_USERID = "UserId";
 			public static readonly TableSpec instance = new TableSpec();
@@ -50,6 +51,14 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
+		private string _filename;
+		public string filename {
+			get {
+				this.LoadIfNotLoaded();
+				return this._filename;
+			}
+		}
+
 		private DateTime _uploadDate;
 		public DateTime uploadDate {
 			get {
@@ -75,8 +84,20 @@ namespace FLocal.Common.dataobjects {
 			this._hash = data[TableSpec.FIELD_HASH];
 			this._extension = data[TableSpec.FIELD_EXTENSION];
 			this._size = int.Parse(data[TableSpec.FIELD_SIZE]);
+			this._filename = data[TableSpec.FIELD_FILENAME];
 			this._uploadDate = Util.ParseDateTimeFromTimestamp(data[TableSpec.FIELD_UPLOADDATE]).Value;
 			this._userId = Util.ParseInt(data[TableSpec.FIELD_USERID]);
+		}
+
+		public XElement exportToXml(UserContext context) {
+			return new XElement("upload",
+				new XElement("id", this.id),
+				new XElement("extension", this.extension),
+				new XElement("size", this.size),
+				new XElement("filename", this.filename),
+				new XElement("uploadDate", this.uploadDate.ToXml()),
+				new XElement("uploader", this.user.exportToXmlForViewing(context))
+			);
 		}
 
 	}

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="Windows-1251"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml">
 
+	<xsl:import href="UserInfoBar.xslt"/>
 	<xsl:template match="post">
 		<tr>
 			<td>
@@ -8,54 +9,7 @@
 					<tr>
 						<td width="120" valign="top" class="darktable" rowspan="2">
 							<a><xsl:attribute name="name">Post<xsl:value-of select="id"/></xsl:attribute></a>
-							<table border="0" cellpadding="0" cellspacing="0">
-								<tr>
-									<td>
-										<a>
-											<xsl:attribute name="href">/User/<xsl:value-of select="poster/user/id"/>/</xsl:attribute>
-											<xsl:value-of select="poster/user/name"/>
-										</a>
-									</td>
-								</tr>
-								<tr>
-									<td class="small">
-										<b><xsl:value-of select="poster/user/title"/></b>
-									</td>
-								</tr>
-								<tr>
-									<td class="small">
-										<i></i> 
-									</td>
-								</tr>
-								<tr>
-									<td class="small">
-										<i><font color="red"></font></i>
-									</td>
-								</tr>
-								<tr>
-									<td class="small">
-										<img src="/user/7901.jpg" alt="" width="80" height="80" />
-									</td>
-								</tr>
-								<tr>
-									<td class="small">
-										<xsl:text>Рег.: </xsl:text>
-										<xsl:apply-templates select="poster/user/regDate/date" mode="date"/>
-									</td>
-								</tr>
-								<tr>
-									<td class="small">
-										<xsl:text>Сообщений: </xsl:text>
-										<xsl:value-of select="poster/user/totalPosts"/>
-									</td>
-								</tr>
-								<tr>
-									<td class="small">
-										<xsl:text>Из: </xsl:text>
-										<xsl:value-of select="poster/user/location"/>
-									</td>
-								</tr>
-							</table>
+							<xsl:apply-templates select="poster/user" mode="userInfoBar"/>
 						</td>
 						<td class="subjecttable">
 							<table width="100%" border="0" cellpadding="0" cellspacing="0">

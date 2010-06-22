@@ -36,7 +36,7 @@ namespace FLocal.IISHandler.handlers.response {
 				default:
 					throw new FLocalException("wrong url");
 			}
-			throw new RedirectException("/Uploads/" + fileNum + "/");
+			throw new RedirectException("/Upload/Item/" + fileNum + "/");
 		}
 
 	}
