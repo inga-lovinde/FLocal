@@ -67,8 +67,8 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
-		private int? _userId;
-		public int? userId {
+		private int _userId;
+		public int userId {
 			get {
 				this.LoadIfNotLoaded();
 				return this._userId;
@@ -76,7 +76,7 @@ namespace FLocal.Common.dataobjects {
 		}
 		public User user {
 			get {
-				return User.LoadById(this.userId.Value);
+				return User.LoadById(this.userId);
 			}
 		}
 
@@ -86,7 +86,7 @@ namespace FLocal.Common.dataobjects {
 			this._size = int.Parse(data[TableSpec.FIELD_SIZE]);
 			this._filename = data[TableSpec.FIELD_FILENAME];
 			this._uploadDate = Util.ParseDateTimeFromTimestamp(data[TableSpec.FIELD_UPLOADDATE]).Value;
-			this._userId = Util.ParseInt(data[TableSpec.FIELD_USERID]);
+			this._userId = int.Parse(data[TableSpec.FIELD_USERID]);
 		}
 
 		public XElement exportToXml(UserContext context) {

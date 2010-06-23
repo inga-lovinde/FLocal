@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Net;
 using System.Web;
+using System.IO;
 
 namespace FLocal.Importer {
 	public class ShallerGateway {
@@ -25,6 +27,8 @@ namespace FLocal.Importer {
 			return regexInfoCache[caption];
 		}
 
+		private static Regex avatarRegex = new Regex("<img\\s+src=\"/user/(\\d+\\.\\w+)\"\\s+alt=\"Picture\"\\s+width=\"\\d+\"\\s+height=\"\\d+\"\\s*/>", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Multiline);
+
 		private static Dictionary<string, string> userImportStructure {
 			get {
 				return new Dictionary<string,string>() {
@@ -39,10 +43,12 @@ namespace FLocal.Importer {
 
 		public static Dictionary<string, string> getUserInfo(string userName) {
 			string content = getUserInfoAsString(userName);
-			return userImportStructure.ToDictionary<KeyValuePair<string, string>, string, string>(
+			Dictionary<string, string> result = userImportStructure.ToDictionary<KeyValuePair<string, string>, string, string>(
 				kvp => kvp.Key,
 				kvp => HttpUtility.HtmlDecode(getInfoRegexByCaption(kvp.Value).Match(content).Groups[1].Value).Trim()
 			);
+			result["avatar"] = avatarRegex.Match(content).Groups[1].Value;
+			return result;
 		}
 
 		public static IEnumerable<string> getUserNames(int pageNum) {
@@ -54,6 +60,22 @@ namespace FLocal.Importer {
 				result.Add(HttpUtility.UrlDecode(match.Groups[1].Value, ShallerConnector.encoding).Trim());
 			}
 			return result;
+		}
+
+		private static FileInfo getFileInfo(string path, int attempt) {
+			try {
+				return ShallerConnector.getPageInfo(path, new Dictionary<string,string>(), new CookieContainer());
+			} catch(Exception) {
+				if(attempt > 3) {
+					throw;
+				} else {
+					return getFileInfo(path, attempt + 1);
+				}
+			}
+		}
+
+		public static FileInfo getFileInfo(string path) {
+			return getFileInfo(path, 1);
 		}
 
 	}

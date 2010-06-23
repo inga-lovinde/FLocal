@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using FLocal.Core;
 using FLocal.Importer;
+using FLocal.Common;
 using FLocal.Common.dataobjects;
 using FLocal.Common.actions;
 
@@ -15,11 +16,12 @@ namespace FLocal.ImportConsole {
 			for(int i=1; i<800; i++) {
 				Console.Write("[" + i + "]");
 				foreach(string userName in ShallerGateway.getUserNames(i)) {
+					Dictionary<string, string> userData = ShallerGateway.getUserInfo(userName);
+					User user;
 					try {
-						User.LoadByName(userName);
+						user = User.LoadByName(userName);
 						Console.Write("-");
 					} catch(NotFoundInDBException) {
-						Dictionary<string, string> userData = ShallerGateway.getUserInfo(userName);
 						AbstractChange addUser = new InsertChange(
 							User.TableSpec.instance,
 							new Dictionary<string, AbstractFieldValue>() {
@@ -44,8 +46,37 @@ namespace FLocal.ImportConsole {
 							}
 						);
 						ChangeSetUtil.ApplyChanges(addUser, addAccount);
+						user = User.LoadById(addUser.getId().Value);
 						Console.Write(".");
 					}
+
+					if(!user.avatarId.HasValue && userData["avatar"] != null && userData["avatar"] != "") {
+						try {
+							Upload avatar;
+							string[] nameParts = userData["avatar"].Split('.');
+							if(nameParts.Length != 2) throw new FLocalException("wrong avatar filename '" + userData["avatar"] + "'");
+							int oldAvatarId = int.Parse(nameParts[0]);
+							FileInfo avatarInfo = ShallerGateway.getFileInfo("user/" + userData["avatar"]);
+							try {
+								avatar = UploadManager.UploadFile(avatarInfo.dataStream, avatarInfo.fileName, avatarInfo.lastModified, user, 900000 + oldAvatarId);
+							} catch(UploadManager.AlreadyUploadedException e) {
+								avatar = Upload.LoadById(e.uploadId);
+							}
+							ChangeSetUtil.ApplyChanges(
+								new UpdateChange(
+									User.TableSpec.instance,
+									new Dictionary<string,AbstractFieldValue> {
+										{ User.TableSpec.FIELD_AVATARID, new ScalarFieldValue(avatar.id.ToString()) }
+									},
+									user.id
+								)
+							);
+							Console.Write("a");
+						} catch(Exception e) {
+							Console.Write("!{" + user.id + "}{" + e.Message + "}!");
+						}
+					}
+
 				}
 			}
 		}

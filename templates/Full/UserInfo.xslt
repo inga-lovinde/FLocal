@@ -30,7 +30,16 @@
 											<xsl:text>Not implemented</xsl:text>
 										</td>
 										<td align="right" valign="top" rowspan="11">
-											<img src="/user/14291.png" alt="Picture" width="80" height="80" />
+											<img alt="Picture" width="80" height="80">
+												<xsl:choose>
+													<xsl:when test="user/avatar">
+														<xsl:attribute name="src">/Upload/Item/<xsl:value-of select="user/avatar"/>/</xsl:attribute>
+													</xsl:when>
+													<xsl:otherwise>
+														<xsl:attribute name="src">/static/images/noavatar.gif</xsl:attribute>
+													</xsl:otherwise>
+												</xsl:choose>
+											</img>
 										</td>
 									</tr>
 									<tr>

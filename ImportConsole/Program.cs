@@ -22,7 +22,12 @@ namespace FLocal.ImportConsole {
 
 		[Action]
 		public static void ImportUsers() {
-			UsersImporter.ImportUsers();
+			try {
+				UsersImporter.ImportUsers();
+			} catch(Exception e) {
+				Console.WriteLine(e.GetType().FullName + ": " + e.Message);
+				Console.WriteLine(e.StackTrace);
+			}
 		}
 
 		[Action]

@@ -26,11 +26,15 @@
 					<i><font color="red"></font></i>
 				</td>
 			</tr>
-			<tr>
-				<td class="small">
-					<img src="/user/7901.jpg" alt="" width="80" height="80" />
-				</td>
-			</tr>
+			<xsl:if test="avatar">
+				<tr>
+					<td class="small">
+						<img alt="" width="80" height="80">
+							<xsl:attribute name="src">/Upload/Item/<xsl:value-of select="avatar"/>/</xsl:attribute>
+						</img>
+					</td>
+				</tr>
+			</xsl:if>
 			<tr>
 				<td class="small">
 					<xsl:text>Πεγ.: </xsl:text>

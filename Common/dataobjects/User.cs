@@ -22,6 +22,7 @@ namespace FLocal.Common.dataobjects {
 			public const string FIELD_USERGROUPID = "UserGroupId";
 			public const string FIELD_SHOWPOSTSTOUSERS = "ShowPostsToUsers";
 			public const string FIELD_BIOGRAPHY = "Biography";
+			public const string FIELD_AVATARID = "AvatarId";
 			public static readonly TableSpec instance = new TableSpec();
 			public string name { get { return TABLE; } }
 			public string idName { get { return FIELD_ID; } }
@@ -102,6 +103,19 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
+		private int? _avatarId;
+		public int? avatarId {
+			get {
+				this.LoadIfNotLoaded();
+				return this._avatarId;
+			}
+		}
+		public Upload avatar {
+			get {
+				return Upload.LoadById(this.avatarId.Value);
+			}
+		}
+
 		private static Dictionary<string, int> id2user = new Dictionary<string,int>();
 		public static User LoadByName(string name) {
 			if(!id2user.ContainsKey(name)) {
@@ -140,10 +154,11 @@ namespace FLocal.Common.dataobjects {
 			this._userGroupId = int.Parse(data[TableSpec.FIELD_USERGROUPID]);
 			this._showPostsToUsers = data[TableSpec.FIELD_SHOWPOSTSTOUSERS];
 			this._biography = data[TableSpec.FIELD_BIOGRAPHY];
+			this._avatarId = Util.ParseInt(data[TableSpec.FIELD_AVATARID]);
 		}
 
 		public XElement exportToXmlForViewing(UserContext context) {
-			return new XElement("user",
+			XElement result = new XElement("user",
 				new XElement("id", this.id),
 				new XElement("regDate", this.regDate.ToXml()),
 				new XElement("totalPosts", this.totalPosts),
@@ -154,6 +169,10 @@ namespace FLocal.Common.dataobjects {
 				new XElement("userGroupId", this.userGroupId),
 				new XElement("showPostsToUsers", this.showPostsToUsers)
 			);
+			if(this.avatarId.HasValue) {
+				result.Add(new XElement("avatar", this.avatarId));
+			}
+			return result;
 		}
 
 		public static IEnumerable<User> getUsers(Diapasone diapasone, UserContext context) {
