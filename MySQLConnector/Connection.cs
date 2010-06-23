@@ -82,7 +82,7 @@ namespace FLocal.MySQLConnector {
 			}
 		}
 
-		public List<string> LoadIdsByConditions(ITableSpec table, FLocal.Core.DB.conditions.AbstractCondition conditions, Diapasone diapasone, JoinSpec[] joins, SortSpec[] sorts) {
+		public List<string> LoadIdsByConditions(ITableSpec table, FLocal.Core.DB.conditions.AbstractCondition conditions, Diapasone diapasone, JoinSpec[] joins, SortSpec[] sorts, bool allowHugeLists) {
 			lock(this) {
 				using(DbCommand command = this.connection.CreateCommand()) {
 
@@ -132,6 +132,9 @@ namespace FLocal.MySQLConnector {
 						return new List<string>();
 					} else {
 						diapasone.total = count;
+						if(diapasone.total > 1000 && diapasone.count < 0 && !allowHugeLists) {
+							throw new CriticalException("huge list");
+						}
 						string queryLimits = "";
 						if(diapasone.count >= 0) {
 							queryLimits = "LIMIT " + diapasone.count + " OFFSET " + diapasone.start;

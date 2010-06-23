@@ -8,7 +8,7 @@ namespace FLocal.Core.DB {
 
 		List<Dictionary<string, string>> LoadByIds(ITableSpec table, List<string> ids);
 
-		List<string> LoadIdsByConditions(ITableSpec table, conditions.AbstractCondition conditions, Diapasone diapasone, JoinSpec[] joins, SortSpec[] sorts);
+		List<string> LoadIdsByConditions(ITableSpec table, conditions.AbstractCondition conditions, Diapasone diapasone, JoinSpec[] joins, SortSpec[] sorts, bool allowHugeLists);
 
 		long GetCountByConditions(ITableSpec table, conditions.AbstractCondition conditions, JoinSpec[] joins);
 
@@ -29,6 +29,10 @@ namespace FLocal.Core.DB {
 	}
 
 	public static class IDBConnectionExtensions {
+
+		public static List<string> LoadIdsByConditions(this IDBConnection connection, ITableSpec table, conditions.AbstractCondition conditions, Diapasone diapasone, JoinSpec[] joins, SortSpec[] sorts) {
+			return connection.LoadIdsByConditions(table, conditions, diapasone, joins, sorts, false);
+		}
 
 		public static List<string> LoadIdsByConditions(this IDBConnection connection, ITableSpec table, conditions.AbstractCondition conditions, Diapasone diapasone, params JoinSpec[] joins) {
 			return connection.LoadIdsByConditions(table, conditions, diapasone, joins, new SortSpec[] { new SortSpec(table.getIdSpec(), true) });
