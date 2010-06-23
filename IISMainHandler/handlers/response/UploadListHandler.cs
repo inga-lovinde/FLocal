@@ -24,12 +24,15 @@ namespace FLocal.IISHandler.handlers.response {
 			List<Upload> uploads = Upload.LoadByIds(
 				from stringId in Config.instance.mainConnection.LoadIdsByConditions(
 					Upload.TableSpec.instance,
-					new MultiValueCondition(
-						Upload.TableSpec.instance.getColumnSpec(Upload.TableSpec.FIELD_EXTENSION),
-						new string[] { "jpg", "gif", "png" }
-					),
+					new EmptyCondition(),
 					pageOuter,
-					new JoinSpec[0]
+					new JoinSpec[0],
+					new SortSpec[] {
+						new SortSpec(
+							Upload.TableSpec.instance.getColumnSpec(Upload.TableSpec.FIELD_UPLOADDATE),
+							true
+						)
+					}
 				) select int.Parse(stringId)
 			);
 			return new XElement[] {
