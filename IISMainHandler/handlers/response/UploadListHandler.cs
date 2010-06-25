@@ -31,7 +31,11 @@ namespace FLocal.IISHandler.handlers.response {
 						new SortSpec(
 							Upload.TableSpec.instance.getColumnSpec(Upload.TableSpec.FIELD_UPLOADDATE),
 							true
-						)
+						),
+						new SortSpec(
+							Upload.TableSpec.instance.getIdSpec(),
+							true
+						),
 					}
 				) select int.Parse(stringId)
 			);
