@@ -20,6 +20,8 @@ namespace FLocal.Core.DB {
 
 		List<Dictionary<string, string>> LoadByIds(Transaction transaction, ITableSpec table, List<string> ids);
 
+		List<string> LoadIdsByConditions(Transaction transaction, ITableSpec table, conditions.AbstractCondition conditions, Diapasone diapasone, JoinSpec[] joins, SortSpec[] sorts, bool allowHugeLists);
+
 		void update(Transaction transaction, ITableSpec table, string id, Dictionary<string, string> data);
 
 		string insert(Transaction transaction, ITableSpec table, Dictionary<string, string> data);

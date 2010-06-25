@@ -9,9 +9,12 @@ namespace FLocal.Common.actions {
 
 		private int? id;
 
+		private Dictionary<string, AbstractFieldValue> data;
+
 		public InsertChange(ISqlObjectTableSpec tableSpec, Dictionary<string, AbstractFieldValue> data)
-			: base(tableSpec, data) {
+			: base(tableSpec, from kvp in data select kvp.Value) {
 			this.id = null;
+			this.data = data;
 		}
 	
 		public override int? getId() {

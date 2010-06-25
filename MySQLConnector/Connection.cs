@@ -32,46 +32,48 @@ namespace FLocal.MySQLConnector {
 		}
 
 		private List<Dictionary<string, string>> _LoadByIds(DbCommand command, ITableSpec table, List<string> ids, bool forUpdate) {
-			command.CommandType = System.Data.CommandType.Text;
+			lock(this) {
+				command.CommandType = System.Data.CommandType.Text;
 
-			ParamsHolder paramsHolder = new ParamsHolder();
-			List<string> placeholder = new List<string>();
-			foreach(string id in ids) {
-				placeholder.Add(this.traits.markParam(paramsHolder.Add(id)));
-			}
+				ParamsHolder paramsHolder = new ParamsHolder();
+				List<string> placeholder = new List<string>();
+				foreach(string id in ids) {
+					placeholder.Add(this.traits.markParam(paramsHolder.Add(id)));
+				}
 
-			command.CommandText = "SELECT * FROM " + table.compile(this.traits) + " WHERE " + table.getIdSpec().compile(this.traits) + " IN (" + string.Join(", ", placeholder.ToArray()) + ")" + (forUpdate ? " FOR UPDATE" : "");
-			//command.Prepare();
-			foreach(KeyValuePair<string, string> kvp in paramsHolder.data) {
-				command.AddParameter(kvp.Key, kvp.Value);
-			}
+				command.CommandText = "SELECT * FROM " + table.compile(this.traits) + " WHERE " + table.getIdSpec().compile(this.traits) + " IN (" + string.Join(", ", placeholder.ToArray()) + ")" + (forUpdate ? " FOR UPDATE" : "");
+				//command.Prepare();
+				foreach(KeyValuePair<string, string> kvp in paramsHolder.data) {
+					command.AddParameter(kvp.Key, kvp.Value);
+				}
 
-			Dictionary<string, Dictionary<string, string>> rawResult = new Dictionary<string, Dictionary<string, string>>();
-			using(DbDataReader reader = command.ExecuteReader()) {
-				while(reader.Read()) {
-					Dictionary<string, string> row = new Dictionary<string,string>();
-					for(int i=0; i<reader.FieldCount; i++) {
-//								throw new CriticalException("Name: " + reader.GetName(i));
-						object value = reader.GetValue(i);
-						string sValue;
-						if(value is DateTime) {
-							sValue = ((DateTime)value).Ticks.ToString();
-						} else {
-							sValue = value.ToString();
+				Dictionary<string, Dictionary<string, string>> rawResult = new Dictionary<string, Dictionary<string, string>>();
+				using(DbDataReader reader = command.ExecuteReader()) {
+					while(reader.Read()) {
+						Dictionary<string, string> row = new Dictionary<string,string>();
+						for(int i=0; i<reader.FieldCount; i++) {
+	//								throw new CriticalException("Name: " + reader.GetName(i));
+							object value = reader.GetValue(i);
+							string sValue;
+							if(value is DateTime) {
+								sValue = ((DateTime)value).Ticks.ToString();
+							} else {
+								sValue = value.ToString();
+							}
+							row.Add(reader.GetName(i), sValue);
 						}
-						row.Add(reader.GetName(i), sValue);
+						rawResult.Add(row[table.idName], row);
 					}
-					rawResult.Add(row[table.idName], row);
 				}
-			}
 
-			List<Dictionary<string, string>> result = new List<Dictionary<string,string>>();
-			foreach(string id in ids) {
-				if(rawResult.ContainsKey(id)) {
-					result.Add(rawResult[id]);
+				List<Dictionary<string, string>> result = new List<Dictionary<string,string>>();
+				foreach(string id in ids) {
+					if(rawResult.ContainsKey(id)) {
+						result.Add(rawResult[id]);
+					}
 				}
+				return result;
 			}
-			return result;
 		}
 
 		public List<Dictionary<string, string>> LoadByIds(ITableSpec table, List<string> ids) {
@@ -82,73 +84,76 @@ namespace FLocal.MySQLConnector {
 			}
 		}
 
+		private List<string> _LoadIdsByConditions(DbCommand command, ITableSpec table, FLocal.Core.DB.conditions.AbstractCondition conditions, Diapasone diapasone, JoinSpec[] joins, SortSpec[] sorts, bool allowHugeLists) {
+			command.CommandType = System.Data.CommandType.Text;
+
+			var conditionsCompiled = ConditionCompiler.Compile(conditions, this.traits);
+			string queryConditions = "";
+			if(conditionsCompiled.Key != "") queryConditions = "WHERE " + conditionsCompiled.Key;
+			ParamsHolder paramsHolder = conditionsCompiled.Value;
+
+			string queryJoins = "";
+			{
+				if(joins.Length > 0) {
+					throw new NotImplementedException();
+				}
+			}
+
+			string querySorts = "";
+			if(sorts.Length > 0) {
+				List<string> sortParts = new List<string>();
+				foreach(SortSpec sortSpec in sorts) {
+					if(sortSpec.ascending) {
+						sortParts.Add(sortSpec.column.compile(this.traits) + " ASC");
+					} else {
+						sortParts.Add(sortSpec.column.compile(this.traits) + " DESC");
+					}
+				}
+				querySorts = "ORDER BY " + string.Join(", ", sortParts.ToArray());
+			}
+
+			string queryMain = "FROM " + table.compile(this.traits) + " " + queryJoins + " " + queryConditions;
+
+			foreach(KeyValuePair<string, string> kvp in paramsHolder.data) {
+				command.AddParameter(kvp.Key, kvp.Value);
+			}
+
+			command.CommandText = "SELECT COUNT(*) " + queryMain;
+			object rawCount;
+			//try {
+				rawCount = command.ExecuteScalar();
+			//} catch(Npgsql.NpgsqlException e) {
+				//throw new FLocalException("Error while trying to execute " + command.CommandText + ": " + e.Message);
+			//}
+			long count = (long)rawCount;
+			if(count < 1) {
+				diapasone.total = 0;
+				return new List<string>();
+			} else {
+				diapasone.total = count;
+				if(diapasone.total > 1000 && diapasone.count < 0 && !allowHugeLists) {
+					throw new CriticalException("huge list");
+				}
+				string queryLimits = "";
+				if(diapasone.count >= 0) {
+					queryLimits = "LIMIT " + diapasone.count + " OFFSET " + diapasone.start;
+				}
+				command.CommandText = "SELECT " + table.compile(this.traits) + ".* " + queryMain + " " + querySorts + " " + queryLimits;
+
+				List<string> result = new List<string>();
+				using(DbDataReader reader = command.ExecuteReader()) {
+					while(reader.Read()) {
+						result.Add(reader.GetValue(0).ToString());
+					}
+				}
+				return result;
+			}
+		}
+
 		public List<string> LoadIdsByConditions(ITableSpec table, FLocal.Core.DB.conditions.AbstractCondition conditions, Diapasone diapasone, JoinSpec[] joins, SortSpec[] sorts, bool allowHugeLists) {
 			lock(this) {
 				using(DbCommand command = this.connection.CreateCommand()) {
-
-					command.CommandType = System.Data.CommandType.Text;
-
-					var conditionsCompiled = ConditionCompiler.Compile(conditions, this.traits);
-					string queryConditions = "";
-					if(conditionsCompiled.Key != "") queryConditions = "WHERE " + conditionsCompiled.Key;
-					ParamsHolder paramsHolder = conditionsCompiled.Value;
-
-					string queryJoins = "";
-					{
-						if(joins.Length > 0) {
-							throw new NotImplementedException();
-						}
-					}
-
-					string querySorts = "";
-					if(sorts.Length > 0) {
-						List<string> sortParts = new List<string>();
-						foreach(SortSpec sortSpec in sorts) {
-							if(sortSpec.ascending) {
-								sortParts.Add(sortSpec.column.compile(this.traits) + " ASC");
-							} else {
-								sortParts.Add(sortSpec.column.compile(this.traits) + " DESC");
-							}
-						}
-						querySorts = "ORDER BY " + string.Join(", ", sortParts.ToArray());
-					}
-
-					string queryMain = "FROM " + table.compile(this.traits) + " " + queryJoins + " " + queryConditions;
-
-					foreach(KeyValuePair<string, string> kvp in paramsHolder.data) {
-						command.AddParameter(kvp.Key, kvp.Value);
-					}
-
-					command.CommandText = "SELECT COUNT(*) " + queryMain;
-					object rawCount;
-					//try {
-						rawCount = command.ExecuteScalar();
-					//} catch(Npgsql.NpgsqlException e) {
-						//throw new FLocalException("Error while trying to execute " + command.CommandText + ": " + e.Message);
-					//}
-					long count = (long)rawCount;
-					if(count < 1) {
-						diapasone.total = 0;
-						return new List<string>();
-					} else {
-						diapasone.total = count;
-						if(diapasone.total > 1000 && diapasone.count < 0 && !allowHugeLists) {
-							throw new CriticalException("huge list");
-						}
-						string queryLimits = "";
-						if(diapasone.count >= 0) {
-							queryLimits = "LIMIT " + diapasone.count + " OFFSET " + diapasone.start;
-						}
-						command.CommandText = "SELECT " + table.compile(this.traits) + ".* " + queryMain + " " + querySorts + " " + queryLimits;
-
-						List<string> result = new List<string>();
-						using(DbDataReader reader = command.ExecuteReader()) {
-							while(reader.Read()) {
-								result.Add(reader.GetValue(0).ToString());
-							}
-						}
-						return result;
-					}
+					return this._LoadIdsByConditions(command, table, conditions, diapasone, joins, sorts, allowHugeLists);
 				}
 			}
 		}
@@ -227,6 +232,16 @@ namespace FLocal.MySQLConnector {
 				using(DbCommand command = transaction.sqlconnection.CreateCommand()) {
 					command.Transaction = transaction.sqltransaction;
 					return this._LoadByIds(command, table, ids, true);
+				}
+			}
+		}
+
+		public List<string> LoadIdsByConditions(FLocal.Core.DB.Transaction _transaction, ITableSpec table, FLocal.Core.DB.conditions.AbstractCondition conditions, Diapasone diapasone, JoinSpec[] joins, SortSpec[] sorts, bool allowHugeLists) {
+			Transaction transaction = (Transaction)_transaction;
+			lock(this) {
+				using(DbCommand command = transaction.sqlconnection.CreateCommand()) {
+					command.Transaction = transaction.sqltransaction;
+					return this._LoadIdsByConditions(command, table, conditions, diapasone, joins, sorts, allowHugeLists);
 				}
 			}
 		}

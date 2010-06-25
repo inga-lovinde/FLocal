@@ -142,7 +142,7 @@ namespace FLocal.Common.dataobjects {
 			);
 		}
 
-		public XElement exportToXmlWithoutThread(UserContext context, bool includeParentPost) {
+		public XElement exportToXmlWithoutThread(UserContext context, bool includeParentPost, params XElement[] additional) {
 			XElement result = new XElement("post",
 				new XElement("id", this.id),
 				new XElement("poster", this.poster.exportToXmlForViewing(context)),
@@ -159,6 +159,9 @@ namespace FLocal.Common.dataobjects {
 				if(this.parentPostId.HasValue) {
 					result.Add(new XElement("parentPost", this.parentPost.exportToXmlWithoutThread(context, false)));
 				}
+			}
+			if(additional.Length > 0) {
+				result.Add(additional);
 			}
 			return result;
 		}

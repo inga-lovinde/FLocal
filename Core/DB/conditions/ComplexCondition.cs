@@ -8,9 +8,9 @@ namespace FLocal.Core.DB.conditions {
 
 		public readonly ConditionsJoinType type;
 
-		public readonly List<NotEmptyCondition> innerConditions;
+		public readonly NotEmptyCondition[] innerConditions;
 
-		public ComplexCondition(ConditionsJoinType type, List<NotEmptyCondition> innerConditions) {
+		public ComplexCondition(ConditionsJoinType type, params NotEmptyCondition[] innerConditions) {
 			this.type = type;
 			this.innerConditions = innerConditions;
 		}

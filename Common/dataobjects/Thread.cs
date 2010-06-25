@@ -30,6 +30,18 @@ namespace FLocal.Common.dataobjects {
 			public void refreshSqlObject(int id) { Refresh(id); }
 		}
 
+		public class ReadMarkerTableSpec : ISqlObjectTableSpec {
+			public const string TABLE = "Threads_ReadMarkers";
+			public const string FIELD_ID = "Id";
+			public const string FIELD_THREADID = "ThreadId";
+			public const string FIELD_ACCOUNTID = "AccountId";
+			public const string FIELD_POSTID = "PostId";
+			public static readonly ReadMarkerTableSpec instance = new ReadMarkerTableSpec();
+			public string name { get { return TABLE; } }
+			public string idName { get { return FIELD_ID; } }
+			public void refreshSqlObject(int id) {  }
+		}
+
 		protected override ISqlObjectTableSpec table { get { return TableSpec.instance; } }
 
 		private int _boardId;
@@ -152,7 +164,7 @@ namespace FLocal.Common.dataobjects {
 			);
 		}
 
-		public XElement exportToXml(UserContext context, bool includeFirstPost) {
+		public XElement exportToXml(UserContext context, bool includeFirstPost, params XElement[] additional) {
 			XElement result = new XElement("thread",
 				new XElement("id", this.id),
 				new XElement("firstPostId", this.firstPostId),
@@ -164,12 +176,14 @@ namespace FLocal.Common.dataobjects {
 				new XElement("isLocked", this.isLocked),
 				new XElement("totalPosts", this.totalPosts),
 				new XElement("totalViews", this.totalViews),
-				new XElement("hasNewPosts", this.hasNewPosts()),
 				new XElement("bodyShort", this.firstPost.bodyShort),
 				context.formatTotalPosts(this.totalPosts)
 			);
 			if(includeFirstPost) {
 				result.Add(new XElement("firstPost", this.firstPost.exportToXmlWithoutThread(context, false)));
+			}
+			if(additional.Length > 0) {
+				result.Add(additional);
 			}
 			return result;
 		}
@@ -206,6 +220,131 @@ namespace FLocal.Common.dataobjects {
 						}
 					},
 					this.id
+				)
+			});
+		}
+
+		private Post getLastRead(Account account) {
+			List<string> stringIds = Config.instance.mainConnection.LoadIdsByConditions(
+				ReadMarkerTableSpec.instance,
+				new ComplexCondition(
+					ConditionsJoinType.AND,
+					new ComparisonCondition(
+						ReadMarkerTableSpec.instance.getColumnSpec(ReadMarkerTableSpec.FIELD_THREADID),
+						ComparisonType.EQUAL,
+						this.id.ToString()
+					),
+					new ComparisonCondition(
+						ReadMarkerTableSpec.instance.getColumnSpec(ReadMarkerTableSpec.FIELD_ACCOUNTID),
+						ComparisonType.EQUAL,
+						account.id.ToString()
+					)
+				),
+				Diapasone.unlimited
+			);
+			if(stringIds.Count > 1) {
+				throw new CriticalException("more than one row");
+			}
+			if(stringIds.Count < 1) {
+				return null;
+			}
+			Dictionary<string, string> data = Config.instance.mainConnection.LoadById(ReadMarkerTableSpec.instance, stringIds[0]);
+			if((data[ReadMarkerTableSpec.FIELD_POSTID] == "") || (data[ReadMarkerTableSpec.FIELD_POSTID] == null)) {
+				return null;
+			}
+			return Post.LoadById(int.Parse(data[ReadMarkerTableSpec.FIELD_POSTID]));
+		}
+
+		public int getLastReadId(Session session) {
+			if(session == null) {
+				return 0;
+			}
+			Post post = this.getLastRead(session.account);
+			if(post == null) {
+				return 0;
+			}
+			return post.id;
+		}
+
+		public void markAsRead(Account account, Post minPost, Post maxPost) {
+			ChangeSetUtil.ApplyChanges(new AbstractChange[] {
+				new InsertOrUpdateChange(
+					ReadMarkerTableSpec.instance,
+					new Dictionary<string,AbstractFieldValue> {
+						{
+							ReadMarkerTableSpec.FIELD_THREADID,
+							new ScalarFieldValue(this.id.ToString())
+						},
+						{
+							ReadMarkerTableSpec.FIELD_ACCOUNTID,
+							new ScalarFieldValue(account.id.ToString())
+						},
+						{
+							ReadMarkerTableSpec.FIELD_POSTID,
+							new ScalarFieldValue(
+								(minPost.id < this.firstPostId)
+								?
+								maxPost.id.ToString()
+								:
+								null
+							) },
+					},
+					new Dictionary<string,AbstractFieldValue> {
+						{
+							ReadMarkerTableSpec.FIELD_POSTID,
+							new IncrementFieldValue(
+								s => {
+									if((s == null) || (s == "")) {
+										s = "0"; //workaround
+									}
+									if(maxPost.id < int.Parse(s)) {
+										return (s == "0") ? null : s; //if some newer posts were already read
+									}
+									long count = Config.instance.mainConnection.GetCountByConditions(
+										Post.TableSpec.instance,
+										new ComplexCondition(
+											ConditionsJoinType.AND,
+											new ComparisonCondition(
+												Post.TableSpec.instance.getColumnSpec(Post.TableSpec.FIELD_THREADID),
+												ComparisonType.EQUAL,
+												this.id.ToString()
+											),
+											new ComparisonCondition(
+												Post.TableSpec.instance.getIdSpec(),
+												ComparisonType.GREATERTHAN,
+												s
+											),
+											new ComparisonCondition(
+												Post.TableSpec.instance.getIdSpec(),
+												ComparisonType.LESSTHAN,
+												minPost.id.ToString()
+											)
+										),
+										new JoinSpec[0]
+									);
+									if(count > 0) {
+										return (s == "0") ? null : s; //if there are some unread posts earlier than minPost
+									} else {
+										return maxPost.id.ToString();
+									}
+								}
+							)
+						}
+
+					},
+					new ComplexCondition(
+						ConditionsJoinType.AND,
+						new ComparisonCondition(
+							ReadMarkerTableSpec.instance.getColumnSpec(ReadMarkerTableSpec.FIELD_THREADID),
+							ComparisonType.EQUAL,
+							this.id.ToString()
+						),
+						new ComparisonCondition(
+							ReadMarkerTableSpec.instance.getColumnSpec(ReadMarkerTableSpec.FIELD_ACCOUNTID),
+							ComparisonType.EQUAL,
+							account.id.ToString()
+						)
+					)
 				)
 			});
 		}

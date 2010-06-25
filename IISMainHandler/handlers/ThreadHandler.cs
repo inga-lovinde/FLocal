@@ -32,18 +32,16 @@ namespace FLocal.IISHandler.handlers {
 							Post.TableSpec.instance,
 							new ComplexCondition(
 								ConditionsJoinType.AND,
-								new List<NotEmptyCondition> {
-									new ComparisonCondition(
-										Post.TableSpec.instance.getColumnSpec(Post.TableSpec.FIELD_THREADID),
-										ComparisonType.EQUAL,
-										thread.id.ToString()
-									),
-									new ComparisonCondition(
-										Post.TableSpec.instance.getIdSpec(),
-										ComparisonType.LESSTHAN,
-										int.Parse(context.requestParts[2].PHPSubstring(1)).ToString()
-									),
-								}
+								new ComparisonCondition(
+									Post.TableSpec.instance.getColumnSpec(Post.TableSpec.FIELD_THREADID),
+									ComparisonType.EQUAL,
+									thread.id.ToString()
+								),
+								new ComparisonCondition(
+									Post.TableSpec.instance.getIdSpec(),
+									ComparisonType.LESSTHAN,
+									int.Parse(context.requestParts[2].PHPSubstring(1)).ToString()
+								)
 							),
 							new JoinSpec[0]
 						)
@@ -52,11 +50,22 @@ namespace FLocal.IISHandler.handlers {
 				2
 			);
 			IEnumerable<Post> posts = thread.getPosts(pageOuter, context);
+
+			int lastReadId = thread.getLastReadId(context.session);
+
 			thread.incrementViewsCounter();
+			if((context.session != null) && (posts.Count() > 0)) {
+				thread.markAsRead(
+					context.session.account,
+					(from post in posts orderby post.id ascending select post).First(),
+					(from post in posts orderby post.id descending select post).First()
+				);
+			}
+
 			return new XElement[] {
 				new XElement("currentLocation", thread.exportToXmlSimpleWithParent(context)),
 				new XElement("posts",
-					from post in posts select post.exportToXmlWithoutThread(context, true),
+					from post in posts select post.exportToXmlWithoutThread(context, true, new XElement("isUnread", (post.id > lastReadId).ToPlainString())),
 					pageOuter.exportToXml(2, 5, 2)
 				)
 			};

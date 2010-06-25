@@ -15,7 +15,7 @@
 				<xsl:attribute name="title"><xsl:value-of select="bodyShort"/></xsl:attribute>
 				<img alt="*" hspace="5" style="vertical-align: text-bottom">
 					<xsl:choose>
-						<xsl:when test="hasNewPosts='true'">
+						<xsl:when test="afterLastRead&lt;=lastPostId">
 							<xsl:attribute name="src">/static/images/book-notread.gif</xsl:attribute>
 						</xsl:when>
 						<xsl:otherwise>
@@ -24,7 +24,15 @@
 					</xsl:choose>
 				</img>
 				<a>
-					<xsl:attribute name="href">/Thread/<xsl:value-of select="id"/>/</xsl:attribute>
+					<xsl:attribute name="href">
+						<xsl:text>/Thread/</xsl:text>
+						<xsl:value-of select="id"/>
+						<xsl:text>/</xsl:text>
+						<xsl:if test="afterLastRead&lt;=lastPostId">
+							<xsl:text>p</xsl:text>
+							<xsl:value-of select="afterLastRead"/>
+						</xsl:if>
+					</xsl:attribute>
 					<xsl:if test="isAnnouncement='true'">
 						<img src="/static/images/sticky.gif" class="separate" width="16" height="16" alt="" border="0" style="vertical-align: text-bottom;" />
 					</xsl:if>

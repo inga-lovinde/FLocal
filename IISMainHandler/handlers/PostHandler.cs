@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Xml.Linq;
+using FLocal.Core;
 using FLocal.Common;
 using FLocal.Common.dataobjects;
 
@@ -19,10 +20,17 @@ namespace FLocal.IISHandler.handlers {
 
 		override protected XElement[] getSpecificData(WebContext context) {
 			Post post = Post.LoadById(int.Parse(context.requestParts[1]));
+
+			int lastReadId = post.thread.getLastReadId(context.session);
+
 			post.thread.incrementViewsCounter();
+			if(context.session != null) {
+				post.thread.markAsRead(context.session.account, post, post);
+			}
+
 			return new XElement[] {
 				new XElement("currentLocation", post.exportToXmlSimpleWithParent(context)),
-				new XElement("posts", post.exportToXmlWithoutThread(context, true))
+				new XElement("posts", post.exportToXmlWithoutThread(context, true, new XElement("isUnread", (post.id > lastReadId).ToPlainString())))
 			};
 		}
 

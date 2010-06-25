@@ -17,10 +17,21 @@
 									<td align="left" width="65%" valign="top">
 										<a target="_blank" class="separate">
 											<xsl:attribute name="href">/Post/<xsl:value-of select="id"/>/</xsl:attribute>
-											<img border="0" src="/static/images/book-notread.gif"  alt="" style="vertical-align: text-bottom" />
+											<img border="0" alt="" style="vertical-align: text-bottom">
+												<xsl:choose>
+													<xsl:when test="isUnread='true'">
+														<xsl:attribute name="src">/static/images/book-notread.gif</xsl:attribute>
+													</xsl:when>
+													<xsl:otherwise>
+														<xsl:attribute name="src">/static/images/book-read.gif</xsl:attribute>
+													</xsl:otherwise>
+												</xsl:choose>
+											</img>
 										</a>
 										<b class="separate"><xsl:value-of select="title"/></b>
-										<img alt="new" src="/static/images/new.gif" />
+										<xsl:if test="isUnread='true'">
+											<img alt="new" src="/static/images/new.gif" />
+										</xsl:if>
 										<xsl:if test="parentPost/post">
 											<font class="small separate">
 												<xsl:text>[</xsl:text>

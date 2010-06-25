@@ -19,12 +19,13 @@ namespace FLocal.Common.actions {
 				return Cache<IEnumerable<string>>.instance.get(
 					tablesLockOrder_locker,
 					() => new List<string>() {
-						"Accounts",
-						"Users",
-						"Boards",
-						"Threads",
-						"Posts",
-						"Sessions",
+						dataobjects.Account.TableSpec.TABLE,
+						dataobjects.User.TableSpec.TABLE,
+						dataobjects.Board.TableSpec.TABLE,
+						dataobjects.Thread.TableSpec.TABLE,
+						dataobjects.Post.TableSpec.TABLE,
+						dataobjects.Thread.ReadMarkerTableSpec.TABLE,
+						dataobjects.Session.TableSpec.TABLE,
 					}
 				);
 			}
@@ -94,7 +95,9 @@ namespace FLocal.Common.actions {
 			//if(!this.isProcessed) throw new CriticalException("ChangeSet is not processed yet");
 			foreach(KeyValuePair<string, HashSet<AbstractChange>> kvp in this.changesByTable) {
 				foreach(AbstractChange change in kvp.Value) {
-					change.tableSpec.refreshSqlObject(change.getId().Value);
+					if(change.getId().HasValue) {
+						change.tableSpec.refreshSqlObject(change.getId().Value);
+					} //otherwise we're disposing because of sql error or something, so we should show real cause of problem, not "id is null"
 				}
 			}
 		}

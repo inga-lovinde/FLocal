@@ -26,12 +26,9 @@ namespace FLocal.Common.actions {
 
 		public readonly ISqlObjectTableSpec tableSpec;
 
-		protected readonly Dictionary<string, AbstractFieldValue> data;
-
-		protected AbstractChange(ISqlObjectTableSpec tableSpec, Dictionary<string, AbstractFieldValue> data) {
+		protected AbstractChange(ISqlObjectTableSpec tableSpec, IEnumerable<AbstractFieldValue> data) {
 			this.tableSpec = tableSpec;
-			this.data = data;
-			this.references = from kvp in data where kvp.Value is ReferenceFieldValue select ((ReferenceFieldValue)kvp.Value).referenced;
+			this.references = from val in data where val is ReferenceFieldValue select ((ReferenceFieldValue)val).referenced;
 			this.isApplied = false;
 		}
 

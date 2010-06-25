@@ -26,7 +26,7 @@ namespace FLocal.IISHandler.handlers {
 				new XElement("currentLocation", board.exportToXmlSimpleWithParent(context)),
 				new XElement("boards", from subBoard in board.subBoards select subBoard.exportToXml(context, true)),
 				new XElement("threads", 
-					(from thread in threads select thread.exportToXml(context, false)).addNumbers(),
+					(from thread in threads select thread.exportToXml(context, false, new XElement("afterLastRead", thread.getLastReadId(context.session) + 1))).addNumbers(),
 					pageOuter.exportToXml(1, 5, 1)
 				)
 			};

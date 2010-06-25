@@ -8,10 +8,12 @@ namespace FLocal.Common.actions {
 	public class UpdateChange : AbstractChange {
 
 		private readonly int id;
+		private Dictionary<string, AbstractFieldValue> data;
 
 		public UpdateChange(ISqlObjectTableSpec tableSpec, Dictionary<string, AbstractFieldValue> data, int id)
-			: base(tableSpec, data) {
+			: base(tableSpec, from kvp in data select kvp.Value) {
 			this.id = id;
+			this.data = data;
 		}
 
 		public override int? getId() {
