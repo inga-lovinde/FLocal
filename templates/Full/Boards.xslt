@@ -31,15 +31,20 @@
 											</xsl:otherwise>
 										</xsl:choose>
 										<br />
-										<xsl:text>18983 Зарегистрированных пользователей.</xsl:text>
+										<xsl:value-of select="totalRegistered"/>
+										<xsl:text> Зарегистрированных пользователей.</xsl:text>
 										<br />
-										<xsl:text>Приветствуем нового пользователя, </xsl:text>
+										<!--xsl:text>Приветствуем нового пользователя, </xsl:text>
 										<a href="/showprofile.php?User=_PC&amp;What=ubbthreads">_PC</a>
+										<br /-->
+										<xsl:text>За последние </xsl:text>
+										<xsl:value-of select="activity/threshold"/>
+										<xsl:text> форум посещало </xsl:text>
+										<xsl:value-of select="activity/sessions"/>
+										<xsl:text> зарегистрированных пользователей.</xsl:text>
 										<br />
-										<xsl:text>Сейчас 222 зарегистрированных и 54 анонимных пользователей в онлайне.</xsl:text>
-										<br />
-										<a href="/editdisplay.php?Cat=#offset">Текущее время:</a>
-										<xsl:text> 08.06.2010 14:17, Вторник</xsl:text>
+										<a href="/editdisplay.php?Cat=#offset">Текущее время:</a><xsl:text> </xsl:text>
+										<xsl:apply-templates select="currentDate" mode="dateTime"/>
 									</td>
 									<td width="30%" class="small" valign="top">
 										<b>Просмотр новых сообщений</b>

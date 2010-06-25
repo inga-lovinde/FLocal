@@ -25,6 +25,8 @@ namespace FLocal.Common {
 
 		public readonly string UploaderUrl;
 
+		public readonly TimeSpan ActivityThreshold;
+
 		protected Config(NameValueCollection data) : base(data) {
 			this.InitTime = DateTime.Now.ToLongTimeString();
 			this.mainConnection = new MySQLConnector.Connection(data["ConnectionString"], MySQLConnector.PostgresDBTraits.instance);
@@ -34,6 +36,7 @@ namespace FLocal.Common {
 			this.SaltPasswords = data["SaltPasswords"];
 			this.SaltUploader = data["SaltUploader"];
 			this.UploaderUrl = data["UploaderUrl"];
+			this.ActivityThreshold = TimeSpan.FromMinutes(int.Parse(data["ActivityThreshold"]));
 		}
 
 		public static void Init(NameValueCollection data) {

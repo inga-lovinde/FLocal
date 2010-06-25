@@ -5,6 +5,7 @@ using System.Text;
 using System.Web;
 using FLocal.Core;
 using FLocal.Common.dataobjects;
+using FLocal.Common.actions;
 using System.Xml.Linq;
 
 namespace FLocal.IISHandler {
@@ -69,6 +70,7 @@ namespace FLocal.IISHandler {
 				try {
 					this.session = Session.LoadByKey(sessionCookie.Value);
 					sessionCookie.Expires = DateTime.Now.AddDays(3);
+					this.session.updateLastActivity();
 					this.httpresponse.AppendCookie(sessionCookie);
 				} catch(NotFoundInDBException) {
 					sessionCookie.Value = "";
