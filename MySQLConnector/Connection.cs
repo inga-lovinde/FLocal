@@ -12,7 +12,7 @@ namespace FLocal.MySQLConnector {
 
 		internal readonly IDBTraits traits;
 
-		private DbConnection connection;
+//		private DbConnection connection;
 		private string connectionString;
 
 		private HashSet<Transaction> transactions;
@@ -20,8 +20,9 @@ namespace FLocal.MySQLConnector {
 		public Connection(string connectionString, IDBTraits traits) {
 			this.traits = traits;
 			this.connectionString = connectionString;
-			this.connection = this.traits.createConnection(this.connectionString);
-			this.connection.Open();
+			using(DbConnection connection = this.createConnection()) {
+				//just testing we can open a connection
+			}
 			this.transactions = new HashSet<Transaction>();
 		}
 
@@ -32,53 +33,51 @@ namespace FLocal.MySQLConnector {
 		}
 
 		private List<Dictionary<string, string>> _LoadByIds(DbCommand command, ITableSpec table, List<string> ids, bool forUpdate) {
-			lock(this) {
-				command.CommandType = System.Data.CommandType.Text;
+			command.CommandType = System.Data.CommandType.Text;
 
-				ParamsHolder paramsHolder = new ParamsHolder();
-				List<string> placeholder = new List<string>();
-				foreach(string id in ids) {
-					placeholder.Add(this.traits.markParam(paramsHolder.Add(id)));
-				}
-
-				command.CommandText = "SELECT * FROM " + table.compile(this.traits) + " WHERE " + table.getIdSpec().compile(this.traits) + " IN (" + string.Join(", ", placeholder.ToArray()) + ")" + (forUpdate ? " FOR UPDATE" : "");
-				//command.Prepare();
-				foreach(KeyValuePair<string, string> kvp in paramsHolder.data) {
-					command.AddParameter(kvp.Key, kvp.Value);
-				}
-
-				Dictionary<string, Dictionary<string, string>> rawResult = new Dictionary<string, Dictionary<string, string>>();
-				using(DbDataReader reader = command.ExecuteReader()) {
-					while(reader.Read()) {
-						Dictionary<string, string> row = new Dictionary<string,string>();
-						for(int i=0; i<reader.FieldCount; i++) {
-	//								throw new CriticalException("Name: " + reader.GetName(i));
-							object value = reader.GetValue(i);
-							string sValue;
-							if(value is DateTime) {
-								sValue = ((DateTime)value).Ticks.ToString();
-							} else {
-								sValue = value.ToString();
-							}
-							row.Add(reader.GetName(i), sValue);
-						}
-						rawResult.Add(row[table.idName], row);
-					}
-				}
-
-				List<Dictionary<string, string>> result = new List<Dictionary<string,string>>();
-				foreach(string id in ids) {
-					if(rawResult.ContainsKey(id)) {
-						result.Add(rawResult[id]);
-					}
-				}
-				return result;
+			ParamsHolder paramsHolder = new ParamsHolder();
+			List<string> placeholder = new List<string>();
+			foreach(string id in ids) {
+				placeholder.Add(this.traits.markParam(paramsHolder.Add(id)));
 			}
+
+			command.CommandText = "SELECT * FROM " + table.compile(this.traits) + " WHERE " + table.getIdSpec().compile(this.traits) + " IN (" + string.Join(", ", placeholder.ToArray()) + ")" + (forUpdate ? " FOR UPDATE" : "");
+			//command.Prepare();
+			foreach(KeyValuePair<string, string> kvp in paramsHolder.data) {
+				command.AddParameter(kvp.Key, kvp.Value);
+			}
+
+			Dictionary<string, Dictionary<string, string>> rawResult = new Dictionary<string, Dictionary<string, string>>();
+			using(DbDataReader reader = command.ExecuteReader()) {
+				while(reader.Read()) {
+					Dictionary<string, string> row = new Dictionary<string,string>();
+					for(int i=0; i<reader.FieldCount; i++) {
+//								throw new CriticalException("Name: " + reader.GetName(i));
+						object value = reader.GetValue(i);
+						string sValue;
+						if(value is DateTime) {
+							sValue = ((DateTime)value).Ticks.ToString();
+						} else {
+							sValue = value.ToString();
+						}
+						row.Add(reader.GetName(i), sValue);
+					}
+					rawResult.Add(row[table.idName], row);
+				}
+			}
+
+			List<Dictionary<string, string>> result = new List<Dictionary<string,string>>();
+			foreach(string id in ids) {
+				if(rawResult.ContainsKey(id)) {
+					result.Add(rawResult[id]);
+				}
+			}
+			return result;
 		}
 
 		public List<Dictionary<string, string>> LoadByIds(ITableSpec table, List<string> ids) {
-			lock(this) {
-				using(DbCommand command = this.connection.CreateCommand()) {
+			using(DbConnection connection = this.createConnection()) {
+				using(DbCommand command = connection.CreateCommand()) {
 					return this._LoadByIds(command, table, ids, false);
 				}
 			}
@@ -151,16 +150,16 @@ namespace FLocal.MySQLConnector {
 		}
 
 		public List<string> LoadIdsByConditions(ITableSpec table, FLocal.Core.DB.conditions.AbstractCondition conditions, Diapasone diapasone, JoinSpec[] joins, SortSpec[] sorts, bool allowHugeLists) {
-			lock(this) {
-				using(DbCommand command = this.connection.CreateCommand()) {
+			using(DbConnection connection = this.createConnection()) {
+				using(DbCommand command = connection.CreateCommand()) {
 					return this._LoadIdsByConditions(command, table, conditions, diapasone, joins, sorts, allowHugeLists);
 				}
 			}
 		}
 
 		public long GetCountByConditions(ITableSpec table, FLocal.Core.DB.conditions.AbstractCondition conditions, JoinSpec[] joins) {
-			lock(this) {
-				using(DbCommand command = this.connection.CreateCommand()) {
+			using(DbConnection connection = this.createConnection()) {
+				using(DbCommand command = connection.CreateCommand()) {
 
 					command.CommandType = System.Data.CommandType.Text;
 
@@ -238,7 +237,7 @@ namespace FLocal.MySQLConnector {
 
 		public List<string> LoadIdsByConditions(FLocal.Core.DB.Transaction _transaction, ITableSpec table, FLocal.Core.DB.conditions.AbstractCondition conditions, Diapasone diapasone, JoinSpec[] joins, SortSpec[] sorts, bool allowHugeLists) {
 			Transaction transaction = (Transaction)_transaction;
-			lock(this) {
+			lock(transaction) {
 				using(DbCommand command = transaction.sqlconnection.CreateCommand()) {
 					command.Transaction = transaction.sqltransaction;
 					return this._LoadIdsByConditions(command, table, conditions, diapasone, joins, sorts, allowHugeLists);
@@ -316,9 +315,9 @@ namespace FLocal.MySQLConnector {
 				}
 				this.transactions.Clear();
 				this.transactions = null;
-				this.connection.Close();
-				this.connection.Dispose();
-				this.connection = null;
+//				this.connection.Close();
+//				this.connection.Dispose();
+//				this.connection = null;
 			}
 		}
 
