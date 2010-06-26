@@ -23,7 +23,7 @@ namespace FLocal.IISHandler.handlers {
 		override protected XElement[] getSpecificData(WebContext context) {
 			return new XElement[] {
 				new XElement("categories", from category in Category.allCategories select category.exportToXmlForMainPage(context)),
-				new XElement("totalRegistered", Config.instance.mainConnection.GetCountByConditions(User.TableSpec.instance, new EmptyCondition(), new JoinSpec[0])),
+				new XElement("totalRegistered", Config.instance.mainConnection.GetCountByConditions(User.TableSpec.instance, new EmptyCondition())),
 				new XElement("activity",
 					new XElement("threshold", Config.instance.ActivityThreshold.ToString()),
 					new XElement("sessions", Config.instance.mainConnection.GetCountByConditions(
@@ -32,8 +32,7 @@ namespace FLocal.IISHandler.handlers {
 							Session.TableSpec.instance.getColumnSpec(Session.TableSpec.FIELD_LASTACTIVITY),
 							ComparisonType.GREATEROREQUAL,
 							DateTime.Now.Subtract(Config.instance.ActivityThreshold).ToUTCString()
-						),
-						new JoinSpec[0]
+						)
 					))
 				),
 				new XElement("currentDate", DateTime.Now.ToXml()),

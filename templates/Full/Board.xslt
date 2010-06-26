@@ -106,8 +106,8 @@
 						<tr>
 							<td align="left" width="55%" class="tdheader">Тема</td>
 							<td align="left" nowrap="nowrap" width="15%" class="tdheader">Автор</td>
-							<td nowrap="nowrap" width="5%" class="tdheader" align="center">Просмотры</td>
-							<td nowrap="nowrap" width="5%" class="tdheader" align="center">Ответы</td>
+							<td nowrap="nowrap" width="5%" class="tdheader" align="center">Просмотров</td>
+							<td nowrap="nowrap" width="5%" class="tdheader" align="center">Постов</td>
 							<td nowrap="nowrap" width="20%" class="tdheader" align="center">Последнее</td>
 						</tr>
 						<!-- BEGIN POST LOOP DO NOT DELETE -->

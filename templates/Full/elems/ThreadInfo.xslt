@@ -58,12 +58,11 @@
 			</td>
 			<td align="center" nowrap="nowrap" class="lighttable">
 				<span class="separate"><xsl:value-of select="totalPosts"/></span>
-				<a class="cup separate" href="/postlist.php?Cat=&amp;Board=Common&amp;page=0&amp;fullview=&amp;src=&amp;sb=5&amp;o=&amp;cupthread=479355&amp;cupmaxnumber=9559703&amp;showlite=" >
-					<font class="new"><i>(10)</i></font>
-				</a>
-				<a class="cup separate" href="/postlist.php?Cat=&amp;Board=Common&amp;page=0&amp;fullview=&amp;src=&amp;sb=5&amp;o=&amp;cupthread=479355&amp;cupdisc=1&amp;showlite=" >
-					<font class="new2"><i>(41)</i></font>
-				</a>
+				<xsl:if test="totalNewPosts and totalNewPosts!='0'">
+					<a class="cup separate">
+						<font class="new"><i>(<xsl:value-of select="totalNewPosts"/>)</i></font>
+					</a>
+				</xsl:if>
 			</td>
 			<td nowrap="nowrap" align="center">
 				<xsl:apply-templates select="lastPostDate/date" mode="dateTime"/>

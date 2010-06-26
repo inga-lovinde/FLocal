@@ -42,8 +42,7 @@ namespace FLocal.IISHandler.handlers {
 									ComparisonType.LESSTHAN,
 									int.Parse(context.requestParts[2].PHPSubstring(1)).ToString()
 								)
-							),
-							new JoinSpec[0]
+							)
 						)
 					}
 				},

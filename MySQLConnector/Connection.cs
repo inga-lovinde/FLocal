@@ -157,7 +157,7 @@ namespace FLocal.MySQLConnector {
 			}
 		}
 
-		public long GetCountByConditions(ITableSpec table, FLocal.Core.DB.conditions.AbstractCondition conditions, JoinSpec[] joins) {
+		public long GetCountByConditions(ITableSpec table, FLocal.Core.DB.conditions.AbstractCondition conditions, params JoinSpec[] joins) {
 			using(DbConnection connection = this.createConnection()) {
 				using(DbCommand command = connection.CreateCommand()) {
 

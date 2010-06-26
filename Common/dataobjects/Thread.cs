@@ -179,7 +179,29 @@ namespace FLocal.Common.dataobjects {
 				result.Add(new XElement("firstPost", this.firstPost.exportToXmlWithoutThread(context, false)));
 			}
 			if(context.account != null) {
-				result.Add(new XElement("afterLastRead", this.getLastReadId(context.account) + 1));
+				int lastReadId = this.getLastReadId(context.account);
+				result.Add(
+					new XElement("afterLastRead", lastReadId + 1),
+					new XElement(
+						"totalNewPosts",
+						Config.instance.mainConnection.GetCountByConditions(
+							Post.TableSpec.instance,
+							new ComplexCondition(
+								ConditionsJoinType.AND,
+								new ComparisonCondition(
+									Post.TableSpec.instance.getColumnSpec(Post.TableSpec.FIELD_THREADID),
+									ComparisonType.EQUAL,
+									this.id.ToString()
+								),
+								new ComparisonCondition(
+									Post.TableSpec.instance.getIdSpec(),
+									ComparisonType.GREATERTHAN,
+									lastReadId.ToString()
+								)
+							)
+						)
+					)
+				);
 			}
 			if(additional.Length > 0) {
 				result.Add(additional);
@@ -307,8 +329,7 @@ namespace FLocal.Common.dataobjects {
 												ComparisonType.LESSTHAN,
 												minPost.id.ToString()
 											)
-										),
-										new JoinSpec[0]
+										)
 									);
 									if(count > 0) {
 										return (s == "0") ? null : s; //if there are some unread posts earlier than minPost

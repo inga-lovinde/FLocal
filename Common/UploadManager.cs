@@ -59,7 +59,7 @@ namespace FLocal.Common {
 			int? uploadId = null;
 
 			try {
-				if(Config.instance.mainConnection.GetCountByConditions(Upload.TableSpec.instance, condition, new JoinSpec[0]) > 0) {
+				if(Config.instance.mainConnection.GetCountByConditions(Upload.TableSpec.instance, condition) > 0) {
 					throw new _AlreadyUploadedException();
 				}
 				Config.Transactional(transaction => {

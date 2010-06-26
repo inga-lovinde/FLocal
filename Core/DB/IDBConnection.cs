@@ -10,7 +10,7 @@ namespace FLocal.Core.DB {
 
 		List<string> LoadIdsByConditions(ITableSpec table, conditions.AbstractCondition conditions, Diapasone diapasone, JoinSpec[] joins, SortSpec[] sorts, bool allowHugeLists);
 
-		long GetCountByConditions(ITableSpec table, conditions.AbstractCondition conditions, JoinSpec[] joins);
+		long GetCountByConditions(ITableSpec table, conditions.AbstractCondition conditions, params JoinSpec[] joins);
 
 		Transaction beginTransaction(System.Data.IsolationLevel iso);
 
