@@ -25,6 +25,13 @@ namespace FLocal.Common {
 
 		abstract public XElement formatTotalPosts(long posts);
 
+		/// <summary>
+		/// May be null
+		/// </summary>
+		abstract public dataobjects.Account account {
+			get;
+		}
+
 	}
 
 	public static class UserContext_Extensions {

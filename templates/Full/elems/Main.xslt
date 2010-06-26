@@ -13,9 +13,11 @@
 			<body>
 				<xsl:call-template name="header"/>
 				<xsl:call-template name="specific"/>
+				<xsl:text disable-output-escaping="yes"><![CDATA[<!--]]></xsl:text>
 				<br />
 				<xsl:text>Data used for authoring this XHTML document:</xsl:text>
 				<xmp><xsl:copy-of select="/"/></xmp>
+				<xsl:text disable-output-escaping="yes"><![CDATA[-->]]></xsl:text>
 			</body>
 		</html>
 	</xsl:template>

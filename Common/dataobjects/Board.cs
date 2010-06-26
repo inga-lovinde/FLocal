@@ -6,6 +6,7 @@ using System.Xml.Linq;
 using FLocal.Core;
 using FLocal.Core.DB;
 using FLocal.Core.DB.conditions;
+using FLocal.Common.actions;
 
 namespace FLocal.Common.dataobjects {
 	public class Board : SqlObject<Board> {
@@ -25,6 +26,18 @@ namespace FLocal.Common.dataobjects {
 			public string name { get { return TABLE; } }
 			public string idName { get { return FIELD_ID; } }
 			public void refreshSqlObject(int id) { Refresh(id); }
+		}
+
+		public class ReadMarkerTableSpec : ISqlObjectTableSpec {
+			public const string TABLE = "Boards_ReadMarkers";
+			public const string FIELD_ID = "Id";
+			public const string FIELD_BOARDID = "BoardId";
+			public const string FIELD_ACCOUNTID = "AccountId";
+			public const string FIELD_LASTREADDATE = "LastReadDate";
+			public static readonly ReadMarkerTableSpec instance = new ReadMarkerTableSpec();
+			public string name { get { return TABLE; } }
+			public string idName { get { return FIELD_ID; } }
+			public void refreshSqlObject(int id) {  }
 		}
 
 		protected override ISqlObjectTableSpec table { get { return TableSpec.instance; } }
@@ -149,8 +162,12 @@ namespace FLocal.Common.dataobjects {
 			Cache<IEnumerable<int>>.instance.delete(this.subBoards_Locker);
 		}
 
-		private bool hasNewPosts() {
-			return Core.Util.RandomInt(0, 1000) < 500;
+		public bool hasNewPosts(Account account) {
+			if(!this.lastPostId.HasValue) {
+				return false;
+			} else {
+				return this.getLastReadDate(account) < this.lastPost.postDate;
+			}
 		}
 
 		private XElement exportLastPostInfo(UserContext context) {
@@ -170,7 +187,7 @@ namespace FLocal.Common.dataobjects {
 			);
 		}
 
-		public XElement exportToXml(UserContext context, bool includeSubBoards) {
+		public XElement exportToXml(UserContext context, bool includeSubBoards, params XElement[] additional) {
 			XElement result = new XElement("board",
 				new XElement("id", this.id),
 				new XElement("sortOrder", this.sortOrder),
@@ -179,14 +196,21 @@ namespace FLocal.Common.dataobjects {
 				new XElement("totalThreads", this.totalThreads),
 				new XElement("name", this.name),
 				new XElement("description", this.description),
-				new XElement("hasNewPosts", this.hasNewPosts().ToPlainString()),
 				new XElement("lastPostInfo", this.exportLastPostInfo(context))
 			);
+
+			if(context.account != null) {
+				result.Add(new XElement("hasNewPosts", this.hasNewPosts(context.account).ToPlainString()));
+			}
 
 			if(includeSubBoards) {
 				result.Add(new XElement("subBoards",
 					from board in this.subBoards select board.exportToXml(context, false)
 				));
+			}
+
+			if(additional.Length > 0) {
+				result.Add(additional);
 			}
 
 			return result;
@@ -223,6 +247,65 @@ namespace FLocal.Common.dataobjects {
 					),
 				}
 			);
+		}
+
+		public DateTime getLastReadDate(Account account) {
+			List<string> stringIds = Config.instance.mainConnection.LoadIdsByConditions(
+				ReadMarkerTableSpec.instance,
+				new ComplexCondition(
+					ConditionsJoinType.AND,
+					new ComparisonCondition(
+						ReadMarkerTableSpec.instance.getColumnSpec(ReadMarkerTableSpec.FIELD_BOARDID),
+						ComparisonType.EQUAL,
+						this.id.ToString()
+					),
+					new ComparisonCondition(
+						ReadMarkerTableSpec.instance.getColumnSpec(ReadMarkerTableSpec.FIELD_ACCOUNTID),
+						ComparisonType.EQUAL,
+						account.id.ToString()
+					)
+				),
+				Diapasone.unlimited
+			);
+			if(stringIds.Count > 1) {
+				throw new CriticalException("more than one row");
+			}
+			if(stringIds.Count < 1) {
+				return new DateTime(0);
+			}
+			Dictionary<string, string> data = Config.instance.mainConnection.LoadById(ReadMarkerTableSpec.instance, stringIds[0]);
+			return Util.ParseDateTimeFromTimestamp(data[ReadMarkerTableSpec.FIELD_LASTREADDATE]).Value;
+		}
+
+		public void markAsRead(Account account) {
+			if(this.lastPostId.HasValue) {
+				ChangeSetUtil.ApplyChanges(
+					new InsertOrUpdateChange(
+						ReadMarkerTableSpec.instance,
+						new Dictionary<string,AbstractFieldValue> {
+							{ ReadMarkerTableSpec.FIELD_BOARDID, new ScalarFieldValue(this.id.ToString()) },
+							{ ReadMarkerTableSpec.FIELD_ACCOUNTID, new ScalarFieldValue(account.id.ToString()) },
+							{ ReadMarkerTableSpec.FIELD_LASTREADDATE, new ScalarFieldValue(DateTime.Now.ToUTCString()) },
+						},
+						new Dictionary<string,AbstractFieldValue> {
+							{ ReadMarkerTableSpec.FIELD_LASTREADDATE, new ScalarFieldValue(DateTime.Now.ToUTCString()) },
+						},
+						new ComplexCondition(
+							ConditionsJoinType.AND,
+							new ComparisonCondition(
+								ReadMarkerTableSpec.instance.getColumnSpec(ReadMarkerTableSpec.FIELD_BOARDID),
+								ComparisonType.EQUAL,
+								this.id.ToString()
+							),
+							new ComparisonCondition(
+								ReadMarkerTableSpec.instance.getColumnSpec(ReadMarkerTableSpec.FIELD_ACCOUNTID),
+								ComparisonType.EQUAL,
+								account.id.ToString()
+							)
+						)
+					)
+				);
+			}
 		}
 
 	}

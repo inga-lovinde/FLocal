@@ -62,6 +62,15 @@ namespace FLocal.IISHandler {
 
 		public Session session;
 
+		public override Account account {
+			get {
+				if(this.session == null) {
+					return null;
+				}
+				return this.session.account;
+			}
+		}
+
 		public WebContext(HttpContext httpcontext) {
 			this.httpcontext = httpcontext;
 			this.requestTime = DateTime.Now;

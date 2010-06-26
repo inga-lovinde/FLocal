@@ -152,10 +152,6 @@ namespace FLocal.Common.dataobjects {
 			this._totalViews = int.Parse(data[TableSpec.FIELD_TOTALVIEWS]);
 		}
 
-		private bool hasNewPosts() {
-			return Core.Util.RandomInt(0, 1000) < 500;
-		}
-
 		public XElement exportToXmlSimpleWithParent(UserContext context) {
 			return new XElement("thread",
 				new XElement("id", this.id),
@@ -181,6 +177,9 @@ namespace FLocal.Common.dataobjects {
 			);
 			if(includeFirstPost) {
 				result.Add(new XElement("firstPost", this.firstPost.exportToXmlWithoutThread(context, false)));
+			}
+			if(context.account != null) {
+				result.Add(new XElement("afterLastRead", this.getLastReadId(context.account) + 1));
 			}
 			if(additional.Length > 0) {
 				result.Add(additional);
@@ -224,7 +223,7 @@ namespace FLocal.Common.dataobjects {
 			});
 		}
 
-		private Post getLastRead(Account account) {
+		public int getLastReadId(Account account) {
 			List<string> stringIds = Config.instance.mainConnection.LoadIdsByConditions(
 				ReadMarkerTableSpec.instance,
 				new ComplexCondition(
@@ -246,24 +245,13 @@ namespace FLocal.Common.dataobjects {
 				throw new CriticalException("more than one row");
 			}
 			if(stringIds.Count < 1) {
-				return null;
+				return 0;
 			}
 			Dictionary<string, string> data = Config.instance.mainConnection.LoadById(ReadMarkerTableSpec.instance, stringIds[0]);
 			if((data[ReadMarkerTableSpec.FIELD_POSTID] == "") || (data[ReadMarkerTableSpec.FIELD_POSTID] == null)) {
-				return null;
-			}
-			return Post.LoadById(int.Parse(data[ReadMarkerTableSpec.FIELD_POSTID]));
-		}
-
-		public int getLastReadId(Session session) {
-			if(session == null) {
 				return 0;
 			}
-			Post post = this.getLastRead(session.account);
-			if(post == null) {
-				return 0;
-			}
-			return post.id;
+			return int.Parse(data[ReadMarkerTableSpec.FIELD_POSTID]);
 		}
 
 		public void markAsRead(Account account, Post minPost, Post maxPost) {
@@ -282,7 +270,7 @@ namespace FLocal.Common.dataobjects {
 						{
 							ReadMarkerTableSpec.FIELD_POSTID,
 							new ScalarFieldValue(
-								(minPost.id < this.firstPostId)
+								(minPost.id <= this.firstPostId)
 								?
 								maxPost.id.ToString()
 								:
@@ -330,7 +318,6 @@ namespace FLocal.Common.dataobjects {
 								}
 							)
 						}
-
 					},
 					new ComplexCondition(
 						ConditionsJoinType.AND,

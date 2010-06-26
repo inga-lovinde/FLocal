@@ -99,7 +99,7 @@ namespace FLocal.Common {
 
 	}
 
-	abstract public class SqlObject<T> : SqlObject<int, T> where T : SqlObject<T>, new() {
+	abstract public class SqlObject<T> : SqlObject<int, T>, IComparable<T> where T : SqlObject<T>, new() {
 
 		public static List<T> LoadByIds(IEnumerable<int> ids) {
 
@@ -133,6 +133,16 @@ namespace FLocal.Common {
 			}
 
 			return res;
+		}
+
+		int IComparable<T>.CompareTo(T other) {
+			if(other.id > this.id) {
+				return -1;
+			} else if(other.id == this.id) {
+				return 0;
+			} else {
+				return 1;
+			}
 		}
 
 	}

@@ -21,18 +21,23 @@ namespace FLocal.IISHandler.handlers {
 		override protected XElement[] getSpecificData(WebContext context) {
 			Post post = Post.LoadById(int.Parse(context.requestParts[1]));
 
-			int lastReadId = post.thread.getLastReadId(context.session);
+			int lastReadId = 0;
+			if(context.session != null) {
+				lastReadId = post.thread.getLastReadId(context.session.account);
+			}
+
+			XElement[] result = new XElement[] {
+				new XElement("currentLocation", post.exportToXmlSimpleWithParent(context)),
+				new XElement("posts", post.exportToXmlWithoutThread(context, true, new XElement("isUnread", (post.id > lastReadId).ToPlainString())))
+			};
 
 			post.thread.incrementViewsCounter();
 			if(context.session != null) {
 				post.thread.markAsRead(context.session.account, post, post);
 			}
 
-			return new XElement[] {
-				new XElement("currentLocation", post.exportToXmlSimpleWithParent(context)),
-				new XElement("posts", post.exportToXmlWithoutThread(context, true, new XElement("isUnread", (post.id > lastReadId).ToPlainString())))
-			};
-		}
+			return result;
+	}
 
 	}
 

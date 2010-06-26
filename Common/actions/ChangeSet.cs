@@ -24,6 +24,7 @@ namespace FLocal.Common.actions {
 						dataobjects.Board.TableSpec.TABLE,
 						dataobjects.Thread.TableSpec.TABLE,
 						dataobjects.Post.TableSpec.TABLE,
+						dataobjects.Board.ReadMarkerTableSpec.TABLE,
 						dataobjects.Thread.ReadMarkerTableSpec.TABLE,
 						dataobjects.Session.TableSpec.TABLE,
 					}

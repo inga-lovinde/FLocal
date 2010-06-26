@@ -51,24 +51,25 @@ namespace FLocal.IISHandler.handlers {
 			);
 			IEnumerable<Post> posts = thread.getPosts(pageOuter, context);
 
-			int lastReadId = thread.getLastReadId(context.session);
-
-			thread.incrementViewsCounter();
-			if((context.session != null) && (posts.Count() > 0)) {
-				thread.markAsRead(
-					context.session.account,
-					(from post in posts orderby post.id ascending select post).First(),
-					(from post in posts orderby post.id descending select post).First()
-				);
+			int lastReadId = 0;
+			if(context.session != null) {
+				lastReadId = thread.getLastReadId(context.session.account);
 			}
 
-			return new XElement[] {
+			XElement[] result = new XElement[] {
 				new XElement("currentLocation", thread.exportToXmlSimpleWithParent(context)),
 				new XElement("posts",
 					from post in posts select post.exportToXmlWithoutThread(context, true, new XElement("isUnread", (post.id > lastReadId).ToPlainString())),
 					pageOuter.exportToXml(2, 5, 2)
 				)
 			};
+
+			thread.incrementViewsCounter();
+			if((context.session != null) && (posts.Count() > 0)) {
+				thread.markAsRead(context.session.account, posts.Min(), posts.Max());
+			}
+
+			return result;
 		}
 
 	}
