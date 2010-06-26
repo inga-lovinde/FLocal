@@ -23,7 +23,7 @@ namespace FLocal.IISHandler.handlers.response {
 			IEnumerable<User> users = User.getUsers(pageOuter, context);
 			return new XElement[] {
 				new XElement("users", 
-					(from user in users select user.exportToXmlForViewing(context)).addNumbers(),
+					from user in users select user.exportToXmlForViewing(context),
 					pageOuter.exportToXml(2, 5, 2)
 				)
 			};

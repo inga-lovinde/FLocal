@@ -18,16 +18,5 @@ namespace FLocal.IISHandler {
 			return str.Split(new string[] { separator }, options);
 		}
 
-		public static IEnumerable<XElement> addNumbers(this IEnumerable<XElement> elements) {
-			int i=0;
-			foreach(XElement element in elements) {
-				XElement result = new XElement(element);
-				result.Add(new XElement("number", i));
-				result.Add(new XElement("even", (i%2 == 0).ToPlainString()));
-				i++;
-				yield return result;
-			}
-		}
-
 	}
 }

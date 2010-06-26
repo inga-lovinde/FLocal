@@ -67,7 +67,7 @@
 	<xsl:template match="users/user">
 		<tr>
 			<xsl:choose>
-				<xsl:when test="even='true'">
+				<xsl:when test="position() mod 2 = 0">
 					<xsl:attribute name="class">lighttable</xsl:attribute>
 				</xsl:when>
 				<xsl:otherwise>
