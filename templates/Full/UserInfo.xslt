@@ -63,7 +63,7 @@
 											<xsl:text>Итого сообщений</xsl:text>
 										</td>
 										<td>
-											<xsl:value-of select="totalPosts"/>
+											<xsl:value-of select="user/totalPosts"/>
 										</td>
 									</tr>
 									<tr>
