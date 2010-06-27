@@ -173,6 +173,7 @@ namespace FLocal.Common.dataobjects {
 				new XElement("totalPosts", this.totalPosts),
 				new XElement("totalViews", this.totalViews),
 				new XElement("bodyShort", this.firstPost.bodyShort),
+				new XElement("layerId", this.firstPost.layerId),
 				context.formatTotalPosts(this.totalPosts)
 			);
 			if(includeFirstPost) {

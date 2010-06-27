@@ -13,7 +13,7 @@
 						<td class="subjecttable">
 							<a target="_blank" class="separate">
 								<xsl:attribute name="href">/Upload/Item/<xsl:value-of select="id"/>/</xsl:attribute>
-								<img border="0" src="/static/images/book-read.gif"  alt="" style="vertical-align: text-bottom" />
+								<img border="0" src="/static/images/message-1-read.gif"  alt="" style="vertical-align: text-bottom" />
 							</a>
 							<b class="separate"><xsl:value-of select="filename"/></b>
 							<xsl:if test="parentPost/post">

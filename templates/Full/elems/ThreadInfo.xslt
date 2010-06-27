@@ -16,10 +16,10 @@
 				<img alt="*" hspace="5" style="vertical-align: text-bottom">
 					<xsl:choose>
 						<xsl:when test="afterLastRead&lt;=lastPostId">
-							<xsl:attribute name="src">/static/images/book-notread.gif</xsl:attribute>
+							<xsl:attribute name="src">/static/images/message-<xsl:value-of select="layerId"/>-notread.gif</xsl:attribute>
 						</xsl:when>
 						<xsl:otherwise>
-							<xsl:attribute name="src">/static/images/book-read.gif</xsl:attribute>
+							<xsl:attribute name="src">/static/images/message-<xsl:value-of select="layerId"/>-read.gif</xsl:attribute>
 						</xsl:otherwise>
 					</xsl:choose>
 				</img>
