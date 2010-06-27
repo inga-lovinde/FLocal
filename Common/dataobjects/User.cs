@@ -192,5 +192,9 @@ namespace FLocal.Common.dataobjects {
 			);
 		}
 
+		public int getMinAllowedLayer(Board board) {
+			return 1;
+		}
+
 	}
 }

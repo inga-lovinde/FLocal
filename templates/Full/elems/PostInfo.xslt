@@ -3,6 +3,7 @@
 
 	<xsl:import href="UserInfoBar.xslt"/>
 	<xsl:template match="post">
+		<xsl:param name="isReplyDisabled">true</xsl:param>
 		<tr>
 			<td>
 				<table width="100%" cellspacing="1" cellpadding="3" border="0">
@@ -54,7 +55,9 @@
 														<tr>
 															<td class="navigation">
 																<a>
-																	<xsl:attribute name="href">/PostReply/<xsl:value-of select="id"/>/</xsl:attribute>
+																	<xsl:if test="$isReplyDisabled='false'">
+																		<xsl:attribute name="href">/Post/<xsl:value-of select="id"/>/Reply/</xsl:attribute>
+																	</xsl:if>
 																	<img src="/static/images/reply.gif" border="0" alt="Ответ на сообщение" width="27" height="14" title="Ответ на сообщение" style="vertical-align: text-bottom" />
 																</a>
 															</td>

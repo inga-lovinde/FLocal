@@ -9,7 +9,9 @@
 			<tr>
 				<td>
 					<table cellpadding="0" cellspacing="1" width="100%" class="tableborders">
-						<xsl:apply-templates select="posts/post"/>
+						<xsl:apply-templates select="posts/post">
+							<xsl:with-param name="isReplyDisabled"><xsl:value-of select="thread/isLocked"/></xsl:with-param>
+						</xsl:apply-templates>
 					</table>
 				</td>
 			</tr>

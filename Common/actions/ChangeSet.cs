@@ -24,6 +24,7 @@ namespace FLocal.Common.actions {
 						dataobjects.Board.TableSpec.TABLE,
 						dataobjects.Thread.TableSpec.TABLE,
 						dataobjects.Post.TableSpec.TABLE,
+						dataobjects.Post.RevisionTableSpec.TABLE,
 						dataobjects.Board.ReadMarkerTableSpec.TABLE,
 						dataobjects.Thread.ReadMarkerTableSpec.TABLE,
 						dataobjects.Session.TableSpec.TABLE,
@@ -94,11 +95,17 @@ namespace FLocal.Common.actions {
 
 		public void Dispose() {
 			//if(!this.isProcessed) throw new CriticalException("ChangeSet is not processed yet");
-			foreach(KeyValuePair<string, HashSet<AbstractChange>> kvp in this.changesByTable) {
-				foreach(AbstractChange change in kvp.Value) {
-					if(change.getId().HasValue) {
-						change.tableSpec.refreshSqlObject(change.getId().Value);
-					} //otherwise we're disposing because of sql error or something, so we should show real cause of problem, not "id is null"
+			if(this.isProcessed) {
+				foreach(KeyValuePair<string, HashSet<AbstractChange>> kvp in this.changesByTable) {
+					foreach(AbstractChange change in kvp.Value) {
+						if(change.getId().HasValue) {
+							try {
+								change.tableSpec.refreshSqlObject(change.getId().Value);
+							} catch(NotFoundInDBException) {
+								//it seems something broken earlier; transaction rollback etc...
+							}
+						} //otherwise we're disposing because of sql error or something, so we should show real cause of problem, not "id is null"
+					}
 				}
 			}
 		}

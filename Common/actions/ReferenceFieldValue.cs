@@ -16,7 +16,7 @@ namespace FLocal.Common.actions {
 			return this.referenced.getId().Value.ToString();
 		}
 		public override string getStringRepresentation(string oldInfo) {
-			return this.referenced.getId().Value.ToString();
+			return this.getStringRepresentation();
 		}
 
 	}

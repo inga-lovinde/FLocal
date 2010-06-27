@@ -31,7 +31,15 @@ namespace FLocal.IISHandler {
 				case "thread":
 					return new handlers.ThreadHandler();
 				case "post":
-					return new handlers.PostHandler();
+					if(context.requestParts.Length < 2) {
+						return new handlers.WrongUrlHandler();
+					}
+					switch(context.requestParts[2].ToLower()) {
+						case "reply":
+							return new handlers.response.ReplyHandler();
+						default:
+							return new handlers.PostHandler();
+					}
 				case "login":
 					return new handlers.response.LoginHandler();
 				case "migrateaccount":
@@ -67,6 +75,8 @@ namespace FLocal.IISHandler {
 								return new handlers.request.LogoutHandler();
 							case "migrateaccount":
 								return new handlers.request.MigrateAccountHandler();
+							case "reply":
+								return new handlers.request.ReplyHandler();
 							default:
 								return new handlers.WrongUrlHandler();
 						}

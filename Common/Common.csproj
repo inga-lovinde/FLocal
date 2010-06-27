@@ -53,6 +53,7 @@
     <Compile Include="actions\InsertOrUpdateChange.cs" />
     <Compile Include="actions\ReferenceFieldValue.cs" />
     <Compile Include="actions\ScalarFieldValue.cs" />
+    <Compile Include="actions\TwoWayReferenceFieldValue.cs" />
     <Compile Include="actions\UpdateChange.cs" />
     <Compile Include="actions\ChangeSetUtil.cs" />
     <Compile Include="Config.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="ISqlObjectTableSpec.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlObject.cs" />
+    <Compile Include="UBBParser.cs" />
     <Compile Include="UploadManager.cs" />
     <Compile Include="UserContext.cs" />
     <Compile Include="UserSettingsGateway.cs" />

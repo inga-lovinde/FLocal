@@ -57,6 +57,7 @@ namespace FLocal.IISHandler.handlers {
 
 			XElement[] result = new XElement[] {
 				new XElement("currentLocation", thread.exportToXmlSimpleWithParent(context)),
+				thread.exportToXml(context, false),
 				new XElement("posts",
 					from post in posts select post.exportToXmlWithoutThread(context, true, new XElement("isUnread", (post.id > lastReadId).ToPlainString())),
 					pageOuter.exportToXml(2, 5, 2)

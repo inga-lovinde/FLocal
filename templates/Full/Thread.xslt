@@ -23,7 +23,9 @@
 								</table>
 							</td>
 						</tr>
-						<xsl:apply-templates select="posts/post"/>
+						<xsl:apply-templates select="posts/post">
+							<xsl:with-param name="isReplyDisabled"><xsl:value-of select="thread/isLocked"/></xsl:with-param>
+						</xsl:apply-templates>
 						<tr class="tdheader">
 							<td>
 								<table width="100%" cellspacing="1" cellpadding="3" border="0">

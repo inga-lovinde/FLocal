@@ -71,3 +71,7 @@ pre
 .navigation {
 	margin:3px;
 }
+
+[pseudolink] {
+	cursor:hand;
+}
