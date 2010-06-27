@@ -18,7 +18,7 @@ namespace FLocal.IISHandler.handlers.request {
 				context.session.account.user,
 				this.getTitle(context),
 				this.getBody(context),
-				int.Parse(context.httprequest.Form["layerId"])
+				PostLayer.LoadById(int.Parse(context.httprequest.Form["layerId"]))
 			);
 			
 			newPost.thread.markAsRead(context.session.account, newPost, newPost);

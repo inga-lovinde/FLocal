@@ -21,10 +21,10 @@
 											<img border="0" alt="" style="vertical-align: text-bottom">
 												<xsl:choose>
 													<xsl:when test="isUnread='true'">
-														<xsl:attribute name="src">/static/images/message-<xsl:value-of select="layerId"/>-notread.gif</xsl:attribute>
+														<xsl:attribute name="src">/static/images/message-<xsl:value-of select="layerName"/>-notread.gif</xsl:attribute>
 													</xsl:when>
 													<xsl:otherwise>
-														<xsl:attribute name="src">/static/images/message-<xsl:value-of select="layerId"/>-read.gif</xsl:attribute>
+														<xsl:attribute name="src">/static/images/message-<xsl:value-of select="layerName"/>-read.gif</xsl:attribute>
 													</xsl:otherwise>
 												</xsl:choose>
 											</img>

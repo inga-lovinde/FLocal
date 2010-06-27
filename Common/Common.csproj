@@ -63,6 +63,7 @@
     <Compile Include="dataobjects\IUserSettings.cs" />
     <Compile Include="dataobjects\AnonymousUserSettings.cs" />
     <Compile Include="dataobjects\Post.cs" />
+    <Compile Include="dataobjects\PostLayer.cs" />
     <Compile Include="dataobjects\Session.cs" />
     <Compile Include="dataobjects\Thread.cs" />
     <Compile Include="dataobjects\Upload.cs" />

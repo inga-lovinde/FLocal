@@ -174,6 +174,7 @@ namespace FLocal.Common.dataobjects {
 				new XElement("totalViews", this.totalViews),
 				new XElement("bodyShort", this.firstPost.bodyShort),
 				new XElement("layerId", this.firstPost.layerId),
+				new XElement("layerName", this.firstPost.layer.name),
 				context.formatTotalPosts(this.totalPosts)
 			);
 			if(includeFirstPost) {
@@ -358,7 +359,7 @@ namespace FLocal.Common.dataobjects {
 			});
 		}
 
-		internal static KeyValuePair<AbstractChange, IEnumerable<AbstractChange>> getNewPostChanges(Board board, int threadId, Post parentPost, User poster, int layerId, string title, string body) {
+		internal static KeyValuePair<AbstractChange, IEnumerable<AbstractChange>> getNewPostChanges(Board board, int threadId, Post parentPost, User poster, PostLayer layer, string title, string body) {
 			string parentPostId = null;
 			if(parentPost != null) parentPostId = parentPost.id.ToString();
 			bool isNewThread = (parentPost == null);
@@ -371,7 +372,7 @@ namespace FLocal.Common.dataobjects {
 					{ Post.TableSpec.FIELD_POSTDATE, new ScalarFieldValue(DateTime.Now.ToUTCString()) },
 					{ Post.TableSpec.FIELD_REVISION, new ScalarFieldValue("0") },
 					{ Post.TableSpec.FIELD_LASTCHANGEDATE, new ScalarFieldValue(DateTime.Now.ToUTCString()) },
-					{ Post.TableSpec.FIELD_LAYERID, new ScalarFieldValue(layerId.ToString()) },
+					{ Post.TableSpec.FIELD_LAYERID, new ScalarFieldValue(layer.id.ToString()) },
 					{ Post.TableSpec.FIELD_TITLE, new ScalarFieldValue(title) },
 					{ Post.TableSpec.FIELD_BODY, new ScalarFieldValue(UBBParser.UBBToIntermediate(body)) },
 				}

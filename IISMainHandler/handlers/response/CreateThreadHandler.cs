@@ -23,6 +23,9 @@ namespace FLocal.IISHandler.handlers.response {
 
 			return new XElement[] {
 				board.exportToXml(context, false),
+				new XElement("layers",
+					from layer in PostLayer.allLayers select layer.exportToXml(context)
+				),
 			};
 		}
 	}

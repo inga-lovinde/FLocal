@@ -308,9 +308,9 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
-		public Thread CreateThread(User poster, string title, string body, int desiredLayerId) {
+		public Thread CreateThread(User poster, string title, string body, PostLayer desiredLayer) {
 
-			int actualLayerId = Math.Max(poster.getMinAllowedLayer(this), desiredLayerId);
+			PostLayer actualLayer = poster.getActualLayer(this, desiredLayer);
 			AbstractChange threadInsert = new InsertChange(
 				Thread.TableSpec.instance,
 				new Dictionary<string,AbstractFieldValue> {
@@ -331,7 +331,7 @@ namespace FLocal.Common.dataobjects {
 				Config.Transactional(transaction => {
 					threadInsertSet.Add(threadInsert);
 					threadInsertSet.Apply(transaction);
-					foreach(AbstractChange change in Thread.getNewPostChanges(this, threadInsert.getId().Value, null, poster, actualLayerId, title, body).Value) {
+					foreach(AbstractChange change in Thread.getNewPostChanges(this, threadInsert.getId().Value, null, poster, actualLayer, title, body).Value) {
 						dataInsertSet.Add(change);
 					}
 					dataInsertSet.Apply(transaction);

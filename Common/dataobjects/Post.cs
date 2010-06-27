@@ -90,6 +90,11 @@ namespace FLocal.Common.dataobjects {
 				return this._layerId;
 			}
 		}
+		public PostLayer layer {
+			get {
+				return PostLayer.LoadById(this.layerId);
+			}
+		}
 
 		private string _title;
 		public string title {
@@ -175,6 +180,7 @@ namespace FLocal.Common.dataobjects {
 				new XElement("lastChangeDate", this.postDate.ToXml()),
 				new XElement("revision", this.revision),
 				new XElement("layerId", this.layerId),
+				new XElement("layerName", this.layer.name),
 				new XElement("title", this.title),
 				new XElement("body", context.outputParams.preprocessBodyIntermediate(this.body)),
 				new XElement("bodyShort", this.bodyShort),
@@ -191,15 +197,15 @@ namespace FLocal.Common.dataobjects {
 			return result;
 		}
 
-		public Post Reply(User poster, string title, string body, int desiredLayerId) {
+		public Post Reply(User poster, string title, string body, PostLayer desiredLayer) {
 
 			if(this.thread.isLocked) {
 				throw new FLocalException("thread locked");
 			}
 
-			int actualLayerId = Math.Max(poster.getMinAllowedLayer(this.thread.board), desiredLayerId);
+			PostLayer actualLayer = poster.getActualLayer(this.thread.board, desiredLayer);
 
-			var changes = Thread.getNewPostChanges(this.thread.board, this.threadId, this, poster, actualLayerId, title, body);
+			var changes = Thread.getNewPostChanges(this.thread.board, this.threadId, this, poster, actualLayer, title, body);
 			ChangeSetUtil.ApplyChanges(changes.Value.ToArray());
 			
 			return Post.LoadById(changes.Key.getId().Value);

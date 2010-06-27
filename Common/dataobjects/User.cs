@@ -197,8 +197,8 @@ namespace FLocal.Common.dataobjects {
 			);
 		}
 
-		public int getMinAllowedLayer(Board board) {
-			return 1;
+		public PostLayer getActualLayer(Board board, PostLayer desiredLayer) {
+			return desiredLayer;
 		}
 
 	}

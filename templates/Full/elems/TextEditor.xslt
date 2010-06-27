@@ -241,5 +241,15 @@ function insertInBody(str) {
 		</table>
 	</xsl:template>
 
+	<xsl:template match="layer">
+		<xsl:param name="defaultLayerId"/>
+		<option>
+			<xsl:attribute name="value"><xsl:value-of select="id"/></xsl:attribute>
+			<xsl:if test="id=$defaultLayerId">
+				<xsl:attribute name="selected">selected</xsl:attribute>
+			</xsl:if>
+			<xsl:value-of select="name"/>
+		</option>
+	</xsl:template>
 
 </xsl:stylesheet>
