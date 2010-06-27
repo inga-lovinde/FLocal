@@ -243,7 +243,7 @@ namespace FLocal.Common.dataobjects {
 					),
 					new SortSpec(
 						Thread.TableSpec.instance.getColumnSpec(Thread.TableSpec.FIELD_LASTPOSTID),
-						true
+						false
 					),
 				}
 			);
