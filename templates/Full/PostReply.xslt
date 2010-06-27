@@ -46,9 +46,24 @@
 									</input>
 									<span class="small">Слой сообщения:</span> 
 									<select class="formboxes" name="layerId">
-										<option value="1" >Нормальное сообщение</option>
-										<option value="2" >Флуд/оффтопик</option>
-										<option value="3" >Мусор</option>
+										<option value="1">
+											<xsl:if test="post/layerId='1'">
+												<xsl:attribute name="selected"/>
+											</xsl:if>
+											<xsl:text>Нормальное сообщение</xsl:text>
+										</option>
+										<option value="2">
+											<xsl:if test="post/layerId='2'">
+												<xsl:attribute name="selected"/>
+											</xsl:if>
+											<xsl:text>Флуд/оффтопик</xsl:text>
+										</option>
+										<option value="3">
+											<xsl:if test="post/layerId='3'">
+												<xsl:attribute name="selected"/>
+											</xsl:if>
+											<xsl:text>Мусор</xsl:text>
+										</option>
 									</select>
 									<br/>
 									<br/>
