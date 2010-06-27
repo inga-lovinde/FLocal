@@ -56,7 +56,7 @@
 			<td align="center">
 				<xsl:value-of select="totalViews"/>
 			</td>
-			<td align="center" nowrap="nowrap" class="lighttable">
+			<td align="center" nowrap="nowrap">
 				<span class="separate"><xsl:value-of select="totalPosts"/></span>
 				<xsl:if test="totalNewPosts and totalNewPosts!='0'">
 					<a class="cup separate">
