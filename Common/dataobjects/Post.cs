@@ -159,6 +159,15 @@ namespace FLocal.Common.dataobjects {
 		}
 
 		public XElement exportToXmlWithoutThread(UserContext context, bool includeParentPost, params XElement[] additional) {
+			
+			if(context.account == null && this.poster.showPostsToUsers != User.ENUM_SHOWPOSTSTOUSERS_ALL) {
+				return null;
+			}
+
+			if(this.poster.showPostsToUsers == User.ENUM_SHOWPOSTSTOUSERS_NONE) {
+				return null;
+			}
+
 			XElement result = new XElement("post",
 				new XElement("id", this.id),
 				new XElement("poster", this.poster.exportToXmlForViewing(context)),

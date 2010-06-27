@@ -10,6 +10,11 @@ using FLocal.Core.DB.conditions;
 namespace FLocal.Common.dataobjects {
 	public class User : SqlObject<User> {
 
+		public const string ENUM_SHOWPOSTSTOUSERS_ALL = "All";
+		public const string ENUM_SHOWPOSTSTOUSERS_LOGGEDIN = "LoggedIn";
+		public const string ENUM_SHOWPOSTSTOUSERS_PRIVELEGED = "Priveleged";
+		public const string ENUM_SHOWPOSTSTOUSERS_NONE = "None";
+
 		public class TableSpec : ISqlObjectTableSpec {
 			public const string TABLE = "Users";
 			public const string FIELD_ID = "Id";
