@@ -56,7 +56,9 @@
 															<td class="navigation">
 																<a>
 																	<xsl:if test="$isReplyDisabled='false'">
-																		<xsl:attribute name="href">/Post/<xsl:value-of select="id"/>/Reply/</xsl:attribute>
+																		<xsl:if test="/root/session/sessionKey">
+																			<xsl:attribute name="href">/Post/<xsl:value-of select="id"/>/Reply/</xsl:attribute>
+																		</xsl:if>
 																	</xsl:if>
 																	<img src="/static/images/reply.gif" border="0" alt="Ответ на сообщение" width="27" height="14" title="Ответ на сообщение" style="vertical-align: text-bottom" />
 																</a>

@@ -20,7 +20,9 @@
 													<td class="navigation" nowrap="nowrap">
 														<!-- postoption is either newpost.gif or greynewpost.gif -->
 														<a>
-															<xsl:attribute name="href">/Board/<xsl:value-of select="currentLocation/board/id"/>/NewThread/</xsl:attribute>
+															<xsl:if test="session/sessionKey">
+																<xsl:attribute name="href">/Board/<xsl:value-of select="currentLocation/board/id"/>/NewThread/</xsl:attribute>
+															</xsl:if>
 															<img src="/static/images/newpost.gif" alt="Новое сообщение" border="0" width="13" height="15" style="vertical-align: text-bottom" />
 															<xsl:text>Сообщение</xsl:text>
 														</a>
