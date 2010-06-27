@@ -47,12 +47,14 @@
 					<xsl:value-of select="totalPosts"/>
 				</td>
 			</tr>
-			<tr>
-				<td class="small">
-					<xsl:text>Из: </xsl:text>
-					<xsl:value-of select="location"/>
-				</td>
-			</tr>
+			<xsl:if test="location!=''">
+				<tr>
+					<td class="small">
+						<xsl:text>Из: </xsl:text>
+						<xsl:value-of select="location"/>
+					</td>
+				</tr>
+			</xsl:if>
 		</table>
 	</xsl:template>
 </xsl:stylesheet>
