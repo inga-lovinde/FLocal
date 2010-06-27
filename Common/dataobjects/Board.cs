@@ -308,5 +308,38 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
+		public Thread CreateThread(User poster, string title, string body, int desiredLayerId) {
+
+			int actualLayerId = Math.Max(poster.getMinAllowedLayer(this), desiredLayerId);
+			AbstractChange threadInsert = new InsertChange(
+				Thread.TableSpec.instance,
+				new Dictionary<string,AbstractFieldValue> {
+					{ Thread.TableSpec.FIELD_BOARDID, new ScalarFieldValue(this.id.ToString()) },
+					{ Thread.TableSpec.FIELD_ISANNOUNCEMENT, new ScalarFieldValue("0") },
+					{ Thread.TableSpec.FIELD_ISLOCKED, new ScalarFieldValue("0") },
+					{ Thread.TableSpec.FIELD_TITLE, new ScalarFieldValue(title) },
+					{ Thread.TableSpec.FIELD_TOPICSTARTERID, new ScalarFieldValue(poster.id.ToString()) },
+					{ Thread.TableSpec.FIELD_TOTALPOSTS, new ScalarFieldValue("0") },
+					{ Thread.TableSpec.FIELD_TOTALVIEWS, new ScalarFieldValue("0") },
+					{ Thread.TableSpec.FIELD_FIRSTPOSTID, new ScalarFieldValue(null) },
+					{ Thread.TableSpec.FIELD_LASTPOSTID, new ScalarFieldValue(null) },
+					{ Thread.TableSpec.FIELD_LASTPOSTDATE, new ScalarFieldValue(DateTime.Now.ToUTCString()) },
+				}
+			);
+
+			using(ChangeSet threadInsertSet = new ChangeSet(), dataInsertSet = new ChangeSet()) {
+				Config.Transactional(transaction => {
+					threadInsertSet.Add(threadInsert);
+					threadInsertSet.Apply(transaction);
+					foreach(AbstractChange change in Thread.getNewPostChanges(this, threadInsert.getId().Value, null, poster, actualLayerId, title, body).Value) {
+						dataInsertSet.Add(change);
+					}
+					dataInsertSet.Apply(transaction);
+				});
+			}
+
+			return Thread.LoadById(threadInsert.getId().Value);
+		}
+
 	}
 }

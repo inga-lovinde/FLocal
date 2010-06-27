@@ -7,6 +7,12 @@ using FLocal.Core;
 namespace FLocal.IISHandler.handlers.request {
 	abstract class AbstractNewMessageHandler : AbstractPostHandler {
 
+		protected override string templateName {
+			get {
+				return "result/MessageCreated.xslt";
+			}
+		}
+
 		protected string getTitle(WebContext context) {
 			string title = context.httprequest.Form["title"].Trim();
 			if(title == "") {

@@ -19,14 +19,14 @@ namespace FLocal.Common.actions {
 				return Cache<IEnumerable<string>>.instance.get(
 					tablesLockOrder_locker,
 					() => new List<string>() {
-						dataobjects.Account.TableSpec.TABLE,
-						dataobjects.User.TableSpec.TABLE,
+						dataobjects.Thread.TableSpec.TABLE, //thread should come first because of Board.newThread locking order with two changesets
 						dataobjects.Board.TableSpec.TABLE,
-						dataobjects.Thread.TableSpec.TABLE,
 						dataobjects.Post.TableSpec.TABLE,
 						dataobjects.Post.RevisionTableSpec.TABLE,
-						dataobjects.Board.ReadMarkerTableSpec.TABLE,
+						dataobjects.Account.TableSpec.TABLE,
+						dataobjects.User.TableSpec.TABLE,
 						dataobjects.Thread.ReadMarkerTableSpec.TABLE,
+						dataobjects.Board.ReadMarkerTableSpec.TABLE,
 						dataobjects.Session.TableSpec.TABLE,
 					}
 				);

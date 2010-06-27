@@ -25,7 +25,18 @@ namespace FLocal.IISHandler {
 				case "boards":
 					return new handlers.BoardsHandler();
 				case "board":
-					return new handlers.BoardHandler();
+					if(context.requestParts.Length < 2) {
+						return new handlers.WrongUrlHandler();
+					}
+					if(context.requestParts.Length == 2) {
+						return new handlers.BoardHandler();
+					}
+					switch(context.requestParts[2].ToLower()) {
+						case "newthread":
+							return new handlers.response.CreateThreadHandler();
+						default:
+							return new handlers.WrongUrlHandler();
+					}
 				case "boardasthread":
 					return new handlers.response.BoardAsThreadHandler();
 				case "thread":
@@ -34,11 +45,14 @@ namespace FLocal.IISHandler {
 					if(context.requestParts.Length < 2) {
 						return new handlers.WrongUrlHandler();
 					}
+					if(context.requestParts.Length == 2) {
+						return new handlers.PostHandler();
+					}
 					switch(context.requestParts[2].ToLower()) {
 						case "reply":
 							return new handlers.response.ReplyHandler();
 						default:
-							return new handlers.PostHandler();
+							return new handlers.WrongUrlHandler();
 					}
 				case "login":
 					return new handlers.response.LoginHandler();
@@ -77,6 +91,8 @@ namespace FLocal.IISHandler {
 								return new handlers.request.MigrateAccountHandler();
 							case "reply":
 								return new handlers.request.ReplyHandler();
+							case "newthread":
+								return new handlers.request.CreateThreadHandler();
 							default:
 								return new handlers.WrongUrlHandler();
 						}

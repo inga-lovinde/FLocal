@@ -67,6 +67,7 @@
     <Compile Include="handlers\request\ReplyHandler.cs" />
     <Compile Include="handlers\request\UploadHandler.cs" />
     <Compile Include="handlers\response\BoardAsThread.cs" />
+    <Compile Include="handlers\response\CreateThreadHandler.cs" />
     <Compile Include="handlers\response\LegacyUploadHandler.cs" />
     <Compile Include="handlers\response\LoginHandler.cs" />
     <Compile Include="handlers\response\MigrateAccountHandler.cs" />

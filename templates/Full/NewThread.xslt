@@ -9,7 +9,7 @@
 					<table cellpadding="3" cellspacing="1" width="100%" class="tableborders">
 						<tr>
 							<td class="tdheader">
-								<xsl:text>Ответ на сообщение (</xsl:text>
+								<xsl:text>Создание нового сообщения - Форум (</xsl:text>
 								<xsl:value-of select="board/name"/>
 								<xsl:text>)</xsl:text>
 							</td> 
@@ -21,9 +21,9 @@
 						</tr> 
 						<tr> 
 							<td class="lighttable"> 
-								<form method="post" action="/do/Reply/" name="replier">
-									<input type="hidden" name="parent">
-										<xsl:attribute name="value"><xsl:value-of select="post/id"/></xsl:attribute>
+								<form method="post" action="/do/NewThread/" name="replier">
+									<input type="hidden" name="board">
+										<xsl:attribute name="value"><xsl:value-of select="board/id"/></xsl:attribute>
 									</input>
 									<xsl:text>Пользователь: </xsl:text>
 									<xsl:value-of select="session/user/name"/>
@@ -31,19 +31,7 @@
 									<br/>
 									<xsl:text>Тема: </xsl:text>
 									<br/>
-									<input type="text" tabindex="1" name="title" maxlength="70" class="formboxes" size="60">
-										<xsl:choose>
-											<xsl:when test="substring(post/title, 1, 4)='Re: '">
-												<xsl:attribute name="value"><xsl:value-of select="post/title"/></xsl:attribute>
-											</xsl:when>
-											<xsl:otherwise>
-												<xsl:attribute name="value">
-													<xsl:text>Re: </xsl:text>
-													<xsl:value-of select="post/title"/>
-												</xsl:attribute>
-											</xsl:otherwise>
-										</xsl:choose>
-									</input>
+									<input type="text" tabindex="1" name="title" maxlength="70" class="formboxes" size="60"/>
 									<span class="small">Слой сообщения:</span> 
 									<select class="formboxes" name="layerId">
 										<option value="1" >Нормальное сообщение</option>
@@ -70,38 +58,6 @@
 				</td>
 			</tr>
 		</table>
-
-		<br/>
-
-		<table width="95%" align="center" cellpadding="1" cellspacing="1" class="tablesurround">
-			<tr>
-				<td>
-					<table cellpadding="3" cellspacing="1" width="100%" class="tableborders">
-						<tr>
-							<td class="tdheader">
-								<xsl:text>Ответ на сообщение</xsl:text>
-							</td> 
-						</tr>
-						<tr class="darktable"> 
-							<td>
-								<b>
-									<xsl:text>Автор: </xsl:text>
-									<xsl:value-of select="post/poster/user/name"/>
-									<br/>
-									<xsl:text>Тема: </xsl:text>
-									<xsl:value-of select="post/title"/>
-								</b>
-							</td> 
-						</tr> 
-						<tr> 
-							<td class="lighttable">
-								<xsl:value-of select="post/body" disable-output-escaping="yes"/>
-							</td> 
-						</tr> 
-					</table> 
-				</td> 
-			</tr> 
-		</table> 
 	</xsl:template>
 
 </xsl:stylesheet>
