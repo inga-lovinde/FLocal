@@ -1,0 +1,157 @@
+A:link {
+    text-decoration:none;color:#4063A1	
+}
+A:visited {
+    text-decoration:none;color:#4063A1
+}
+A:active {
+    text-decoration:none;color:#F97E42
+}
+A:hover {
+    COLOR: #F97E42;text-decoration:none
+}
+.onbody {
+    text-decoration:none;color:#000000	
+}
+.onbody A:link {
+    text-decoration:underline;color:#000000
+}
+.onbody A:visited {
+    text-decoration:underline;color:#332200	
+}
+.onbody A:hover {
+    text-decoration:underline;color:#221100	
+}
+.onbody A:active {
+    text-decoration:underline;color:#000000	
+}
+    img {border:0}
+BODY {
+    FONT-SIZE: 11px; FONT-FAMILY: verdana,arial,sans-serif
+}
+P {
+    FONT-SIZE: 11px; FONT-FAMILY: verdana,arial,sans-serif
+}
+TABLE {
+    FONT-SIZE: 11px; FONT-FAMILY: verdana,arial,sans-serif
+}
+TD {
+    FONT-SIZE: 11px; FONT-FAMILY: verdana,arial,sans-serif
+}
+TR {
+    FONT-SIZE: 11px; FONT-FAMILY: verdana,arial,sans-serif
+}
+PRE {
+    background: #fffff3;
+    BORDER-RIGHT: #fffff3 1px solid; PADDING-RIGHT: 0px; BORDER-TOP: #fffff3 1px solid; PADDING-LEFT: 0px; FONT-SIZE: 13px;font-family:courier new; PADDING-BOTTOM: 0px; MARGIN: 10px 10px; BORDER-LEFT: #fffff3 1px solid; PADDING-TOP: 0px; BORDER-BOTTOM: #fffff3 1px solid
+}
+FORM {
+    DISPLAY: inline; MARGIN-BOTTOM: 0px
+}
+BODY {
+    BACKGROUND: #F5F5DF
+}
+.tablesurround {
+    BACKGROUND: #F6D67A
+}
+.tableborders {
+    BACKGROUND: #F3A458
+}
+.tdheader {
+    FONT-WEIGHT: bold; FONT-SIZE: 11px; BACKGROUND: #EDEACF; FONT-FAMILY: verdana,arial,sans-serif;color:#7A7A7A
+}
+.tdheader a {font-size:11px;color:#4063A1;text-decoration:underline}
+.tdheader a:hover {color:#E86D31;text-decoration:underline}
+.tdheader a:visited {color:#305290;text-decoration:underline}
+.tdheader a:active {color:#E86D31;text-decoration:underline}
+.menubar {
+    BACKGROUND: #EDEACF
+}
+.navigation {
+    FONT-SIZE: 11px; BACKGROUND: #FEFDE5; FONT-FAMILY: Verdana,helvetica,arial
+}
+.post {
+    BACKGROUND: #FFFEF2;font-family:verdana,tahoma,arial;font-size:10pt;color:#000000
+}
+.new {
+    FONT-SIZE: 11px; COLOR: #666666
+}
+.catandforum {
+    FONT-SIZE: 11px; BACKGROUND: #FEFDE5
+}
+.posttime {
+    FONT-SIZE: 11px; BACKGROUND: #FEFDF1; TEXT-ALIGN: center
+}
+.threadtotal {
+    FONT-SIZE: 11px; BACKGROUND: #FEFDF1
+}
+.posttotal {
+    FONT-SIZE: 11px; BACKGROUND: #FEFDE5
+}
+.modcolumn {
+    FONT-SIZE: 11px; BACKGROUND: #FEFDE5
+}
+.small {
+    FONT-SIZE: 10px; FONT-FAMILY: verdana,helvetica,arial
+}
+.standouttext {
+    font-weight:bold;
+}
+.pollcolor {
+    BACKGROUND: #0000b0
+}
+.welcome {
+    FONT-FAMILY: Times new roman
+}
+.forumtitle {
+    font-size:13px; font-weight:bold;
+}
+.forumdescript {
+    FONT-SIZE: 10px
+}
+.lighttable {
+    BACKGROUND: #FFFFF3
+}
+.darktable {
+    BACKGROUND: #FEFDE5
+}
+.cleartable {
+    BACKGROUND: #EDEACF; color: #000000;
+}
+.alternatetable {
+    BACKGROUND: #ffffff
+}
+.subjecttable {
+   BACKGROUND: #FEFDE5
+}
+.footertable {
+    BACKGROUND: #FEFDE5
+}
+.formboxes {
+    FONT-SIZE: 11px; FONT-FAMILY: verdana, arial, sans-serif; BACKGROUND-COLOR: #FFFFF3
+}
+.buttons {
+    FONT-SIZE: 11px; FONT-FAMILY: verdana, arial, sans-serif; BACKGROUND-COLOR: #dddddd
+}
+BLOCKQUOTE {
+    background: #FFFFF3;
+    BORDER-RIGHT: #F3A458 1px solid; PADDING-RIGHT: 10px; BORDER-TOP: #F3A458 1px solid; PADDING-LEFT: 10px; FONT-SIZE: 11px; PADDING-BOTTOM: 0px; MARGIN: 10px 10px; BORDER-LEFT: #F3A458 1px solid; PADDING-TOP: 0px; BORDER-BOTTOM: #F3A458 1px solid
+}
+BLOCKQUOTE .small {
+    PADDING-RIGHT: 2px; PADDING-LEFT: 0px; BACKGROUND: #EDEACF; PADDING-BOTTOM: 2px; MARGIN-LEFT: -10px; PADDING-TOP: 0px; font-weight:bold
+}
+BLOCKQUOTE HR {
+    VISIBILITY: hidden; HEIGHT: 1px
+}
+BLOCKQUOTE BR {
+    FONT-SIZE: 1px
+}
+.topmenu {
+    BACKGROUND: #EDEACF; COLOR: black
+}
+hr { COLOR: #F3A458; HEIGHT: 1px; }
+    
+.confluent {
+    COLOR: #FFFFF3
+}    
+    

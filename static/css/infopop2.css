@@ -1,0 +1,222 @@
+/* File Version 6.5 */
+
+a:link  {
+  color: #cc6600;
+  background: none;
+}
+a:visited {
+  color: #666699;
+  background: none;
+}
+a:active {
+  color: #333366;
+  background: none;
+}
+a:hover {
+  color: #333366;
+  background: none;
+}
+p,table,td,tr {
+  font-size: 10pt;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+form {
+  display: inline;
+  margin-bottom: 0;
+}
+body {
+	color: #000000;
+	background: #ffffff;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+}
+.tablesurround {
+	background: #ffffff;
+	color: #000000;
+}
+.tableborders {
+	background: #666699;
+	color: #FFFFFF;
+}
+.tdheader {
+  font-size: 10pt;
+  font-weight: bold;
+  color: #000000;
+  background: #ebd6ad;
+   border-top:1px solid #FFF;
+}
+.menubar{
+  background: #dedfdf;
+  color: #000000;
+  font-size: 9pt;
+}
+.navigation{
+  background: #cccccc;
+  color: #000000;
+  font-size: 10pt;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #666699;
+  padding: 1px;
+  margin: 1px;
+}
+.catandforum {
+  font-size: 8pt;
+}
+.posttime {
+	font-size: 10pt;
+	background: #f7f7f7;
+	color: #000000;
+}
+.threadtotal {
+	font-size: 10pt;
+	background: #f7f7f7;
+	color: #000000;
+}
+.posttotal,.modcolumn {
+  font-size: 10pt;
+  background: #dedfdf;
+  color: #000000;
+}
+.modline {
+  font-size: 8pt;
+  font-style: oblique;
+}
+.small {
+  font-weight: normal;
+  font-size: 8pt;
+}
+.standouttext {
+  color: #ff0000;
+  background: none;
+}
+.pollcolor {
+	background: #ff0000;
+	color: #000000;
+	border: 1px solid #000000;
+}
+.forumtitle a {
+  font-size: 10pt;
+  font-weight: bold;
+  color: #cc6600;
+  background: none;
+}
+.forumdescript {
+  font-size: 8pt;
+}
+.lighttable {
+  background: #f7f7f7;
+  color: #000000;
+  padding:5px;
+}
+.darktable {
+  background: #e6e6e6;
+  color: #000000;
+  padding:5px;
+}
+.newlighttable {
+  background: #f7f7f7;
+  color: #000000;
+}
+.newdarktable {
+  background: #e6e6e6;
+  color: #000000;
+}
+.newlighttable a:link  {
+}
+.newlighttable a:visited {
+}
+.newlighttable a:active {
+}
+.newlighttable a:hover {
+}
+
+.newdarktable a:link  {
+}
+.newdarktable a:visited {
+}
+.newdarktable a:active {
+}
+.newdarktable a:hover {
+}
+.newpostsincat {
+	background: #FFFF00;
+	color: #000000;
+}
+.cleartable {
+	background: #f7f7f7;
+	color: #000000;
+}
+.newsubjecttable {
+	background: #c4c4c4;
+	font-weight: bold;
+	color: #000000;
+}
+.subjecttable {
+  background: #dedfdf;
+  color: #000000;
+}
+.formboxes{
+  background-color: #ffffff;
+  color: #000000;
+  font-size: 10pt;
+}
+.buttons {
+	background-color: #dedfdf;
+	color: #000000;
+	font-size: 10pt;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+blockquote {
+   font-size: 9pt; border: 1px solid #e6e6e6;
+   margin: 0px 20px; padding: 0px 10px
+}
+blockquote .small {
+	background: #e6e6e6;
+	margin-left:-10px;
+	padding: 1px 2px;
+	color: #000000;
+}
+blockquote hr {
+   visibility:hidden;
+   height: 1px
+}
+blockquote br {
+   font-size: 1px
+}
+.post:first-letter {
+	font-weight: bold;
+}
+pre {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	display: block;
+	white-space: pre;
+}
+.modname {
+	    color: #00AA00;
+}
+.adminname {
+	    color: #FF0000;
+}
+.topmenu{
+  background: #FFFFAA;
+  color: black;
+}
+
+.new {
+  font-size: 8pt;
+  color:  red   ;
+}
+.new2 {
+  font-size: 8pt;
+  color: #880088;
+}
+
+a.cup {
+   text-decoration:none;
+}
+
+.confluent {
+  color: #f7f7f7;
+}

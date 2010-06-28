@@ -1,0 +1,116 @@
+/* lynn.css v2.1 :) */
+a {
+	color: #ccffff; text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+.onbody {
+}
+body, p, table, td, tr {
+	color: #ffffff; font-family: 'Tahoma', sans-serif; font-size: 12pt;
+}
+body {
+	background-color: #8ea0ab;
+}
+form {
+	display: inline; margin-bottom: 0px;
+}
+.tablesurround, .tableborders {
+	background-color: #404d53;
+}
+.tdheader {
+	font-weight: bold; background-color: #50616b; color: #bbddff;
+}
+.menubar {
+	font-weight: bold; background-color: #50616b; color: #404d53;
+}
+.navigation {
+	background-color: #6c8391; color: #404d53;
+}
+.topmenu {
+	font-weight: bold; background-color: #50616b; color: #404d53;
+}
+.new {
+	color: yellow;
+}
+.forumtitle {
+	font-weight: bold;
+}
+.catandforum {
+	font-weight: bold;
+}
+
+.small, .posttotal, .modcolumn, .threadtotal, .posttime, .forumdescript, .navigation {
+	font-size: 10pt;
+}
+.posttotal, .modcolumn, .threadtotal, .posttime {
+	background-color: #50616b;
+}
+.posttime {
+	text-align: center;
+}
+.standouttext {
+	color: #bbddff; font-weight: bold;
+}
+.pollcolor {
+	background-color: #bbddff;
+}
+.lighttable {
+	background-color: #607681;
+}
+.darktable, .cleartable, .subjecttable {
+	background-color: #50616b;
+}
+.alternatetable {
+	background-color: #404d53;
+}
+.formboxes {
+	color: #ffffff; background-color: #50616b;
+	font-family: 'lucida console', monospace;
+
+}
+.buttons {
+	color: #ffffff; background-color: #50616b;
+	font-family: 'tahoma', sans-serif;
+}
+
+/* quotes */
+blockquote {
+	border: 1px solid #404d53; padding: 0ex 1ex; margin: 1ex;
+}
+blockquote font.small {
+	display: block;	text-align: center; background-color: #50616b;
+	color: #bbddff; font-weight: bold;
+	margin: 0ex; border: 1px solid #404d53; border-top: 0 none; padding-bottom: 1pt;
+}
+/* codes */
+pre {
+	border: 1px solid #404d53; padding: 0px 4pt 1ex; margin: 4pt;
+	font-family: 'lucida console', monospace; font-size: inherit;
+}
+pre font.small {
+	display: block; text-align: center; background-color: #50616b;
+	color: #bbddff; font-weight: bold;
+	margin: 0ex; border: 1px solid #404d53; border-top: 0 none; padding-bottom: 1pt;
+	font-family: 'tahoma', sans-serif;
+}
+pre hr {
+	display: block; visibility: hidden;
+}
+hr {
+	display: none;
+}
+
+/* unknown */
+.footertable {
+	background-color: red  /* где оно есть ??? */
+}
+.welcome {
+	background-color: red  /* где оно есть ??? */
+}
+
+.confluent {
+   color: #607681;
+}
+

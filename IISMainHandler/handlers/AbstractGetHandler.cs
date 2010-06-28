@@ -19,6 +19,7 @@ namespace FLocal.IISHandler.handlers {
 				new XElement("root",
 					new XElement("title", Config.instance.AppInfo),
 					context.exportSession(),
+					context.userSettings.skin.exportToXml(),
 					this.getSpecificData(context)
 				)
 			);

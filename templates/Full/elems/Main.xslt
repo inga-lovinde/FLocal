@@ -6,7 +6,9 @@
 		<html>
 			<head>
 				<link rel="stylesheet" href="/static/css/global.css" type="text/css" />
-				<link rel="stylesheet" href="/static/css/coffeehaus.css" type="text/css" />
+				<link rel="stylesheet" type="text/css">
+					<xsl:attribute name="href">/static/css/<xsl:value-of select="skin/name"/>.css</xsl:attribute>
+				</link>
 				<link rel="shortcut icon" href="/static/favicons/smirk.ico" type="image/x-icon" />
 				<title><xsl:value-of select="title"/></title>
 			</head>

@@ -1,0 +1,219 @@
+A:link, A:visited, A:active, A:hover { 
+}
+A:link  { 
+}
+A:visited { 
+}
+A:active {
+}
+A:HOVER { 
+  color: #000088; 
+  
+  background: #F4EAC6;
+}
+.onbody{
+}
+.onbody A:LINK {
+}
+.onbody A:VISITED {
+}
+.onbody A:ACTIVE {
+}
+BODY,P,TABLE,TD,TR {   
+  font-size:   10pt;
+  font-family: verdana,arial,Helvetica,sans-serif;
+}
+FORM {
+  display: inline;
+  margin-bottom: 0;
+}
+BODY {
+  background: #FFFFEE;
+  background:url("images/aa.gif");
+}
+PRE {
+  font-size:   9pt;
+  font-family: courier;
+}
+.tablesurround {
+  background:#505092;
+}
+.tableborders {
+  background: #D6C6A9;
+}
+.tdheader {
+  font-size:   10pt;
+  font-weight: bold;
+  background:  #b6b7da;
+  background-image: url('images/shaller-l.jpg');
+  background-repeat: repeat-x;
+  font-family: verdana,arial,sans-serif;
+}
+.menubar{
+  background: #b6b7da;
+  background-image: url('images/shaller-l.jpg');
+  background-repeat: repeat-x;
+}
+.navigation{
+  background: #b6b7da;
+  font-size:   8pt;
+  background-image: url('images/shaller-l.jpg');
+  background-repeat: repeat-x;
+  font-family: helvetica,arial;
+}
+.post {
+}
+.new {
+  font-size: 8pt;
+  color: red;
+}
+.new2 {
+  font-size: 8pt;
+  color: #880088;
+}
+.catandforum {
+  font-size: 8pt;
+}
+.posttime {
+  font-size: 8pt;
+  text-align: center;
+  background: #FFFFEE;
+}
+.threadtotal {
+  font-size: 8pt;
+  background: #FFFFEE;
+}
+.posttotal {
+  background: #F4EAD7;
+  background-image: url('images/shaller-l-long.jpg');
+    background-repeat: repeat-x;
+  font-size: 8pt;
+}
+.modcolumn {
+  background: #F4EAD7;
+  background-image: url('images/shaller-l-long.jpg');
+  background-repeat: repeat-x;
+  font-size: 8pt;
+}
+.small {
+  font-size:   8pt;
+  font-family: helvetica,arial;
+}
+.standouttext {
+  color: blue;
+}
+.pollcolor {
+  background: blue;
+}
+.welcome {
+  font-family: Times new roman;
+}
+.forumtitle {
+}
+.forumdescript {
+  font-size: 8pt;
+}
+.lighttable {
+  background: #FFFFEE;
+  background-image: url('images/shaller-lighttable.jpg');
+  background-repeat: repeat-x;
+}
+.darktable {
+  background: #F4EAD7;
+  background-image: url('images/shaller-l-long.jpg');
+  background-repeat: repeat-x;
+}
+.cleartable {
+  background: #FFFFEE;
+}
+.alternatetable {
+  background: #FFFFEE;
+}
+.subjecttable {
+  background: #f4ead7;
+}
+.footertable {
+  background: #F4EAD7;
+}
+.formboxes{
+  font-family: geneva, arial, sans-serif;
+  background-color: #F4EaD7;
+  border: 1px dashed #b6b7da;
+  font-size: 8pt;
+}
+.buttons {
+  border-width: 1px;
+  font-family: geneva, arial, sans-serif;
+  background-color: #F4EaD7;
+  font-size: 8pt;
+}
+blockquote {
+  border: 1px dashed #1F4584;
+  background-color: #F4EAD7;
+  background-image: url('images/shaller-l-long.jpg');
+  background-repeat: repeat-x;
+  font-size: 9pt;
+  margin: 0px 15px;
+  padding-left:10px;
+  padding-right:10px;
+  padding-top:1px;
+  padding-bottom:0px
+}
+blockquote .small{
+  font-family: Tahoma;
+  background-image: url('images/shaller-l.jpg');
+  background-repeat: repeat-x;
+  border-right: 1px solid #3E6174;
+  border-bottom: 1px solid #3E6174;
+  font-weight:bold;
+        margin-left:-10px;
+        padding: 1px 6px 2px 6px;
+        color: #313131;
+}
+
+blockquote hr {
+   visibility:hidden;
+   height:1px
+}
+blockquote br {
+   font-size:1px
+}
+.topmenu{
+  background: #FFFFAA;
+  background-image: url('images/shaller-head.jpg');
+  background-repeat: repeat-x;
+  color: black;
+}
+.topmenu a, .topmenu a:visited {
+  color:#000088;
+}
+
+hr {
+  height: 0;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid;
+}
+a.cup {
+   text-decoration:none;
+}
+
+.selectedrow {
+  font-size:   10pt;
+  background:  #b6b7da;
+  background-image: url('images/shaller-l.jpg');
+  background-repeat: repeat-x;
+  font-family: verdana,arial,sans-serif;
+}
+
+.confluent
+{
+   color: #FFFFEE;
+}
+
+.ctitle
+{
+   color: #550099;
+}
+
+

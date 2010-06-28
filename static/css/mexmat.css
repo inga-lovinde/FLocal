@@ -1,0 +1,178 @@
+A:link  { 
+    text-decoration:none; color: #993333
+}
+A:visited { 
+    text-decoration:none; color: #993333
+}
+A:active {
+    text-decoration:none; color: #993333
+}
+A:hover { 
+      text-decoration:underline; color: #993333
+}
+body,p,table,td,tr {   
+  font-size: 11px;
+  font-family: verdana,arial,sans-serif;
+  color: black;
+}
+body {
+  background: #DCDCDC; 
+}
+pre {
+  font-size: 13px;
+  font-family: courier,courier new;
+  background: #F5F5F5;
+  border: #000000 1px solid; 
+  padding: 4px; 
+  margin: 20px
+}
+FORM {
+  display: inline;
+  margin-bottom: 0px
+}
+.tablesurround {
+  background: #999999;
+}
+.tableborders {
+  background: #FFFFFF;
+}
+.tdheader {
+  background-image: url('images/mexmat/mexmat1.gif');
+  font-size: 11px;
+  font-weight: bold;
+  color: #603913;
+  font-family: verdana,arial,sans-serif;
+}
+.tdheader td {
+  background-image: url('images/mexmat/mexmat1.gif');
+  font-size: 11px;
+  font-weight: bold;
+  color: #603913;
+  font-family: verdana,arial,sans-serif;
+}
+.topmenu {
+  background: #DCDCDC;
+  color: #000000; 
+  font-size: 11px 
+}
+.menubar{
+  background: #DCDCDC;
+  color: #000000;
+  font-size: 11px
+}
+.navigation{
+  background: #E5E5E5;
+  color: black;
+  font-size: 11px;
+  font-family: verdana,arial,sans-serif;
+}
+.post {
+  background: #F5F5F5;
+  font-family: verdana,tahoma,arial;
+  font-size: 12px;
+  color: #000000;
+}
+.new {
+  font-size: 11px;
+}
+.catandforum {
+  background: #E5E5E5;
+  font-size: 11px;
+}
+.posttime {
+  font-size: 11px;
+  text-align: left;
+  background: #DCDCDC;
+}
+.threadtotal {
+  font-size: 11px;
+  background: #DCDCDC;
+}
+.posttotal {
+  font-size: 11px;
+  background: #DCDCDC;
+}
+.modcolumn {
+  font-size: 11px;
+  background: #E5E5E5;
+}
+.small {
+  font-size: 10px;
+  font-family: verdana,arial,sans-serif;
+}
+.pollcolor {
+  background: #999999;
+}
+.forumtitle {
+  font-size: 11px; 
+  font-weight: bold;
+}
+.forumdescript {
+  font-size: 10px;
+  color: #993333
+}
+.lighttable {
+  background: #F5F5F5;
+}
+.darktable {
+  background: #E5E5E5;
+}
+.cleartable {
+  background: #E5E5E5;
+}
+.alternatetable {
+  background: #E5E5E5;
+}
+.subjecttable {
+  background: #E5E5E5;
+}
+.footertable {
+  background: #E5E5E5;
+}                          
+.formboxes{
+  font-family: verdana, arial, sans-serif;
+  background-color: #FFFFFF;
+  font-size: 11px;
+}
+.buttons {
+  font-family: verdana, arial, sans-serif;
+  background-color: #D4D0C8;
+  font-size: 11px;
+}
+blockquote {
+   font-size: 11px;
+   font-family: verdana, arial, sans-serif; 
+   border: 1px solid;
+   margin: 20px; 
+   padding: 4px;
+   background: #F5F5F5
+}
+blockquote .small {
+   background: #E5E5E5;
+   margin-left: -4px; 
+   padding: 4px;
+   font-weight: bold;
+   font-size: 10px;
+}
+blockquote hr {
+   visibility: hidden;
+}
+blockquote br {
+   font-size: 1px
+}
+pre .small {
+   background: #E5E5E5;
+   margin-left: -4px; 
+   padding: 4px;
+   font-weight: bold;
+   font-size: 10px;
+}
+pre hr { 
+  color: #F5F5F5; 
+  height: 1px 
+}
+    
+.confluent {
+  color: #F5F5F5;
+}
+

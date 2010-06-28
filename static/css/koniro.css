@@ -1,0 +1,551 @@
+a:link  { 
+  text-decoration: none;
+  color: #1E4382;
+  background: none;
+}
+a:visited { 
+  text-decoration: none;
+  color: #1E4382;
+  background: none;
+}
+a:active {
+  color: #467FC1;
+  text-decoration: none;
+
+  background: none;
+}
+a:hover { 
+  text-decoration: underline;
+
+  color: #467FC1;
+  background: none;
+}
+p, table, td, tr {   
+  font-size: 10pt;
+  font-family: Tahoma, Arial, Helvetica, sans-serif;
+}
+form {
+  display: inline;
+  margin-bottom: 0;
+}
+body {
+	color: #000;
+	font-family: Tahoma, Trembuchet MS Verdana, Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+    background: #467FC1 url('images/koniro/bkg2.png');
+}
+.tablesurround {
+	color: #3E6174;
+	background-color: transparent;
+}
+.tableborders {
+	background-color: #171717;
+	color: #FFFFFF;
+}
+.tdheader {
+  font-size: 9pt;
+  font-weight: bold;
+  color: #FFF;
+  background: #224988 url('images/koniro/grad-02.png');
+}
+
+.tdheader a:link  { 
+  color: #FFFFFF;
+  background: none;
+}
+.tdheader a:visited { 
+  color: #FFFFFF;
+  background: none;
+}
+.tdheader a:active {
+  color: #D0DAE7;
+  background: none;
+}
+.tdheader a:hover { 
+  color: #D0DAE7;
+  background: none;
+}
+
+.menubar{
+  background: #224988 url('images/koniro/grad-02.png');
+  font-weight: bold;
+  color: #FFF
+}
+
+.menubar a:link  { 
+  color: #FFFFFF;
+  background: none;
+}
+.menubar a:visited { 
+  color: #FFFFFF;
+  background: none;
+}
+.menubar a:active {
+  color: #D0DAE7;
+  background: none;
+}
+.menubar a:hover { 
+  color: #D0DAE7;
+  background: none;
+}
+
+.navigation{
+  background-image: url('images/koniro/grad-02-sans.png');
+  color: #FFF;
+  border: 2px groove #3E6174;
+  font-size: 8pt;
+  padding: 0px; 
+  margin: 0px;
+  font-weight: bold;
+}
+
+.navigation a:link  { 
+  color: #FFFFFF;
+  background: none;
+}
+.navigation a:visited { 
+  color: #FFFFFF;
+  background: none;
+}
+.navigation a:active {
+  color: #D0DAE7;
+  background: none;
+}
+.navigation a:hover { 
+  color: #D0DAE7;
+  background: none;
+}
+  
+.new {
+  font-size: 8pt;
+  font-family: Verdana;
+  color: #FF0000;
+  background: none;
+}
+.new2 {
+  font-size: 8pt;
+  font-family: Verdana;
+  color: #880088;
+  background: none;
+}
+      
+.catandforum {
+  font-size: 9pt;
+}
+.posttime {
+  font-size: 9pt;
+  color: #313131;
+  background: #DFE6EF;
+  border-top: 1px solid #FFF;
+}
+.threadtotal {
+  font-size: 9pt;
+  color: #313131;
+  background: #DFE6EF;
+  border-top: 1px solid #FFF;
+}
+.posttotal,.modcolumn {
+  font-size: 9pt;
+  color: #313131;
+  background: #D0DAE7;
+  border-top: 1px solid #FFF;
+}
+.modline {
+  font-size: 8pt;
+  font-style: oblique;
+}
+.small {
+  font-size: 8pt;
+  font-weight:normal;
+}
+.standouttext {
+  color: #ff0000;
+  background: none;
+}
+.pollcolor {
+  background-image: url('images/koniro/grad-02.png');
+	color: #313131;
+	border: 1px solid #3E6174;
+  padding: 4px 
+}
+.welcome {
+  background: #bcbdbd;
+  color: #313131;
+}
+.forumtitle a {
+  font-size: 10pt;
+  font-weight: bold;
+  color: #1C5EB1; 
+  background: none;
+}
+.forumtitle a:hover {
+  font-size: 10pt;
+  font-weight: bold;
+  color: #333366; 
+  background: none;
+}
+.forumdescript {
+  font-size: 8pt;
+}
+.lighttable {
+	color: #313131;
+  background: #DFE6EF;
+  border-top: 1px solid #FFF;
+}
+
+.lighttable a{
+  color: #003366;
+  background: none;
+}
+
+.darktable {
+  border-top: 1px solid #FFF;
+  background: #D0DAE7;
+  color: #313131;
+}
+
+.newlighttable {
+  background: #6E94D6;
+    border-top: 1px solid #FFF;
+	font-weight: bold;
+	color: #FFFFFF;
+}
+.newlighttable a:link  { 
+  color: #FFFFFF;
+  background: none;
+}
+.newlighttable a:visited { 
+  color: #FFFFFF;
+  background: none;
+}
+.newlighttable a:active {
+  color: #D0DAE7;
+  background: none;
+}
+.newlighttable a:hover { 
+  color: #D0DAE7;
+  background: none;
+}
+
+.newdarktable {
+  background: #4B6491;
+    border-top: 1px solid #FFF;
+	font-weight: bold;
+	color: #FFFFFF
+}
+.newdarktable a:link  { 
+  color: #FFFFFF;
+  background: none;
+}
+.newdarktable a:visited { 
+  color: #FFFFFF;
+  background: none;
+}
+.newdarktable a:active {
+  color: #D0DAE7;
+  background: none;
+}
+.newdarktable a:hover { 
+  color: #D0DAE7;
+  background: none;
+}
+
+.newpostsincat {
+	color: #313131;
+}
+.cleartable {
+	background: #f7f7f7;
+	color: #313131;
+}
+.alternatetable {
+	background: #666699;
+	color: #313131;
+}
+.newsubjecttable {
+  background: #BFCCDE;
+  border-top: 1px solid #FFF;
+  font-weight: bold;
+  color: #313131
+}
+
+.subjecttable {
+  background: #D0DAE7;
+  border-top: 1px solid #FFF;
+  color: #313131
+}
+
+
+.footertable {
+	background: #ffffff;
+	color: #313131;
+}                          
+.formboxes{
+  background-color: #ffffff 
+  color: #313131;
+  font-size: 10pt;
+}
+
+
+.devswoosh {
+	background-image: url('/images/koniro/devswoosh.gif');
+	background-repeat: no-repeat;
+	background-position: right top
+
+}
+
+
+
+.devlogo {
+  background-image: url('/images/koniro/logo.gif');
+  background-repeat: no-repeat; 
+  background-position: left top
+}
+
+
+.buttons {
+  color: #FFF;
+  border: 2px groove #1F4584;
+  background:#1F4584 url('images/koniro/grad-02-sans.png');
+  background-repeat: repeat-x;
+  font-size:9pt;
+  font-family:Tahoma, Arial;
+  font-weight:bold;
+  background-repeat:repeat-x;
+}
+
+.buttons:active {
+  color: #FFF;
+  border: 2px ridge #1F4584;
+  background:#1F4584 url('images/koniro/grad-02-sans.png');
+  background-repeat: repeat-x;
+  font-size:9pt;
+  font-family:Tahoma, Arial;
+  font-weight:bold;
+  background-repeat:repeat-x;
+}
+
+.formboxes{
+  background-color: F1F4F8;
+  border: 1px dashed #1F4584;
+  color: #3366FF;
+  font-size: 10pt;
+  padding: 1px;
+  margin: 2px;
+
+}
+
+blockquote {
+  border: 1px dashed #1F4584;
+  background-image: url('images/koniro/nbkg-l.png');
+  font-size: 9pt; 
+  margin: 0px 15px;
+  padding-left:15px;
+  padding-right:10px;
+  padding-top:0px;
+  padding-bottom:0px
+}
+blockquote .small {
+/*  letter-spacing: 0.2em;
+  font-style: italic;
+  font-family: Tahoma;
+  font-size: medium;
+  font-weight:bold;*/
+  color: #000;
+  padding-left:0px;
+  padding-right:6px;
+  padding-top:0px;
+  padding-bottom:0px;
+}
+blizockquote .small {
+	background: #3E6174;
+	margin-left:-10px;
+	padding: 0px 2px 1px 1px;
+	color: #FFF;
+}
+blockquote hr {
+   visibility:hidden;
+   height: 1px
+}
+blockquote br {
+   font-size:1px
+}
+.onbody{
+  color: #313131;
+  background: none;
+}
+.onbody a:link {
+  color: #0000FF;
+  background: none;
+}
+.onbody a:visited {
+  color: #000066;
+  background: none;
+}
+.onbody a:active {
+  color: #000066;
+  background: none;
+}
+.post:first-letter {
+	font-weight: bold;
+}
+pre {
+	font-family: Tahoma, Trembuchet MS Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	display: block;
+	white-space: pre;
+}
+
+
+.devswoosh {
+
+	background-image: url(../images/cssgraphics/koniro/devswoosh.gif);
+
+	background-repeat: no-repeat;
+
+	background-position: right top;
+
+}
+
+
+
+.devlogo {
+
+	background-image: url(../images/cssgraphics/koniro/logo.gif);
+
+	background-repeat: no-repeat;
+
+	background-position: left top;
+
+}
+
+
+.tdnothumbs {
+  font-size: 10pt;
+  font-weight: bold;
+  color: #FFFFFF;
+  background-image: url('images/koniro/grad-02.png');
+}
+.tdnothumbs a:link  { 
+  color: #FFFFFF;
+  background: none;
+}
+.tdnothumbs a:visited { 
+  color: #FFFFFF;
+  background: none;
+}
+.tdnothumbs a:active {
+  color: #D0DAE7;
+  background: none;
+}
+.tdnothumbs a:hover { 
+  color: #D0DAE7;
+  background: none;
+}
+
+.tdnothumbs a:link  {
+  color: #FFFFFF;
+  background: none;
+}
+
+.tdnothumbs a:visited {
+  color: #FFFFFF;
+  background: none;
+}
+
+.tdnothumbs a:active {
+  color: #DFE6EF;
+  background: none;
+}
+
+.tddetails {
+    background: #DAE5F2;
+    color: #000080;
+}
+
+.tdbackground {
+  font-size: 9pt;
+  font-weight: ;
+  color: #000080;
+  background: #DAE5F2;
+  font-family: Verdana, Helvetica, sans-serif;
+}
+.catcolumn {
+  font-size: 8pt;
+  font-style: ;
+  text-align: ;
+  background: #DAE5F2;
+  color: #000080;
+}
+
+.photocol {
+  font-size: 8pt;
+  font-style: ;
+  text-align: ;
+  background: #DFE6EF;
+  color: #000080;
+}
+
+.commentscol {
+  font-size: 8pt;
+  font-style: ;
+  text-align: ;
+  background: #DAE5F2;
+  color: #000080;
+}
+
+.lastphocol {
+  font-size: 8pt;
+  font-style: ;
+  text-align: ;
+  background: #DAE5F2;
+  color: #000080;
+}
+
+.lastcommcol {
+  font-size: 8pt;
+  background: #DFE6EF;
+  color: #000080;
+}
+a.cup {
+   text-decoration:none;
+}
+.selectedrow {
+  font-size: 9pt;
+  color: #FFF;
+  background: #224988 url('images/koniro/grad-02.png');
+}
+
+.topmenu{
+  background: #224988 url('images/koniro/grad-02.png');
+  font-weight: bold;
+  color: #FFF
+}
+
+.topmenu a:link  { 
+  color: #FFFFFF;
+  background: none;
+}
+.topmenu a:visited { 
+  color: #FFFFFF;
+  background: none;
+}
+.topmenu a:active {
+  color: #D0DAE7;
+  background: none;
+}
+.topmenu a:hover { 
+  color: #D0DAE7;
+  background: none;
+}
+
+.tdheader a:link, .post a:link{
+  text-decoration: underline;
+}
+
+.confluent {
+   color: #DFE6EF;
+}
+.ctitle
+{
+   color: #550099;
+}

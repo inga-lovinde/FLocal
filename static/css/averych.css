@@ -1,0 +1,149 @@
+A:link {
+    text-decoration:none;color:#464da0	
+}
+A:visited {
+    text-decoration:none;color:#464da0
+}
+A:active {
+    text-decoration:none;color:#f39
+}
+A:hover {
+    COLOR: #f39;text-decoration:none
+}
+.onbody {
+    text-decoration:none;color:#000000	
+}
+.onbody A:link {
+    text-decoration:underline;color:#000000
+}
+.onbody A:visited {
+    text-decoration:underline;color:#332200	
+}
+.onbody A:hover {
+    text-decoration:underline;color:#221100	
+}
+.onbody A:active {
+    text-decoration:underline;color:#000000	
+}
+    img {border:0}
+BODY {
+    FONT-SIZE: 11px; FONT-FAMILY: verdana,arial,sans-serif
+}
+P {
+    FONT-SIZE: 11px; FONT-FAMILY: verdana,arial,sans-serif
+}
+TABLE {
+    FONT-SIZE: 11px; FONT-FAMILY: verdana,arial,sans-serif
+}
+TD {
+    FONT-SIZE: 11px; FONT-FAMILY: verdana,arial,sans-serif
+}
+TR {
+    FONT-SIZE: 11px; FONT-FAMILY: verdana,arial,sans-serif
+}
+PRE { background: #f9eff6; FONT-SIZE: 13px; font-family:"courier new"; MARGIN: 10px; BORD;padding: 0; border: solid 1px #f9eff6; }
+FORM {
+    DISPLAY: inline; MARGIN-BOTTOM: 0px
+}
+BODY {
+    BACKGROUND: #fcdfe8
+}
+.tablesurround {
+    BACKGROUND: #fcf
+}
+.tableborders {
+    BACKGROUND: #eb8aa9
+}
+.tdheader {
+    FONT-WEIGHT: bold; FONT-SIZE: 11px; BACKGROUND: #facddb; FONT-FAMILY: verdana, arial, sans-serif;color:#454545
+}
+.tdheader a {font-size:11px;color:#464da0;text-decoration:underline}
+.tdheader a:hover {color:#ec008c;text-decoration:underline}
+.tdheader a:visited {color:#293896;text-decoration:underline}
+.tdheader a:active {color:#ec008c;text-decoration:underline}
+.menubar {
+    BACKGROUND: #facddb
+}
+.navigation {
+    FONT-SIZE: 11px; BACKGROUND: #fdeaed; FONT-FAMILY: Verdana, helvetica, arial
+}
+.post {
+    BACKGROUND: #fdecee;font-family:verdana, tahoma, arial;font-size:10pt;color:#000000
+}
+.new {
+    FONT-SIZE: 11px; COLOR: #666666
+}
+.catandforum {
+    FONT-SIZE: 11px; BACKGROUND: #fdeaed
+}
+.posttime { FONT-SIZE: 11px; background: #fef2f7; TEXT-ALIGN: center
+      }
+.threadtotal {
+    FONT-SIZE: 11px; BACKGROUND: #fef2f7
+}
+.posttotal {
+    FONT-SIZE: 11px; BACKGROUND: #fdeaed
+}
+.modcolumn {
+    FONT-SIZE: 11px; BACKGROUND: #fdeaed
+}
+.small {
+    FONT-SIZE: 10px; FONT-FAMILY: verdana,helvetica,arial
+}
+.standouttext {
+    font-weight:bold;
+}
+.pollcolor {
+    BACKGROUND: #0000b0
+}
+.welcome {
+    FONT-FAMILY: Times new roman
+}
+.forumtitle {
+    font-size:13px; font-weight:bold;
+}
+.forumdescript {
+    FONT-SIZE: 10px
+}
+.lighttable {
+    BACKGROUND: #f9eff6
+}
+.darktable {
+    BACKGROUND: #fdeaed
+}
+.cleartable {
+    BACKGROUND: #facddb; color: #000000;
+}
+.alternatetable {
+    BACKGROUND: #ffffff
+}
+.subjecttable {
+   BACKGROUND: #fdeaed
+}
+.footertable {
+    BACKGROUND: #fdeaed
+}
+.formboxes {
+    FONT-SIZE: 11px; FONT-FAMILY: verdana, arial, sans-serif; BACKGROUND-COLOR: #f9eff6
+}
+.buttons {
+    FONT-SIZE: 11px; FONT-FAMILY: verdana, arial, sans-serif; BACKGROUND-COLOR: #dddddd
+}
+BLOCKQUOTE { background: #f9eff6; FONT-SIZE: 11px; MARGIN: 10px; BORD;padding: 0 10px; border: solid 1px #eb8aa9; }
+BLOCKQUOTE .small { BACKGROUND: #facddb; MARGIN-LEFT: -10px; font-weight:bold
+; padding: 0 2px 2px 0; }
+BLOCKQUOTE HR {
+    VISIBILITY: hidden; HEIGHT: 1px
+}
+BLOCKQUOTE BR {
+    FONT-SIZE: 1px
+}
+.topmenu {
+    BACKGROUND: #facddb; COLOR: black
+}
+hr { COLOR: #eb8aa9; HEIGHT: 1px; }
+    
+.confluent {
+    COLOR: #f9eff6
+}    
+   

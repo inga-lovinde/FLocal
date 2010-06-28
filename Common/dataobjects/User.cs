@@ -121,11 +121,11 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
-		private static Dictionary<string, int> id2user = new Dictionary<string,int>();
+		private static Dictionary<string, int> username2id = new Dictionary<string,int>();
 		public static User LoadByName(string name) {
-			if(!id2user.ContainsKey(name)) {
-				lock(id2user) {
-					if(!id2user.ContainsKey(name)) {
+			if(!username2id.ContainsKey(name)) {
+				lock(username2id) {
+					if(!username2id.ContainsKey(name)) {
 						List<string> ids = Config.instance.mainConnection.LoadIdsByConditions(
 							TableSpec.instance,
 							new ComparisonCondition(
@@ -139,14 +139,14 @@ namespace FLocal.Common.dataobjects {
 						if(ids.Count > 1) {
 							throw new CriticalException("not unique");
 						} else if(ids.Count == 1) {
-							id2user[name] = int.Parse(ids[0]);
+							username2id[name] = int.Parse(ids[0]);
 						} else {
 							throw new NotFoundInDBException();
 						}
 					}
 				}
 			}
-			return User.LoadById(id2user[name]);
+			return User.LoadById(username2id[name]);
 		}
 
 		protected override void doFromHash(Dictionary<string, string> data) {

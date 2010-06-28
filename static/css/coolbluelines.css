@@ -1,0 +1,604 @@
+.modname {
+	    color: #00AA00;
+}
+.adminname {
+	    color: #FF0000;
+}
+
+
+
+
+
+
+a:link  { 
+
+  color: #3366FF;
+
+  background: none;
+
+}
+
+a:visited { 
+
+  color: #3366FF;
+
+  background: none;
+
+}
+
+a:active {
+
+  color: #3366FF;
+
+  background: none;
+
+}
+
+a:hover {
+
+	color: #3399CC;
+
+	background: none;
+
+	text-decoration: none;
+
+}
+
+p, table, td, tr {   
+
+  font-size: 10pt;
+
+  font-family: Verdana, Tahoma, Arial;
+
+}
+
+form {
+
+  display: inline;
+
+  margin-bottom: 0;
+
+}
+
+body {
+
+	color: #000000;
+
+	background: #BCD0ED url('images/coolbluelines/background.gif');
+
+	font-family: Verdana, Tahoma, Arial;
+
+    font-size: 10pt
+
+}
+
+.tablesurround {
+
+	background: #BCD0ED;
+
+	color: #000000;
+
+}
+
+.tableborders {
+
+	background: #FFFFFF;
+
+	color: #FFFFFF;
+
+}
+
+.tdheader {
+
+  font-size: 10pt;
+
+  font-weight: bold;
+
+  color: #FFFFFF;
+
+  background: #BCD0ED url('images/coolbluelines/coolheader.gif');
+
+}
+
+.tdheader a:link  { 
+
+  color: #FFFFFF;
+
+  background: none;
+
+}
+
+.tdheader a:visited { 
+
+  color: #FFFFFF;
+
+  background: none;
+
+}
+
+.tdheader a:active {
+
+  color: #DFE6EF;
+
+  background: none;
+
+}
+
+.tdheader a:hover {
+
+	color: #BCD0ED;
+
+	background: none;
+
+	text-decoration: none;
+
+}
+
+.menubar{
+
+	background: #BCD0ED url('images/coolbluelines/coolheader.gif');
+
+	color: #000000;
+
+	font-weight: bold
+
+}
+
+.menubar a:link  { 
+
+  color: #FFFFFF;
+
+  background: none;
+
+}
+
+.menubar a:visited { 
+
+  color: #FFFFFF;
+
+  background: none;
+
+}
+
+.menubar a:active {
+
+  color: #DFE6EF;
+
+  background: none;
+
+}
+
+.menubar a:hover {
+
+	color: #BCD0ED;
+
+	background: none;
+
+	text-decoration: none;
+
+}
+
+
+
+.navigation{
+
+	border:1px solid #666699; background:#BCD0ED url('images/coolbluelines/coolnav.gif'); color: #E4EAF2;
+
+	font-size: 10pt;
+
+	padding: 1px;
+
+	margin: 1px;
+
+	font-weight: bold
+
+}
+
+.new {
+  font-size: 8pt;
+  color: #FF0000;
+  background: none;
+}
+.new2 {
+  font-size: 8pt;
+  color: #880088;
+  background: none;
+}
+
+.catandforum {
+
+  font-size: 10pt;
+
+}
+
+.posttime {
+
+	font-size: 10pt;
+
+	background: #DFE6EF;
+
+	color: #000000;
+
+}
+
+.threadtotal {
+
+	font-size: 10pt;
+
+	background: #DFE6EF;
+
+	color: #000000;
+
+}
+
+.posttotal,.modcolumn {
+
+  font-size: 10pt;
+
+  background: #DFE6EF;
+
+  color: #000000;
+
+}
+
+.modline {
+
+  font-size: 8pt;
+
+  font-style: oblique;
+
+}
+
+.small {
+
+  font-weight: normal;
+
+  font-size: 8pt;
+
+}
+
+.standouttext {
+
+  color: #ff0000;
+
+  background: none;
+
+}
+
+.pollcolor {
+
+	background: #ff0000;
+
+	color: #000000;
+
+	border: 1px solid #000000;
+
+}
+
+.welcome {
+
+  background: #BCD0ED url('images/coolbluelines/coolheader.gif');
+
+  color: #ffffff
+
+}
+
+.forumtitle {
+
+  font-size: 10pt;
+
+  font-weight: bold;
+
+}
+
+.forumdescript {
+
+  font-size: 8pt;
+
+}
+
+.lighttable {
+
+  background: #DFE6EF;
+
+  color: #000000;
+
+}
+
+.darktable {
+
+  background: #DAE5F2;
+
+  color: #000000;
+
+}
+
+.newlighttable {
+
+	background: #BCD0ED;
+
+	border-style: solid;
+
+	border-width: 1px 1px 1px 1px;
+
+	border-color: #DFE6EF;
+
+	padding: 1px;
+
+	margin: 1px;
+
+	font-weight: bold;
+
+	color: #000000;
+
+}
+
+.newdarktable {
+
+	background: #BCD0ED;
+
+	border-style: solid;
+
+	border-width: 1px 1px 1px 1px;
+
+	border-color: #E4EAF2;
+
+	padding: 1px;
+
+	margin: 1px;
+
+	font-weight: bold;
+
+	color: #000000;
+
+}
+
+.newpostsincat {
+
+	background: #FFCC00;
+
+	color: #000000;
+
+}
+
+.cleartable {
+
+	background: #f7f7f7;
+
+	color: #000000;
+
+}
+
+.alternatetable {
+
+	background: #666699;
+
+	color: #000000;
+
+}
+
+.newsubjecttable {
+
+	background: #BCD0ED;
+
+	font-weight: bold;
+
+	color: #000000;
+
+}
+
+.subjecttable {
+
+  background: #BCD0ED;
+
+  color: #000000;
+
+}
+
+.footertable {
+
+	background: #ffffff;
+
+	color: #000000;
+
+}                          
+
+.formboxes{
+
+  background-color: #ffffff;
+
+  color: #3366FF;
+
+  font-size: 10pt;
+
+}
+
+.buttons {
+
+	border-left:2px solid #BCD0ED; border-right:2px solid #3366FF; border-top:2px solid #BCD0ED; border-bottom:2px solid #3366FF; background:#3366FF url('images/coolbluelines/coolheader.gif'); color: #FFFFFF;
+
+	font-size: 9pt;
+
+	font-family: Verdana, Tahoma, Arial;
+
+	font-weight: bold
+
+}
+
+blockquote {
+
+   font-size: 9pt; border: 1px solid #3366FF;
+
+   background: #BCD0ED;
+
+   margin: 0px 20px; padding: 0px 10px
+
+}
+
+blockquote .small {
+
+	background: #3366FF;
+
+	margin-left:-10px;
+
+	padding: 1px 2px;
+
+	color: #FFFFFF;
+
+}
+
+blockquote hr {
+
+   visibility:hidden;
+
+   height: 1px
+
+}
+blockquote br {
+   font-size:1px
+}
+.onbody{
+
+  color: #000000;
+
+  background: none;
+
+}
+
+.onbody a:link {
+
+  color: #3366FF;
+
+  background: none;
+
+}
+
+.onbody a:visited {
+
+  color: #3366FF;
+
+  background: none;
+
+}
+
+.onbody a:active {
+
+  color: #3366FF;
+
+  background: none;
+
+}
+
+.post:first-letter {
+
+	font-weight: bold;
+
+}
+
+pre {
+
+	font-family: Verdana, Tahoma, Arial;
+
+	font-size: 10pt;
+
+	display: block;
+
+	white-space: pre;
+
+}
+
+
+
+
+
+.tdnothumbs {
+  font-size: 10pt;
+  font-weight: bold;
+  color: #FFFFFF;
+  background: #BCD0ED url('images/coolbluelines/coolheader.gif');
+}
+
+.tdnothumbs a:link  {
+  color: #FFFFFF;
+  background: none;
+}
+
+.tdnothumbs a:visited {
+  color: #FFFFFF;
+  background: none;
+}
+
+.tdnothumbs a:active {
+  color: #DFE6EF;
+  background: none;
+}
+
+.tddetails {
+    background: #DAE5F2;
+    color: #000080;
+}
+
+.tddetails {
+    background: #DAE5F2;
+    color: #000080;
+}
+
+.tdbackground {
+  font-size: 9pt;
+  font-weight: ;
+  color: #000080;
+  background: #DAE5F2;
+  font-family: Verdana, Helvetica, sans-serif
+}
+.catcolumn {
+  font-size: 8pt;
+  font-style: ;
+  text-align: ;
+  background: #DAE5F2;
+  color: #000080
+}
+
+.photocol {
+  font-size: 8pt;
+  font-style: ;
+  text-align: ;
+  background: #DFE6EF;
+  color: #000080
+}
+
+.commentscol {
+  font-size: 8pt;
+  font-style: ;
+  text-align: ;
+  background: #DAE5F2;
+  color: #000080
+}
+
+.lastphocol {
+  font-size: 8pt;
+  font-style: ;
+  text-align: ;
+  background: #DAE5F2;
+  color: #000080
+}
+
+.lastcommcol {
+  font-size: 8pt;
+  background: #DFE6EF;
+  color: #000080;
+}
+
+.topmenu{
+   background-color: #BCD0ED;
+   font-weight: bold;	
+
+}
+
+a.cup {
+   text-decoration:none;
+}
+
+.confluent {
+  color: #DFE6EF;
+}
+

@@ -32,9 +32,10 @@ namespace FLocal.IISHandler {
 			}
 		}
 
-		public override Common.dataobjects.IUserSettings userSettings {
+		private IUserSettings _userSettings;
+		public override IUserSettings userSettings {
 			get {
-				return new Common.dataobjects.AnonymousUserSettings();
+				return this._userSettings;
 			}
 		}
 
@@ -87,6 +88,11 @@ namespace FLocal.IISHandler {
 					this.httpresponse.AppendCookie(sessionCookie);
 					//throw; //TODO: remove me!
 				}
+			}
+			if(this.session != null) {
+				this._userSettings = AccountSettings.LoadByAccount(this.session.account);
+			} else {
+				this._userSettings = new AnonymousUserSettings();
 			}
 		}
 

@@ -1,0 +1,105 @@
+/*
+	magic.css v1.1
+	Created by Lynn
+	(c)Lynn, 2003
+*/
+a {
+	color: rgb(100,50,0); text-decoration: none;
+}
+a:link, a:visited {
+	text-decoration: underline;
+}
+a:visited {
+	color: rgb(0,0,0);
+}
+.onbody {
+}
+body, p, table, td, tr {
+	color: black; font-family: 'Georgia', serif; font-size: 10pt;
+}
+body {
+	background-color: rgb(255,255,220);
+}
+form {
+	display: inline; margin-bottom: 1em;
+}
+.tablesurround, .tableborders, .alternatetable {
+	background-color: rgb(120,60,0);
+}
+.tdheader, .menubar, .topmenu{
+	font-weight: bold; background-color: rgb(255,220,150); color: rgb(100,50,0);
+}
+.new {
+	color: rgb(192,0,0);
+}
+.forumtitle {
+	font-weight: normal;
+}
+.catandforum {
+	font-weight: normal;
+}
+
+.small, .posttotal, .modcolumn, .threadtotal, .posttime, .forumdescript, .navigation {
+	font-size: 8pt;
+}
+.posttotal, .modcolumn, .threadtotal, .posttime, .navigation{
+	background-color: rgb(255,240,200);
+}
+.posttime {
+	text-align: center;
+}
+.standouttext {
+	color: rgb(120,60,0); font-weight: bold;
+}
+.pollcolor {
+	background-color: rgb(120,60,0);
+}
+.lighttable {
+	background-color: rgb(255,240,200);
+}
+.darktable, .cleartable, .subjecttable {
+	background-color: rgb(255,220,150);
+}
+.formboxes, .buttons {
+	background-color: rgb(255,240,200);
+	font-family: 'Georgia', serif;
+}
+blockquote, pre {
+	border: 1px solid rgb(120,60,0); 
+  padding: 0ex 1ex 1ex; 
+  /*margin: 100px;*/
+	background-color: rgb(255,220,150); 
+  font-size: inherit;
+}
+blockquote font.small, pre font.small {
+	display: block;	text-align: left; background-color: transparent;
+	color: rgb(100,50,0); font-weight: bold; margin: 0ex; border: none;
+	font-family: 'Georgia', serif;
+}
+pre {
+	font-family: 'Courier', monospace;
+}
+pre hr {
+	display: block; visibility: hidden;
+}
+blockquote br {
+   font-size:1px
+}
+/* unknown */
+.footertable {
+	background-color: red
+}
+.welcome {
+	background-color: red
+}
+hr {
+  height: 0;
+  background: transparent;
+  border: none;
+  border-bottom: 1px dotted rgb(120,60,0);
+  width: 100%;
+}
+
+.confluent {
+	color: rgb(255,240,200);
+}

@@ -1,0 +1,136 @@
+/* lynn.css v2.3 :) */
+a:link, a:visited { 
+	text-decoration: none;
+}
+a:link  { 
+	color: #ccffff;
+}
+a:visited { 
+	color: #bbdddd;
+}
+a:active {
+	color: #ccffff;
+}
+a:hover {
+	text-decoration: underline;
+}
+.onbody {
+}
+body, p, table, td, tr {
+	color: #ffffff; font-family: 'Tahoma', sans-serif; font-size: 10pt;
+}
+body {
+	background-color: #8ea0ab;
+}
+form {
+	display: inline; margin-bottom: 1em;
+}
+.tablesurround, .tableborders {
+	background-color: #404d53;
+}
+.tdheader {
+	font-weight: bold; background-color: #50616b; color: #bbddff;
+}
+.menubar {
+	font-weight: bold; background-color: #50616b; color: #404d53;
+}
+.navigation {
+	background-color: #6c8391; color: #404d53;
+}
+.topmenu {
+	font-weight: bold; background-color: #50616b; color: #404d53;
+}
+.new {
+	color: yellow;
+}
+.forumtitle {
+	font-weight: bold;
+}
+.catandforum {
+	font-weight: bold;
+}
+
+.small, .posttotal, .modcolumn, .threadtotal, .posttime, .forumdescript, .navigation {
+	font-size: 8pt;
+}
+.posttotal, .modcolumn, .threadtotal, .posttime {
+	background-color: #50616b;
+}
+.posttime {
+	text-align: center;
+}
+.standouttext {
+	color: #bbddff; font-weight: bold;
+}
+.pollcolor {
+	background-color: #bbddff;
+}
+.lighttable {
+	background-color: #607681;
+}
+.darktable, .cleartable, .subjecttable {
+	background-color: #50616b;
+}
+.alternatetable {
+	background-color: #404d53;
+}
+.formboxes, .buttons {
+	color: #ffffff; background-color: #50616b;
+	font-family: 'Tahoma', sans-serif;
+}
+textarea.formboxes {
+	font-family: 'Lucida console', monospace; font-size: 8pt;
+}
+/* quotes */
+blockquote, pre {
+	border: 1px solid #404d53; padding: 0ex 1ex 1ex; margin: 1ex;  font-size: inherit;
+}
+blockquote font.small, pre font.small {
+	display: block;	text-align: center; background-color: #50616b;
+	color: #bbddff; font-weight: bold;
+	margin: 0ex; border: 1px solid #404d53; border-top: 0 none; padding-bottom: 1pt;
+	font-family: 'Tahoma', sans-serif;
+}
+blockquote br {
+   font-size:1px
+}
+/* codes */
+pre {
+	font-family: 'Lucida Console', monospace;
+}
+pre hr {
+	display: block; visibility: hidden;
+}
+hr {
+	display: block;
+	height: 1px;
+	background: transparent;
+	border: none;
+	border-bottom: 1px solid white;
+}
+
+/* unknown */
+.footertable, .welcome {
+	background-color: red  /* где оно есть ??? */
+}
+a.cup:hover {
+   text-decoration:none;
+}
+   
+.selectedrow {
+   background-color: #004d53;
+}
+
+.confluent {
+   color: #607681;
+}
+
+.rating_positive
+{
+  color: #00CC00;
+}
+.rating_positive_postlist
+{
+  color: #00CC00;
+}
+

@@ -1,0 +1,104 @@
+/*
+	akel.css v1.1
+	Created for Akel by Lynn
+	(c)Lynn, 2003
+*/
+
+a {
+	color: rgb(0,0,0);
+}
+a:link {
+	text-decoration: underline;
+}
+a:visited {
+	color: rgb(0,6,6);
+}
+a:active {
+	color: rgb(255,0,204);
+}
+a:hover {
+}
+.onbody {
+	color: rgb(255,255,255);
+}
+body, p, table, td, tr {
+	color: rgb(0,0,0); font-family: 'Verdana', sans-serif; font-size: 10pt;
+}
+body {
+	background-color: rgb(255,255,223);
+}
+form {
+	display: inline; margin-bottom: 1em;
+}
+.tablesurround, .tableborders, .alternatetable {
+	background-color: rgb(0,128,128);
+}
+.tdheader{
+	background-color: rgb(0,128,128); color: rgb(255,255,255);
+}
+.tdheader td {
+	color: inherit;
+}
+.tdheader a {
+	color: inherit;
+}
+.menubar, .topmenu {
+	background-color: rgb(255,255,192);
+}
+.new {
+	color: rgb(192,0,0);
+}
+.forumtitle {
+	font-weight: normal;
+}
+.catandforum {
+	font-weight: normal;
+}
+
+.small, .posttotal, .modcolumn, .threadtotal, .posttime, .forumdescript, .navigation {
+	font-size: 8pt;
+}
+.posttotal, .modcolumn, .threadtotal, .posttime, .navigation{
+	background-color: rgb(255,255,223);
+}
+.posttime {
+	text-align: center;
+}
+.standouttext {
+	font-weight: bold;
+}
+.pollcolor {
+	background-color: rgb(0,128,128);
+}
+.lighttable {
+	background-color: rgb(255,255,223);
+}
+.darktable, .cleartable, .subjecttable {
+	background-color: rgb(255,255,192);
+}
+.formboxes, .buttons {
+	background-color: rgb(255,255,223);
+	font-family: 'Verdana', sans-serif;
+}
+blockquote, pre {
+	border: 1px solid rgb(0,128,128); padding: 0ex 4px 1ex; margin: 1ex;
+	background-color: rgb(255,255,192); font-size: inherit;
+}
+blockquote font.small, pre font.small {
+	display: block;	text-align: center; background-color: rgb(0,128,128);
+	color: rgb(255,255,255); font-weight: bold; margin: 0ex -4px; border: none;
+	padding-bottom: 2px; font-family: 'Verdana', sans-serif;
+}
+pre {
+	font-family: 'Courier', monospace;
+}
+pre hr {
+	display: block; visibility: hidden;
+}
+hr {
+	display: none;
+}
+.confluent {
+	color: rgb(255,255,223);
+}
+

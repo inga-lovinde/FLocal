@@ -14,7 +14,15 @@ namespace FLocal.Common.dataobjects {
 			get;
 		}
 
+		int uploadsPerPage {
+			get;
+		}
+
 		int usersPerPage {
+			get;
+		}
+
+		Skin skin {
 			get;
 		}
 

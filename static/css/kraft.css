@@ -1,0 +1,170 @@
+A:link {
+    text-decoration:none;color:#0000b0
+    }
+    A:visited {
+text-decoration:none;color:#0000b0
+}
+A:active {
+    text-decoration:none;color:#0000b0
+    }
+    A:hover {
+COLOR: #ff0000;text-decoration:none
+}
+.onbody {
+    text-decoration:none;color:#ffffff
+    }
+    .onbody A:link {
+text-decoration:underline;color:#ffffff
+}
+.onbody A:visited {
+    text-decoration:underline;color:#ccddff
+    }
+    .onbody A:hover {
+text-decoration:underline;color:#ddeeff
+}
+.onbody A:active {
+    text-decoration:underline;color:#ffffff
+    }
+    img {border:0}
+    BODY {
+FONT-SIZE: 11px; FONT-FAMILY: verdana,arial,sans-serif
+}
+P {
+    FONT-SIZE: 11px; FONT-FAMILY: verdana,arial,sans-serif
+    }
+    TABLE {
+FONT-SIZE: 11px; FONT-FAMILY: verdana,arial,sans-serif
+}
+TD {
+    FONT-SIZE: 11px; FONT-FAMILY: verdana,arial,sans-serif
+    }
+    TR {
+FONT-SIZE: 11px; FONT-FAMILY: verdana,arial,sans-serif
+}
+
+PRE {
+    background: #ffffff;
+    BORDER-RIGHT: #ffffff 1px solid; PADDING-RIGHT: 10px; BORDER-TOP: #ffffff 1px solid; PADDING-LEFT: 10px; FONT-SIZE: 11px;font-family:courier; PADDING-BOTTOM: 0px; MARGIN: 10px 10px; BORDER-LEFT: #ffffff 1px solid; PADDING-TOP: 0px; BORDER-BOTTOM: #ffffff 1px solid
+    }
+    
+    FORM {
+DISPLAY: inline; MARGIN-BOTTOM: 0px
+}
+BODY {
+    BACKGROUND: #FFFFFF
+    }
+    .tablesurround {
+BACKGROUND: #ffffff
+}
+.tableborders {
+    BACKGROUND: #ffffff
+    }
+    .tdheader {
+FONT-WEIGHT: bold; FONT-SIZE: 11px; BACKGROUND: #6699cc; FONT-FAMILY: verdana,arial,sans-serif;color:#ffffff
+}
+.tdheader a {font-size:11px;color:#ffffff;text-decoration:underline}
+.tdheader a:hover {color:#ddeeff;text-decoration:underline}
+.tdheader a:visited {color:#ccddff;text-decoration:underline}
+.tdheader a:active {color:#ffffff;text-decoration:underline}
+.menubar {
+    BACKGROUND: #ffffff
+    }
+    .navigation {
+FONT-SIZE: 11px; BACKGROUND: #ffffff; FONT-FAMILY: Verdana,helvetica,arial
+}
+.post {
+    /*BACKGROUND: #f9f9f9;*/font-family:verdana,tahoma,arial;font-size:10pt;color:#000000
+    }
+    .new {
+FONT-SIZE: 11px; COLOR: #666666
+}
+.new2 {
+  FONT-SIZE: 11px; COLOR: #880088
+}
+
+.catandforum {
+    FONT-SIZE: 11px; BACKGROUND: #f0f0f0
+    }
+    .posttime {
+FONT-SIZE: 11px; BACKGROUND: #f9f9f9; TEXT-ALIGN: center
+}
+.threadtotal {
+    FONT-SIZE: 11px; BACKGROUND: #f9f9f9
+    }
+    .posttotal {
+FONT-SIZE: 11px; BACKGROUND: #f0f0f0
+}
+.modcolumn {
+    FONT-SIZE: 11px; BACKGROUND: #f0f0f0
+    }
+    .small {
+FONT-SIZE: 10px; FONT-FAMILY: verdana,helvetica,arial
+}
+.standouttext {
+    font-weight:bold;
+    }
+    .pollcolor {
+BACKGROUND: #0000b0
+}
+.welcome {
+    FONT-FAMILY: Times new roman
+    }
+    .forumtitle {
+font-size:12px
+}
+.forumdescript {
+    FONT-SIZE: 10px
+    }
+    .lighttable {
+BACKGROUND: #f9f9f9
+}
+.darktable {
+    BACKGROUND: #f0f0f0
+    }
+    .cleartable {
+BACKGROUND: #f0f0f0
+}
+.alternatetable {
+    BACKGROUND: #ffffff
+    }
+    .subjecttable {
+BACKGROUND: #f0f0f0
+}
+.footertable {
+    BACKGROUND: #00ff00
+    }
+    .formboxes {
+FONT-SIZE: 11px; FONT-FAMILY: verdana, arial, sans-serif; BACKGROUND-COLOR: #ffffff
+}
+.buttons {
+    FONT-SIZE: 11px; FONT-FAMILY: verdana, arial, sans-serif; BACKGROUND-COLOR: #cccccc
+    }
+    BLOCKQUOTE {
+background: #ffffff;
+BORDER-RIGHT: #ffffff 1px solid; PADDING-RIGHT: 10px; BORDER-TOP: #ffffff 1px solid; PADDING-LEFT: 10px; FONT-SIZE: 11px; PADDING-BOTTOM: 0px; MARGIN: 10px 10px; BORDER-LEFT: #ffffff 1px solid; PADDING-TOP: 0px; BORDER-BOTTOM: #ffffff 1px solid
+}
+BLOCKQUOTE .small {
+    PADDING-RIGHT: 2px; PADDING-LEFT: 2px; BACKGROUND: #f0f0f0; PADDING-BOTTOM: 1px; MARGIN-LEFT: -10px; PADDING-TOP: 1px; font-weight:bold
+    }
+    BLOCKQUOTE HR {
+VISIBILITY: hidden; HEIGHT: 1px
+}
+BLOCKQUOTE BR {
+    FONT-SIZE: 1px
+    }
+    .topmenu {
+BACKGROUND: #ffffff; COLOR: black
+}
+
+.selectedrow {
+FONT-SIZE: 11px; BACKGROUND: #6699cc; FONT-FAMILY: verdana,arial,sans-serif;color:#ffffff
+}
+    .confluent {
+COLOR: #f9f9f9;
+}
+
+.ctitle
+{
+   color: #550099;
+}
+

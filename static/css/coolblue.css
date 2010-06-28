@@ -1,0 +1,302 @@
+// CoolBlue Stylesheet
+// By Joshua Pettit
+// www.joshuapettit.com
+
+
+a:link  { 
+  color: #3366FF;
+  background: none;
+}
+a:visited { 
+  color: #3366FF;
+  background: none;
+}
+a:active {
+  color: #3366FF;
+  background: none;
+}
+a:hover {
+	color: #3399CC;
+	background: none;
+	text-decoration: none;
+}
+p,table,td,tr {   
+  font-size: 10pt;
+  font-family: Verdana, Tahoma, Arial;
+}
+form {
+  display: inline;
+  margin-bottom: 0;
+}
+body {
+	color: #000000;
+	background: #ffffff;
+	font-family: Verdana, Tahoma, Arial;
+    font-size: 10pt;
+}
+.tablesurround {
+	background: #BCD0ED;
+	color: #000000;
+}
+.tableborders {
+	background: #FFFFFF;
+	color: #FFFFFF;
+}
+.tdheader {
+  font-size: 10pt;
+  font-weight: bold;
+  color: #FFFFFF;
+  background: #BCD0ED url(images/coolheader.gif);
+}
+.tdheader a:link  { 
+  color: #FFFFFF;
+  background: none;
+}
+.tdheader a:visited { 
+  color: #FFFFFF;
+  background: none;
+}
+.tdheader a:active {
+  color: #DFE6EF;
+  background: none;
+}
+.tdheader a:hover {
+	color: #BCD0ED;
+	background: none;
+	text-decoration: none;
+}
+.menubar{
+	background: #BCD0ED url(images/coolheader.gif);
+	color: #000000;
+	font-weight: bold;
+}
+.menubar a:link  { 
+  color: #FFFFFF;
+  background: none;
+}
+.menubar a:visited { 
+  color: #FFFFFF;
+  background: none;
+}
+.menubar a:active {
+  color: #DFE6EF;
+  background: none;
+}
+.menubar a:hover {
+	color: #BCD0ED;
+	background: none;
+	text-decoration: none;
+}
+
+.navigation{
+	background: #BCD0ED url(images/coolnav.gif);
+	color: #E4EAF2;
+	font-size: 8pt;
+	border-style: solid;
+	border-width: 1px 1px 1px 1px;
+	border-color: #666699;
+	padding: 1px;
+	margin: 1px;
+	font-weight: bold;
+}
+.new {
+  font-size: 8pt;
+  color: #FF0000;
+  background: none;
+}
+.new2 {
+  font-size: 8pt;
+  color: #880088;
+  background: none;
+}
+	    
+.catandforum {
+  font-size: 8pt;
+}
+.posttime {
+	font-size: 10pt;
+	background: #DFE6EF;
+	color: #000000;
+}
+.threadtotal {
+	font-size: 10pt;
+	background: #DFE6EF;
+	color: #000000;
+}
+.posttotal,.modcolumn {
+  font-size: 10pt;
+  background: #DFE6EF;
+  color: #000000;
+}
+.modline {
+  font-size: 8pt;
+  font-style: oblique;
+}
+.small {
+  font-weight: normal;
+  font-size: 8pt;
+}
+.standouttext {
+  color: #ff0000;
+  background: none;
+}
+.pollcolor {
+	background: #ff0000;
+	color: #000000;
+	border: 1px solid #000000;
+}
+.welcome {
+  background: #BCD0ED url(images/coolheader.gif);
+  color: #ffffff;
+}
+.forumtitle {
+  font-size: 10pt;
+  font-weight: bold;
+}
+.forumdescript {
+  font-size: 8pt;
+}
+.lighttable {
+  background: #DFE6EF;
+  color: #000000;
+}
+.darktable {
+  background: #E4EAF2;
+  color: #000000;
+}
+.newlighttable {
+	background: #BCD0ED;
+	border-style: solid;
+	border-width: 1px 1px 1px 1px;
+	border-color: #DFE6EF;
+	padding: 1px;
+	margin: 1px;
+	font-weight: bold;
+	color: #000000;
+}
+.newdarktable {
+	background: #BCD0ED;
+	border-style: solid;
+	border-width: 1px 1px 1px 1px;
+	border-color: #E4EAF2;
+	padding: 1px;
+	margin: 1px;
+	font-weight: bold;
+	color: #000000;
+}
+.newpostsincat {
+	background: #FFCC00;
+	color: #000000;
+}
+.cleartable {
+	background: #f7f7f7;
+	color: #000000;
+}
+.alternatetable {
+	background: #666699;
+	color: #000000;
+}
+.newsubjecttable {
+	background: #BCD0ED;
+	font-weight: bold;
+	color: #000000;
+}
+.subjecttable {
+  background: #BCD0ED;
+  color: #000000;
+}
+.footertable {
+	background: #ffffff;
+	color: #000000;
+}                          
+.formboxes{
+  background-color: #ffffff;
+  color: #3366FF;
+  font-size: 10pt;
+}
+.buttons {
+	background: #3366FF url(images/coolheader.gif);
+	color: #FFFFFF;
+	font-size: 9pt;
+	font-family: Verdana, Tahoma, Arial;
+	border-top-width: 2px;
+	border-right-width: 2px;
+	border-bottom-width: 2px;
+	border-left-width: 2px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #BCD0ED;
+	border-right-color: #3366FF;
+	border-bottom-color: #3366FF;
+	border-left-color: #BCD0ED;
+	font-weight: bold;
+}
+blockquote {
+   font-size: 9pt; border: 1px solid #3366FF;
+   background: #BCD0ED;
+   margin: 0px 20px; padding: 0px 10px
+}
+blockquote .small {
+	background: #3366FF;
+	margin-left:-10px;
+	padding: 1px 2px;
+	color: #FFFFFF;
+}
+blockquote hr {
+   visibility:hidden;
+   height: 1px
+}
+blockquote br {
+   font-size:1px
+}
+.onbody{
+  color: #000000;
+  background: none;
+}
+.onbody a:link {
+  color: #3366FF;
+  background: none;
+}
+.onbody a:visited {
+  color: #3366FF;
+  background: none;
+}
+.onbody a:active {
+  color: #3366FF;
+  background: none;
+}
+.post:first-letter {
+	font-weight: bold;
+}
+pre {
+	font-family: Verdana, Tahoma, Arial;
+	font-size: 10pt;
+	display: block;
+	white-space: pre;
+}
+a.cup {
+   text-decoration:none;
+}
+.selectedrow {
+  font-size: 10pt;
+  background: #BCD0ED url(images/coolheader.gif);
+}
+
+.topmenu{
+   background-color: #BCD0ED;
+   font-weight: bold;	
+
+}
+
+.confluent {
+  color: #DFE6EF;
+}
+
+.ctitle
+{
+   color: #550099;
+}
+
+

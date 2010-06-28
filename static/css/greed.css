@@ -1,0 +1,69 @@
+A:link {text-decoration:none;color:#aaaaaa}
+A:visited{text-decoration:none;color:#666666}
+A:active{text-decoration:none;color:#999999}
+A:hover{COLOR:white;text-decoration:none}
+
+.onbody{text-decoration:none;color:white}
+.onbody A:link{text-decoration:underline;color:#aaaaaa}
+.onbody A:visited{text-decoration:underline;color:#666666}
+.onbody A:hover{text-decoration:underline;color:white}
+.onbody A:active{text-decoration:underline;color:#999999}
+
+BODY, P, TABLE, TD, TR {FONT-SIZE:11px;FONT-FAMILY:verdana,sans-serif,arial}
+BODY{color:#ffffff;background-color:black}
+FORM{DISPLAY:inline;MARGIN-BOTTOM:0px}
+
+.topmenu{BACKGROUND:#000000;COLOR:black;FONT-SIZE:12px}
+.menubar{BACKGROUND:#050505;FONT-SIZE:12px}
+
+.tablesurround{BACKGROUND:#191919;margin-top:-1px;margin-bottom:-1px}
+.tableborders{BACKGROUND:#191919}
+
+.tdheader{FONT-WEIGHT:bold;FONT-SIZE:11px;BACKGROUND:#333333;FONT-FAMILY:verdana,arial,sans-serif;color:#ffffff}
+.tdheader a{font-size:11px;color:#dddddd;text-decoration:underline}
+.tdheader a:hover{color:#BBBBBB;text-decoration:none}
+.tdheader a:visited{color:#999999;text-decoration:underline}
+.tdheader a:active{color:#000000;text-decoration:underline}
+
+.navigation{FONT-SIZE:11px;BACKGROUND:#000000;FONT-FAMILY:Verdana,helvetica,arial}
+
+.post{BACKGROUND:#151515;font-family:verdana,tahoma,arial;font-size:10pt;color:#dddddd}
+.new{FONT-SIZE:11px;COLOR:#666666}
+.catandforum{FONT-SIZE:11px;color:#eeeeee;BACKGROUND:black}
+.posttime{FONT-SIZE:11px;BACKGROUND:#000000;TEXT-ALIGN:center}
+.threadtotal{FONT-SIZE:11px;BACKGROUND:#000000}
+.posttotal{FONT-SIZE:11px;BACKGROUND:black}
+.modcolumn{FONT-SIZE:11px;BACKGROUND:black}
+.small{FONT-SIZE:11px;FONT-FAMILY:Arial,Helvetica,sans-serif;color:#666666;line-height:normal}
+.standouttext{font-weight:bold}
+.pollcolor{BACKGROUND:#999999}
+
+.welcome{FONT-FAMILY:Times new roman}
+.forumtitle{font-size:12px}
+.forumdescript{FONT-SIZE:11px;background-color:black}
+
+.lighttable{BACKGROUND:#141414;color:#cccccc}
+.darktable{BACKGROUND:black}
+.cleartable{BACKGROUND:black}
+.alternatetable{BACKGROUND:black}
+.subjecttable{BACKGROUND:black}
+.footertable{BACKGROUND:#666666}
+
+.formboxes{FONT-SIZE:11px;FONT-FAMILY:Verdana,helvetica,arial;color:#eeeeee;BACKGROUND-COLOR:black}
+.buttons{FONT-SIZE:11px;FONT-FAMILY:Verdana,helvetica,arial;BACKGROUND-COLOR:#555555}
+
+PRE{background:#303030;FONT-SIZE:9px;font-family:courier;BORDER:#999999 1px solid;PADDING: 3px 5px;MARGIN:0px 10px 0px 30px}
+
+BLOCKQUOTE{background:#333333;FONT-SIZE:11px;border:1px solid #999999;padding:0px 10px;MARGIN:5px 10px 0px 30px}
+BLOCKQUOTE .small{PADDING: 1px 4px;color:#000000;BACKGROUND:#999999;MARGIN-Left: -11px;font-weight:bold}
+BLOCKQUOTE HR {VISIBILITY:hidden;HEIGHT:1px}
+BLOCKQUOTE BR {FONT-SIZE:1px}
+.selectedrow {FONT-SIZE:11px;BACKGROUND:#333333;FONT-FAMILY:verdana,arial,sans-serif;color:#ffffff}
+.confluent{COLOR:#141414;}
+
+.message_in A:link {color: #4444FF;}
+.message_in A:visited {color: #4444FF;}
+
+.message_out A:link {color: #FF0000;}
+.message_out A:visited {color: #FF0000;}
+

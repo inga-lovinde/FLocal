@@ -1,0 +1,151 @@
+/*
+body.css v1.0
+*/
+
+
+a:link, a:visited, a:active, a:hover { 
+text-decoration: none;
+}
+A:link {
+COLOR: #000066
+}
+A:visited {
+COLOR: #000066
+}
+A:active {
+COLOR: #003333
+}
+a:hover {
+text-decoration: underline;
+}
+.onbody {
+
+}
+.onbody A:link {
+
+}
+.onbody A:visited {
+
+}
+
+.onbody {
+}
+body, p, table, td, tr {
+color: #000000; font-family: 'Tahoma', sans-serif; font-size: 10pt;
+scrollbar-face-color:#DDFFFF; scrollbar-shadow-color: #000000;
+scrollbar-highlight-color: #EEFFFF; scrollbar-3dlight-color:#000000; 
+}
+body {
+background-color: #EEFFFF;
+}
+form {
+display: inline; margin-bottom: 1em;
+}
+
+
+.tablesurround {
+BACKGROUND: #8888aa
+}
+.tableborders {
+BACKGROUND: #666699
+}
+.tdheader {
+BACKGROUND: #bcbdbd;/*#dedfdf;*/ COLOR: #000000; FONT-FAMILY: Verdana, Helvetica, sans-serif
+}
+.menubar {
+BACKGROUND: #dedfdf; COLOR: #000000
+}
+.navigation {
+BACKGROUND: #bcbdbd; COLOR: #000000; FONT-FAMILY: Verdana, Helvetica, sans-serif
+}
+.post:first-line {
+
+}
+.post:first-letter {
+
+}
+.new {
+FONT-FAMILY: Verdana, Helvetica, sans-serif;
+font-size: 8pt; color: #006699;
+}
+.new2 {
+FONT-FAMILY: Verdana, Helvetica, sans-serif;
+font-size: 8pt; color: #880088;
+}
+.catandforum {
+
+}
+.posttime {
+BACKGROUND: #f7f7f7
+}
+.threadtotal {
+BACKGROUND: #f7f7f7
+}
+.posttotal {
+BACKGROUND: #f7f7f7
+}
+.modcolumn {
+FONT-SIZE: 9pt; BACKGROUND: #f7f7f7
+}
+.small {
+FONT-SIZE: 9pt; FONT-FAMILY: Verdana, Helvetica, sans-serif
+}
+.standouttext {
+COLOR: red
+}
+.pollcolor {
+BACKGROUND: red
+}
+.welcome {
+BACKGROUND: #bcbdbd; COLOR: #000000; FONT-FAMILY: Verdana, Helvetica, sans-serif
+}
+.forumtitle {
+
+}
+.forumdescript {
+   font-size: 8pt;
+}
+.lighttable {
+BACKGROUND: #f7f7f7; COLOR: #000000
+}
+.darktable {
+BACKGROUND: #e6e6e6; COLOR: #000000
+}
+.cleartable {
+BACKGROUND: #f7f7f7
+}
+.alternatetable {
+BACKGROUND: #666699
+}
+.subjecttable {
+BACKGROUND: #dedfdf; COLOR: #000000
+}
+.footertable {
+BACKGROUND: #ffffff
+}
+.formboxes, .buttons {
+color: #000000; background-color: #dedfdf;
+font-family: 'Tahoma', sans-serif;
+}
+textarea.formboxes {
+font-family: 'Lucida console', monospace; font-size: 8pt;
+}
+BLOCKQUOTE {
+BORDER-RIGHT: #e6e6e6 1px solid; PADDING-RIGHT: 10px; BORDER-TOP: #e6e6e6 1px solid; PADDING-LEFT: 10px; FONT-SIZE: 9pt; PADDING-BOTTOM: 0px; MARGIN: 0px 20px; BORDER-LEFT: #e6e6e6 1px solid; PADDING-TOP: 0px; BORDER-BOTTOM: #e6e6e6 1px solid
+}
+BLOCKQUOTE .small {
+PADDING-RIGHT: 2px; PADDING-LEFT: 2px; BACKGROUND: #e6e6e6; PADDING-BOTTOM: 1px; MARGIN-LEFT: -10px; PADDING-TOP: 1px
+}
+BLOCKQUOTE HR {
+VISIBILITY: hidden; HEIGHT: 1px
+}
+BLOCKQUOTE BR {
+FONT-SIZE: 1px
+}
+.topmenu {
+BACKGROUND: #ffffaa; COLOR: black
+}
+
+.confluent {
+COLOR: #f7f7f7;
+}
