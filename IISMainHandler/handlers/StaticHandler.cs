@@ -21,7 +21,7 @@ namespace FLocal.IISHandler.handlers {
 				throw new HttpException(403, "listing not allowed");
 			}
 			
-			Regex checker = new Regex("^[a-z][0-9a-z\\-]*(\\.[a-zA-Z]+)?$", RegexOptions.Compiled | RegexOptions.CultureInvariant | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+			Regex checker = new Regex("^[a-z][0-9a-z\\-_]*(\\.[a-zA-Z]+)?$", RegexOptions.Compiled | RegexOptions.CultureInvariant | RegexOptions.IgnoreCase | RegexOptions.Singleline);
 			string path = "";
 			for(int i=1; i<this.requestParts.Length; i++) {
 				if(!checker.IsMatch(this.requestParts[i])) {
