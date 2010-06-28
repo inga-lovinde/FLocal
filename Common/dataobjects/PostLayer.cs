@@ -51,7 +51,7 @@ namespace FLocal.Common.dataobjects {
 								new FLocal.Core.DB.conditions.EmptyCondition(),
 								Diapasone.unlimited
 							) select int.Parse(stringId);
-							Category.LoadByIds(ids);
+							PostLayer.LoadByIds(ids);
 							return ids;
 						}
 					)
