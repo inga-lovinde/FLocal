@@ -20,8 +20,8 @@
 						</tr> 
 						<tr> 
 							<td class="lighttable"> 
-								<form method="post" action="/do/Upload/">
-									<input type="file" name="uploaded" class="formboxes" /><br/>
+								<form method="post" action="/do/Upload/" enctype="multipart/form-data">
+									<input type="file" name="file" class="formboxes" /><br/>
 									<input type="submit" name="buttlogin" value="Отправить!" class="buttons" /> 
 								</form> 
 							</td> 

@@ -21,7 +21,7 @@ namespace FLocal.IISHandler.handlers.request {
 		}
 
 		protected override XElement[] Do(WebContext context) {
-			HttpPostedFile file = context.httprequest.Files["uploaded"];
+			HttpPostedFile file = context.httprequest.Files["file"];
 			if(file == null) throw new FLocalException("file not uploaded");
 			if(file.ContentLength != file.InputStream.Length) throw new FLocalException("file is not uploaded completely");
 			Upload upload = UploadManager.UploadFile(file.InputStream, System.IO.Path.GetFileName(file.FileName), DateTime.Now, context.session.account.user, null);

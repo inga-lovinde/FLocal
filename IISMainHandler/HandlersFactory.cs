@@ -93,6 +93,8 @@ namespace FLocal.IISHandler {
 								return new handlers.request.ReplyHandler();
 							case "newthread":
 								return new handlers.request.CreateThreadHandler();
+							case "upload":
+								return new handlers.request.UploadHandler();
 							default:
 								return new handlers.WrongUrlHandler();
 						}
