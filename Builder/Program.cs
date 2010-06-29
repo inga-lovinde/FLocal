@@ -16,10 +16,13 @@ namespace Builder {
 			info.WorkingDirectory = (new FileInfo(filename)).Directory.FullName;
 			info.UseShellExecute = false;
 			info.RedirectStandardOutput = true;
+			StringBuilder builder = new StringBuilder();
 			using(Process process = Process.Start(info)) {
+				builder.Append(process.StandardOutput.ReadToEnd());
 				process.WaitForExit();
-				return process.StandardOutput.ReadToEnd();
+				builder.Append(process.StandardOutput.ReadToEnd());
 			}
+			return builder.ToString();
 		}
 
 		static void Main(string[] args) {
@@ -45,7 +48,11 @@ namespace Builder {
 				string postbuildCommands = fullPath + "postbuild.bat";
 				string buildNumberFile = fullPath + "build.txt";
 
-				if(File.Exists(prebuildCommands)) Console.WriteLine(runBatFile(prebuildCommands));
+				if(File.Exists(prebuildCommands)) {
+					Console.WriteLine(">prebuild");
+					Console.WriteLine(runBatFile(prebuildCommands));
+					Console.WriteLine("<prebuild");
+				}
 
 				if(!File.Exists(buildNumberFile)) {
 					using(FileStream stream = File.Create(buildNumberFile)) {
