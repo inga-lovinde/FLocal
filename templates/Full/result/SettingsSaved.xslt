@@ -8,12 +8,12 @@
 					<table cellpadding="3" cellspacing="1" width="100%" class="tableborders">
 						<tr>
 							<td class="tdheader">
-								<xsl:text>Выход из панели</xsl:text>
+								<xsl:text>Сохранение настроек</xsl:text>
 							</td> 
 						</tr>
 						<tr> 
 							<td class="lighttable"> 
-								<xsl:text>Сессия удалена</xsl:text>
+								<xsl:text>Настройки сохранены</xsl:text>
 								<br/>
 								<a>
 									<xsl:attribute name="href">/Boards/</xsl:attribute>

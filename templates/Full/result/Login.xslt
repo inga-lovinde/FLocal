@@ -14,6 +14,11 @@
 						<tr> 
 							<td class="lighttable"> 
 								<xsl:text>Авторизация прошла успешно</xsl:text>
+								<br/>
+								<a>
+									<xsl:attribute name="href">/Boards/</xsl:attribute>
+									<xsl:text>На главную</xsl:text>
+								</a>
 							</td> 
 						</tr> 
 					</table> 

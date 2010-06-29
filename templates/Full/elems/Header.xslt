@@ -45,7 +45,12 @@
 									<xsl:text>Аплоад</xsl:text>
 								</a>
 								<xsl:text> | </xsl:text>
-								<a target="_top">My Home</a>
+								<a target="_top">
+									<xsl:if test="session/sessionKey">
+										<xsl:attribute name="href">/Settings/</xsl:attribute>
+									</xsl:if>
+									<xsl:text>Настройки</xsl:text>
+								</a>
 								<xsl:text> | </xsl:text>
 								<a target="_top">
 									<xsl:if test="session/notLoggedIn">

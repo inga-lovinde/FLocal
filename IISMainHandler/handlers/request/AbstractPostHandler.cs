@@ -32,6 +32,7 @@ namespace FLocal.IISHandler.handlers.request {
 				new XElement("root",
 					new XElement("title", Config.instance.AppInfo),
 					this.Do(context),
+					context.userSettings.skin.exportToXml(),
 					context.exportSession()
 				)
 			);

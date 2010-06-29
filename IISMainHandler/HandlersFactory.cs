@@ -62,6 +62,8 @@ namespace FLocal.IISHandler {
 					return new handlers.response.UserListHandler();
 				case "user":
 					return new handlers.response.UserInfoHandler();
+				case "settings":
+					return new handlers.response.SettingsHandler();
 				case "upload":
 					if(context.requestParts.Length < 2) {
 						return new handlers.WrongUrlHandler();
@@ -93,6 +95,8 @@ namespace FLocal.IISHandler {
 								return new handlers.request.ReplyHandler();
 							case "newthread":
 								return new handlers.request.CreateThreadHandler();
+							case "settings":
+								return new handlers.request.SettingsHandler();
 							case "upload":
 								return new handlers.request.UploadHandler();
 							default:

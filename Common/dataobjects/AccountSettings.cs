@@ -6,6 +6,7 @@ using System.Xml.Linq;
 using FLocal.Core;
 using FLocal.Core.DB;
 using FLocal.Core.DB.conditions;
+using FLocal.Common.actions;
 
 namespace FLocal.Common.dataobjects {
 	public class AccountSettings : SqlObject<AccountSettings>, IUserSettings {
@@ -68,7 +69,7 @@ namespace FLocal.Common.dataobjects {
 		private int _usersPerPage;
 		public int usersPerPage {
 			get {
-				this.Load();
+				this.LoadIfNotLoaded();
 				return this._usersPerPage;
 			}
 		}
@@ -127,6 +128,38 @@ namespace FLocal.Common.dataobjects {
 				return AccountSettings.LoadById(accountid2id[account.id].Value);
 			} else {
 				return new AnonymousUserSettings();
+				//If cache for this account was just cleared, we will return AnonymousUserSettings. It is ok.
+			}
+		}
+		private static void ClearCacheByAccount(Account account) {
+			lock(accountid2id) {
+				accountid2id.Remove(account.id);
+			}
+		}
+
+		public static void Save(Account account, int postsPerPage, int threadsPerPage, int usersPerPage, int uploadsPerPage, Skin skin) {
+			Dictionary<string, AbstractFieldValue> data = new Dictionary<string,AbstractFieldValue> {
+				{ TableSpec.FIELD_ACCOUNTID, new ScalarFieldValue(account.id.ToString()) },
+				{ TableSpec.FIELD_POSTSPERPAGE, new ScalarFieldValue(postsPerPage.ToString()) },
+				{ TableSpec.FIELD_THREADSPERPAGE, new ScalarFieldValue(threadsPerPage.ToString()) },
+				{ TableSpec.FIELD_USERSPERPAGE, new ScalarFieldValue(usersPerPage.ToString()) },
+				{ TableSpec.FIELD_UPLOADSPERPAGE, new ScalarFieldValue(uploadsPerPage.ToString()) },
+				{ TableSpec.FIELD_SKINID, new ScalarFieldValue(skin.id.ToString()) },
+			};
+			ChangeSetUtil.ApplyChanges(
+				new InsertOrUpdateChange(
+					TableSpec.instance,
+					data,
+					data,
+					new ComparisonCondition(
+						TableSpec.instance.getColumnSpec(TableSpec.FIELD_ACCOUNTID),
+						ComparisonType.EQUAL,
+						account.id.ToString()
+					)
+				)
+			);
+			if(LoadByAccount(account) is AnonymousUserSettings) {
+				ClearCacheByAccount(account);
 			}
 		}
 
