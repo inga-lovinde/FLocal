@@ -16,15 +16,15 @@ namespace FLocal.ImportConsole {
 			for(int i=1; i<800; i++) {
 				Console.Write("[" + i + "]");
 				foreach(string userName in ShallerGateway.getUserNames(i)) {
-					Dictionary<string, string> userData = ShallerGateway.getUserInfo(userName);
 					User user;
 					try {
-						user = User.LoadByName(userName);
+						User.LoadByName(userName);
 						Console.Write("-");
 					} catch(NotFoundInDBException) {
+						Dictionary<string, string> userData = ShallerGateway.getUserInfo(userName);
 						AbstractChange addUser = new InsertChange(
 							User.TableSpec.instance,
-							new Dictionary<string, AbstractFieldValue>() {
+							new Dictionary<string, AbstractFieldValue> {
 								{ User.TableSpec.FIELD_NAME, new ScalarFieldValue(userName) },
 								{ User.TableSpec.FIELD_REGDATE, new ScalarFieldValue(DateTime.Parse(userData["regDate"]).ToUTCString()) },
 								{ User.TableSpec.FIELD_LOCATION, new ScalarFieldValue(userData["location"]) },
@@ -38,20 +38,27 @@ namespace FLocal.ImportConsole {
 						);
 						AbstractChange addAccount = new InsertChange(
 							Account.TableSpec.instance,
-							new Dictionary<string,AbstractFieldValue>() {
+							new Dictionary<string,AbstractFieldValue> {
 								{ Account.TableSpec.FIELD_NAME, new ScalarFieldValue(userName.ToLower()) },
 								{ Account.TableSpec.FIELD_NEEDSMIGRATION, new ScalarFieldValue("1") },
 								{ Account.TableSpec.FIELD_PASSWORDHASH, new ScalarFieldValue("*") },
 								{ Account.TableSpec.FIELD_USERID, new ReferenceFieldValue(addUser) },
 							}
 						);
-						ChangeSetUtil.ApplyChanges(addUser, addAccount);
+						AbstractChange addIndicator = new InsertChange(
+							AccountIndicator.TableSpec.instance,
+							new Dictionary<string,AbstractFieldValue> {
+								{ AccountIndicator.TableSpec.FIELD_ACCOUNTID, new ReferenceFieldValue(addAccount) },
+								{ AccountIndicator.TableSpec.FIELD_PRIVATEMESSAGES, new ScalarFieldValue("0") },
+								{ AccountIndicator.TableSpec.FIELD_UNREADPRIVATEMESSAGES, new ScalarFieldValue("0") },
+							}
+						);
+						ChangeSetUtil.ApplyChanges(addUser, addAccount, addIndicator);
+
 						user = User.LoadById(addUser.getId().Value);
 						Console.Write(".");
-					}
 
-					if(!user.avatarId.HasValue && userData["avatar"] != null && userData["avatar"] != "") {
-						try {
+						if(userData["avatar"] != null && userData["avatar"] != "") {
 							Upload avatar;
 							string[] nameParts = userData["avatar"].Split('.');
 							if(nameParts.Length != 2) throw new FLocalException("wrong avatar filename '" + userData["avatar"] + "'");
@@ -72,8 +79,6 @@ namespace FLocal.ImportConsole {
 								)
 							);
 							Console.Write("a");
-						} catch(Exception e) {
-							Console.Write("!{" + user.id + "}{" + e.Message + "}!");
 						}
 					}
 

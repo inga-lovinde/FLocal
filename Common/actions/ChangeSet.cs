@@ -26,6 +26,7 @@ namespace FLocal.Common.actions {
 						dataobjects.Account.TableSpec.TABLE,
 						dataobjects.User.TableSpec.TABLE,
 						dataobjects.AccountSettings.TableSpec.TABLE,
+						dataobjects.AccountIndicator.TableSpec.TABLE,
 						dataobjects.Thread.ReadMarkerTableSpec.TABLE,
 						dataobjects.Board.ReadMarkerTableSpec.TABLE,
 						dataobjects.Session.TableSpec.TABLE,
