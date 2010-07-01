@@ -89,6 +89,7 @@ namespace FLocal.Common.dataobjects {
 		}
 
 		public void updateLastActivity() {
+			if(DateTime.Now.Subtract(this.lastActivity).Seconds < 30) return; //to partially remove db load
 			try {
 				Config.Transactional(transaction => {
 					Config.instance.mainConnection.update(
@@ -139,7 +140,8 @@ namespace FLocal.Common.dataobjects {
 			return new XElement("session",
 				new XElement("lastActivity", this.lastActivity.ToXml()),
 				new XElement("sessionKey", this.sessionKey),
-				this.account.user.exportToXmlForViewing(context)
+				this.account.user.exportToXmlForViewing(context),
+				AccountIndicator.LoadByAccount(this.account).exportToXml(context)
 			);
 		}
 
