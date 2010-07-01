@@ -17,10 +17,10 @@ namespace FLocal.IISHandler.handlers {
 		private XDocument getData(WebContext context) {
 			return new XDocument(
 				new XElement("root",
+					this.getSpecificData(context),
 					new XElement("title", Config.instance.AppInfo),
 					context.exportSession(),
-					context.userSettings.skin.exportToXml(),
-					this.getSpecificData(context)
+					context.userSettings.skin.exportToXml()
 				)
 			);
 		}

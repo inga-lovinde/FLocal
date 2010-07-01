@@ -98,6 +98,11 @@ namespace FLocal.Common.dataobjects {
 				return this._lastPostId;
 			}
 		}
+		public Post lastPost {
+			get {
+				return Post.LoadById(this.lastPostId);
+			}
+		}
 
 		private DateTime _lastPostDate;
 		public DateTime lastPostDate {
@@ -392,17 +397,7 @@ namespace FLocal.Common.dataobjects {
 				{ Thread.TableSpec.FIELD_TOTALPOSTS, new IncrementFieldValue() },
 				{
 					Thread.TableSpec.FIELD_LASTPOSTID,
-					new TwoWayReferenceFieldValue(
-						postInsert,
-						(oldStringId, newStringId) => {
-							if((oldStringId == null) || (oldStringId == "")) {
-								return newStringId;
-							}
-							int oldId = int.Parse(oldStringId);
-							int newId = int.Parse(newStringId);
-							return Math.Max(oldId, newId).ToString();
-						}
-					)
+					new TwoWayReferenceFieldValue(postInsert, TwoWayReferenceFieldValue.GREATEST)
 				}
 			};
 			if(isNewThread) {

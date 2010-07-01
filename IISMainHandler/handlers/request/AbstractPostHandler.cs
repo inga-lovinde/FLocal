@@ -30,8 +30,8 @@ namespace FLocal.IISHandler.handlers.request {
 		private XDocument getData(WebContext context) {
 			return new XDocument(
 				new XElement("root",
-					new XElement("title", Config.instance.AppInfo),
 					this.Do(context),
+					new XElement("title", Config.instance.AppInfo),
 					context.userSettings.skin.exportToXml(),
 					context.exportSession()
 				)

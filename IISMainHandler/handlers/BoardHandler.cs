@@ -22,7 +22,7 @@ namespace FLocal.IISHandler.handlers {
 		override protected XElement[] getSpecificData(WebContext context) {
 			Board board = Board.LoadById(int.Parse(context.requestParts[1]));
 			PageOuter pageOuter = PageOuter.createFromGet(context.requestParts, context.userSettings.threadsPerPage, 2);
-			IEnumerable<Thread> threads = board.getThreads(pageOuter, context);
+			IEnumerable<Thread> threads = board.getThreads(pageOuter);
 			XElement[] result = new XElement[] {
 				new XElement("currentLocation", board.exportToXmlSimpleWithParent(context)),
 				new XElement("boards", from subBoard in board.subBoards select subBoard.exportToXml(context, true)),

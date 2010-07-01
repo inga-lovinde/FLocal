@@ -51,6 +51,8 @@ namespace FLocal.IISHandler {
 					switch(context.requestParts[2].ToLower()) {
 						case "reply":
 							return new handlers.response.ReplyHandler();
+						case "pmreply":
+							return new handlers.response.PMReplyToPostHandler();
 						default:
 							return new handlers.WrongUrlHandler();
 					}
@@ -64,6 +66,14 @@ namespace FLocal.IISHandler {
 					return new handlers.response.UserInfoHandler();
 				case "settings":
 					return new handlers.response.SettingsHandler();
+				case "conversations":
+					return new handlers.response.ConversationsHandler();
+				case "conversation":
+					return new handlers.response.ConversationHandler();
+				case "pmsend":
+					return new handlers.response.PMSendHandler();
+				case "pmreply":
+					return new handlers.response.PMReplyHandler();
 				case "upload":
 					if(context.requestParts.Length < 2) {
 						return new handlers.WrongUrlHandler();
@@ -97,6 +107,8 @@ namespace FLocal.IISHandler {
 								return new handlers.request.CreateThreadHandler();
 							case "settings":
 								return new handlers.request.SettingsHandler();
+							case "sendpm":
+								return new handlers.request.SendPMHandler();
 							case "upload":
 								return new handlers.request.UploadHandler();
 							default:

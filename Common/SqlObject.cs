@@ -53,7 +53,7 @@ namespace FLocal.Common {
 			this.fromHash(Config.instance.mainConnection.LoadById(this.table, this.id.ToString()));
 		}
 
-		protected void Load() {
+		private void Load() {
 			lock(this.lockInitializer) {
 				if(this.isLoaded) throw new CriticalException("already initialized");
 				this.doLoad();

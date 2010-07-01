@@ -35,6 +35,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -63,6 +64,8 @@
     <Compile Include="dataobjects\Category.cs" />
     <Compile Include="dataobjects\IUserSettings.cs" />
     <Compile Include="dataobjects\AnonymousUserSettings.cs" />
+    <Compile Include="dataobjects\PMConversation.cs" />
+    <Compile Include="dataobjects\PMMessage.cs" />
     <Compile Include="dataobjects\Post.cs" />
     <Compile Include="dataobjects\PostLayer.cs" />
     <Compile Include="dataobjects\Session.cs" />

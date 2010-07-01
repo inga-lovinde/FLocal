@@ -34,9 +34,23 @@
 					<table width="100%" class="tableborders" cellpadding="3" cellspacing="1">
 						<tr>
 							<td align="center" class="menubar">
-								<a href="/Boards/" target="_top">Список форумов</a>
+								<a target="_top">
+									<xsl:if test="session/sessionKey">
+										<xsl:attribute name="href">/Conversations/</xsl:attribute>
+										<xsl:if test="session/indicators/unreadPrivateMessages != '0'">
+											<img src="/static/images/newpm.gif">
+												<xsl:attribute name="alt">
+													<xsl:text>У вас </xsl:text>
+													<xsl:value-of select="session/indicators/unreadPrivateMessages"/>
+													<xsl:text> непрочитанных личных сообщений</xsl:text>
+												</xsl:attribute>
+											</img>
+										</xsl:if>
+									</xsl:if>
+									<xsl:text>Личные сообщения</xsl:text>
+								</a>
 								<xsl:text> | </xsl:text>
-								<a target="_top">Поиск</a>
+								<a href="/Boards/" target="_top">Список форумов</a>
 								<xsl:text> | </xsl:text>
 								<a target="_top">
 									<xsl:if test="session/sessionKey">

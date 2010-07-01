@@ -216,7 +216,7 @@ namespace FLocal.Common.dataobjects {
 			return result;
 		}
 
-		public IEnumerable<Thread> getThreads(Diapasone diapasone, UserContext context, SortSpec[] sortBy) {
+		public IEnumerable<Thread> getThreads(Diapasone diapasone, SortSpec[] sortBy) {
 			return Thread.LoadByIds(
 				from stringId in Config.instance.mainConnection.LoadIdsByConditions(
 					Thread.TableSpec.instance,
@@ -232,10 +232,9 @@ namespace FLocal.Common.dataobjects {
 			);
 		}
 
-		public IEnumerable<Thread> getThreads(Diapasone diapasone, UserContext context) {
+		public IEnumerable<Thread> getThreads(Diapasone diapasone) {
 			return this.getThreads(
 				diapasone,
-				context,
 				new SortSpec[] {
 					new SortSpec(
 						Thread.TableSpec.instance.getColumnSpec(Thread.TableSpec.FIELD_ISANNOUNCEMENT),

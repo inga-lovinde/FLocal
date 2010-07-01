@@ -61,6 +61,13 @@ namespace FLocal.Common.dataobjects {
 			this._needsMigration = Util.string2bool(data[TableSpec.FIELD_NEEDSMIGRATION]);
 		}
 
+		public XElement exportToXml(UserContext context) {
+			return new XElement("account",
+				new XElement("id", this.id),
+				this.user.exportToXmlForViewing(context)
+			);
+		}
+
 		private static Dictionary<string, int> name2id = new Dictionary<string, int>();
 		public static Account LoadByName(string _name) {
 			string name = _name.ToLower();
@@ -88,6 +95,33 @@ namespace FLocal.Common.dataobjects {
 				}
 			}
 			return Account.LoadById(name2id[name]);
+		}
+
+		private static Dictionary<int, int> userid2id = new Dictionary<int, int>();
+		public static Account LoadByUser(User user) {
+			if(!userid2id.ContainsKey(user.id)) {
+				lock(userid2id) {
+					if(!userid2id.ContainsKey(user.id)) {
+						List<string> ids = Config.instance.mainConnection.LoadIdsByConditions(
+							TableSpec.instance,
+							new ComparisonCondition(
+								TableSpec.instance.getColumnSpec(TableSpec.FIELD_USERID),
+								ComparisonType.EQUAL,
+								user.id.ToString()
+							),
+							Diapasone.unlimited
+						);
+						if(ids.Count > 1) {
+							throw new CriticalException("not unique");
+						} else if(ids.Count == 1) {
+							userid2id[user.id] = int.Parse(ids[0]);
+						} else {
+							throw new NotFoundInDBException();
+						}
+					}
+				}
+			}
+			return Account.LoadById(userid2id[user.id]);
 		}
 
 		private string hashPassword(string password) {

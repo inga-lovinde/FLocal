@@ -9,6 +9,13 @@ namespace FLocal.Common.actions {
 
 		public delegate string Calculator(string old, string reference);
 
+		public static Calculator GREATEST = (old, reference) => {
+			if(old == null || old == "") {
+				return reference;
+			}
+			return Math.Max(int.Parse(old), int.Parse(reference)).ToString();
+		};
+
 		private Calculator calculator;
 
 		public TwoWayReferenceFieldValue(AbstractChange referenced, Calculator calculator)

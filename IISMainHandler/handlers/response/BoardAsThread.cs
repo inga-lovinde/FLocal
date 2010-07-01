@@ -23,7 +23,7 @@ namespace FLocal.IISHandler.handlers.response {
 			PageOuter pageOuter = PageOuter.createFromGet(context.requestParts, context.userSettings.postsPerPage, 2);
 			IEnumerable<Thread> threads = board.getThreads(
 				pageOuter,
-				context, new SortSpec[] {
+				new SortSpec[] {
 					new SortSpec(
 						Thread.TableSpec.instance.getColumnSpec(Thread.TableSpec.FIELD_ID),
 						true
