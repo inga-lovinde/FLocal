@@ -29,7 +29,7 @@ namespace FLocal.Common.actions {
 		}
 
 		public override void Lock(Transaction transaction) {
-			List<string> ids = Config.instance.mainConnection.LoadIdsByConditions(this.tableSpec, this.condition, Diapasone.unlimited, new JoinSpec[0]);
+			List<string> ids = Config.instance.mainConnection.LoadIdsByConditions(transaction, this.tableSpec, this.condition, Diapasone.unlimited, new JoinSpec[0], new SortSpec[0], false);
 			if(ids.Count > 1) {
 				throw new CriticalException("Not unique");
 			} else if(ids.Count == 1) {
