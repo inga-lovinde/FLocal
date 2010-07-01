@@ -13,6 +13,14 @@
 			</xsl:choose>
 			<td align="left">
 				<xsl:attribute name="title"><xsl:value-of select="bodyShort"/></xsl:attribute>
+				<xsl:if test="isAnnouncement='true'">
+					<img src="/static/images/sticky.gif" width="16" height="16" alt="" border="0" style="vertical-align: text-bottom;" />
+					<xsl:text> </xsl:text>
+				</xsl:if>
+				<xsl:if test="isLocked='true'">
+					<img src="/static/images/lock.gif" width="16" height="16" alt="" border="0" style="vertical-align:text-bottom"/>
+					<xsl:text> </xsl:text>
+				</xsl:if>
 				<img alt="*" hspace="5" style="vertical-align: text-bottom">
 					<xsl:choose>
 						<xsl:when test="afterLastRead&lt;=lastPostId">
@@ -23,6 +31,7 @@
 						</xsl:otherwise>
 					</xsl:choose>
 				</img>
+				<xsl:text> </xsl:text>
 				<a>
 					<xsl:attribute name="href">
 						<xsl:text>/Thread/</xsl:text>
@@ -33,9 +42,6 @@
 							<xsl:value-of select="afterLastRead"/>
 						</xsl:if>
 					</xsl:attribute>
-					<xsl:if test="isAnnouncement='true'">
-						<img src="/static/images/sticky.gif" class="separate" width="16" height="16" alt="" border="0" style="vertical-align: text-bottom;" />
-					</xsl:if>
 					<xsl:value-of select="title"/>
 				</a>
 				<span class="small" style="margin-left:1.5em">
