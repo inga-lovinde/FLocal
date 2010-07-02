@@ -201,5 +201,26 @@ namespace FLocal.Common.dataobjects {
 			return desiredLayer;
 		}
 
+		public IEnumerable<Post> getPosts(Diapasone diapasone) {
+			return Post.LoadByIds(
+				from stringId in Config.instance.mainConnection.LoadIdsByConditions(
+					Post.TableSpec.instance,
+					new ComparisonCondition(
+						Post.TableSpec.instance.getColumnSpec(Post.TableSpec.FIELD_POSTERID),
+						ComparisonType.EQUAL,
+						this.id.ToString()
+					),
+					diapasone,
+					new JoinSpec[0],
+					new SortSpec[] {
+						new SortSpec(
+							Post.TableSpec.instance.getIdSpec(),
+							false
+						),
+					}
+				) select int.Parse(stringId)
+			);
+		}
+
 	}
 }

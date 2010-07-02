@@ -63,7 +63,18 @@ namespace FLocal.IISHandler {
 				case "users":
 					return new handlers.response.UserListHandler();
 				case "user":
-					return new handlers.response.UserInfoHandler();
+					if(context.requestParts.Length < 2) {
+						return new handlers.WrongUrlHandler();
+					}
+					if(context.requestParts.Length == 2) {
+						return new handlers.response.UserInfoHandler();
+					}
+					switch(context.requestParts[2].ToLower()) {
+						case "posts":
+							return new handlers.response.UserPostsHandler();
+						default:
+							return new handlers.WrongUrlHandler();
+					}
 				case "settings":
 					return new handlers.response.SettingsHandler();
 				case "conversations":
