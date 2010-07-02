@@ -44,6 +44,22 @@ namespace FLocal.Common.dataobjects {
 
 		protected override ISqlObjectTableSpec table { get { return TableSpec.instance; } }
 
+		private AbstractCondition getReadmarkerSearchCondition(Account account) {
+			return new ComplexCondition(
+				ConditionsJoinType.AND,
+				new ComparisonCondition(
+					ReadMarkerTableSpec.instance.getColumnSpec(ReadMarkerTableSpec.FIELD_THREADID),
+					ComparisonType.EQUAL,
+					this.id.ToString()
+				),
+				new ComparisonCondition(
+					ReadMarkerTableSpec.instance.getColumnSpec(ReadMarkerTableSpec.FIELD_ACCOUNTID),
+					ComparisonType.EQUAL,
+					account.id.ToString()
+				)
+			);
+		}
+
 		private int _boardId;
 		public int boardId {
 			get {
@@ -255,19 +271,7 @@ namespace FLocal.Common.dataobjects {
 		public int getLastReadId(Account account) {
 			List<string> stringIds = Config.instance.mainConnection.LoadIdsByConditions(
 				ReadMarkerTableSpec.instance,
-				new ComplexCondition(
-					ConditionsJoinType.AND,
-					new ComparisonCondition(
-						ReadMarkerTableSpec.instance.getColumnSpec(ReadMarkerTableSpec.FIELD_THREADID),
-						ComparisonType.EQUAL,
-						this.id.ToString()
-					),
-					new ComparisonCondition(
-						ReadMarkerTableSpec.instance.getColumnSpec(ReadMarkerTableSpec.FIELD_ACCOUNTID),
-						ComparisonType.EQUAL,
-						account.id.ToString()
-					)
-				),
+				this.getReadmarkerSearchCondition(account),
 				Diapasone.unlimited
 			);
 			if(stringIds.Count > 1) {
@@ -283,8 +287,25 @@ namespace FLocal.Common.dataobjects {
 			return int.Parse(data[ReadMarkerTableSpec.FIELD_POSTID]);
 		}
 
+		public void forceMarkAsRead(Account account, Post maxPost) {
+			ChangeSetUtil.ApplyChanges(
+				new InsertOrUpdateChange(
+					ReadMarkerTableSpec.instance,
+					new Dictionary<string,AbstractFieldValue> {
+						{ ReadMarkerTableSpec.FIELD_ACCOUNTID, new ScalarFieldValue(account.id.ToString()) },
+						{ ReadMarkerTableSpec.FIELD_THREADID, new ScalarFieldValue(this.id.ToString()) },
+						{ ReadMarkerTableSpec.FIELD_POSTID, new ScalarFieldValue(maxPost.id.ToString()) },
+					},
+					new Dictionary<string,AbstractFieldValue> {
+						{ ReadMarkerTableSpec.FIELD_POSTID, new IncrementFieldValue(IncrementFieldValue.GREATEST(maxPost.id)) },
+					},
+					this.getReadmarkerSearchCondition(account)
+				)
+			);
+		}
+
 		public void markAsRead(Account account, Post minPost, Post maxPost) {
-			ChangeSetUtil.ApplyChanges(new AbstractChange[] {
+			ChangeSetUtil.ApplyChanges(
 				new InsertOrUpdateChange(
 					ReadMarkerTableSpec.instance,
 					new Dictionary<string,AbstractFieldValue> {
@@ -347,21 +368,9 @@ namespace FLocal.Common.dataobjects {
 							)
 						}
 					},
-					new ComplexCondition(
-						ConditionsJoinType.AND,
-						new ComparisonCondition(
-							ReadMarkerTableSpec.instance.getColumnSpec(ReadMarkerTableSpec.FIELD_THREADID),
-							ComparisonType.EQUAL,
-							this.id.ToString()
-						),
-						new ComparisonCondition(
-							ReadMarkerTableSpec.instance.getColumnSpec(ReadMarkerTableSpec.FIELD_ACCOUNTID),
-							ComparisonType.EQUAL,
-							account.id.ToString()
-						)
-					)
+					this.getReadmarkerSearchCondition(account)
 				)
-			});
+			);
 		}
 
 		internal static KeyValuePair<AbstractChange, IEnumerable<AbstractChange>> getNewPostChanges(Board board, int threadId, Post parentPost, User poster, PostLayer layer, string title, string body) {

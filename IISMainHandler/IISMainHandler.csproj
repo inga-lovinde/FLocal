@@ -63,7 +63,9 @@
     <Compile Include="handlers\request\CreateThreadHandler.cs" />
     <Compile Include="handlers\request\LoginHandler.cs" />
     <Compile Include="handlers\request\LogoutHandler.cs" />
+    <Compile Include="handlers\request\MarkThreadAsReadHandler.cs" />
     <Compile Include="handlers\request\MigrateAccountHandler.cs" />
+    <Compile Include="handlers\request\ReturnPostHandler.cs" />
     <Compile Include="handlers\request\ReplyHandler.cs" />
     <Compile Include="handlers\request\SendPMHandler.cs" />
     <Compile Include="handlers\request\SettingsHandler.cs" />

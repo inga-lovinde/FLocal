@@ -66,6 +66,9 @@
 				<span class="separate"><xsl:value-of select="totalPosts"/></span>
 				<xsl:if test="totalNewPosts and totalNewPosts!='0'">
 					<a class="cup separate">
+						<xsl:if test="/root/session/sessionKey">
+							<xsl:attribute name="href">/do/MarkThreadAsRead/<xsl:value-of select="id"/>/p<xsl:value-of select="lastPostId"/>/</xsl:attribute>
+						</xsl:if>
 						<font class="new"><i>(<xsl:value-of select="totalNewPosts"/>)</i></font>
 					</a>
 				</xsl:if>

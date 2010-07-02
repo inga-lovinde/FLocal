@@ -109,6 +109,8 @@ namespace FLocal.IISHandler {
 								return new handlers.request.SettingsHandler();
 							case "sendpm":
 								return new handlers.request.SendPMHandler();
+							case "markthreadasread":
+								return new handlers.request.MarkThreadAsReadHandler();
 							case "upload":
 								return new handlers.request.UploadHandler();
 							default:
