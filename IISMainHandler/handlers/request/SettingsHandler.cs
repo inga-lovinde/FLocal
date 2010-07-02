@@ -16,6 +16,9 @@ namespace FLocal.IISHandler.handlers.request {
 		}
 
 		protected override XElement[] Do(WebContext context) {
+			string currentPassword = context.httprequest.Form["currentPassword"];
+			string newPassword = context.httprequest.Form["newPassword"];
+			if(newPassword != context.httprequest.Form["newPassword2"]) throw new FLocalException("new passwords mismatch");
 			int postsPerPage = int.Parse(context.httprequest.Form["postsPerPage"]);
 			int threadsPerPage = int.Parse(context.httprequest.Form["threadsPerPage"]);
 			int usersPerPage = int.Parse(context.httprequest.Form["usersPerPage"]);
@@ -27,7 +30,13 @@ namespace FLocal.IISHandler.handlers.request {
 			if((usersPerPage < 1) || (usersPerPage > 200)) throw new FLocalException("wrong number for usersPerPage");
 			if((uploadsPerPage < 1) || (uploadsPerPage > 200)) throw new FLocalException("wrong number for uploadsPerPage");
 
+			if(!context.account.checkPassword(currentPassword)) throw new FLocalException("wrong password");
+
 			AccountSettings.Save(context.session.account, postsPerPage, threadsPerPage, usersPerPage, uploadsPerPage, skin);
+
+			if(newPassword != null && newPassword != "") {
+				context.account.updatePassword(newPassword);
+			}
 
 			return new XElement[0];
 		}

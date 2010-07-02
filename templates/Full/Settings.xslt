@@ -20,6 +20,20 @@
 							<td class="lighttable"> 
 								<form method="post" action="/do/Settings/">
 									<p>
+										<xsl:text>Ваш текущий пароль</xsl:text>
+										<br/>
+										<input type="password" name="currentPassword"/>
+									</p>
+									<p>
+										<xsl:text>Если вы хотите изменить пароль, введите сюда новый пароль</xsl:text>
+										<br/>
+										<input type="password" name="newPassword"/>
+										<br/>
+										<xsl:text>и повторите его</xsl:text>
+										<br/>
+										<input type="password" name="newPassword2"/>
+									</p>
+									<p>
 										<xsl:text>Постов на страницу:</xsl:text>
 										<br/>
 										<input type="text" name="postsPerPage">

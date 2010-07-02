@@ -128,6 +128,10 @@ namespace FLocal.Common.dataobjects {
 			return Util.md5(password + " " + Config.instance.SaltMigration + " " + this.id);
 		}
 
+		public bool checkPassword(string password) {
+			return this.hashPassword(password) == this.passwordHash;
+		}
+
 		public void updatePassword(string newPassword) {
 			ChangeSetUtil.ApplyChanges(new AbstractChange[] {
 				new UpdateChange(
