@@ -182,7 +182,7 @@
 										<td valign="top" colspan="3" align="center" class="darktable">
 											<a>
 												<img src="/static/images/sendprivate.gif" border="0" style="vertical-align: text-bottom" />
-												<xsl:text>Послать личное сообщение</xsl:text>
+												<xsl:text> Послать личное сообщение</xsl:text>
 											</a>
 											<xsl:text> | </xsl:text>
 											<a>
@@ -190,23 +190,23 @@
 													<xsl:attribute name="href">/Conversation/<xsl:value-of select="accountId"/>/</xsl:attribute>
 												</xsl:if>
 												<img src="/static/images/sundial.gif" border="0" style="vertical-align: text-bottom" />
-												<xsl:text>История</xsl:text>
+												<xsl:text> История</xsl:text>
 											</a>
 											<xsl:text> | </xsl:text>
 											<a>
 												<img src="/static/images/addtobook.gif" align="top" style="vertical-align: text-bottom" />
-												<xsl:text>Добавить в адресную книгу</xsl:text>
+												<xsl:text> Добавить в адресную книгу</xsl:text>
 											</a>
 											<xsl:text> | </xsl:text>
 											<a>
 												<xsl:attribute name="href">/User/<xsl:value-of select="user/id"/>/Posts/</xsl:attribute>
 												<img src="/static/images/viewposts.gif" align="top" style="vertical-align: text-bottom" />
-												<xsl:text>Показать все сообщения пользователя</xsl:text>
+												<xsl:text> Показать все сообщения пользователя</xsl:text>
 											</a>
 											<xsl:text> | </xsl:text>
 											<a>
 												<img src="/static/images/graph.gif" align="top" border="0" style="vertical-align: text-bottom" />
-												<xsl:text>Статистика</xsl:text>
+												<xsl:text> Статистика</xsl:text>
 											</a>
 										</td>
 									</tr>
