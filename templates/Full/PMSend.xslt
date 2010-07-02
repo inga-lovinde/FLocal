@@ -24,7 +24,17 @@
 									<xsl:value-of select="session/user/name"/>
 									<br/>
 									<xsl:text>Получатель: </xsl:text>
-									<input type="text" name="receiverName" class="formboxes" size="15"/>
+									<xsl:choose>
+										<xsl:when test="receiver">
+											<input type="hidden" name="receiverId">
+												<xsl:attribute name="value"><xsl:value-of select="receiver/account/id"/></xsl:attribute>
+											</input>
+											<xsl:value-of select="receiver/account/user/name"/>
+										</xsl:when>
+										<xsl:otherwise>
+											<input type="text" name="receiverName" class="formboxes" size="15"/>
+										</xsl:otherwise>
+									</xsl:choose>
 									<br/>
 									<br/>
 									<xsl:text>Тема: </xsl:text>

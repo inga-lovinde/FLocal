@@ -181,6 +181,9 @@
 									<tr>
 										<td valign="top" colspan="3" align="center" class="darktable">
 											<a>
+												<xsl:if test="accountId">
+													<xsl:attribute name="href">/PMSend/<xsl:value-of select="accountId"/>/</xsl:attribute>
+												</xsl:if>
 												<img src="/static/images/sendprivate.gif" border="0" style="vertical-align: text-bottom" />
 												<xsl:text> Послать личное сообщение</xsl:text>
 											</a>

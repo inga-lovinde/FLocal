@@ -19,6 +19,12 @@ namespace FLocal.IISHandler.handlers.response {
 		}
 
 		override protected XElement[] getSpecificData(WebContext context) {
+			if(context.requestParts.Length > 1) {
+				Account account = Account.LoadById(int.Parse(context.requestParts[1]));
+				return new XElement[] {
+					new XElement("receiver", account.exportToXml(context)),
+				};
+			}
 			return new XElement[0];
 		}
 	}
