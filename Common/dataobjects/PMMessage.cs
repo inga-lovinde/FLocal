@@ -154,6 +154,7 @@ namespace FLocal.Common.dataobjects {
 				new XElement("poster", this.poster.exportToXml(context)),
 				new XElement("owner", this.owner.exportToXml(context)),
 				new XElement("interlocutor", this.interlocutor.exportToXml(context)),
+				new XElement("isRead", this.isRead.ToPlainString()),
 				new XElement("postDate", this.postDate.ToXml()),
 				new XElement("title", this.title),
 				new XElement("body", context.outputParams.preprocessBodyIntermediate(this.body)),
