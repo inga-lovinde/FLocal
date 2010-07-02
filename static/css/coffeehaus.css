@@ -1,11 +1,5 @@
 /* File Version 6.5.1 */
 
-[pseudolink] {
-	color: #303030;
-	background: none;
-	text-decoration: underline;
-}
-
 a:link {
 	color: #303030;
 	background: none;
