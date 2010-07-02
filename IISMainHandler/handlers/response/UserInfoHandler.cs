@@ -22,8 +22,16 @@ namespace FLocal.IISHandler.handlers.response {
 
 		override protected XElement[] getSpecificData(WebContext context) {
 			User user = User.LoadById(int.Parse(context.requestParts[1]));
+			Account account = null;
+			if(context.session != null) {
+				try {
+					account = Account.LoadByUser(user);
+				} catch(NotFoundInDBException) {
+				}
+			}
 			return new XElement[] {
 				user.exportToXmlForViewing(context),
+				(account == null) ? null : new XElement("accountId", account.id.ToString()), //for PM history, PM send etc
 			};
 		}
 

@@ -186,6 +186,9 @@
 											</a>
 											<xsl:text> | </xsl:text>
 											<a>
+												<xsl:if test="accountId">
+													<xsl:attribute name="href">/Conversation/<xsl:value-of select="accountId"/>/</xsl:attribute>
+												</xsl:if>
 												<img src="/static/images/sundial.gif" border="0" style="vertical-align: text-bottom" />
 												<xsl:text>История</xsl:text>
 											</a>
