@@ -27,7 +27,7 @@
 						<xsl:text>/Conversation/</xsl:text>
 						<xsl:value-of select="interlocutor/account/id"/>
 						<xsl:text>/</xsl:text>
-						<xsl:if test="afterLastRead&lt;=lastPostId">
+						<xsl:if test="afterLastRead&lt;=lastMessageId">
 							<xsl:text>p</xsl:text>
 							<xsl:value-of select="afterLastRead"/>
 						</xsl:if>
