@@ -43,5 +43,11 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
+		public bool isPostVisible(Post post) {
+			if(post.poster.showPostsToUsers != User.ENUM_SHOWPOSTSTOUSERS_ALL) return false;
+			if(post.layer.name != PostLayer.NAME_NORMAL) return false;
+			return true;
+		}
+		
 	}
 }

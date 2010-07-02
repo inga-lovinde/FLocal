@@ -17,10 +17,6 @@ namespace FLocal.Common {
 			get;
 		}
 
-		abstract public dataobjects.IUserSettings userSettings {
-			get;
-		}
-
 		abstract public string formatDateTime(DateTime dateTime);
 
 		abstract public XElement formatTotalPosts(long posts);
@@ -31,6 +27,8 @@ namespace FLocal.Common {
 		abstract public dataobjects.Account account {
 			get;
 		}
+
+		abstract public bool isPostVisible(dataobjects.Post post);
 
 	}
 

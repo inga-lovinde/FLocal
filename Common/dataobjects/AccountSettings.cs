@@ -89,6 +89,13 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
+		public bool isPostVisible(Post post) {
+			if(post.poster.showPostsToUsers == User.ENUM_SHOWPOSTSTOUSERS_NONE) return false;
+			if(post.poster.showPostsToUsers == User.ENUM_SHOWPOSTSTOUSERS_PRIVELEGED) return false;
+			if(post.layer.name == PostLayer.NAME_HIDDEN) return false;
+			return true;
+		}
+		
 		protected override void doFromHash(Dictionary<string, string> data) {
 			this._accountId = int.Parse(data[TableSpec.FIELD_ACCOUNTID]);
 			this._postsPerPage = int.Parse(data[TableSpec.FIELD_POSTSPERPAGE]);

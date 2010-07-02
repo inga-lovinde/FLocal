@@ -182,6 +182,9 @@ namespace FLocal.Common.dataobjects {
 		}
 
 		public XElement exportToXml(UserContext context, bool includeFirstPost, params XElement[] additional) {
+
+			if(!context.isPostVisible(this.firstPost)) return null;
+
 			XElement result = new XElement("thread",
 				new XElement("id", this.id),
 				new XElement("firstPostId", this.firstPostId),

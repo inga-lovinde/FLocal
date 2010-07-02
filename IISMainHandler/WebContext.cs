@@ -32,11 +32,9 @@ namespace FLocal.IISHandler {
 			}
 		}
 
-		private IUserSettings _userSettings;
-		public override IUserSettings userSettings {
-			get {
-				return this._userSettings;
-			}
+		public IUserSettings userSettings {
+			get;
+			private set;
 		}
 
 		public override Common.IOutputParams outputParams {
@@ -59,7 +57,10 @@ namespace FLocal.IISHandler {
 			return PageOuter.create(this.userSettings.postsPerPage, posts).exportToXml(2, 0, 2);
 		}
 
-		public DateTime requestTime;
+		public DateTime requestTime {
+			get;
+			private set;
+		}
 
 		public Session session;
 
@@ -70,6 +71,10 @@ namespace FLocal.IISHandler {
 				}
 				return this.session.account;
 			}
+		}
+
+		public override bool isPostVisible(Post post) {
+			return this.userSettings.isPostVisible(post);
 		}
 
 		public WebContext(HttpContext httpcontext) {
@@ -90,9 +95,9 @@ namespace FLocal.IISHandler {
 				}
 			}
 			if(this.session != null) {
-				this._userSettings = AccountSettings.LoadByAccount(this.session.account);
+				this.userSettings = AccountSettings.LoadByAccount(this.session.account);
 			} else {
-				this._userSettings = new AnonymousUserSettings();
+				this.userSettings = new AnonymousUserSettings();
 			}
 		}
 

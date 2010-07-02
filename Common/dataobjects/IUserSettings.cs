@@ -27,6 +27,8 @@ namespace FLocal.Common.dataobjects {
 			get;
 		}
 
+		bool isPostVisible(Post post);
+
 	}
 
 	public static class IUserSettings_Extension {
