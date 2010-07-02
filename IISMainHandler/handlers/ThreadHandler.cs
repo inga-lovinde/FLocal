@@ -48,7 +48,7 @@ namespace FLocal.IISHandler.handlers {
 				},
 				2
 			);
-			IEnumerable<Post> posts = thread.getPosts(pageOuter, context);
+			IEnumerable<Post> posts = thread.getPosts(pageOuter);
 
 			int lastReadId = 0;
 			if(context.session != null) {

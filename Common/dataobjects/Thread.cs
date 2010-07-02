@@ -235,7 +235,7 @@ namespace FLocal.Common.dataobjects {
 			return result;
 		}
 
-		public IEnumerable<Post> getPosts(Diapasone diapasone, UserContext context) {
+		public IEnumerable<Post> getPosts(Diapasone diapasone) {
 			return Post.LoadByIds(
 				from stringId in Config.instance.mainConnection.LoadIdsByConditions(
 					Post.TableSpec.instance,
