@@ -22,6 +22,7 @@ namespace FLocal.Common.dataobjects {
 			public const string FIELD_NAME = "Name";
 			public const string FIELD_DESCRIPTION = "Comment";
 			public const string FIELD_PARENTBOARDID = "ParentBoardId";
+			public const string FIELD_LEGACYNAME = "LegacyName";
 			public static readonly TableSpec instance = new TableSpec();
 			public string name { get { return TABLE; } }
 			public string idName { get { return FIELD_ID; } }
@@ -121,6 +122,14 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
+		private string _legacyName;
+		public string legacyName {
+			get {
+				this.LoadIfNotLoaded();
+				return this._legacyName;
+			}
+		}
+
 		protected override void doFromHash(Dictionary<string, string> data) {
 			this._sortOrder = int.Parse(data[TableSpec.FIELD_SORTORDER]);
 			this._categoryId = Util.ParseInt(data[TableSpec.FIELD_CATEGORYID]);
@@ -130,6 +139,7 @@ namespace FLocal.Common.dataobjects {
 			this._name = data[TableSpec.FIELD_NAME];
 			this._description = data[TableSpec.FIELD_DESCRIPTION];
 			this._parentBoardId = Util.ParseInt(data[TableSpec.FIELD_PARENTBOARDID]);
+			this._legacyName = data[TableSpec.FIELD_LEGACYNAME];
 		}
 
 		private readonly object subBoards_Locker = new object();
@@ -214,6 +224,21 @@ namespace FLocal.Common.dataobjects {
 			}
 
 			return result;
+		}
+
+		private static readonly IEnumerable<int> allBoardsIds = from stringId in Config.instance.mainConnection.LoadIdsByConditions(TableSpec.instance, new EmptyCondition(), Diapasone.unlimited) select int.Parse(stringId);
+
+		private static Dictionary<string, int> legacyName2Id = new Dictionary<string,int>();
+		public static Board LoadByLegacyName(string legacy) {
+			if((legacy == null) || (legacy == "")) throw new FLocalException("legacy name is empty");
+			if(!legacyName2Id.ContainsKey(legacy)) {
+				lock(legacyName2Id) {
+					if(!legacyName2Id.ContainsKey(legacy)) {
+						legacyName2Id[legacy] = (from boardId in allBoardsIds let board = Board.LoadById(boardId) where board.legacyName == legacy select boardId).Single();
+					}
+				}
+			}
+			return Board.LoadById(legacyName2Id[legacy]);
 		}
 
 		public IEnumerable<Thread> getThreads(Diapasone diapasone, SortSpec[] sortBy) {

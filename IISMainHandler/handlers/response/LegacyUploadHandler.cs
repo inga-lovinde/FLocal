@@ -4,19 +4,11 @@ using System.Linq;
 using System.Text;
 using FLocal.Core;
 using FLocal.Common;
-using System.Xml.Linq;
-using FLocal.Common.dataobjects;
 
 namespace FLocal.IISHandler.handlers.response {
-	class LegacyUploadHandler : AbstractGetHandler {
+	class LegacyUploadHandler : RedirectGetHandler {
 
-		protected override string templateName {
-			get {
-				return null;
-			}
-		}
-
-		protected override System.Xml.Linq.XElement[] getSpecificData(WebContext context) {
+		protected override string getRedirectUrl(WebContext context) {
 			if(context.requestParts.Length != 3) throw new FLocalException("wrong url");
 			string[] parts = context.requestParts[2].Split('.');
 			if(parts.Length != 2) throw new FLocalException("wrong url");
@@ -36,7 +28,7 @@ namespace FLocal.IISHandler.handlers.response {
 				default:
 					throw new FLocalException("wrong url");
 			}
-			throw new RedirectException("/Upload/Item/" + fileNum + "/");
+			return "/Upload/Item/" + fileNum + "/";
 		}
 
 	}

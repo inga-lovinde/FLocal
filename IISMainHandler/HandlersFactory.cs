@@ -19,6 +19,9 @@ namespace FLocal.IISHandler {
 			if(context.httprequest.Path.ToLower().StartsWith("/user/upload/")) {
 				return new handlers.response.LegacyUploadHandler();
 			}
+			if(context.httprequest.Path.EndsWith(".php")) {
+				return new handlers.response.LegacyPHPHandler();
+			}
 			#endregion
 
 			switch(context.requestParts[0].ToLower()) {

@@ -74,12 +74,14 @@
     <Compile Include="handlers\response\ConversationHandler.cs" />
     <Compile Include="handlers\response\ConversationsHandler.cs" />
     <Compile Include="handlers\response\CreateThreadHandler.cs" />
+    <Compile Include="handlers\response\LegacyPHPHandler.cs" />
     <Compile Include="handlers\response\LegacyUploadHandler.cs" />
     <Compile Include="handlers\response\LoginHandler.cs" />
     <Compile Include="handlers\response\MigrateAccountHandler.cs" />
     <Compile Include="handlers\response\PMReplyHandler.cs" />
     <Compile Include="handlers\response\PMReplyToPostHandler.cs" />
     <Compile Include="handlers\response\PMSendHandler.cs" />
+    <Compile Include="handlers\response\RedirectGetHandler.cs" />
     <Compile Include="handlers\response\ReplyHandler.cs" />
     <Compile Include="handlers\response\SettingsHandler.cs" />
     <Compile Include="handlers\response\UploadHandler.cs" />
