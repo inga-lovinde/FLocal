@@ -35,6 +35,9 @@ namespace FLocal.Common.actions {
 				this.tableSpec,
 				processedData
 			));
+			if(processedData.ContainsKey(this.tableSpec.idName)) {
+				this.id = int.Parse(processedData[this.tableSpec.idName]);
+			}
 		}
 
 	}

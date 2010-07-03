@@ -376,44 +376,57 @@ namespace FLocal.Common.dataobjects {
 			);
 		}
 
-		internal static KeyValuePair<AbstractChange, IEnumerable<AbstractChange>> getNewPostChanges(Board board, int threadId, Post parentPost, User poster, PostLayer layer, string title, string body) {
+		internal static KeyValuePair<AbstractChange, IEnumerable<AbstractChange>> getNewPostChanges(Board board, int threadId, Post parentPost, User poster, PostLayer layer, string title, string body, DateTime date, int? forcedPostId) {
 			string parentPostId = null;
 			if(parentPost != null) parentPostId = parentPost.id.ToString();
 			bool isNewThread = (parentPost == null);
+			string bodyIntermediate;
+			if(forcedPostId.HasValue) {
+				//dirty hack
+				bodyIntermediate = body;
+			} else {
+				bodyIntermediate = UBBParser.UBBToIntermediate(body);
+			}
+			var postInsertData = new Dictionary<string,AbstractFieldValue> {
+				{ Post.TableSpec.FIELD_THREADID, new ScalarFieldValue(threadId.ToString()) },
+				{ Post.TableSpec.FIELD_PARENTPOSTID, new ScalarFieldValue(parentPostId) },
+				{ Post.TableSpec.FIELD_POSTERID, new ScalarFieldValue(poster.id.ToString()) },
+				{ Post.TableSpec.FIELD_POSTDATE, new ScalarFieldValue(date.ToUTCString()) },
+				{ Post.TableSpec.FIELD_REVISION, new ScalarFieldValue("0") },
+				{ Post.TableSpec.FIELD_LASTCHANGEDATE, new ScalarFieldValue(date.ToUTCString()) },
+				{ Post.TableSpec.FIELD_LAYERID, new ScalarFieldValue(layer.id.ToString()) },
+				{ Post.TableSpec.FIELD_TITLE, new ScalarFieldValue(title) },
+				{ Post.TableSpec.FIELD_BODY, new ScalarFieldValue(bodyIntermediate) },
+			};
+			if(forcedPostId.HasValue) {
+				postInsertData[Post.TableSpec.FIELD_ID] = new ScalarFieldValue(forcedPostId.Value.ToString());
+			}
 			AbstractChange postInsert = new InsertChange(
 				Post.TableSpec.instance,
-				new Dictionary<string,AbstractFieldValue> {
-					{ Post.TableSpec.FIELD_THREADID, new ScalarFieldValue(threadId.ToString()) },
-					{ Post.TableSpec.FIELD_PARENTPOSTID, new ScalarFieldValue(parentPostId) },
-					{ Post.TableSpec.FIELD_POSTERID, new ScalarFieldValue(poster.id.ToString()) },
-					{ Post.TableSpec.FIELD_POSTDATE, new ScalarFieldValue(DateTime.Now.ToUTCString()) },
-					{ Post.TableSpec.FIELD_REVISION, new ScalarFieldValue("0") },
-					{ Post.TableSpec.FIELD_LASTCHANGEDATE, new ScalarFieldValue(DateTime.Now.ToUTCString()) },
-					{ Post.TableSpec.FIELD_LAYERID, new ScalarFieldValue(layer.id.ToString()) },
-					{ Post.TableSpec.FIELD_TITLE, new ScalarFieldValue(title) },
-					{ Post.TableSpec.FIELD_BODY, new ScalarFieldValue(UBBParser.UBBToIntermediate(body)) },
-				}
+				postInsertData
 			);
+			AbstractFieldValue postReference = new ReferenceFieldValue(postInsert);
+			AbstractFieldValue postIndexReference = new TwoWayReferenceFieldValue(postInsert, TwoWayReferenceFieldValue.GREATEST);
 			AbstractChange revisionInsert = new InsertChange(
 				Post.RevisionTableSpec.instance,
 				new Dictionary<string,AbstractFieldValue> {
-					{ Post.RevisionTableSpec.FIELD_POSTID, new ReferenceFieldValue(postInsert) },
+					{ Post.RevisionTableSpec.FIELD_POSTID, postReference },
 					{ Post.RevisionTableSpec.FIELD_NUMBER, new ScalarFieldValue("0") },
-					{ Post.RevisionTableSpec.FIELD_CHANGEDATE, new ScalarFieldValue(DateTime.Now.ToUTCString()) },
+					{ Post.RevisionTableSpec.FIELD_CHANGEDATE, new ScalarFieldValue(date.ToUTCString()) },
 					{ Post.RevisionTableSpec.FIELD_TITLE, new ScalarFieldValue(title) },
 					{ Post.RevisionTableSpec.FIELD_BODY, new ScalarFieldValue(body) },
 				}
 			);
 			Dictionary<string, AbstractFieldValue> threadData = new Dictionary<string,AbstractFieldValue> {
-				{ Thread.TableSpec.FIELD_LASTPOSTDATE, new ScalarFieldValue(DateTime.Now.ToUTCString()) },
+				{ Thread.TableSpec.FIELD_LASTPOSTDATE, new ScalarFieldValue(date.ToUTCString()) },
 				{ Thread.TableSpec.FIELD_TOTALPOSTS, new IncrementFieldValue() },
 				{
 					Thread.TableSpec.FIELD_LASTPOSTID,
-					new TwoWayReferenceFieldValue(postInsert, TwoWayReferenceFieldValue.GREATEST)
+					postIndexReference
 				}
 			};
 			if(isNewThread) {
-				threadData[Thread.TableSpec.FIELD_FIRSTPOSTID] = new ReferenceFieldValue(postInsert);
+				threadData[Thread.TableSpec.FIELD_FIRSTPOSTID] = postReference;
 			}
 			AbstractChange threadUpdate = new UpdateChange(
 				Thread.TableSpec.instance,
@@ -439,17 +452,7 @@ namespace FLocal.Common.dataobjects {
 				{ Board.TableSpec.FIELD_TOTALPOSTS, new IncrementFieldValue() },
 				{
 					Board.TableSpec.FIELD_LASTPOSTID,
-					new TwoWayReferenceFieldValue(
-						postInsert,
-						(oldStringId, newStringId) => {
-							if((oldStringId == null) || (oldStringId == "")) {
-								return newStringId;
-							}
-							int oldId = int.Parse(oldStringId);
-							int newId = int.Parse(newStringId);
-							return Math.Max(oldId, newId).ToString();
-						}
-					)
+					postIndexReference
 				}
 			};
 			if(isNewThread) {

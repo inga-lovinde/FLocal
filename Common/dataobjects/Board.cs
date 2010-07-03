@@ -333,6 +333,9 @@ namespace FLocal.Common.dataobjects {
 		}
 
 		public Thread CreateThread(User poster, string title, string body, PostLayer desiredLayer) {
+			return this.CreateThread(poster, title, body, desiredLayer, DateTime.Now, null);
+		}
+		public Thread CreateThread(User poster, string title, string body, PostLayer desiredLayer, DateTime date, int? forcedPostId) {
 
 			PostLayer actualLayer = poster.getActualLayer(this, desiredLayer);
 			AbstractChange threadInsert = new InsertChange(
@@ -347,7 +350,7 @@ namespace FLocal.Common.dataobjects {
 					{ Thread.TableSpec.FIELD_TOTALVIEWS, new ScalarFieldValue("0") },
 					{ Thread.TableSpec.FIELD_FIRSTPOSTID, new ScalarFieldValue(null) },
 					{ Thread.TableSpec.FIELD_LASTPOSTID, new ScalarFieldValue(null) },
-					{ Thread.TableSpec.FIELD_LASTPOSTDATE, new ScalarFieldValue(DateTime.Now.ToUTCString()) },
+					{ Thread.TableSpec.FIELD_LASTPOSTDATE, new ScalarFieldValue(date.ToUTCString()) },
 				}
 			);
 
@@ -355,7 +358,7 @@ namespace FLocal.Common.dataobjects {
 				Config.Transactional(transaction => {
 					threadInsertSet.Add(threadInsert);
 					threadInsertSet.Apply(transaction);
-					foreach(AbstractChange change in Thread.getNewPostChanges(this, threadInsert.getId().Value, null, poster, actualLayer, title, body).Value) {
+					foreach(AbstractChange change in Thread.getNewPostChanges(this, threadInsert.getId().Value, null, poster, actualLayer, title, body, date, forcedPostId).Value) {
 						dataInsertSet.Add(change);
 					}
 					dataInsertSet.Apply(transaction);

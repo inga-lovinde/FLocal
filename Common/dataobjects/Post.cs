@@ -197,6 +197,9 @@ namespace FLocal.Common.dataobjects {
 		}
 
 		public Post Reply(User poster, string title, string body, PostLayer desiredLayer) {
+			return this.Reply(poster, title, body, desiredLayer, DateTime.Now, null);
+		}
+		public Post Reply(User poster, string title, string body, PostLayer desiredLayer, DateTime date, int? forcedPostId) {
 
 			if(this.thread.isLocked) {
 				throw new FLocalException("thread locked");
@@ -204,7 +207,7 @@ namespace FLocal.Common.dataobjects {
 
 			PostLayer actualLayer = poster.getActualLayer(this.thread.board, desiredLayer);
 
-			var changes = Thread.getNewPostChanges(this.thread.board, this.threadId, this, poster, actualLayer, title, body);
+			var changes = Thread.getNewPostChanges(this.thread.board, this.threadId, this, poster, actualLayer, title, body, date, forcedPostId);
 			ChangeSetUtil.ApplyChanges(changes.Value.ToArray());
 			
 			return Post.LoadById(changes.Key.getId().Value);

@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 namespace FLocal.ImportConsole {
 	class ThreadedHTMLProcessor {
 
-		private readonly static DateTime UNIX = new DateTime(1970, 1, 1, 0, 0, 0).ToLocalTime();
+		private readonly static DateTime UNIX = new DateTime(1970, 1, 1, 0, 0, 0);
 
 		private readonly static Regex PARENT_BEGINMARKER = new Regex("<font class=\"small\">\\[<a href=\"/a?showthreaded.php\\?Cat=&amp;Board=\\w+&amp;Number=");
 		private const string PARENT_ENDMARKER = "&amp;";
@@ -304,7 +304,7 @@ namespace FLocal.ImportConsole {
 								new Dictionary<string, string> {
 									{ "Subject", contentTitle },
 									{ "Board", contentBoard },
-									{ "UnixTime", ((int)(contentDate.Subtract(UNIX).TotalSeconds)).ToString() },
+									{ "UnixTime", ((int)(contentDate.ToUniversalTime().Subtract(UNIX).TotalSeconds)).ToString() },
 									{ "Parent", contentParent.ToString() },
 									{ "Main", contentThread.ToString() },
 									{ "Local_Main", contentThread.ToString() },

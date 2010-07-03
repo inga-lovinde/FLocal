@@ -43,5 +43,11 @@ namespace FLocal.ImportConsole {
 		public static void ConvertThreaded(string pathToThreaded, string outFile) {
 			ThreadedHTMLProcessor.Process(pathToThreaded, outFile);
 		}
+
+		[Action]
+		public static void ImportShallerDB(string pathToDB) {
+			initializeConfig();
+			ShallerDBProcessor.processDB(pathToDB);
+		}
 	}
 }
