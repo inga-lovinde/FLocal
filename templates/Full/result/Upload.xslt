@@ -15,13 +15,17 @@
 							<td class="lighttable"> 
 								<xsl:text>Файл успешно загружен.</xsl:text>
 								<br/>
-								<xsl:text>Теперь вы можете вставлять ссылки на него с помощью тэга [uploadLink=</xsl:text>
+								<xsl:text>Теперь вы можете вставлять ссылки на него с помощью тэга [uploadLink]</xsl:text>
 									<xsl:value-of select="uploadedId"/>
-								<xsl:text>]</xsl:text>
+								<xsl:text>[/uploadLink]</xsl:text>
 								<br/>
-								<xsl:text>Для вставки картинки воспользуйтесь тэгом [uploadImage=</xsl:text>
+								<xsl:text>Для вставки картинки воспользуйтесь тэгом [uploadImage]</xsl:text>
 									<xsl:value-of select="uploadedId"/>
-								<xsl:text>]</xsl:text>
+								<xsl:text>[/uploadImage]</xsl:text>
+								<br/>
+								<img>
+									<xsl:attribute name="src">/Upload/Item/<xsl:value-of select="uploadedId"/>/</xsl:attribute>
+								</img>
 							</td> 
 						</tr> 
 					</table> 
