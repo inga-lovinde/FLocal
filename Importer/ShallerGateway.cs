@@ -10,6 +10,8 @@ using System.IO;
 namespace FLocal.Importer {
 	public class ShallerGateway {
 
+		public static readonly Encoding encoding = ShallerConnector.encoding;
+
 		public static string getUserInfoAsString(string userName) {
 			//if(userName != HttpUtility.UrlEncode(userName, ShallerConnector.encoding)) throw new ApplicationException("'" + userName + "':showprofile.php?User=" + HttpUtility.UrlEncode(userName, ShallerConnector.encoding) + "&What=login&showlite=l");
 			return ShallerConnector.getPageContent("showprofile.php?User=" + HttpUtility.UrlEncode(userName, ShallerConnector.encoding) + "&What=login&showlite=l", new Dictionary<string,string>(), new System.Net.CookieContainer());

@@ -9,19 +9,22 @@ using FLocal.Common;
 namespace FLocal.ImportConsole {
 	class Program {
 		public static void Main(string[] args) {
+			Consolery.Run(typeof(Program), args);
+		}
 
+		private static void initializeConfig() {
 			if(!Config.isInitialized) {
 				lock(typeof(Config)) {
 					if(!Config.isInitialized) {
 						Config.Init(ConfigurationManager.AppSettings);
 					}
 				}
-				Consolery.Run(typeof(Program), args);
 			}
 		}
 
 		[Action]
 		public static void ImportUsers() {
+			initializeConfig();
 			try {
 				UsersImporter.ImportUsers();
 			} catch(Exception e) {
@@ -32,7 +35,13 @@ namespace FLocal.ImportConsole {
 
 		[Action]
 		public static void ProcessUpload(string pathToUpload) {
+			initializeConfig();
 			UploadProcessor.ProcessUpload(pathToUpload);
+		}
+
+		[Action]
+		public static void ConvertThreaded(string pathToThreaded, string outFile) {
+			ThreadedHTMLProcessor.Process(pathToThreaded, outFile);
 		}
 	}
 }
