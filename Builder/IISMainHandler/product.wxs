@@ -64,6 +64,12 @@
 			<Component Id="NConsoler.dll" Guid="F39FD087-8961-4871-9D59-FDB83002BC91">
 				<File Id="NConsoler.dll" Source="..\..\ThirdParty\NConsoler\NConsoler.dll" KeyPath="yes" Checksum="yes"/>
 			</Component>
+			<Component Id="PJonDevelopment.BBCode.dll" Guid="5271E184-FCCB-433C-B789-959B410D6DDA">
+				<File Id="PJonDevelopment.BBCode.dll" Source="..\..\ThirdParty\BBCode\bin\Release\PJonDevelopment.BBCode.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="PJonDevelopment.BBCode.pdb" Guid="EFFBA1FA-A3A8-4D20-8894-AFD255B9F005">
+				<File Id="PJonDevelopment.BBCode.pdb" Source="..\..\ThirdParty\BBCode\bin\Release\PJonDevelopment.BBCode.pdb" KeyPath="yes" Checksum="yes"/>
+			</Component>
 			<!--Component Id="MySql.Data.dll" Guid="90646729-6B21-4BEE-94C3-F39F5288EFB3">
 				<File Id="MySql.Data.dll" Source="..\..\ThirdParty\mysql-connector-net-6.2.3\MySql.Data\Provider\bin\Release\MySql.Data.dll" KeyPath="yes" Checksum="yes"/>
 			</Component>
@@ -111,6 +117,10 @@
 		<Feature Id='ThirdParty' Title='ThirdParty libraries/tools' Level='1'>
 			<Feature Id='NConsoler' Title='NConsoler' Level='1'>
 				<ComponentRef Id='NConsoler.dll' />
+			</Feature>
+			<Feature Id='BBCode' Title='BBCode parser by PJonDevelopment' Level='1'>
+				<ComponentRef Id='PJonDevelopment.BBCode.dll' />
+				<ComponentRef Id='PJonDevelopment.BBCode.pdb' />
 			</Feature>
 			<!--Feature Id='MySql.Data' Title='MySql Connector/NET' Level='1'>
 				<ComponentRef Id='MySql.Data.dll' />
