@@ -139,7 +139,7 @@ namespace FLocal.Common.dataobjects {
 			this._name = data[TableSpec.FIELD_NAME];
 			this._description = data[TableSpec.FIELD_DESCRIPTION];
 			this._parentBoardId = Util.ParseInt(data[TableSpec.FIELD_PARENTBOARDID]);
-			this._legacyName = data[TableSpec.FIELD_LEGACYNAME];
+			this._legacyName = data[TableSpec.FIELD_LEGACYNAME].ToLower();
 		}
 
 		private readonly object subBoards_Locker = new object();
@@ -229,8 +229,9 @@ namespace FLocal.Common.dataobjects {
 		private static readonly IEnumerable<int> allBoardsIds = from stringId in Config.instance.mainConnection.LoadIdsByConditions(TableSpec.instance, new EmptyCondition(), Diapasone.unlimited) select int.Parse(stringId);
 
 		private static Dictionary<string, int> legacyName2Id = new Dictionary<string,int>();
-		public static Board LoadByLegacyName(string legacy) {
-			if((legacy == null) || (legacy == "")) throw new FLocalException("legacy name is empty");
+		public static Board LoadByLegacyName(string _legacy) {
+			if((_legacy == null) || (_legacy == "")) throw new FLocalException("legacy name is empty");
+			string legacy = _legacy.ToLower();
 			if(!legacyName2Id.ContainsKey(legacy)) {
 				lock(legacyName2Id) {
 					if(!legacyName2Id.ContainsKey(legacy)) {
