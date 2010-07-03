@@ -31,5 +31,19 @@ namespace FLocal.Common.BBCodes {
 			}
 		}
 
+		protected string DefaultOrValue {
+			get {
+				string result = this.Default;
+				if(result == null) {
+					result = this.InnerText;
+				}
+				return result;
+			}
+		}
+
+		protected string Safe(string str) {
+			return System.Web.HttpUtility.HtmlEncode(str);
+		}
+
 	}
 }

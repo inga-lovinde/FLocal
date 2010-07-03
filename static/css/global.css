@@ -76,3 +76,9 @@ pre
 	cursor:hand;
 	text-decoration:underline;
 }
+[spoiler] [inner] {
+	display:none;
+}
+[spoiler] [opener] {
+	cursor:hand;
+}

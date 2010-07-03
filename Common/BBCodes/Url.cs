@@ -12,11 +12,7 @@ namespace FLocal.Common.BBCodes {
 		}
 
 		public override string Format(ITextFormatter formatter) {
-			string rawUrl = this.Default;
-			if(rawUrl == null) {
-//				throw new ApplicationException(String.Join("; ", (from kvp in this.Attributes select kvp.Key + "=" + kvp.Value).ToArray()));
-				rawUrl = this.InnerText;
-			}
+			string rawUrl = this.DefaultOrValue;
 			var urlInfo = UrlProcessor.Process(rawUrl);
 			return "<a href=\"" + urlInfo.relativeUrl + "\">" + this.GetInnerHTML(formatter) + "</a>";
 		}

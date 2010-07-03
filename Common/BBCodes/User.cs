@@ -5,14 +5,15 @@ using System.Text;
 using PJonDevelopment.BBCode;
 
 namespace FLocal.Common.BBCodes {
-	class Code : BBCode {
+	class User : BBCode {
 
-		public Code()
-			: base("code") {
+		public User()
+			: base("user") {
 		}
 
 		public override string Format(ITextFormatter formatter) {
-			return "<pre>" + this.InnerBBCode.Trim() + "</pre><br/>";
+			var user = dataobjects.User.LoadByName(this.Default);
+			return "<a href=\"/User/" + user.id.ToString() + "/\">" + this.Safe(user.name) + "</a>";
 		}
 
 	}

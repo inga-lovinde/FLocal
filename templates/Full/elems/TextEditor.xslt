@@ -125,13 +125,13 @@ function insertInBody(str) {
 						</tr>
 						<tr>
 							<td class="darktable">
-								<a pseudolink="pseudolink" onclick="DoPrompt('pollstart');">Начало<br/>голосования</a>
+								<a pseudolink="pseudolink" onclick="alert('Not implemented');return;DoPrompt('pollstart');">Начало<br/>голосования</a>
 							</td>
 							<td class="darktable">
-								<a pseudolink="pseudolink" onclick="DoPrompt('polloption');">Вариант<br/>голосования</a>
+								<a pseudolink="pseudolink" onclick="alert('Not implemented');return;DoPrompt('polloption');">Вариант<br/>голосования</a>
 							</td>
 							<td class="darktable">
-								<a pseudolink="pseudolink" onclick="DoPrompt('pollstop');">Конец<br/>голосования</a>
+								<a pseudolink="pseudolink" onclick="alert('Not implemented');return;DoPrompt('pollstop');">Конец<br/>голосования</a>
 							</td>
 						</tr>
 						<tr>
@@ -150,18 +150,18 @@ function insertInBody(str) {
 								<a pseudolink="pseudolink" onclick="DoPrompt('user');">Пользователь</a>
 							</td>
 							<td class="darktable">
-								<a pseudolink="pseudolink" onclick="DoPrompt('table');">Таблица</a>
+								<a pseudolink="pseudolink" onclick="alert('Not implemented');return;DoPrompt('table');">Таблица</a>
 							</td>
 							<td class="darktable">
-								<a pseudolink="pseudolink" onclick="DoPrompt('ecode');">Ecode</a>
+								<a pseudolink="pseudolink" onclick="alert('Not implemented');return;DoPrompt('ecode');">Ecode</a>
 							</td>
 						</tr>
 						<tr>
 							<td class="darktable">
-								<a pseudolink="pseudolink" onclick="DoPrompt('video');">YouTube</a>
+								<a pseudolink="pseudolink" onclick="alert('Not implemented');return;DoPrompt('video');">YouTube</a>
 							</td>
 							<td class="darktable" colspan="2">
-								<a pseudolink="pseudolink" onclick="DoPrompt('math');">Math</a>
+								<a pseudolink="pseudolink" onclick="alert('Not implemented');return;DoPrompt('math');">Math</a>
 							</td>
 						</tr>
 					</table>

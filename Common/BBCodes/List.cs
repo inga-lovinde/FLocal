@@ -5,14 +5,14 @@ using System.Text;
 using PJonDevelopment.BBCode;
 
 namespace FLocal.Common.BBCodes {
-	class Code : BBCode {
+	class List : BBCode {
 
-		public Code()
-			: base("code") {
+		public List()
+			: base("list") {
 		}
 
 		public override string Format(ITextFormatter formatter) {
-			return "<pre>" + this.InnerBBCode.Trim() + "</pre><br/>";
+			return "<ul>" + this.GetInnerHTML(formatter) + "</ul>";
 		}
 
 	}
