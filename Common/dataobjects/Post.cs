@@ -75,8 +75,8 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
-		private int _revision;
-		public int revision {
+		private int? _revision;
+		public int? revision {
 			get {
 				this.LoadIfNotLoaded();
 				return this._revision;
