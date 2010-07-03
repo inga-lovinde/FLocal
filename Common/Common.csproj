@@ -57,6 +57,15 @@
     <Compile Include="actions\TwoWayReferenceFieldValue.cs" />
     <Compile Include="actions\UpdateChange.cs" />
     <Compile Include="actions\ChangeSetUtil.cs" />
+    <Compile Include="BBCodes\B.cs" />
+    <Compile Include="BBCodes\helpers\BBCode.cs" />
+    <Compile Include="BBCodes\Code.cs" />
+    <Compile Include="BBCodes\FUrl.cs" />
+    <Compile Include="BBCodes\Image.cs" />
+    <Compile Include="BBCodes\S.cs" />
+    <Compile Include="BBCodes\U.cs" />
+    <Compile Include="BBCodes\Url.cs" />
+    <Compile Include="BBCodes\helpers\UrlProcessor.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="dataobjects\Account.cs" />
     <Compile Include="dataobjects\AccountIndicator.cs" />
@@ -79,6 +88,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlObject.cs" />
     <Compile Include="UBBParser.cs" />
+    <Compile Include="BBCodes\I.cs" />
     <Compile Include="UploadManager.cs" />
     <Compile Include="UserContext.cs" />
     <Compile Include="UserSettingsGateway.cs" />
@@ -91,6 +101,10 @@
     <ProjectReference Include="..\MySQLConnector\MySQLConnector.csproj">
       <Project>{E38DE5B1-F9C2-43BA-A5DF-0743ABD4DFC7}</Project>
       <Name>MySQLConnector</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ThirdParty\BBCode\BBCode.vbproj">
+      <Project>{ACDDD5D1-119F-4B82-8FE6-6515C812795B}</Project>
+      <Name>BBCode</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
