@@ -100,6 +100,8 @@ Public Class BBCodeElement
             If (__RequireClosingTag = TriState.UseDefault) Then
                 If (Not String.IsNullOrEmpty(Me.Name) AndAlso Me.Parser.Dictionary.ContainsKey(Me.Name)) Then
                     __RequireClosingTag = If(Me.Parser.Dictionary(Me.Name).RequireClosingTag, TriState.True, TriState.False)
+                ElseIf (Not String.IsNullOrEmpty(Me.Name) AndAlso Me.Parser.ElementTypes.ContainsKey(Me.Name)) Then
+                    __RequireClosingTag = If(Me.Parser.ElementTypes(Me.Name).RequireClosingTag, TriState.True, TriState.False)
                 End If
             End If
             Return (__RequireClosingTag = TriState.True)

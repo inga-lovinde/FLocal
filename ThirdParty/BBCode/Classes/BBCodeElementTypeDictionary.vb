@@ -25,7 +25,7 @@ Imports System.Diagnostics.CodeAnalysis
 <Serializable()> _
 <XmlRoot(ElementName:=STR_BBCodeElementTypesXmlElement, [Namespace]:=STR_BBCodeSchemaNamespace)> _
 Public NotInheritable Class BBCodeElementTypeDictionary
-    Inherits Dictionary(Of String, Type)
+    Inherits Dictionary(Of String, BBCodeElementTypeDefinition)
     Implements IXmlSerializable
 
     Private Const STR_ConfigurationItem As String = "element"
@@ -47,10 +47,19 @@ Public NotInheritable Class BBCodeElementTypeDictionary
     ''' </summary>
     ''' <param name="tagName">The key of the element to add.</param>
     ''' <param name="value">The value of the element to add.</param>
-    Public Shadows Sub Add(ByVal tagName As String, ByVal value As Type)
+    Private Shadows Sub Add(ByVal tagName As String, ByVal value As BBCodeElementTypeDefinition)
         ValidateTagName(tagName)
-        ValidateBBCodeElementType(value)
+        ValidateBBCodeElementType(value.Type)
         MyBase.Add(tagName.ToUpperInvariant(), value)
+    End Sub
+
+    ''' <summary>
+    ''' Adds the specified key and value to the dictionary.
+    ''' </summary>
+    ''' <param name="tagName">The key of the element to add.</param>
+    ''' <param name="value">The value of the element to add.</param>
+    Public Shadows Sub Add(ByVal tagName As String, ByVal value As Type, ByVal requireClosingTag As Boolean)
+        Add(tagName.ToUpperInvariant(), New BBCodeElementTypeDefinition() With {.TagName = tagName, .Type = value, .RequireClosingTag = requireClosingTag})
     End Sub
 
     ''' <summary>This method is reserved and should not be used. When implementing the IXmlSerializable interface, you should return null (Nothing in Visual Basic) from this method, and instead, if specifying a custom schema is required, apply the <see cref="T:System.Xml.Serialization.XmlSchemaProviderAttribute" /> to the class.</summary>
@@ -74,10 +83,14 @@ Public NotInheritable Class BBCodeElementTypeDictionary
         '* Reads the items
         '*
         Do While (reader.Read() AndAlso reader.LocalName = STR_ConfigurationItem AndAlso reader.NamespaceURI = STR_BBCodeSchemaNamespace)
-            Dim name = reader.GetAttribute("name")
-            Dim type = System.Type.GetType(reader.GetAttribute("type"))
-            If (type.IsSubclassOf(GetType(BBCodeElement))) Then
-                Me.Add(name, type)
+            Dim definition As New BBCodeElementTypeDefinition()
+            With definition
+                .TagName = reader.GetAttribute("name")
+                Boolean.TryParse(reader.GetAttribute("requireClosingTag"), .RequireClosingTag)
+                .Type = System.Type.GetType(reader.GetAttribute("type"))
+            End With
+            If (definition.Type.IsSubclassOf(GetType(BBCodeElement))) Then
+                Me.Add(definition.TagName, definition)
             End If
         Loop
 
@@ -95,7 +108,8 @@ Public NotInheritable Class BBCodeElementTypeDictionary
         For Each it In Me
             writer.WriteStartElement(STR_ConfigurationItem, STR_BBCodeSchemaNamespace)
             writer.WriteAttributeString("name", it.Key.ToLower(CultureInfo.InvariantCulture))
-            writer.WriteAttributeString("type", it.Value.AssemblyQualifiedName)
+            writer.WriteAttributeString("requireClosingTag", it.Value.RequireClosingTag.ToString())
+            writer.WriteAttributeString("type", it.Value.Type.AssemblyQualifiedName)
             writer.WriteEndElement()
         Next
 

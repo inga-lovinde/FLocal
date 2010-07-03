@@ -69,6 +69,7 @@
     <Compile Include="Classes\BBCodeElement.vb" />
     <Compile Include="Classes\BBCodeElementDefinition.vb" />
     <Compile Include="Classes\BBCodeElementFactory.vb" />
+    <Compile Include="Classes\BBCodeElementTypeDefinition.vb" />
     <Compile Include="Classes\BBCodeHtmlFormatter.vb" />
     <Compile Include="Classes\BBCodeNode.vb" />
     <Compile Include="Classes\BBCodeNodeCollection.vb" />

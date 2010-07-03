@@ -50,6 +50,7 @@
       <xs:element name="Element">
         <xs:complexType>
           <xs:attribute name="name" type="xs:string" use="required" />
+          <xs:attribute name="requireClosingTag" type="xs:string" use="required" />
           <xs:attribute name="type" type="xs:string" use="required">
             <xs:annotation>
               <xs:documentation>

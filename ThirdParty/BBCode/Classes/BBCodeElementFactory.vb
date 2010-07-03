@@ -54,7 +54,7 @@ Friend NotInheritable Class BBCodeElementFactory
             '*
             '* Gets the type of the element
             '*
-            Dim type = Parser.ElementTypes(name.ToUpperInvariant())
+            Dim type = Parser.ElementTypes(name.ToUpperInvariant()).Type
 
             '*
             '* Check if the type IS BBCodeElement
