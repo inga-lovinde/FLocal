@@ -109,6 +109,7 @@
 										<br />
 										<font class="post">
 											<xsl:value-of select="body" disable-output-escaping="yes" />
+											<!--<xsl:copy-of select="body"/>-->
 											<br />
 											<br />
 										</font>

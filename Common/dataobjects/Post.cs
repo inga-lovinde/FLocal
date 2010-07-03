@@ -163,6 +163,10 @@ namespace FLocal.Common.dataobjects {
 			);
 		}
 
+		private XNode XMLBody(UserContext context) {
+			return XElement.Parse("<body>" + context.outputParams.preprocessBodyIntermediate(this.body) + "</body>", LoadOptions.PreserveWhitespace);
+		}
+
 		public XElement exportToXmlWithoutThread(UserContext context, bool includeParentPost, params XElement[] additional) {
 			
 			if(!context.isPostVisible(this)) return null;
@@ -177,6 +181,7 @@ namespace FLocal.Common.dataobjects {
 				new XElement("layerName", this.layer.name),
 				new XElement("title", this.title),
 				new XElement("body", context.outputParams.preprocessBodyIntermediate(this.body)),
+				//this.XMLBody(context),
 				new XElement("bodyShort", this.bodyShort),
 				new XElement("threadId", this.threadId)
 			);
