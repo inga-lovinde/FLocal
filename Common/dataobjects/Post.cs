@@ -147,7 +147,7 @@ namespace FLocal.Common.dataobjects {
 			this._posterId = int.Parse(data[TableSpec.FIELD_POSTERID]);
 			this._postDate = new DateTime(long.Parse(data[TableSpec.FIELD_POSTDATE]));
 			this._lastChangeDate = Util.ParseDateTimeFromTimestamp(data[TableSpec.FIELD_LASTCHANGEDATE]);
-			this._revision = int.Parse(data[TableSpec.FIELD_REVISION]);
+			this._revision = Util.ParseInt(data[TableSpec.FIELD_REVISION]);
 			this._layerId = int.Parse(data[TableSpec.FIELD_LAYERID]);
 			this._title = data[TableSpec.FIELD_TITLE];
 			this._body = data[TableSpec.FIELD_BODY];
