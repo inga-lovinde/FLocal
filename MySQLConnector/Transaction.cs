@@ -8,6 +8,7 @@ using System.Data.Common;
 namespace FLocal.MySQLConnector {
 	class Transaction : Core.DB.Transaction {
 
+		internal Connection connection;
 		internal DbConnection sqlconnection;
 		internal DbTransaction sqltransaction;
 
@@ -17,6 +18,7 @@ namespace FLocal.MySQLConnector {
 		}
 
 		public Transaction(Connection connection, System.Data.IsolationLevel iso) : base() {
+			this.connection = connection;
 			this.sqlconnection = connection.createConnection();
 			try {
 				if(connection.traits.supportsIsolationLevel()) {
@@ -50,6 +52,7 @@ namespace FLocal.MySQLConnector {
 			this.sqlconnection.Close();
 			this.sqlconnection.Dispose();
 			this.finalizedImpl = true;
+			this.connection.RemoveTransaction(this);
 		}
 
 	}

@@ -306,6 +306,12 @@ namespace FLocal.MySQLConnector {
 			}
 		}
 
+		internal void RemoveTransaction(Transaction transaction) {
+			lock(this) {
+				this.transactions.Remove(transaction);
+			}
+		}
+
 		public void Dispose() {
 			lock(this) {
 				foreach(Transaction transaction in this.transactions) {
