@@ -163,7 +163,16 @@ namespace FLocal.ImportConsole {
 						} else {
 							int localMain = int.Parse(data["Local_Main"]);
 							int main = int.Parse(data["Main"]);
-							DateTime date = UNIX.AddSeconds(int.Parse(data["UnixTime"])).ToLocalTime();
+							int UnixTime;
+							try {
+								UnixTime = int.Parse(data["UnixTime"]);
+							} catch(OverflowException) {
+								UnixTime = 1000*1000*1000;
+							}
+							if(UnixTime <= 0) {
+								UnixTime = 1000*1000*1000;
+							}
+							DateTime date = UNIX.AddSeconds(UnixTime).ToLocalTime();
 							User user;
 							string username = data["Username"];
 							try {
