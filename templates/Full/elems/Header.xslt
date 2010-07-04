@@ -75,7 +75,10 @@
 								<xsl:text> | </xsl:text>
 								<a target="_top">Кто в онлайне</a>
 								<xsl:text> | </xsl:text>
-								<a target="_top">FAQ</a>
+								<a target="_top">
+									<xsl:attribute name="href">/q/faq</xsl:attribute>
+									<xsl:text>FAQ</xsl:text>
+								</a>
 								<xsl:text> | </xsl:text>
 								<a target="_top">
 									<xsl:if test="session/sessionKey">
