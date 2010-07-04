@@ -40,7 +40,8 @@ namespace FLocal.Common.dataobjects {
 		}
 
 		private static Dictionary<string, int> name2id = new Dictionary<string,int>();
-		public static QuickLink LoadByName(string name) {
+		public static QuickLink LoadByName(string _name) {
+			string name = _name.ToLower();
 			if(!name2id.ContainsKey(name)) {
 				lock(name2id) {
 					if(!name2id.ContainsKey(name)) {
