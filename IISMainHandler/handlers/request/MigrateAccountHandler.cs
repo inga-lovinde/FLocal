@@ -48,7 +48,7 @@ namespace FLocal.IISHandler.handlers.request {
 			string check = Util.md5(match.Groups[1].Value +  " " + Config.instance.SaltMigration + " " + account.id);
 			if(check != context.httprequest["check"]) throw new FLocalException("Wrong key '" + match.Groups[1].Value + "'");
 			if(context.httprequest.Form["password"] != context.httprequest.Form["password2"]) throw new FLocalException("Passwords mismatch");
-			account.updatePassword(context.httprequest.Form["password2"]);
+			account.migrate(context.httprequest.Form["password2"]);
 			return new XElement[0];
 		}
 
