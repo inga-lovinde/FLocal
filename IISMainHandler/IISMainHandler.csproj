@@ -81,6 +81,7 @@
     <Compile Include="handlers\response\PMReplyHandler.cs" />
     <Compile Include="handlers\response\PMReplyToPostHandler.cs" />
     <Compile Include="handlers\response\PMSendHandler.cs" />
+    <Compile Include="handlers\response\QuickLinkHandler.cs" />
     <Compile Include="handlers\response\RedirectGetHandler.cs" />
     <Compile Include="handlers\response\ReplyHandler.cs" />
     <Compile Include="handlers\response\SettingsHandler.cs" />
