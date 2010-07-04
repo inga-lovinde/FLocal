@@ -34,6 +34,8 @@
 					<table width="100%" class="tableborders" cellpadding="3" cellspacing="1">
 						<tr>
 							<td align="center" class="menubar">
+								<a href="/Boards/" target="_top">Список форумов</a>
+								<xsl:text> | </xsl:text>
 								<a target="_top">
 									<xsl:if test="session/sessionKey">
 										<xsl:attribute name="href">/Conversations/</xsl:attribute>
@@ -49,8 +51,6 @@
 									</xsl:if>
 									<xsl:text>Личные сообщения</xsl:text>
 								</a>
-								<xsl:text> | </xsl:text>
-								<a href="/Boards/" target="_top">Список форумов</a>
 								<xsl:text> | </xsl:text>
 								<a target="_top">
 									<xsl:if test="session/sessionKey">
