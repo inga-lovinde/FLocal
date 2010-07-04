@@ -133,6 +133,7 @@ namespace FLocal.Common.dataobjects {
 		}
 
 		public void updatePassword(string newPassword) {
+			if(newPassword.Length < 5) throw new FLocalException("Password is too short");
 			ChangeSetUtil.ApplyChanges(new AbstractChange[] {
 				new UpdateChange(
 					TableSpec.instance,
