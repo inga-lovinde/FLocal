@@ -16,7 +16,7 @@ namespace FLocal.IISHandler {
 
 			Uri referer = httpcontext.Request.UrlReferrer;
 			if(referer != null && referer.PathAndQuery.StartsWith("/static")) {
-				throw new HttpException(403, "You have come from the static page");
+				throw new HttpException(403, "You have come from the static page '" + referer + "'");
 			}
 
 			if(!FLocal.Common.Config.isInitialized) {
