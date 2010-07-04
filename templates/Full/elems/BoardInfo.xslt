@@ -74,10 +74,11 @@
 	</xsl:template>
 
 	<xsl:template match="subBoards/board">
-		<xsl:text> </xsl:text>
+		<xsl:text> [</xsl:text>
 		<a>
 			<xsl:attribute name="href">/Board/<xsl:value-of select="id"/>/</xsl:attribute>
 			<xsl:value-of select="name"/>
 		</a>
+		<xsl:text>]</xsl:text>
 	</xsl:template>
 </xsl:stylesheet>
