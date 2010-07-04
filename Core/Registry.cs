@@ -51,6 +51,12 @@ namespace FLocal.Core {
             return this.storage.ContainsKey(id);
         }
 
+		internal void Clear() {
+			lock(this.locks) {
+				this.storage.Clear();
+			}
+		}
+
 		internal void Delete(TKey[] idsToDelete) {
 			foreach(TKey id in idsToDelete) {
 				lock(this.locks[id]) {
