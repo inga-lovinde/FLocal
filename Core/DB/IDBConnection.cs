@@ -47,7 +47,7 @@ namespace FLocal.Core.DB {
 		public static Dictionary<string, string> LoadById(this IDBConnection connection, ITableSpec table, string id) {
 			List<Dictionary<string, string>> rows = connection.LoadByIds(table, new List<string> { id });
 			if(rows.Count < 1) {
-				throw new NotFoundInDBException();
+				throw new NotFoundInDBException(table, id);
 			}
 			if(rows.Count > 1) {
 				throw new CriticalException(rows.Count + " objects with specified id");

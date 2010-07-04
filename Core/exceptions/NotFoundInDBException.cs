@@ -9,6 +9,8 @@ namespace FLocal.Core {
 
         public NotFoundInDBException() : base("Object not found in DB") { }
 
+		public NotFoundInDBException(DB.ITableSpec tableSpec, string id) : base("Object " + tableSpec.name + "[" + tableSpec.idName + "=" + id + "] not found in db") {}
+
     }
 
 }
