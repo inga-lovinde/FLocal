@@ -34,7 +34,7 @@
 									<br/>
 									<input type="checkbox" name="constitution" value="constitution"/>
 									<label for="constitution"> Да, я согласен/согласна/согласно с тем, что на этом форуме действует </label>
-									<a href="/q/consitution/" style="text-decoration:underline">описанная по этой ссылке конституция</a>
+									<a href="/q/constitution/" style="text-decoration:underline">описанная по этой ссылке конституция</a>
 									<xsl:text>.</xsl:text>
 									<i> (обязательно)</i>
 									<br/>
