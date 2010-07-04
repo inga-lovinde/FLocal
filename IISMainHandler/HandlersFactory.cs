@@ -28,6 +28,8 @@ namespace FLocal.IISHandler {
 			#endregion
 
 			switch(context.requestParts[0].ToLower()) {
+				case "q":
+					return new handlers.response.QuickLinkHandler();
 				case "boards":
 					return new handlers.BoardsHandler();
 				case "board":
