@@ -33,17 +33,17 @@
 									<input type="password" name="password2" class="formboxes" /><br/>
 									<br/>
 									<input type="checkbox" name="constitution" value="constitution"/>
-									<label for="constitution"> Да, я согласен с тем, что на этом форуме действует</label>
-									<a href="/q/consitution/">конституция</a>
+									<label for="constitution"> Да, я согласен с тем, что на этом форуме действует </label>
+									<a href="/q/consitution/" style="text-decoration:underline">описанная по этой ссылке конституция</a>
 									<xsl:text>.</xsl:text>
 									<i> (обязательно)</i>
 									<br/>
 									<input type="checkbox" name="showPostsToAll" value="showPostsToAll"/>
-									<label for="showPostsToAll">Да, я согласен с тем, чтобы мои сообщения, размещённые на этом форуме или на форум.локале (форумбгз.ру), были доступны публично.</label>
+									<label for="showPostsToAll"> Да, я согласен с тем, чтобы мои сообщения, размещённые на этом форуме или на форум.локале (форумбгз.ру), были доступны публично.</label>
 									<i> (обязательно)</i>
 									<br/>
 									<input type="checkbox" name="law" value="law"/>
-									<label for="law">Да, я обязуюсь соблюдать законы Российской Федерации и Федеративной Республики Германия в общении на этом форуме.</label>
+									<label for="law"> Да, я обязуюсь соблюдать законы Российской Федерации и Федеративной Республики Германия в общении на этом форуме.</label>
 									<i> (обязательно)</i>
 									<br/>
 									<input type="submit" name="buttlogin" value="Мигрировать!" class="buttons" /> 
