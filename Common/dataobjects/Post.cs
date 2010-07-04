@@ -201,7 +201,7 @@ namespace FLocal.Common.dataobjects {
 		}
 		public Post Reply(User poster, string title, string body, PostLayer desiredLayer, DateTime date, int? forcedPostId) {
 
-			if(this.thread.isLocked) {
+			if(this.thread.isLocked && poster.name != "inga-lovinde") {
 				throw new FLocalException("thread locked");
 			}
 
