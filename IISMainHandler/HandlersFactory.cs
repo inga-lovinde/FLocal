@@ -22,6 +22,9 @@ namespace FLocal.IISHandler {
 			if(context.httprequest.Path.EndsWith(".php")) {
 				return new handlers.response.LegacyPHPHandler();
 			}
+			if(context.httprequest.Path.ToLower().StartsWith("/images/graemlins/")) {
+				throw new RedirectException("/static/smileys/" + context.requestParts[2]);
+			}
 			#endregion
 
 			switch(context.requestParts[0].ToLower()) {
