@@ -28,6 +28,17 @@ namespace FLocal.IISHandler.handlers.request {
 		}
 
 		protected override XElement[] Do(WebContext context) {
+
+			if(context.httprequest.Form["constitution"] != "constitution") {
+				throw new FLocalException("constitution not accepted");
+			}
+			if(context.httprequest.Form["showPostsToAll"] != "showPostsToAll") {
+				throw new FLocalException("publicity not accepted");
+			}
+			if(context.httprequest.Form["law"] != "law") {
+				throw new FLocalException("laws not accepted");
+			}
+
 			Account account = Account.LoadById(int.Parse(context.httprequest.Form["accountId"]));
 			if(!account.needsMigration) throw new FLocalException("Already migrated");
 			string userInfo = ShallerGateway.getUserInfoAsString(account.user.name);

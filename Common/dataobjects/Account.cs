@@ -141,12 +141,34 @@ namespace FLocal.Common.dataobjects {
 							TableSpec.FIELD_PASSWORDHASH,
 							new ScalarFieldValue(this.hashPassword(newPassword))
 						},
+					},
+					this.id
+				)
+			});
+		}
+
+		public void migrate(string newPassword) {
+			ChangeSetUtil.ApplyChanges(new AbstractChange[] {
+				new UpdateChange(
+					TableSpec.instance,
+					new Dictionary<string, AbstractFieldValue>() {
+						{
+							TableSpec.FIELD_PASSWORDHASH,
+							new ScalarFieldValue(this.hashPassword(newPassword))
+						},
 						{
 							TableSpec.FIELD_NEEDSMIGRATION,
 							new ScalarFieldValue("0")
 						},
 					},
 					this.id
+				),
+				new UpdateChange(
+					User.TableSpec.instance,
+					new Dictionary<string, AbstractFieldValue> {
+						{ User.TableSpec.FIELD_SHOWPOSTSTOUSERS, new ScalarFieldValue(User.ENUM_SHOWPOSTSTOUSERS_ALL) },
+					},
+					this.user.id
 				)
 			});
 		}
