@@ -91,7 +91,7 @@ function insertInBody(str) {
 						<xsl:text>More!</xsl:text>
 					</a>
 					<xsl:text> &#160; </xsl:text>
-					<a href="/Upload/New/">
+					<a href="/Upload/New/" target="_blank">
 						<xsl:text>Upload</xsl:text>
 					</a>
 					<xsl:text> &#160; </xsl:text>
