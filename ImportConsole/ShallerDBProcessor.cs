@@ -259,7 +259,7 @@ namespace FLocal.ImportConsole {
 				}
 			}
 
-			Console.WriteLine("Not found discussions:");
+			Console.ReadLine();
 			int j=0;
 			foreach(var insert in inserts) {
 				if(j%1000 == 0) {
@@ -286,6 +286,7 @@ namespace FLocal.ImportConsole {
 				}
 			}
 
+			Console.WriteLine("Not found discussions:");
 			foreach(int discussionId in discussionsIds.OrderBy(id => id)) {
 				Console.WriteLine(discussionId);
 			}
