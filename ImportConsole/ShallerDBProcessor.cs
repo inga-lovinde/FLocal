@@ -144,6 +144,7 @@ namespace FLocal.ImportConsole {
 		private readonly static DateTime UNIX = new DateTime(1970, 1, 1, 0, 0, 0);
 
 		public static void processDB(string filename) {
+			List<KeyValuePair<int, Action>> inserts = new List<KeyValuePair<int, Action>>();
 			HashSet<int> discussionsIds = new HashSet<int>();
 			using(StreamReader reader = new StreamReader(filename)) {
 				int i=0;
@@ -161,81 +162,83 @@ namespace FLocal.ImportConsole {
 						if(Config.instance.mainConnection.GetCountByConditions(Post.TableSpec.instance, new ComparisonCondition(Post.TableSpec.instance.getIdSpec(), ComparisonType.EQUAL, postId.ToString())) > 0) {
 							Console.Write("-");
 						} else {
-							int localMain = int.Parse(data["Local_Main"]);
-							int main = int.Parse(data["Main"]);
-							int UnixTime;
-							try {
-								UnixTime = int.Parse(data["UnixTime"]);
-							} catch(OverflowException) {
-								UnixTime = 1000*1000*1000;
-							}
-							if(UnixTime <= 0) {
-								UnixTime = 1000*1000*1000;
-							}
-							DateTime date = UNIX.AddSeconds(UnixTime).ToLocalTime();
-							User user;
-							string username = data["Username"];
-							try {
-								user = User.LoadByName(username);
-							} catch(NotFoundInDBException) {
-								Console.Error.WriteLine("Cannot find user '" + username + "'; creating one...");
-								ChangeSetUtil.ApplyChanges(
-									new InsertChange(
-										User.TableSpec.instance,
-										new Dictionary<string, AbstractFieldValue> {
-											{ User.TableSpec.FIELD_NAME, new ScalarFieldValue(username) },
-											{ User.TableSpec.FIELD_REGDATE, new ScalarFieldValue(date.ToUTCString()) },
-											{ User.TableSpec.FIELD_SHOWPOSTSTOUSERS, new ScalarFieldValue(User.ENUM_SHOWPOSTSTOUSERS_ALL) },
-											{ User.TableSpec.FIELD_BIOGRAPHY, new ScalarFieldValue("") },
-											{ User.TableSpec.FIELD_LOCATION, new ScalarFieldValue("") },
-											{ User.TableSpec.FIELD_SIGNATURE, new ScalarFieldValue("") },
-											{ User.TableSpec.FIELD_TITLE, new ScalarFieldValue("") },
-											{ User.TableSpec.FIELD_TOTALPOSTS, new ScalarFieldValue("0") },
-											{ User.TableSpec.FIELD_USERGROUPID, new ScalarFieldValue("1") },
-										}
-									)
-								);
-								user = User.LoadByName(data["Username"]);
-							}
-							string title = data["Subject"];
-							string body = data["Body"];
-							PostLayer layer = PostLayer.LoadById(1);
-							if(data.ContainsKey("Layer")) {
-								layer = PostLayer.LoadById(int.Parse(data["Layer"]));
-							}
-							if(postId == main || postId == localMain) {
-								//first post in the thread
-								string legacyBoardName;
-								if(localMain != 0) {
-									discussionsIds.Add(main);
-									legacyBoardName = discussions[main];
-								} else {
-									legacyBoardName = data["Board"];
-								}
-								Board board;
+							inserts.Add(new KeyValuePair<int, Action>(postId, () => {
+								int localMain = int.Parse(data["Local_Main"]);
+								int main = int.Parse(data["Main"]);
+								int UnixTime;
 								try {
-									board = Board.LoadByLegacyName(legacyBoardName);
-								} catch(NotFoundInDBException) {
-									throw new ApplicationException("Cannot find board '" + legacyBoardName + "'");
+									UnixTime = int.Parse(data["UnixTime"]);
+								} catch(OverflowException) {
+									UnixTime = 1000*1000*1000;
 								}
-								board.CreateThread(user, title, body, layer, date, postId);
-							} else {
-								int parentId = int.Parse(data["Parent"]);
-								if(parentId == 0) {
-									parentId = localMain;
-									if(parentId == 0) {
-										parentId = main;
+								if(UnixTime <= 0) {
+									UnixTime = 1000*1000*1000;
+								}
+								DateTime date = UNIX.AddSeconds(UnixTime).ToLocalTime();
+								User user;
+								string username = data["Username"];
+								try {
+									user = User.LoadByName(username);
+								} catch(NotFoundInDBException) {
+									Console.Error.WriteLine("Cannot find user '" + username + "'; creating one...");
+									ChangeSetUtil.ApplyChanges(
+										new InsertChange(
+											User.TableSpec.instance,
+											new Dictionary<string, AbstractFieldValue> {
+												{ User.TableSpec.FIELD_NAME, new ScalarFieldValue(username) },
+												{ User.TableSpec.FIELD_REGDATE, new ScalarFieldValue(date.ToUTCString()) },
+												{ User.TableSpec.FIELD_SHOWPOSTSTOUSERS, new ScalarFieldValue(User.ENUM_SHOWPOSTSTOUSERS_ALL) },
+												{ User.TableSpec.FIELD_BIOGRAPHY, new ScalarFieldValue("") },
+												{ User.TableSpec.FIELD_LOCATION, new ScalarFieldValue("") },
+												{ User.TableSpec.FIELD_SIGNATURE, new ScalarFieldValue("") },
+												{ User.TableSpec.FIELD_TITLE, new ScalarFieldValue("") },
+												{ User.TableSpec.FIELD_TOTALPOSTS, new ScalarFieldValue("0") },
+												{ User.TableSpec.FIELD_USERGROUPID, new ScalarFieldValue("1") },
+											}
+										)
+									);
+									user = User.LoadByName(data["Username"]);
+								}
+								string title = data["Subject"];
+								string body = data["Body"];
+								PostLayer layer = PostLayer.LoadById(1);
+								if(data.ContainsKey("Layer")) {
+									layer = PostLayer.LoadById(int.Parse(data["Layer"]));
+								}
+								if(postId == main || postId == localMain) {
+									//first post in the thread
+									string legacyBoardName;
+									if(localMain != 0) {
+										discussionsIds.Add(main);
+										legacyBoardName = discussions[main];
+									} else {
+										legacyBoardName = data["Board"];
 									}
+									Board board;
+									try {
+										board = Board.LoadByLegacyName(legacyBoardName);
+									} catch(NotFoundInDBException) {
+										throw new ApplicationException("Cannot find board '" + legacyBoardName + "'");
+									}
+									board.CreateThread(user, title, body, layer, date, postId);
+								} else {
+									int parentId = int.Parse(data["Parent"]);
+									if(parentId == 0) {
+										parentId = localMain;
+										if(parentId == 0) {
+											parentId = main;
+										}
+									}
+									Post post;
+									try {
+										post = Post.LoadById(parentId);
+									} catch(NotFoundInDBException) {
+										throw new ApplicationException("Cannot find parent post #" + parentId);
+									}
+									post.Reply(user, title, body, layer, date, postId);
 								}
-								Post post;
-								try {
-									post = Post.LoadById(parentId);
-								} catch(NotFoundInDBException) {
-									throw new ApplicationException("Cannot find parent post #" + parentId);
-								}
-								post.Reply(user, title, body, layer, date, postId);
-							}
-							Console.Write("+");
+								Console.Write("+");
+							}));
 						}
 					} catch(Exception e) {
 						Console.Error.WriteLine("Cannot process post #" + postId + ": " + e.GetType().FullName + ": " + e.Message);
@@ -257,9 +260,36 @@ namespace FLocal.ImportConsole {
 			}
 
 			Console.WriteLine("Not found discussions:");
+			int j=0;
+			foreach(var insert in inserts) {
+				if(j%1000 == 0) {
+					Console.Write("[" + (int)(j/1000) + "]");
+				}
+				try {
+					insert.Value();
+					Console.Write("+");
+				} catch(Exception e) {
+					Console.Error.WriteLine("Cannot process post #" + insert.Key + ": " + e.GetType().FullName + ": " + e.Message);
+					Console.Error.WriteLine(e.StackTrace);
+					Console.Write("!");
+//						Console.ReadLine();
+				} finally {
+					j++;
+					if((j%50000)==0) {
+						Core.RegistryCleaner.CleanRegistry<int, Post>();
+						Core.RegistryCleaner.CleanRegistry<int, Thread>();
+						GC.Collect();
+						Console.Error.WriteLine();
+						Console.Error.WriteLine("Registry cleaned; garbage collected");
+						Console.Error.WriteLine();
+					}
+				}
+			}
+
 			foreach(int discussionId in discussionsIds.OrderBy(id => id)) {
 				Console.WriteLine(discussionId);
 			}
+
 		}
 
 	}
