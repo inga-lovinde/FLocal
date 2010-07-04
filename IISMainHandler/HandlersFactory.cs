@@ -135,7 +135,7 @@ namespace FLocal.IISHandler {
 						}
 					}
 				default:
-					return new handlers.DebugHandler(context.requestParts[0]);
+					return new handlers.WrongUrlHandler();
 			}
 		}
 
