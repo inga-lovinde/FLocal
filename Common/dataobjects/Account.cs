@@ -125,7 +125,7 @@ namespace FLocal.Common.dataobjects {
 		}
 
 		private string hashPassword(string password) {
-			return Util.md5(password + " " + Config.instance.SaltMigration + " " + this.id);
+			return Util.md5(Util.md5(password) + " " + Util.md5(Config.instance.SaltMigration) + " " + Util.md5(this.id.ToString()));
 		}
 
 		public bool checkPassword(string password) {
