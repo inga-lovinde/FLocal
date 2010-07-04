@@ -18,6 +18,9 @@ namespace FLocal.IISHandler.handlers.request {
 			if(title == "") {
 				throw new FLocalException("Title is empty");
 			}
+			if(title.Length > 100) {
+				throw new FLocalException("Title is too long");
+			}
 			return title;
 		}
 
@@ -25,6 +28,9 @@ namespace FLocal.IISHandler.handlers.request {
 			string body = context.httprequest.Form["body"].Trim();
 			if(body == "") {
 				throw new FLocalException("Body is empty");
+			}
+			if(body.Length > 30000) {
+				throw new FLocalException("Body is too long");
 			}
 			return body;
 		}
