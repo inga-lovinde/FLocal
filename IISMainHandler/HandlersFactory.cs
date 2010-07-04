@@ -41,7 +41,7 @@ namespace FLocal.IISHandler {
 						case "newthread":
 							return new handlers.response.CreateThreadHandler();
 						default:
-							return new handlers.WrongUrlHandler();
+							return new handlers.BoardHandler();
 					}
 				case "boardasthread":
 					return new handlers.response.BoardAsThreadHandler();
