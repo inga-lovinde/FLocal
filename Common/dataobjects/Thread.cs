@@ -11,6 +11,8 @@ using FLocal.Common.actions;
 namespace FLocal.Common.dataobjects {
 	public class Thread : SqlObject<Thread> {
 
+		private const int FORMALREADMIN = 10000001;
+
 		public class TableSpec : ISqlObjectTableSpec {
 			public const string TABLE = "Threads";
 			public const string FIELD_ID = "Id";
@@ -281,11 +283,11 @@ namespace FLocal.Common.dataobjects {
 				throw new CriticalException("more than one row");
 			}
 			if(stringIds.Count < 1) {
-				return 0;
+				return FORMALREADMIN;
 			}
 			Dictionary<string, string> data = Config.instance.mainConnection.LoadById(ReadMarkerTableSpec.instance, stringIds[0]);
 			if((data[ReadMarkerTableSpec.FIELD_POSTID] == "") || (data[ReadMarkerTableSpec.FIELD_POSTID] == null)) {
-				return 0;
+				return FORMALREADMIN;
 			}
 			return int.Parse(data[ReadMarkerTableSpec.FIELD_POSTID]);
 		}
