@@ -1,7 +1,6 @@
 
 body { 
 background-color: #FFFFFF;
-background-image: url();
 font-family: Verdana, Arial, Helvetica, sans-serif;
 color: #000000;
 font-size: 11px;
@@ -33,7 +32,7 @@ font-size: 11px;
 }
 
 .welcome { 
-Background: #ceebf7 url('images/fusion/') repeat-x 50% top;
+Background: #ceebf7 repeat-x 50% top;
 border-color: #000000;
 border-style: solid;
 border-width: 1px;
@@ -56,7 +55,7 @@ border-width: 1px;
 }
 
 .menubar {
-Background: #4ebdd8 url('images/fusion/FusionBB_cellpic.gif') repeat-x 50% top;
+Background: #4ebdd8 url('/static/css/FusionBB/FusionBB_cellpic.gif') repeat-x 50% top;
 border-color: #2c9db6;
 border-style: solid;
 border-width: 1px;
@@ -91,7 +90,7 @@ font-size: 11px;
 }
 
 .tdheader {
-Background: #4ebdd8 url('images/fusion/FusionBB_cellpic.gif') repeat-x 50% top;
+Background: #4ebdd8 url('/static/css/FusionBB/FusionBB_cellpic.gif') repeat-x 50% top;
 border-color: #2c9db6;
 border-style: solid;
 border-width: 1px;
@@ -121,7 +120,7 @@ text-decoration: none;
 }
 
 .darktable { 
-Background: #ceebf7 url('images/fusion/FusionBB_color-dunkel.gif') repeat-x 50% top;
+Background: #ceebf7 url('/static/css/FusionBB/FusionBB_color-dunkel.gif') repeat-x 50% top;
 border-color: #2c9db6;
 border-style: solid;
 border-width: 1px;
@@ -130,7 +129,7 @@ font-size: 11px;
 }
 
 .modcolumn { 
-Background: #ceebf7 url('images/fusion/FusionBB_color-dunkel.gif') repeat-x 50% top;
+Background: #ceebf7 url('/static/css/FusionBB/FusionBB_color-dunkel.gif') repeat-x 50% top;
 border-color: #2c9db6;
 border-style: solid;
 border-width: 1px;
@@ -141,7 +140,7 @@ font-size: 11px;
 
 
 .threadtotal {
-Background: #dbf0f9 url('images/fusion/FusionBB_color-hell.gif') repeat-x 50% top;
+Background: #dbf0f9 url('/static/css/FusionBB/FusionBB_color-hell.gif') repeat-x 50% top;
 border-color: #2c9db6;
 border-style: solid;
 border-width: 1px;
@@ -150,7 +149,7 @@ font-size: 11px;
 }
 
 .posttotal {
-Background: #ceebf7 url('images/fusion/FusionBB_color-dunkel.gif') repeat-x 50% top;
+Background: #ceebf7 url('/static/css/FusionBB/FusionBB_color-dunkel.gif') repeat-x 50% top;
 border-color: #2c9db6;
 border-style: solid;
 border-width: 1px;
@@ -159,7 +158,7 @@ font-size: 11px;
 }
 
 .posttime {
-Background: #dbf0f9 url('images/fusion/FusionBB_color-hell.gif') repeat-x 50% top;
+Background: #dbf0f9 url('/static/css/FusionBB/FusionBB_color-hell.gif') repeat-x 50% top;
 border-color: #2c9db6;
 border-style: solid;
 border-width: 1px;
@@ -168,7 +167,7 @@ font-size: 11px;
 }
 
 .lighttable { 
-Background: #dbf0f9 url('images/fusion/FusionBB_color-hell.gif') repeat-x 50% top;
+Background: #dbf0f9 url('/static/css/FusionBB/FusionBB_color-hell.gif') repeat-x 50% top;
 border-color: #2c9db6;
 border-style: solid;
 border-width: 1px;
@@ -177,7 +176,7 @@ font-size: 11px;
 }
 
 .cleartable {
-Background: #ceebf7 url('images/fusion/FusionBB_color-dunkel.gif') repeat-x 50% top;
+Background: #ceebf7 url('/static/css/FusionBB/FusionBB_color-dunkel.gif') repeat-x 50% top;
 border-color: #2c9db6;
 border-style: solid;
 border-width: 1px;
@@ -186,7 +185,7 @@ font-size: 11px;
 }
 
 .subjecttable {
-Background: #ceebf7 url('images/fusion/FusionBB_color-dunkel.gif') repeat-x 50% top;
+Background: #ceebf7 url('/static/css/FusionBB/FusionBB_color-dunkel.gif') repeat-x 50% top;
 border-color: #2c9db6;
 border-style: solid;
 border-width: 1px;
@@ -195,7 +194,7 @@ font-size: 11px;
 }
 
 .navigation {
-Background: #4ebdd8 url('images/fusion/FusionBB_cellpic.gif') repeat-x 50% top;
+Background: #4ebdd8 url('/static/css/FusionBB/FusionBB_cellpic.gif') repeat-x 50% top;
 border-color: #2c9db6;
 border-style: solid;
 border-width: 1px;
@@ -281,7 +280,7 @@ background-color: #FF6500;
 }
 
 .newdarktable {
-Background: #34ADDE url('images/fusion/FusionBB_color-dunkel.gif') repeat-x 50% top;
+Background: #34ADDE url('/static/css/FusionBB/FusionBB_color-dunkel.gif') repeat-x 50% top;
 border-color: #2c9db6;
 border-style: solid;
 border-width: 1px;
@@ -290,7 +289,7 @@ font-size: 11px;
 }
 
 .newlighttable {
-Background: #34ADDE url('images/fusion/FusionBB_color-dunkel.gif') repeat-x 50% top;
+Background: #34ADDE url('/static/css/FusionBB/FusionBB_color-dunkel.gif') repeat-x 50% top;
 border-color: #2c9db6;
 border-style: solid;
 border-width: 1px;
@@ -319,7 +318,7 @@ text-decoration: none;
 }
 
 .newsubjecttable {
-Background: #34ADDE url('images/fusion/FusionBB_color-dunkel.gif') repeat-x 50% top;
+Background: #34ADDE url('/static/css/FusionBB/FusionBB_color-dunkel.gif') repeat-x 50% top;
 border-color: #2c9db6;
 border-style: solid;
 border-width: 1px;
@@ -501,19 +500,17 @@ color: #FF0000;
 
 
 .boardlogo { 
-background-image: url('images/fusion/_board_logo.gif');
+missing-background-image: url('/static/css/FusionBB/_board_logo.gif');
 BACKGROUND-POSITION: center;
 BACKGROUND-REPEAT: no-repeat;  HEIGHT: 55px;
 }
 
 .eventbanner1 { 
-background-image: url('');
 BACKGROUND-POSITION: center;
 BACKGROUND-REPEAT: repeat;  HEIGHT: 0px;
 }
 
 .eventbanner2 { 
-background-image: url('');
 BACKGROUND-POSITION: center;
 BACKGROUND-REPEAT: repeat;  HEIGHT: 0px;
 }

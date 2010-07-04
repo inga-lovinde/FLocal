@@ -63,7 +63,7 @@ body {
   font-size: 12px;
   font-weight: bold;
   color: #EEEEEE;
-  background: #2b2b2b url("images/wcsoft_images/header_grad.gif");
+  background: #2b2b2b url("/static/css/wcsoft/header_grad.gif");
   background-repeat: repeat-x;
    border-top:2px solid #3c3c3c;
    border-right:2px solid #3c3c3c;
@@ -75,7 +75,7 @@ body {
 }
 
 .menubar{
-  background: #2b2b2b url("images/wcsoft_images/header_grad.gif");
+  background: #2b2b2b url("/static/css/wcsoft/header_grad.gif");
   background-repeat: repeat-x;
 	color: #CCCCCC;
    font-size: 11px;
@@ -85,7 +85,7 @@ body {
    border-left:2px solid #1a1a1a;
 }
 .navigation{
-  background: #2b2b2b url("images/wcsoft_images/header_grad.gif");
+  background: #2b2b2b url("/static/css/wcsoft/header_grad.gif");
   background-repeat: repeat-x;
 	color: #CCCCCC;
 	font-size: 11px;
@@ -100,7 +100,7 @@ body {
   font-size: 12px;
 }
 .posttime {
-  background: #6d6d6d url("images/wcsoft_images/lighttable_grad.gif");
+  background: #6d6d6d url("/static/css/wcsoft/lighttable_grad.gif");
   background-repeat: repeat-x;
   color: #cccccc;
   font-size: 10px;
@@ -110,7 +110,7 @@ body {
    border-left:2px solid #5c5c5c;
 }
 .threadtotal {
-  background: #6d6d6d url("images/wcsoft_images/lighttable_grad.gif");
+  background: #6d6d6d url("/static/css/wcsoft/lighttable_grad.gif");
   background-repeat: repeat-x;
   color: #cccccc;
   font-size: 10px;
@@ -120,7 +120,7 @@ body {
    border-left:2px solid #5c5c5c;
 }
 .posttotal,.modcolumn {
-  background: #4c4c4c url("images/wcsoft_images/darktable_grad.gif");
+  background: #4c4c4c url("/static/css/wcsoft/darktable_grad.gif");
   background-repeat: repeat-x;
   color: #cccccc;
   font-size: 10px;
@@ -154,7 +154,7 @@ body {
   font-size: 10px;
 }
 .lighttable {
-  background: #6d6d6d url("images/wcsoft_images/lighttable_grad.gif");
+  background: #6d6d6d url("/static/css/wcsoft/lighttable_grad.gif");
   background-repeat: repeat-x;
   color: #cccccc;
   font-size: 11px;
@@ -165,7 +165,7 @@ body {
    border-left:2px solid #5c5c5c;
 }
 .darktable {
-  background: #4c4c4c url("images/wcsoft_images/darktable_grad.gif");
+  background: #4c4c4c url("/static/css/wcsoft/darktable_grad.gif");
   background-repeat: repeat-x;
   color: #cccccc;
   font-size: 11px;
@@ -200,7 +200,7 @@ body {
 	color: #cccccc;
 }
 .subjecttable {
-  background: #4c4c4c url("images/wcsoft_images/darktable_grad.gif");
+  background: #4c4c4c url("/static/css/wcsoft/darktable_grad.gif");
   background-repeat: repeat-x;
   color: #cccccc;
    border-top:2px solid #5d5d5d;

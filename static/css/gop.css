@@ -25,13 +25,13 @@ form {
 body {
 	color: #182248;
 	background-color: #505875;
-	background-image: url('images/gop/pagebg.gif');
+	background-image: url('/static/css/pagebg.gif');
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 10pt;
 }
 .tablesurround {
 	background-color: transparent;
-	background-image: url('images/gop/surroundbg.gif');
+	background-image: url('/static/css/gop/surroundbg.gif');
 	margin: 4px;
 }
 .tableborders {
@@ -43,7 +43,7 @@ body {
 	font-weight: bold;
 	color: #C2CBEB;
 	background-color: #182248;
-	background-image: url('images/gop/catb.jpg');
+	background-image: url('/static/css/gop/catb.jpg');
 	background-repeat: repeat-x;
 	height:32px;
 	vertical-align: middle;
@@ -59,7 +59,7 @@ body {
 }
 .menubar {
 	background-color: #8DA0C5;
-	background-image: url('images/gop/darkbg.jpg');
+	background-image: url('/static/css/gop/darkbg.jpg');
 	background-repeat: repeat-x;
 	color: #182248;
 	font-size: 9pt;
@@ -92,21 +92,21 @@ body {
 .posttime {
 	font-size: 10pt;
 	background-color: #A3ACCC;
-	background-image: url('images/gop/lightbg.jpg');
+	background-image: url('/static/css/gop/lightbg.jpg');
 	background-repeat: repeat-x;
 	color: #182248;
 }
 .threadtotal {
 	font-size: 10pt;
 	background-color: #A3ACCC;
-	background-image: url('images/gop/lightbg.jpg');
+	background-image: url('/static/css/gop/lightbg.jpg');
 	background-repeat: repeat-x;
 	color: #182248;
 }
 .posttotal,.modcolumn {
 	font-size: 10pt;
 	background-color: #8DA0C5;
-	background-image: url('images/gop/darkbg.jpg');
+	background-image: url('/static/css/gop/darkbg.jpg');
 	background-repeat: repeat-x;
 	color: #182248;
 }
@@ -139,14 +139,14 @@ body {
 .lighttable {
 	font-size: 10pt;
 	background-color: #A3ACCC;
-	background-image: url('images/gop/lightbg.jpg');
+	background-image: url('/static/css/gop/lightbg.jpg');
 	background-repeat: repeat-x;
 	color: #182248;
 }
 .darktable {
 	font-size: 10pt;
 	background-color: #8DA0C5;
-background-image: url('images/gop/darkbg.jpg');
+background-image: url('/static/css/gop/darkbg.jpg');
 	background-repeat: repeat-x;
 	color: #182248;
 }

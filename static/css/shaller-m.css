@@ -40,7 +40,7 @@ FORM {
 }
 BODY {
   background: #FFFFEE;
-  background:url("images/aa.gif");
+  background:url("/static/css/shaller/aa.gif");
 }
 PRE {
   font-size:   9pt;
@@ -56,7 +56,7 @@ PRE {
   font-size:   10pt;
   font-weight: bold;
   background:  #b6b7da;
-  background-image: url('images/shaller-l-m.jpg');
+  background-image: url('/static/css/shaller/shaller-l-m.jpg');
   background-repeat: repeat-x;
   background-position: bottom;
   font-family: verdana,arial,sans-serif;
@@ -64,13 +64,13 @@ PRE {
 }
 .menubar{
   background: #b6b7da;
-  background-image: url('images/shaller-l-m.jpg');
+  background-image: url('/static/css/shaller/shaller-l-m.jpg');
   background-repeat: repeat-x;
 }
 .navigation{
   background: #b6b7da;
   font-size:   8pt;
-  background-image: url('images/shaller-l.jpg');
+  background-image: url('/static/css/shaller/shaller-l.jpg');
   background-repeat: repeat-x;
   font-family: helvetica,arial;
 }
@@ -98,13 +98,13 @@ PRE {
 }
 .posttotal {
   background: #F4EAD7;
-  background-image: url('images/shaller-l-long.jpg');
+  background-image: url('/static/css/shaller/shaller-l-long.jpg');
     background-repeat: repeat-x;
   font-size: 8pt;
 }
 .modcolumn {
   background: #F4EAD7;
-  background-image: url('images/shaller-l-long.jpg');
+  background-image: url('/static/css/shaller/shaller-l-long.jpg');
   background-repeat: repeat-x;
   font-size: 8pt;
 }
@@ -128,12 +128,12 @@ PRE {
 }
 .lighttable {
   background: #FFFFEE;
-  background-image: url('images/shaller-lighttable.jpg');
+  background-image: url('/static/css/shaller/shaller-lighttable.jpg');
   background-repeat: repeat-x;
 }
 .darktable {
   background: #F4EAD7;
-  background-image: url('images/shaller-l-long.jpg');
+  background-image: url('/static/css/shaller/shaller-l-long.jpg');
   background-repeat: repeat-x;
 }
 .cleartable {
@@ -163,7 +163,7 @@ PRE {
 blockquote {
   border: 1px dashed #1F4584;
   background-color: #F4EAD7;
-  background-image: url('images/shaller-l-long.jpg');
+  background-image: url('/static/css/shaller/shaller-l-long.jpg');
   background-repeat: repeat-x;
   font-size: 9pt;
   
@@ -175,7 +175,7 @@ blockquote {
 }
 blockquote .small{
   font-family: Tahoma;
-  background-image: url('images/shaller-l.jpg');
+  background-image: url('/static/css/shaller/shaller-l.jpg');
   background-repeat: repeat-x;
   border-right: 1px solid #3E6174;
   border-bottom: 1px solid #3E6174;
@@ -194,7 +194,7 @@ blockquote br {
 }
 .topmenu{
   background: #FFFFAA;
-  background-image: url('images/shaller-head.jpg');
+  background-image: url('/static/css/shaller/shaller-head.jpg');
   background-repeat: repeat-x;
   color: black;
 }
@@ -215,7 +215,7 @@ a.cup {
 .selectedrow {
   font-size:   10pt;
   background:  #b6b7da;
-  background-image: url('images/shaller-l.jpg');
+  background-image: url('/static/css/shaller/shaller-l.jpg');
   background-repeat: repeat-x;
   font-family: verdana,arial,sans-serif;
 }

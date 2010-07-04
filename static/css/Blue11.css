@@ -1,7 +1,6 @@
  
  body {
 background-color: #FFFFFF;
-background-image: url('');
 font-family: Verdana, Arial, Helvetica, sans-serif;
 font-size: 10pt;
 color: #000000;
@@ -39,26 +38,22 @@ color: #000000;
 
 .tableborders {
 background-color: #CCCCCC;
-background-image: url('');
 color: #FFFFFF;
 }
 
 .tablesurround {
 background-color: #9999CC;
-background-image: url('');
 color: #CCCCCC;
 }
 
 .menubar{
 background-color: #FFE066;
-background-image: url('');
 font-size: 10pt;
 color: #000000;
 }
 
 .topmenu{
 background-color: #D6DCFE;
-background-image: url('');
 font-size: 10pt;
 color: #000000;
 }
@@ -71,7 +66,6 @@ font-size: 9pt;
 
 .tdheader {
 background-color: #D6DCFE;
-background-image: url('');
 border-top:1px solid #FFFFFF;
 font-size: 10pt;
 font-weight: bold;
@@ -80,28 +74,24 @@ color: #000000;
 
 .darktable {
 background-color: #E6E6E6;
-background-image: url('');
 font-size: 10pt;
 color: #000000;
 }
 
 .threadtotal {
 background-color: #EEEEF8;
-background-image: url('');
 font-size: 10pt;
 color: #000000;
 }
 
 .posttotal,.modcolumn {
 background-color: #E6E6E6;
-background-image: url('');
 font-size: 10pt;
 color: #000000;
 }
 
 .posttime {
 background-color: #EEEEF8;
-background-image: url('');
 font-size: 10pt;
 color: #000000;
 text-align:center;
@@ -109,28 +99,24 @@ text-align:center;
 
 .lighttable {
 background-color: #FFFFFF;
-background-image: url('');
 font-size: 10pt;
 color: #000000;
 }
 
 .cleartable {
 background-color: #FFFFFF;
-background-image: url('');
 font-size: 10pt;
 color: #000000;
 }
 
 .subjecttable {
 background-color: #E6E6E6;
-background-image: url('');
 font-size: 10pt;
 color: #000000;
 }
 
 .navigation{
 background-color: #FFE066;
-background-image: url('');
 border-style: solid;
 border-width: 1px 1px 1px 1px;
 border-color: #CCCCCC;
@@ -175,7 +161,6 @@ font-size: 9pt;
 
 .newsubjecttable {
 background-color: #FFCC00;
-background-image: url('');
 font-weight: bold;
 font-size: 10pt;
 color: #000000;
@@ -183,7 +168,6 @@ color: #000000;
 
 .newdarktable {
 background-color: #FFCC00;
-background-image: url('');
 font-weight: bold;
 font-size: 10pt;
 color: #000000;
@@ -191,7 +175,6 @@ color: #000000;
 
 .newlighttable {
 background-color: #FFCC00;
-background-image: url('');
 font-weight: bold;
 font-size: 10pt;
 color: #000000;
@@ -211,7 +194,6 @@ padding: 0px;
 
 .formboxes {
 background-color: #FFFFFF;
-background-image: url('');
 border-width: 2px dashed;
 font-size: 10pt;
 color: #000000;
@@ -219,7 +201,6 @@ color: #000000;
 
 .buttons {
 background-color: #FFE066;
-background-image: url('');
 font-family: Verdana, Arial, Helvetica, sans-serif;
 font-size: 9pt;
 color: #000000;
@@ -330,19 +311,17 @@ border: 1px;
 }
 
 .boardlogo { 
-background-image: url('images/_board_logo.gif');
+missing-background-image: url('/static/css/Blue11/_board_logo.gif');
 BACKGROUND-POSITION: center;
 BACKGROUND-REPEAT: no-repeat;  HEIGHT: 55px;
 }
 
 .eventbanner1 { 
-background-image: url('');
 BACKGROUND-POSITION: center;
 BACKGROUND-REPEAT: repeat;  HEIGHT: 0px;
 }
 
 .eventbanner2 { 
-background-image: url('');
 BACKGROUND-POSITION: center;
 BACKGROUND-REPEAT: repeat;  HEIGHT: 0px;
 }

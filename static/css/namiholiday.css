@@ -41,7 +41,7 @@ body {
 	color: #000;
 	font-family: Tahoma, Trembuchet MS Verdana, Arial, Helvetica, sans-serif;
     font-size: 10pt;
-    background-image: url('images/namiholiday/bkg4.jpg');
+    background-image: url('/static/css/namiholiday/bkg4.jpg');
 }
 .tablesurround {
 	color: #3E6174;
@@ -55,7 +55,7 @@ body {
   font-size: 9pt;
   font-weight: bold;
   color: #FFF;
-  background-image: url('images/namiholiday/grad-r4.jpg');
+  background-image: url('/static/css/namiholiday/grad-r4.jpg');
   border-top:1px solid #FFF;
 }
 
@@ -65,7 +65,7 @@ body {
 }
 
 .menubar{
-  background-image: url('images/namiholiday/grad-r3.jpg');
+  background-image: url('/static/css/namiholiday/grad-r3.jpg');
   background-repeat: repeat-x;
   background-color: #F26676;
   border-top:1px solid #FFF;
@@ -84,7 +84,7 @@ body {
 }
 
 .navigation{
-  background-image: url('images/namiholiday/grad.jpg');
+  missing-background-image: url('/static/css/namiholiday/grad.jpg');
   color: #000;
   border: 1px groove #3E6174;
   font-size: 8pt;
@@ -137,7 +137,7 @@ body {
   background: none;
 }
 .pollcolor {
-  background-image: url('images/namiholiday/grad-r.jpg');
+  missing-background-image: url('/static/css/namiholiday/grad-r.jpg');
 	color: #313131;
 	border: 1px solid #3E6174;
   padding: 4px 
@@ -245,7 +245,7 @@ body {
 }
 
 .subjecttable {
-  background-image: url('images/namiholiday/grad-r3.jpg');
+  background-image: url('/static/css/namiholiday/grad-r3.jpg');
   background-repeat: repeat-x;
   background-color: #F26676;
   border-top:1px solid #FFF;
@@ -263,7 +263,8 @@ body {
 .buttons {
   color: #000;
   border: 2px groove #6B9565;
-  background:#1F4584 url('images/namiholiday/grad.jpg');
+  background-color:#1F4584;
+  missing-background-image: url('/static/css/namiholiday/grad.jpg');
   background-repeat: repeat-x;
   font-size:8pt;
   font-family:Tahoma, Arial;
@@ -274,7 +275,8 @@ body {
 .buttons:active {
   color: #000;
   border: 2px ridge #6B9565;
-  background:#1F4584 url('images/namiholiday/grad.jpg');
+  background-color:#1F4584;
+  missing-background-image: url('/static/css/namiholiday/grad.jpg');
   background-repeat: repeat-x;
   font-size:8pt;
   font-family:Tahoma, Arial;
@@ -294,7 +296,7 @@ body {
 
 blockquote {
   border: 1px solid #3E6174;
-  background-image: url('images/namiholiday/nbkg.jpg');
+  missing-background-image: url('/static/css/namiholiday/nbkg.jpg');
   font-size: 9pt; 
   margin: 0px 15px;
   padding-left:15px;

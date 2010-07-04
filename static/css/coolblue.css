@@ -46,7 +46,8 @@ body {
   font-size: 10pt;
   font-weight: bold;
   color: #FFFFFF;
-  background: #BCD0ED url(images/coolheader.gif);
+  background-color: #BCD0ED;
+  background-image: url(/static/css/coolblue/coolheader.gif);
 }
 .tdheader a:link  { 
   color: #FFFFFF;
@@ -66,7 +67,7 @@ body {
 	text-decoration: none;
 }
 .menubar{
-	background: #BCD0ED url(images/coolheader.gif);
+	background: #BCD0ED url(/static/css/coolblue/coolheader.gif);
 	color: #000000;
 	font-weight: bold;
 }
@@ -89,7 +90,7 @@ body {
 }
 
 .navigation{
-	background: #BCD0ED url(images/coolnav.gif);
+	background: #BCD0ED url(/static/css/coolblue/coolnav.gif);
 	color: #E4EAF2;
 	font-size: 8pt;
 	border-style: solid;
@@ -146,7 +147,7 @@ body {
 	border: 1px solid #000000;
 }
 .welcome {
-  background: #BCD0ED url(images/coolheader.gif);
+  background: #BCD0ED url(/static/css/coolblue/coolheader.gif);
   color: #ffffff;
 }
 .forumtitle {
@@ -215,7 +216,7 @@ body {
   font-size: 10pt;
 }
 .buttons {
-	background: #3366FF url(images/coolheader.gif);
+	background: #3366FF url(/static/css/coolblue/coolheader.gif);
 	color: #FFFFFF;
 	font-size: 9pt;
 	font-family: Verdana, Tahoma, Arial;
@@ -281,7 +282,7 @@ a.cup {
 }
 .selectedrow {
   font-size: 10pt;
-  background: #BCD0ED url(images/coolheader.gif);
+  background: #BCD0ED url(/static/css/coolblue/coolheader.gif);
 }
 
 .topmenu{

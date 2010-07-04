@@ -32,7 +32,7 @@ body {
 	color: #000;
 	font-family: Tahoma, Trembuchet MS Verdana, Arial, Helvetica, sans-serif;
     font-size: 10pt;
-    background: #467FC1 url('images/koniro/bkg2.png');
+    background: #467FC1 url('/static/css/koniro/bkg2.png');
 }
 .tablesurround {
 	color: #3E6174;
@@ -46,7 +46,7 @@ body {
   font-size: 9pt;
   font-weight: bold;
   color: #FFF;
-  background: #224988 url('images/koniro/grad-02.png');
+  background: #224988 url('/static/css/koniro/grad-02.png');
 }
 
 .tdheader a:link  { 
@@ -67,7 +67,7 @@ body {
 }
 
 .menubar{
-  background: #224988 url('images/koniro/grad-02.png');
+  background: #224988 url('/static/css/koniro/grad-02.png');
   font-weight: bold;
   color: #FFF
 }
@@ -90,7 +90,7 @@ body {
 }
 
 .navigation{
-  background-image: url('images/koniro/grad-02-sans.png');
+  background-image: url('/static/css/koniro/grad-02-sans.png');
   color: #FFF;
   border: 2px groove #3E6174;
   font-size: 8pt;
@@ -163,7 +163,7 @@ body {
   background: none;
 }
 .pollcolor {
-  background-image: url('images/koniro/grad-02.png');
+  background-image: url('/static/css/koniro/grad-02.png');
 	color: #313131;
 	border: 1px solid #3E6174;
   padding: 4px 
@@ -287,7 +287,7 @@ body {
 
 
 .devswoosh {
-	background-image: url('/images/koniro/devswoosh.gif');
+	missing-background-image: url('/static/css/koniro/devswoosh.gif');
 	background-repeat: no-repeat;
 	background-position: right top
 
@@ -296,7 +296,7 @@ body {
 
 
 .devlogo {
-  background-image: url('/images/koniro/logo.gif');
+  missing-background-image: url('/static/css/koniro/logo.gif');
   background-repeat: no-repeat; 
   background-position: left top
 }
@@ -305,7 +305,7 @@ body {
 .buttons {
   color: #FFF;
   border: 2px groove #1F4584;
-  background:#1F4584 url('images/koniro/grad-02-sans.png');
+  background:#1F4584 url('/static/css/koniro/grad-02-sans.png');
   background-repeat: repeat-x;
   font-size:9pt;
   font-family:Tahoma, Arial;
@@ -316,7 +316,7 @@ body {
 .buttons:active {
   color: #FFF;
   border: 2px ridge #1F4584;
-  background:#1F4584 url('images/koniro/grad-02-sans.png');
+  background:#1F4584 url('/static/css/koniro/grad-02-sans.png');
   background-repeat: repeat-x;
   font-size:9pt;
   font-family:Tahoma, Arial;
@@ -336,7 +336,7 @@ body {
 
 blockquote {
   border: 1px dashed #1F4584;
-  background-image: url('images/koniro/nbkg-l.png');
+  background-image: url('/static/css/koniro/nbkg-l.png');
   font-size: 9pt; 
   margin: 0px 15px;
   padding-left:15px;
@@ -410,7 +410,7 @@ pre {
 
 .devlogo {
 
-	background-image: url(../images/cssgraphics/koniro/logo.gif);
+	missing-background-image: url(/static/css/koniro/logo.gif);
 
 	background-repeat: no-repeat;
 
@@ -423,7 +423,7 @@ pre {
   font-size: 10pt;
   font-weight: bold;
   color: #FFFFFF;
-  background-image: url('images/koniro/grad-02.png');
+  background-image: url('/static/css/koniro/grad-02.png');
 }
 .tdnothumbs a:link  { 
   color: #FFFFFF;
@@ -512,11 +512,11 @@ a.cup {
 .selectedrow {
   font-size: 9pt;
   color: #FFF;
-  background: #224988 url('images/koniro/grad-02.png');
+  background: #224988 url('/static/css/koniro/grad-02.png');
 }
 
 .topmenu{
-  background: #224988 url('images/koniro/grad-02.png');
+  background: #224988 url('/static/css/koniro/grad-02.png');
   font-weight: bold;
   color: #FFF
 }

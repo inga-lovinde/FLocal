@@ -28,7 +28,7 @@ FORM {
 }
 BODY {
   background: #FFFFEE;
-  background:url("images/aa.gif");
+  background:url("/static/css/shaller/aa.gif");
 }
 PRE {
   font-size:   9pt;

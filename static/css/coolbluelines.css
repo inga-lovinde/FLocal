@@ -64,7 +64,7 @@ body {
 
 	color: #000000;
 
-	background: #BCD0ED url('images/coolbluelines/background.gif');
+	background: #BCD0ED url('/static/css/coolbluelines/background.gif');
 
 	font-family: Verdana, Tahoma, Arial;
 
@@ -96,7 +96,7 @@ body {
 
   color: #FFFFFF;
 
-  background: #BCD0ED url('images/coolbluelines/coolheader.gif');
+  background: #BCD0ED url('/static/css/coolbluelines/coolheader.gif');
 
 }
 
@@ -136,7 +136,7 @@ body {
 
 .menubar{
 
-	background: #BCD0ED url('images/coolbluelines/coolheader.gif');
+	background: #BCD0ED url('/static/css/coolbluelines/coolheader.gif');
 
 	color: #000000;
 
@@ -182,7 +182,7 @@ body {
 
 .navigation{
 
-	border:1px solid #666699; background:#BCD0ED url('images/coolbluelines/coolnav.gif'); color: #E4EAF2;
+	border:1px solid #666699; background:#BCD0ED url('/static/css/coolbluelines/coolnav.gif'); color: #E4EAF2;
 
 	font-size: 10pt;
 
@@ -277,7 +277,7 @@ body {
 
 .welcome {
 
-  background: #BCD0ED url('images/coolbluelines/coolheader.gif');
+  background: #BCD0ED url('/static/css/coolbluelines/coolheader.gif');
 
   color: #ffffff
 
@@ -415,7 +415,7 @@ body {
 
 .buttons {
 
-	border-left:2px solid #BCD0ED; border-right:2px solid #3366FF; border-top:2px solid #BCD0ED; border-bottom:2px solid #3366FF; background:#3366FF url('images/coolbluelines/coolheader.gif'); color: #FFFFFF;
+	border-left:2px solid #BCD0ED; border-right:2px solid #3366FF; border-top:2px solid #BCD0ED; border-bottom:2px solid #3366FF; background:#3366FF url('/static/css/coolbluelines/coolheader.gif'); color: #FFFFFF;
 
 	font-size: 9pt;
 
@@ -515,7 +515,7 @@ pre {
   font-size: 10pt;
   font-weight: bold;
   color: #FFFFFF;
-  background: #BCD0ED url('images/coolbluelines/coolheader.gif');
+  background: #BCD0ED url('/static/css/coolbluelines/coolheader.gif');
 }
 
 .tdnothumbs a:link  {

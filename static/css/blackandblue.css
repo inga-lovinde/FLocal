@@ -39,7 +39,7 @@ FORM {
   margin-bottom: 0;
 }
 BODY {
-  background-image: url(/images/background.gif);
+  background-image: url(/static/css/blackandblue/background.gif);
 }
 PRE {
   font-size:   9pt;
