@@ -28,7 +28,7 @@
 								<tr class="menubar">
 									<td width="90">Internet &gt;&gt;</td>
 									<td><a href="https://172.16.0.11/">Интернет...</a></td>
-									<td align="right"><a href="/sendmail.php"><font color="red">Проблемы с сетью или интернетом?</font></a></td>
+									<td align="right"><a><font color="red">Проблемы с сетью или интернетом?</font></a></td>
 								</tr>
 							</table>
 						</td>
@@ -110,7 +110,7 @@
 					<tr>
 						<td>
 							Найти файл в сети:
-							<form name="searchform" action="send_lorien.php" method="get">
+							<form name="searchform" method="get">
 								<input type="text" name="what" size="25"/>
 								<input type="hidden" name="restype" value="all"/>
 							</form>

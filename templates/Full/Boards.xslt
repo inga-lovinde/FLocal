@@ -43,19 +43,19 @@
 										<xsl:value-of select="activity/sessions"/>
 										<xsl:text> зарегистрированных пользователей.</xsl:text>
 										<br />
-										<a href="/editdisplay.php?Cat=#offset">Текущее время:</a><xsl:text> </xsl:text>
+										<a>Текущее время:</a><xsl:text> </xsl:text>
 										<xsl:apply-templates select="currentDate" mode="dateTime"/>
 									</td>
 									<td width="30%" class="small" valign="top">
 										<b>Просмотр новых сообщений</b>
 										<br />
-										<a href="/dosearch.php?Cat=&amp;Forum=All_Forums&amp;Words=&amp;Match=Entire+Phrase&amp;Limit=25&amp;src=all">Последние 7 дней</a> 
+										<a>Последние 7 дней</a> 
 										<br />
-										<a href="/dosearch.php?Cat=&amp;Forum=All_Forums&amp;Uname=summersun&amp;search_replies=1&amp;Limit=25&amp;src=all">Последние ответы на мои сообщения</a>
+										<a>Последние ответы на мои сообщения</a>
 										<br />
-										<a href="/dosearch.php?Cat=&amp;Forum=All_Forums&amp;Uname=summersun&amp;Limit=25&amp;src=all&amp;onlyrated=1">Мои сообщения с оценками</a>
+										<a>Мои сообщения с оценками</a>
 										<br />
-										<a href="/toprated.php?showlite=">Рейтинги сообщений</a>
+										<a>Рейтинги сообщений</a>
 									</td>
 									<td class="small" valign="top">
 										<b>Легенда:</b>

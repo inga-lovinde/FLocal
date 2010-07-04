@@ -28,8 +28,8 @@
 														</a>
 													</td>
 													<td class="navigation" nowrap="nowrap">
-														<form method="get" action="/postlist.php" name="fullview">
-															<select name="fullview" class="formboxes" style="font-size:10px" onchange="document.forms.fullview.submit()">
+														<form method="get" name="fullview">
+															<select name="fullview" class="formboxes" style="font-size:10px">
 																<option value="0">Норм</option>
 																<option value="1">Офт</option>
 																<option value="2" selected="selected">Мус</option>

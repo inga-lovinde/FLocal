@@ -21,7 +21,7 @@
 								<xsl:text> | </xsl:text>
 								<a href ="http://weather.yandex.ru/27612/" target="_blank">Weather</a>
 								<xsl:text> | </xsl:text>
-								<a href ="/sendmail.php" target="_blank">LAN Support</a>
+								<a target="_blank">LAN Support</a>
 							</td>
 						</tr>
 					</table>

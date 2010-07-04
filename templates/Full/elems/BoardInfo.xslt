@@ -27,7 +27,7 @@
 				<table cellpadding="0" cellspacing="0">
 					<tr>
 						<td class="forumdescript" style="padding-right:0.5em">
-							<a href="/apostlist.php?Cat=&amp;Board=Common">
+							<a>
 								<xsl:attribute name="href">/Board/<xsl:value-of select="id"/>/</xsl:attribute>
 								<xsl:text>A</xsl:text>
 							</a>
@@ -50,9 +50,9 @@
 				<xsl:apply-templates select="lastPostInfo"/>
 			</td>
 			<td width="10%" class="modcolumn" align="center">
-				<a href="/showprofile.php?User=Sash&amp;What=ubbthreads">Sash</a>
+				<a>Sash</a>
 				<xsl:text>, </xsl:text>
-				<a href="/showprofile.php?User=DeadmoroZ&amp;What=ubbthreads">DeadmoroZ</a>
+				<a>DeadmoroZ</a>
 			</td>
 		</tr>
 	</xsl:template>
