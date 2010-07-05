@@ -9,7 +9,8 @@ namespace FLocal.Common.dataobjects {
 
 		public AnonymousUserSettings() {
 			var allSkins = Skin.allSkins.ToArray();
-			this._skinId = allSkins[Util.RandomInt(0, allSkins.Length)].id;
+			//this._skinId = allSkins[Util.RandomInt(0, allSkins.Length)].id;
+			this._skinId = 28;
 		}
 
 		public int threadsPerPage {
