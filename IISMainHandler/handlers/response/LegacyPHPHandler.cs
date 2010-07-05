@@ -20,9 +20,11 @@ namespace FLocal.IISHandler.handlers.response {
 
 			switch(scriptParts[0].ToLower()) {
 				case "showflat":
+				case "ashowflat":
 					Post post = Post.LoadById(int.Parse(context.httprequest.QueryString["Number"]));
 					return "/Thread/" + post.thread.id.ToString() + "/p" + post.id.ToString();
 				case "showthreaded":
+				case "ashowthreaded":
 					return "/Post/" + int.Parse(context.httprequest.QueryString["Number"]).ToString() + "/";
 				case "postlist":
 					return "/Board/" + Board.LoadByLegacyName(context.httprequest.QueryString["Board"]).id.ToString() + "/";
