@@ -139,6 +139,9 @@ namespace FLocal.ImportConsole {
 			{ 1699598, "hobby.pictures" }, //Тред с картинками
 			{ 2340623, "hobby.movies" }, //Хорошие фильмы [с комментариями и ссылками]
 			{ 6727481, "hobby.youtube" }, //Что я видел на Youtube (все самое лучшее
+
+			{ 9510866, "flood.guessuser" }, //[нИгра] Угадайте форумчанина
+			{ 9032894, "hobby.contemporary" }, //Современные художники (с картинками)
 		};
 
 		private readonly static DateTime UNIX = new DateTime(1970, 1, 1, 0, 0, 0);
