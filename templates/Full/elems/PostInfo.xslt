@@ -35,9 +35,9 @@
 										</xsl:if>
 										<xsl:if test="parentPost/post">
 											<font class="small separate">
-												<xsl:attribute name="title"><xsl:value-of select="parentPost/post/bodyShort"/></xsl:attribute>
 												<xsl:text>[</xsl:text>
 												<a target="_blank">
+													<xsl:attribute name="title"><xsl:value-of select="parentPost/post/bodyShort"/></xsl:attribute>
 													<xsl:attribute name="href">/Post/<xsl:value-of select="parentPost/post/id"/>/</xsl:attribute>
 													<xsl:text>re: </xsl:text>
 													<xsl:value-of select="parentPost/post/poster/user/name"/>
