@@ -113,7 +113,7 @@ namespace FLocal.Common.dataobjects {
 		}
 		public string bodyShort {
 			get {
-				return this.body.Replace("<br />", Util.EOL).PHPSubstring(0, 1000);
+				return this.body.Replace("<br />", Util.EOL).Replace("<br/>", Util.EOL).PHPSubstring(0, 1000);
 			}
 		}
 
