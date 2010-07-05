@@ -35,6 +35,10 @@ namespace FLocal.Common {
 
 				private static readonly Dictionary<Regex, MatchEvaluator> SMILEYS_DATA = (from smile in SMILEYS select new KeyValuePair<Regex, MatchEvaluator>(new Regex("(^|\\s+|>)" + Regex.Escape(smile.Key) + "($|\\s+|<)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => match.Groups[1] + "<img src=\"/static/smileys/" + smile.Value + ".gif\" alt=\"" + smile.Key + "\"/>" + match.Groups[2])).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
 
+				private static readonly Dictionary<Regex, MatchEvaluator> TYPOGRAPHICS = new Dictionary<Regex, MatchEvaluator> {
+					{ new Regex("(\\s+)-(\\s+)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => match.Groups[1] + "&ndash;" + match.Groups[2] },
+				};
+
 				private ITextFormatter inner;
 
 				private TextFormatter() {
@@ -45,6 +49,9 @@ namespace FLocal.Common {
 					string result = this.inner.Format(source);
 					foreach(var smile in SMILEYS_DATA) {
 						result = smile.Key.Replace(result, smile.Value);
+					}
+					foreach(var kvp in TYPOGRAPHICS) {
+						result = kvp.Key.Replace(result, kvp.Value);
 					}
 					return result;
 				}
