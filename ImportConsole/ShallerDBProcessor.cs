@@ -162,29 +162,28 @@ namespace FLocal.ImportConsole {
 						if(Config.instance.mainConnection.GetCountByConditions(Post.TableSpec.instance, new ComparisonCondition(Post.TableSpec.instance.getIdSpec(), ComparisonType.EQUAL, postId.ToString())) > 0) {
 							Console.Write("-");
 						} else {
-							inserts.Add(new KeyValuePair<int, Action>(postId, () => {
-								int localMain = int.Parse(data["Local_Main"]);
-								int main = int.Parse(data["Main"]);
-								int UnixTime;
-								try {
-									UnixTime = int.Parse(data["UnixTime"]);
-								} catch(OverflowException) {
-									UnixTime = 1000*1000*1000;
-								}
-								if(UnixTime <= 0) {
-									UnixTime = 1000*1000*1000;
-								}
-								DateTime date = UNIX.AddSeconds(UnixTime).ToLocalTime();
-								User user;
-								string username = data["Username"];
-								try {
-									user = User.LoadByName(username);
-								} catch(NotFoundInDBException) {
-									Console.Error.WriteLine("Cannot find user '" + username + "'; creating one...");
-									ChangeSetUtil.ApplyChanges(
-										new InsertChange(
-											User.TableSpec.instance,
-											new Dictionary<string, AbstractFieldValue> {
+							int localMain = int.Parse(data["Local_Main"]);
+							int main = int.Parse(data["Main"]);
+							int UnixTime;
+							try {
+								UnixTime = int.Parse(data["UnixTime"]);
+							} catch(OverflowException) {
+								UnixTime = 1000*1000*1000;
+							}
+							if(UnixTime <= 0) {
+								UnixTime = 1000*1000*1000;
+							}
+							DateTime date = UNIX.AddSeconds(UnixTime).ToLocalTime();
+							User user;
+							string username = data["Username"];
+							try {
+								user = User.LoadByName(username);
+							} catch(NotFoundInDBException) {
+								Console.Error.WriteLine("Cannot find user '" + username + "'; creating one...");
+								ChangeSetUtil.ApplyChanges(
+									new InsertChange(
+										User.TableSpec.instance,
+										new Dictionary<string, AbstractFieldValue> {
 												{ User.TableSpec.FIELD_NAME, new ScalarFieldValue(username) },
 												{ User.TableSpec.FIELD_REGDATE, new ScalarFieldValue(date.ToUTCString()) },
 												{ User.TableSpec.FIELD_SHOWPOSTSTOUSERS, new ScalarFieldValue(User.ENUM_SHOWPOSTSTOUSERS_ALL) },
@@ -195,16 +194,17 @@ namespace FLocal.ImportConsole {
 												{ User.TableSpec.FIELD_TOTALPOSTS, new ScalarFieldValue("0") },
 												{ User.TableSpec.FIELD_USERGROUPID, new ScalarFieldValue("1") },
 											}
-										)
-									);
-									user = User.LoadByName(data["Username"]);
-								}
-								string title = data["Subject"];
-								string body = data["Body"];
-								PostLayer layer = PostLayer.LoadById(1);
-								if(data.ContainsKey("Layer")) {
-									layer = PostLayer.LoadById(int.Parse(data["Layer"]));
-								}
+									)
+								);
+								user = User.LoadByName(data["Username"]);
+							}
+							string title = data["Subject"];
+							string body = data["Body"];
+							PostLayer layer = PostLayer.LoadById(1);
+							if(data.ContainsKey("Layer")) {
+								layer = PostLayer.LoadById(int.Parse(data["Layer"]));
+							}
+							inserts.Add(new KeyValuePair<int, Action>(postId, () => {
 								if(postId == main || postId == localMain) {
 									//first post in the thread
 									string legacyBoardName;
@@ -237,8 +237,8 @@ namespace FLocal.ImportConsole {
 									}
 									post.Reply(user, title, body, layer, date, postId);
 								}
-								Console.Write("+");
 							}));
+							Console.Write("+");
 						}
 					} catch(Exception e) {
 						Console.Error.WriteLine("Cannot process post #" + postId + ": " + e.GetType().FullName + ": " + e.Message);
