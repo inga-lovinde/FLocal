@@ -28,6 +28,8 @@ namespace FLocal.IISHandler.handlers.response {
 					return "/Post/" + int.Parse(context.httprequest.QueryString["Number"]).ToString() + "/";
 				case "postlist":
 					return "/Board/" + Board.LoadByLegacyName(context.httprequest.QueryString["Board"]).id.ToString() + "/";
+				case "showprofile":
+					return "/User/" + User.LoadByName(context.httprequest.QueryString["User"]).id.ToString() + "/";
 				default:
 					throw new NotImplementedException("unknown script " + scriptParts[0]);
 			}
