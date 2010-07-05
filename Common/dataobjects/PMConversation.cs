@@ -326,6 +326,7 @@ namespace FLocal.Common.dataobjects {
 				new Dictionary<string,AbstractFieldValue> {
 					{ TableSpec.FIELD_TOTALMESSAGES, new IncrementFieldValue() },
 					{ TableSpec.FIELD_LASTMESSAGEID, new TwoWayReferenceFieldValue(insertPmSender, TwoWayReferenceFieldValue.GREATEST) },
+					{ TableSpec.FIELD_LASTMESSAGEDATE, new ScalarFieldValue(DateTime.Now.ToUTCString()) },
 				},
 				new ComplexCondition(
 					ConditionsJoinType.AND,
@@ -354,6 +355,7 @@ namespace FLocal.Common.dataobjects {
 				new Dictionary<string,AbstractFieldValue> {
 					{ TableSpec.FIELD_TOTALMESSAGES, new IncrementFieldValue() },
 					{ TableSpec.FIELD_LASTMESSAGEID, new TwoWayReferenceFieldValue(insertPmReceiver, TwoWayReferenceFieldValue.GREATEST) },
+					{ TableSpec.FIELD_LASTMESSAGEDATE, new ScalarFieldValue(DateTime.Now.ToUTCString()) },
 				},
 				new ComplexCondition(
 					ConditionsJoinType.AND,
