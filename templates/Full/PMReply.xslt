@@ -50,7 +50,8 @@
 										<xsl:with-param name="body">
 											<xsl:text>[q]</xsl:text>
 											<xsl:value-of select="message/bodyUBB"/>
-											<xsl:text>[/q]</xsl:text>
+											<xsl:text>[/q]
+</xsl:text>
 										</xsl:with-param>
 									</xsl:call-template>
 									<br/>
