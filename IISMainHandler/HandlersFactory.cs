@@ -69,7 +69,16 @@ namespace FLocal.IISHandler {
 				case "migrateaccount":
 					return new handlers.response.MigrateAccountHandler();
 				case "users":
-					return new handlers.response.UserListHandler();
+					if(context.requestParts.Length < 2) {
+						return new handlers.response.UserListHandler();
+					} else {
+						switch(context.requestParts[1].ToLower()) {
+							case "active":
+								return new handlers.response.ActiveAccountListHandler();
+							default:
+								return new handlers.response.UserListHandler();
+						}
+					}
 				case "user":
 					if(context.requestParts.Length < 2) {
 						return new handlers.WrongUrlHandler();

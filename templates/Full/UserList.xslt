@@ -58,6 +58,19 @@
 								</table>
 							</td>
 						</tr>
+						<tr class="tdheader">
+							<td colspan="7">
+								<table width="100%" cellspacing="1" cellpadding="3" border="0">
+									<tr>
+										<td>
+											<a href="/Users/Active/">
+												<xsl:text>Активные (смигрированные)</xsl:text>
+											</a>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
 					</table>
 				</td>
 			</tr>

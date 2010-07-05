@@ -180,7 +180,7 @@ namespace FLocal.Common.dataobjects {
 			return result;
 		}
 
-		public static IEnumerable<User> getUsers(Diapasone diapasone, UserContext context) {
+		public static IEnumerable<User> getUsers(Diapasone diapasone) {
 			return User.LoadByIds(
 				from stringId in Config.instance.mainConnection.LoadIdsByConditions(
 					User.TableSpec.instance,

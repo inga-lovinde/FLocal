@@ -21,6 +21,10 @@ namespace FLocal.IISHandler {
 			this.perPage = perPage;
 		}
 
+		public static PageOuter createUnlimited(long perPage) {
+			return new PageOuter(perPage);
+		}
+
 		public static PageOuter create(long perPage, long total) {
 			PageOuter result = new PageOuter(0, perPage, perPage);
 			result.total = total;
