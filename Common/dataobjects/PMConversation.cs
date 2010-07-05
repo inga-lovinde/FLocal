@@ -249,7 +249,14 @@ namespace FLocal.Common.dataobjects {
 						ComparisonType.EQUAL,
 						owner.id.ToString()
 					),
-					diapasone
+					diapasone,
+					new JoinSpec[0],
+					new SortSpec[] {
+						new SortSpec(
+							TableSpec.instance.getColumnSpec(TableSpec.FIELD_LASTMESSAGEID),
+							false
+						)
+					}
 				) select int.Parse(stringId)
 			);
 		}
