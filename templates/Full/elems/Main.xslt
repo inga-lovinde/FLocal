@@ -57,11 +57,11 @@
 
 	<xsl:template match="date" mode="dateTime">
 		<span nowrap="nowrap">
-			<xsl:value-of select="year"/>
-			<xsl:text>-</xsl:text>
-			<xsl:value-of select="format-number(month, '00')"/>
-			<xsl:text>-</xsl:text>
 			<xsl:value-of select="format-number(mday, '00')"/>
+			<xsl:text>.</xsl:text>
+			<xsl:value-of select="format-number(month, '00')"/>
+			<xsl:text>.</xsl:text>
+			<xsl:value-of select="year"/>
 			<xsl:text> </xsl:text>
 			<xsl:value-of select="format-number(hour, '00')"/>
 			<xsl:text>:</xsl:text>
@@ -73,11 +73,11 @@
 
 	<xsl:template match="date" mode="date">
 		<span nowrap="nowrap">
-			<xsl:value-of select="year"/>
-			<xsl:text>-</xsl:text>
-			<xsl:value-of select="format-number(month, '00')"/>
-			<xsl:text>-</xsl:text>
 			<xsl:value-of select="format-number(mday, '00')"/>
+			<xsl:text>.</xsl:text>
+			<xsl:value-of select="format-number(month, '00')"/>
+			<xsl:text>.</xsl:text>
+			<xsl:value-of select="year"/>
 		</span>
 	</xsl:template>
 
