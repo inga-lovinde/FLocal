@@ -147,6 +147,7 @@ namespace FLocal.ImportConsole {
 		private readonly static DateTime UNIX = new DateTime(1970, 1, 1, 0, 0, 0);
 
 		public static void processDB(string filename) {
+			try {
 			Dictionary<int, Action> inserts = new Dictionary<int, Action>();
 			HashSet<int> discussionsIds = new HashSet<int>();
 			using(StreamReader reader = new StreamReader(filename)) {
@@ -278,20 +279,16 @@ namespace FLocal.ImportConsole {
 //						Console.ReadLine();
 				} finally {
 					j++;
-					if((j%50000)==0) {
-						Core.RegistryCleaner.CleanRegistry<int, Post>();
-						Core.RegistryCleaner.CleanRegistry<int, Thread>();
-						GC.Collect();
-						Console.Error.WriteLine();
-						Console.Error.WriteLine("Registry cleaned; garbage collected");
-						Console.Error.WriteLine();
-					}
 				}
 			}
 
 			Console.WriteLine("Not found discussions:");
 			foreach(int discussionId in discussionsIds.OrderBy(id => id)) {
 				Console.WriteLine(discussionId);
+			}
+			} catch(Exception e) {
+				Console.Error.WriteLine(e.GetType().FullName + ": " + e.Message);
+				Console.Error.WriteLine(e.StackTrace);
 			}
 
 		}
