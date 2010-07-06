@@ -101,6 +101,11 @@
 			</td>
 			<td>
 				<xsl:value-of select="totalPosts"/>
+				<xsl:if test="actualPosts">
+					<xsl:text> (</xsl:text>
+					<xsl:value-of select="actualPosts"/>
+					<xsl:text>)</xsl:text>
+				</xsl:if>
 			</td>
 			<td>
 				<xsl:text>TODO</xsl:text>
