@@ -287,7 +287,7 @@ namespace FLocal.Common.dataobjects {
 			}
 			Dictionary<string, string> data = Config.instance.mainConnection.LoadById(ReadMarkerTableSpec.instance, stringIds[0]);
 			if((data[ReadMarkerTableSpec.FIELD_POSTID] == "") || (data[ReadMarkerTableSpec.FIELD_POSTID] == null)) {
-				return FORMALREADMIN;
+				return 0;
 			}
 			return int.Parse(data[ReadMarkerTableSpec.FIELD_POSTID]);
 		}
