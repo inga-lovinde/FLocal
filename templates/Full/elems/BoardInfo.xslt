@@ -66,6 +66,12 @@
 					<xsl:text>от </xsl:text>
 					<xsl:value-of select="post/poster/user/name"/>
 				</a>
+				<xsl:text> </xsl:text>
+				<img alt="new" src="/static/images/new.gif">
+					<xsl:if test="post/id &lt; 10000000">
+						<xsl:attribute name="style">visibility:hidden</xsl:attribute>
+					</xsl:if>
+				</img>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:text>N/A</xsl:text>

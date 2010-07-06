@@ -75,6 +75,12 @@
 			</td>
 			<td nowrap="nowrap" align="center">
 				<xsl:apply-templates select="lastPostDate/date" mode="dateTime"/>
+				<xsl:text> </xsl:text>
+				<img alt="new" src="/static/images/new.gif">
+					<xsl:if test="lastPostId &lt; 10000000">
+						<xsl:attribute name="style">visibility:hidden</xsl:attribute>
+					</xsl:if>
+				</img>
 			</td>
 		</tr>
 	</xsl:template>
