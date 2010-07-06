@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
+using FLocal.Core.DB;
 using FLocal.Common.dataobjects;
 
 namespace FLocal.IISHandler.handlers {
@@ -22,7 +23,7 @@ namespace FLocal.IISHandler.handlers {
 			context.httpresponse.WriteLine("AppInfo: " + context.config.AppInfo);
 			context.httpresponse.WriteLine("InitTime: " + context.config.InitTime);
 			if(context.httprequest.Path == "/test/") {
-				using(Core.DB.Transaction transaction = context.config.mainConnection.beginTransaction(System.Data.IsolationLevel.Snapshot)) {
+				using(Transaction transaction = context.config.mainConnection.beginTransaction()) {
 					context.httpresponse.WriteLine(transaction.GetHashCode().ToString());
 				}
 			}

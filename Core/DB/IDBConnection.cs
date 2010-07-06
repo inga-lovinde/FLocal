@@ -41,7 +41,7 @@ namespace FLocal.Core.DB {
 		}
 
 		public static Transaction beginTransaction(this IDBConnection connection) {
-			return connection.beginTransaction(System.Data.IsolationLevel.Snapshot);
+			return connection.beginTransaction(System.Data.IsolationLevel.ReadCommitted);
 		}
 
 		public static Dictionary<string, string> LoadById(this IDBConnection connection, ITableSpec table, string id) {
