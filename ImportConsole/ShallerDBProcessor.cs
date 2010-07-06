@@ -162,7 +162,7 @@ namespace FLocal.ImportConsole {
 					Dictionary<string, string> data = DictionaryConverter.FromDump(line);
 					int postId = int.Parse(data["Number"]);
 					try {
-						if(Config.instance.mainConnection.GetCountByConditions(Post.TableSpec.instance, new ComparisonCondition(Post.TableSpec.instance.getIdSpec(), ComparisonType.EQUAL, postId.ToString())) > 0) {
+						if(inserts.ContainsKey(postId) || Config.instance.mainConnection.GetCountByConditions(Post.TableSpec.instance, new ComparisonCondition(Post.TableSpec.instance.getIdSpec(), ComparisonType.EQUAL, postId.ToString())) > 0) {
 							Console.Write("-");
 						} else {
 							int localMain = int.Parse(data["Local_Main"]);
