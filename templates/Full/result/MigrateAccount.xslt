@@ -11,9 +11,31 @@
 								<xsl:text>ћиграци€ пользовател€</xsl:text>
 							</td> 
 						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<table cellpadding="3" cellspacing="1" width="100%" class="tableborders">
 						<tr> 
 							<td class="lighttable"> 
-								<xsl:text>ћиграци€ успешно завершена, теперь вы можете войти в форум, использу€ свой логин и новый пароль.</xsl:text>
+								<p>ћиграци€ была успешно завершена, теперь вы можете войти в форум, использу€ свой логин и новый пароль</p>
+								<p align="center">
+									<xsl:text>[&#8592;] </xsl:text>
+									<a id="actionLink_left">
+										<xsl:attribute name="href">/Boards/</xsl:attribute>
+										<xsl:text>¬ернутьс€ к списку разделов</xsl:text>
+									</a>
+									<xsl:text> | </xsl:text>
+									<a id="actionLink_right">
+										<xsl:attribute name="href">/Login/</xsl:attribute>
+										<xsl:text>¬ойти</xsl:text>
+									</a>
+									<xsl:text> [&#8594;]</xsl:text>
+								</p>
+								<script type="text/javascript" language="Javascript">
+									<xsl:text>assignArrowsHandlers();</xsl:text>
+								</script>
 							</td> 
 						</tr> 
 					</table> 

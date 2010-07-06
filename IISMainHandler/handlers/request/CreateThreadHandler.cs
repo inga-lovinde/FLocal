@@ -23,7 +23,10 @@ namespace FLocal.IISHandler.handlers.request {
 
 			newThread.markAsRead(context.session.account, newPost, newPost);
 
-			return new XElement[] { newPost.exportToXmlWithoutThread(context, false) };
+			return new XElement[] {
+				newThread.board.exportToXml(context, false),
+				newPost.exportToXmlWithoutThread(context, false)
+			};
 		}
 	}
 }

@@ -11,14 +11,31 @@
 								<xsl:text>Новое сообщение</xsl:text>
 							</td> 
 						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<table cellpadding="3" cellspacing="1" width="100%" class="tableborders">
 						<tr> 
 							<td class="lighttable"> 
-								<xsl:text>Ваше сообщение было успешно создано</xsl:text>
-								<br/>
-								<a>
-									<xsl:attribute name="href">/Thread/<xsl:value-of select="post/threadId"/>/p<xsl:value-of select="post/id"/></xsl:attribute>
-									<xsl:text>Просмотреть сообщение</xsl:text>
-								</a>
+								<p>Ваше сообщение было успешно создано</p>
+								<p align="center">
+									<xsl:text>[&#8592;] </xsl:text>
+									<a id="actionLink_left">
+										<xsl:attribute name="href">/Board/<xsl:value-of select="board/id"/>/</xsl:attribute>
+										<xsl:text>Вернуться в раздел</xsl:text>
+									</a>
+									<xsl:text> | </xsl:text>
+									<a id="actionLink_right">
+										<xsl:attribute name="href">/Thread/<xsl:value-of select="post/threadId"/>/p<xsl:value-of select="post/id"/></xsl:attribute>
+										<xsl:text>Просмотреть сообщение</xsl:text>
+									</a>
+									<xsl:text> [&#8594;]</xsl:text>
+								</p>
+								<script type="text/javascript" language="Javascript">
+									<xsl:text>assignArrowsHandlers();</xsl:text>
+								</script>
 							</td> 
 						</tr> 
 					</table> 
