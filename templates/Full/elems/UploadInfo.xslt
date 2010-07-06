@@ -37,6 +37,15 @@
 											<img style="max-width:800px;max-height:600px;">
 												<xsl:attribute name="src">/Upload/Item/<xsl:value-of select="id"/>/</xsl:attribute>
 											</img>
+											<br/>
+											<br/>
+											<xsl:text>Для вставки ссылки в форум используйте тэг [uploadLink]</xsl:text>
+											<xsl:value-of select="id"/>
+											<xsl:text>[/uploadLink]</xsl:text>
+											<br/>
+											<xsl:text>Для вставки изображения в форум используйте тэг [uploadImage]</xsl:text>
+											<xsl:value-of select="id"/>
+											<xsl:text>[/uploadImage]</xsl:text>
 										</font>
 									</td>
 								</tr>
