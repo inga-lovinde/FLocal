@@ -7,6 +7,7 @@ using System.Xml.Linq;
 using FLocal.Common;
 using FLocal.Common.dataobjects;
 using FLocal.Core.DB;
+using FLocal.Core.DB.conditions;
 
 namespace FLocal.IISHandler.handlers.response {
 
@@ -34,7 +35,29 @@ namespace FLocal.IISHandler.handlers.response {
 			);
 			return new XElement[] {
 				new XElement("users", 
-					from account in accounts select account.user.exportToXmlForViewing(context),
+					from account in accounts
+					select account.user.exportToXmlForViewing(
+						context,
+						new XElement(
+							"actualPosts",
+							Config.instance.mainConnection.GetCountByConditions(
+								Post.TableSpec.instance,
+								new ComplexCondition(
+									ConditionsJoinType.AND,
+									new ComparisonCondition(
+										Post.TableSpec.instance.getColumnSpec(Post.TableSpec.FIELD_POSTERID),
+										ComparisonType.EQUAL,
+										account.user.id.ToString()
+									),
+									new ComparisonCondition(
+										Post.TableSpec.instance.getIdSpec(),
+										ComparisonType.GREATEROREQUAL,
+										Thread.FORMALREADMIN.ToString()
+									)
+								)
+							)
+						)
+					),
 					pageOuter.exportToXml(2, 5, 2)
 				)
 			};

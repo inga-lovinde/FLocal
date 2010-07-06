@@ -162,7 +162,7 @@ namespace FLocal.Common.dataobjects {
 			this._avatarId = Util.ParseInt(data[TableSpec.FIELD_AVATARID]);
 		}
 
-		public XElement exportToXmlForViewing(UserContext context) {
+		public XElement exportToXmlForViewing(UserContext context, params XElement[] additional) {
 			XElement result = new XElement("user",
 				new XElement("id", this.id),
 				new XElement("regDate", this.regDate.ToXml()),
@@ -176,6 +176,9 @@ namespace FLocal.Common.dataobjects {
 			);
 			if(this.avatarId.HasValue) {
 				result.Add(new XElement("avatar", this.avatarId));
+			}
+			foreach(XElement elem in additional) {
+				result.Add(elem);
 			}
 			return result;
 		}
