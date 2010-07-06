@@ -39,11 +39,11 @@
 											</img>
 											<br/>
 											<br/>
-											<xsl:text>Для вставки ссылки в форум используйте тэг [uploadLink]</xsl:text>
+											<xsl:text>─ы  тёЄртъш ёё√ыъш т ЇюЁєь шёяюы№чєщЄх Є¤у [uploadLink]</xsl:text>
 											<xsl:value-of select="id"/>
 											<xsl:text>[/uploadLink]</xsl:text>
 											<br/>
-											<xsl:text>Для вставки изображения в форум используйте тэг [uploadImage]</xsl:text>
+											<xsl:text>─ы  тёЄртъш шчюсЁрцхэш  т ЇюЁєь шёяюы№чєщЄх Є¤у [uploadImage]</xsl:text>
 											<xsl:value-of select="id"/>
 											<xsl:text>[/uploadImage]</xsl:text>
 										</font>
