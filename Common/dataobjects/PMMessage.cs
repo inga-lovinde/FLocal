@@ -117,6 +117,11 @@ namespace FLocal.Common.dataobjects {
 				return this._incomingPMId;
 			}
 		}
+		public PMMessage incomingPM {
+			get {
+				return PMMessage.LoadById(this.incomingPMId.Value);
+			}
+		}
 
 		private bool _isRead;
 		public bool isRead {
@@ -160,6 +165,9 @@ namespace FLocal.Common.dataobjects {
 				new XElement("body", context.outputParams.preprocessBodyIntermediate(this.body)),
 				new XElement("bodyUBB", this.bodyUBB)
 			);
+			if(this.direction == ENUM_DIRECTION_OUTGOING) {
+				result.Add(new XElement("isReadByInterlocutor", this.incomingPM.isRead));
+			}
 			if(additional.Length > 0) {
 				result.Add(additional);
 			}

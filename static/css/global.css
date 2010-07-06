@@ -82,3 +82,6 @@ pre
 [spoiler] [opener] {
 	cursor:hand;
 }
+.warning {
+	background-color:red;
+}
