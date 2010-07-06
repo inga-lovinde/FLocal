@@ -66,6 +66,9 @@
 															</td>
 															<td class="navigation">
 																<a>
+																	<xsl:if test="isOwner='true'">
+																		<xsl:attribute name="href">/Post/<xsl:value-of select="id"/>/Edit/</xsl:attribute>
+																	</xsl:if>
 																	<img src="/static/images/edit.gif" border="0" alt="Правка сообщения" title="Правка сообщения" width="21" height="14" style="vertical-align: text-bottom" />
 																</a>
 															</td>
@@ -116,6 +119,22 @@
 										</font>
 									</td>
 								</tr>
+								<xsl:if test="revision">
+									<xsl:if test="(revision != '') and (revision != '0')">
+										<tr>
+											<td>
+												<font size="-2">
+													<xsl:text>Это сообщение было отредактировано пользователем </xsl:text>
+													<xsl:value-of select="revision"/>
+													<xsl:text> раз, последний раз </xsl:text>
+													<xsl:apply-templates select="lastChangeDate/date" mode="dateTime"/>
+													<br />
+													<br/>
+												</font>
+											</td>
+										</tr>
+									</xsl:if>
+								</xsl:if>
 								<xsl:if test="poster/user/signature != ''">
 									<tr>
 										<td>

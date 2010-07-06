@@ -61,6 +61,7 @@
     <Compile Include="handlers\request\AbstractNewMessageHandler.cs" />
     <Compile Include="handlers\request\AbstractPostHandler.cs" />
     <Compile Include="handlers\request\CreateThreadHandler.cs" />
+    <Compile Include="handlers\request\EditHandler.cs" />
     <Compile Include="handlers\request\LoginHandler.cs" />
     <Compile Include="handlers\request\LogoutHandler.cs" />
     <Compile Include="handlers\request\MarkThreadAsReadHandler.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="handlers\response\ConversationHandler.cs" />
     <Compile Include="handlers\response\ConversationsHandler.cs" />
     <Compile Include="handlers\response\CreateThreadHandler.cs" />
+    <Compile Include="handlers\response\EditHandler.cs" />
     <Compile Include="handlers\response\LegacyPHPHandler.cs" />
     <Compile Include="handlers\response\LegacyUploadHandler.cs" />
     <Compile Include="handlers\response\LoginHandler.cs" />

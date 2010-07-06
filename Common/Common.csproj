@@ -88,6 +88,7 @@
     <Compile Include="dataobjects\Post.cs" />
     <Compile Include="dataobjects\PostLayer.cs" />
     <Compile Include="dataobjects\QuickLink.cs" />
+    <Compile Include="dataobjects\Revision.cs" />
     <Compile Include="dataobjects\Session.cs" />
     <Compile Include="dataobjects\Skin.cs" />
     <Compile Include="dataobjects\Thread.cs" />

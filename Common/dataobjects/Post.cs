@@ -5,6 +5,7 @@ using System.Text;
 using System.Xml.Linq;
 using FLocal.Core;
 using FLocal.Core.DB;
+using FLocal.Core.DB.conditions;
 using FLocal.Common;
 using FLocal.Common.actions;
 
@@ -27,20 +28,6 @@ namespace FLocal.Common.dataobjects {
 			public string name { get { return TABLE; } }
 			public string idName { get { return FIELD_ID; } }
 			public void refreshSqlObject(int id) { Refresh(id); }
-		}
-
-		public class RevisionTableSpec : ISqlObjectTableSpec {
-			public const string TABLE = "Revisions";
-			public const string FIELD_ID = "Id";
-			public const string FIELD_POSTID = "PostId";
-			public const string FIELD_CHANGEDATE = "ChangeDate";
-			public const string FIELD_TITLE = "Title";
-			public const string FIELD_BODY = "Body";
-			public const string FIELD_NUMBER = "Number";
-			public static readonly RevisionTableSpec instance = new RevisionTableSpec();
-			public string name { get { return TABLE; } }
-			public string idName { get { return FIELD_ID; } }
-			public void refreshSqlObject(int id) { }
 		}
 
 		protected override ISqlObjectTableSpec table { get { return TableSpec.instance; } }
@@ -67,8 +54,8 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
-		private DateTime? _lastChangeDate;
-		public DateTime? lastChangeDate {
+		private DateTime _lastChangeDate;
+		public DateTime lastChangeDate {
 			get {
 				this.LoadIfNotLoaded();
 				return this._lastChangeDate;
@@ -80,6 +67,31 @@ namespace FLocal.Common.dataobjects {
 			get {
 				this.LoadIfNotLoaded();
 				return this._revision;
+			}
+		}
+		public Revision latestRevision {
+			get {
+				return Revision.LoadById(
+					int.Parse(
+						Config.instance.mainConnection.LoadIdsByConditions(
+							Revision.TableSpec.instance,
+							new ComplexCondition(
+								ConditionsJoinType.AND,
+								new ComparisonCondition(
+									Revision.TableSpec.instance.getColumnSpec(Revision.TableSpec.FIELD_POSTID),
+									ComparisonType.EQUAL,
+									this.id.ToString()
+								),
+								new ComparisonCondition(
+									Revision.TableSpec.instance.getColumnSpec(Revision.TableSpec.FIELD_NUMBER),
+									ComparisonType.EQUAL,
+									this.revision.ToString()
+								)
+							),
+							Diapasone.unlimited
+						).Single()
+					)
+				);
 			}
 		}
 		
@@ -145,8 +157,8 @@ namespace FLocal.Common.dataobjects {
 
 		protected override void doFromHash(Dictionary<string, string> data) {
 			this._posterId = int.Parse(data[TableSpec.FIELD_POSTERID]);
-			this._postDate = new DateTime(long.Parse(data[TableSpec.FIELD_POSTDATE]));
-			this._lastChangeDate = Util.ParseDateTimeFromTimestamp(data[TableSpec.FIELD_LASTCHANGEDATE]);
+			this._postDate = Util.ParseDateTimeFromTimestamp(data[TableSpec.FIELD_POSTDATE]).Value;
+			this._lastChangeDate = Util.ParseDateTimeFromTimestamp(data[TableSpec.FIELD_LASTCHANGEDATE]).Value;
 			this._revision = Util.ParseInt(data[TableSpec.FIELD_REVISION]);
 			this._layerId = int.Parse(data[TableSpec.FIELD_LAYERID]);
 			this._title = data[TableSpec.FIELD_TITLE];
@@ -175,15 +187,16 @@ namespace FLocal.Common.dataobjects {
 				new XElement("id", this.id),
 				new XElement("poster", this.poster.exportToXmlForViewing(context)),
 				new XElement("postDate", this.postDate.ToXml()),
-				new XElement("lastChangeDate", this.postDate.ToXml()),
-				new XElement("revision", this.revision),
+				new XElement("lastChangeDate", this.lastChangeDate.ToXml()),
+				new XElement("revision", this.revision.ToString()),
 				new XElement("layerId", this.layerId),
 				new XElement("layerName", this.layer.name),
 				new XElement("title", this.title),
 				new XElement("body", context.outputParams.preprocessBodyIntermediate(this.body)),
 				//this.XMLBody(context),
 				new XElement("bodyShort", this.bodyShort),
-				new XElement("threadId", this.threadId)
+				new XElement("threadId", this.threadId),
+				new XElement("isOwner", ((context.account != null) && (this.poster.id == context.account.user.id)).ToPlainString())
 			);
 			if(includeParentPost) {
 				if(this.parentPostId.HasValue) {
@@ -211,6 +224,42 @@ namespace FLocal.Common.dataobjects {
 			ChangeSetUtil.ApplyChanges(changes.Value.ToArray());
 			
 			return Post.LoadById(changes.Key.getId().Value);
+		}
+
+		private readonly object Edit_locker = new object(); //TODO: move locking to DB
+		public void Edit(User user, string newTitle, string newBody, PostLayer newDesiredLayer) {
+			if(this.poster.id != user.id) {
+				throw new AccessViolationException();
+			}
+			PostLayer actualLayer = poster.getActualLayer(this.thread.board, newDesiredLayer);
+			if(actualLayer.id < this.layer.id) {
+				actualLayer = this.layer;
+			}
+			lock(this.Edit_locker) {
+				ChangeSetUtil.ApplyChanges(
+					new InsertChange(
+						Revision.TableSpec.instance,
+						new Dictionary<string, AbstractFieldValue> {
+							{ Revision.TableSpec.FIELD_POSTID, new ScalarFieldValue(this.id.ToString()) },
+							{ Revision.TableSpec.FIELD_CHANGEDATE, new ScalarFieldValue(DateTime.Now.ToUTCString()) },
+							{ Revision.TableSpec.FIELD_TITLE, new ScalarFieldValue(newTitle) },
+							{ Revision.TableSpec.FIELD_BODY, new ScalarFieldValue(newBody) },
+							{ Revision.TableSpec.FIELD_NUMBER, new ScalarFieldValue((this.revision + 1).ToString()) },
+						}
+					),
+					new UpdateChange(
+						TableSpec.instance,
+						new Dictionary<string, AbstractFieldValue> {
+							{ TableSpec.FIELD_TITLE, new ScalarFieldValue(newTitle) },
+							{ TableSpec.FIELD_BODY, new ScalarFieldValue(UBBParser.UBBToIntermediate(newBody)) },
+							{ TableSpec.FIELD_LASTCHANGEDATE, new ScalarFieldValue(DateTime.Now.ToUTCString()) },
+							{ TableSpec.FIELD_REVISION, new IncrementFieldValue() },
+							{ TableSpec.FIELD_LAYERID, new ScalarFieldValue(actualLayer.id.ToString()) },
+						},
+						this.id
+					)
+				);
+			}
 		}
 
 	}

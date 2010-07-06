@@ -57,6 +57,8 @@ namespace FLocal.IISHandler {
 						return new handlers.PostHandler();
 					}
 					switch(context.requestParts[2].ToLower()) {
+						case "edit":
+							return new handlers.response.EditHandler();
 						case "reply":
 							return new handlers.response.ReplyHandler();
 						case "pmreply":
@@ -129,6 +131,8 @@ namespace FLocal.IISHandler {
 								return new handlers.request.LogoutHandler();
 							case "migrateaccount":
 								return new handlers.request.MigrateAccountHandler();
+							case "edit":
+								return new handlers.request.EditHandler();
 							case "reply":
 								return new handlers.request.ReplyHandler();
 							case "newthread":

@@ -22,7 +22,7 @@ namespace FLocal.Common.actions {
 						dataobjects.Thread.TableSpec.TABLE, //thread should come first because of Board.newThread locking order with two changesets
 						dataobjects.Board.TableSpec.TABLE,
 						dataobjects.Post.TableSpec.TABLE,
-						dataobjects.Post.RevisionTableSpec.TABLE,
+						dataobjects.Revision.TableSpec.TABLE,
 						dataobjects.Account.TableSpec.TABLE,
 						dataobjects.User.TableSpec.TABLE,
 						dataobjects.AccountSettings.TableSpec.TABLE,

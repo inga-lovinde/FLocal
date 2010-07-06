@@ -410,13 +410,13 @@ namespace FLocal.Common.dataobjects {
 			AbstractFieldValue postReference = new ReferenceFieldValue(postInsert);
 			AbstractFieldValue postIndexReference = new TwoWayReferenceFieldValue(postInsert, TwoWayReferenceFieldValue.GREATEST);
 			AbstractChange revisionInsert = new InsertChange(
-				Post.RevisionTableSpec.instance,
+				Revision.TableSpec.instance,
 				new Dictionary<string,AbstractFieldValue> {
-					{ Post.RevisionTableSpec.FIELD_POSTID, postReference },
-					{ Post.RevisionTableSpec.FIELD_NUMBER, new ScalarFieldValue("0") },
-					{ Post.RevisionTableSpec.FIELD_CHANGEDATE, new ScalarFieldValue(date.ToUTCString()) },
-					{ Post.RevisionTableSpec.FIELD_TITLE, new ScalarFieldValue(title) },
-					{ Post.RevisionTableSpec.FIELD_BODY, new ScalarFieldValue(body) },
+					{ Revision.TableSpec.FIELD_POSTID, postReference },
+					{ Revision.TableSpec.FIELD_NUMBER, new ScalarFieldValue("0") },
+					{ Revision.TableSpec.FIELD_CHANGEDATE, new ScalarFieldValue(date.ToUTCString()) },
+					{ Revision.TableSpec.FIELD_TITLE, new ScalarFieldValue(title) },
+					{ Revision.TableSpec.FIELD_BODY, new ScalarFieldValue(body) },
 				}
 			);
 			Dictionary<string, AbstractFieldValue> threadData = new Dictionary<string,AbstractFieldValue> {
