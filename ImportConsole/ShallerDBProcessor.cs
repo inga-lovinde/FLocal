@@ -147,7 +147,7 @@ namespace FLocal.ImportConsole {
 		private readonly static DateTime UNIX = new DateTime(1970, 1, 1, 0, 0, 0);
 
 		public static void processDB(string filename) {
-			List<KeyValuePair<int, Action>> inserts = new List<KeyValuePair<int, Action>>();
+			Dictionary<int, Action> inserts = new Dictionary<int, Action>();
 			HashSet<int> discussionsIds = new HashSet<int>();
 			using(StreamReader reader = new StreamReader(filename)) {
 				int i=0;
@@ -207,7 +207,7 @@ namespace FLocal.ImportConsole {
 							if(data.ContainsKey("Layer")) {
 								layer = PostLayer.LoadById(int.Parse(data["Layer"]));
 							}
-							inserts.Add(new KeyValuePair<int, Action>(postId, () => {
+							inserts[postId] = () => {
 								if(postId == main || postId == localMain) {
 									//first post in the thread
 									string legacyBoardName;
@@ -240,7 +240,7 @@ namespace FLocal.ImportConsole {
 									}
 									post.Reply(user, title, body, layer, date, postId);
 								}
-							}));
+							};
 							Console.Write("+");
 						}
 					} catch(Exception e) {
