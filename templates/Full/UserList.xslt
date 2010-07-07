@@ -7,6 +7,19 @@
 				<td>
 					<table cellpadding="3" cellspacing="1" width="100%" class="tableborders">
 						<tr class="tdheader">
+							<td colspan="7">
+								<table width="100%" cellspacing="1" cellpadding="3" border="0">
+									<tr>
+										<td>
+											<a href="/Users/Active/">
+												<xsl:text>Активные (смигрированные)</xsl:text>
+											</a>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr class="tdheader">
 							<td align="left" width="15%" nowrap="nowrap">
 								<a>
 									<xsl:text>Пользователь</xsl:text>
@@ -58,19 +71,6 @@
 								</table>
 							</td>
 						</tr>
-						<tr class="tdheader">
-							<td colspan="7">
-								<table width="100%" cellspacing="1" cellpadding="3" border="0">
-									<tr>
-										<td>
-											<a href="/Users/Active/">
-												<xsl:text>Активные (смигрированные)</xsl:text>
-											</a>
-										</td>
-									</tr>
-								</table>
-							</td>
-						</tr>
 					</table>
 				</td>
 			</tr>
@@ -100,12 +100,15 @@
 				<xsl:text>TODO</xsl:text>
 			</td>
 			<td>
-				<xsl:value-of select="totalPosts"/>
-				<xsl:if test="actualPosts">
-					<xsl:text> (</xsl:text>
-					<xsl:value-of select="actualPosts"/>
-					<xsl:text>)</xsl:text>
-				</xsl:if>
+				<a>
+					<xsl:attribute name="href">/User/<xsl:value-of select="id"/>/Posts/</xsl:attribute>
+					<xsl:value-of select="totalPosts"/>
+					<xsl:if test="actualPosts">
+						<xsl:text> (</xsl:text>
+						<xsl:value-of select="actualPosts"/>
+						<xsl:text>)</xsl:text>
+					</xsl:if>
+				</a>
 			</td>
 			<td>
 				<xsl:text>TODO</xsl:text>
