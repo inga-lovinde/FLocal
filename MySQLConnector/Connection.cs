@@ -137,7 +137,7 @@ namespace FLocal.MySQLConnector {
 				if(diapasone.count >= 0) {
 					queryLimits = "LIMIT " + diapasone.count + " OFFSET " + diapasone.start;
 				}
-				command.CommandText = "SELECT " + table.compile(this.traits) + ".* " + queryMain + " " + querySorts + " " + queryLimits;
+				command.CommandText = "SELECT " + table.getIdSpec().compile(this.traits) + " " + queryMain + " " + querySorts + " " + queryLimits;
 
 				List<string> result = new List<string>();
 				using(DbDataReader reader = command.ExecuteReader()) {
