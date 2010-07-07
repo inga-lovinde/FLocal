@@ -63,7 +63,8 @@ namespace FLocal.IISHandler {
 				new XElement("start", this.start),
 				new XElement("count", this.count),
 				new XElement("total", this.total),
-				new XElement("perPage", this.perPage)
+				new XElement("perPage", this.perPage),
+				new XElement("isEmpty", (this.perPage >= this.total).ToPlainString())
 			);
 			if(this.count > 0) {
 				if(this.start + this.count < this.total) {

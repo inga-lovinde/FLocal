@@ -44,11 +44,13 @@
 					</xsl:attribute>
 					<xsl:value-of select="title"/>
 				</a>
-				<span class="small" style="margin-left:1.5em">
-					<xsl:apply-templates select="pageOuter" mode="withoutCurrent">
-						<xsl:with-param name="baseLink">/Thread/<xsl:value-of select="id"/>/</xsl:with-param>
-					</xsl:apply-templates>
-				</span>
+				<xsl:if test="pageOuter/isEmpty='false'">
+					<span class="small" style="margin-left:1.5em">
+						<xsl:apply-templates select="pageOuter" mode="withoutCurrent">
+							<xsl:with-param name="baseLink">/Thread/<xsl:value-of select="id"/>/</xsl:with-param>
+						</xsl:apply-templates>
+					</span>
+				</xsl:if>
 			</td>
 			<td align="left" nowrap="nowrap">
 				<a>
