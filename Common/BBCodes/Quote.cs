@@ -14,7 +14,7 @@ namespace FLocal.Common.BBCodes {
 		public override string Format(ITextFormatter formatter) {
 			string marker = this.Default;
 			if(marker == null) marker = "Quote:";
-			return "<blockquote><font class=\"small\">" + marker + "</font><hr/><br/>" + this.GetInnerHTML(formatter).Trim() + "<br/><br/><hr/></blockquote><br/>";
+			return "<br/><blockquote><font class=\"small\">" + marker + "</font><hr/>" + this.GetInnerHTML(formatter).Trim() + "<br/><hr/></blockquote><br/>";
 		}
 
 	}
