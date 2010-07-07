@@ -160,7 +160,14 @@ namespace FLocal.ImportConsole {
 					if(i%1000 == 0) {
 						Console.Write("[" + (int)(i/1000) + "]");
 					}
-					Dictionary<string, string> data = DictionaryConverter.FromDump(line);
+					Dictionary<string, string> data;
+					try {
+						data = DictionaryConverter.FromDump(line);
+					} catch(Exception e) {
+						Console.Error.WriteLine("Error while trying to parse line: " + e.GetType().FullName + ": " + e.Message);
+						Console.Error.WriteLine(e.StackTrace);
+						continue;
+					}
 					int postId = int.Parse(data["Number"]);
 					try {
 						if(inserts.ContainsKey(postId) || Config.instance.mainConnection.GetCountByConditions(Post.TableSpec.instance, new ComparisonCondition(Post.TableSpec.instance.getIdSpec(), ComparisonType.EQUAL, postId.ToString())) > 0) {
