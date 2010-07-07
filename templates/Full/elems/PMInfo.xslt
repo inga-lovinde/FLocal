@@ -12,12 +12,12 @@
 							<xsl:apply-templates select="poster/account/user" mode="userInfoBar"/>
 						</td>
 						<td class="subjecttable">
+							<xsl:if test="isReadByInterlocutor='false'">
+								<xsl:attribute name="class">warning</xsl:attribute>
+							</xsl:if>
 							<table width="100%" border="0" cellpadding="0" cellspacing="0">
 								<tr>
 									<td align="left" width="65%" valign="top">
-										<xsl:if test="isReadByInterlocutor='false'">
-											<xsl:attribute name="class">warning</xsl:attribute>
-										</xsl:if>
 										<a target="_blank" class="separate">
 											<img border="0" alt="" style="vertical-align: text-bottom">
 												<xsl:choose>
