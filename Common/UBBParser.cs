@@ -38,6 +38,14 @@ namespace FLocal.Common {
 				private static readonly Dictionary<Regex, MatchEvaluator> TYPOGRAPHICS = new Dictionary<Regex, MatchEvaluator> {
 					{ new Regex("(\\s+)--?(\\s+)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => match.Groups[1] + "–" + match.Groups[2] },
 					{ new Regex("(\\s+)---(\\s+)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => match.Groups[1] + "—" + match.Groups[2] },
+					{ new Regex("\\(c\\)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => "©" },
+					{ new Regex("\\(r\\)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => "®" },
+					{ new Regex("\\(tm\\)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => "™" },
+					{ new Regex("\\+\\-", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => "±" },
+					{ new Regex("&lt;=", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => "≤" },
+					{ new Regex("&gt;=", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => "≥" },
+					{ new Regex("!=", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => "≠" },
+					{ new Regex("~=", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => "≈" },
 				};
 
 				private ITextFormatter inner;
