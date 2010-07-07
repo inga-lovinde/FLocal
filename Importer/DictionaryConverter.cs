@@ -13,8 +13,10 @@ namespace FLocal.Importer {
 
 		public static Dictionary<string, string> FromDump(string dump) {
 			Dictionary<string, string> result = new Dictionary<string,string>();
-			foreach(var kvp in (from elem in dump.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries) let parts = elem.Split(new char[] { '=' }, 2) select new KeyValuePair<string, string>(HttpUtility.UrlDecode(parts[0], ShallerConnector.encoding), HttpUtility.UrlDecode(parts[1], ShallerConnector.encoding)))) {
-				result[kvp.Key] = kvp.Value;
+			foreach(var str in dump.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)) {// let parts = elem.Split(new char[] { '=' }, 2) select new KeyValuePair<string, string>(HttpUtility.UrlDecode(parts[0], ShallerConnector.encoding), HttpUtility.UrlDecode(parts[1], ShallerConnector.encoding)))) {
+				string[] parts = str.Split(new char[] { '=' }, 2);
+				if(parts.Length != 2) throw new ApplicationException("wrong parts count " + parts.Length);
+				result[parts[0]] = parts[1];
 			}
 			return result;
 		}

@@ -270,6 +270,7 @@ namespace FLocal.ImportConsole {
 				}
 			}
 
+			Console.WriteLine("Finished parsing");
 			Console.ReadLine();
 			int j=0;
 			foreach(var insert in inserts) {
