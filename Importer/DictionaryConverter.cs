@@ -12,7 +12,11 @@ namespace FLocal.Importer {
 		}
 
 		public static Dictionary<string, string> FromDump(string dump) {
-			return (from elem in dump.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries) let parts = elem.Split(new char[] { '=' }, 2) select new KeyValuePair<string, string>(HttpUtility.UrlDecode(parts[0], ShallerConnector.encoding), HttpUtility.UrlDecode(parts[1], ShallerConnector.encoding))).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+			Dictionary<string, string> result = new Dictionary<string,string>();
+			foreach(var kvp in (from elem in dump.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries) let parts = elem.Split(new char[] { '=' }, 2) select new KeyValuePair<string, string>(HttpUtility.UrlDecode(parts[0], ShallerConnector.encoding), HttpUtility.UrlDecode(parts[1], ShallerConnector.encoding)))) {
+				result[kvp.Key] = kvp.Value;
+			}
+			return result;
 		}
 	
 	}
