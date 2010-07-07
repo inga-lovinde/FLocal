@@ -93,6 +93,7 @@
     <Compile Include="handlers\response\UploadNewHandler.cs" />
     <Compile Include="handlers\response\UserInfoHandler.cs" />
     <Compile Include="handlers\response\UserPostsHandler.cs" />
+    <Compile Include="handlers\response\WhoIsOnlineHandler.cs" />
     <Compile Include="handlers\RootHandler.cs" />
     <Compile Include="handlers\StaticHandler.cs" />
     <Compile Include="handlers\ThreadHandler.cs" />

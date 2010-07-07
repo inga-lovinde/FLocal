@@ -73,7 +73,10 @@
 									<xsl:text>¬ход</xsl:text>
 								</a>
 								<xsl:text> | </xsl:text>
-								<a target="_top"> то в онлайне</a>
+								<a target="_top">
+									<xsl:attribute name="href">/Users/Online/</xsl:attribute>
+									<xsl:text> то в онлайне</xsl:text>
+								</a>
 								<xsl:text> | </xsl:text>
 								<a target="_top">
 									<xsl:attribute name="href">/q/faq</xsl:attribute>

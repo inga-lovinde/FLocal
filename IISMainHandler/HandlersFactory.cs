@@ -77,6 +77,8 @@ namespace FLocal.IISHandler {
 						switch(context.requestParts[1].ToLower()) {
 							case "active":
 								return new handlers.response.ActiveAccountListHandler();
+							case "online":
+								return new handlers.response.WhoIsOnlineHandler();
 							default:
 								return new handlers.response.UserListHandler();
 						}
