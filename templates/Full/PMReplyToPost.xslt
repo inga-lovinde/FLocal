@@ -2,6 +2,10 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml">
 	<xsl:import href="elems\Main.xslt"/>
 	<xsl:import href="elems\TextEditor.xslt"/>
+	<xsl:template name="specificTitle">
+		<xsl:text>Ћичный ответ на сообщение - </xsl:text>
+		<xsl:value-of select="post/title"/>
+	</xsl:template>
 	<xsl:template name="specific">
 		<table width="95%" align="center" cellpadding="1" cellspacing="1" class="tablesurround">
 			<tr>
@@ -16,7 +20,7 @@
 						</tr>
 						<tr class="darktable"> 
 							<td> 
-								<xsl:text>«аполните приведенную ниже форму дл€ отправки сообщени€ в форум. HTML отключен. UBBCode включен, и вы можете использовать UBBCode в ваших сообщени€х. јнонимные сообщени€ разрешены, и вы можете выбрать любое незарегистрированное им€.</xsl:text>
+								<xsl:text>«аполните приведенную ниже форму дл€ отправки личного сообщени€.</xsl:text>
 							</td> 
 						</tr> 
 						<tr> 

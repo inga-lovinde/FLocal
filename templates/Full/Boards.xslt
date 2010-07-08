@@ -2,6 +2,7 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml">
 	<xsl:import href="elems\Main.xslt"/>
 	<xsl:import href="elems\BoardInfo.xslt"/>
+	<xsl:template name="specificTitle">Разделы</xsl:template>
 	<xsl:template name="specific">
 				<table width="95%" align="center" class="tablesurround" cellspacing="1" cellpadding="1">
 					<tr>

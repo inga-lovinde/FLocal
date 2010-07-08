@@ -11,7 +11,11 @@
 				</link>
 				<link rel="shortcut icon" href="/static/favicons/smirk.ico" type="image/x-icon" />
 				<script language="Javascript" type="text/javascript" src="/static/js/common.js"><xsl:text> </xsl:text></script>
-				<title><xsl:value-of select="title"/></title>
+				<title>
+					<xsl:call-template name="specificTitle"/>
+					<xsl:text> - </xsl:text>
+					<xsl:value-of select="title"/>
+				</title>
 			</head>
 			<body>
 				<xsl:call-template name="header"/>

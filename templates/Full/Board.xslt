@@ -3,6 +3,9 @@
 	<xsl:import href="elems\Main.xslt"/>
 	<xsl:import href="elems\BoardInfo.xslt"/>
 	<xsl:import href="elems\ThreadInfo.xslt"/>
+	<xsl:template name="specificTitle">
+		<xsl:value-of select="currentLocation/board/name"/>
+	</xsl:template>
 	<xsl:template name="specific">
 		<table width="95%" align="center" cellpadding="1" cellspacing="1" class="tablesurround">
 			<tr>

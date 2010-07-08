@@ -2,6 +2,7 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml">
 	<xsl:import href="elems\Main.xslt"/>
 	<xsl:import href="elems\TextEditor.xslt"/>
+	<xsl:template name="specificTitle">Ќовое личное сообщение</xsl:template>
 	<xsl:template name="specific">
 		<table width="95%" align="center" cellpadding="1" cellspacing="1" class="tablesurround">
 			<tr>
@@ -9,12 +10,12 @@
 					<table cellpadding="3" cellspacing="1" width="100%" class="tableborders">
 						<tr>
 							<td class="tdheader">
-								<xsl:text>Ќовое приватное сообщение</xsl:text>
+								<xsl:text>Ќовое личное сообщение</xsl:text>
 							</td> 
 						</tr>
 						<tr class="darktable"> 
 							<td> 
-								<xsl:text>«аполните приведенную ниже форму дл€ отправки приватного сообщени€. HTML отключен. UBBCode включен, и вы можете использовать UBBCode в ваших сообщени€х. јнонимные сообщени€ разрешены, и вы можете выбрать любое незарегистрированное им€.</xsl:text>
+								<xsl:text>«аполните приведенную ниже форму дл€ отправки личного сообщени€. HTML отключен. UBBCode включен, и вы можете использовать UBBCode в ваших сообщени€х. јнонимные сообщени€ разрешены, и вы можете выбрать любое незарегистрированное им€.</xsl:text>
 							</td> 
 						</tr> 
 						<tr> 
