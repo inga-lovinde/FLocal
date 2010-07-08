@@ -7,7 +7,7 @@
 				<a>
 					<xsl:attribute name="onClick">if(!confirm('ѕометить все сообщени€ как прочитанные?')) {event.returnValue=false; return false;} else { alert("Not implemented yet"); }</xsl:attribute>
 					<xsl:choose>
-						<xsl:when test="hasNewPosts='true'">
+						<xsl:when test="(hasNewPosts='true') and (lastPostInfo/post/id &gt; 10000000)">
 							<img border="0" width="17" height="21" src="/static/images/newposts.gif" alt=""/>
 						</xsl:when>
 						<xsl:otherwise>
@@ -59,7 +59,7 @@
 
 	<xsl:template match="lastPostInfo">
 		<xsl:choose>
-			<xsl:when test="post">
+			<xsl:when test="post and (post/id &gt; 10000000)">
 				<xsl:apply-templates select="post/postDate/date" mode="dateTime"/><br />
 				<a>
 					<xsl:attribute name="href">/Thread/<xsl:value-of select="post/threadId"/>/p<xsl:value-of select="post/id"/>/</xsl:attribute>
@@ -74,7 +74,7 @@
 				</img>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:text>N/A</xsl:text>
+				<xsl:text>&#160;</xsl:text>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>

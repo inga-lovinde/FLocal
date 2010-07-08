@@ -76,13 +76,20 @@
 				</xsl:if>
 			</td>
 			<td nowrap="nowrap" align="center">
-				<xsl:apply-templates select="lastPostDate/date" mode="dateTime"/>
-				<xsl:text> </xsl:text>
-				<img alt="new" src="/static/images/new.gif">
-					<xsl:if test="lastPostId &lt; 10000000">
-						<xsl:attribute name="style">visibility:hidden</xsl:attribute>
-					</xsl:if>
-				</img>
+				<xsl:choose>
+					<xsl:when test="lastPostId &gt; 10000000">
+						<xsl:apply-templates select="lastPostDate/date" mode="dateTime"/>
+						<xsl:text> </xsl:text>
+						<img alt="new" src="/static/images/new.gif">
+							<xsl:if test="lastPostId &lt; 10000000">
+								<xsl:attribute name="style">visibility:hidden</xsl:attribute>
+							</xsl:if>
+						</img>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:text>&#160;</xsl:text>
+					</xsl:otherwise>
+				</xsl:choose>
 			</td>
 		</tr>
 	</xsl:template>
