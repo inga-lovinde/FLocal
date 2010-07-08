@@ -91,10 +91,12 @@ namespace FLocal.IISHandler {
 			HttpCookie sessionCookie = this.httprequest.Cookies["session"];
 			if(sessionCookie != null && sessionCookie.Value != null && sessionCookie.Value != "") {
 				try {
-					this.session = Session.LoadByKey(sessionCookie.Value);
+					var session = Session.LoadByKey(sessionCookie.Value);
+					var tmp = session.account;
 					sessionCookie.Expires = DateTime.Now.AddDays(3);
-					this.session.updateLastActivity();
+					session.updateLastActivity();
 					this.httpresponse.AppendCookie(sessionCookie);
+					this.session = session;
 				} catch(NotFoundInDBException) {
 					sessionCookie.Value = "";
 					sessionCookie.Expires = DateTime.Now.AddDays(-1);
