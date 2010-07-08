@@ -20,9 +20,17 @@ namespace FLocal.IISHandler {
 		}
 
 		private object requestParts_Locker = new object();
+		private string[] requestParts_Data = null;
 		public string[] requestParts {
 			get {
-				return Cache<string[]>.instance.get(requestParts_Locker, () => this.httprequest.Path.Split("/", StringSplitOptions.RemoveEmptyEntries));
+				if(this.requestParts_Data == null) {
+					lock(this.requestParts_Locker) {
+						if(this.requestParts_Data == null) {
+							this.requestParts_Data = this.httprequest.Path.Split("/", StringSplitOptions.RemoveEmptyEntries);
+						}
+					}
+				}
+				return this.requestParts_Data;
 			}
 		}
 
