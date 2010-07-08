@@ -200,16 +200,7 @@ namespace FLocal.ImportConsole {
 										);
 									}
 
-									ChangeSetUtil.ApplyChanges(
-										new UpdateChange(
-											Post.TableSpec.instance,
-											new Dictionary<string, AbstractFieldValue> {
-												{ Post.TableSpec.FIELD_TITLE, new ScalarFieldValue(title) },
-												{ Post.TableSpec.FIELD_BODY, new ScalarFieldValue(body) },
-											},
-											post.id
-										)
-									);
+									ChangeSetUtil.ApplyChanges(changes.ToArray());
 								};
 								Console.Write("+");
 							} else {
