@@ -142,7 +142,7 @@ namespace FLocal.Common.dataobjects {
 		public bool isLocked {
 			get {
 				this.LoadIfNotLoaded();
-				return this._isAnnouncement;
+				return this._isLocked;
 			}
 		}
 
