@@ -72,8 +72,7 @@ namespace FLocal.Common.dataobjects {
 								ComparisonType.EQUAL,
 								account.id.ToString()
 							),
-							Diapasone.unlimited,
-							new JoinSpec[0]
+							Diapasone.unlimited
 						);
 						if(ids.Count > 1) {
 							throw new CriticalException("not unique");

@@ -54,8 +54,7 @@ namespace FLocal.Common.dataobjects {
 							IEnumerable<int> ids = from stringId in Config.instance.mainConnection.LoadIdsByConditions(
 								TableSpec.instance,
 								new FLocal.Core.DB.conditions.EmptyCondition(),
-								Diapasone.unlimited,
-								new JoinSpec[0]
+								Diapasone.unlimited
 							) select int.Parse(stringId);
 							Category.LoadByIds(ids);
 							return ids;
@@ -84,8 +83,7 @@ namespace FLocal.Common.dataobjects {
 									FLocal.Core.DB.conditions.ComparisonType.EQUAL,
 									this.id.ToString()
 								),
-								Diapasone.unlimited,
-								new JoinSpec[0]
+								Diapasone.unlimited
 							) select int.Parse(stringId);
 							Board.LoadByIds(ids);
 							return ids;

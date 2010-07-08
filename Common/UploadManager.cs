@@ -105,9 +105,8 @@ namespace FLocal.Common {
 						Config.instance.mainConnection.LoadIdsByConditions(
 							Upload.TableSpec.instance,
 							condition,
-							Diapasone.unlimited,
-							new JoinSpec[0]
-						)[0]
+							Diapasone.unlimited
+						).Single()
 					)
 				);
 			}

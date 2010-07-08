@@ -156,8 +156,7 @@ namespace FLocal.Common.dataobjects {
 									FLocal.Core.DB.conditions.ComparisonType.EQUAL,
 									this.id.ToString()
 								),
-								Diapasone.unlimited,
-								new JoinSpec[0]
+								Diapasone.unlimited
 							) select int.Parse(stringId);
 							Board.LoadByIds(ids);
 							return ids;
