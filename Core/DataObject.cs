@@ -47,13 +47,18 @@ namespace FLocal.Core {
 			return res;
 		}
 
-        protected virtual void AfterCreate(bool forLoadingFromHash) { }
+        /// <summary>
+        /// This method should consume no time
+        /// </summary>
+        /// <param name="forLoadingFromHash"></param>
+		protected virtual void AfterCreate(bool forLoadingFromHash) { }
 
         internal override void CreateByIdFromRegistry(TKey id, bool forLoadingFromHash) {
             if(!this.isJustCreated) throw new CriticalException("Object already has an id");
             this._id = id;
             this.isJustCreated = false;
-            this.AfterCreate(forLoadingFromHash);
+			//System.Threading.ThreadPool.QueueUserWorkItem(state => this.AfterCreate(forLoadingFromHash));
+			this.AfterCreate(forLoadingFromHash);
         }
 
 		internal override void markAsDeletedFromRegistry() {

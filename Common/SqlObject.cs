@@ -17,7 +17,7 @@ namespace FLocal.Common {
 			get;
 		}
 
-		private bool _isLoaded = false;
+		private volatile bool _isLoaded = false;
 		protected bool isLoaded {
 			get {
 				return this._isLoaded;
@@ -27,8 +27,8 @@ namespace FLocal.Common {
 			}
 		}
 
-		private object lockFiller = new object();
-		private object lockInitializer = new object();
+		private volatile object lockFiller = new object();
+		private volatile object lockInitializer = new object();
 
 		abstract protected void doFromHash(Dictionary<string, string> data);
 
@@ -87,10 +87,10 @@ namespace FLocal.Common {
 			}
 		}
 
-		protected override void AfterCreate(bool forLoadingFromHash) {
+		/*protected override void AfterCreate(bool forLoadingFromHash) {
 			base.AfterCreate(forLoadingFromHash);
-			if(!forLoadingFromHash) this.Load();
-		}
+			if(!forLoadingFromHash) this.LoadIfNotLoaded();
+		}*/
 
 		protected static void Refresh(TKey id) {
 			Dictionary<TKey, T> objects = LoadByIdsForLoadingFromHash(new List<TKey>() { id });
