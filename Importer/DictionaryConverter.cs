@@ -16,7 +16,7 @@ namespace FLocal.Importer {
 			foreach(var str in dump.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)) {// let parts = elem.Split(new char[] { '=' }, 2) select new KeyValuePair<string, string>(HttpUtility.UrlDecode(parts[0], ShallerConnector.encoding), HttpUtility.UrlDecode(parts[1], ShallerConnector.encoding)))) {
 				string[] parts = str.Split(new char[] { '=' }, 2);
 				if(parts.Length != 2) throw new ApplicationException("wrong parts count " + parts.Length);
-				result[parts[0]] = parts[1];
+				result[HttpUtility.UrlDecode(parts[0], ShallerConnector.encoding)] = HttpUtility.UrlDecode(parts[1], ShallerConnector.encoding);
 			}
 			return result;
 		}
