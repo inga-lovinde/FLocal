@@ -5,6 +5,7 @@ using System.Text;
 using System.Web;
 using System.Text.RegularExpressions;
 using PJonDevelopment.BBCode;
+using System.IO;
 
 namespace FLocal.Common {
 	public static class UBBParser {
@@ -22,7 +23,7 @@ namespace FLocal.Common {
 					{ ":D", "laugh" },
 					{ ";)", "wink" },
 					{ ":p", "tongue" },
-					{ ":cool:", "cool" },
+					/*{ ":cool:", "cool" },
 					{ ":crazy:", "crazy" },
 					{ ":mad:", "mad" },
 					{ ":shocked:", "shocked" },
@@ -30,10 +31,21 @@ namespace FLocal.Common {
 					{ ":grin:", "grin" },
 					{ ":ooo:", "ooo" },
 					{ ":confused:", "confused" },
-					{ ":lol:", "lol" },
+					{ ":lol:", "lol" },*/
 				};
 
 				private static readonly Dictionary<Regex, MatchEvaluator> SMILEYS_DATA = (from smile in SMILEYS select new KeyValuePair<Regex, MatchEvaluator>(new Regex("(^|\\s|>)" + Regex.Escape(smile.Key) + "($|\\s|<)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => match.Groups[1] + "<img src=\"/static/smileys/" + smile.Value + ".gif\" alt=\"" + smile.Key + "\"/>" + match.Groups[2])).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+
+				private static readonly Regex SMILEYS_MATCHER = new Regex("(^|\\s|>)\\:(\\w+)\\:($|\\s|<)", RegexOptions.Compiled | RegexOptions.Singleline);
+
+				private static string SMILEYS_REPLACE(Match match) {
+					FileInfo smiley = new FileInfo(Config.instance.dataDir + "Static\\smileys\\" + match.Groups[2] + ".gif");
+					if(smiley.Exists && smiley.FullName.StartsWith(Config.instance.dataDir + "Static\\smileys\\")) {
+						return match.Groups[1] + "<img src=\"/static/smileys/" + match.Groups[2] + ".gif\" alt=\"" + match.Groups[2] + "\"/>" + match.Groups[3];
+					} else {
+						return match.Value;
+					}
+				}
 
 				private static readonly Dictionary<Regex, MatchEvaluator> TYPOGRAPHICS = new Dictionary<Regex, MatchEvaluator> {
 					{ new Regex("(\\s+)--?(\\s+)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => match.Groups[1] + "–" + match.Groups[2] },
@@ -59,6 +71,7 @@ namespace FLocal.Common {
 					foreach(var smile in SMILEYS_DATA) {
 						result = smile.Key.Replace(result, smile.Value);
 					}
+					result = SMILEYS_MATCHER.Replace(result, SMILEYS_REPLACE);
 					foreach(var kvp in TYPOGRAPHICS) {
 						result = kvp.Key.Replace(result, kvp.Value);
 					}
