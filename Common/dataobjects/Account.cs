@@ -177,7 +177,7 @@ namespace FLocal.Common.dataobjects {
 
 		public static Account tryAuthorize(string name, string password) {
 			Account account = LoadByName(name);
-			if(account.passwordHash != account.hashPassword(password)) throw new FLocalException("Wrong password (" + account.hashPassword(password) + ")");
+			if(account.passwordHash != account.hashPassword(password)) throw new FLocalException("Wrong password (" + account.id + ":" + account.hashPassword(password) + ")");
 			return account;
 		}
 
