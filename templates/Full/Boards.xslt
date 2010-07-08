@@ -54,7 +54,10 @@
 									<td width="30%" class="small" valign="top">
 										<b>Просмотр новых сообщений</b>
 										<br />
-										<a>Последние 7 дней</a> 
+										<a>
+											<xsl:attribute name="href">/AllPosts/</xsl:attribute>
+											<xsl:text>Последние 7 дней</xsl:text>
+										</a>
 										<br />
 										<a>
 											<xsl:attribute name="href">/User/<xsl:value-of select="session/user/id"/>/Replies/</xsl:attribute>
