@@ -16,6 +16,9 @@ namespace FLocal.Common.dataobjects {
 			private string key;
 			
 			public static SessionKey Parse(string _key) {
+				if(_key == null) {
+					throw new FLocalException("SessionKey is null");
+				}
 				return new SessionKey { key = _key };
 			}
 
