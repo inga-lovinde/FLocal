@@ -236,7 +236,7 @@ namespace FLocal.Common.dataobjects {
 				actualLayer = this.layer;
 			}
 			lock(this.Edit_locker) {
-				ChangeSetUtil.ApplyChanges(
+				List<AbstractChange> changes = new List<AbstractChange> {
 					new InsertChange(
 						Revision.TableSpec.instance,
 						new Dictionary<string, AbstractFieldValue> {
@@ -258,7 +258,19 @@ namespace FLocal.Common.dataobjects {
 						},
 						this.id
 					)
-				);
+				};
+				if(this.thread.firstPost.id == this.id) {
+					changes.Add(
+						new UpdateChange(
+							Thread.TableSpec.instance,
+							new Dictionary<string,AbstractFieldValue> {
+								{ TableSpec.FIELD_TITLE, new ScalarFieldValue(newTitle) },
+							},
+							this.thread.id
+						)
+					);
+				}
+				ChangeSetUtil.ApplyChanges(changes.ToArray());
 			}
 		}
 
