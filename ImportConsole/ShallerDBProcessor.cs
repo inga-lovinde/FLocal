@@ -174,10 +174,32 @@ namespace FLocal.ImportConsole {
 							Console.Write("-");
 						} else if(Config.instance.mainConnection.GetCountByConditions(Post.TableSpec.instance, new ComparisonCondition(Post.TableSpec.instance.getIdSpec(), ComparisonType.EQUAL, postId.ToString())) > 0) {
 							Post post = Post.LoadById(postId);
-							if(post.title.StartsWith("%") || post.body.StartsWith("%")) {
+							if(post.title.StartsWith("%") || post.body.StartsWith("%") || (post.thread.firstPost.id == post.id && post.thread.title.StartsWith("%"))) {
 								string title = data["Subject"];
 								string body = data["Body"];
 								inserts[postId] = () => {
+									List<AbstractChange> changes = new List<AbstractChange> {
+										new UpdateChange(
+											Post.TableSpec.instance,
+											new Dictionary<string, AbstractFieldValue> {
+												{ Post.TableSpec.FIELD_TITLE, new ScalarFieldValue(title) },
+												{ Post.TableSpec.FIELD_BODY, new ScalarFieldValue(body) },
+											},
+											post.id
+										)
+									};
+									if(post.thread.firstPost.id == post.id) {
+										changes.Add(
+											new UpdateChange(
+												Thread.TableSpec.instance,
+												new Dictionary<string, AbstractFieldValue> {
+													{ Thread.TableSpec.FIELD_TITLE, new ScalarFieldValue(title) },
+												},
+												post.thread.id
+											)
+										);
+									}
+
 									ChangeSetUtil.ApplyChanges(
 										new UpdateChange(
 											Post.TableSpec.instance,
