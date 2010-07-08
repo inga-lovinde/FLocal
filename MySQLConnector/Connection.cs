@@ -91,10 +91,17 @@ namespace FLocal.MySQLConnector {
 			if(conditionsCompiled.Key != "") queryConditions = "WHERE " + conditionsCompiled.Key;
 			ParamsHolder paramsHolder = conditionsCompiled.Value;
 
-			string queryJoins = "";
+			StringBuilder queryJoins = new StringBuilder();
 			{
-				if(joins.Length > 0) {
-					throw new NotImplementedException();
+				foreach(var join in joins) {
+					queryJoins.Append(" JOIN ");
+					queryJoins.Append(join.additionalTableRaw.compile(this.traits));
+					queryJoins.Append(" ");
+					queryJoins.Append(join.additionalTable.compile(this.traits));
+					queryJoins.Append(" ON ");
+					queryJoins.Append(join.mainColumn.compile(this.traits));
+					queryJoins.Append(" = ");
+					queryJoins.Append(join.additionalTable.getIdSpec().compile(this.traits));
 				}
 			}
 

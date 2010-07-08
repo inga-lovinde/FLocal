@@ -25,7 +25,11 @@
 									<td width="45%" class="small" valign="top">
 										<xsl:choose>
 											<xsl:when test="session/user">
-												<xsl:text>Вы вошли в форум как </xsl:text><xsl:value-of select="session/user/name"/>
+												<xsl:text>Вы вошли в форум как </xsl:text>
+												<a>
+													<xsl:attribute name="href">/User/<xsl:value-of select="session/user/id"/>/</xsl:attribute>
+													<xsl:value-of select="session/user/name"/>
+												</a>
 											</xsl:when>
 											<xsl:otherwise>
 												<xsl:text>Вы не вошли в форум</xsl:text>
@@ -52,7 +56,10 @@
 										<br />
 										<a>Последние 7 дней</a> 
 										<br />
-										<a>Последние ответы на мои сообщения</a>
+										<a>
+											<xsl:attribute name="href">/User/<xsl:value-of select="session/user/id"/>/Replies/</xsl:attribute>
+											<xsl:text>Последние ответы на мои сообщения</xsl:text>
+										</a>
 										<br />
 										<a>Мои сообщения с оценками</a>
 										<br />

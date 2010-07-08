@@ -8,8 +8,10 @@ namespace FLocal.Core.DB {
 
 		private class TableSpec : ITableSpec {
 			private readonly string _name;
-			public TableSpec(string name) {
+			private readonly string _idName;
+			public TableSpec(ITableSpec raw, string name) {
 				this._name = name;
+				this._idName = raw.idName;
 			}
 			public string name {
 				get {
@@ -18,7 +20,7 @@ namespace FLocal.Core.DB {
 			}
 			public string idName {
 				get {
-					throw new NotImplementedException();
+					return this._idName;
 				}
 			}
 		}
@@ -26,12 +28,12 @@ namespace FLocal.Core.DB {
 		public readonly ColumnSpec mainColumn;
 
 		public readonly ITableSpec additionalTable;
-		public readonly ITableSpec additionalTableJoin;
+		public readonly ITableSpec additionalTableRaw;
 
 		public JoinSpec(ColumnSpec mainColumn, ITableSpec additionalTable, string alias) {
 			this.mainColumn = mainColumn;
-			this.additionalTableJoin = additionalTable;
-			this.additionalTable = new TableSpec(alias);
+			this.additionalTableRaw = additionalTable;
+			this.additionalTable = new TableSpec(additionalTable, alias);
 		}
 
 	}

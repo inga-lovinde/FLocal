@@ -224,5 +224,33 @@ namespace FLocal.Common.dataobjects {
 			);
 		}
 
+		public IEnumerable<Post> getReplies(Diapasone diapasone) {
+			JoinSpec parent = new JoinSpec(
+				Post.TableSpec.instance.getColumnSpec(Post.TableSpec.FIELD_PARENTPOSTID),
+				Post.TableSpec.instance,
+				"parent"
+			);
+			return Post.LoadByIds(
+				from stringId in Config.instance.mainConnection.LoadIdsByConditions(
+					Post.TableSpec.instance,
+					new ComparisonCondition(
+						parent.additionalTable.getColumnSpec(Post.TableSpec.FIELD_POSTERID),
+						ComparisonType.EQUAL,
+						this.id.ToString()
+					),
+					diapasone,
+					new JoinSpec[] {
+						parent
+					},
+					new SortSpec[] {
+						new SortSpec(
+							Post.TableSpec.instance.getIdSpec(),
+							false
+						),
+					}
+				) select int.Parse(stringId)
+			);
+		}
+
 	}
 }

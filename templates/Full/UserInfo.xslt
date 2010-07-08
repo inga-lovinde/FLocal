@@ -205,7 +205,12 @@
 											<a>
 												<xsl:attribute name="href">/User/<xsl:value-of select="user/id"/>/Posts/</xsl:attribute>
 												<img src="/static/images/viewposts.gif" align="top" style="vertical-align: text-bottom" />
-												<xsl:text> Показать все сообщения пользователя</xsl:text>
+												<xsl:text> Сообщения</xsl:text>
+											</a>
+											<xsl:text> | </xsl:text>
+											<a>
+												<xsl:attribute name="href">/User/<xsl:value-of select="user/id"/>/Replies/</xsl:attribute>
+												<xsl:text>Ответы</xsl:text>
 											</a>
 											<xsl:text> | </xsl:text>
 											<a>

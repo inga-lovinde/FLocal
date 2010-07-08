@@ -93,6 +93,8 @@ namespace FLocal.IISHandler {
 					switch(context.requestParts[2].ToLower()) {
 						case "posts":
 							return new handlers.response.UserPostsHandler();
+						case "replies":
+							return new handlers.response.UserRepliesHandler();
 						default:
 							return new handlers.WrongUrlHandler();
 					}
