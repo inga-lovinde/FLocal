@@ -31,7 +31,7 @@ namespace FLocal.IISHandler.handlers.response {
 						DateTime.Now.Subtract(Config.instance.ActivityThreshold).ToUTCString()
 					),
 					pageOuter
-				) select Session.LoadById(Session.SessionKey.Parse(stringId));
+				) select Session.LoadByKey(stringId);
 			return new XElement[] {
 				new XElement("users", 
 					from session in sessions select session.account.user.exportToXmlForViewing(context),
