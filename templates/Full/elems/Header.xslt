@@ -40,7 +40,7 @@
 									<xsl:if test="session/sessionKey">
 										<xsl:attribute name="href">/Conversations/</xsl:attribute>
 										<xsl:if test="session/indicators/unreadPrivateMessages != '0'">
-											<img src="/static/images/newpm.gif">
+											<img src="/static/images/newpm.gif" border="0">
 												<xsl:attribute name="alt">
 													<xsl:text>У вас </xsl:text>
 													<xsl:value-of select="session/indicators/unreadPrivateMessages"/>
