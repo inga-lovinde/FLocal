@@ -233,10 +233,18 @@ namespace FLocal.Common.dataobjects {
 			return Post.LoadByIds(
 				from stringId in Config.instance.mainConnection.LoadIdsByConditions(
 					Post.TableSpec.instance,
-					new ComparisonCondition(
-						parent.additionalTable.getColumnSpec(Post.TableSpec.FIELD_POSTERID),
-						ComparisonType.EQUAL,
-						this.id.ToString()
+					new ComplexCondition(
+						ConditionsJoinType.AND,
+						new ComparisonCondition(
+							parent.additionalTable.getColumnSpec(Post.TableSpec.FIELD_POSTERID),
+							ComparisonType.EQUAL,
+							this.id.ToString()
+						),
+						new ComparisonCondition(
+							Post.TableSpec.instance.getIdSpec(),
+							ComparisonType.GREATEROREQUAL,
+							Thread.FORMALREADMIN.ToString()
+						)
 					),
 					diapasone,
 					new JoinSpec[] {
