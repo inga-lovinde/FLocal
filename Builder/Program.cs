@@ -32,18 +32,35 @@ namespace Builder {
 				string WIXPATH = ConfigurationManager.AppSettings["WiXPath"];
 				string SVNPATH = ConfigurationManager.AppSettings["SVNPath"];
 				
-				if(args.Length != 1) throw new ApplicationException("You should specify project name first");
+				if(args.Length < 1) throw new ApplicationException("You should specify project name first");
 
 				string path = args[0];
 				if(!Directory.Exists(path)) throw new ApplicationException("Directory doesn't exists");
 				string fullPath = new DirectoryInfo(path).FullName;
 				fullPath += Path.DirectorySeparatorChar;
 
+				string target = "release";
+				string targetId = "1";
+				if(args.Length > 1) {
+					switch(args[1].ToLower()) {
+						case "release":
+							target = "release";
+							targetId = "1";
+							break;
+						case "debug":
+							target = "debug";
+							targetId = "2";
+							break;
+						default:
+							throw new ApplicationException("Wrong target");
+					}
+				}
+
 				string sourceFile = fullPath + "product.wxs";
 				if(!File.Exists(sourceFile)) throw new ApplicationException("No wxs file could be found");
 				string targetFile = fullPath + "product.wixobj";
-				string wixPdbFile = fullPath + "product.wixpdb";
-				string outputFile = fullPath + "product.msi";
+				string wixPdbFile = fullPath + "product-" + target + ".wixpdb";
+				string outputFile = fullPath + "product-" + target + ".msi";
 				string prebuildCommands = fullPath + "prebuild.bat";
 				string postbuildCommands = fullPath + "postbuild.bat";
 				string buildNumberFile = fullPath + "build.txt";
@@ -95,7 +112,7 @@ namespace Builder {
 					using(StreamReader sourceReader = new StreamReader(sourceFile)) {
 						wxsData = sourceReader.ReadToEnd();
 					}
-					wxsData = wxsData.Replace("{rev}", revNumber.ToString()).Replace("{build}", buildNumber.ToString());
+					wxsData = wxsData.Replace("{rev}", revNumber.ToString()).Replace("{build}", buildNumber.ToString()).Replace("{target}", target).Replace("{targetId}", targetId);
 
 					using(StreamWriter tempWriter = tempFile.getWriter()) {
 						tempWriter.Write(wxsData);

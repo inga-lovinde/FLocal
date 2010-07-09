@@ -1,12 +1,12 @@
 <?xml version='1.0'?>
 <Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'>
-	<Product Id='*' Name='FLocal IISMainHandler' Language='1033' 
-		Version='1.{rev}.{build}.0' Manufacturer='inga-lovinde' UpgradeCode='3981e346-b07f-45aa-bb8e-263a01dee3f1' >
-		<Package Description='FLocal IISMainHandler' Comments='FLocal IISMainHandler' Manufacturer='inga-lovinde' InstallerVersion='300' Compressed='yes' Platform="x64" />
-		<Upgrade Id="3981e346-b07f-45aa-bb8e-263a01dee3f1">
+	<Product Id='*' Name='FLocal IISMainHandler {target}' Language='1033' 
+		Version='1.{rev}.{build}.0' Manufacturer='inga-lovinde' UpgradeCode='3981e346-b07f-45aa-bb8e-263a01dee3f{targetId}' >
+		<Package Description='FLocal IISMainHandler {target}' Comments='FLocal IISMainHandler {target}' Manufacturer='inga-lovinde' InstallerVersion='300' Compressed='yes' Platform="x64" />
+		<Upgrade Id="3981e346-b07f-45aa-bb8e-263a01dee3f{targetId}">
 			<UpgradeVersion Minimum="1.0.0" IncludeMinimum="yes" Maximum="1.{rev}.{build}" IncludeMaximum="no" Property="OLDERVERSIONBEINGUPGRADED" />
 		</Upgrade>
-		<Upgrade Id="3981e346-b07f-45aa-bb8e-263a01dee3f1">
+		<Upgrade Id="3981e346-b07f-45aa-bb8e-263a01dee3f{targetId}">
 			<UpgradeVersion Minimum="1.{rev}.{build}" IncludeMinimum="no" Property="NEWERVERSIONDETECTED" />
 		</Upgrade>
 		<InstallExecuteSequence>
@@ -15,76 +15,78 @@
 		<Media Id='1' Cabinet='product.cab' EmbedCab='yes' />
 		<Directory Id="TARGETDIR" Name="SourceDir">
 			<Directory Id="ProgramFiles64Folder">
-				<Directory Id="APPLICATIONROOTDIRECTORY" Name="FLocal"/>
-			</Directory>
-			<Directory Id="INETPUBROOTDIRECTORY" Name="inetpub">
-				<Directory Id="INETPUBMAINDIRECTORY" Name="flocal-main">
-					<Directory Id="BINARIESROOTDIRECTORY" Name="Bin"/>
-					<Directory Id="DATAROOTDIRECTORY" Name="data"/>
+				<Directory Id="MANUFACTURERROOTDIRECTORY" Name="FLocal">
+					<Directory Id="APPLICATIONROOTDIRECTORY" Name="main">
+						<Directory Id="APPLICATIONDIRECTORY" Name="{target}">
+							<Directory Id="ARCHIVEDIRECTORY" Name="archive"/>
+							<Directory Id="BINARIESROOTDIRECTORY" Name="Bin"/>
+							<Directory Id="DATAROOTDIRECTORY" Name="data"/>
+						</Directory>
+					</Directory>
 				</Directory>
 			</Directory>
 		</Directory>
 		<DirectoryRef Id="BINARIESROOTDIRECTORY">
-			<Component Id="Core.dll" Guid="B8542489-E367-4AC6-9FCF-EA3454F0D642">
+			<Component Id="Core.dll" Guid="B8542489-E367-4AC6-9FCF-EA3454F0D64{targetId}">
 				<File Id="Core.dll" Source="..\..\Core\bin\Release\Core.dll" KeyPath="yes" Checksum="yes"/>
 			</Component>
-			<Component Id="Core.pdb" Guid="3109981C-0182-48CA-B1CA-8F68F1C0F4B9">
+			<Component Id="Core.pdb" Guid="3109981C-0182-48CA-B1CA-8F68F1C0F4B{targetId}">
 				<File Id="Core.pdb" Source="..\..\Core\bin\Release\Core.pdb" KeyPath="yes" Checksum="yes"/>
 			</Component>
-			<Component Id="Common.dll" Guid="4CD35090-702C-479D-826B-2DE966FB0D45">
+			<Component Id="Common.dll" Guid="4CD35090-702C-479D-826B-2DE966FB0D4{targetId}">
 				<File Id="Common.dll" Source="..\..\Common\bin\Release\Common.dll" KeyPath="yes" Checksum="yes"/>
 			</Component>
-			<Component Id="Common.pdb" Guid="78F773B8-0B28-4657-8E13-739FDB16F3C5">
+			<Component Id="Common.pdb" Guid="78F773B8-0B28-4657-8E13-739FDB16F3C{targetId}">
 				<File Id="Common.pdb" Source="..\..\Common\bin\Release\Common.pdb" KeyPath="yes" Checksum="yes"/>
 			</Component>
-			<Component Id="MySQLConnector.dll" Guid="924EC439-F1F0-431F-A6EA-152C321F614C">
+			<Component Id="MySQLConnector.dll" Guid="924EC439-F1F0-431F-A6EA-152C321F614{targetId}">
 				<File Id="MySQLConnector.dll" Source="..\..\MySQLConnector\bin\Release\MySQLConnector.dll" KeyPath="yes" Checksum="yes"/>
 			</Component>
-			<Component Id="MySQLConnector.pdb" Guid="32AA82C5-1561-4612-A113-C7A099C3ECEF">
+			<Component Id="MySQLConnector.pdb" Guid="32AA82C5-1561-4612-A113-C7A099C3ECE{targetId}">
 				<File Id="MySQLConnector.pdb" Source="..\..\IISMainHandler\bin\Release\MySQLConnector.pdb" KeyPath="yes" Checksum="yes"/>
 			</Component>
-			<Component Id="IISMainHandler.dll" Guid="E3BCF3A1-75C0-4CD7-95D4-4A0245B1CA18">
+			<Component Id="IISMainHandler.dll" Guid="E3BCF3A1-75C0-4CD7-95D4-4A0245B1CA1{targetId}">
 				<File Id="IISMainHandler.dll" Source="..\..\IISMainHandler\bin\Release\IISMainHandler.dll" KeyPath="yes" Checksum="yes"/>
 			</Component>
-			<Component Id="IISMainHandler.pdb" Guid="4F5F1280-8EC8-4C56-80F4-8C810F0C839F">
+			<Component Id="IISMainHandler.pdb" Guid="4F5F1280-8EC8-4C56-80F4-8C810F0C839{targetId}">
 				<File Id="IISMainHandler.pdb" Source="..\..\IISMainHandler\bin\Release\IISMainHandler.pdb" KeyPath="yes" Checksum="yes"/>
 			</Component>
-			<Component Id="Importer.dll" Guid="F25304A3-2705-4E97-B0E9-1DF04C277AD8">
+			<Component Id="Importer.dll" Guid="F25304A3-2705-4E97-B0E9-1DF04C277AD{targetId}">
 				<File Id="Importer.dll" Source="..\..\Importer\bin\Release\Importer.dll" KeyPath="yes" Checksum="yes"/>
 			</Component>
-			<Component Id="Importer.pdb" Guid="6AE31E67-EFC6-471B-BB55-0DF628399D35">
+			<Component Id="Importer.pdb" Guid="6AE31E67-EFC6-471B-BB55-0DF628399D3{targetId}">
 				<File Id="Importer.pdb" Source="..\..\Importer\bin\Release\Importer.pdb" KeyPath="yes" Checksum="yes"/>
 			</Component>
-			<Component Id="ImportConsole.exe" Guid="45962809-9BE4-4792-9759-21C49FCA57F7">
+			<Component Id="ImportConsole.exe" Guid="45962809-9BE4-4792-9759-21C49FCA57F{targetId}">
 				<File Id="ImportConsole.exe" Source="..\..\ImportConsole\bin\Release\ImportConsole.exe" KeyPath="yes" Checksum="yes"/>
 			</Component>
-			<Component Id="ImportConsole.pdb" Guid="6E5DCF23-7247-4DE0-BB6D-1A8463723437">
+			<Component Id="ImportConsole.pdb" Guid="6E5DCF23-7247-4DE0-BB6D-1A846372343{targetId}">
 				<File Id="ImportConsole.pdb" Source="..\..\ImportConsole\bin\Release\ImportConsole.pdb" KeyPath="yes" Checksum="yes"/>
 			</Component>
-			<Component Id="NConsoler.dll" Guid="F39FD087-8961-4871-9D59-FDB83002BC91">
+			<Component Id="NConsoler.dll" Guid="F39FD087-8961-4871-9D59-FDB83002BC9{targetId}">
 				<File Id="NConsoler.dll" Source="..\..\ThirdParty\NConsoler\NConsoler.dll" KeyPath="yes" Checksum="yes"/>
 			</Component>
-			<Component Id="PJonDevelopment.BBCode.dll" Guid="5271E184-FCCB-433C-B789-959B410D6DDA">
+			<Component Id="PJonDevelopment.BBCode.dll" Guid="5271E184-FCCB-433C-B789-959B410D6DD{targetId}">
 				<File Id="PJonDevelopment.BBCode.dll" Source="..\..\ThirdParty\BBCode\bin\Release\PJonDevelopment.BBCode.dll" KeyPath="yes" Checksum="yes"/>
 			</Component>
-			<Component Id="PJonDevelopment.BBCode.pdb" Guid="EFFBA1FA-A3A8-4D20-8894-AFD255B9F005">
+			<Component Id="PJonDevelopment.BBCode.pdb" Guid="EFFBA1FA-A3A8-4D20-8894-AFD255B9F00{targetId}">
 				<File Id="PJonDevelopment.BBCode.pdb" Source="..\..\ThirdParty\BBCode\bin\Release\PJonDevelopment.BBCode.pdb" KeyPath="yes" Checksum="yes"/>
 			</Component>
-			<!--Component Id="MySql.Data.dll" Guid="90646729-6B21-4BEE-94C3-F39F5288EFB3">
+			<!--Component Id="MySql.Data.dll" Guid="90646729-6B21-4BEE-94C3-F39F5288EFB{targetId}">
 				<File Id="MySql.Data.dll" Source="..\..\ThirdParty\mysql-connector-net-6.2.3\MySql.Data\Provider\bin\Release\MySql.Data.dll" KeyPath="yes" Checksum="yes"/>
 			</Component>
-			<Component Id="MySql.Data.pdb" Guid="7105BA2A-A10A-4E41-AA4F-30FA66499BE6">
+			<Component Id="MySql.Data.pdb" Guid="7105BA2A-A10A-4E41-AA4F-30FA66499BE{targetId}">
 				<File Id="MySql.Data.pdb" Source="..\..\ThirdParty\mysql-connector-net-6.2.3\MySql.Data\Provider\bin\Release\MySql.Data.pdb" KeyPath="yes" Checksum="yes"/>
 			</Component-->
 		</DirectoryRef>
-		<DirectoryRef Id="APPLICATIONROOTDIRECTORY">
-			<Component Id="Templates.7z" Guid="B41F4142-A39C-43BE-8D20-F31BFFA9B483">
+		<DirectoryRef Id="ARCHIVEDIRECTORY">
+			<Component Id="Templates.7z" Guid="B41F4142-A39C-43BE-8D20-F31BFFA9B48{targetId}">
 				<File Id="Templates.7z" Source="Templates.7z" KeyPath="yes" Checksum="yes"/>
 			</Component>
-			<Component Id="Static.7z" Guid="C5D6456D-39B0-40E1-8DB1-0950199B15D2">
+			<Component Id="Static.7z" Guid="C5D6456D-39B0-40E1-8DB1-0950199B15D{targetId}">
 				<File Id="Static.7z" Source="Static.7z" KeyPath="yes" Checksum="yes"/>
 			</Component>
-			<Component Id="_7z.exe" Guid="57AD7901-2C9B-4349-ABD8-C8FBA82F2724">
+			<Component Id="_7z.exe" Guid="57AD7901-2C9B-4349-ABD8-C8FBA82F272{targetId}">
 				<File Id="_7z.exe" Name="7z.exe" Source="7z.exe" KeyPath="yes" Checksum="yes"/>
 			</Component>
 		</DirectoryRef>
@@ -137,8 +139,8 @@
 			</Feature>
 		</Feature>
 
-		<CustomAction Id="InstallTemplates" FileKey="_7z.exe" ExeCommand="x &quot;C:\Program Files\FLocal\Templates.7z&quot; -oC:\inetpub\flocal-main\data\templates\ -aoa -y" Execute="deferred" Impersonate="no" Return="check"/>
-		<CustomAction Id="InstallStatic" FileKey="_7z.exe" ExeCommand="x &quot;C:\Program Files\FLocal\Static.7z&quot; -oC:\inetpub\flocal-main\data\Static\ -aoa -y" Execute="deferred" Impersonate="no" Return="check"/>
+		<CustomAction Id="InstallTemplates" FileKey="_7z.exe" ExeCommand="x &quot;C:\Program Files\FLocal\main\{target}\archive\Templates.7z&quot; -o&quot;C:\Program Files\FLocal\main\{target}\data\templates\&quot; -aoa -y" Execute="deferred" Impersonate="no" Return="check"/>
+		<CustomAction Id="InstallStatic" FileKey="_7z.exe" ExeCommand="x &quot;C:\Program Files\FLocal\main\{target}\archive\Static.7z&quot; -o&quot;C:\Program Files\FLocal\main\{target}\data\Static\&quot; -aoa -y" Execute="deferred" Impersonate="no" Return="check"/>
 		<InstallExecuteSequence>
 			<Custom Action="InstallTemplates" Before="InstallFinalize">
 				<![CDATA[NOT REMOVE]]>
