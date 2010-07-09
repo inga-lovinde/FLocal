@@ -244,6 +244,11 @@ namespace FLocal.Common.dataobjects {
 							Post.TableSpec.instance.getIdSpec(),
 							ComparisonType.GREATEROREQUAL,
 							Thread.FORMALREADMIN.ToString()
+						),
+						new ComparisonCondition(
+							Post.TableSpec.instance.getColumnSpec(Post.TableSpec.FIELD_POSTERID),
+							ComparisonType.NOTEQUAL,
+							this.id.ToString()
 						)
 					),
 					diapasone,
