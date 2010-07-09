@@ -92,7 +92,7 @@ namespace FLocal.Common.dataobjects {
 		}
 
 		public void updateLastActivity() {
-			if(DateTime.Now.Subtract(this.lastActivity).Seconds < 30) return; //to partially remove db load
+			if(DateTime.Now.Subtract(this.lastActivity).TotalSeconds < 30) return; //to partially remove db load
 			try {
 				Config.Transactional(transaction => {
 					Config.instance.mainConnection.update(
