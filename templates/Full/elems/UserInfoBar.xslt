@@ -29,7 +29,7 @@
 			<xsl:if test="avatar">
 				<tr>
 					<td class="small">
-						<img alt="" width="80" height="80">
+						<img alt="" class="avatar">
 							<xsl:attribute name="src">/Upload/Item/<xsl:value-of select="avatar"/>/</xsl:attribute>
 						</img>
 					</td>

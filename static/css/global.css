@@ -85,3 +85,9 @@ pre
 .warning {
 	background-color:red;
 }
+.avatar {
+	max-height:80px;
+	height:expression((this.scrollHeight >= 80) ? '80px' : 'auto');
+	max-width:80px;
+	width:expression((this.scrollHeight >= 80) ? '80px' : 'auto');
+}
