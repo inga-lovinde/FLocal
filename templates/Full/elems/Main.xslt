@@ -20,6 +20,11 @@
 			<body>
 				<xsl:call-template name="header"/>
 				<xsl:call-template name="specific"/>
+				<div style="display:none">
+					<form action="" method="POST" id="systemForm">
+						<input type="hidden" name="data"/>
+					</form>
+				</div>
 				<xsl:text disable-output-escaping="yes"><![CDATA[<!--]]></xsl:text>
 				<br />
 				<xsl:text>Data used for authoring this XHTML document:</xsl:text>

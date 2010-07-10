@@ -31,3 +31,24 @@ function assignArrowsHandlers() {
 		}
 	}
 }
+
+function getSelText() {
+//	alert(typeof(window.getSelection));
+//	alert(typeof(document.getSelection));
+//	alert(typeof(document.selection));
+	if(typeof(window.getSelection) == "function") {
+		return window.getSelection();
+	} else if(typeof(document.getSelection) == "function") {
+		return document.getSelection();
+	} else if(typeof(document.selection) == "object") {
+		return document.selection.createRange().text;
+	} else {
+		return "";
+	}
+}
+
+function submitSelText(url) {
+	document.getElementById("systemForm").data.value = getSelText();
+	document.getElementById("systemForm").action = url;
+	document.getElementById("systemForm").submit();
+}

@@ -28,6 +28,7 @@ namespace FLocal.IISHandler.handlers.response {
 				new XElement("layers",
 					from layer in PostLayer.allLayers select layer.exportToXml(context)
 				),
+				new XElement("quoted", context.httprequest.Form["data"]),
 			};
 		}
 	}

@@ -59,6 +59,8 @@
 																	<xsl:if test="$isReplyDisabled='false'">
 																		<xsl:if test="/root/session/sessionKey">
 																			<xsl:attribute name="href">/Post/<xsl:value-of select="id"/>/Reply/</xsl:attribute>
+																			<xsl:attribute name="onClick">submitSelText(this.href);return false;</xsl:attribute>
+																			<xsl:attribute name="onMouseDown">submitSelText(this.href);return false;</xsl:attribute>
 																		</xsl:if>
 																	</xsl:if>
 																	<img src="/static/images/reply.gif" border="0" alt="Ответ на сообщение" width="27" height="14" title="Ответ на сообщение" style="vertical-align: text-bottom" />
@@ -91,6 +93,8 @@
 																<a>
 																	<xsl:if test="/root/session/sessionKey">
 																		<xsl:attribute name="href">/Post/<xsl:value-of select="id"/>/PMReply/</xsl:attribute>
+																		<xsl:attribute name="onClick">submitSelText(this.href);return false;</xsl:attribute>
+																		<xsl:attribute name="onMouseDown">submitSelText(this.href);return false;</xsl:attribute>
 																	</xsl:if>
 																	<img src="/static/images/email2.gif" border="0" alt="Ответить приватом" title="Ответить приватом" />
 																</a>

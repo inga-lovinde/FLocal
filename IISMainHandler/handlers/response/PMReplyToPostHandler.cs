@@ -26,6 +26,7 @@ namespace FLocal.IISHandler.handlers.response {
 				post.thread.exportToXml(context, false),
 				post.exportToXmlWithoutThread(context, false),
 				new XElement("receiver", Account.LoadByUser(post.poster).exportToXml(context)),
+				new XElement("quoted", context.httprequest.Form["data"]),
 			};
 		}
 	}
