@@ -94,14 +94,19 @@
 		<xsl:param name="baseLink"/>
 		<xsl:param name="selected">-1</xsl:param>
 		<xsl:if test="current() != '0'">
-			<xsl:text>|</xsl:text>
+			<xsl:text>&#8201;|&#8201;</xsl:text>
 		</xsl:if>
-		<a class="separate">
-			<xsl:if test="current() != $selected">
-				<xsl:attribute name="href"><xsl:value-of select="$baseLink"/><xsl:value-of select="current()"/></xsl:attribute>
-			</xsl:if>
-			<xsl:value-of select="current()"/>
-		</a>
+		<xsl:choose>
+			<xsl:when test="current() != $selected">
+				<a>
+					<xsl:attribute name="href"><xsl:value-of select="$baseLink"/><xsl:value-of select="current()"/></xsl:attribute>
+					<xsl:value-of select="current()"/>
+				</a>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="current()"/>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:template>
 
 	<xsl:template match="pageOuter" mode="withoutCurrent">
@@ -114,6 +119,7 @@
 
 	<xsl:template match="pageOuter" mode="withCurrent">
 		<xsl:param name="baseLink"/>
+		<xsl:text> </xsl:text>
 		<xsl:apply-templates select="pages/page" mode="withoutCurrent">
 			<xsl:with-param name="baseLink"><xsl:value-of select="$baseLink"/></xsl:with-param>
 			<xsl:with-param name="selected">
@@ -127,16 +133,21 @@
 				</xsl:choose>
 			</xsl:with-param>
 		</xsl:apply-templates>
-		<xsl:text>|</xsl:text>
-		<a class="separate">
-			<xsl:if test="unlimited='false'">
-				<xsl:attribute name="href"><xsl:value-of select="$baseLink"/>all</xsl:attribute>
-			</xsl:if>
-			<xsl:text>все</xsl:text>
-		</a>
+		<xsl:text>&#8201;|&#8201;</xsl:text>
+		<xsl:choose>
+			<xsl:when test="unlimited='false'">
+				<a>
+					<xsl:attribute name="href"><xsl:value-of select="$baseLink"/>all</xsl:attribute>
+					<xsl:text>все</xsl:text>
+				</a>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:text>все</xsl:text>
+			</xsl:otherwise>
+		</xsl:choose>
 		<xsl:if test="next">
-			<xsl:text>|</xsl:text>
-			<a class="separate">
+			<xsl:text>&#8201;|&#8201;</xsl:text>
+			<a>
 				<xsl:attribute name="href"><xsl:value-of select="$baseLink"/><xsl:value-of select="next"/></xsl:attribute>
 				<xsl:text>Следующая страница</xsl:text>
 			</a>
