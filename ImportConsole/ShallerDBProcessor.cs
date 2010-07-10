@@ -173,7 +173,7 @@ namespace FLocal.ImportConsole {
 						if(inserts.ContainsKey(postId)) {
 							Console.Write("-");
 						} else if(Config.instance.mainConnection.GetCountByConditions(Post.TableSpec.instance, new ComparisonCondition(Post.TableSpec.instance.getIdSpec(), ComparisonType.EQUAL, postId.ToString())) > 0) {
-							Post post = Post.LoadById(postId);
+/*							Post post = Post.LoadById(postId);
 							if(post.title.StartsWith("%") || post.title.StartsWith("Re%3A") || post.body.StartsWith("%") || (post.thread.firstPost.id == post.id && post.thread.title.StartsWith("%"))) {
 								string title = data["Subject"];
 								string body = data["Body"];
@@ -205,7 +205,8 @@ namespace FLocal.ImportConsole {
 								Console.Write("+");
 							} else {
 								Console.Write("-");
-							}
+							}*/
+							Console.Write("-");
 						} else {
 							int localMain = int.Parse(data["Local_Main"]);
 							int main = int.Parse(data["Main"]);
