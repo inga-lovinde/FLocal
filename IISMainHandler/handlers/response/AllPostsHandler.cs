@@ -24,7 +24,7 @@ namespace FLocal.IISHandler.handlers.response {
 			PageOuter pageOuter = PageOuter.createFromGet(
 				context.requestParts,
 				context.userSettings.postsPerPage,
-				3
+				1
 			);
 			IEnumerable<Post> posts = from stringId in Config.instance.mainConnection.LoadIdsByConditions(Post.TableSpec.instance, new EmptyCondition(), pageOuter, new JoinSpec[0], new SortSpec[] { new SortSpec(Post.TableSpec.instance.getIdSpec(), false) }) select Post.LoadById(int.Parse(stringId));
 
