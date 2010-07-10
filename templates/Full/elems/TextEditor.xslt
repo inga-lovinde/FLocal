@@ -75,7 +75,7 @@ function insertInBody(str) {
 						<img src="/static/smileys/smirk.gif" border="0" alt="smirk" />
 					</a>
 					<xsl:text> &#160; </xsl:text>
-					<a pseudolink="pseudolink" onClick="insertInBody(' :grin ');">
+					<a pseudolink="pseudolink" onClick="insertInBody(' :grin: ');">
 						<img src="/static/smileys/grin.gif" border="0" alt="grin" />
 					</a>
 					<br/>
