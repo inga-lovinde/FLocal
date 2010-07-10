@@ -32,6 +32,7 @@ namespace FLocal.IISHandler.handlers.request {
 				new XElement("root",
 					this.Do(context),
 					new XElement("title", Config.instance.AppInfo),
+					new XElement("timestamp", DateTime.Now.Ticks.ToString()),
 					context.userSettings.skin.exportToXml(),
 					context.exportSession()
 				)
