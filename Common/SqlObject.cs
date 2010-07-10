@@ -69,6 +69,14 @@ namespace FLocal.Common {
 			}
 		}
 
+		protected void LoadFromHashIfNotLoaded(Dictionary<string, string> data) {
+			lock(this.lockInitializer) {
+				if(this.isLoaded) return;
+				this.fromHash(data);
+				this.isLoaded = true;
+			}
+		}
+
 		protected void LoadIfNotLoaded() {
 			if(!this.isLoaded) {
 				lock(this.lockInitializer) {
@@ -120,7 +128,7 @@ namespace FLocal.Common {
 					int id = int.Parse(row[table.idName]);
 					loadedIds.Add(id);
 					if(!rawRes.ContainsKey(id)) throw new CriticalException("wrong id");
-					rawRes[id].LoadFromHash(row);
+					rawRes[id].LoadFromHashIfNotLoaded(row);
 				}
 			}
 
