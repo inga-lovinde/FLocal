@@ -1,13 +1,13 @@
 <?xml version='1.0'?>
 <Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'>
 	<Product Id='*' Name='FLocal IISUploadHandler' Language='1033' 
-		Version='1.{rev}.{build}.0' Manufacturer='inga-lovinde' UpgradeCode='1311A47C-18A2-47CB-AB1C-85C7FF020D68' >
+		Version='1.255.{build}.0' Manufacturer='inga-lovinde' UpgradeCode='1311A47C-18A2-47CB-AB1C-85C7FF020D68' >
 		<Package Description='FLocal IISUploadHandler' Comments='FLocal IISUploadHandler' Manufacturer='inga-lovinde' InstallerVersion='300' Compressed='yes' Platform="x64" />
 		<Upgrade Id="1311A47C-18A2-47CB-AB1C-85C7FF020D68">
-			<UpgradeVersion Minimum="1.0.0" IncludeMinimum="yes" Maximum="1.{rev}.{build}" IncludeMaximum="no" Property="OLDERVERSIONBEINGUPGRADED" />
+			<UpgradeVersion Minimum="1.0.0" IncludeMinimum="yes" Maximum="1.255.{build}" IncludeMaximum="no" Property="OLDERVERSIONBEINGUPGRADED" />
 		</Upgrade>
 		<Upgrade Id="1311A47C-18A2-47CB-AB1C-85C7FF020D68">
-			<UpgradeVersion Minimum="1.{rev}.{build}" IncludeMinimum="no" Property="NEWERVERSIONDETECTED" />
+			<UpgradeVersion Minimum="1.255.{build}" IncludeMinimum="no" Property="NEWERVERSIONDETECTED" />
 		</Upgrade>
 		<InstallExecuteSequence>
 			<RemoveExistingProducts After="InstallInitialize"/>
