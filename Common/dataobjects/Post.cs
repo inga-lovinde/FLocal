@@ -85,7 +85,7 @@ namespace FLocal.Common.dataobjects {
 								new ComparisonCondition(
 									Revision.TableSpec.instance.getColumnSpec(Revision.TableSpec.FIELD_NUMBER),
 									ComparisonType.EQUAL,
-									this.revision.ToString()
+									this.revision.Value.ToString()
 								)
 							),
 							Diapasone.unlimited
