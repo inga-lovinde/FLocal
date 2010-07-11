@@ -16,13 +16,6 @@
 								<img border="0" src="/static/images/message-normal-read.gif"  alt="" style="vertical-align: text-bottom" />
 							</a>
 							<b class="separate"><xsl:value-of select="filename"/></b>
-							<xsl:if test="parentPost/post">
-								<font class="small separate">
-									<xsl:text>[</xsl:text>
-									<xsl:value-of select="size"/>
-									<xsl:text>]</xsl:text>
-								</font>
-							</xsl:if>
 							<br />
 							<font class="small" style="padding-left:2em"><xsl:apply-templates select="uploadDate/date" mode="dateTime"/></font>
 						</td>
