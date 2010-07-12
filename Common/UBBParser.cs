@@ -94,9 +94,11 @@ namespace FLocal.Common {
 				this.parser.ElementTypes.Add("color", typeof(BBCodes.FontColor), true);
 				this.parser.ElementTypes.Add("size", typeof(BBCodes.FontSize), true);
 				this.parser.ElementTypes.Add("furl", typeof(BBCodes.FUrl), true);
+				this.parser.ElementTypes.Add("google", typeof(BBCodes.Google), true);
 				this.parser.ElementTypes.Add("i", typeof(BBCodes.I), true);
 				this.parser.ElementTypes.Add("image", typeof(BBCodes.Image), true);
 				this.parser.ElementTypes.Add("list", typeof(BBCodes.List), true);
+				this.parser.ElementTypes.Add("lurk", typeof(BBCodes.Lurk), true);
 				this.parser.ElementTypes.Add("*", typeof(BBCodes.ListElem), false);
 				this.parser.ElementTypes.Add("poll", typeof(BBCodes.Poll), true);
 				this.parser.ElementTypes.Add("quote", typeof(BBCodes.Quote), true);this.parser.ElementTypes.Add("q", typeof(BBCodes.Quote), true);
@@ -107,6 +109,8 @@ namespace FLocal.Common {
 				this.parser.ElementTypes.Add("uploadlink", typeof(BBCodes.UploadLink), true);
 				this.parser.ElementTypes.Add("url", typeof(BBCodes.Url), true);
 				this.parser.ElementTypes.Add("user", typeof(BBCodes.User), false);
+				this.parser.ElementTypes.Add("wiki", typeof(BBCodes.Wiki), true);
+				this.parser.ElementTypes.Add("ruwiki", typeof(BBCodes.RuWiki), true);
 				this.formatter = TextFormatter.instance;
 			}
 

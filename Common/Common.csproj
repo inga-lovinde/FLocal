@@ -61,14 +61,17 @@
     <Compile Include="BBCodes\Font.cs" />
     <Compile Include="BBCodes\FontColor.cs" />
     <Compile Include="BBCodes\FontSize.cs" />
+    <Compile Include="BBCodes\Google.cs" />
     <Compile Include="BBCodes\helpers\BBCode.cs" />
     <Compile Include="BBCodes\Code.cs" />
     <Compile Include="BBCodes\FUrl.cs" />
     <Compile Include="BBCodes\Image.cs" />
     <Compile Include="BBCodes\List.cs" />
     <Compile Include="BBCodes\ListElem.cs" />
+    <Compile Include="BBCodes\Lurk.cs" />
     <Compile Include="BBCodes\Poll.cs" />
     <Compile Include="BBCodes\Quote.cs" />
+    <Compile Include="BBCodes\RuWiki.cs" />
     <Compile Include="BBCodes\S.cs" />
     <Compile Include="BBCodes\Spoiler.cs" />
     <Compile Include="BBCodes\U.cs" />
@@ -77,6 +80,7 @@
     <Compile Include="BBCodes\Url.cs" />
     <Compile Include="BBCodes\helpers\UrlProcessor.cs" />
     <Compile Include="BBCodes\User.cs" />
+    <Compile Include="BBCodes\Wiki.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="dataobjects\Account.cs" />
     <Compile Include="dataobjects\AccountIndicator.cs" />
