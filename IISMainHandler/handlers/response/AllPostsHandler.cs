@@ -26,7 +26,25 @@ namespace FLocal.IISHandler.handlers.response {
 				context.userSettings.postsPerPage,
 				1
 			);
-			IEnumerable<Post> posts = from stringId in Config.instance.mainConnection.LoadIdsByConditions(Post.TableSpec.instance, new EmptyCondition(), pageOuter, new JoinSpec[0], new SortSpec[] { new SortSpec(Post.TableSpec.instance.getIdSpec(), false) }) select Post.LoadById(int.Parse(stringId));
+			IEnumerable<Post> posts =
+				from stringId
+				in Config.instance.mainConnection.LoadIdsByConditions(
+					Post.TableSpec.instance,
+					new ComparisonCondition(
+						Post.TableSpec.instance.getIdSpec(),
+						ComparisonType.GREATEROREQUAL,
+						Thread.FORMALREADMIN.ToString()
+					),
+					pageOuter,
+					new JoinSpec[0],
+					new SortSpec[] {
+						new SortSpec(
+							Post.TableSpec.instance.getIdSpec(),
+							false
+						)
+					}
+				)
+				select Post.LoadById(int.Parse(stringId));
 
 			XElement[] result = new XElement[] {
 				new XElement("posts",
