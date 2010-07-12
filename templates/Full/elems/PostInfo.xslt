@@ -132,7 +132,7 @@
 													<xsl:value-of select="revision"/>
 													<xsl:text> раз, последний раз </xsl:text>
 													<xsl:apply-templates select="lastChangeDate/date" mode="dateTime"/>
-													<br />
+													<br/>
 													<br/>
 												</font>
 											</td>

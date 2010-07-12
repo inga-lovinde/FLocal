@@ -78,6 +78,7 @@
 											<xsl:text>Для вставки ссылки в форум используйте тэг [poll]</xsl:text>
 											<xsl:value-of select="id"/>
 											<xsl:text>[/poll]</xsl:text>
+											<br/>
 										</font>
 									</td>
 								</tr>

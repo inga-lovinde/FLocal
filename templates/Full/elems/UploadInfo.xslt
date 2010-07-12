@@ -39,6 +39,7 @@
 											<xsl:text>Для вставки изображения в форум используйте тэг [uploadImage]</xsl:text>
 											<xsl:value-of select="id"/>
 											<xsl:text>[/uploadImage]</xsl:text>
+											<br/>
 										</font>
 									</td>
 								</tr>
