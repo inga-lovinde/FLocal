@@ -13,8 +13,11 @@ namespace FLocal.Common.BBCodes {
 
 		public override string Format(ITextFormatter formatter) {
 			string rawUrl = this.DefaultOrValue;
-			Uri uri = new Uri(rawUrl);
-			return "<a href=\"" + uri.ToString() + "\">" + this.GetInnerHTML(formatter) + "</a>";
+			string title = null;
+			if(rawUrl.ToLower() != this.InnerText.ToLower()) {
+				title = this.GetInnerHTML(formatter);
+			}
+			return UrlProcessor.ProcessLink(rawUrl, title, false);
 		}
 
 	}

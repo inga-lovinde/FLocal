@@ -48,6 +48,11 @@ namespace FLocal.Common {
 					}
 				}
 
+				private static readonly Regex LINKS_MATCHER = new Regex("https?://[^\\s\\[<]+", RegexOptions.Singleline | RegexOptions.Compiled);
+				private static string LINKS_REPLACE(Match match) {
+					return BBCodes.UrlProcessor.ProcessLink(match.Value, null, true);
+				}
+
 				private static readonly Dictionary<Regex, MatchEvaluator> TYPOGRAPHICS = new Dictionary<Regex, MatchEvaluator> {
 					{ new Regex("(\\s+)--?(\\s+)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => match.Groups[1] + "–" + match.Groups[2] },
 					{ new Regex("(\\s+)---(\\s+)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => match.Groups[1] + "—" + match.Groups[2] },
@@ -69,6 +74,7 @@ namespace FLocal.Common {
 
 				public string Format(string source) {
 					string result = this.inner.Format(source).Replace("&nbsp;", " ");
+					result = LINKS_MATCHER.Replace(result, LINKS_REPLACE);
 					foreach(var smile in SMILEYS_DATA) {
 						result = smile.Key.Replace(result, smile.Value);
 					}

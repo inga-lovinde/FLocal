@@ -53,5 +53,20 @@ namespace FLocal.Common.BBCodes {
 			}
 		}
 
+		public static string ProcessLink(string link, string title, bool shortenRelative) {
+			if(title == null) {
+				title = link;
+			}
+			string url;
+			if(shortenRelative) {
+				var urlInfo = UrlProcessor.Process(link);
+				url = urlInfo.relativeUrl;
+			} else {
+				var urlInfo = new Uri(link);
+				url = urlInfo.ToString();
+			}
+			return "<a href=\"" + url + "\">" + title + "</a>";
+		}
+
 	}
 }
