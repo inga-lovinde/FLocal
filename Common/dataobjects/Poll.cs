@@ -44,7 +44,7 @@ namespace FLocal.Common.dataobjects {
 				public static readonly TableSpec instance = new TableSpec();
 				public string name { get { return TABLE; }}
 				public string idName { get { return FIELD_ID; }}
-				public void refreshSqlObject(int id) { }
+				public void refreshSqlObject(int id) { Refresh(id); }
 			}
 
 			protected override ISqlObjectTableSpec table { get { return TableSpec.instance; } }
