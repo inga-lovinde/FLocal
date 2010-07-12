@@ -34,9 +34,11 @@
 									</textarea>
 									<br/>
 									<br/>
-									<input type="checkbox" name="isDetailed" value="isDetailed"/><label for="isDetailed"> Показывать имена проголосовавших</label>
+									<input type="checkbox" name="isDetailed" value="isDetailed" id="isDetailed"/>
+									<label for="isDetailed"> Показывать имена проголосовавших</label>
 									<br/>
-									<input type="checkbox" name="isMultiOption" value="isMultiOption"/><label for="isMultiOption"> Разрешить выбор нескольких вариантов</label>
+									<input type="checkbox" name="isMultiOption" value="isMultiOption" id="isMultiOption"/>
+									<label for="isMultiOption"> Разрешить выбор нескольких вариантов</label>
 									<br/>
 									<br/>
 									<xsl:text>Вариант 1: </xsl:text>

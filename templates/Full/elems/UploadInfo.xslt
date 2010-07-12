@@ -40,6 +40,7 @@
 											<xsl:value-of select="id"/>
 											<xsl:text>[/uploadImage]</xsl:text>
 											<br/>
+											<br/>
 										</font>
 									</td>
 								</tr>

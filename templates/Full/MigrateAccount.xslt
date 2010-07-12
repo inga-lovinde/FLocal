@@ -33,17 +33,17 @@
 									<xsl:text>Повторите пароль</xsl:text><br/> 
 									<input type="password" name="password2" class="formboxes" /><br/>
 									<br/>
-									<input type="checkbox" name="constitution" value="constitution"/>
+									<input type="checkbox" name="constitution" value="constitution" id="constitution"/>
 									<label for="constitution"> Да, я согласен/согласна/согласно с тем, что на этом форуме действует </label>
 									<a href="/q/constitution/" style="text-decoration:underline">описанная по этой ссылке конституция</a>
 									<xsl:text>.</xsl:text>
 									<i> (обязательно)</i>
 									<br/>
-									<input type="checkbox" name="showPostsToAll" value="showPostsToAll"/>
+									<input type="checkbox" name="showPostsToAll" value="showPostsToAll" id="showPostsToAll"/>
 									<label for="showPostsToAll"> Да, я согласен/согласна/согласно с тем, чтобы мои сообщения, размещённые на этом форуме или на форум.локале (форумбгз.ру), были доступны публично.</label>
 									<i> (обязательно)</i>
 									<br/>
-									<input type="checkbox" name="law" value="law"/>
+									<input type="checkbox" name="law" value="law" id="law"/>
 									<label for="law"> Да, я обязуюсь соблюдать законы Российской Федерации и Федеративной Республики Германия в общении на этом форуме.</label>
 									<i> (обязательно)</i>
 									<br/>

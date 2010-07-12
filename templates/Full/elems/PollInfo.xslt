@@ -79,6 +79,7 @@
 											<xsl:value-of select="id"/>
 											<xsl:text>[/poll]</xsl:text>
 											<br/>
+											<br/>
 										</font>
 									</td>
 								</tr>
@@ -107,6 +108,7 @@
 				<input name="option">
 					<xsl:attribute name="type"><xsl:value-of select="$inputType"/></xsl:attribute>
 					<xsl:attribute name="value"><xsl:value-of select="id"/></xsl:attribute>
+					<xsl:attribute name="id">option_<xsl:value-of select="id"/></xsl:attribute>
 					<xsl:if test="isSelected='true'">
 						<xsl:attribute name="checked">checked</xsl:attribute>
 					</xsl:if>
@@ -115,6 +117,7 @@
 					</xsl:if>
 				</input>
 				<label for="option">
+					<xsl:attribute name="for">option_<xsl:value-of select="id"/></xsl:attribute>
 					<xsl:text> </xsl:text>
 					<xsl:value-of select="name" disable-output-escaping="yes"/>
 				</label>
