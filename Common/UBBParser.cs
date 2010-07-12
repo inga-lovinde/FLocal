@@ -6,6 +6,7 @@ using System.Web;
 using System.Text.RegularExpressions;
 using PJonDevelopment.BBCode;
 using System.IO;
+using FLocal.Core;
 
 namespace FLocal.Common {
 	public static class UBBParser {
@@ -97,6 +98,7 @@ namespace FLocal.Common {
 				this.parser.ElementTypes.Add("image", typeof(BBCodes.Image), true);
 				this.parser.ElementTypes.Add("list", typeof(BBCodes.List), true);
 				this.parser.ElementTypes.Add("*", typeof(BBCodes.ListElem), false);
+				this.parser.ElementTypes.Add("poll", typeof(BBCodes.Poll), true);
 				this.parser.ElementTypes.Add("quote", typeof(BBCodes.Quote), true);this.parser.ElementTypes.Add("q", typeof(BBCodes.Quote), true);
 				this.parser.ElementTypes.Add("s", typeof(BBCodes.S), true);
 				this.parser.ElementTypes.Add("spoiler", typeof(BBCodes.Spoiler), true);this.parser.ElementTypes.Add("cut", typeof(BBCodes.Spoiler), true);
@@ -109,7 +111,9 @@ namespace FLocal.Common {
 			}
 
 			public string Parse(string input) {
-				return this.parser.Parse(input).Format(this.formatter);
+				string result = this.parser.Parse(input).Format(this.formatter);
+				if(result.EndsWith("<br/>")) result = result.Substring(0, result.Length - 5);
+				return result;
 			}
 
 		}

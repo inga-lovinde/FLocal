@@ -124,6 +124,7 @@ function insertInBody(str) {
 							</td>
 						</tr>
 						<tr>
+							<!--
 							<td class="darktable">
 								<a pseudolink="pseudolink" onclick="alert('Not implemented');return;DoPrompt('pollstart');">Начало<br/>голосования</a>
 							</td>
@@ -132,6 +133,10 @@ function insertInBody(str) {
 							</td>
 							<td class="darktable">
 								<a pseudolink="pseudolink" onclick="alert('Not implemented');return;DoPrompt('pollstop');">Конец<br/>голосования</a>
+							</td>
+							-->
+							<td class="darktable" colspan="3" align="center">
+								<a href="/Poll/Create/">Создать опрос</a>
 							</td>
 						</tr>
 						<tr>

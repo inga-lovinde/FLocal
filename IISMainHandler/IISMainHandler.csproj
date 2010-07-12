@@ -60,6 +60,7 @@
     <Compile Include="handlers\PostHandler.cs" />
     <Compile Include="handlers\request\AbstractNewMessageHandler.cs" />
     <Compile Include="handlers\request\AbstractPostHandler.cs" />
+    <Compile Include="handlers\request\CreatePollHandler.cs" />
     <Compile Include="handlers\request\CreateThreadHandler.cs" />
     <Compile Include="handlers\request\EditHandler.cs" />
     <Compile Include="handlers\request\LoginHandler.cs" />
@@ -71,11 +72,13 @@
     <Compile Include="handlers\request\SendPMHandler.cs" />
     <Compile Include="handlers\request\SettingsHandler.cs" />
     <Compile Include="handlers\request\UploadHandler.cs" />
+    <Compile Include="handlers\request\VoteHandler.cs" />
     <Compile Include="handlers\response\ActiveAccountListHandler.cs" />
     <Compile Include="handlers\response\AllPostsHandler.cs" />
     <Compile Include="handlers\response\BoardAsThread.cs" />
     <Compile Include="handlers\response\ConversationHandler.cs" />
     <Compile Include="handlers\response\ConversationsHandler.cs" />
+    <Compile Include="handlers\response\CreatePollHandler.cs" />
     <Compile Include="handlers\response\CreateThreadHandler.cs" />
     <Compile Include="handlers\response\EditHandler.cs" />
     <Compile Include="handlers\response\LegacyPHPHandler.cs" />
@@ -85,6 +88,7 @@
     <Compile Include="handlers\response\PMReplyHandler.cs" />
     <Compile Include="handlers\response\PMReplyToPostHandler.cs" />
     <Compile Include="handlers\response\PMSendHandler.cs" />
+    <Compile Include="handlers\response\PollHandler.cs" />
     <Compile Include="handlers\response\QuickLinkHandler.cs" />
     <Compile Include="handlers\response\RedirectGetHandler.cs" />
     <Compile Include="handlers\response\ReplyHandler.cs" />

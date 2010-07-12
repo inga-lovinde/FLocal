@@ -124,6 +124,16 @@ namespace FLocal.IISHandler {
 						default:
 							return new handlers.WrongUrlHandler();
 					}
+				case "poll":
+					if(context.requestParts.Length < 2) {
+						return new handlers.WrongUrlHandler();
+					}
+					switch(context.requestParts[1].ToLower()) {
+						case "create":
+							return new handlers.response.CreatePollHandler();
+						default:
+							return new handlers.response.PollHandler();
+					}
 				case "static":
 					return new handlers.StaticHandler(context.requestParts);
 				case "do":
@@ -151,6 +161,10 @@ namespace FLocal.IISHandler {
 								return new handlers.request.MarkThreadAsReadHandler();
 							case "upload":
 								return new handlers.request.UploadHandler();
+							case "newpoll":
+								return new handlers.request.CreatePollHandler();
+							case "vote":
+								return new handlers.request.VoteHandler();
 							default:
 								return new handlers.WrongUrlHandler();
 						}

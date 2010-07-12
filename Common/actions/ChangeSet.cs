@@ -31,6 +31,8 @@ namespace FLocal.Common.actions {
 						dataobjects.PMMessage.TableSpec.TABLE,
 						dataobjects.Thread.ReadMarkerTableSpec.TABLE,
 						dataobjects.Board.ReadMarkerTableSpec.TABLE,
+						dataobjects.Poll.TableSpec.TABLE,
+						dataobjects.Poll.Vote.TableSpec.TABLE,
 						dataobjects.Session.TableSpec.TABLE,
 					}
 				);

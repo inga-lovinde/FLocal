@@ -67,6 +67,7 @@
     <Compile Include="BBCodes\Image.cs" />
     <Compile Include="BBCodes\List.cs" />
     <Compile Include="BBCodes\ListElem.cs" />
+    <Compile Include="BBCodes\Poll.cs" />
     <Compile Include="BBCodes\Quote.cs" />
     <Compile Include="BBCodes\S.cs" />
     <Compile Include="BBCodes\Spoiler.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="dataobjects\AnonymousUserSettings.cs" />
     <Compile Include="dataobjects\PMConversation.cs" />
     <Compile Include="dataobjects\PMMessage.cs" />
+    <Compile Include="dataobjects\Poll.cs" />
     <Compile Include="dataobjects\Post.cs" />
     <Compile Include="dataobjects\PostLayer.cs" />
     <Compile Include="dataobjects\QuickLink.cs" />
