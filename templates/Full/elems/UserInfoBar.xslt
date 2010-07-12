@@ -5,10 +5,7 @@
 		<table border="0" cellpadding="0" cellspacing="0">
 			<tr>
 				<td>
-					<a>
-						<xsl:attribute name="href">/User/<xsl:value-of select="id"/>/</xsl:attribute>
-						<xsl:value-of select="name"/>
-					</a>
+					<xsl:apply-templates select="current()" mode="userLink"/>
 				</td>
 			</tr>
 			<tr>

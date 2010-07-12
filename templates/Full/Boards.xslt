@@ -26,10 +26,7 @@
 										<xsl:choose>
 											<xsl:when test="session/user">
 												<xsl:text>Вы вошли в форум как </xsl:text>
-												<a>
-													<xsl:attribute name="href">/User/<xsl:value-of select="session/user/id"/>/</xsl:attribute>
-													<xsl:value-of select="session/user/name"/>
-												</a>
+												<xsl:apply-templates select="session/user" mode="userLink"/>
 											</xsl:when>
 											<xsl:otherwise>
 												<xsl:text>Вы не вошли в форум</xsl:text>

@@ -53,13 +53,7 @@
 				</xsl:if>
 			</td>
 			<td align="left" nowrap="nowrap">
-				<a>
-					<xsl:attribute name="href">/User/<xsl:value-of select="topicstarter/user/id"/>/</xsl:attribute>
-					<font>
-						<xsl:attribute name="color">#0000ff</xsl:attribute>
-						<xsl:value-of select="topicstarter/user/name"/>
-					</font>
-				</a>
+				<xsl:apply-templates select="topicstarter/user" mode="userLink"/>
 			</td>
 			<td align="center">
 				<xsl:value-of select="totalViews"/>

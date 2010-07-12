@@ -89,10 +89,7 @@
 				</xsl:otherwise>
 			</xsl:choose>
 			<td>
-				<a>
-					<xsl:attribute name="href">/User/<xsl:value-of select="id"/>/</xsl:attribute>
-					<xsl:value-of select="name"/>
-				</a>
+				<xsl:apply-templates select="current()" mode="userLink"/>
 			</td>
 			<td>
 				<xsl:text>Пользователь</xsl:text>

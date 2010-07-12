@@ -22,10 +22,7 @@
 													<xsl:text>Пользователи</xsl:text>
 												</a>
 												<xsl:text> &gt;&gt; </xsl:text>
-												<a>
-													<xsl:attribute name="href">/User/<xsl:value-of select="user/id"/></xsl:attribute>
-													<xsl:value-of select="user/name"/>
-												</a>
+												<xsl:apply-templates select="user" mode="userLink"/>
 												<xsl:text> &gt;&gt; </xsl:text>
 												<xsl:text>Посты</xsl:text>
 											</font>
