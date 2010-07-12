@@ -75,7 +75,7 @@
 						<xsl:apply-templates select="conversations/conversation"/>
 						<!-- END OF LOOP -->
 						<tr class="tdheader">
-							<td colspan="2">
+							<td colspan="3">
 								<font class="onbody">
 									<xsl:text>страницы:</xsl:text>
 									<xsl:apply-templates select="conversations/pageOuter" mode="withCurrent">
