@@ -155,7 +155,11 @@
 	</xsl:template>
 
 	<xsl:template match="user" mode="userLink">
-		<a class="separate">
+		<a>
+			<xsl:attribute name="class">
+				<xsl:text>separate </xsl:text>
+				<xsl:text>UG_</xsl:text><xsl:value-of select="group/name"/>
+			</xsl:attribute>
 			<xsl:attribute name="href">/User/<xsl:value-of select="id"/>/</xsl:attribute>
 			<xsl:value-of select="name"/>
 		</a>

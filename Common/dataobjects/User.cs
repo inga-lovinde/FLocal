@@ -91,6 +91,11 @@ namespace FLocal.Common.dataobjects {
 				return this._userGroupId;
 			}
 		}
+		public UserGroup userGroup {
+			get {
+				return UserGroup.LoadById(this.userGroupId);
+			}
+		}
 
 		private string _showPostsToUsers;
 		public string showPostsToUsers {
@@ -170,7 +175,7 @@ namespace FLocal.Common.dataobjects {
 				new XElement("title", this.title),
 				new XElement("location", this.location),
 				new XElement("name", this.name),
-				new XElement("userGroupId", this.userGroupId),
+				this.userGroup.exportToXml(context),
 				new XElement("showPostsToUsers", this.showPostsToUsers)
 			);
 			if(this.avatarId.HasValue) {

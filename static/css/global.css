@@ -91,3 +91,8 @@ pre
 	max-width:80px;
 	width:expression((this.scrollHeight >= 80) ? '80px' : 'auto');
 }
+.UG_Blondes {
+	color:red !important;
+	background-color:yellow !important;
+	font-weight: bold !important;
+}
