@@ -26,7 +26,7 @@ namespace FLocal.IISHandler.handlers.response {
 				context.userSettings.postsPerPage,
 				1
 			);
-			IEnumerable<Post> posts =
+			IEnumerable<Post> posts = Post.LoadByIds(
 				from stringId
 				in Config.instance.mainConnection.LoadIdsByConditions(
 					Post.TableSpec.instance,
@@ -44,7 +44,8 @@ namespace FLocal.IISHandler.handlers.response {
 						)
 					}
 				)
-				select Post.LoadById(int.Parse(stringId));
+				select int.Parse(stringId)
+			);
 
 			XElement[] result = new XElement[] {
 				new XElement("posts",
