@@ -19,7 +19,16 @@ namespace FLocal.IISHandler.handlers.response {
 		}
 
 		override protected XElement[] getSpecificData(WebContext context) {
+			
 			Post post = Post.LoadById(int.Parse(context.requestParts[1]));
+
+			string quoted = context.httprequest.Form["data"];
+			if(quoted != null) quoted = quoted.Trim();
+			if(quoted == null || quoted == "") {
+				if(post.revision.HasValue) {
+					quoted = post.latestRevision.body.Trim();
+				}
+			}
 
 			return new XElement[] {
 				post.thread.board.exportToXml(context, false),
@@ -28,7 +37,7 @@ namespace FLocal.IISHandler.handlers.response {
 				new XElement("layers",
 					from layer in PostLayer.allLayers select layer.exportToXml(context)
 				),
-				new XElement("quoted", context.httprequest.Form["data"]),
+				new XElement("quoted", quoted),
 			};
 		}
 	}
