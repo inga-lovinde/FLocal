@@ -1,0 +1,45 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Xml.Linq;
+using FLocal.Core;
+using FLocal.Core.DB;
+using FLocal.Core.DB.conditions;
+
+namespace FLocal.Common.dataobjects {
+	public class UserGroup : SqlObject<UserGroup> {
+
+		public class TableSpec : ISqlObjectTableSpec {
+			public const string TABLE = "UserGroups";
+			public const string FIELD_ID = "Id";
+			public const string FIELD_NAME = "Name";
+			public static readonly TableSpec instance = new TableSpec();
+			public string name { get { return TABLE; } }
+			public string idName { get { return FIELD_ID; } }
+			public void refreshSqlObject(int id) { Refresh(id); }
+		}
+
+		protected override ISqlObjectTableSpec table { get { return TableSpec.instance; } }
+
+		private string _name;
+		public string name {
+			get {
+				this.LoadIfNotLoaded();
+				return this._name;
+			}
+		}
+
+		protected override void doFromHash(Dictionary<string, string> data) {
+			this._name = data[TableSpec.FIELD_NAME];
+		}
+
+		public XElement exportToXml(UserContext context) {
+			return new XElement("group",
+				new XElement("id", this.id),
+				new XElement("name", this.name)
+			);
+		}
+
+	}
+}
