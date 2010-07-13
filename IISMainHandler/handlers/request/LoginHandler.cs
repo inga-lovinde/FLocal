@@ -29,6 +29,15 @@ namespace FLocal.IISHandler.handlers.request {
 		}
 
 		protected override XElement[] Do(WebContext context) {
+			
+			try {
+				Account tmpAccount = Account.LoadByName(context.httprequest.Form["name"]);
+				if(tmpAccount.needsMigration) {
+					throw new RedirectException("/MigrateAccount/" + context.httprequest.Form["name"]);
+				}
+			} catch(NotFoundInDBException) {
+			}
+
 			Account account = Account.tryAuthorize(context.httprequest.Form["name"], context.httprequest.Form["password"]);
 			Session session = Session.create(account);
 

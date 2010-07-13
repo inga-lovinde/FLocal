@@ -18,7 +18,7 @@ namespace FLocal.IISHandler.handlers.response {
 
 		protected override System.Xml.Linq.XElement[] getSpecificData(WebContext context) {
 			string username;
-			if(context.httprequest.Form["username"] != "") {
+			if(context.httprequest.Form["username"] != null && context.httprequest.Form["username"] != "") {
 				username = context.httprequest.Form["username"];
 			} else {
 				if(context.requestParts.Length != 2) {
