@@ -27,6 +27,12 @@ namespace FLocal.IISHandler {
 			}
 			#endregion
 
+			#region robots
+			if(context.httprequest.Path.ToLower().StartsWith("/robots.txt")) {
+				return new handlers.response.RobotsHandler();
+			}
+			#endregion
+
 			switch(context.requestParts[0].ToLower()) {
 				case "q":
 					return new handlers.response.QuickLinkHandler();
@@ -97,6 +103,8 @@ namespace FLocal.IISHandler {
 							return new handlers.response.UserPostsHandler();
 						case "replies":
 							return new handlers.response.UserRepliesHandler();
+						case "pollsparticipated":
+							return new handlers.response.UserPollsParticipatedHandler();
 						default:
 							return new handlers.WrongUrlHandler();
 					}

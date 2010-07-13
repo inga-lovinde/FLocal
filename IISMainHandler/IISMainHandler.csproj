@@ -97,6 +97,7 @@
     <Compile Include="handlers\response\UploadListHandler.cs" />
     <Compile Include="handlers\response\UploadNewHandler.cs" />
     <Compile Include="handlers\response\UserInfoHandler.cs" />
+    <Compile Include="handlers\response\UserPollsParticipatedHandler.cs" />
     <Compile Include="handlers\response\UserPostsHandler.cs" />
     <Compile Include="handlers\response\UserRepliesHandler.cs" />
     <Compile Include="handlers\response\WhoIsOnlineHandler.cs" />
