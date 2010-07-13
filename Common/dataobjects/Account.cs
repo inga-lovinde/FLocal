@@ -74,22 +74,12 @@ namespace FLocal.Common.dataobjects {
 			if(!name2id.ContainsKey(name)) {
 				lock(name2id) {
 					if(!name2id.ContainsKey(name)) {
-						List<string> ids = Config.instance.mainConnection.LoadIdsByConditions(
-							TableSpec.instance,
-							new ComparisonCondition(
+						name2id[name] = int.Parse(
+							Config.instance.mainConnection.LoadIdByField(
 								TableSpec.instance.getColumnSpec(TableSpec.FIELD_NAME),
-								ComparisonType.EQUAL,
 								name
-							),
-							Diapasone.unlimited
+							)
 						);
-						if(ids.Count > 1) {
-							throw new CriticalException("not unique");
-						} else if(ids.Count == 1) {
-							name2id[name] = int.Parse(ids[0]);
-						} else {
-							throw new NotFoundInDBException();
-						}
 					}
 				}
 			}
@@ -101,22 +91,12 @@ namespace FLocal.Common.dataobjects {
 			if(!userid2id.ContainsKey(user.id)) {
 				lock(userid2id) {
 					if(!userid2id.ContainsKey(user.id)) {
-						List<string> ids = Config.instance.mainConnection.LoadIdsByConditions(
-							TableSpec.instance,
-							new ComparisonCondition(
+						userid2id[user.id] = int.Parse(
+							Config.instance.mainConnection.LoadIdByField(
 								TableSpec.instance.getColumnSpec(TableSpec.FIELD_USERID),
-								ComparisonType.EQUAL,
 								user.id.ToString()
-							),
-							Diapasone.unlimited
+							)
 						);
-						if(ids.Count > 1) {
-							throw new CriticalException("not unique");
-						} else if(ids.Count == 1) {
-							userid2id[user.id] = int.Parse(ids[0]);
-						} else {
-							throw new NotFoundInDBException();
-						}
 					}
 				}
 			}

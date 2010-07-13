@@ -45,22 +45,12 @@ namespace FLocal.Common.dataobjects {
 			if(!name2id.ContainsKey(name)) {
 				lock(name2id) {
 					if(!name2id.ContainsKey(name)) {
-						List<string> ids = Config.instance.mainConnection.LoadIdsByConditions(
-							TableSpec.instance,
-							new ComparisonCondition(
+						name2id[name] = int.Parse(
+							Config.instance.mainConnection.LoadIdByField(
 								TableSpec.instance.getColumnSpec(TableSpec.FIELD_NAME),
-								ComparisonType.EQUAL,
 								name
-							),
-							Diapasone.unlimited
+							)
 						);
-						if(ids.Count > 1) {
-							throw new CriticalException("not unique");
-						} else if(ids.Count == 1) {
-							name2id[name] = int.Parse(ids[0]);
-						} else {
-							throw new NotFoundInDBException();
-						}
 					}
 				}
 			}

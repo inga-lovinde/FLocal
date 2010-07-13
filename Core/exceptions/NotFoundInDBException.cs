@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using FLocal.Core.DB;
 
 namespace FLocal.Core {
 
@@ -9,7 +10,9 @@ namespace FLocal.Core {
 
         public NotFoundInDBException() : base("Object not found in DB") { }
 
-		public NotFoundInDBException(DB.ITableSpec tableSpec, string id) : base("Object " + tableSpec.name + "[" + tableSpec.idName + "=" + id + "] not found in db") {}
+		public NotFoundInDBException(ColumnSpec columnSpec, string value) : base("Object " + columnSpec.table.name + "[" + columnSpec.name + "=" + value + "] not found in db") {}
+
+		public NotFoundInDBException(ITableSpec tableSpec, string id) : this(tableSpec.getIdSpec(), id) {}
 
     }
 

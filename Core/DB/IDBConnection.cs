@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using FLocal.Core.DB.conditions;
 
 namespace FLocal.Core.DB {
 	public interface IDBConnection : IDisposable {
 
 		List<Dictionary<string, string>> LoadByIds(ITableSpec table, List<string> ids);
 
-		List<string> LoadIdsByConditions(ITableSpec table, conditions.AbstractCondition conditions, Diapasone diapasone, JoinSpec[] joins, SortSpec[] sorts, bool allowHugeLists);
+		List<string> LoadIdsByConditions(ITableSpec table, AbstractCondition conditions, Diapasone diapasone, JoinSpec[] joins, SortSpec[] sorts, bool allowHugeLists);
 
-		long GetCountByConditions(ITableSpec table, conditions.AbstractCondition conditions, params JoinSpec[] joins);
+		long GetCountByConditions(ITableSpec table, AbstractCondition conditions, params JoinSpec[] joins);
 
 		Transaction beginTransaction(System.Data.IsolationLevel iso);
 
@@ -20,7 +21,7 @@ namespace FLocal.Core.DB {
 
 		List<Dictionary<string, string>> LoadByIds(Transaction transaction, ITableSpec table, List<string> ids);
 
-		List<string> LoadIdsByConditions(Transaction transaction, ITableSpec table, conditions.AbstractCondition conditions, Diapasone diapasone, JoinSpec[] joins, SortSpec[] sorts, bool allowHugeLists);
+		List<string> LoadIdsByConditions(Transaction transaction, ITableSpec table, AbstractCondition conditions, Diapasone diapasone, JoinSpec[] joins, SortSpec[] sorts, bool allowHugeLists);
 
 		void update(Transaction transaction, ITableSpec table, string id, Dictionary<string, string> data);
 
@@ -32,11 +33,11 @@ namespace FLocal.Core.DB {
 
 	public static class IDBConnectionExtensions {
 
-		public static List<string> LoadIdsByConditions(this IDBConnection connection, ITableSpec table, conditions.AbstractCondition conditions, Diapasone diapasone, JoinSpec[] joins, SortSpec[] sorts) {
+		public static List<string> LoadIdsByConditions(this IDBConnection connection, ITableSpec table, AbstractCondition conditions, Diapasone diapasone, JoinSpec[] joins, SortSpec[] sorts) {
 			return connection.LoadIdsByConditions(table, conditions, diapasone, joins, sorts, false);
 		}
 
-		public static List<string> LoadIdsByConditions(this IDBConnection connection, ITableSpec table, conditions.AbstractCondition conditions, Diapasone diapasone, params JoinSpec[] joins) {
+		public static List<string> LoadIdsByConditions(this IDBConnection connection, ITableSpec table, AbstractCondition conditions, Diapasone diapasone, params JoinSpec[] joins) {
 			return connection.LoadIdsByConditions(table, conditions, diapasone, joins, new SortSpec[] { new SortSpec(table.getIdSpec(), true) });
 		}
 
@@ -53,6 +54,25 @@ namespace FLocal.Core.DB {
 				throw new CriticalException(rows.Count + " objects with specified id");
 			}
 			return rows[0];
+		}
+
+		public static string LoadIdByField(this IDBConnection connection, ColumnSpec column, string value) {
+			List<string> ids = connection.LoadIdsByConditions(
+				column.table,
+				new ComparisonCondition(
+					column,
+					ComparisonType.EQUAL,
+					value
+				),
+				Diapasone.unlimited
+			);
+			if(ids.Count > 1) {
+				throw new CriticalException("not unique");
+			} else if(ids.Count == 1) {
+				return ids[0];
+			} else {
+				throw new NotFoundInDBException(column, value);
+			}
 		}
 	
 	}
