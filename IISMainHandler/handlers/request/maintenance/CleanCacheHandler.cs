@@ -24,7 +24,10 @@ namespace FLocal.IISHandler.handlers.request.maintenance {
 			int length = int.Parse(context.httprequest.Form["length"]);
 			ISqlObjectTableSpec tableSpec = TableManager.TABLES[table];
 			for(int i=0; i<length; i++) {
-				tableSpec.refreshSqlObject(start+i);
+				try {
+					tableSpec.refreshSqlObject(start+i);
+				} catch(NotFoundInDBException) {
+				}
 			}
 			return new XElement[] {
 			};
