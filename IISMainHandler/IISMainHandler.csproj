@@ -66,6 +66,7 @@
     <Compile Include="handlers\request\EditHandler.cs" />
     <Compile Include="handlers\request\LoginHandler.cs" />
     <Compile Include="handlers\request\LogoutHandler.cs" />
+    <Compile Include="handlers\request\maintenance\CleanCacheHandler.cs" />
     <Compile Include="handlers\request\MarkThreadAsReadHandler.cs" />
     <Compile Include="handlers\request\MigrateAccountHandler.cs" />
     <Compile Include="handlers\request\ReturnPostHandler.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="handlers\response\LegacyPHPHandler.cs" />
     <Compile Include="handlers\response\LegacyUploadHandler.cs" />
     <Compile Include="handlers\response\LoginHandler.cs" />
+    <Compile Include="handlers\response\maintenance\CleanCacheHandler.cs" />
     <Compile Include="handlers\response\MigrateAccountHandler.cs" />
     <Compile Include="handlers\response\PMReplyHandler.cs" />
     <Compile Include="handlers\response\PMReplyToPostHandler.cs" />

@@ -132,6 +132,16 @@ namespace FLocal.IISHandler {
 						default:
 							return new handlers.WrongUrlHandler();
 					}
+				case "maintenance":
+					if(context.requestParts.Length < 2) {
+						return new handlers.WrongUrlHandler();
+					}
+					switch(context.requestParts[1].ToLower()) {
+						case "cleancache":
+							return new handlers.response.maintenance.CleanCacheHandler();
+						default:
+							return new handlers.WrongUrlHandler();
+					}
 				case "poll":
 					if(context.requestParts.Length < 2) {
 						return new handlers.WrongUrlHandler();
@@ -173,6 +183,16 @@ namespace FLocal.IISHandler {
 								return new handlers.request.CreatePollHandler();
 							case "vote":
 								return new handlers.request.VoteHandler();
+							case "maintenance":
+								if(context.requestParts.Length < 3) {
+									return new handlers.WrongUrlHandler();
+								}
+								switch(context.requestParts[2].ToLower()) {
+									case "cleancache":
+										return new handlers.request.maintenance.CleanCacheHandler();
+									default:
+										return new handlers.WrongUrlHandler();
+								}
 							default:
 								return new handlers.WrongUrlHandler();
 						}

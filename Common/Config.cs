@@ -27,6 +27,8 @@ namespace FLocal.Common {
 
 		public readonly TimeSpan ActivityThreshold;
 
+		public readonly string AdminUserName = "inga-lovinde";
+
 		protected Config(NameValueCollection data) : base(data) {
 			this.InitTime = DateTime.Now.ToLongTimeString();
 			this.mainConnection = new MySQLConnector.Connection(data["ConnectionString"], MySQLConnector.PostgresDBTraits.instance);
