@@ -92,6 +92,7 @@
     <Compile Include="handlers\response\QuickLinkHandler.cs" />
     <Compile Include="handlers\response\RedirectGetHandler.cs" />
     <Compile Include="handlers\response\ReplyHandler.cs" />
+    <Compile Include="handlers\response\RobotsHandler.cs" />
     <Compile Include="handlers\response\SettingsHandler.cs" />
     <Compile Include="handlers\response\UploadHandler.cs" />
     <Compile Include="handlers\response\UploadListHandler.cs" />

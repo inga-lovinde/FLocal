@@ -3,12 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
+using System.Xml.Linq;
 
 namespace FLocal.IISHandler.handlers {
-	class WrongUrlHandler : ISpecificHandler  {
+	class WrongUrlHandler : AbstractGetHandler  {
 
-		public void Handle(WebContext context) {
-			throw new HttpException(400, "wrong url '" + context.httprequest.RawUrl + "'");
+		protected override string templateName {
+			get {
+				return "WrongUrl.xslt";
+			}
+		}
+
+		protected override XElement[] getSpecificData(WebContext context) {
+			return new XElement[] {
+				new XElement("path", context.httprequest.Path)
+			};
 		}
 
 	}
