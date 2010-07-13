@@ -12,10 +12,12 @@ namespace FLocal.IISHandler.handlers.response {
 		protected override string getRedirectUrl(WebContext context) {
 			string[] scriptParts = context.requestParts[0].Split('.');
 			if(scriptParts.Length != 2) {
-				throw new FLocalException("wrong url");
+				//throw new FLocalException("wrong url");
+				throw new WrongUrlException();
 			}
 			if(scriptParts[1].ToLower() != "php") {
-				throw new FLocalException("wrong url");
+				//throw new FLocalException("wrong url");
+				throw new WrongUrlException();
 			}
 
 			switch(scriptParts[0].ToLower()) {
@@ -31,7 +33,8 @@ namespace FLocal.IISHandler.handlers.response {
 				case "showprofile":
 					return "/User/" + User.LoadByName(context.httprequest.QueryString["User"]).id.ToString() + "/";
 				default:
-					throw new NotImplementedException("unknown script " + scriptParts[0]);
+					//throw new NotImplementedException("unknown script " + scriptParts[0]);
+					throw new WrongUrlException();
 			}
 		}
 

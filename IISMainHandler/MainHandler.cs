@@ -28,8 +28,12 @@ namespace FLocal.IISHandler {
 			}
 
 			WebContext context = new WebContext(httpcontext);
-			ISpecificHandler handler = HandlersFactory.getHandler(context);
-			handler.Handle(context);
+			try {
+				ISpecificHandler handler = HandlersFactory.getHandler(context);
+				handler.Handle(context);
+			} catch(WrongUrlException) {
+				(new handlers.WrongUrlHandler()).Handle(context);
+			}
 		}
 
 		public void ProcessRequest(HttpContext context) {

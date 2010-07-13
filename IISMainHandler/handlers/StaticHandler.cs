@@ -18,32 +18,37 @@ namespace FLocal.IISHandler.handlers {
 
 		public void Handle(WebContext context) {
 			if(this.requestParts.Length < 2) {
-				throw new HttpException(403, "listing not allowed");
+				//throw new HttpException(403, "listing not allowed");
+				throw new WrongUrlException();
 			}
 			
 			Regex checker = new Regex("^[a-z][0-9a-z\\-_]*(\\.[a-zA-Z]+)?$", RegexOptions.Compiled | RegexOptions.CultureInvariant | RegexOptions.IgnoreCase | RegexOptions.Singleline);
 			string path = "";
 			for(int i=1; i<this.requestParts.Length; i++) {
 				if(!checker.IsMatch(this.requestParts[i])) {
-					throw new HttpException(400, "wrong url (checker='" + checker.ToString() + "'; string='" + this.requestParts[i] + "'");
+					//throw new HttpException(400, "wrong url (checker='" + checker.ToString() + "'; string='" + this.requestParts[i] + "'");
+					throw new WrongUrlException();
 				}
 				path += FLocal.Common.Config.instance.DirSeparator + this.requestParts[i];
 			}
 
 			string fullPath = FLocal.Common.Config.instance.dataDir + "Static" + path;
 			if(!File.Exists(fullPath)) {
-				throw new HttpException(404, "not found");
+				//throw new HttpException(404, "not found");
+				throw new WrongUrlException();
 			}
 			FileInfo fileinfo = new FileInfo(fullPath);
 			if(!fileinfo.FullName.StartsWith(FLocal.Common.Config.instance.dataDir + "Static")) {
-				throw new HttpException(403, "forbidden");
+				//throw new HttpException(403, "forbidden");
+				throw new WrongUrlException();
 			}
 			
 			string mime = Util.getMimeByExtension(fileinfo.Extension);
 			if(mime != null) {
 				context.httpresponse.ContentType = mime;
 			} else {
-				throw new HttpException(403, "wrong file type");
+				//throw new HttpException(403, "wrong file type");
+				throw new WrongUrlException();
 			}
 
 			context.httpresponse.Cache.SetExpires(DateTime.Now.AddDays(10));

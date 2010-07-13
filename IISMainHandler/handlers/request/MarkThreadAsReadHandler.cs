@@ -17,7 +17,7 @@ namespace FLocal.IISHandler.handlers.request {
 		protected override void _Do(WebContext context) {
 			Account account = context.session.account;
 			Thread thread = Thread.LoadById(int.Parse(context.requestParts[2]));
-			if(!context.requestParts[3].StartsWith("p")) throw new CriticalException("wrong url");
+			if(!context.requestParts[3].StartsWith("p")) throw new WrongUrlException(); //throw new CriticalException("wrong url");
 			Post post = Post.LoadById(int.Parse(context.requestParts[3].PHPSubstring(1)));
 
 			if(post.thread.id != thread.id) throw new CriticalException("id mismatch");
