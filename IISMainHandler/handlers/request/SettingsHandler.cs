@@ -30,7 +30,7 @@ namespace FLocal.IISHandler.handlers.request {
 			if((usersPerPage < 1) || (usersPerPage > 200)) throw new FLocalException("wrong number for usersPerPage");
 			if((uploadsPerPage < 1) || (uploadsPerPage > 200)) throw new FLocalException("wrong number for uploadsPerPage");
 
-			if(!context.account.checkPassword(currentPassword)) throw new FLocalException("wrong password");
+			if(!context.account.checkPassword(currentPassword)) throw new FLocalException("Wrong password. You should enter your current password in order to change settings.");
 
 			AccountSettings.Save(context.session.account, postsPerPage, threadsPerPage, usersPerPage, uploadsPerPage, skin);
 
