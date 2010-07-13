@@ -61,6 +61,11 @@
 											<xsl:text>Последние ответы на мои сообщения</xsl:text>
 										</a>
 										<br />
+										<a>
+											<xsl:attribute name="href">/User/<xsl:value-of select="session/user/id"/>/PollsParticipated/</xsl:attribute>
+											<xsl:text>Последние опросы с моим участием</xsl:text>
+										</a>
+										<br />
 										<a>Мои сообщения с оценками</a>
 										<br />
 										<a>Рейтинги сообщений</a>

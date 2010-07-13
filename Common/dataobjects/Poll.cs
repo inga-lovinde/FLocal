@@ -62,6 +62,19 @@ namespace FLocal.Common.dataobjects {
 				}
 			}
 
+			private int _pollId;
+			public int pollId {
+				get {
+					this.LoadIfNotLoaded();
+					return this._pollId;
+				}
+			}
+			public Poll poll {
+				get {
+					return Poll.LoadById(this.pollId);
+				}
+			}
+
 			private HashSet<int> _options;
 			public HashSet<int> options {
 				get {
@@ -72,6 +85,7 @@ namespace FLocal.Common.dataobjects {
 
 			protected override void doFromHash(Dictionary<string, string> data) {
 				this._userId = int.Parse(data[TableSpec.FIELD_USERID]);
+				this._pollId = int.Parse(data[TableSpec.FIELD_POLLID]);
 				this._options = new HashSet<int>(from elem in XElement.Parse(data[TableSpec.FIELD_VOTEINFO]).Descendants("vote") select int.Parse(elem.Attribute("optionId").Value));
 			}
 
