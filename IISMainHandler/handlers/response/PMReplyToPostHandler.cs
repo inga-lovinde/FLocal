@@ -26,7 +26,7 @@ namespace FLocal.IISHandler.handlers.response {
 			if(quoted != null) quoted = quoted.Trim();
 			if(quoted == null || quoted == "") {
 				if(post.revision.HasValue) {
-					quoted = post.latestRevision.body.Trim();
+					quoted = UBBParser.StripQuotes(post.latestRevision.body).Trim();
 				}
 			}
 

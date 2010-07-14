@@ -13,6 +13,19 @@ namespace FLocal.Common {
 
 		private class BBParserGateway {
 
+			private class SimpleFormatter : ITextFormatter {
+
+				public static readonly SimpleFormatter instance = new SimpleFormatter();
+
+				private SimpleFormatter() {
+				}
+
+				public string Format(string source) {
+					return source;
+				}
+
+			}
+
 			private class TextFormatter : ITextFormatter {
 
 				public static readonly TextFormatter instance = new TextFormatter();
@@ -92,6 +105,9 @@ namespace FLocal.Common {
 			private BBCodeParser parser;
 			private ITextFormatter formatter;
 
+			private BBCodeParser quotesParser;
+			private ITextFormatter simpleFormatter;
+
 			private BBParserGateway() {
 				this.parser = new BBCodeParser();
 				this.parser.ElementTypes.Add("b", typeof(BBCodes.B), true);
@@ -118,11 +134,22 @@ namespace FLocal.Common {
 				this.parser.ElementTypes.Add("wiki", typeof(BBCodes.Wiki), true);
 				this.parser.ElementTypes.Add("ruwiki", typeof(BBCodes.RuWiki), true);
 				this.formatter = TextFormatter.instance;
+				
+				this.quotesParser = new BBCodeParser();
+				foreach(var elementType in this.parser.ElementTypes) {
+					this.quotesParser.ElementTypes.Add(elementType.Key, typeof(BBCodes.QuoteSkipper), elementType.Value.RequireClosingTag);
+				}
+				this.simpleFormatter = SimpleFormatter.instance;
 			}
 
 			public string Parse(string input) {
 				string result = this.parser.Parse(input).Format(this.formatter);
 				if(result.EndsWith("<br/>")) result = result.Substring(0, result.Length - 5);
+				return result;
+			}
+
+			public string ParseQuote(string input) {
+				string result = this.quotesParser.Parse(input).Format(this.simpleFormatter);
 				return result;
 			}
 
@@ -135,6 +162,10 @@ namespace FLocal.Common {
 
 		public static string ShallerToUBB(string shaller) {
 			return shaller;
+		}
+
+		public static string StripQuotes(string UBB) {
+			return BBParserGateway.instance.ParseQuote(UBB);
 		}
 
 	}

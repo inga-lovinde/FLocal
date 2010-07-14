@@ -53,7 +53,7 @@
 									<xsl:call-template name="textEditor">
 										<xsl:with-param name="body">
 											<xsl:text>[q]</xsl:text>
-											<xsl:value-of select="message/bodyUBB"/>
+											<xsl:value-of select="quoted"/>
 											<xsl:text>[/q]
 </xsl:text>
 										</xsl:with-param>

@@ -71,6 +71,7 @@
     <Compile Include="BBCodes\Lurk.cs" />
     <Compile Include="BBCodes\Poll.cs" />
     <Compile Include="BBCodes\Quote.cs" />
+    <Compile Include="BBCodes\QuoteSkipper.cs" />
     <Compile Include="BBCodes\RuWiki.cs" />
     <Compile Include="BBCodes\S.cs" />
     <Compile Include="BBCodes\Spoiler.cs" />
