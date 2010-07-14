@@ -163,6 +163,7 @@ namespace FLocal.Common.dataobjects {
 						}
 					)
 					let board = Board.LoadById(id)
+					where board.sortOrder >= 0
 					orderby board.sortOrder, board.id
 					select board;
 			}
