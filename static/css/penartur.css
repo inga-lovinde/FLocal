@@ -1,4 +1,4 @@
-body { font-size:80%; }
+body { font-size:11pt; }
 
 A:link {text-decoration:none;color:#aaaaaa}
 A:visited{text-decoration:none;color:#666666}
@@ -55,7 +55,7 @@ FORM{DISPLAY:inline;MARGIN-BOTTOM:0}
 .formboxes{font-size:1em;font-family:"Segoe Print";color:#eeeeee;BACKGROUND-COLOR:black}
 .buttons{font-size:1em;font-family:"Calibri";BACKGROUND-COLOR:#555555}
 
-PRE{background-color:#303030;font-size:1em;font-family:"Consolas";BORDER:#999999 1px solid;PADDING: 0.2em 0.3em;MARGIN:0 0.5em 0 1em;color:white}
+PRE{background-color:#303030;font-size:0.9em;font-family:"Consolas";BORDER:#999999 1px solid;PADDING: 0.2em 0.3em;MARGIN:0 0.5em 0 1em;color:white}
 
 BLOCKQUOTE{background:#333333;font-size:1em;border:1px solid #999999;padding:0 0.3em;MARGIN:0.3em 0.5em 0 1em}
 BLOCKQUOTE .small{PADDING: 0.1em 0.2em;color:#000000;BACKGROUND:#999999;MARGIN-Left: -0.3em;font-weight:bold}
