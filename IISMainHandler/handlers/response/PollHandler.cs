@@ -20,7 +20,7 @@ namespace FLocal.IISHandler.handlers.response {
 			}
 		}
 
-		override protected XElement[] getSpecificData(WebContext context) {
+		override protected IEnumerable<XElement> getSpecificData(WebContext context) {
 			Poll poll = Poll.LoadById(int.Parse(context.requestParts[1]));
 			return new XElement[] {
 				poll.exportToXmlWithVotes(context)

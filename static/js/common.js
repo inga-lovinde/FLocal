@@ -52,3 +52,12 @@ function submitSelText(url) {
 	document.getElementById("systemForm").action = url;
 	document.getElementById("systemForm").submit();
 }
+
+function changeActionToSelf(elem) {
+	if(elem.checked) {
+		elem.form.newAction = elem.form.action;
+		elem.form.action = "";
+	} else {
+		elem.form.action = elem.form.newAction;
+	}
+}

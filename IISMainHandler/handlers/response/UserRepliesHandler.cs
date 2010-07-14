@@ -20,7 +20,7 @@ namespace FLocal.IISHandler.handlers.response {
 			}
 		}
 
-		override protected XElement[] getSpecificData(WebContext context) {
+		override protected IEnumerable<XElement> getSpecificData(WebContext context) {
 			User user = User.LoadById(int.Parse(context.requestParts[1]));
 			PageOuter pageOuter = PageOuter.createFromGet(
 				context.requestParts,

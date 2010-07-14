@@ -75,6 +75,7 @@
     <Compile Include="handlers\request\SettingsHandler.cs" />
     <Compile Include="handlers\request\UploadHandler.cs" />
     <Compile Include="handlers\request\VoteHandler.cs" />
+    <Compile Include="handlers\response\AbstractNewMessageHandler.cs" />
     <Compile Include="handlers\response\ActiveAccountListHandler.cs" />
     <Compile Include="handlers\response\AllPostsHandler.cs" />
     <Compile Include="handlers\response\BoardAsThread.cs" />

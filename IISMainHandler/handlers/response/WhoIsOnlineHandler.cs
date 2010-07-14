@@ -20,7 +20,7 @@ namespace FLocal.IISHandler.handlers.response {
 			}
 		}
 
-		override protected XElement[] getSpecificData(WebContext context) {
+		override protected IEnumerable<XElement> getSpecificData(WebContext context) {
 			PageOuter pageOuter = PageOuter.createUnlimited(context.userSettings.usersPerPage);
 			IEnumerable<Session> sessions = 
 				from stringId in Config.instance.mainConnection.LoadIdsByConditions(

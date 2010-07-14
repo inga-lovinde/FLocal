@@ -18,7 +18,7 @@ namespace FLocal.IISHandler.handlers.response {
 			}
 		}
 
-		override protected XElement[] getSpecificData(WebContext context) {
+		override protected IEnumerable<XElement> getSpecificData(WebContext context) {
 			Board board = Board.LoadById(int.Parse(context.requestParts[1]));
 			PageOuter pageOuter = PageOuter.createFromGet(context.requestParts, context.userSettings.postsPerPage, 2);
 			IEnumerable<Thread> threads = board.getThreads(

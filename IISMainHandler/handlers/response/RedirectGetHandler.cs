@@ -15,7 +15,7 @@ namespace FLocal.IISHandler.handlers.response {
 
 		abstract protected string getRedirectUrl(WebContext context);
 
-		protected override XElement[] getSpecificData(WebContext context) {
+		protected override IEnumerable<XElement> getSpecificData(WebContext context) {
 			throw new RedirectException(this.getRedirectUrl(context));
 		}
 

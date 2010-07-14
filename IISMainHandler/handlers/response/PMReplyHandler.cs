@@ -10,7 +10,7 @@ using FLocal.Common.dataobjects;
 
 namespace FLocal.IISHandler.handlers.response {
 
-	class PMReplyHandler : AbstractGetHandler {
+	class PMReplyHandler : AbstractNewMessageHandler {
 
 		override protected string templateName {
 			get {
@@ -18,7 +18,7 @@ namespace FLocal.IISHandler.handlers.response {
 			}
 		}
 
-		override protected XElement[] getSpecificData(WebContext context) {
+		override protected IEnumerable<XElement> getSpecificNewMessageData(WebContext context) {
 			PMMessage message = PMMessage.LoadById(int.Parse(context.requestParts[1]));
 
 			return new XElement[] {

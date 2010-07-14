@@ -20,7 +20,7 @@ namespace FLocal.IISHandler.handlers {
 			}
 		}
 
-		override protected XElement[] getSpecificData(WebContext context) {
+		override protected IEnumerable<XElement> getSpecificData(WebContext context) {
 			Thread thread = Thread.LoadById(int.Parse(context.requestParts[1]));
 			PageOuter pageOuter = PageOuter.createFromGet(
 				context.requestParts,

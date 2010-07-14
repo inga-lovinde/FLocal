@@ -18,7 +18,7 @@ namespace FLocal.IISHandler.handlers.response {
 			}
 		}
 
-		protected override System.Xml.Linq.XElement[] getSpecificData(WebContext context) {
+		protected override IEnumerable<XElement> getSpecificData(WebContext context) {
 			if(context.session == null) throw new AccessViolationException();
 			PageOuter pageOuter = PageOuter.createFromGet(context.requestParts, context.userSettings.uploadsPerPage, 2);
 			List<Upload> uploads = Upload.LoadByIds(

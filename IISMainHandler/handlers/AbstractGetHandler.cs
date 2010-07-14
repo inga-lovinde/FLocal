@@ -12,7 +12,7 @@ namespace FLocal.IISHandler.handlers {
 			get;
 		}
 
-		abstract protected XElement[] getSpecificData(WebContext context);
+		abstract protected IEnumerable<XElement> getSpecificData(WebContext context);
 
 		private XDocument getData(WebContext context) {
 			return new XDocument(

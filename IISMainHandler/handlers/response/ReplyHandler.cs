@@ -10,7 +10,7 @@ using FLocal.Common.dataobjects;
 
 namespace FLocal.IISHandler.handlers.response {
 
-	class ReplyHandler : AbstractGetHandler {
+	class ReplyHandler : AbstractNewMessageHandler {
 
 		override protected string templateName {
 			get {
@@ -18,7 +18,7 @@ namespace FLocal.IISHandler.handlers.response {
 			}
 		}
 
-		override protected XElement[] getSpecificData(WebContext context) {
+		override protected IEnumerable<XElement> getSpecificNewMessageData(WebContext context) {
 			
 			Post post = Post.LoadById(int.Parse(context.requestParts[1]));
 

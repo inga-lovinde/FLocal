@@ -14,7 +14,7 @@ namespace FLocal.IISHandler.handlers {
 			}
 		}
 
-		protected override XElement[] getSpecificData(WebContext context) {
+		protected override IEnumerable<XElement> getSpecificData(WebContext context) {
 			return new XElement[] {
 				new XElement("path", context.httprequest.Path)
 			};

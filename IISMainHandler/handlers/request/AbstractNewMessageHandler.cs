@@ -25,7 +25,7 @@ namespace FLocal.IISHandler.handlers.request {
 		}
 
 		protected string getBody(WebContext context) {
-			string body = context.httprequest.Form["body"].Trim();
+			string body = context.httprequest.Form["Body"].Trim();
 			if(body == "") {
 				throw new FLocalException("Body is empty");
 			}

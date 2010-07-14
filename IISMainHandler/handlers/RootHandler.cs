@@ -15,7 +15,7 @@ namespace FLocal.IISHandler.handlers {
 			}
 		}
 
-		override protected XElement[] getSpecificData(WebContext context) {
+		override protected IEnumerable<XElement> getSpecificData(WebContext context) {
 			return new XElement[0];
 		}
 

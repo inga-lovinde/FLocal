@@ -20,7 +20,7 @@ namespace FLocal.IISHandler.handlers.response {
 			}
 		}
 
-		override protected XElement[] getSpecificData(WebContext context) {
+		override protected IEnumerable<XElement> getSpecificData(WebContext context) {
 			Account interlocutor = Account.LoadById(int.Parse(context.requestParts[1]));
 			PMConversation conversation = PMConversation.LoadByAccounts(context.session.account, interlocutor);
 			PageOuter pageOuter = PageOuter.createFromGet(

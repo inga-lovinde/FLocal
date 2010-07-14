@@ -18,7 +18,7 @@ namespace FLocal.IISHandler.handlers.response {
 			}
 		}
 
-		override protected XElement[] getSpecificData(WebContext context) {
+		override protected IEnumerable<XElement> getSpecificData(WebContext context) {
 			IUserSettings settings = AccountSettings.LoadByAccount(context.session.account);
 
 			return new XElement[] {

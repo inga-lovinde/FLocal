@@ -20,7 +20,7 @@ namespace FLocal.IISHandler.handlers {
 			}
 		}
 
-		override protected XElement[] getSpecificData(WebContext context) {
+		override protected IEnumerable<XElement> getSpecificData(WebContext context) {
 			return new XElement[] {
 				new XElement("categories", from category in Category.allCategories select category.exportToXmlForMainPage(context)),
 				new XElement("totalRegistered", Config.instance.mainConnection.GetCountByConditions(User.TableSpec.instance, new EmptyCondition())),

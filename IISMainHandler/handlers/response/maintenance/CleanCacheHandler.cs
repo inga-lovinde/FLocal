@@ -18,7 +18,7 @@ namespace FLocal.IISHandler.handlers.response.maintenance {
 			}
 		}
 
-		override protected XElement[] getSpecificData(WebContext context) {
+		override protected IEnumerable<XElement> getSpecificData(WebContext context) {
 			return new XElement[] {
 				new XElement(
 					"tables",

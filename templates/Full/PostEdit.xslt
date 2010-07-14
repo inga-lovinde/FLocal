@@ -49,15 +49,6 @@
 									<xsl:call-template name="textEditor">
 										<xsl:with-param name="body"><xsl:value-of select="revision/body"/></xsl:with-param>
 									</xsl:call-template>
-									<br/>
-									<input type="checkbox" name="preview" value="1" class="formboxes" disabled="disabled" />
-									<xsl:text>Я хочу предварительно просмотреть сообщение перед отправкой</xsl:text>
-									<br/>
-									<br/>
-									<input type="checkbox" name="spellcheck" value="1" class="formboxes" onChange="document.replier.preview.checked=this.checked;" disabled="disabled" />
-									<xsl:text>Проверить правописание</xsl:text>
-									<br/>
-									<br/>
 									<input type="submit" tabindex="3" name="textcont" taborder="2" value="Продолжить" class="buttons"/>
 								</form>
 							</td>

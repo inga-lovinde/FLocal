@@ -18,7 +18,7 @@ namespace FLocal.IISHandler.handlers.response {
 			}
 		}
 
-		protected override System.Xml.Linq.XElement[] getSpecificData(WebContext context) {
+		protected override IEnumerable<XElement> getSpecificData(WebContext context) {
 			Upload upload = Upload.LoadById(int.Parse(context.requestParts[2]));
 			throw new RedirectException(Config.instance.UploaderUrl + "Data/" + upload.hash + "." + upload.extension);
 		}
