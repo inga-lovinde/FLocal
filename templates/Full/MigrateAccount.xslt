@@ -48,7 +48,11 @@
 									<i> (обязательно)</i>
 									<br/>
 									<input type="submit" name="buttlogin" value="Мигрировать!" class="buttons" /> 
-								</form> 
+								</form>
+								<h3 style="color:red">
+									<xsl:text>Если у вас что-то не получается - прочитайте </xsl:text>
+									<a href="http://penartur.narod.ru/flocal/migration/">инструкцию в картинках</a>
+								</h3>
 							</td> 
 						</tr> 
 					</table> 
