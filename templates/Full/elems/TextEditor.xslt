@@ -255,8 +255,8 @@ function insertInBody(str) {
 		</table>
 
 		<br/>
-		<input type="checkbox" name="preview" value="1" class="formboxes" onClick="changeActionToSelf(this)" />
-		<xsl:text>Я хочу предварительно просмотреть сообщение перед отправкой</xsl:text>
+		<input type="checkbox" name="preview" value="1" class="formboxes" onClick="changeActionToSelf(this)" id="preview" />
+		<label for="preview"> Я хочу предварительно просмотреть сообщение перед отправкой</label>
 		<xsl:if test="bodyIntermediate">
 			<br/>
 			<table width="100%" cellspacing="1" cellpadding="3" border="0">
