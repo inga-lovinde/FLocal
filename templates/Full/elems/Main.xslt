@@ -64,13 +64,31 @@
 		<xsl:value-of select="*/name"/>
 	</xsl:template>
 
+	<xsl:template match="date" mode="_date">
+		<xsl:choose>
+			<xsl:when test="year=/root/current/date/year and month=/root/current/date/month and mday=/root/current/date/mday">
+				<xsl:text>сегодня</xsl:text>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:choose>
+					<xsl:when test="year=/root/current/date/year and month=/root/current/date/month and (mday+1)=/root/current/date/mday">
+						<xsl:text>вчера</xsl:text>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="format-number(mday, '00')"/>
+						<xsl:text>.</xsl:text>
+						<xsl:value-of select="format-number(month, '00')"/>
+						<xsl:text>.</xsl:text>
+						<xsl:value-of select="year"/>
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+
 	<xsl:template match="date" mode="dateTime">
 		<span nowrap="nowrap">
-			<xsl:value-of select="format-number(mday, '00')"/>
-			<xsl:text>.</xsl:text>
-			<xsl:value-of select="format-number(month, '00')"/>
-			<xsl:text>.</xsl:text>
-			<xsl:value-of select="year"/>
+			<xsl:apply-templates select="current()" mode="_date"/>
 			<xsl:text> </xsl:text>
 			<xsl:value-of select="format-number(hour, '00')"/>
 			<xsl:text>:</xsl:text>
@@ -82,11 +100,7 @@
 
 	<xsl:template match="date" mode="date">
 		<span nowrap="nowrap">
-			<xsl:value-of select="format-number(mday, '00')"/>
-			<xsl:text>.</xsl:text>
-			<xsl:value-of select="format-number(month, '00')"/>
-			<xsl:text>.</xsl:text>
-			<xsl:value-of select="year"/>
+			<xsl:apply-templates select="current()" mode="_date"/>
 		</span>
 	</xsl:template>
 

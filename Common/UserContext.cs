@@ -45,7 +45,8 @@ namespace FLocal.Common {
 				new XElement("mday", dateTime.Day),
 				new XElement("hour", dateTime.Hour),
 				new XElement("minute", dateTime.Minute),
-				new XElement("second", dateTime.Second)
+				new XElement("second", dateTime.Second),
+				new XElement("ticks", dateTime.Ticks)
 			);
 		}
 

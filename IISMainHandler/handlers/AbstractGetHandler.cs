@@ -19,7 +19,7 @@ namespace FLocal.IISHandler.handlers {
 				new XElement("root",
 					this.getSpecificData(context),
 					new XElement("title", Config.instance.AppInfo),
-					new XElement("timestamp", DateTime.Now.Ticks.ToString()),
+					new XElement("current", DateTime.Now.ToXml()),
 					context.exportSession(),
 					context.userSettings.skin.exportToXml()
 				)

@@ -35,13 +35,13 @@
 						<tr>
 							<td align="center" class="menubar">
 								<a target="_top">
-									<xsl:attribute name="href">/Boards/?<xsl:value-of select="timestamp"/></xsl:attribute>
+									<xsl:attribute name="href">/Boards/?<xsl:value-of select="current/date/ticks"/></xsl:attribute>
 									<xsl:text>Список форумов</xsl:text>
 								</a>
 								<xsl:text> | </xsl:text>
 								<a target="_top">
 									<xsl:if test="session/sessionKey">
-										<xsl:attribute name="href">/Conversations/?<xsl:value-of select="timestamp"/></xsl:attribute>
+										<xsl:attribute name="href">/Conversations/?<xsl:value-of select="current/date/ticks"/></xsl:attribute>
 										<xsl:if test="session/indicators/unreadPrivateMessages != '0'">
 											<img src="/static/images/newpm.gif" border="0">
 												<xsl:attribute name="alt">
@@ -57,7 +57,7 @@
 								<xsl:text> | </xsl:text>
 								<a target="_top">
 									<xsl:if test="session/sessionKey">
-										<xsl:attribute name="href">/Upload/List/?<xsl:value-of select="timestamp"/></xsl:attribute>
+										<xsl:attribute name="href">/Upload/List/?<xsl:value-of select="current/date/ticks"/></xsl:attribute>
 									</xsl:if>
 									<xsl:text>Аплоад</xsl:text>
 								</a>
@@ -77,7 +77,7 @@
 								</a>
 								<xsl:text> | </xsl:text>
 								<a target="_top">
-									<xsl:attribute name="href">/Users/Online/?<xsl:value-of select="timestamp"/></xsl:attribute>
+									<xsl:attribute name="href">/Users/Online/?<xsl:value-of select="current/date/ticks"/></xsl:attribute>
 									<xsl:text>Кто в онлайне</xsl:text>
 								</a>
 								<xsl:text> | </xsl:text>
