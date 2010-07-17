@@ -22,7 +22,6 @@
 				</a>
 			</xsl:if>
 			<xsl:if test="session/notLoggedIn">
-				<xsl:text> | </xsl:text>
 				<a target="_top">
 					<xsl:attribute name="href">/Login/</xsl:attribute>
 					<xsl:text>¬ход</xsl:text>

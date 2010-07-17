@@ -55,6 +55,7 @@
 			<div class="lighttable post">
 				<xsl:value-of select="body" disable-output-escaping="yes" />
 				<br/>
+				<br/>
 			</div>
 		</div>
 	</xsl:template>

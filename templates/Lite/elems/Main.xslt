@@ -102,7 +102,7 @@
 		<xsl:param name="baseLink"/>
 		<xsl:param name="selected">-1</xsl:param>
 		<xsl:if test="current() != '0'">
-			<xsl:text>&#8201;|&#8201;</xsl:text>
+			<xsl:text>|</xsl:text>
 		</xsl:if>
 		<xsl:choose>
 			<xsl:when test="current() != $selected">
@@ -141,7 +141,7 @@
 				</xsl:choose>
 			</xsl:with-param>
 		</xsl:apply-templates>
-		<xsl:text>&#8201;|&#8201;</xsl:text>
+		<xsl:text>|</xsl:text>
 		<xsl:choose>
 			<xsl:when test="unlimited='false'">
 				<a>
@@ -154,7 +154,7 @@
 			</xsl:otherwise>
 		</xsl:choose>
 		<xsl:if test="next">
-			<xsl:text>&#8201;|&#8201;</xsl:text>
+			<xsl:text>|</xsl:text>
 			<a>
 				<xsl:attribute name="href"><xsl:value-of select="$baseLink"/><xsl:value-of select="next"/></xsl:attribute>
 				<xsl:text>Next</xsl:text>
@@ -166,7 +166,7 @@
 		<xsl:param name="baseLink"/>
 		<a href="#top">Top</a>
 		<xsl:if test="next">
-			<xsl:text>&#8201;|&#8201;</xsl:text>
+			<xsl:text>|</xsl:text>
 			<a>
 				<xsl:attribute name="href"><xsl:value-of select="$baseLink"/><xsl:value-of select="next"/></xsl:attribute>
 				<xsl:text>Next</xsl:text>
