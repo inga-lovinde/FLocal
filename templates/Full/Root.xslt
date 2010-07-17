@@ -52,7 +52,7 @@
 									<xsl:value-of select="url/host"/>
 									<xsl:text>:</xsl:text>
 									<xsl:if test="url/port &gt;= 1000">
-										<xsl:value-of select="floor(port div 1000)"/>
+										<xsl:value-of select="floor(url/port div 1000)"/>
 									</xsl:if>
 								</xsl:variable>
 								<tr class="menubar">
