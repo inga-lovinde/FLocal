@@ -50,6 +50,7 @@
     <Compile Include="designs\Classic.cs" />
     <Compile Include="designs\IDesign.cs" />
     <Compile Include="designs\Lite.cs" />
+    <Compile Include="designs\Raw.cs" />
     <Compile Include="exceptions\RedirectException.cs" />
     <Compile Include="exceptions\WrongUrlException.cs" />
     <Compile Include="Extensions.cs" />

@@ -5,10 +5,9 @@ using System.Text;
 
 namespace FLocal.IISHandler.designs {
 	class Classic : IDesign {
-		public string fsname {
-			get {
-				return "Full";
-			}
+
+		public string GetFSName(string template) {
+			return System.IO.Path.Combine("Full", template);
 		}
 
 		string FLocal.Common.IOutputParams.preprocessBodyIntermediate(string bodyIntermediate) {

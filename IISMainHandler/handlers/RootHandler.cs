@@ -16,7 +16,14 @@ namespace FLocal.IISHandler.handlers {
 		}
 
 		override protected IEnumerable<XElement> getSpecificData(WebContext context) {
-			return new XElement[0];
+			Uri url = context.httprequest.Url;
+			return new XElement[] {
+				new XElement(
+					"url",
+					new XElement("host", url.Host),
+					new XElement("port", url.Port)
+				),
+			};
 		}
 
 	}

@@ -6,9 +6,7 @@ using System.Text;
 namespace FLocal.IISHandler.designs {
 	interface IDesign : Common.IOutputParams {
 
-		string fsname {
-			get;
-		}
+		string GetFSName(string template);
 
 	}
 }

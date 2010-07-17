@@ -51,11 +51,7 @@ namespace FLocal.IISHandler {
 			}
 		}
 
-		public designs.IDesign design {
-			get {
-				return new designs.Classic();
-			}
-		}
+		public readonly designs.IDesign design;
 
 		public override string formatDateTime(DateTime dateTime) {
 			return dateTime.ToString();
@@ -109,11 +105,24 @@ namespace FLocal.IISHandler {
 			} else {
 				this.userSettings = new AnonymousUserSettings();
 			}
+
+			switch(this.httprequest.Url.Port % 1000) {
+				case 445:
+					this.design = new designs.Raw();
+					break;
+				case 447:
+					this.design = new designs.Lite();
+					break;
+				case 443:
+				default:
+					this.design = new designs.Classic();
+					break;
+			}
 		}
 
 		public string Transform(string templateName, System.Xml.Linq.XDocument data) {
 			//TODO: this should work according to design!
-			return TemplateEngine.Compile(this.design.fsname + this.config.DirSeparator + templateName, data);
+			return TemplateEngine.Compile(this.design.GetFSName(templateName), data);
 		}
 
 		public XElement exportSession() {
