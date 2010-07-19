@@ -155,7 +155,7 @@
 		</xsl:choose>
 		<xsl:if test="next">
 			<xsl:text>|</xsl:text>
-			<a>
+			<a rel="next">
 				<xsl:attribute name="href"><xsl:value-of select="$baseLink"/><xsl:value-of select="next"/></xsl:attribute>
 				<xsl:text>Next</xsl:text>
 			</a>
@@ -167,7 +167,7 @@
 		<a href="#top">Top</a>
 		<xsl:if test="next">
 			<xsl:text>|</xsl:text>
-			<a>
+			<a rel="next">
 				<xsl:attribute name="href"><xsl:value-of select="$baseLink"/><xsl:value-of select="next"/></xsl:attribute>
 				<xsl:text>Next</xsl:text>
 			</a>

@@ -161,7 +161,7 @@
 		</xsl:choose>
 		<xsl:if test="next">
 			<xsl:text>&#8201;|&#8201;</xsl:text>
-			<a>
+			<a rel="next">
 				<xsl:attribute name="href"><xsl:value-of select="$baseLink"/><xsl:value-of select="next"/></xsl:attribute>
 				<xsl:text>Следующая страница</xsl:text>
 			</a>
