@@ -5,7 +5,7 @@ using System.Text;
 using FLocal.Core.DB;
 
 namespace FLocal.Common.actions {
-	public class ChangeSetUtil {
+	public static class ChangeSetUtil {
 
 		internal static void WithChangeSet(Action<ChangeSet, Transaction> action) {
 			using(ChangeSet changeSet = new ChangeSet()) {
