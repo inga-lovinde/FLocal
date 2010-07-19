@@ -18,11 +18,6 @@
 								<xsl:text>)</xsl:text>
 							</td> 
 						</tr>
-						<tr class="darktable"> 
-							<td> 
-								<xsl:text>Заполните приведенную ниже форму для изменения сообщения</xsl:text>
-							</td> 
-						</tr> 
 						<tr> 
 							<td class="lighttable"> 
 								<form method="post" action="/do/Edit/" name="replier">

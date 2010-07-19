@@ -9,7 +9,7 @@
 			<xsl:text> [</xsl:text>
 			<a>
 				<xsl:if test="session/sessionKey">
-					<xsl:attribute name="href">/Board/<xsl:value-of select="currentLocation/board/id"/>/NewThread/</xsl:attribute>
+					<xsl:attribute name="href">/PMSend/</xsl:attribute>
 				</xsl:if>
 				<xsl:text>New Message</xsl:text>
 			</a>

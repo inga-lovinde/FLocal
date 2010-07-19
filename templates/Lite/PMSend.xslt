@@ -13,11 +13,6 @@
 								<xsl:text>Ќовое личное сообщение</xsl:text>
 							</td> 
 						</tr>
-						<tr class="darktable"> 
-							<td> 
-								<xsl:text>«аполните приведенную ниже форму дл€ отправки личного сообщени€. HTML отключен. UBBCode включен, и вы можете использовать UBBCode в ваших сообщени€х. јнонимные сообщени€ разрешены, и вы можете выбрать любое незарегистрированное им€.</xsl:text>
-							</td> 
-						</tr> 
 						<tr> 
 							<td class="lighttable"> 
 								<form method="post" action="/do/SendPM/" name="replier">

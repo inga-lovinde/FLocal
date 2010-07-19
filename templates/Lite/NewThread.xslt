@@ -18,11 +18,6 @@
 								<xsl:text>)</xsl:text>
 							</td> 
 						</tr>
-						<tr class="darktable"> 
-							<td> 
-								<xsl:text>«аполните приведенную ниже форму дл€ отправки сообщени€ в форум. HTML отключен. UBBCode включен, и вы можете использовать UBBCode в ваших сообщени€х. јнонимные сообщени€ разрешены, и вы можете выбрать любое незарегистрированное им€.</xsl:text>
-							</td> 
-						</tr> 
 						<tr> 
 							<td class="lighttable"> 
 								<form method="post" action="/do/NewThread/" name="replier">
