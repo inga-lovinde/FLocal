@@ -24,25 +24,29 @@
 					</a>
 				</font>
 				<br />
-				<table cellpadding="0" cellspacing="0">
-					<tr>
-						<td class="forumdescript" style="padding-right:0.5em">
-							<a>
-								<xsl:attribute name="href">/Board/<xsl:value-of select="id"/>/</xsl:attribute>
-								<xsl:text>A</xsl:text>
-							</a>
-						</td>
-						<td class="forumdescript"><xsl:value-of select="description"/></td>
-					</tr>
-					<xsl:if test="subBoards/board">
-						<tr>
-							<td class="forumdescript">&#160;</td>
-							<td class="forumdescript" style="padding-top:0.3em">
-								<xsl:apply-templates select="subBoards/board"/>
-							</td>
-						</tr>
-					</xsl:if>
-				</table>
+				<xsl:if test="(description != '') or (subBoards/board)">
+					<table cellpadding="0" cellspacing="0">
+						<xsl:if test="description != ''">
+							<tr>
+								<td class="forumdescript" style="padding-right:0.5em">
+									<a>
+										<xsl:attribute name="href">/Board/<xsl:value-of select="id"/>/</xsl:attribute>
+										<xsl:text>A</xsl:text>
+									</a>
+								</td>
+								<td class="forumdescript"><xsl:value-of select="description"/></td>
+							</tr>
+						</xsl:if>
+						<xsl:if test="subBoards/board">
+							<tr>
+								<td class="forumdescript">&#160;</td>
+								<td class="forumdescript" style="padding-top:0.3em">
+									<xsl:apply-templates select="subBoards/board"/>
+								</td>
+							</tr>
+						</xsl:if>
+					</table>
+				</xsl:if>
 			</td>
 			<td width="7%" align="center" class="threadtotal" nowrap="nowrap"><xsl:value-of select="totalThreads"/></td>
 			<td width="7%" align="center" class="posttotal" nowrap="nowrap"><xsl:value-of select="totalPosts"/></td>
