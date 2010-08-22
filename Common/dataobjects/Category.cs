@@ -9,7 +9,7 @@ using System.Xml.Linq;
 namespace FLocal.Common.dataobjects {
 	public class Category : SqlObject<Category> {
 
-		public class TableSpec : ISqlObjectTableSpec {
+		public class TableSpec : IComplexSqlObjectTableSpec {
 			public const string TABLE = "Categories";
 			public const string FIELD_ID = "Id";
 			public const string FIELD_SORTORDER = "SortOrder";
@@ -19,6 +19,10 @@ namespace FLocal.Common.dataobjects {
 			public string name { get { return TABLE; } }
 			public string idName { get { return FIELD_ID; } }
 			public void refreshSqlObject(int id) { Refresh(id); }
+			public void refreshSqlObjectAndRelated(int id) {
+				Refresh(id);
+				LoadById(id).subBoards_Reset();
+			}
 		}
 
 		protected override ISqlObjectTableSpec table { get { return TableSpec.instance; } }

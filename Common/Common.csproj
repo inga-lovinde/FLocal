@@ -103,6 +103,7 @@
     <Compile Include="dataobjects\User.cs" />
     <Compile Include="dataobjects\AccountSettings.cs" />
     <Compile Include="dataobjects\UserGroup.cs" />
+    <Compile Include="IComplexSqlObjectTableSpec.cs" />
     <Compile Include="IOutputParams.cs" />
     <Compile Include="ISqlObjectTableSpec.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

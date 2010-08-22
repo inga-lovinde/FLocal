@@ -23,9 +23,13 @@ namespace FLocal.IISHandler.handlers.request.maintenance {
 			int start = int.Parse(context.httprequest.Form["start"]);
 			int length = int.Parse(context.httprequest.Form["length"]);
 			ISqlObjectTableSpec tableSpec = TableManager.TABLES[table];
-			for(int i=0; i<length; i++) {
+			foreach(int id in Enumerable.Range(start, length)) {
 				try {
-					tableSpec.refreshSqlObject(start+i);
+					if(tableSpec is IComplexSqlObjectTableSpec) {
+						((IComplexSqlObjectTableSpec)tableSpec).refreshSqlObjectAndRelated(id);
+					} else {
+						tableSpec.refreshSqlObject(id);
+					}
 				} catch(NotFoundInDBException) {
 				}
 			}
