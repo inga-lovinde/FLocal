@@ -28,12 +28,6 @@
 					<table cellpadding="0" cellspacing="0">
 						<xsl:if test="description != ''">
 							<tr>
-								<td class="forumdescript" style="padding-right:0.5em">
-									<a>
-										<xsl:attribute name="href">/Board/<xsl:value-of select="id"/>/</xsl:attribute>
-										<xsl:text>A</xsl:text>
-									</a>
-								</td>
 								<td class="forumdescript"><xsl:value-of select="description"/></td>
 							</tr>
 						</xsl:if>
