@@ -18,6 +18,7 @@ namespace FLocal.Common.dataobjects {
 			public const string FIELD_PASSWORDHASH = "Password";
 			public const string FIELD_NEEDSMIGRATION = "NeedsMigration";
 			public const string FIELD_NAME = "Name";
+			public const string FIELD_IPADDRESS = "IpAddress";
 			public static readonly TableSpec instance = new TableSpec();
 			public string name { get { return TABLE; } }
 			public string idName { get { return FIELD_ID; } }
@@ -158,7 +159,7 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
-		public static KeyValuePair<AbstractChange, AbstractChange[]> getNewAccountChanges(string _name, string password) {
+		public static KeyValuePair<AbstractChange, AbstractChange[]> getNewAccountChanges(string _name, string password, string ip) {
 			string name = _name.Trim();
 			checkNewName(name);
 			checkNewPassword(password);
@@ -184,6 +185,7 @@ namespace FLocal.Common.dataobjects {
 					{ Account.TableSpec.FIELD_NEEDSMIGRATION, new ScalarFieldValue("0") },
 					{ Account.TableSpec.FIELD_PASSWORDHASH, new ScalarFieldValue(hashPassword(password, name.ToLower())) },
 					{ Account.TableSpec.FIELD_USERID, new ReferenceFieldValue(userInsert) },
+					{ Account.TableSpec.FIELD_IPADDRESS, new ScalarFieldValue(ip) },
 				}
 			);
 			var indicatorInsert = new InsertChange(
@@ -204,8 +206,9 @@ namespace FLocal.Common.dataobjects {
 			);
 		}
 
-		public void migrate(string newPassword) {
+		public void migrate(string newPassword, string ip) {
 			checkNewPassword(newPassword);
+			if(!this.needsMigration) throw new FLocalException("Already migrated");
 			ChangeSetUtil.ApplyChanges(new AbstractChange[] {
 				new UpdateChange(
 					TableSpec.instance,
@@ -217,6 +220,10 @@ namespace FLocal.Common.dataobjects {
 						{
 							TableSpec.FIELD_NEEDSMIGRATION,
 							new ScalarFieldValue("0")
+						},
+						{
+							TableSpec.FIELD_IPADDRESS,
+							new ScalarFieldValue(ip)
 						},
 					},
 					this.id

@@ -17,7 +17,7 @@ namespace FLocal.IISHandler.handlers.request {
 			Invite invite = Invite.LoadById(int.Parse(context.httprequest.Form["inviteId"]));
 			if(invite.isUsed) throw new FLocalException("Invite is already used");
 			if(context.httprequest.Form["password"] != context.httprequest.Form["password2"]) throw new FLocalException("Passwords mismatch");
-			return invite.createAccount(context.httprequest.Form["code"], context.httprequest.Form["login"], context.httprequest.Form["password"]);
+			return invite.createAccount(context.httprequest.Form["code"], context.httprequest.Form["login"], context.httprequest.Form["password"], context.httprequest.UserHostAddress);
 		}
 
 	}
