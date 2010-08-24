@@ -87,6 +87,7 @@
     <Compile Include="dataobjects\AccountIndicator.cs" />
     <Compile Include="dataobjects\Board.cs" />
     <Compile Include="dataobjects\Category.cs" />
+    <Compile Include="dataobjects\Invite.cs" />
     <Compile Include="dataobjects\IUserSettings.cs" />
     <Compile Include="dataobjects\AnonymousUserSettings.cs" />
     <Compile Include="dataobjects\PMConversation.cs" />

@@ -55,10 +55,19 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
+		private string _name;
+		public string name {
+			get {
+				this.LoadIfNotLoaded();
+				return this._name;
+			}
+		}
+
 		protected override void doFromHash(Dictionary<string, string> data) {
 			this._userId = int.Parse(data[TableSpec.FIELD_USERID]);
 			this._passwordHash = data[TableSpec.FIELD_PASSWORDHASH];
 			this._needsMigration = Util.string2bool(data[TableSpec.FIELD_NEEDSMIGRATION]);
+			this._name = data[TableSpec.FIELD_NAME];
 		}
 
 		public XElement exportToXml(UserContext context) {
@@ -103,23 +112,31 @@ namespace FLocal.Common.dataobjects {
 			return Account.LoadById(userid2id[user.id]);
 		}
 
-		private string hashPassword(string password) {
+		private string hashPasswordLegacy(string password) {
 			return Util.md5(Util.md5(password) + " " + Util.md5(Config.instance.SaltMigration) + " " + Util.md5(this.id.ToString()));
 		}
 
+		private static string hashPassword(string password, string name) {
+			return Util.md5(Util.md5(password) + " " + Util.md5(Config.instance.SaltMigration) + " " + Util.md5(name));
+		}
+
+		private string hashPassword(string password) {
+			return hashPassword(password, name);
+		}
+
 		public bool checkPassword(string password) {
-			return this.hashPassword(password) == this.passwordHash;
+			return (this.hashPassword(password) == this.passwordHash) || (this.hashPasswordLegacy(password) == this.passwordHash);
 		}
 
 		public void updatePassword(string newPassword) {
-			if(newPassword.Length < 5) throw new FLocalException("Password is too short");
+			checkNewPassword(newPassword);
 			ChangeSetUtil.ApplyChanges(new AbstractChange[] {
 				new UpdateChange(
 					TableSpec.instance,
 					new Dictionary<string, AbstractFieldValue>() {
 						{
 							TableSpec.FIELD_PASSWORDHASH,
-							new ScalarFieldValue(this.hashPassword(newPassword))
+							new ScalarFieldValue(this.hashPasswordLegacy(newPassword))
 						},
 					},
 					this.id
@@ -127,15 +144,75 @@ namespace FLocal.Common.dataobjects {
 			});
 		}
 
-		public void migrate(string newPassword) {
+		public static void checkNewPassword(string newPassword) {
 			if(newPassword.Length < 5) throw new FLocalException("Password is too short");
+		}
+
+		public static void checkNewName(string newName) {
+			if(newName.Length < 2) throw new FLocalException("Name is too short");
+			if(newName.Length > 16) throw new FLocalException("Name is too long");
+			try {
+				Account.LoadByName(newName);
+				throw new FLocalException("Name is already used");
+			} catch(NotFoundInDBException) {
+			}
+		}
+
+		public static KeyValuePair<AbstractChange, AbstractChange[]> getNewAccountChanges(string _name, string password) {
+			string name = _name.Trim();
+			checkNewName(name);
+			checkNewPassword(password);
+			var userInsert = new InsertChange(
+				User.TableSpec.instance,
+				new Dictionary<string, AbstractFieldValue> {
+					{ User.TableSpec.FIELD_AVATARID, new ScalarFieldValue(null) },
+					{ User.TableSpec.FIELD_BIOGRAPHY, new ScalarFieldValue("") },
+					{ User.TableSpec.FIELD_LOCATION, new ScalarFieldValue("") },
+					{ User.TableSpec.FIELD_NAME, new ScalarFieldValue(name) },
+					{ User.TableSpec.FIELD_REGDATE, new ScalarFieldValue(DateTime.Now.ToUTCString()) },
+					{ User.TableSpec.FIELD_SHOWPOSTSTOUSERS, new ScalarFieldValue(User.ENUM_SHOWPOSTSTOUSERS_ALL) },
+					{ User.TableSpec.FIELD_SIGNATURE, new ScalarFieldValue("") },
+					{ User.TableSpec.FIELD_TITLE, new ScalarFieldValue("novice") },
+					{ User.TableSpec.FIELD_TOTALPOSTS, new ScalarFieldValue("0") },
+					{ User.TableSpec.FIELD_USERGROUPID, new ScalarFieldValue("1") },
+				}
+			);
+			var accountInsert = new InsertChange(
+				Account.TableSpec.instance,
+				new Dictionary<string, AbstractFieldValue> {
+					{ Account.TableSpec.FIELD_NAME, new ScalarFieldValue(name.ToLower()) },
+					{ Account.TableSpec.FIELD_NEEDSMIGRATION, new ScalarFieldValue("0") },
+					{ Account.TableSpec.FIELD_PASSWORDHASH, new ScalarFieldValue(hashPassword(password, name.ToLower())) },
+					{ Account.TableSpec.FIELD_USERID, new ReferenceFieldValue(userInsert) },
+				}
+			);
+			var indicatorInsert = new InsertChange(
+				AccountIndicator.TableSpec.instance,
+				new Dictionary<string,AbstractFieldValue> {
+					{ AccountIndicator.TableSpec.FIELD_ACCOUNTID, new ReferenceFieldValue(accountInsert) },
+					{ AccountIndicator.TableSpec.FIELD_PRIVATEMESSAGES, new ScalarFieldValue("0") },
+					{ AccountIndicator.TableSpec.FIELD_UNREADPRIVATEMESSAGES, new ScalarFieldValue("0") },
+				}
+			);
+			return new KeyValuePair<AbstractChange,AbstractChange[]>(
+				accountInsert,
+				new[] {
+					userInsert,
+					accountInsert,
+					indicatorInsert,
+				}
+			);
+		}
+
+		public void migrate(string newPassword) {
+			checkNewPassword(newPassword);
 			ChangeSetUtil.ApplyChanges(new AbstractChange[] {
 				new UpdateChange(
 					TableSpec.instance,
 					new Dictionary<string, AbstractFieldValue>() {
 						{
 							TableSpec.FIELD_PASSWORDHASH,
-							new ScalarFieldValue(this.hashPassword(newPassword))
+							new ScalarFieldValue(this.hashPasswordLegacy(newPassword))
 						},
 						{
 							TableSpec.FIELD_NEEDSMIGRATION,
@@ -156,7 +233,7 @@ namespace FLocal.Common.dataobjects {
 
 		public static Account tryAuthorize(string name, string password) {
 			Account account = LoadByName(name);
-			if(account.passwordHash != account.hashPassword(password)) throw new FLocalException("Wrong password (" + account.id + ":" + account.hashPassword(password) + ")");
+			if(!account.checkPassword(password)) throw new FLocalException("Wrong password (" + account.id + ":" + account.hashPassword(password) + ")");
 			return account;
 		}
 

@@ -78,6 +78,8 @@ namespace FLocal.IISHandler {
 					return new handlers.response.LoginHandler();
 				case "migrateaccount":
 					return new handlers.response.MigrateAccountHandler();
+				case "registerbyinvite":
+					return new handlers.response.RegisterByInviteHandler();
 				case "users":
 					if(context.requestParts.Length < 2) {
 						return new handlers.response.UserListHandler();
@@ -165,6 +167,8 @@ namespace FLocal.IISHandler {
 								return new handlers.request.LogoutHandler();
 							case "migrateaccount":
 								return new handlers.request.MigrateAccountHandler();
+							case "registerbyinvite":
+								return new handlers.request.RegisterByInviteHandler();
 							case "edit":
 								return new handlers.request.EditHandler();
 							case "reply":

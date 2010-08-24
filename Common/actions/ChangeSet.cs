@@ -33,6 +33,7 @@ namespace FLocal.Common.actions {
 						dataobjects.Board.ReadMarkerTableSpec.TABLE,
 						dataobjects.Poll.TableSpec.TABLE,
 						dataobjects.Poll.Vote.TableSpec.TABLE,
+						dataobjects.Invite.TableSpec.TABLE,
 						dataobjects.Session.TableSpec.TABLE,
 					}
 				);

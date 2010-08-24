@@ -11,34 +11,9 @@ using FLocal.Common;
 using FLocal.Common.actions;
 
 namespace FLocal.IISHandler.handlers.request {
-	class MigrateAccountHandler : AbstractPostHandler {
+	class MigrateAccountHandler : AbstractNewAccountHandler {
 
-		protected override string templateName {
-			get {
-				return "result/MigrateAccount.xslt";
-			}
-		}
-
-		protected override bool shouldBeLoggedIn {
-			get { return false; }
-		}
-
-		protected override bool shouldBeGuest {
-			get { return true; }
-		}
-
-		protected override XElement[] Do(WebContext context) {
-
-			if(context.httprequest.Form["constitution"] != "constitution") {
-				throw new FLocalException("constitution not accepted");
-			}
-			if(context.httprequest.Form["showPostsToAll"] != "showPostsToAll") {
-				throw new FLocalException("publicity not accepted");
-			}
-			if(context.httprequest.Form["law"] != "law") {
-				throw new FLocalException("laws not accepted");
-			}
-
+		protected override Account DoCreateAccount(WebContext context) {
 			Account account = Account.LoadById(int.Parse(context.httprequest.Form["accountId"]));
 			if(!account.needsMigration) throw new FLocalException("Already migrated");
 			string userInfo = ShallerGateway.getUserInfoAsString(account.user.name);
@@ -49,7 +24,7 @@ namespace FLocal.IISHandler.handlers.request {
 			if(check != context.httprequest["check"]) throw new FLocalException("Wrong key (fhn:" + match.Groups[1].Value + ")");
 			if(context.httprequest.Form["password"] != context.httprequest.Form["password2"]) throw new FLocalException("Passwords mismatch");
 			account.migrate(context.httprequest.Form["password2"]);
-			return new XElement[0];
+			return account;
 		}
 
 	}

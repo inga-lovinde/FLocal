@@ -60,6 +60,7 @@
     <Compile Include="handlers\BoardsHandler.cs" />
     <Compile Include="handlers\DebugHandler.cs" />
     <Compile Include="handlers\PostHandler.cs" />
+    <Compile Include="handlers\request\AbstractNewAccountHandler.cs" />
     <Compile Include="handlers\request\AbstractNewMessageHandler.cs" />
     <Compile Include="handlers\request\AbstractPostHandler.cs" />
     <Compile Include="handlers\request\CreatePollHandler.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="handlers\request\maintenance\CleanCacheHandler.cs" />
     <Compile Include="handlers\request\MarkThreadAsReadHandler.cs" />
     <Compile Include="handlers\request\MigrateAccountHandler.cs" />
+    <Compile Include="handlers\request\RegisterByInviteHandler.cs" />
     <Compile Include="handlers\request\ReturnPostHandler.cs" />
     <Compile Include="handlers\request\ReplyHandler.cs" />
     <Compile Include="handlers\request\SendPMHandler.cs" />
@@ -96,6 +98,7 @@
     <Compile Include="handlers\response\PollHandler.cs" />
     <Compile Include="handlers\response\QuickLinkHandler.cs" />
     <Compile Include="handlers\response\RedirectGetHandler.cs" />
+    <Compile Include="handlers\response\RegisterByInviteHandler.cs" />
     <Compile Include="handlers\response\ReplyHandler.cs" />
     <Compile Include="handlers\response\RobotsHandler.cs" />
     <Compile Include="handlers\response\SettingsHandler.cs" />
