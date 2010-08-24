@@ -33,7 +33,6 @@
 						</xsl:if>
 						<xsl:if test="subBoards/board">
 							<tr>
-								<td class="forumdescript">&#160;</td>
 								<td class="forumdescript" style="padding-top:0.3em">
 									<xsl:apply-templates select="subBoards/board"/>
 								</td>
