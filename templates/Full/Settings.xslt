@@ -35,6 +35,11 @@
 										<input type="password" name="newPassword2"/>
 									</p>
 									<p>
+										<xsl:text>e-mail для восстановления пароля (необязательно)</xsl:text>
+										<br/>
+										<input type="text" name="registrationEmail"/>
+									</p>
+									<p>
 										<xsl:text>Постов на страницу:</xsl:text>
 										<br/>
 										<input type="text" name="postsPerPage">

@@ -19,6 +19,7 @@ namespace FLocal.Common.dataobjects {
 			public const string FIELD_NEEDSMIGRATION = "NeedsMigration";
 			public const string FIELD_NAME = "Name";
 			public const string FIELD_IPADDRESS = "IpAddress";
+			public const string FIELD_REGISTRATIONEMAIL = "RegistrationEmail";
 			public static readonly TableSpec instance = new TableSpec();
 			public string name { get { return TABLE; } }
 			public string idName { get { return FIELD_ID; } }
@@ -145,6 +146,21 @@ namespace FLocal.Common.dataobjects {
 			});
 		}
 
+		public void updateRegistrationEmail(string newEmail) {
+			ChangeSetUtil.ApplyChanges(new AbstractChange[] {
+				new UpdateChange(
+					TableSpec.instance,
+					new Dictionary<string, AbstractFieldValue>() {
+						{
+							TableSpec.FIELD_REGISTRATIONEMAIL,
+							new ScalarFieldValue(newEmail)
+						},
+					},
+					this.id
+				)
+			});
+		}
+
 		public static void checkNewPassword(string newPassword) {
 			if(newPassword.Length < 5) throw new FLocalException("Password is too short");
 		}
@@ -159,7 +175,7 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
-		public static KeyValuePair<AbstractChange, AbstractChange[]> getNewAccountChanges(string _name, string password, string ip) {
+		public static KeyValuePair<AbstractChange, AbstractChange[]> getNewAccountChanges(string _name, string password, string ip, string registrationEmail) {
 			string name = _name.Trim();
 			checkNewName(name);
 			checkNewPassword(password);
@@ -186,6 +202,7 @@ namespace FLocal.Common.dataobjects {
 					{ Account.TableSpec.FIELD_PASSWORDHASH, new ScalarFieldValue(hashPassword(password, name.ToLower())) },
 					{ Account.TableSpec.FIELD_USERID, new ReferenceFieldValue(userInsert) },
 					{ Account.TableSpec.FIELD_IPADDRESS, new ScalarFieldValue(ip) },
+					{ Account.TableSpec.FIELD_REGISTRATIONEMAIL, new ScalarFieldValue(registrationEmail) },
 				}
 			);
 			var indicatorInsert = new InsertChange(
@@ -206,7 +223,7 @@ namespace FLocal.Common.dataobjects {
 			);
 		}
 
-		public void migrate(string newPassword, string ip) {
+		public void migrate(string newPassword, string ip, string registrationEmail) {
 			checkNewPassword(newPassword);
 			if(!this.needsMigration) throw new FLocalException("Already migrated");
 			ChangeSetUtil.ApplyChanges(new AbstractChange[] {
@@ -224,6 +241,10 @@ namespace FLocal.Common.dataobjects {
 						{
 							TableSpec.FIELD_IPADDRESS,
 							new ScalarFieldValue(ip)
+						},
+						{
+							TableSpec.FIELD_REGISTRATIONEMAIL,
+							new ScalarFieldValue(registrationEmail)
 						},
 					},
 					this.id

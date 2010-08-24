@@ -84,11 +84,11 @@ namespace FLocal.Common.dataobjects {
 		}
 
 		private object createAccount_locker = new object();
-		public Account createAccount(string code, string name, string password, string ip) {
+		public Account createAccount(string code, string name, string password, string ip, string registrationEmail) {
 			lock(this.createAccount_locker) {
 				if(this.isUsed) throw new FLocalException("Invite is already used");
 				if(this.code != code) throw new FLocalException("Wrong code");
-				var rawChanges = Account.getNewAccountChanges(name, password, ip);
+				var rawChanges = Account.getNewAccountChanges(name, password, ip, registrationEmail);
 				var accountInsert = rawChanges.Key;
 				var changes = new List<AbstractChange>(rawChanges.Value);
 				changes.Add(

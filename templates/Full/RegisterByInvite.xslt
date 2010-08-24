@@ -27,6 +27,8 @@
 									<input type="password" name="password" class="formboxes" /><br/>
 									<xsl:text>Повторите пароль</xsl:text><br/> 
 									<input type="password" name="password2" class="formboxes" /><br/>
+									<xsl:text>e-mail для восстановления пароля (необязательно)</xsl:text><br/>
+									<input type="text" name="registrationEmail" class="formboxes" />
 									<br/>
 									<input type="checkbox" name="constitution" value="constitution" id="constitution"/>
 									<label for="constitution"> Да, я согласен/согласна/согласно с тем, что на этом форуме действует </label>

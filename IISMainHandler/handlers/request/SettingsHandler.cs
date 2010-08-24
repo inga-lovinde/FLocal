@@ -19,6 +19,7 @@ namespace FLocal.IISHandler.handlers.request {
 			string currentPassword = context.httprequest.Form["currentPassword"];
 			string newPassword = context.httprequest.Form["newPassword"];
 			if(newPassword != context.httprequest.Form["newPassword2"]) throw new FLocalException("new passwords mismatch");
+			string registrationEmail = context.httprequest.Form["registrationEmail"];
 			int postsPerPage = int.Parse(context.httprequest.Form["postsPerPage"]);
 			int threadsPerPage = int.Parse(context.httprequest.Form["threadsPerPage"]);
 			int usersPerPage = int.Parse(context.httprequest.Form["usersPerPage"]);
@@ -36,6 +37,10 @@ namespace FLocal.IISHandler.handlers.request {
 
 			if(newPassword != null && newPassword != "") {
 				context.account.updatePassword(newPassword);
+			}
+
+			if(registrationEmail != null && registrationEmail != "") {
+				context.account.updateRegistrationEmail(registrationEmail);
 			}
 
 			return new XElement[0];
