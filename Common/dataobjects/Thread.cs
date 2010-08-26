@@ -283,7 +283,7 @@ namespace FLocal.Common.dataobjects {
 				throw new CriticalException("more than one row");
 			}
 			if(stringIds.Count < 1) {
-				return FORMALREADMIN;
+				return (this.lastPostId >= FORMALREADMIN) ? 0 : this.lastPostId;
 			}
 			Dictionary<string, string> data = Config.instance.mainConnection.LoadById(ReadMarkerTableSpec.instance, stringIds[0]);
 			if((data[ReadMarkerTableSpec.FIELD_POSTID] == "") || (data[ReadMarkerTableSpec.FIELD_POSTID] == null)) {
