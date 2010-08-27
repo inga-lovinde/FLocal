@@ -9,7 +9,8 @@
 					<table cellpadding="3" cellspacing="1" width="100%" class="tableborders">
 						<tr>
 							<td class="tdheader">
-								<xsl:text>Миграция пользователя</xsl:text>
+								<xsl:text>Миграция пользователя </xsl:text>
+								<xsl:value-of select="migrationInfo/account/user/name"/>
 							</td> 
 						</tr>
 						<tr class="darktable"> 
@@ -23,7 +24,7 @@
 							<td class="lighttable"> 
 								<form method="post" action="/do/MigrateAccount/">
 									<input type="hidden" name="accountId">
-										<xsl:attribute name="value"><xsl:value-of select="migrationInfo/accountId"/></xsl:attribute>
+										<xsl:attribute name="value"><xsl:value-of select="migrationInfo/account/id"/></xsl:attribute>
 									</input>
 									<input type="hidden" name="check">
 										<xsl:attribute name="value"><xsl:value-of select="migrationInfo/check"/></xsl:attribute>

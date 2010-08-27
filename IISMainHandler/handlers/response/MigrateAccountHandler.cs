@@ -31,7 +31,7 @@ namespace FLocal.IISHandler.handlers.response {
 			string key = Util.RandomString(8, Util.RandomSource.LETTERS_DIGITS);
 			return new XElement[] {
 				new XElement("migrationInfo",
-					new XElement("accountId", account.id),
+					account.exportToXml(context),
 					new XElement("key", key),
 					new XElement("check", Util.md5(key + " " + Config.instance.SaltMigration + " " + account.id))
 				),
