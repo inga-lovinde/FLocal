@@ -14,6 +14,14 @@ namespace FLocal.IISHandler.handlers.request {
 	class RegisterByInviteHandler : AbstractNewAccountHandler {
 
 		protected override Account DoCreateAccount(WebContext context) {
+			try {
+				Account tmpAccount = Account.LoadByName(context.httprequest.Form["login"]);
+				if(tmpAccount.needsMigration) {
+					throw new RedirectException("/MigrateAccount/" + context.httprequest.Form["login"]);
+				}
+			} catch(NotFoundInDBException) {
+			}
+
 			Invite invite = Invite.LoadById(int.Parse(context.httprequest.Form["inviteId"]));
 			if(invite.isUsed) throw new FLocalException("Invite is already used");
 			if(context.httprequest.Form["password"] != context.httprequest.Form["password2"]) throw new FLocalException("Passwords mismatch");
