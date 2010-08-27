@@ -14,6 +14,7 @@ namespace FLocal.Common {
 			dataobjects.Board.TableSpec.instance,
 			dataobjects.Category.TableSpec.instance,
 			dataobjects.Invite.TableSpec.instance,
+			dataobjects.LocalNetwork.TableSpec.instance,
 			dataobjects.PMConversation.TableSpec.instance,
 			dataobjects.PMMessage.TableSpec.instance,
 			dataobjects.Poll.TableSpec.instance,

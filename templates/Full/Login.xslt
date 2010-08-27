@@ -62,6 +62,70 @@
 				</td> 
 			</tr> 
 		</table> 
+		<br/>
+		<table width="95%" align="center" cellpadding="1" cellspacing="1" class="tablesurround">
+			<tr>
+				<td>
+					<table cellpadding="3" cellspacing="1" width="100%" class="tableborders">
+						<tr>
+							<td class="tdheader">
+								<xsl:text>Регистрация</xsl:text>
+							</td> 
+						</tr>
+						<tr class="darktable"> 
+							<td>
+								<xsl:choose>
+									<xsl:when test="isLocalNetwork='false'">
+										<xsl:text>Ваш IP </xsl:text>
+										<xsl:value-of select="ip"/>
+										<xsl:text> не входит в список разрешённых подсетей.</xsl:text>
+										<br/>
+										<xsl:text>Если вы считаете, что это ошибка, сообщите администратору свой IP-адрес и описание сети (общежитие/учебный корпус, университет и прочее).</xsl:text>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:text>Ваш IP </xsl:text>
+										<xsl:value-of select="ip"/>
+										<xsl:text> входит в список разрешённых подсетей.</xsl:text>
+									</xsl:otherwise>
+								</xsl:choose>
+							</td> 
+						</tr>
+						<xsl:if test="isLocalNetwork='true'">
+							<tr> 
+								<td class="lighttable"> 
+									<form method="post" action="/do/Register/">
+										<xsl:text>Имя пользователя</xsl:text><br/>
+										<input type="text" name="login" class="formboxes" maxlength="16"/><br/>
+										<xsl:text>Новый пароль</xsl:text><br /> 
+										<input type="password" name="password" class="formboxes" /><br/>
+										<xsl:text>Повторите пароль</xsl:text><br/> 
+										<input type="password" name="password2" class="formboxes" /><br/>
+										<xsl:text>e-mail для восстановления пароля (необязательно)</xsl:text><br/>
+										<input type="text" name="registrationEmail" class="formboxes" />
+										<br/>
+										<input type="checkbox" name="constitution" value="constitution" id="constitution"/>
+										<label for="constitution"> Да, я согласен/согласна/согласно с тем, что на этом форуме действует </label>
+										<a href="/q/constitution/" style="text-decoration:underline">описанная по этой ссылке конституция</a>
+										<xsl:text>.</xsl:text>
+										<i> (обязательно)</i>
+										<br/>
+										<input type="checkbox" name="showPostsToAll" value="showPostsToAll" id="showPostsToAll"/>
+										<label for="showPostsToAll"> Да, я согласен/согласна/согласно с тем, чтобы мои сообщения, размещённые на этом форуме, были доступны публично.</label>
+										<i> (обязательно)</i>
+										<br/>
+										<input type="checkbox" name="law" value="law" id="law"/>
+										<label for="law"> Да, я обязуюсь соблюдать законы Российской Федерации и Федеративной Республики Германия в общении на этом форуме.</label>
+										<i> (обязательно)</i>
+										<br/>
+										<input type="submit" name="buttlogin" value="Зарегистрироваться!" class="buttons" /> 
+									</form>
+								</td> 
+							</tr> 
+						</xsl:if>
+					</table> 
+				</td> 
+			</tr> 
+		</table> 
 	</xsl:template>
 
 </xsl:stylesheet>

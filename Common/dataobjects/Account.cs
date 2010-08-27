@@ -265,5 +265,13 @@ namespace FLocal.Common.dataobjects {
 			return account;
 		}
 
+		public static Account createAccount(string name, string password, string ip, string registrationEmail) {
+			var rawChanges = Account.getNewAccountChanges(name, password, ip, registrationEmail);
+			var accountInsert = rawChanges.Key;
+			var changes = rawChanges.Value;
+			ChangeSetUtil.ApplyChanges(changes);
+			return Account.LoadById(accountInsert.getId().Value);
+		}
+
 	}
 }

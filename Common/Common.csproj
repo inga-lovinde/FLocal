@@ -90,6 +90,7 @@
     <Compile Include="dataobjects\Invite.cs" />
     <Compile Include="dataobjects\IUserSettings.cs" />
     <Compile Include="dataobjects\AnonymousUserSettings.cs" />
+    <Compile Include="dataobjects\LocalNetwork.cs" />
     <Compile Include="dataobjects\PMConversation.cs" />
     <Compile Include="dataobjects\PMMessage.cs" />
     <Compile Include="dataobjects\Poll.cs" />

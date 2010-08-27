@@ -17,6 +17,9 @@ namespace FLocal.IISHandler.handlers.response {
 			context.httpresponse.ContentType = "text/plain";
 			context.httpresponse.WriteLine("User-agent: *");
 			context.httpresponse.WriteLine("Disallow: /");
+			foreach(var subnet in context.remoteHost.matchingSubnets) {
+				context.httpresponse.WriteLine(subnet.ToString());
+			}
 		}
 
 	}

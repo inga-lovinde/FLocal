@@ -167,6 +167,8 @@ namespace FLocal.IISHandler {
 								return new handlers.request.LogoutHandler();
 							case "migrateaccount":
 								return new handlers.request.MigrateAccountHandler();
+							case "register":
+								return new handlers.request.RegisterHandler();
 							case "registerbyinvite":
 								return new handlers.request.RegisterByInviteHandler();
 							case "edit":

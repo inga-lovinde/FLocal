@@ -17,7 +17,10 @@ namespace FLocal.IISHandler.handlers.response {
 		}
 
 		protected override IEnumerable<XElement> getSpecificData(WebContext context) {
-			return new XElement[0];
+			return new XElement[] {
+				new XElement("isLocalNetwork", LocalNetwork.IsLocalNetwork(context.remoteHost).ToPlainString()),
+				new XElement("ip", context.remoteHost.ToString()),
+			};
 		}
 
 	}

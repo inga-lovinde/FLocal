@@ -72,6 +72,7 @@
     <Compile Include="handlers\request\MarkThreadAsReadHandler.cs" />
     <Compile Include="handlers\request\MigrateAccountHandler.cs" />
     <Compile Include="handlers\request\RegisterByInviteHandler.cs" />
+    <Compile Include="handlers\request\RegisterHandler.cs" />
     <Compile Include="handlers\request\ReturnPostHandler.cs" />
     <Compile Include="handlers\request\ReplyHandler.cs" />
     <Compile Include="handlers\request\SendPMHandler.cs" />

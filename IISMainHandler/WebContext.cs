@@ -144,5 +144,11 @@ namespace FLocal.IISHandler {
 			return result;
 		}
 
+		public Core.Network.IPv4Address remoteHost {
+			get {
+				return new Core.Network.IPv4Address(this.httprequest.UserHostAddress);
+			}
+		}
+
 	}
 }
