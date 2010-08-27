@@ -13,6 +13,7 @@ namespace FLocal.Common {
 			dataobjects.AccountSettings.TableSpec.instance,
 			dataobjects.Board.TableSpec.instance,
 			dataobjects.Category.TableSpec.instance,
+			dataobjects.Invite.TableSpec.instance,
 			dataobjects.PMConversation.TableSpec.instance,
 			dataobjects.PMMessage.TableSpec.instance,
 			dataobjects.Poll.TableSpec.instance,
