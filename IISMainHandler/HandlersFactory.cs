@@ -154,6 +154,8 @@ namespace FLocal.IISHandler {
 						default:
 							return new handlers.response.PollHandler();
 					}
+				case "localnetworks":
+					return new handlers.response.LocalNetworksListHandler();
 				case "static":
 					return new handlers.StaticHandler(context.requestParts);
 				case "do":

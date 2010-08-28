@@ -81,13 +81,16 @@
 										<xsl:text> не входит в список разрешённых подсетей.</xsl:text>
 										<br/>
 										<xsl:text>Если вы считаете, что это ошибка, сообщите администратору свой IP-адрес и описание сети (общежитие/учебный корпус, университет и прочее).</xsl:text>
+										<br/>
 									</xsl:when>
 									<xsl:otherwise>
 										<xsl:text>Ваш IP </xsl:text>
 										<xsl:value-of select="ip"/>
 										<xsl:text> входит в список разрешённых подсетей.</xsl:text>
+										<br/>
 									</xsl:otherwise>
 								</xsl:choose>
+								<a href="/LocalNetworks/">Список разрешённых подсетей</a>
 							</td> 
 						</tr>
 						<xsl:if test="isLocalNetwork='true'">

@@ -90,6 +90,7 @@
     <Compile Include="handlers\response\EditHandler.cs" />
     <Compile Include="handlers\response\LegacyPHPHandler.cs" />
     <Compile Include="handlers\response\LegacyUploadHandler.cs" />
+    <Compile Include="handlers\response\LocalNetworksListHandler.cs" />
     <Compile Include="handlers\response\LoginHandler.cs" />
     <Compile Include="handlers\response\maintenance\CleanCacheHandler.cs" />
     <Compile Include="handlers\response\MigrateAccountHandler.cs" />
