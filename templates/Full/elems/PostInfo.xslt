@@ -123,22 +123,7 @@
 										</font>
 									</td>
 								</tr>
-								<xsl:if test="revision">
-									<xsl:if test="(revision != '') and (revision != '0')">
-										<tr>
-											<td>
-												<font size="-2">
-													<xsl:text>Это сообщение было отредактировано пользователем </xsl:text>
-													<xsl:value-of select="revision"/>
-													<xsl:text> раз, последний раз </xsl:text>
-													<xsl:apply-templates select="lastChangeDate/date" mode="dateTime"/>
-													<br/>
-													<br/>
-												</font>
-											</td>
-										</tr>
-									</xsl:if>
-								</xsl:if>
+								<xsl:apply-templates select="specific"/>
 								<xsl:if test="poster/user/signature != ''">
 									<tr>
 										<td>
@@ -156,5 +141,21 @@
 		</tr>
 	</xsl:template>
 
+	<xsl:template match="specific/changeInfo">
+		<xsl:if test="(revision != '') and (revision != '0')">
+			<tr>
+				<td>
+					<font size="-2">
+						<xsl:text>Это сообщение было отредактировано пользователем </xsl:text>
+						<xsl:value-of select="revision"/>
+						<xsl:text> раз, последний раз </xsl:text>
+						<xsl:apply-templates select="lastChangeDate/date" mode="dateTime"/>
+						<br/>
+						<br/>
+					</font>
+				</td>
+			</tr>
+		</xsl:if>
+	</xsl:template>
 
 </xsl:stylesheet>

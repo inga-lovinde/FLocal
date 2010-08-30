@@ -187,8 +187,6 @@ namespace FLocal.Common.dataobjects {
 				new XElement("id", this.id),
 				new XElement("poster", this.poster.exportToXmlForViewing(context)),
 				new XElement("postDate", this.postDate.ToXml()),
-				new XElement("lastChangeDate", this.lastChangeDate.ToXml()),
-				new XElement("revision", this.revision.ToString()),
 				new XElement("layerId", this.layerId),
 				new XElement("layerName", this.layer.name),
 				new XElement("title", this.title),
@@ -196,7 +194,15 @@ namespace FLocal.Common.dataobjects {
 				//this.XMLBody(context),
 				new XElement("bodyShort", this.bodyShort),
 				new XElement("threadId", this.threadId),
-				new XElement("isOwner", ((context.account != null) && (this.poster.id == context.account.user.id)).ToPlainString())
+				new XElement("isOwner", ((context.account != null) && (this.poster.id == context.account.user.id)).ToPlainString()),
+				new XElement(
+					"specific",
+					new XElement(
+						"changeInfo",
+						new XElement("lastChangeDate", this.lastChangeDate.ToXml()),
+						new XElement("revision", this.revision.ToString())
+					)
+				)
 			);
 			if(includeParentPost) {
 				if(this.parentPostId.HasValue) {
