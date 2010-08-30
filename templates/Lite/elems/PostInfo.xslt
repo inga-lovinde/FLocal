@@ -64,4 +64,36 @@
 	<xsl:template match="specific/changeInfo">
 	</xsl:template>
 
+	<xsl:template match="specific/thread">
+		<xsl:choose>
+			<xsl:when test="afterLastRead&lt;=lastPostId">
+				<xsl:text>(*</xsl:text>
+				<xsl:value-of select="totalNewPosts"/>
+				<xsl:text>)</xsl:text>
+			</xsl:when>
+			<xsl:otherwise>
+			</xsl:otherwise>
+		</xsl:choose>
+		<xsl:text> </xsl:text>
+		<a>
+			<xsl:attribute name="href">
+				<xsl:text>/Thread/</xsl:text>
+				<xsl:value-of select="id"/>
+				<xsl:text>/</xsl:text>
+				<xsl:if test="afterLastRead&lt;=lastPostId">
+					<xsl:text>p</xsl:text>
+					<xsl:value-of select="afterLastRead"/>
+				</xsl:if>
+			</xsl:attribute>
+			<xsl:choose>
+				<xsl:when test="totalPosts &gt; 1">
+					<xsl:text>Обсуждение этого сообщения</xsl:text>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:text>Начать обсуждение</xsl:text>
+				</xsl:otherwise>
+			</xsl:choose>
+		</a>
+	</xsl:template>
+
 </xsl:stylesheet>

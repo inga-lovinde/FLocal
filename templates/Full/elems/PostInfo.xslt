@@ -158,4 +158,45 @@
 		</xsl:if>
 	</xsl:template>
 
+	<xsl:template match="specific/thread">
+		<tr>
+			<td>
+				<font size="-1">
+					<a class="separate">
+						<xsl:attribute name="href">
+							<xsl:text>/Thread/</xsl:text>
+							<xsl:value-of select="id"/>
+							<xsl:text>/</xsl:text>
+							<xsl:if test="afterLastRead&lt;=lastPostId">
+								<xsl:text>p</xsl:text>
+								<xsl:value-of select="afterLastRead"/>
+							</xsl:if>
+						</xsl:attribute>
+						<xsl:choose>
+							<xsl:when test="totalPosts &gt; 1">
+								<xsl:text>Обсуждение этого сообщения</xsl:text>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:text>Начать обсуждение</xsl:text>
+							</xsl:otherwise>
+						</xsl:choose>
+					</a>
+					<xsl:if test="totalPosts &gt; 1">
+						<span class="separate"><xsl:value-of select="totalPosts"/></span>
+						<xsl:if test="totalNewPosts and totalNewPosts!='0'">
+							<a class="cup separate">
+								<xsl:if test="/root/session/sessionKey">
+									<xsl:attribute name="href">/do/MarkThreadAsRead/<xsl:value-of select="id"/>/p<xsl:value-of select="lastPostId"/>/</xsl:attribute>
+								</xsl:if>
+								<font class="new"><i>(<xsl:value-of select="totalNewPosts"/>)</i></font>
+							</a>
+						</xsl:if>
+					</xsl:if>
+					<br/>
+					<br/>
+				</font>
+			</td>
+		</tr>
+	</xsl:template>
+
 </xsl:stylesheet>
