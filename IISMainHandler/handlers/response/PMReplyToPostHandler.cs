@@ -32,8 +32,8 @@ namespace FLocal.IISHandler.handlers.response {
 
 			return new XElement[] {
 				post.thread.board.exportToXml(context, false),
-				post.thread.exportToXml(context, false),
-				post.exportToXmlWithoutThread(context, false),
+				post.thread.exportToXml(context),
+				post.exportToXml(context, false),
 				new XElement("receiver", Account.LoadByUser(post.poster).exportToXml(context)),
 				new XElement("quoted", quoted),
 			};

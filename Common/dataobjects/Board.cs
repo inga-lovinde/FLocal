@@ -188,7 +188,7 @@ namespace FLocal.Common.dataobjects {
 			if(!this.lastPostId.HasValue) {
 				return new XElement("none");
 			} else {
-				return this.lastPost.exportToXmlWithoutThread(context, false);
+				return this.lastPost.exportToXml(context, false);
 			}
 		}
 

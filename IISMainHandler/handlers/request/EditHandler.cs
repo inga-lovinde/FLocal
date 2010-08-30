@@ -17,7 +17,7 @@ namespace FLocal.IISHandler.handlers.request {
 		protected override XElement[] Do(WebContext context) {
 
 			Post post = Post.LoadById(int.Parse(context.httprequest.Form["postId"]));
-			XElement postXml = post.exportToXmlWithoutThread(context, false);
+			XElement postXml = post.exportToXml(context, false);
 			post.Edit(
 				context.session.account.user,
 				this.getTitle(context),

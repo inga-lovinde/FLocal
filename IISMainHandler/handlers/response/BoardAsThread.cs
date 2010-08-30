@@ -33,8 +33,8 @@ namespace FLocal.IISHandler.handlers.response {
 			return new XElement[] {
 				new XElement("currentLocation", board.exportToXmlSimpleWithParent(context)),
 				new XElement("boards", from subBoard in board.subBoards select subBoard.exportToXml(context, true)),
-				new XElement("threads", 
-					from thread in threads select thread.exportToXml(context, true),
+				new XElement("posts", 
+					from thread in threads select thread.firstPost.exportToXml(context, true),
 					pageOuter.exportToXml(1, 5, 1)
 				)
 			};

@@ -99,20 +99,20 @@
 							<td colspan="5">
 								<font class="onbody">
 									<xsl:text>страницы:</xsl:text>
-									<xsl:apply-templates select="threads/pageOuter" mode="withCurrent">
+									<xsl:apply-templates select="posts/pageOuter" mode="withCurrent">
 										<xsl:with-param name="baseLink">/BoardAsThread/<xsl:value-of select="currentLocation/board/id"/>/</xsl:with-param>
 									</xsl:apply-templates>
 								</font>
 							</td>
 						</tr>
 						<!-- BEGIN POST LOOP DO NOT DELETE -->
-						<xsl:apply-templates select="threads/thread/firstPost/post"/>
+						<xsl:apply-templates select="posts/post"/>
 						<!-- END OF LOOP -->
 						<tr class="tdheader">
 							<td colspan="5">
 								<font class="onbody">
 									<xsl:text>страницы:</xsl:text>
-									<xsl:apply-templates select="threads/pageOuter" mode="withCurrent">
+									<xsl:apply-templates select="posts/pageOuter" mode="withCurrent">
 										<xsl:with-param name="baseLink">/BoardAsThread/<xsl:value-of select="currentLocation/board/id"/>/</xsl:with-param>
 									</xsl:apply-templates>
 								</font>

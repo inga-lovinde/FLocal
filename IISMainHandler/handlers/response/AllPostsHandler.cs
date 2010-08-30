@@ -49,7 +49,7 @@ namespace FLocal.IISHandler.handlers.response {
 
 			XElement[] result = new XElement[] {
 				new XElement("posts",
-					from post in posts select post.exportToXmlWithoutThread(context, true),
+					from post in posts select post.exportToXml(context, true),
 					pageOuter.exportToXml(2, 5, 2)
 				)
 			};

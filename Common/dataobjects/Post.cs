@@ -179,7 +179,7 @@ namespace FLocal.Common.dataobjects {
 			return XElement.Parse("<body>" + context.outputParams.preprocessBodyIntermediate(this.body) + "</body>", LoadOptions.PreserveWhitespace);
 		}
 
-		public XElement exportToXmlWithoutThread(UserContext context, bool includeParentPost, params XElement[] additional) {
+		public XElement exportToXml(UserContext context, bool includeParentPost, params XElement[] additional) {
 			
 			if(!context.isPostVisible(this)) return null;
 
@@ -200,7 +200,7 @@ namespace FLocal.Common.dataobjects {
 			);
 			if(includeParentPost) {
 				if(this.parentPostId.HasValue) {
-					result.Add(new XElement("parentPost", this.parentPost.exportToXmlWithoutThread(context, false)));
+					result.Add(new XElement("parentPost", this.parentPost.exportToXml(context, false)));
 				}
 			}
 			if(additional.Length > 0) {

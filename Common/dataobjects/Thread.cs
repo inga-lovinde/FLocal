@@ -183,7 +183,7 @@ namespace FLocal.Common.dataobjects {
 			);
 		}
 
-		public XElement exportToXml(UserContext context, bool includeFirstPost, params XElement[] additional) {
+		public XElement exportToXml(UserContext context, params XElement[] additional) {
 
 			if(!context.isPostVisible(this.firstPost)) return null;
 
@@ -203,9 +203,6 @@ namespace FLocal.Common.dataobjects {
 				new XElement("layerName", this.firstPost.layer.name),
 				context.formatTotalPosts(this.totalPosts)
 			);
-			if(includeFirstPost) {
-				result.Add(new XElement("firstPost", this.firstPost.exportToXmlWithoutThread(context, false)));
-			}
 			if(context.account != null) {
 				int lastReadId = this.getLastReadId(context.account);
 				result.Add(
