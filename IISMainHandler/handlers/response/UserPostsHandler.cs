@@ -32,7 +32,7 @@ namespace FLocal.IISHandler.handlers.response {
 			XElement[] result = new XElement[] {
 				user.exportToXmlForViewing(context),
 				new XElement("posts",
-					from post in posts select post.exportToXml(context, true),
+					from post in posts select post.exportToXml(context),
 					pageOuter.exportToXml(2, 5, 2)
 				)
 			};

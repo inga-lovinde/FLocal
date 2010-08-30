@@ -59,7 +59,7 @@ namespace FLocal.IISHandler.handlers {
 				new XElement("currentLocation", thread.exportToXmlSimpleWithParent(context)),
 				thread.exportToXml(context),
 				new XElement("posts",
-					from post in posts select post.exportToXml(context, true, new XElement("isUnread", (post.id > lastReadId).ToPlainString())),
+					from post in posts select post.exportToXml(context, new XElement("isUnread", (post.id > lastReadId).ToPlainString())),
 					pageOuter.exportToXml(2, 5, 2)
 				)
 			};

@@ -175,11 +175,19 @@ namespace FLocal.Common.dataobjects {
 			);
 		}
 
+		public XElement exportToXmlBase(UserContext context) {
+			return new XElement("post",
+				new XElement("id", this.id),
+				new XElement("poster", this.poster.exportToXmlForViewing(context)),
+				new XElement("bodyShort", context.isPostVisible(this) ? this.bodyShort : "")
+			);
+		}
+
 		private XNode XMLBody(UserContext context) {
 			return XElement.Parse("<body>" + context.outputParams.preprocessBodyIntermediate(this.body) + "</body>", LoadOptions.PreserveWhitespace);
 		}
 
-		public XElement exportToXml(UserContext context, bool includeParentPost, params XElement[] additional) {
+		public XElement exportToXml(UserContext context, params XElement[] additional) {
 			
 			if(!context.isPostVisible(this)) return null;
 
@@ -204,10 +212,8 @@ namespace FLocal.Common.dataobjects {
 					)
 				)
 			);
-			if(includeParentPost) {
-				if(this.parentPostId.HasValue) {
-					result.Add(new XElement("parentPost", this.parentPost.exportToXml(context, false)));
-				}
+			if(this.parentPostId.HasValue) {
+				result.Add(new XElement("parentPost", this.parentPost.exportToXmlBase(context)));
 			}
 			if(additional.Length > 0) {
 				result.Add(additional);

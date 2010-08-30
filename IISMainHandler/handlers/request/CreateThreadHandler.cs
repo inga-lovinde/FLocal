@@ -25,7 +25,7 @@ namespace FLocal.IISHandler.handlers.request {
 
 			return new XElement[] {
 				newThread.board.exportToXml(context, false),
-				newPost.exportToXml(context, false)
+				newPost.exportToXml(context)
 			};
 		}
 	}

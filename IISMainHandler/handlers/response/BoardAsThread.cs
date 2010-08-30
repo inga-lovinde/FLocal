@@ -36,11 +36,7 @@ namespace FLocal.IISHandler.handlers.response {
 				new XElement("posts", 
 					from thread in threads select thread.firstPost.exportToXml(
 						context,
-						false,
-						new XElement(
-							"specific",
-							thread.exportToXml(context)
-						)
+						new XElement("specific", thread.exportToXml(context))
 					),
 					pageOuter.exportToXml(1, 5, 1)
 				)
