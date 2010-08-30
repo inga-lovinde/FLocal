@@ -91,37 +91,18 @@
 			</tr>
 		</table>
 		<br/>
-		<table width="95%" align="center" cellpadding="1" cellspacing="1" class="tablesurround">
-			<tr>
-				<td>
-					<table cellpadding="0" cellspacing="1" width="100%" class="tableborders">
-						<tr class="tdheader">
-							<td colspan="5">
-								<font class="onbody">
-									<xsl:text>страницы:</xsl:text>
-									<xsl:apply-templates select="posts/pageOuter" mode="withCurrent">
-										<xsl:with-param name="baseLink">/BoardAsThread/<xsl:value-of select="currentLocation/board/id"/>/</xsl:with-param>
-									</xsl:apply-templates>
-								</font>
-							</td>
-						</tr>
-						<!-- BEGIN POST LOOP DO NOT DELETE -->
-						<xsl:apply-templates select="posts/post"/>
-						<!-- END OF LOOP -->
-						<tr class="tdheader">
-							<td colspan="5">
-								<font class="onbody">
-									<xsl:text>страницы:</xsl:text>
-									<xsl:apply-templates select="posts/pageOuter" mode="withCurrent">
-										<xsl:with-param name="baseLink">/BoardAsThread/<xsl:value-of select="currentLocation/board/id"/>/</xsl:with-param>
-									</xsl:apply-templates>
-								</font>
-							</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-		</table>
+		<div class="tdheader">
+			<xsl:text>страницы:</xsl:text>
+			<xsl:apply-templates select="posts/pageOuter" mode="withCurrent">
+				<xsl:with-param name="baseLink">/BoardAsThread/<xsl:value-of select="currentLocation/board/id"/>/</xsl:with-param>
+			</xsl:apply-templates>
+		</div>
+		<xsl:apply-templates select="posts/post"/>
+		<div class="tdheader">
+			<xsl:apply-templates select="posts/pageOuter" mode="footer">
+				<xsl:with-param name="baseLink">/BoardAsThread/<xsl:value-of select="currentLocation/board/id"/>/</xsl:with-param>
+			</xsl:apply-templates>
+		</div>
 	</xsl:template>
 
 </xsl:stylesheet>

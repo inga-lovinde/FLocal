@@ -162,7 +162,7 @@
 		<tr>
 			<td>
 				<font size="-1">
-					<a class="separate">
+					<a>
 						<xsl:attribute name="href">
 							<xsl:text>/Thread/</xsl:text>
 							<xsl:value-of select="id"/>

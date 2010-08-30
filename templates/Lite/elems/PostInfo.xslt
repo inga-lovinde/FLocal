@@ -87,10 +87,10 @@
 			</xsl:attribute>
 			<xsl:choose>
 				<xsl:when test="totalPosts &gt; 1">
-					<xsl:text>Обсуждение этого сообщения</xsl:text>
+					<xsl:text>╬сёєцфхэшх ¤Єюую ёююс∙хэш </xsl:text>
 				</xsl:when>
 				<xsl:otherwise>
-					<xsl:text>Начать обсуждение</xsl:text>
+					<xsl:text>═рўрЄ№ юсёєцфхэшх</xsl:text>
 				</xsl:otherwise>
 			</xsl:choose>
 		</a>
