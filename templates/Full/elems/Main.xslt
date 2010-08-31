@@ -169,6 +169,7 @@
 	</xsl:template>
 
 	<xsl:template match="user" mode="userLink">
+		<xsl:if test="position() &gt; 1">, </xsl:if>
 		<a>
 			<xsl:attribute name="class">
 				<xsl:text>separate </xsl:text>
