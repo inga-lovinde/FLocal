@@ -55,11 +55,11 @@ namespace FLocal.Common.dataobjects {
 					from id in Cache<IEnumerable<int>>.instance.get(
 						allCategories_Locker,
 						() => {
-							IEnumerable<int> ids = from stringId in Config.instance.mainConnection.LoadIdsByConditions(
+							IEnumerable<int> ids = (from stringId in Config.instance.mainConnection.LoadIdsByConditions(
 								TableSpec.instance,
 								new FLocal.Core.DB.conditions.EmptyCondition(),
 								Diapasone.unlimited
-							) select int.Parse(stringId);
+							) select int.Parse(stringId)).ToList();
 							Category.LoadByIds(ids);
 							return ids;
 						}
@@ -80,7 +80,7 @@ namespace FLocal.Common.dataobjects {
 					from id in Cache<IEnumerable<int>>.instance.get(
 						this.subBoards_Locker,
 						() => {
-							IEnumerable<int> ids = from stringId in Config.instance.mainConnection.LoadIdsByConditions(
+							IEnumerable<int> ids = (from stringId in Config.instance.mainConnection.LoadIdsByConditions(
 								Board.TableSpec.instance,
 								new FLocal.Core.DB.conditions.ComparisonCondition(
 									Board.TableSpec.instance.getColumnSpec(Board.TableSpec.FIELD_CATEGORYID),
@@ -88,7 +88,7 @@ namespace FLocal.Common.dataobjects {
 									this.id.ToString()
 								),
 								Diapasone.unlimited
-							) select int.Parse(stringId);
+							) select int.Parse(stringId)).ToList();
 							Board.LoadByIds(ids);
 							return ids;
 						}

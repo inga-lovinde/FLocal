@@ -153,7 +153,7 @@ namespace FLocal.Common.dataobjects {
 					from id in Cache<IEnumerable<int>>.instance.get(
 						this.subBoards_Locker,
 						() => {
-							IEnumerable<int> ids = from stringId in Config.instance.mainConnection.LoadIdsByConditions(
+							IEnumerable<int> ids = (from stringId in Config.instance.mainConnection.LoadIdsByConditions(
 								TableSpec.instance,
 								new FLocal.Core.DB.conditions.ComparisonCondition(
 									TableSpec.instance.getColumnSpec(Board.TableSpec.FIELD_PARENTBOARDID),
@@ -161,7 +161,7 @@ namespace FLocal.Common.dataobjects {
 									this.id.ToString()
 								),
 								Diapasone.unlimited
-							) select int.Parse(stringId);
+							) select int.Parse(stringId)).ToList();
 							Board.LoadByIds(ids);
 							return ids;
 						}
