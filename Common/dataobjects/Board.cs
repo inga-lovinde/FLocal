@@ -201,6 +201,14 @@ namespace FLocal.Common.dataobjects {
 			);
 		}
 
+		public XElement exportToXmlSimple(UserContext context) {
+			return new XElement("board",
+				new XElement("id", this.id),
+				new XElement("name", this.name),
+				new XElement("description", this.description)
+			);
+		}
+
 		public XElement exportToXml(UserContext context, bool includeSubBoards, params XElement[] additional) {
 			XElement result = new XElement("board",
 				new XElement("id", this.id),
@@ -210,7 +218,8 @@ namespace FLocal.Common.dataobjects {
 				new XElement("totalThreads", this.totalThreads),
 				new XElement("name", this.name),
 				new XElement("description", this.description),
-				new XElement("lastPostInfo", this.exportLastPostInfo(context))
+				new XElement("lastPostInfo", this.exportLastPostInfo(context)),
+				new XElement("moderators", from moderator in Moderator.GetModerators(this) select moderator.user.exportToXmlForViewing(context))
 			);
 
 			if(context.account != null) {

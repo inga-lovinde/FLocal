@@ -10,6 +10,9 @@ using FLocal.Core.DB.conditions;
 namespace FLocal.Common.dataobjects {
 	public class UserGroup : SqlObject<UserGroup> {
 
+		public const string NAME_MODERATORS = "Moderators";
+		public const string NAME_ADMINISTRATORS = "Administrators";
+
 		public class TableSpec : ISqlObjectTableSpec {
 			public const string TABLE = "UserGroups";
 			public const string FIELD_ID = "Id";

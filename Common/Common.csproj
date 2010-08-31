@@ -91,11 +91,14 @@
     <Compile Include="dataobjects\IUserSettings.cs" />
     <Compile Include="dataobjects\AnonymousUserSettings.cs" />
     <Compile Include="dataobjects\LocalNetwork.cs" />
+    <Compile Include="dataobjects\Moderator.cs" />
     <Compile Include="dataobjects\PMConversation.cs" />
     <Compile Include="dataobjects\PMMessage.cs" />
     <Compile Include="dataobjects\Poll.cs" />
     <Compile Include="dataobjects\Post.cs" />
     <Compile Include="dataobjects\PostLayer.cs" />
+    <Compile Include="dataobjects\Punishment.cs" />
+    <Compile Include="dataobjects\PunishmentType.cs" />
     <Compile Include="dataobjects\QuickLink.cs" />
     <Compile Include="dataobjects\Revision.cs" />
     <Compile Include="dataobjects\Session.cs" />

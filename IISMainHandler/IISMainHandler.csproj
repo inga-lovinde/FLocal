@@ -71,6 +71,7 @@
     <Compile Include="handlers\request\maintenance\CleanCacheHandler.cs" />
     <Compile Include="handlers\request\MarkThreadAsReadHandler.cs" />
     <Compile Include="handlers\request\MigrateAccountHandler.cs" />
+    <Compile Include="handlers\request\PunishHandler.cs" />
     <Compile Include="handlers\request\RegisterByInviteHandler.cs" />
     <Compile Include="handlers\request\RegisterHandler.cs" />
     <Compile Include="handlers\request\ReturnPostHandler.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="handlers\response\PMReplyToPostHandler.cs" />
     <Compile Include="handlers\response\PMSendHandler.cs" />
     <Compile Include="handlers\response\PollHandler.cs" />
+    <Compile Include="handlers\response\PunishHandler.cs" />
     <Compile Include="handlers\response\QuickLinkHandler.cs" />
     <Compile Include="handlers\response\RedirectGetHandler.cs" />
     <Compile Include="handlers\response\RegisterByInviteHandler.cs" />

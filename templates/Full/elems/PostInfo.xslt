@@ -54,6 +54,14 @@
 												<td align="right">
 													<table class="tablesurround" border="0">
 														<tr>
+															<xsl:if test="isPunishmentEnabled='true'">
+																<td class="navigation">
+																	<a>
+																		<xsl:attribute name="href">/Post/<xsl:value-of select="id"/>/Punish/</xsl:attribute>
+																		<img src="/static/images/punish.gif" border="0" alt="Модерировать сообщение" title="Модерировать сообщение" style="vertical-align: text-bottom" />
+																	</a>
+																</td>
+															</xsl:if>
 															<td class="navigation">
 																<a>
 																	<xsl:if test="$isReplyDisabled='false'">
@@ -156,6 +164,27 @@
 				</td>
 			</tr>
 		</xsl:if>
+	</xsl:template>
+
+	<xsl:template match="specific/punishment">
+		<tr>
+			<td>
+				<font size="-2" class="punishment">
+					<xsl:value-of select="punishmentType/description"/>
+					<xsl:text> (</xsl:text>
+					<xsl:value-of select="punishmentType/weightDescription"/>
+					<xsl:text>). </xsl:text>
+					<xsl:value-of select="comment"/>
+					<xsl:text> (</xsl:text>
+					<xsl:apply-templates select="moderator/user" mode="userLink"/>
+					<xsl:text>, </xsl:text>
+					<xsl:apply-templates select="punishmentDate/date" mode="dateTime"/>
+					<xsl:text>)</xsl:text>
+					<br/>
+					<br/>
+				</font>
+			</td>
+		</tr>
 	</xsl:template>
 
 	<xsl:template match="specific/thread">

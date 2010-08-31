@@ -34,6 +34,8 @@ namespace FLocal.Common.actions {
 						dataobjects.Poll.TableSpec.TABLE,
 						dataobjects.Poll.Vote.TableSpec.TABLE,
 						dataobjects.Invite.TableSpec.TABLE,
+						dataobjects.Moderator.TableSpec.TABLE,
+						dataobjects.Punishment.TableSpec.TABLE,
 						dataobjects.Session.TableSpec.TABLE,
 					}
 				);

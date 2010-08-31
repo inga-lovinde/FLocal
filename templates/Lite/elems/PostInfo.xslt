@@ -31,6 +31,13 @@
 				</xsl:if>
 				<font class="small" style="padding-left:2em"><xsl:apply-templates select="postDate/date" mode="dateTime"/></font>
 				<span style="padding-left:1em">
+					<xsl:if test="isPunishmentEnabled='true'">
+						<xsl:text> | </xsl:text>
+						<a class="mod">
+							<xsl:attribute name="href">/Post/<xsl:value-of select="id"/>/Punish/</xsl:attribute>
+							<xsl:text>Mod</xsl:text>
+						</a>
+					</xsl:if>
 					<xsl:text> | </xsl:text>
 					<a>
 						<xsl:if test="$isReplyDisabled='false'">

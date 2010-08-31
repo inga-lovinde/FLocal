@@ -71,6 +71,8 @@ namespace FLocal.IISHandler {
 							return new handlers.response.ReplyHandler();
 						case "pmreply":
 							return new handlers.response.PMReplyToPostHandler();
+						case "punish":
+							return new handlers.response.PunishHandler();
 						default:
 							return new handlers.WrongUrlHandler();
 					}
@@ -175,6 +177,8 @@ namespace FLocal.IISHandler {
 								return new handlers.request.RegisterByInviteHandler();
 							case "edit":
 								return new handlers.request.EditHandler();
+							case "punish":
+								return new handlers.request.PunishHandler();
 							case "reply":
 								return new handlers.request.ReplyHandler();
 							case "newthread":

@@ -396,6 +396,7 @@ namespace FLocal.Common.dataobjects {
 				{ Post.TableSpec.FIELD_LAYERID, new ScalarFieldValue(layer.id.ToString()) },
 				{ Post.TableSpec.FIELD_TITLE, new ScalarFieldValue(title) },
 				{ Post.TableSpec.FIELD_BODY, new ScalarFieldValue(bodyIntermediate) },
+				{ Post.TableSpec.FIELD_TOTALPUNISHMENTS, new ScalarFieldValue("0") },
 			};
 			if(forcedPostId.HasValue) {
 				postInsertData[Post.TableSpec.FIELD_ID] = new ScalarFieldValue(forcedPostId.Value.ToString());

@@ -29,7 +29,12 @@ namespace FLocal.IISHandler.handlers {
 			XElement[] result = new XElement[] {
 				new XElement("currentLocation", post.exportToXmlSimpleWithParent(context)),
 				post.thread.exportToXml(context),
-				new XElement("posts", post.exportToXml(context, new XElement("isUnread", (post.id > lastReadId).ToPlainString())))
+				new XElement("posts",
+					post.exportToXml(
+						context,
+						new XElement("isUnread", (post.id > lastReadId).ToPlainString())
+					)
+				)
 			};
 
 			post.thread.incrementViewsCounter();

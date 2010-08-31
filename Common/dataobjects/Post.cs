@@ -24,6 +24,7 @@ namespace FLocal.Common.dataobjects {
 			public const string FIELD_BODY = "Body";
 			public const string FIELD_THREADID = "ThreadId";
 			public const string FIELD_PARENTPOSTID = "ParentPostId";
+			public const string FIELD_TOTALPUNISHMENTS = "TotalPunishments";
 			public static readonly TableSpec instance = new TableSpec();
 			public string name { get { return TABLE; } }
 			public string idName { get { return FIELD_ID; } }
@@ -155,6 +156,43 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
+		private int _totalPunishments;
+		public int totalPunishments {
+			get {
+				this.LoadIfNotLoaded();
+				return this._totalPunishments;
+			}
+		}
+
+		private readonly object punishments_Locker = new object();
+		public IEnumerable<Punishment> punishments {
+			get {
+				return
+					from id in Cache<IEnumerable<int>>.instance.get(
+						this.punishments_Locker,
+						() => {
+							IEnumerable<int> ids = (from stringId in Config.instance.mainConnection.LoadIdsByConditions(
+								Punishment.TableSpec.instance,
+								new ComparisonCondition(
+									Punishment.TableSpec.instance.getColumnSpec(Punishment.TableSpec.FIELD_POSTID),
+									ComparisonType.EQUAL,
+									this.id.ToString()
+								),
+								Diapasone.unlimited
+							) select int.Parse(stringId)).ToList();
+							Punishment.LoadByIds(ids);
+							return ids;
+						}
+					)
+					let punishment = Punishment.LoadById(id)
+					orderby punishment.id
+					select punishment;
+			}
+		}
+		internal void punishments_Reset() {
+			Cache<IEnumerable<int>>.instance.delete(this.punishments_Locker);
+		}
+
 		protected override void doFromHash(Dictionary<string, string> data) {
 			this._posterId = int.Parse(data[TableSpec.FIELD_POSTERID]);
 			this._postDate = Util.ParseDateTimeFromTimestamp(data[TableSpec.FIELD_POSTDATE]).Value;
@@ -165,6 +203,7 @@ namespace FLocal.Common.dataobjects {
 			this._body = data[TableSpec.FIELD_BODY];
 			this._threadId = int.Parse(data[TableSpec.FIELD_THREADID]);
 			this._parentPostId = Util.ParseInt(data[TableSpec.FIELD_PARENTPOSTID]);
+			this._totalPunishments = Util.ParseInt(data[TableSpec.FIELD_TOTALPUNISHMENTS]).GetValueOrDefault(0);
 		}
 
 		public XElement exportToXmlSimpleWithParent(UserContext context) {
@@ -179,7 +218,8 @@ namespace FLocal.Common.dataobjects {
 			return new XElement("post",
 				new XElement("id", this.id),
 				new XElement("poster", this.poster.exportToXmlForViewing(context)),
-				new XElement("bodyShort", context.isPostVisible(this) ? this.bodyShort : "")
+				new XElement("bodyShort", context.isPostVisible(this) ? this.bodyShort : ""),
+				new XElement("title", this.title)
 			);
 		}
 
@@ -193,7 +233,12 @@ namespace FLocal.Common.dataobjects {
 
 			XElement result = new XElement("post",
 				new XElement("id", this.id),
-				new XElement("poster", this.poster.exportToXmlForViewing(context)),
+				new XElement("poster",
+					this.poster.exportToXmlForViewing(
+						context,
+						new XElement("isModerator", Moderator.isModerator(this.poster, this.thread.board).ToPlainString())
+					)
+				),
 				new XElement("postDate", this.postDate.ToXml()),
 				new XElement("layerId", this.layerId),
 				new XElement("layerName", this.layer.name),
@@ -202,6 +247,7 @@ namespace FLocal.Common.dataobjects {
 				//this.XMLBody(context),
 				new XElement("bodyShort", this.bodyShort),
 				new XElement("threadId", this.threadId),
+				new XElement("isPunishmentEnabled", ((context.account != null) && Moderator.isModerator(context.account, this.thread.board)).ToPlainString()),
 				new XElement("isOwner", ((context.account != null) && (this.poster.id == context.account.user.id)).ToPlainString()),
 				new XElement(
 					"specific",
@@ -212,6 +258,9 @@ namespace FLocal.Common.dataobjects {
 					)
 				)
 			);
+			if(this.totalPunishments > 0) {
+				result.Add(from punishment in punishments select new XElement("specific", punishment.exportToXml(context)));
+			}
 			if(this.parentPostId.HasValue) {
 				result.Add(new XElement("parentPost", this.parentPost.exportToXmlBase(context)));
 			}
@@ -283,6 +332,52 @@ namespace FLocal.Common.dataobjects {
 					);
 				}
 				ChangeSetUtil.ApplyChanges(changes.ToArray());
+			}
+		}
+
+		public void Punish(Account account, PunishmentType type, string comment) {
+
+			if(!Moderator.isModerator(account, this.thread.board)) throw new FLocalException(account.id + " is not a moderator in board " + this.thread.board.id);
+
+			if(account.user.id == this.poster.id) throw new FLocalException("You cannot punish your own posts");
+	
+			ChangeSetUtil.ApplyChanges(
+				new UpdateChange(
+					TableSpec.instance,
+					new Dictionary<string,AbstractFieldValue> {
+						{ TableSpec.FIELD_TOTALPUNISHMENTS, new IncrementFieldValue() },
+					},
+					this.id
+				),
+				new InsertChange(
+					Punishment.TableSpec.instance,
+					new Dictionary<string,AbstractFieldValue> {
+						{ Punishment.TableSpec.FIELD_POSTID, new ScalarFieldValue(this.id.ToString()) },
+						{ Punishment.TableSpec.FIELD_OWNERID, new ScalarFieldValue(this.poster.id.ToString()) },
+						{ Punishment.TableSpec.FIELD_ORIGINALBOARDID, new ScalarFieldValue(this.thread.board.id.ToString()) },
+						{ Punishment.TableSpec.FIELD_MODERATORID, new ScalarFieldValue(account.id.ToString()) },
+						{ Punishment.TableSpec.FIELD_PUNISHMENTDATE, new ScalarFieldValue(DateTime.Now.ToUTCString()) },
+						{ Punishment.TableSpec.FIELD_PUNISHMENTTYPE, new ScalarFieldValue(type.id.ToString()) },
+						{ Punishment.TableSpec.FIELD_ISWITHDRAWED, new ScalarFieldValue("0") },
+						{ Punishment.TableSpec.FIELD_COMMENT, new ScalarFieldValue(comment) },
+					}
+				)
+			);
+
+			Account posterAccount = null;
+			try {
+				posterAccount = Account.LoadByUser(this.poster);
+			} catch(NotFoundInDBException) {
+			}
+			
+			if(posterAccount != null) {
+				PMMessage newMessage = PMConversation.SendPMMessage(
+					account,
+					posterAccount,
+					this.title,
+					type.description + "\r\n" + this.id
+				);
+				newMessage.conversation.markAsRead(account, newMessage, newMessage);
 			}
 		}
 

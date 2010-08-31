@@ -47,9 +47,7 @@
 				<xsl:apply-templates select="lastPostInfo"/>
 			</td>
 			<td width="10%" class="modcolumn" align="center">
-				<a>Sash</a>
-				<xsl:text>, </xsl:text>
-				<a>DeadmoroZ</a>
+				<xsl:apply-templates select="moderators/user" mode="userLink"/>
 			</td>
 		</tr>
 	</xsl:template>

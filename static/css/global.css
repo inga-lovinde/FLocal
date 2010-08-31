@@ -96,6 +96,17 @@ pre
 	background-color:yellow !important;
 	font-weight: bold !important;
 }
+.UG_Moderators {
+	color:blue !important;
+	background-color:white !important;
+}
+.UG_Administrators {
+	color:black !important;
+	background-color:white !important;
+}
 p {
 	margin:0em;
+}
+.punishment {
+	color:red !important;
 }

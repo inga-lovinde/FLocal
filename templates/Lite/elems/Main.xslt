@@ -182,6 +182,9 @@
 			</xsl:attribute>
 			<xsl:attribute name="href">/User/<xsl:value-of select="id"/>/</xsl:attribute>
 			<xsl:value-of select="name"/>
+			<xsl:if test="isModerator='true'">
+				<xsl:text>^M</xsl:text>
+			</xsl:if>
 		</a>
 	</xsl:template>
 
