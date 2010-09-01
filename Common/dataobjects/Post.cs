@@ -364,6 +364,8 @@ namespace FLocal.Common.dataobjects {
 				)
 			);
 
+			this.punishments_Reset();
+
 			Account posterAccount = null;
 			try {
 				posterAccount = Account.LoadByUser(this.poster);
