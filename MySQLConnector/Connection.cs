@@ -57,6 +57,8 @@ namespace FLocal.MySQLConnector {
 						string sValue;
 						if(value is DateTime) {
 							sValue = ((DateTime)value).Ticks.ToString();
+						} else if(value is TimeSpan) {
+							sValue = ((TimeSpan)value).Ticks.ToString();
 						} else {
 							sValue = value.ToString();
 						}

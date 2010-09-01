@@ -134,6 +134,19 @@ namespace FLocal.Core {
 			}
 		}
 
+		public static TimeSpan? ParseTimeSpanFromTimestamp(string raw) {
+			if(raw == "") {
+				return null;
+			} else {
+				long ticks = long.Parse(raw);
+				if(ticks < 1) {
+					return null;
+				} else {
+					return new TimeSpan(ticks);
+				}
+			}
+		}
+
 		public static string EOL {
 			get {
 				return new string(new char[] { (char)0x0d, (char)0x0a });

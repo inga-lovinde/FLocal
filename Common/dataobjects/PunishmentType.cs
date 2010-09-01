@@ -16,6 +16,7 @@ namespace FLocal.Common.dataobjects {
 			public const string FIELD_DESCRIPTION = "Description";
 			public const string FIELD_WEIGHT = "Weight";
 			public const string FIELD_WEIGHTDESCRIPTION = "WeightDescription";
+			public const string FIELD_TIMESPAN = "TimeSpan";
 			public static readonly TableSpec instance = new TableSpec();
 			public string name { get { return TABLE; } }
 			public string idName { get { return FIELD_ID; } }
@@ -48,10 +49,19 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
+		private TimeSpan _timeSpan;
+		public TimeSpan timeSpan {
+			get {
+				this.LoadIfNotLoaded();
+				return this._timeSpan;
+			}
+		}
+
 		protected override void doFromHash(Dictionary<string, string> data) {
 			this._description = data[TableSpec.FIELD_DESCRIPTION];
 			this._weight = int.Parse(data[TableSpec.FIELD_WEIGHT]);
 			this._weightDescription = data[TableSpec.FIELD_WEIGHTDESCRIPTION];
+			this._timeSpan = Util.ParseTimeSpanFromTimestamp(data[TableSpec.FIELD_TIMESPAN]).Value;
 		}
 
 		public XElement exportToXml(UserContext context) {
@@ -59,7 +69,8 @@ namespace FLocal.Common.dataobjects {
 				new XElement("id", this.id),
 				new XElement("description", this.description),
 				new XElement("weight", this.weight),
-				new XElement("weightDescription", this.weightDescription)
+				new XElement("weightDescription", this.weightDescription),
+				this.timeSpan.ToXml()
 			);
 		}
 

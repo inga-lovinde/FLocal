@@ -86,7 +86,8 @@
 			<xsl:value-of select="weight"/>
 			<xsl:text> (</xsl:text>
 			<xsl:value-of select="weightDescription"/>
-			<xsl:text>)</xsl:text>
+			<xsl:text>), срок действия </xsl:text>
+			<xsl:apply-templates select="timeSpan"/>
 		</label>
 		<br/>
 	</xsl:template>

@@ -104,6 +104,27 @@
 		</span>
 	</xsl:template>
 
+	<xsl:template match="timeSpan">
+		<span nowrap="nowrap">
+			<xsl:if test="days &gt; 0">
+				<xsl:value-of select="days"/>
+				<xsl:text> дней </xsl:text>
+			</xsl:if>
+			<xsl:if test="hours &gt; 0">
+				<xsl:value-of select="hours"/>
+				<xsl:text> часов </xsl:text>
+			</xsl:if>
+			<xsl:if test="minutes &gt; 0">
+				<xsl:value-of select="minutes"/>
+				<xsl:text> минут </xsl:text>
+			</xsl:if>
+			<xsl:if test="seconds &gt; 0">
+				<xsl:value-of select="seconds"/>
+				<xsl:text> секунд </xsl:text>
+			</xsl:if>
+		</span>
+	</xsl:template>
+
 	<xsl:template match="pageOuter/pages/page" mode="withoutCurrent">
 		<xsl:param name="baseLink"/>
 		<xsl:param name="selected">-1</xsl:param>

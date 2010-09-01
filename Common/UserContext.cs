@@ -50,6 +50,16 @@ namespace FLocal.Common {
 			);
 		}
 
+		public static XElement ToXml(this TimeSpan timeSpan) {
+			return new XElement("timeSpan",
+				new XElement("days", (long)timeSpan.TotalDays),
+				new XElement("hours", timeSpan.Hours),
+				new XElement("minutes", timeSpan.Minutes),
+				new XElement("seconds", timeSpan.Seconds),
+				new XElement("ticks", timeSpan.Ticks)
+			);
+		}
+
 	}
 
 }

@@ -377,6 +377,7 @@ namespace FLocal.Common.dataobjects {
 							{ Punishment.TableSpec.FIELD_PUNISHMENTTYPE, new ScalarFieldValue(type.id.ToString()) },
 							{ Punishment.TableSpec.FIELD_ISWITHDRAWED, new ScalarFieldValue("0") },
 							{ Punishment.TableSpec.FIELD_COMMENT, new ScalarFieldValue(comment) },
+							{ Punishment.TableSpec.FIELD_EXPIRES, new ScalarFieldValue(DateTime.Now.Add(type.timeSpan).ToUTCString()) },
 						}
 					)
 				);
