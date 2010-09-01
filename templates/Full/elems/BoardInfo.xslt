@@ -53,25 +53,12 @@
 	</xsl:template>
 
 	<xsl:template match="lastPostInfo">
-		<xsl:choose>
-			<xsl:when test="post and (post/id &gt; 10000000)">
-				<xsl:apply-templates select="post/postDate/date" mode="dateTime"/><br />
-				<a>
-					<xsl:attribute name="href">/Thread/<xsl:value-of select="post/threadId"/>/p<xsl:value-of select="post/id"/>/</xsl:attribute>
-					<xsl:text>от </xsl:text>
-					<xsl:value-of select="post/poster/user/name"/>
-				</a>
-				<xsl:text> </xsl:text>
-				<img alt="new" src="/static/images/new.gif">
-					<xsl:if test="post/id &lt; 10000000">
-						<xsl:attribute name="style">visibility:hidden</xsl:attribute>
-					</xsl:if>
-				</img>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:text>&#160;</xsl:text>
-			</xsl:otherwise>
-		</xsl:choose>
+		<xsl:apply-templates select="post/postDate/date" mode="dateTime"/><br />
+		<a>
+			<xsl:attribute name="href">/Thread/<xsl:value-of select="post/threadId"/>/p<xsl:value-of select="post/id"/>/</xsl:attribute>
+			<xsl:text>от </xsl:text>
+			<xsl:value-of select="post/poster/user/name"/>
+		</a>
 	</xsl:template>
 
 	<xsl:template match="subBoards/board">
