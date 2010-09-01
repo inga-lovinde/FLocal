@@ -71,6 +71,27 @@
 	<xsl:template match="specific/changeInfo">
 	</xsl:template>
 
+	<xsl:template match="specific/punishment">
+		<tr>
+			<td>
+				<font size="-2" class="punishment">
+					<xsl:value-of select="punishmentType/description"/>
+					<xsl:text> (</xsl:text>
+					<xsl:value-of select="punishmentType/weightDescription"/>
+					<xsl:text>). </xsl:text>
+					<xsl:value-of select="comment"/>
+					<xsl:text> (</xsl:text>
+					<xsl:apply-templates select="moderator/user" mode="userLink"/>
+					<xsl:text>, </xsl:text>
+					<xsl:apply-templates select="punishmentDate/date" mode="dateTime"/>
+					<xsl:text>)</xsl:text>
+					<br/>
+					<br/>
+				</font>
+			</td>
+		</tr>
+	</xsl:template>
+
 	<xsl:template match="specific/thread">
 		<xsl:choose>
 			<xsl:when test="afterLastRead&lt;=lastPostId">
