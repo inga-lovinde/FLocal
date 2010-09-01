@@ -13,7 +13,7 @@ namespace FLocal.Common.BBCodes {
 
 		public override string Format(ITextFormatter formatter) {
 			var thread = dataobjects.Thread.LoadById(int.Parse(this.DefaultOrValue));
-			var name = this.Safe(post.title);
+			var name = this.Safe(thread.title);
 			if(this.Default != null) {
 				name = this.GetInnerHTML(formatter);
 			}
