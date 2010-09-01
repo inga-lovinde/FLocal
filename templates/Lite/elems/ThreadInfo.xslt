@@ -18,8 +18,8 @@
 				<xsl:if test="isLocked='true'">
 					<xsl:text>{l}</xsl:text>
 				</xsl:if>
-				<xsl:if test="layerName='offtop'">{o}</xsl:if>
-				<xsl:if test="layerName='garbage'">{g}</xsl:if>
+				<xsl:if test="firstPost/post/layerName='offtop'">{o}</xsl:if>
+				<xsl:if test="firstPost/post/layerName='garbage'">{g}</xsl:if>
 				<xsl:choose>
 					<xsl:when test="afterLastRead&lt;=lastPostId">
 						<xsl:text>(*</xsl:text>
@@ -44,7 +44,7 @@
 				</a>
 			</td>
 			<td align="left" nowrap="nowrap">
-				<xsl:apply-templates select="topicstarter/user" mode="userLink"/>
+				<xsl:apply-templates select="firstPost/post/poster/user" mode="userLink"/>
 			</td>
 		</tr>
 	</xsl:template>

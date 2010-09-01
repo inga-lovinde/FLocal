@@ -12,7 +12,7 @@
 				</xsl:otherwise>
 			</xsl:choose>
 			<td align="left">
-				<xsl:attribute name="title"><xsl:value-of select="bodyShort"/></xsl:attribute>
+				<xsl:attribute name="title"><xsl:value-of select="firstPost/post/bodyShort"/></xsl:attribute>
 				<xsl:if test="isAnnouncement='true'">
 					<img src="/static/images/sticky.gif" width="16" height="16" alt="" border="0" style="vertical-align: text-bottom;" />
 					<xsl:text> </xsl:text>
@@ -24,10 +24,10 @@
 				<img alt="*" hspace="5" style="vertical-align: text-bottom">
 					<xsl:choose>
 						<xsl:when test="afterLastRead&lt;=lastPostId">
-							<xsl:attribute name="src">/static/images/message-<xsl:value-of select="layerName"/>-notread.gif</xsl:attribute>
+							<xsl:attribute name="src">/static/images/message-<xsl:value-of select="firstPost/post/layerName"/>-notread.gif</xsl:attribute>
 						</xsl:when>
 						<xsl:otherwise>
-							<xsl:attribute name="src">/static/images/message-<xsl:value-of select="layerName"/>-read.gif</xsl:attribute>
+							<xsl:attribute name="src">/static/images/message-<xsl:value-of select="firstPost/post/layerName"/>-read.gif</xsl:attribute>
 						</xsl:otherwise>
 					</xsl:choose>
 				</img>
@@ -53,7 +53,7 @@
 				</xsl:if>
 			</td>
 			<td align="left" nowrap="nowrap">
-				<xsl:apply-templates select="topicstarter/user" mode="userLink"/>
+				<xsl:apply-templates select="firstPost/post/poster/user" mode="userLink"/>
 			</td>
 			<td align="center">
 				<xsl:value-of select="totalViews"/>

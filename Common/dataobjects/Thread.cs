@@ -189,8 +189,7 @@ namespace FLocal.Common.dataobjects {
 
 			XElement result = new XElement("thread",
 				new XElement("id", this.id),
-				new XElement("firstPostId", this.firstPostId),
-				new XElement("topicstarter", this.topicstarter.exportToXmlForViewing(context)),
+				new XElement("firstPost", this.firstPost.exportToXml(context)),
 				new XElement("title", this.title),
 				new XElement("lastPostId", this.lastPostId),
 				new XElement("lastPostDate", this.lastPostDate.ToXml()),
@@ -198,9 +197,6 @@ namespace FLocal.Common.dataobjects {
 				new XElement("isLocked", this.isLocked),
 				new XElement("totalPosts", this.totalPosts),
 				new XElement("totalViews", this.totalViews),
-				new XElement("bodyShort", this.firstPost.bodyShort),
-				new XElement("layerId", this.firstPost.layerId),
-				new XElement("layerName", this.firstPost.layer.name),
 				context.formatTotalPosts(this.totalPosts)
 			);
 			if(context.account != null) {
