@@ -16,6 +16,8 @@
 					<xsl:text>PM</xsl:text>
 				</a>
 				<xsl:text> | </xsl:text>
+				<a href="/Boards/">Главная</a>
+				<xsl:text> | </xsl:text>
 				<a target="_top">
 					<xsl:attribute name="href">/do/Logout/?sessionKey=<xsl:value-of select="session/sessionKey"/></xsl:attribute>
 					<xsl:text>Выход</xsl:text>
