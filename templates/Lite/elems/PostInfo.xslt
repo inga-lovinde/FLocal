@@ -61,8 +61,8 @@
 			</div>
 			<div class="lighttable post">
 				<xsl:value-of select="body" disable-output-escaping="yes" />
-				<xsl:apply-templates select="specific"/>
 				<br/>
+				<xsl:apply-templates select="specific"/>
 				<br/>
 			</div>
 		</div>
