@@ -335,51 +335,71 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
+		private readonly object Punish_Locker = new object();
 		public void Punish(Account account, PunishmentType type, string comment) {
 
 			if(!Moderator.isModerator(account, this.thread.board)) throw new FLocalException(account.id + " is not a moderator in board " + this.thread.board.id);
 
 			if(account.user.id == this.poster.id) throw new FLocalException("You cannot punish your own posts");
 	
-			ChangeSetUtil.ApplyChanges(
-				new UpdateChange(
-					TableSpec.instance,
-					new Dictionary<string,AbstractFieldValue> {
-						{ TableSpec.FIELD_TOTALPUNISHMENTS, new IncrementFieldValue() },
-					},
-					this.id
-				),
-				new InsertChange(
-					Punishment.TableSpec.instance,
-					new Dictionary<string,AbstractFieldValue> {
-						{ Punishment.TableSpec.FIELD_POSTID, new ScalarFieldValue(this.id.ToString()) },
-						{ Punishment.TableSpec.FIELD_OWNERID, new ScalarFieldValue(this.poster.id.ToString()) },
-						{ Punishment.TableSpec.FIELD_ORIGINALBOARDID, new ScalarFieldValue(this.thread.board.id.ToString()) },
-						{ Punishment.TableSpec.FIELD_MODERATORID, new ScalarFieldValue(account.id.ToString()) },
-						{ Punishment.TableSpec.FIELD_PUNISHMENTDATE, new ScalarFieldValue(DateTime.Now.ToUTCString()) },
-						{ Punishment.TableSpec.FIELD_PUNISHMENTTYPE, new ScalarFieldValue(type.id.ToString()) },
-						{ Punishment.TableSpec.FIELD_ISWITHDRAWED, new ScalarFieldValue("0") },
-						{ Punishment.TableSpec.FIELD_COMMENT, new ScalarFieldValue(comment) },
-					}
-				)
-			);
+			lock(this.Punish_Locker) {
 
-			this.punishments_Reset();
+				List<AbstractChange> changes = (
+					from punishment in this.punishments
+					select (AbstractChange)new UpdateChange(
+						Punishment.TableSpec.instance,
+						new Dictionary<string,AbstractFieldValue> {
+							{ Punishment.TableSpec.FIELD_ISWITHDRAWED, new ScalarFieldValue("1") },
+						},
+						punishment.id
+					)
+				).ToList();
 
-			Account posterAccount = null;
-			try {
-				posterAccount = Account.LoadByUser(this.poster);
-			} catch(NotFoundInDBException) {
-			}
-			
-			if(posterAccount != null) {
-				PMMessage newMessage = PMConversation.SendPMMessage(
-					account,
-					posterAccount,
-					this.title,
-					String.Format("{0}\r\n[post]{2}[/post]\r\n{1}", type.description, comment, this.id)
+				changes.Add(
+					new UpdateChange(
+						TableSpec.instance,
+						new Dictionary<string,AbstractFieldValue> {
+							{ TableSpec.FIELD_TOTALPUNISHMENTS, new IncrementFieldValue() },
+						},
+						this.id
+					)
 				);
-				newMessage.conversation.markAsRead(account, newMessage, newMessage);
+
+				changes.Add(
+					new InsertChange(
+						Punishment.TableSpec.instance,
+						new Dictionary<string,AbstractFieldValue> {
+							{ Punishment.TableSpec.FIELD_POSTID, new ScalarFieldValue(this.id.ToString()) },
+							{ Punishment.TableSpec.FIELD_OWNERID, new ScalarFieldValue(this.poster.id.ToString()) },
+							{ Punishment.TableSpec.FIELD_ORIGINALBOARDID, new ScalarFieldValue(this.thread.board.id.ToString()) },
+							{ Punishment.TableSpec.FIELD_MODERATORID, new ScalarFieldValue(account.id.ToString()) },
+							{ Punishment.TableSpec.FIELD_PUNISHMENTDATE, new ScalarFieldValue(DateTime.Now.ToUTCString()) },
+							{ Punishment.TableSpec.FIELD_PUNISHMENTTYPE, new ScalarFieldValue(type.id.ToString()) },
+							{ Punishment.TableSpec.FIELD_ISWITHDRAWED, new ScalarFieldValue("0") },
+							{ Punishment.TableSpec.FIELD_COMMENT, new ScalarFieldValue(comment) },
+						}
+					)
+				);
+
+				ChangeSetUtil.ApplyChanges(changes.ToArray());
+
+				this.punishments_Reset();
+
+				Account posterAccount = null;
+				try {
+					posterAccount = Account.LoadByUser(this.poster);
+				} catch(NotFoundInDBException) {
+				}
+				
+				if(posterAccount != null) {
+					PMMessage newMessage = PMConversation.SendPMMessage(
+						account,
+						posterAccount,
+						this.title,
+						String.Format("{0}\r\n[post]{2}[/post]\r\n{1}", type.description, comment, this.id)
+					);
+					newMessage.conversation.markAsRead(account, newMessage, newMessage);
+				}
 			}
 		}
 
