@@ -377,7 +377,7 @@ namespace FLocal.Common.dataobjects {
 					account,
 					posterAccount,
 					this.title,
-					type.description + "\r\n" + this.id
+					String.Format("{0}\r\n[post]{2}[/post]\r\n{1}", type.description, comment, this.id)
 				);
 				newMessage.conversation.markAsRead(account, newMessage, newMessage);
 			}
