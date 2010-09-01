@@ -108,3 +108,7 @@ p {
 .punishment {
 	color:red !important;
 }
+.punishment.withdrawed {
+	color:red !important;
+	text-decoration: line-through;
+}

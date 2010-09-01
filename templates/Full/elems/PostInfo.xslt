@@ -169,7 +169,13 @@
 	<xsl:template match="specific/punishment">
 		<tr>
 			<td>
-				<font size="-2" class="punishment">
+				<font size="-2">
+					<xsl:attribute name="class">
+						<xsl:text>punishment</xsl:text>
+						<xsl:if test="isWithdrawed='true'">
+							<xsl:text> withdrawed</xsl:text>
+						</xsl:if>
+					</xsl:attribute>
 					<xsl:value-of select="punishmentType/description"/>
 					<xsl:text> (</xsl:text>
 					<xsl:value-of select="punishmentType/weightDescription"/>
