@@ -70,11 +70,13 @@
     <Compile Include="BBCodes\ListElem.cs" />
     <Compile Include="BBCodes\Lurk.cs" />
     <Compile Include="BBCodes\Poll.cs" />
+    <Compile Include="BBCodes\Post.cs" />
     <Compile Include="BBCodes\Quote.cs" />
     <Compile Include="BBCodes\QuoteSkipper.cs" />
     <Compile Include="BBCodes\RuWiki.cs" />
     <Compile Include="BBCodes\S.cs" />
     <Compile Include="BBCodes\Spoiler.cs" />
+    <Compile Include="BBCodes\Thread.cs" />
     <Compile Include="BBCodes\U.cs" />
     <Compile Include="BBCodes\UploadImage.cs" />
     <Compile Include="BBCodes\UploadLink.cs" />
