@@ -25,7 +25,7 @@ namespace FLocal.IISHandler.handlers {
 			IEnumerable<Thread> threads = board.getThreads(pageOuter);
 			XElement[] result = new XElement[] {
 				new XElement("currentLocation", board.exportToXmlSimpleWithParent(context)),
-				new XElement("boards", from subBoard in board.subBoards select subBoard.exportToXml(context, true)),
+				new XElement("boards", from subBoard in board.subBoards select subBoard.exportToXml(context, Board.SubboardsOptions.FirstLevel)),
 				new XElement("threads", 
 					from thread in threads select thread.exportToXml(context),
 					pageOuter.exportToXml(1, 5, 1)

@@ -53,12 +53,14 @@
 	</xsl:template>
 
 	<xsl:template match="lastPostInfo">
-		<xsl:apply-templates select="post/postDate/date" mode="dateTime"/><br />
-		<a>
-			<xsl:attribute name="href">/Thread/<xsl:value-of select="post/threadId"/>/p<xsl:value-of select="post/id"/>/</xsl:attribute>
-			<xsl:text>от </xsl:text>
-			<xsl:value-of select="post/poster/user/name"/>
-		</a>
+		<xsl:if test="post">
+			<xsl:apply-templates select="post/postDate/date" mode="dateTime"/><br />
+			<a>
+				<xsl:attribute name="href">/Thread/<xsl:value-of select="post/threadId"/>/p<xsl:value-of select="post/id"/>/</xsl:attribute>
+				<xsl:text>от </xsl:text>
+				<xsl:value-of select="post/poster/user/name"/>
+			</a>
+		</xsl:if>
 	</xsl:template>
 
 	<xsl:template match="subBoards/board">

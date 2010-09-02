@@ -36,6 +36,7 @@ namespace FLocal.Common.actions {
 						dataobjects.Invite.TableSpec.TABLE,
 						dataobjects.Moderator.TableSpec.TABLE,
 						dataobjects.Punishment.TableSpec.TABLE,
+						dataobjects.PunishmentTransfer.TableSpec.TABLE,
 						dataobjects.Session.TableSpec.TABLE,
 					}
 				);

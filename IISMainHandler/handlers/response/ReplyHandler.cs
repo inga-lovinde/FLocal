@@ -31,7 +31,7 @@ namespace FLocal.IISHandler.handlers.response {
 			}
 
 			return new XElement[] {
-				post.thread.board.exportToXml(context, false),
+				post.thread.board.exportToXml(context, Board.SubboardsOptions.None),
 				post.thread.exportToXml(context),
 				post.exportToXml(context),
 				new XElement("layers",

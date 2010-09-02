@@ -22,7 +22,7 @@ namespace FLocal.IISHandler.handlers.response {
 			Post post = Post.LoadById(int.Parse(context.requestParts[1]));
 
 			return new XElement[] {
-				post.thread.board.exportToXml(context, false),
+				post.thread.board.exportToXml(context, Board.SubboardsOptions.None),
 				post.thread.exportToXml(context),
 				post.exportToXml(context),
 				post.latestRevision.exportToXml(context),

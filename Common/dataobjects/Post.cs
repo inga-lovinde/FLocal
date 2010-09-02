@@ -281,10 +281,15 @@ namespace FLocal.Common.dataobjects {
 
 			PostLayer actualLayer = poster.getActualLayer(this.thread.board, desiredLayer);
 
-			var changes = Thread.getNewPostChanges(this.thread.board, this.threadId, this, poster, actualLayer, title, body, date, forcedPostId);
-			ChangeSetUtil.ApplyChanges(changes.Value.ToArray());
-			
-			return Post.LoadById(changes.Key.getId().Value);
+			Post newPost;
+			lock(this.thread.locker) {
+
+				var changes = Thread.getNewPostChanges(this.thread.board, this.threadId, this, poster, actualLayer, title, body, date, forcedPostId);
+				ChangeSetUtil.ApplyChanges(changes.Value.ToArray());
+				
+				newPost = Post.LoadById(changes.Key.getId().Value);
+			}
+			return newPost;
 		}
 
 		private readonly object Edit_locker = new object(); //TODO: move locking to DB
@@ -335,8 +340,24 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
+		private IEnumerable<Post> subPosts {
+			get {
+				return Post.LoadByIds(
+					from stringId in Config.instance.mainConnection.LoadIdsByConditions(
+						TableSpec.instance,
+						new ComparisonCondition(
+							TableSpec.instance.getColumnSpec(TableSpec.FIELD_PARENTPOSTID),
+							ComparisonType.EQUAL,
+							this.id.ToString()
+						),
+						Diapasone.unlimited
+					) select int.Parse(stringId)
+				);
+			}
+		}
+
 		private readonly object Punish_Locker = new object();
-		public void Punish(Account account, PunishmentType type, string comment) {
+		public void Punish(Account account, PunishmentType type, string comment, PunishmentTransfer.NewTransferInfo? transferInfo) {
 
 			if(!Moderator.isModerator(account, this.thread.board)) throw new FLocalException(account.id + " is not a moderator in board " + this.thread.board.id);
 
@@ -344,62 +365,205 @@ namespace FLocal.Common.dataobjects {
 	
 			lock(this.Punish_Locker) {
 
-				List<AbstractChange> changes = (
-					from punishment in this.punishments
-					select (AbstractChange)new UpdateChange(
-						Punishment.TableSpec.instance,
-						new Dictionary<string,AbstractFieldValue> {
-							{ Punishment.TableSpec.FIELD_ISWITHDRAWED, new ScalarFieldValue("1") },
-						},
-						punishment.id
-					)
-				).ToList();
+				lock(this.thread.locker) {
 
-				changes.Add(
-					new UpdateChange(
-						TableSpec.instance,
-						new Dictionary<string,AbstractFieldValue> {
-							{ TableSpec.FIELD_TOTALPUNISHMENTS, new IncrementFieldValue() },
-						},
-						this.id
-					)
-				);
-
-				changes.Add(
-					new InsertChange(
-						Punishment.TableSpec.instance,
-						new Dictionary<string,AbstractFieldValue> {
-							{ Punishment.TableSpec.FIELD_POSTID, new ScalarFieldValue(this.id.ToString()) },
-							{ Punishment.TableSpec.FIELD_OWNERID, new ScalarFieldValue(this.poster.id.ToString()) },
-							{ Punishment.TableSpec.FIELD_ORIGINALBOARDID, new ScalarFieldValue(this.thread.board.id.ToString()) },
-							{ Punishment.TableSpec.FIELD_MODERATORID, new ScalarFieldValue(account.id.ToString()) },
-							{ Punishment.TableSpec.FIELD_PUNISHMENTDATE, new ScalarFieldValue(DateTime.Now.ToUTCString()) },
-							{ Punishment.TableSpec.FIELD_PUNISHMENTTYPE, new ScalarFieldValue(type.id.ToString()) },
-							{ Punishment.TableSpec.FIELD_ISWITHDRAWED, new ScalarFieldValue("0") },
-							{ Punishment.TableSpec.FIELD_COMMENT, new ScalarFieldValue(comment) },
-							{ Punishment.TableSpec.FIELD_EXPIRES, new ScalarFieldValue(DateTime.Now.Add(type.timeSpan).ToUTCString()) },
-						}
-					)
-				);
-
-				ChangeSetUtil.ApplyChanges(changes.ToArray());
-
-				this.punishments_Reset();
-
-				Account posterAccount = null;
-				try {
-					posterAccount = Account.LoadByUser(this.poster);
-				} catch(NotFoundInDBException) {
-				}
-				
-				if(posterAccount != null) {
-					PMMessage newMessage = PMConversation.SendPMMessage(
-						account,
-						posterAccount,
-						this.title,
-						String.Format("{0}\r\n[post]{2}[/post]\r\n{1}", type.description, comment, this.id)
+					IEnumerable<AbstractChange> changes = (
+						from punishment in this.punishments
+						select (AbstractChange)new UpdateChange(
+							Punishment.TableSpec.instance,
+							new Dictionary<string,AbstractFieldValue> {
+								{ Punishment.TableSpec.FIELD_ISWITHDRAWED, new ScalarFieldValue("1") },
+							},
+							punishment.id
+						)
 					);
-					newMessage.conversation.markAsRead(account, newMessage, newMessage);
+
+					InsertChange transferInsert = null;
+
+
+					if(transferInfo.HasValue) {
+
+						var _transferInfo = transferInfo.Value;
+
+						Post lastAffectedPost;
+						int totalAffectedPosts;
+
+						if(!this.parentPostId.HasValue) {
+							if(!_transferInfo.isSubthreadTransfer) {
+								throw new FLocalException("You cannot move the first post in thread");
+							} else {
+								lastAffectedPost = this.thread.lastPost;
+								totalAffectedPosts = this.thread.totalPosts;
+								changes = changes.Union(
+									new UpdateChange(
+										Thread.TableSpec.instance,
+										new Dictionary<string,AbstractFieldValue> {
+											{ Thread.TableSpec.FIELD_BOARDID, new ScalarFieldValue(_transferInfo.newBoardId.ToString()) },
+										},
+										this.thread.id
+									)
+								);
+							}
+						} else {
+
+							List<Post> postsAffected;
+							if(_transferInfo.isSubthreadTransfer) {
+								postsAffected = this.ToSequence(post => post.subPosts).OrderBy(post => post.id).ToList();
+							} else {
+								postsAffected = new List<Post>();
+								postsAffected.Add(this);
+							}
+
+							lastAffectedPost = postsAffected.Last();
+							totalAffectedPosts = postsAffected.Count;
+
+							InsertChange threadCreate = new InsertChange(
+								Thread.TableSpec.instance,
+								new Dictionary<string,AbstractFieldValue> {
+									{ Thread.TableSpec.FIELD_BOARDID, new ScalarFieldValue(_transferInfo.newBoardId.ToString()) },
+									{ Thread.TableSpec.FIELD_FIRSTPOSTID, new ScalarFieldValue(this.id.ToString()) },
+									{ Thread.TableSpec.FIELD_ISANNOUNCEMENT, new ScalarFieldValue("0") },
+									{ Thread.TableSpec.FIELD_ISLOCKED, new ScalarFieldValue("0") },
+									{ Thread.TableSpec.FIELD_LASTPOSTDATE, new ScalarFieldValue(lastAffectedPost.postDate.ToUTCString()) },
+									{ Thread.TableSpec.FIELD_LASTPOSTID, new ScalarFieldValue(lastAffectedPost.id.ToString()) },
+									{ Thread.TableSpec.FIELD_TITLE, new ScalarFieldValue(this.title) },
+									{ Thread.TableSpec.FIELD_TOPICSTARTERID, new ScalarFieldValue(this.posterId.ToString()) },
+									{ Thread.TableSpec.FIELD_TOTALPOSTS, new ScalarFieldValue(totalAffectedPosts.ToString()) },
+									{ Thread.TableSpec.FIELD_TOTALVIEWS, new ScalarFieldValue("0") },
+								}
+							);
+							changes = changes.Union(threadCreate);
+
+							changes = changes.Union(
+								from post in postsAffected
+								select (AbstractChange)new UpdateChange(
+									TableSpec.instance,
+									new Dictionary<string,AbstractFieldValue> {
+										{ TableSpec.FIELD_THREADID, new ReferenceFieldValue(threadCreate) },
+									},
+									post.id
+								)
+							);
+
+							if(!_transferInfo.isSubthreadTransfer) {
+								changes = changes.Union(
+									from post in this.subPosts
+									select (AbstractChange)new UpdateChange(
+										TableSpec.instance,
+										new Dictionary<string,AbstractFieldValue> {
+											{ TableSpec.FIELD_PARENTPOSTID, new ScalarFieldValue(this.parentPostId.ToString()) },
+										},
+										post.id
+									)
+								);
+							}
+
+						}
+
+						changes = changes.Union(
+							from board in this.thread.board.boardAndParents
+							select (AbstractChange)new UpdateChange(
+								Board.TableSpec.instance,
+								new Dictionary<string,AbstractFieldValue> {
+									{ Board.TableSpec.FIELD_TOTALPOSTS, new IncrementFieldValue(IncrementFieldValue.DECREMENTOR_CUSTOM(totalAffectedPosts)) },
+									{ Board.TableSpec.FIELD_TOTALTHREADS, new IncrementFieldValue(IncrementFieldValue.DECREMENTOR_CUSTOM(this.parentPostId.HasValue ? 0 : 1)) },
+								},
+								board.id
+							)
+						);
+
+						changes = changes.Union(
+							from board in _transferInfo.newBoard.boardAndParents
+							select (AbstractChange)new UpdateChange(
+								Board.TableSpec.instance,
+								new Dictionary<string,AbstractFieldValue> {
+									{ Board.TableSpec.FIELD_TOTALPOSTS, new IncrementFieldValue(IncrementFieldValue.INCREMENTOR_CUSTOM(totalAffectedPosts)) },
+									{ Board.TableSpec.FIELD_TOTALTHREADS, new IncrementFieldValue() },
+									{ Board.TableSpec.FIELD_LASTPOSTID, new IncrementFieldValue(IncrementFieldValue.GREATEST(lastAffectedPost.id)) },
+								},
+								board.id
+							)
+						);
+
+						transferInsert = new InsertChange(
+							PunishmentTransfer.TableSpec.instance,
+							new Dictionary<string,AbstractFieldValue> {
+								{ PunishmentTransfer.TableSpec.FIELD_OLDBOARDID, new ScalarFieldValue(this.thread.boardId.ToString()) },
+								{ PunishmentTransfer.TableSpec.FIELD_NEWBOARDID, new ScalarFieldValue(_transferInfo.newBoardId.ToString()) },
+								{ PunishmentTransfer.TableSpec.FIELD_ISSUBTHREADTRANSFER, new ScalarFieldValue(_transferInfo.isSubthreadTransfer.ToDBString()) },
+								{ PunishmentTransfer.TableSpec.FIELD_OLDPARENTPOSTID, new ScalarFieldValue(this.parentPostId.HasValue ? this.parentPostId.ToString() : null) },
+							}
+						);
+						changes = changes.Union(transferInsert);
+
+						changes = changes.Union(
+							new UpdateChange(
+								TableSpec.instance,
+								new Dictionary<string,AbstractFieldValue> {
+									{ TableSpec.FIELD_PARENTPOSTID, new ScalarFieldValue(null) },
+								},
+								this.id
+							)
+						);
+
+						if(this.parentPostId.HasValue) {
+							changes = changes.Union(
+								new UpdateChange(
+									Thread.TableSpec.instance,
+									new Dictionary<string,AbstractFieldValue> {
+										{ Thread.TableSpec.FIELD_TOTALPOSTS, new IncrementFieldValue(IncrementFieldValue.DECREMENTOR_CUSTOM(totalAffectedPosts)) },
+									},
+									this.threadId
+								)
+							);
+						}
+					}
+
+					changes = changes.Union(
+						new UpdateChange(
+							TableSpec.instance,
+							new Dictionary<string,AbstractFieldValue> {
+								{ TableSpec.FIELD_TOTALPUNISHMENTS, new IncrementFieldValue() },
+							},
+							this.id
+						),
+						new InsertChange(
+							Punishment.TableSpec.instance,
+							new Dictionary<string,AbstractFieldValue> {
+								{ Punishment.TableSpec.FIELD_POSTID, new ScalarFieldValue(this.id.ToString()) },
+								{ Punishment.TableSpec.FIELD_OWNERID, new ScalarFieldValue(this.poster.id.ToString()) },
+								{ Punishment.TableSpec.FIELD_ORIGINALBOARDID, new ScalarFieldValue(this.thread.board.id.ToString()) },
+								{ Punishment.TableSpec.FIELD_MODERATORID, new ScalarFieldValue(account.id.ToString()) },
+								{ Punishment.TableSpec.FIELD_PUNISHMENTDATE, new ScalarFieldValue(DateTime.Now.ToUTCString()) },
+								{ Punishment.TableSpec.FIELD_PUNISHMENTTYPE, new ScalarFieldValue(type.id.ToString()) },
+								{ Punishment.TableSpec.FIELD_ISWITHDRAWED, new ScalarFieldValue("0") },
+								{ Punishment.TableSpec.FIELD_COMMENT, new ScalarFieldValue(comment) },
+								{ Punishment.TableSpec.FIELD_EXPIRES, new ScalarFieldValue(DateTime.Now.Add(type.timeSpan).ToUTCString()) },
+								{ Punishment.TableSpec.FIELD_TRANSFERID, (transferInsert != null) ? (AbstractFieldValue)new ReferenceFieldValue(transferInsert) : (AbstractFieldValue)new ScalarFieldValue(null) },
+							}
+						)
+					);
+
+					ChangeSetUtil.ApplyChanges(changes.ToArray());
+
+					this.punishments_Reset();
+
+					Account posterAccount = null;
+					try {
+						posterAccount = Account.LoadByUser(this.poster);
+					} catch(NotFoundInDBException) {
+					}
+					
+					if(posterAccount != null) {
+						PMMessage newMessage = PMConversation.SendPMMessage(
+							account,
+							posterAccount,
+							this.title,
+							String.Format("{0}\r\n[post]{2}[/post]\r\n{1}", type.description, comment, this.id)
+						);
+						newMessage.conversation.markAsRead(account, newMessage, newMessage);
+					}
+
 				}
 			}
 		}

@@ -6,8 +6,21 @@ using System.Text;
 namespace FLocal.Common.actions {
 	class IncrementFieldValue : AbstractFieldValue {
 
-		public static readonly Func<string, string> INCREMENTOR = s => (int.Parse(s)+1).ToString();
-		public static readonly Func<string, string> DECREMENTOR = s => (int.Parse(s)-1).ToString();
+		public static Func<string, string> INCREMENTOR_CUSTOM(int i) {
+			return s => (int.Parse(s)+i).ToString();
+		}
+
+		public static Func<string, string> DECREMENTOR_CUSTOM(int i) {
+			return s => (int.Parse(s)-i).ToString();
+		}
+
+		public static string INCREMENTOR(string s) {
+			return INCREMENTOR_CUSTOM(1)(s);
+		}
+
+		public static string DECREMENTOR(string s) {
+			return DECREMENTOR_CUSTOM(1)(s);
+		}
 
 		public static Func<string, string> GREATEST(int val) {
 			return s => {

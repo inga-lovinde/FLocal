@@ -25,12 +25,16 @@ namespace FLocal.IISHandler.handlers.response {
 			if(context.account.user.id == post.poster.id) throw new FLocalException("You cannot punish your own posts");
 			
 			return new XElement[] {
-				post.thread.board.exportToXml(context, false),
+				post.thread.board.exportToXml(context, Board.SubboardsOptions.None),
 				post.thread.exportToXml(context),
 				post.exportToXml(context),
 				post.latestRevision.exportToXml(context),
 				new XElement("layers",
 					from layer in PostLayer.allLayers select layer.exportToXml(context)
+				),
+				new XElement("categories",
+					from category in Category.allCategories select
+					category.exportToXmlForMainPage(context, Board.SubboardsOptions.AllLevels)
 				),
 				new XElement("punishmentTypes",
 					from punishmentType in PunishmentType.allTypes select punishmentType.exportToXml(context)

@@ -22,7 +22,7 @@ namespace FLocal.IISHandler.handlers {
 
 		override protected IEnumerable<XElement> getSpecificData(WebContext context) {
 			return new XElement[] {
-				new XElement("categories", from category in Category.allCategories select category.exportToXmlForMainPage(context)),
+				new XElement("categories", from category in Category.allCategories select category.exportToXmlForMainPage(context, Board.SubboardsOptions.FirstLevel)),
 				new XElement("totalRegistered", Config.instance.mainConnection.GetCountByConditions(User.TableSpec.instance, new EmptyCondition())),
 				new XElement("activity",
 					new XElement("threshold", Config.instance.ActivityThreshold.ToString()),

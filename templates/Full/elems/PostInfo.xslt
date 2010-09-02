@@ -187,6 +187,37 @@
 					<xsl:apply-templates select="punishmentDate/date" mode="dateTime"/>
 					<xsl:text>)</xsl:text>
 					<br/>
+					<xsl:if test="transfer">
+						<xsl:choose>
+							<xsl:when test="transfer/isSubthreadTransfer='true'">
+								<xsl:text>ѕодветка была перенесена</xsl:text>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:text>—ообщение было перенесено</xsl:text>
+							</xsl:otherwise>
+						</xsl:choose>
+						<xsl:if test="transfer/oldParentPost">
+							<xsl:text> из обсуждени€ сообщени€ </xsl:text>
+							<a>
+								<xsl:attribute name="href">
+									<xsl:text>/Post/</xsl:text>
+									<xsl:value-of select="transfer/oldParentPost/post/id"/>
+									<xsl:text>/</xsl:text>
+								</xsl:attribute>
+								<xsl:value-of select="transfer/oldParentPost/post/title"/>
+							</a>
+						</xsl:if>
+						<xsl:text> из раздела </xsl:text>
+						<a>
+							<xsl:attribute name="href">
+								<xsl:text>/Board/</xsl:text>
+								<xsl:value-of select="transfer/oldBoard/board/id"/>
+								<xsl:text>/</xsl:text>
+							</xsl:attribute>
+							<xsl:value-of select="transfer/oldBoard/board/name"/>
+						</a>
+						<br/>
+					</xsl:if>
 					<br/>
 				</font>
 			</td>

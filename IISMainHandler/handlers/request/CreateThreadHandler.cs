@@ -24,7 +24,7 @@ namespace FLocal.IISHandler.handlers.request {
 			newThread.markAsRead(context.session.account, newPost, newPost);
 
 			return new XElement[] {
-				newThread.board.exportToXml(context, false),
+				newThread.board.exportToXml(context, Board.SubboardsOptions.None),
 				newPost.exportToXml(context)
 			};
 		}

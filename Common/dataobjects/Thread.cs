@@ -470,6 +470,14 @@ namespace FLocal.Common.dataobjects {
 			return new KeyValuePair<AbstractChange,IEnumerable<AbstractChange>>(postInsert, changes);
 		}
 
+		public readonly object locker = new object();
+
+		public void Synchronized(Action action) {
+			lock(this.locker) {
+				this.board.Synchronized(action);
+			}
+		}
+
 	}
 
 }

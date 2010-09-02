@@ -110,12 +110,12 @@ namespace FLocal.Common.dataobjects {
 			);
 		}
 
-		public XElement exportToXmlForMainPage(UserContext context) {
+		public XElement exportToXmlForMainPage(UserContext context, Board.SubboardsOptions subboardsOptions) {
 			return new XElement("category",
 				new XElement("id", this.id),
 				new XElement("name", this.name),
 				new XElement("sortOrder", this.sortOrder),
-				new XElement("boards", from board in this.subBoards select board.exportToXml(context, true))
+				new XElement("boards", from board in this.subBoards select board.exportToXml(context, subboardsOptions))
 			);
 		}
 

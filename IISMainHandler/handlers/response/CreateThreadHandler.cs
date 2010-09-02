@@ -22,7 +22,7 @@ namespace FLocal.IISHandler.handlers.response {
 			Board board = Board.LoadById(int.Parse(context.requestParts[1]));
 
 			return new XElement[] {
-				board.exportToXml(context, false),
+				board.exportToXml(context, Board.SubboardsOptions.None),
 				new XElement("layers",
 					from layer in PostLayer.allLayers select layer.exportToXml(context)
 				),

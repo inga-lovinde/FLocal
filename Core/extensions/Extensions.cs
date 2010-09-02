@@ -57,7 +57,7 @@ namespace FLocal.Core {
 			return string.Join(",", (from elem in list select elem.ToString()).ToArray());
 		}
 
-        public static string ToXmlApiRequestString(this bool val) {
+        public static string ToDBString(this bool val) {
             return val ? "1" : "0";
         }
 
@@ -228,6 +228,23 @@ namespace FLocal.Core {
 
 		public static string ToUTCString(this DateTime date) {
 			return date.ToUniversalTime().ToString("u");
+		}
+
+		public static IEnumerable<T> ToSequence<T>(this T obj, Func<T, IEnumerable<T>> nextElementsGenerator) where T : class {
+			yield return obj;
+			foreach(var sub in nextElementsGenerator(obj)) {
+				foreach(var subsub in sub.ToSequence(nextElementsGenerator)) {
+					yield return subsub;
+				}
+			}
+		}
+
+		public static T Last<T>(this List<T> list) {
+			return list[list.Count-1];
+		}
+
+		public static IEnumerable<T> Union<T>(this IEnumerable<T> enumerable, params T[] second) {
+			return enumerable.Union((IEnumerable<T>)second);
 		}
 
     }

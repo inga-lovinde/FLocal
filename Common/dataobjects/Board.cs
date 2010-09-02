@@ -11,6 +11,13 @@ using FLocal.Common.actions;
 namespace FLocal.Common.dataobjects {
 	public class Board : SqlObject<Board> {
 
+		[Flags]
+		public enum SubboardsOptions {
+			None = 0x0,
+			FirstLevel = 0x1,
+			AllLevels = 0x3
+		}
+
 		public class TableSpec : IComplexSqlObjectTableSpec {
 			public const string TABLE = "Boards";
 			public const string FIELD_ID = "Id";
@@ -209,7 +216,7 @@ namespace FLocal.Common.dataobjects {
 			);
 		}
 
-		public XElement exportToXml(UserContext context, bool includeSubBoards, params XElement[] additional) {
+		public XElement exportToXml(UserContext context, Board.SubboardsOptions subboardsOptions, params XElement[] additional) {
 			XElement result = new XElement("board",
 				new XElement("id", this.id),
 				new XElement("sortOrder", this.sortOrder),
@@ -226,9 +233,9 @@ namespace FLocal.Common.dataobjects {
 				result.Add(new XElement("hasNewPosts", this.hasNewPosts(context.account).ToPlainString()));
 			}
 
-			if(includeSubBoards) {
+			if((subboardsOptions & SubboardsOptions.FirstLevel) == SubboardsOptions.FirstLevel) {
 				result.Add(new XElement("subBoards",
-					from board in this.subBoards select board.exportToXml(context, false)
+					from board in this.subBoards select board.exportToXml(context, (subboardsOptions == SubboardsOptions.AllLevels) ? SubboardsOptions.AllLevels : SubboardsOptions.None)
 				));
 			}
 
@@ -380,6 +387,24 @@ namespace FLocal.Common.dataobjects {
 			}
 
 			return Thread.LoadById(threadInsert.getId().Value);
+		}
+
+		public readonly object locker = new object();
+
+		public void Synchronized(Action action) {
+			lock(this.locker) {
+				if(this.parentBoardId.HasValue) {
+					this.parentBoard.Synchronized(action);
+				} else {
+					action();
+				}
+			}
+		}
+
+		public IEnumerable<Board> boardAndParents {
+			get {
+				return this.ToSequence(board => board.parentBoardId.HasValue ? new Board[] { board.parentBoard } : new Board[0]);
+			}
 		}
 
 	}

@@ -21,11 +21,16 @@ namespace FLocal.IISHandler.handlers.request {
 			post.Punish(
 				context.session.account,
 				PunishmentType.LoadById(int.Parse(context.httprequest.Form["punishmentTypeId"])),
-				context.httprequest.Form["comment"]
+				context.httprequest.Form["comment"],
+				(context.httprequest.Form["transfer"] == "transfer")
+					?
+					(PunishmentTransfer.NewTransferInfo?)new PunishmentTransfer.NewTransferInfo(Board.LoadById(int.Parse(context.httprequest.Form["transfer_boardId"])), context.httprequest.Form["transfer_subThread"] == "transfer_subThread")
+					:
+					null
 			);
 			
 			return new XElement[] {
-				post.thread.board.exportToXml(context, false),
+				post.thread.board.exportToXml(context, Board.SubboardsOptions.None),
 				postXml
 			};
 		}
