@@ -15,7 +15,7 @@
 						<td class="subjecttable">
 							<table width="100%" border="0" cellpadding="0" cellspacing="0">
 								<tr>
-									<td align="left" width="65%" valign="top">
+									<td align="left" width="80%" valign="top">
 										<a target="_blank" class="separate">
 											<xsl:attribute name="href">/Post/<xsl:value-of select="id"/>/</xsl:attribute>
 											<img border="0" alt="" style="vertical-align: text-bottom">
@@ -48,7 +48,7 @@
 										<br />
 										<font class="small" style="padding-left:2em"><xsl:apply-templates select="postDate/date" mode="dateTime"/></font>
 									</td>
-									<td align="right" width="35%">
+									<td align="right" width="20%">
 										<table cellpadding="0" cellspacing="0" border="0">
 											<tr>
 												<td align="right">
