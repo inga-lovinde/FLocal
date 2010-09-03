@@ -14,7 +14,11 @@
 							</td> 
 						</tr>
 						<tr class="darktable"> 
-							<td> 
+							<td>
+								<xsl:text>Пользователь </xsl:text>
+								<xsl:apply-templates select="migrationInfo/account/user" mode="userLink"/>
+								<xsl:text> найден в списке пользователей старого форума.</xsl:text>
+								<br/>
 								<xsl:text>Введите строку </xsl:text>
 								<b>(fhn:<xsl:value-of select="migrationInfo/key"/>)</b>
 								<xsl:text> (вместе со скобками) в поле биографии в своём профайле на старом форуме.</xsl:text>
