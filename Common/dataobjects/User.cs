@@ -236,11 +236,6 @@ namespace FLocal.Common.dataobjects {
 							this.id.ToString()
 						),
 						new ComparisonCondition(
-							Post.TableSpec.instance.getIdSpec(),
-							ComparisonType.GREATEROREQUAL,
-							Thread.FORMALREADMIN.ToString()
-						),
-						new ComparisonCondition(
 							Post.TableSpec.instance.getColumnSpec(Post.TableSpec.FIELD_POSTERID),
 							ComparisonType.NOTEQUAL,
 							this.id.ToString()
