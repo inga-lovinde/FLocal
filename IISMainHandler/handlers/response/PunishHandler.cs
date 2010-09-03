@@ -22,7 +22,6 @@ namespace FLocal.IISHandler.handlers.response {
 			Post post = Post.LoadById(int.Parse(context.requestParts[1]));
 
 			if(!Moderator.isModerator(context.account, post.thread)) throw new FLocalException(context.account.id + " is not a moderator in board " + post.thread.board.id);
-			if(context.account.user.id == post.poster.id) throw new FLocalException("You cannot punish your own posts");
 			
 			return new XElement[] {
 				post.thread.board.exportToXml(context, Board.SubboardsOptions.None),

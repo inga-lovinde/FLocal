@@ -368,8 +368,6 @@ namespace FLocal.Common.dataobjects {
 				if(transferInfo.HasValue && !transferInfo.Value.newBoard.isTransferTarget) throw new FLocalException("You cannot transfer in '" + transferInfo.Value.newBoard.name + "'");
 			}
 
-			if(account.user.id == this.poster.id) throw new FLocalException("You cannot punish your own posts");
-	
 			lock(this.Punish_Locker) {
 
 				lock(this.thread.locker) {
@@ -561,7 +559,7 @@ namespace FLocal.Common.dataobjects {
 					} catch(NotFoundInDBException) {
 					}
 					
-					if(posterAccount != null) {
+					if((posterAccount != null) && (posterAccount.id != account.id)) {
 						PMMessage newMessage = PMConversation.SendPMMessage(
 							account,
 							posterAccount,
