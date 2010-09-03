@@ -158,7 +158,7 @@ namespace FLocal.Common {
 		}
 
 		public static string UBBToIntermediate(string UBB) {
-			//return HttpUtility.HtmlEncode(UBB).Replace("\r\n", "<br/>\r\n");
+			//return HttpUtility.HtmlEncode(UBB).Replace(Util.EOL, "<br/>" + Util.EOL);
 			return BBParserGateway.instance.Parse(UBB);
 		}
 
