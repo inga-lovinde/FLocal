@@ -21,7 +21,15 @@ namespace FLocal.IISHandler.handlers.response {
 		}
 
 		override protected IEnumerable<XElement> getSpecificData(WebContext context) {
-			User user = User.LoadById(int.Parse(context.requestParts[1]));
+			User user;
+			{
+				int userId;
+				if(int.TryParse(context.requestParts[1], out userId)) {
+					user = User.LoadById(userId);
+				} else {
+					user = User.LoadByName(context.requestParts[1]);
+				}
+			}
 			Account account = null;
 			if(context.session != null) {
 				try {
