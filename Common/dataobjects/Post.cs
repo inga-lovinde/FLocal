@@ -559,7 +559,7 @@ namespace FLocal.Common.dataobjects {
 					} catch(NotFoundInDBException) {
 					}
 					
-					if((posterAccount != null) && (posterAccount.id != account.id)) {
+					if((posterAccount != null) && (posterAccount.id != account.id) && !posterAccount.needsMigration) {
 						PMMessage newMessage = PMConversation.SendPMMessage(
 							account,
 							posterAccount,

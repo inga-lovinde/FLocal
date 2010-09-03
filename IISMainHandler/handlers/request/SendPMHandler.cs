@@ -24,6 +24,9 @@ namespace FLocal.IISHandler.handlers.request {
 			} else {
 				throw new ApplicationException("receiverId/receiverName not passed");
 			}
+
+			if(receiver.needsMigration) throw new ApplicationException("User is not migrated");
+
 			PMMessage newMessage = PMConversation.SendPMMessage(
 				context.account,
 				receiver,

@@ -20,9 +20,10 @@ namespace FLocal.IISHandler.handlers.response {
 
 		override protected IEnumerable<XElement> getSpecificNewMessageData(WebContext context) {
 			if(context.requestParts.Length > 1) {
-				Account account = Account.LoadById(int.Parse(context.requestParts[1]));
+				Account receiver = Account.LoadById(int.Parse(context.requestParts[1]));
+				if(receiver.needsMigration) throw new ApplicationException("User is not migrated");
 				return new XElement[] {
-					new XElement("receiver", account.exportToXml(context)),
+					new XElement("receiver", receiver.exportToXml(context)),
 				};
 			}
 			return new XElement[0];

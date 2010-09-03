@@ -21,6 +21,8 @@ namespace FLocal.IISHandler.handlers.response {
 		override protected IEnumerable<XElement> getSpecificNewMessageData(WebContext context) {
 
 			Post post = Post.LoadById(int.Parse(context.requestParts[1]));
+			Account receiver = Account.LoadByUser(post.poster);
+			if(receiver.needsMigration) throw new ApplicationException("User is not migrated");
 
 			string quoted = context.httprequest.Form["data"];
 			if(quoted != null) quoted = quoted.Trim();
@@ -34,7 +36,7 @@ namespace FLocal.IISHandler.handlers.response {
 				post.thread.board.exportToXml(context, Board.SubboardsOptions.None),
 				post.thread.exportToXml(context),
 				post.exportToXml(context),
-				new XElement("receiver", Account.LoadByUser(post.poster).exportToXml(context)),
+				new XElement("receiver", receiver.exportToXml(context)),
 				new XElement("quoted", quoted),
 			};
 		}
