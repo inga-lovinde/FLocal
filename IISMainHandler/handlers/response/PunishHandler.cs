@@ -21,7 +21,7 @@ namespace FLocal.IISHandler.handlers.response {
 		override protected IEnumerable<XElement> getSpecificNewMessageData(WebContext context) {
 			Post post = Post.LoadById(int.Parse(context.requestParts[1]));
 
-			if(!Moderator.isModerator(context.account, post.thread.board)) throw new FLocalException(context.account.id + " is not a moderator in board " + post.thread.board.id);
+			if(!Moderator.isModerator(context.account, post.thread)) throw new FLocalException(context.account.id + " is not a moderator in board " + post.thread.board.id);
 			if(context.account.user.id == post.poster.id) throw new FLocalException("You cannot punish your own posts");
 			
 			return new XElement[] {
@@ -34,13 +34,14 @@ namespace FLocal.IISHandler.handlers.response {
 				),
 				new XElement("categories",
 					from category in Category.allCategories select
-					category.exportToXmlForMainPage(context, Board.SubboardsOptions.AllLevels)
+					category.exportToXmlForTree(context)
 				),
 				new XElement("punishmentTypes",
 					from punishmentType in PunishmentType.allTypes select punishmentType.exportToXml(context)
-				)
+				),
+				new XElement("isTrueModerator", Moderator.isTrueModerator(context.account, post.thread.board).ToPlainString())
 			};
 		}
 	}
-
+	
 }

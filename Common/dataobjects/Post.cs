@@ -236,7 +236,7 @@ namespace FLocal.Common.dataobjects {
 				new XElement("poster",
 					this.poster.exportToXmlForViewing(
 						context,
-						new XElement("isModerator", Moderator.isModerator(this.poster, this.thread.board).ToPlainString())
+						new XElement("isModerator", Moderator.isModerator(this.poster, this.thread).ToPlainString())
 					)
 				),
 				new XElement("postDate", this.postDate.ToXml()),
@@ -247,7 +247,7 @@ namespace FLocal.Common.dataobjects {
 				//this.XMLBody(context),
 				new XElement("bodyShort", this.bodyShort),
 				new XElement("threadId", this.threadId),
-				new XElement("isPunishmentEnabled", ((context.account != null) && Moderator.isModerator(context.account, this.thread.board)).ToPlainString()),
+				new XElement("isPunishmentEnabled", ((context.account != null) && Moderator.isModerator(context.account, this.thread)).ToPlainString()),
 				new XElement("isOwner", ((context.account != null) && (this.poster.id == context.account.user.id)).ToPlainString()),
 				new XElement(
 					"specific",
@@ -359,7 +359,14 @@ namespace FLocal.Common.dataobjects {
 		private readonly object Punish_Locker = new object();
 		public void Punish(Account account, PunishmentType type, string comment, PunishmentTransfer.NewTransferInfo? transferInfo) {
 
-			if(!Moderator.isModerator(account, this.thread.board)) throw new FLocalException(account.id + " is not a moderator in board " + this.thread.board.id);
+			if(string.IsNullOrEmpty(comment)) throw new FLocalException("Comment is empty");
+
+			if(!Moderator.isModerator(account, this.thread)) throw new FLocalException(account.id + " is not a moderator in board " + this.thread.board.id);
+
+			if(!Moderator.isTrueModerator(account, this.thread.board)) {
+				if(type.weight != 0) throw new FLocalException("You cannot set punishments with weight != 0");
+				if(transferInfo.HasValue && !transferInfo.Value.newBoard.isTransferTarget) throw new FLocalException("You cannot transfer in '" + transferInfo.Value.newBoard.name + "'");
+			}
 
 			if(account.user.id == this.poster.id) throw new FLocalException("You cannot punish your own posts");
 	

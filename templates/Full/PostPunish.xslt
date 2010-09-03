@@ -94,6 +94,9 @@
 		<input type="radio" name="punishmentTypeId">
 			<xsl:attribute name="id">punishmentTypeId_<xsl:value-of select="id"/></xsl:attribute>
 			<xsl:attribute name="value"><xsl:value-of select="id"/></xsl:attribute>
+			<xsl:if test="not(/root/isTrueModerator = 'true') and not(weight = '0')">
+				<xsl:attribute name="disabled">disabled</xsl:attribute>
+			</xsl:if>
 		</input>
 		<label>
 			<xsl:attribute name="for">punishmentTypeId_<xsl:value-of select="id"/></xsl:attribute>
@@ -119,7 +122,9 @@
 	<xsl:template match="board" mode="select">
 		<xsl:param name="prefix"/>
 		<option>
-			<xsl:attribute name="value"><xsl:value-of select="id"/></xsl:attribute>
+			<xsl:if test="not(/root/isTrueModerator = 'true') and not(isTransferTarget = 'true')">
+				<xsl:attribute name="disabled">disabled</xsl:attribute>
+			</xsl:if>
 			<xsl:value-of select="$prefix"/>
 			<xsl:value-of select="name"/>
 		</option>

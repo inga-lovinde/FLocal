@@ -30,6 +30,8 @@ namespace FLocal.Common.dataobjects {
 			public const string FIELD_DESCRIPTION = "Comment";
 			public const string FIELD_PARENTBOARDID = "ParentBoardId";
 			public const string FIELD_LEGACYNAME = "LegacyName";
+			public const string FIELD_ISTRANSFERTARGET = "IsTransferTarget";
+			public const string FIELD_ISTOPICSTARTERMODERATION = "IsTopicstarterModeration";
 			public static readonly TableSpec instance = new TableSpec();
 			public string name { get { return TABLE; } }
 			public string idName { get { return FIELD_ID; } }
@@ -140,6 +142,22 @@ namespace FLocal.Common.dataobjects {
 				return this._legacyName;
 			}
 		}
+		
+		private bool _isTransferTarget;
+		public bool isTransferTarget {
+			get {
+				this.LoadIfNotLoaded();
+				return this._isTransferTarget;
+			}
+		}
+
+		private bool _isTopicstarterModeration;
+		public bool isTopicstarterModeration {
+			get {
+				this.LoadIfNotLoaded();
+				return this._isTopicstarterModeration;
+			}
+		}
 
 		protected override void doFromHash(Dictionary<string, string> data) {
 			this._sortOrder = int.Parse(data[TableSpec.FIELD_SORTORDER]);
@@ -151,6 +169,8 @@ namespace FLocal.Common.dataobjects {
 			this._description = data[TableSpec.FIELD_DESCRIPTION];
 			this._parentBoardId = Util.ParseInt(data[TableSpec.FIELD_PARENTBOARDID]);
 			this._legacyName = data[TableSpec.FIELD_LEGACYNAME].ToLower();
+			this._isTransferTarget = Util.string2bool(data[TableSpec.FIELD_ISTRANSFERTARGET]);
+			this._isTopicstarterModeration = Util.string2bool(data[TableSpec.FIELD_ISTOPICSTARTERMODERATION]);
 		}
 
 		private readonly object subBoards_Locker = new object();
@@ -208,12 +228,18 @@ namespace FLocal.Common.dataobjects {
 			);
 		}
 
-		public XElement exportToXmlSimple(UserContext context) {
-			return new XElement("board",
+		public XElement exportToXmlSimple(UserContext context, Board.SubboardsOptions subboardsOptions) {
+			XElement result = new XElement("board",
 				new XElement("id", this.id),
 				new XElement("name", this.name),
-				new XElement("description", this.description)
+				new XElement("description", this.description),
+				new XElement("isTopicstarterModeration", this.isTopicstarterModeration.ToPlainString()),
+				new XElement("isTransferTarget", this.isTransferTarget.ToPlainString())
 			);
+			if((subboardsOptions & SubboardsOptions.FirstLevel) == SubboardsOptions.FirstLevel) {
+				result.Add(new XElement("subBoards", from board in this.subBoards select board.exportToXmlSimple(context, (subboardsOptions == SubboardsOptions.AllLevels) ? SubboardsOptions.AllLevels : SubboardsOptions.None)));
+			}
+			return result;
 		}
 
 		public XElement exportToXml(UserContext context, Board.SubboardsOptions subboardsOptions, params XElement[] additional) {
@@ -226,7 +252,9 @@ namespace FLocal.Common.dataobjects {
 				new XElement("name", this.name),
 				new XElement("description", this.description),
 				new XElement("lastPostInfo", this.exportLastPostInfo(context)),
-				new XElement("moderators", from moderator in Moderator.GetModerators(this) select moderator.user.exportToXmlForViewing(context))
+				new XElement("moderators", from moderator in Moderator.GetModerators(this) select moderator.user.exportToXmlForViewing(context)),
+				new XElement("isTopicstarterModeration", this.isTopicstarterModeration.ToPlainString()),
+				new XElement("isTransferTarget", this.isTransferTarget.ToPlainString())
 			);
 
 			if(context.account != null) {

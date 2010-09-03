@@ -158,7 +158,7 @@ namespace FLocal.Common.dataobjects {
 			return new XElement("punishment",
 				this.post.exportToXmlBase(context),
 				new XElement("owner", this.owner.exportToXmlForViewing(context)),
-				new XElement("originalBoard", this.originalBoard.exportToXmlSimple(context)),
+				new XElement("originalBoard", this.originalBoard.exportToXmlSimple(context, Board.SubboardsOptions.None)),
 				new XElement("moderator", this.moderator.user.exportToXmlForViewing(context)),
 				new XElement("punishmentDate", this.punishmentDate.ToXml()),
 				this.punishmentType.exportToXml(context),

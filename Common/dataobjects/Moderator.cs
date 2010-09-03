@@ -74,7 +74,7 @@ namespace FLocal.Common.dataobjects {
 		}
 
 		private static readonly Dictionary<int, Dictionary<int, bool>> isModerator_cache = new Dictionary<int,Dictionary<int,bool>>();
-		public static bool isModerator(Account account, Board board) {
+		public static bool isTrueModerator(Account account, Board board) {
 			//slight optimisation...
 			UserGroup group = account.user.userGroup;
 			if(group.name != UserGroup.NAME_ADMINISTRATORS && group.name != UserGroup.NAME_MODERATORS) return false;
@@ -112,14 +112,17 @@ namespace FLocal.Common.dataobjects {
 			}
 			return isModerator_cache[account.id][board.id];
 		}
-		public static bool isModerator(User user, Board board) {
+		public static bool isModerator(Account account, Thread thread) {
+			return (thread.board.isTopicstarterModeration && thread.topicstarterId == account.userId) || isTrueModerator(account, thread.board);
+		}
+		public static bool isModerator(User user, Thread thread) {
 			Account account;
 			try {
 				account = Account.LoadByUser(user);
 			} catch(NotFoundInDBException) {
 				return false;
 			}
-			return isModerator(account, board);
+			return isModerator(account, thread);
 		}
 
 		private static readonly Dictionary<int, IEnumerable<int>> byBoard_cache = new Dictionary<int,IEnumerable<int>>();

@@ -100,9 +100,9 @@ namespace FLocal.Common.dataobjects {
 		public XElement exportToXml(UserContext context) {
 			return new XElement("transfer",
 				new XElement("id", this.id),
-				new XElement("oldBoard", this.oldBoard.exportToXmlSimple(context)),
+				new XElement("oldBoard", this.oldBoard.exportToXmlSimple(context, Board.SubboardsOptions.None)),
 				this.oldParentPostId.HasValue ? new XElement("oldParentPost", this.oldParentPost.exportToXmlBase(context)) : null,
-				new XElement("newBoard", this.newBoard.exportToXmlSimple(context)),
+				new XElement("newBoard", this.newBoard.exportToXmlSimple(context, Board.SubboardsOptions.None)),
 				new XElement("isSubthreadTransfer", this.isSubthreadTransfer.ToPlainString())
 			);
 		}
