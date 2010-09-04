@@ -27,6 +27,19 @@
 									<xsl:text>Тип:</xsl:text><br/>
 									<xsl:apply-templates select="punishmentTypes/punishmentType"/>
 									<br/>
+									<input type="checkbox" name="transfer" value="transfer" id="Transfer"/>
+									<label for="Transfer">
+										<xsl:text> Перенести сообщение в раздел</xsl:text>
+									</label>
+									<select name="transfer_boardId">
+										<option value="-1">Выберите раздел</option>
+										<xsl:apply-templates select="categories/category" mode="select"/>
+									</select>
+									<input type="checkbox" name="transfer_subThread" value="transfer_subThread" id="Transfer_SubThread"/>
+									<label for="Transfer_SubThread">
+										<xsl:text> со всеми ответами</xsl:text>
+									</label>
+									<br/>
 									<br/>
 									<xsl:text>Комментарий: </xsl:text>
 									<br/>
@@ -77,6 +90,9 @@
 		<input type="radio" name="punishmentTypeId">
 			<xsl:attribute name="id">punishmentTypeId_<xsl:value-of select="id"/></xsl:attribute>
 			<xsl:attribute name="value"><xsl:value-of select="id"/></xsl:attribute>
+			<xsl:if test="not(/root/isTrueModerator = 'true') and not(weight = '0')">
+				<xsl:attribute name="disabled">disabled</xsl:attribute>
+			</xsl:if>
 		</input>
 		<label>
 			<xsl:attribute name="for">punishmentTypeId_<xsl:value-of select="id"/></xsl:attribute>
@@ -90,6 +106,30 @@
 			<xsl:apply-templates select="timeSpan"/>
 		</label>
 		<br/>
+	</xsl:template>
+
+	<xsl:template match="category" mode="select">
+		<optgroup>
+			<xsl:attribute name="label"><xsl:value-of select="name"/></xsl:attribute>
+			<xsl:apply-templates select="boards/board" mode="select"/>
+		</optgroup>
+	</xsl:template>
+
+	<xsl:template match="board" mode="select">
+		<xsl:param name="prefix"/>
+		<option>
+			<xsl:if test="not(/root/isTrueModerator = 'true') and not(isTransferTarget = 'true')">
+				<xsl:attribute name="disabled">disabled</xsl:attribute>
+			</xsl:if>
+			<xsl:value-of select="$prefix"/>
+			<xsl:value-of select="name"/>
+		</option>
+		<xsl:apply-templates select="subBoards/board" mode="select">
+			<xsl:with-param name="prefix">
+				<xsl:value-of select="$prefix"/>
+				<xsl:text>&#160;&#160;</xsl:text>
+			</xsl:with-param>
+		</xsl:apply-templates>
 	</xsl:template>
 
 </xsl:stylesheet>
