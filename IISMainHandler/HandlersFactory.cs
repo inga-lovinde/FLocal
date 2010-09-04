@@ -83,17 +83,15 @@ namespace FLocal.IISHandler {
 				case "registerbyinvite":
 					return new handlers.response.RegisterByInviteHandler();
 				case "users":
-					if(context.requestParts.Length < 2) {
-						return new handlers.response.UserListHandler();
-					} else {
-						switch(context.requestParts[1].ToLower()) {
-							case "active":
-								return new handlers.response.ActiveAccountListHandler();
-							case "online":
-								return new handlers.response.WhoIsOnlineHandler();
-							default:
-								return new handlers.response.UserListHandler();
-						}
+					switch(context.requestParts[1].ToLower()) {
+						case "all":
+							return new handlers.response.UserListHandler();
+						case "active":
+							return new handlers.response.ActiveAccountListHandler();
+						case "online":
+							return new handlers.response.WhoIsOnlineHandler();
+						default:
+							return new handlers.WrongUrlHandler();
 					}
 				case "user":
 					if(context.requestParts.Length < 2) {

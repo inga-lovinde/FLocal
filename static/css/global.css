@@ -112,3 +112,6 @@ p {
 	color:red !important;
 	text-decoration: line-through;
 }
+.currentLink {
+	border: solid 3px;
+}

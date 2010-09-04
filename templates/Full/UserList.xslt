@@ -65,7 +65,7 @@
 										<td>
 											<xsl:text>страницы:</xsl:text>
 											<xsl:apply-templates select="users/pageOuter" mode="withCurrent">
-												<xsl:with-param name="baseLink">/Users/</xsl:with-param>
+												<xsl:with-param name="baseLink">/Users/All/</xsl:with-param>
 											</xsl:apply-templates>
 										</td>
 									</tr>
