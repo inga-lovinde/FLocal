@@ -38,7 +38,7 @@
 												<xsl:text>[</xsl:text>
 												<a>
 													<xsl:attribute name="title"><xsl:value-of select="parentPost/post/bodyShort"/></xsl:attribute>
-													<xsl:attribute name="href">/Post/<xsl:value-of select="parentPost/post/id"/>/</xsl:attribute>
+													<xsl:attribute name="href">/Thread/<xsl:value-of select="threadId"/>/p<xsl:value-of select="parentPost/post/id"/>/</xsl:attribute>
 													<xsl:text>re: </xsl:text>
 													<xsl:value-of select="parentPost/post/poster/user/name"/>
 												</a>
