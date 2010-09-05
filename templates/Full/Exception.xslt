@@ -20,12 +20,9 @@
 								<xsl:text>Сообщение об ошибке: </xsl:text>
 								<xsl:value-of select="exception/message"/>
 								<br/>
+								<xsl:text>ID ошибки: </xsl:text>
+								<xsl:value-of select="exception/guid"/>
 								<br/>
-								<font size="-3">
-									<pre>
-										<xsl:value-of select="exception/trace"/>
-									</pre>
-								</font>
 							</td> 
 						</tr> 
 					</table> 

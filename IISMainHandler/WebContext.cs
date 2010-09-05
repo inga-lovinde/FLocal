@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using FLocal.Core;
+using FLocal.Common;
 using FLocal.Common.dataobjects;
 using FLocal.Common.actions;
 using System.Xml.Linq;
@@ -152,7 +153,7 @@ namespace FLocal.IISHandler {
 		}
 
 		public void LogError(Exception e) {
-			using(StreamWriter writer = new StreamWriter(Common.Config.instance.dataDir + "Logs\\" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + "." + Guid.NewGuid() + ".txt")) {
+			using(StreamWriter writer = new StreamWriter(Common.Config.instance.dataDir + "Logs\\" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + "." + e.GetGuid().ToString() + ".txt")) {
 				writer.WriteLine("Requested url: " + this.httprequest.RawUrl);
 				writer.WriteLine("Remote ip: " + this.httprequest.UserHostAddress);
 				if(this.httprequest.Cookies["session"] != null) {
@@ -160,6 +161,7 @@ namespace FLocal.IISHandler {
 				}
 				writer.WriteLine();
 				writer.WriteLine("Exception: " + e.GetType().FullName);
+				writer.WriteLine("Guid: " + e.GetGuid().ToString());
 				writer.WriteLine(e.Message);
 				if(e is FLocalException) {
 					writer.WriteLine(((FLocalException)e).FullStackTrace);

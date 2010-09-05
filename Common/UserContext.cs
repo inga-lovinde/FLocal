@@ -60,11 +60,16 @@ namespace FLocal.Common {
 			);
 		}
 
+		public static Guid GetGuid(this Exception exception) {
+			return Core.Cache<Guid>.instance.get(exception, () => Guid.NewGuid());
+		}
+
 		public static XElement ToXml(this Exception exception) {
 			return new XElement("exception",
 				new XElement("type", exception.GetType().FullName),
 				new XElement("message", exception.Message),
-				new XElement("trace", exception.StackTrace)
+				new XElement("trace", exception.StackTrace),
+				new XElement("guid", exception.GetGuid().ToString())
 			);
 		}
 
