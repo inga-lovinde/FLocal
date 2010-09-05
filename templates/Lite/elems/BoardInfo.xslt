@@ -4,7 +4,7 @@
 	<xsl:template match="board">
 		<p>
 			<xsl:choose>
-				<xsl:when test="(hasNewPosts='true') and (lastPostInfo/post/id &gt; 10000000)">
+				<xsl:when test="(hasNewPosts='true') and not(lastPostInfo/post/poster/user/id = /root/session/user/id)">
 					<xsl:text>(*)</xsl:text>
 				</xsl:when>
 				<xsl:otherwise>

@@ -7,7 +7,7 @@
 				<a>
 					<xsl:attribute name="onClick">if(!confirm('ѕометить все сообщени€ как прочитанные?')) {event.returnValue=false; return false;} else { alert("Not implemented yet"); }</xsl:attribute>
 					<xsl:choose>
-						<xsl:when test="(hasNewPosts='true') and (lastPostInfo/post/id &gt; 10000000)">
+						<xsl:when test="(hasNewPosts='true') and not(lastPostInfo/post/poster/user/id = /root/session/user/id)">
 							<img border="0" width="17" height="21" src="/static/images/newposts.gif" alt=""/>
 						</xsl:when>
 						<xsl:otherwise>
