@@ -114,5 +114,5 @@ p {
 	text-decoration: line-through;
 }
 .currentLink {
-	border: solid 3px;
+	font-weight:bold;
 }
