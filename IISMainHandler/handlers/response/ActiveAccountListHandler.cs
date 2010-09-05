@@ -57,8 +57,7 @@ namespace FLocal.IISHandler.handlers.response {
 								)
 							)
 						)
-					),
-					pageOuter.exportToXml(2, 5, 2)
+					)
 				)
 			};
 		}

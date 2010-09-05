@@ -34,8 +34,7 @@ namespace FLocal.IISHandler.handlers.response {
 				) select Session.LoadByKey(stringId);
 			return new XElement[] {
 				new XElement("users", 
-					from session in sessions select session.account.user.exportToXmlForViewing(context),
-					pageOuter.exportToXml(2, 5, 2)
+					from session in sessions select session.account.user.exportToXmlForViewing(context)
 				)
 			};
 		}

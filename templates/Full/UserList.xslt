@@ -3,23 +3,11 @@
 	<xsl:import href="elems\Main.xslt"/>
 	<xsl:template name="specificTitle">Пользователи</xsl:template>
 	<xsl:template name="specific">
+		<xsl:call-template name="subHeader"/>
 		<table width="95%" align="center" cellpadding="1" cellspacing="1" class="tablesurround">
 			<tr>
 				<td>
 					<table cellpadding="3" cellspacing="1" width="100%" class="tableborders">
-						<tr class="tdheader">
-							<td colspan="7">
-								<table width="100%" cellspacing="1" cellpadding="3" border="0">
-									<tr>
-										<td>
-											<a href="/Users/Active/">
-												<xsl:text>Активные (смигрированные)</xsl:text>
-											</a>
-										</td>
-									</tr>
-								</table>
-							</td>
-						</tr>
 						<tr class="tdheader">
 							<td align="left" width="15%" nowrap="nowrap">
 								<a>
@@ -58,20 +46,22 @@
 							</td>
 						</tr>
 						<xsl:apply-templates select="users/user"/>
-						<tr class="tdheader">
-							<td colspan="7">
-								<table width="100%" cellspacing="1" cellpadding="3" border="0">
-									<tr>
-										<td>
-											<xsl:text>страницы:</xsl:text>
-											<xsl:apply-templates select="users/pageOuter" mode="withCurrent">
-												<xsl:with-param name="baseLink">/Users/All/</xsl:with-param>
-											</xsl:apply-templates>
-										</td>
-									</tr>
-								</table>
-							</td>
-						</tr>
+						<xsl:if test="users/pageOuter">
+							<tr class="tdheader">
+								<td colspan="7">
+									<table width="100%" cellspacing="1" cellpadding="3" border="0">
+										<tr>
+											<td>
+												<xsl:text>страницы:</xsl:text>
+												<xsl:apply-templates select="users/pageOuter" mode="withCurrent">
+													<xsl:with-param name="baseLink">/Users/All/</xsl:with-param>
+												</xsl:apply-templates>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</xsl:if>
 					</table>
 				</td>
 			</tr>
@@ -118,6 +108,36 @@
 				<xsl:apply-templates select="regDate" mode="dateTime"/>
 			</td>
 		</tr>
+	</xsl:template>
+
+	<xsl:template name="subHeader">
+		<table width="95%" align="center" class="tablesurround" cellpadding="1" cellspacing="1">
+			<tr>
+				<td>
+					<table width="100%" class="tableborders" cellpadding="3" cellspacing="1">
+						<tr>
+							<td align="center" class="menubar">
+								<xsl:call-template name="headerLink">
+									<xsl:with-param name="url">/Users/All/</xsl:with-param>
+									<xsl:with-param name="text">Все</xsl:with-param>
+								</xsl:call-template>
+								<xsl:text> | </xsl:text>
+								<xsl:call-template name="headerLink">
+									<xsl:with-param name="url">/Users/Active/</xsl:with-param>
+									<xsl:with-param name="text">Активные (смигрированные)</xsl:with-param>
+								</xsl:call-template>
+								<xsl:text> | </xsl:text>
+								<xsl:call-template name="headerLink">
+									<xsl:with-param name="url">/Users/Online/</xsl:with-param>
+									<xsl:with-param name="text">В онлайне</xsl:with-param>
+								</xsl:call-template>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		<center>&#160;&#160;</center>
 	</xsl:template>
 
 </xsl:stylesheet>

@@ -72,11 +72,6 @@
 								</xsl:call-template>
 								<xsl:text> | </xsl:text>
 								<xsl:call-template name="headerLink">
-									<xsl:with-param name="url">/Users/Online/</xsl:with-param>
-									<xsl:with-param name="text">Кто в онлайне</xsl:with-param>
-								</xsl:call-template>
-								<xsl:text> | </xsl:text>
-								<xsl:call-template name="headerLink">
 									<xsl:with-param name="url">/q/faq/</xsl:with-param>
 									<xsl:with-param name="text">FAQ</xsl:with-param>
 								</xsl:call-template>

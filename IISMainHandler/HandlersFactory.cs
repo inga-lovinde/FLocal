@@ -83,6 +83,9 @@ namespace FLocal.IISHandler {
 				case "registerbyinvite":
 					return new handlers.response.RegisterByInviteHandler();
 				case "users":
+					if(context.requestParts.Length == 1) {
+						throw new RedirectException("/Users/All/");
+					}
 					switch(context.requestParts[1].ToLower()) {
 						case "all":
 							return new handlers.response.UserListHandler();
