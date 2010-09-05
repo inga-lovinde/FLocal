@@ -126,6 +126,9 @@ namespace FLocal.Common.dataobjects {
 		}
 		public string bodyShort {
 			get {
+				if(this.revision.HasValue) {
+					return this.latestRevision.body.PHPSubstring(0, 300);
+				}
 				return this.body.Replace("<br />", Util.EOL).Replace("<br/>", Util.EOL).PHPSubstring(0, 1000);
 			}
 		}
