@@ -14,21 +14,32 @@ namespace FLocal.IISHandler.handlers {
 
 		abstract protected IEnumerable<XElement> getSpecificData(WebContext context);
 
+		protected IEnumerable<XElement> getCommonData(WebContext context) {
+			return new XElement[] {
+				new XElement("title", Config.instance.AppInfo),
+				new XElement("current", DateTime.Now.ToXml()),
+				context.exportSession(),
+				context.userSettings.skin.exportToXml(),
+				new XElement("currentUrl", "/" + String.Join("/", context.requestParts) + "/"),
+			};
+		}
+
 		private XDocument getData(WebContext context) {
 			return new XDocument(
 				new XElement("root",
 					this.getSpecificData(context),
-					new XElement("title", Config.instance.AppInfo),
-					new XElement("current", DateTime.Now.ToXml()),
-					context.exportSession(),
-					context.userSettings.skin.exportToXml(),
-					new XElement("currentUrl", "/" + String.Join("/", context.requestParts) + "/")
+					this.getCommonData(context)
 				)
 			);
 		}
 
 		public void Handle(WebContext context) {
-			context.httpresponse.Write(context.Transform(this.templateName, this.getData(context)));
+			try {
+				context.httpresponse.Write(context.Transform(this.templateName, this.getData(context)));
+			} catch(Exception e) {
+				context.LogError(e);
+				context.httpresponse.Write(context.Transform("Exception.xslt", new XDocument(new XElement("root", this.getCommonData(context), e.ToXml()))));
+			}
 		}
 
 	}

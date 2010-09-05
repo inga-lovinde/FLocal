@@ -46,7 +46,7 @@ namespace FLocal.IISHandler.handlers.response {
 								new ComparisonCondition(
 									PMMessage.TableSpec.instance.getIdSpec(),
 									ComparisonType.LESSTHAN,
-									int.Parse(context.requestParts[2].PHPSubstring(1)).ToString()
+									int.Parse(context.requestParts[4].PHPSubstring(1)).ToString()
 								)
 							)
 						)

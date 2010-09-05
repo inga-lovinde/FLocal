@@ -27,28 +27,39 @@ namespace FLocal.IISHandler.handlers.request {
 
 		abstract protected XElement[] Do(WebContext context);
 
+		protected IEnumerable<XElement> getCommonData(WebContext context) {
+			return new XElement[] {
+				new XElement("title", Config.instance.AppInfo),
+				new XElement("timestamp", DateTime.Now.Ticks.ToString()),
+				context.userSettings.skin.exportToXml(),
+				context.exportSession(),
+			};
+		}
+
 		private XDocument getData(WebContext context) {
 			return new XDocument(
 				new XElement("root",
 					this.Do(context),
-					new XElement("title", Config.instance.AppInfo),
-					new XElement("timestamp", DateTime.Now.Ticks.ToString()),
-					context.userSettings.skin.exportToXml(),
-					context.exportSession()
+					this.getCommonData(context)
 				)
 			);
 		}
 
 		public void Handle(WebContext context) {
 
-			Uri referer = context.httprequest.UrlReferrer;
-			if(referer == null || referer.Host != context.httprequest.Url.Host) {
-				throw new System.Web.HttpException(403, "Wrong referer");
-			}
+			try {
+				Uri referer = context.httprequest.UrlReferrer;
+				if(referer == null || referer.Host != context.httprequest.Url.Host) {
+					throw new System.Web.HttpException(403, "Wrong referer");
+				}
 
-			if(this.shouldBeGuest && context.session != null) throw new FLocalException("Should be guest");
-			if(this.shouldBeLoggedIn && context.session == null) throw new FLocalException("Should be anonymous");
-			context.httpresponse.Write(context.Transform(this.templateName, this.getData(context)));
+				if(this.shouldBeGuest && context.session != null) throw new FLocalException("Should be guest");
+				if(this.shouldBeLoggedIn && context.session == null) throw new FLocalException("Should be anonymous");
+				context.httpresponse.Write(context.Transform(this.templateName, this.getData(context)));
+			} catch(Exception e) {
+				context.LogError(e);
+				context.httpresponse.Write(context.Transform("Exception.xslt", new XDocument(new XElement("root", this.getCommonData(context), e.ToXml()))));
+			}
 		}
 
 	}

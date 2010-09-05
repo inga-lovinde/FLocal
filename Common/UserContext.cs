@@ -60,6 +60,14 @@ namespace FLocal.Common {
 			);
 		}
 
+		public static XElement ToXml(this Exception exception) {
+			return new XElement("exception",
+				new XElement("type", exception.GetType().FullName),
+				new XElement("message", exception.Message),
+				new XElement("trace", exception.StackTrace)
+			);
+		}
+
 	}
 
 }

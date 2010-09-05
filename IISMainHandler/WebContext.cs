@@ -7,6 +7,7 @@ using FLocal.Core;
 using FLocal.Common.dataobjects;
 using FLocal.Common.actions;
 using System.Xml.Linq;
+using System.IO;
 
 namespace FLocal.IISHandler {
 	class WebContext : Common.UserContext {
@@ -147,6 +148,18 @@ namespace FLocal.IISHandler {
 		public Core.Network.IPv4Address remoteHost {
 			get {
 				return new Core.Network.IPv4Address(this.httprequest.UserHostAddress);
+			}
+		}
+
+		public void LogError(Exception e) {
+			using(StreamWriter writer = new StreamWriter(Common.Config.instance.dataDir + "Logs\\" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + "." + Guid.NewGuid() + ".txt")) {
+				writer.WriteLine("Exception: " + e.GetType().FullName);
+				writer.WriteLine(e.Message);
+				if(e is FLocalException) {
+					writer.WriteLine(((FLocalException)e).FullStackTrace);
+				} else {
+					writer.WriteLine(e.StackTrace);
+				}
 			}
 		}
 
