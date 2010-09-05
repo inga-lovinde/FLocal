@@ -33,7 +33,7 @@ namespace FLocal.IISHandler.handlers.response {
 					new ComparisonCondition(
 						Poll.Vote.TableSpec.instance.getColumnSpec(Poll.Vote.TableSpec.FIELD_USERID),
 						ComparisonType.EQUAL,
-						context.session.account.user.id.ToString()
+						user.id.ToString()
 					),
 					pageOuter,
 					new JoinSpec[0],
