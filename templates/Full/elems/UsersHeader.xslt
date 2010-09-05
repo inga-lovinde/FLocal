@@ -23,8 +23,8 @@
 									<xsl:with-param name="url">/Users/Online/</xsl:with-param>
 									<xsl:with-param name="text">В онлайне</xsl:with-param>
 								</xsl:call-template>
-								<xsl:text> | </xsl:text>
 								<xsl:if test="user">
+									<xsl:text> | </xsl:text>
 									<xsl:call-template name="headerLink">
 										<xsl:with-param name="url">/Users/User/<xsl:value-of select="user/id"/>/</xsl:with-param>
 										<xsl:with-param name="text"><xsl:value-of select="user/name"/></xsl:with-param>
