@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="Windows-1251"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml">
 	<xsl:import href="elems\Main.xslt"/>
-	<xsl:import href="elems\MyHeader.xslt"/>
 	<xsl:import href="elems\PMInfo.xslt"/>
 	<xsl:template name="specificTitle">
 		<xsl:value-of select="conversationInfo/interlocutor/account/user/name"/>
 	</xsl:template>
 	<xsl:template name="specific">
-		<xsl:call-template name="myHeader"/>
 		<xsl:call-template name="conversationInfo"/>
 		<br />
 		<table width="95%" align="center" cellpadding="1" cellspacing="1" class="tablesurround">

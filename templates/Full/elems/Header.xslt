@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="Windows-1251"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml">
+	<xsl:import href="MyHeader.xslt"/>
+	<xsl:import href="UsersHeader.xslt"/>
 
 	<xsl:template name="headerLink">
 		<xsl:param name="url"/>
@@ -68,6 +70,12 @@
 				</td>
 			</tr>
 		</table>
+		<xsl:if test="starts-with(/root/currentUrl, '/Users/')">
+			<xsl:call-template name="usersHeader"/>
+		</xsl:if>
+		<xsl:if test="starts-with(/root/currentUrl, '/My/')">
+			<xsl:call-template name="myHeader"/>
+		</xsl:if>
 		<center>&#160;&#160;</center>
 	</xsl:template>
 </xsl:stylesheet>
