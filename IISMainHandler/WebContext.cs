@@ -153,6 +153,12 @@ namespace FLocal.IISHandler {
 
 		public void LogError(Exception e) {
 			using(StreamWriter writer = new StreamWriter(Common.Config.instance.dataDir + "Logs\\" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + "." + Guid.NewGuid() + ".txt")) {
+				writer.WriteLine("Requested url: " + this.httprequest.RawUrl);
+				writer.WriteLine("Remote ip: " + this.httprequest.UserHostAddress);
+				if(this.httprequest.Cookies["session"] != null) {
+					writer.WriteLine("Session: " + this.httprequest.Cookies["session"].Value);
+				}
+				writer.WriteLine();
 				writer.WriteLine("Exception: " + e.GetType().FullName);
 				writer.WriteLine(e.Message);
 				if(e is FLocalException) {
@@ -160,10 +166,6 @@ namespace FLocal.IISHandler {
 				} else {
 					writer.WriteLine(e.StackTrace);
 				}
-				writer.WriteLine();
-				writer.WriteLine("Requested url: " + this.httprequest.RawUrl);
-				writer.WriteLine();
-				writer.WriteLine("Remote ip: " + this.httprequest.UserHostAddress);
 			}
 		}
 
