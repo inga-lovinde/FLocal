@@ -2,6 +2,7 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml">
 	<xsl:import href="MyHeader.xslt"/>
 	<xsl:import href="UsersHeader.xslt"/>
+	<xsl:import href="UploadHeader.xslt"/>
 
 	<xsl:template name="headerLink">
 		<xsl:param name="url"/>
@@ -43,7 +44,7 @@
 								</xsl:call-template>
 								<xsl:text> | </xsl:text>
 								<xsl:call-template name="headerLink">
-									<xsl:with-param name="url">/Upload/List/</xsl:with-param>
+									<xsl:with-param name="url">/Upload/</xsl:with-param>
 									<xsl:with-param name="text">Àןכמאה</xsl:with-param>
 									<xsl:with-param name="isDisabled">
 										<xsl:if test="not(session/sessionKey)">true</xsl:if>
@@ -75,6 +76,9 @@
 		</xsl:if>
 		<xsl:if test="starts-with(/root/currentUrl, '/My/')">
 			<xsl:call-template name="myHeader"/>
+		</xsl:if>
+		<xsl:if test="starts-with(/root/currentUrl, '/Upload/')">
+			<xsl:call-template name="uploadHeader"/>
 		</xsl:if>
 		<center>&#160;&#160;</center>
 	</xsl:template>
