@@ -118,6 +118,7 @@
 	<xsl:template match="board" mode="select">
 		<xsl:param name="prefix"/>
 		<option>
+			<xsl:attribute name="value"><xsl:value-of select="id"/></xsl:attribute>
 			<xsl:if test="not(/root/isTrueModerator = 'true') and not(isTransferTarget = 'true')">
 				<xsl:attribute name="disabled">disabled</xsl:attribute>
 			</xsl:if>
