@@ -7,7 +7,10 @@ namespace FLocal.Common.actions {
 	class IncrementFieldValue : AbstractFieldValue {
 
 		public static Func<string, string> INCREMENTOR_CUSTOM(int i) {
-			return s => (int.Parse(s)+i).ToString();
+			return s => {
+				int old = String.IsNullOrEmpty(s) ? 0 : int.Parse(s);
+				return (old+i).ToString();
+			};
 		}
 
 		public static Func<string, string> DECREMENTOR_CUSTOM(int i) {
