@@ -27,7 +27,6 @@ namespace FLocal.IISHandler.handlers.response {
 				post.thread.board.exportToXml(context, Board.SubboardsOptions.None),
 				post.thread.exportToXml(context),
 				post.exportToXml(context),
-				post.latestRevision.exportToXml(context),
 				new XElement("layers",
 					from layer in PostLayer.allLayers select layer.exportToXml(context)
 				),
