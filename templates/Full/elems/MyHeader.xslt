@@ -57,7 +57,6 @@
 				</td>
 			</tr>
 		</table>
-		<center>&#160;&#160;</center>
 	</xsl:template>
 </xsl:stylesheet>
 

@@ -134,9 +134,11 @@ namespace FLocal.IISHandler {
 								return new handlers.WrongUrlHandler();
 							}
 							if(context.requestParts.Length == 3) {
-								return new handlers.response.UserInfoHandler();
+								throw new RedirectException("/Users/User/" + context.requestParts[2] + "/Info/");
 							}
 							switch(context.requestParts[3].ToLower()) {
+								case "info":
+									return new handlers.response.UserInfoHandler();
 								case "posts":
 									return new handlers.response.UserPostsHandler();
 								case "replies":

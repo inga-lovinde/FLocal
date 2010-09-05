@@ -4,33 +4,6 @@
 	<xsl:import href="elems\PollShortInfo.xslt"/>
 	<xsl:template name="specificTitle">Опросы</xsl:template>
 	<xsl:template name="specific">
-		<table width="95%" align="center" cellpadding="1" cellspacing="1" class="tablesurround">
-			<tr>
-				<td>
-					<table cellpadding="3" cellspacing="1" width="100%" border="0" class="tableborders">
-						<tr class="darktable">
-							<td colspan="6">
-								<table width="100%" cellpadding="0" cellspacing="0">
-									<tr>
-										<td colspan="2" class="catandforum">
-											<a>
-												<xsl:attribute name="href">/Users/</xsl:attribute>
-												<xsl:text>Пользователи</xsl:text>
-											</a>
-											<xsl:text> &gt;&gt; </xsl:text>
-											<xsl:apply-templates select="user" mode="userLink"/>
-											<xsl:text> &gt;&gt; </xsl:text>
-											<xsl:text>Опросы с участием пользователя</xsl:text>
-										</td>
-									</tr>
-								</table>
-							</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-		</table>
-		<br/>
 		<table width="95%" align="center" class="tablesurround">
 			<tr>
 				<td>
