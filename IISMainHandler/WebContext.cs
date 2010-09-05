@@ -160,6 +160,10 @@ namespace FLocal.IISHandler {
 				} else {
 					writer.WriteLine(e.StackTrace);
 				}
+				writer.WriteLine();
+				writer.WriteLine("Requested url: " + this.httprequest.RawUrl);
+				writer.WriteLine();
+				writer.WriteLine("Remote ip: " + this.httprequest.UserHostAddress);
 			}
 		}
 
