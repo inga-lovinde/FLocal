@@ -24,10 +24,10 @@ namespace FLocal.IISHandler.handlers.response {
 			User user;
 			{
 				int userId;
-				if(int.TryParse(context.requestParts[1], out userId)) {
+				if(int.TryParse(context.requestParts[2], out userId)) {
 					user = User.LoadById(userId);
 				} else {
-					user = User.LoadByName(context.requestParts[1]);
+					user = User.LoadByName(context.requestParts[2]);
 				}
 			}
 			Account account = null;

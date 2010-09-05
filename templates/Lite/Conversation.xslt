@@ -19,7 +19,7 @@
 										<td>
 											<xsl:text>страницы:</xsl:text>
 											<xsl:apply-templates select="messages/pageOuter" mode="withCurrent">
-												<xsl:with-param name="baseLink">/Conversation/<xsl:value-of select="conversation/interlocutor/account/id"/>/</xsl:with-param>
+												<xsl:with-param name="baseLink">/My/Conversations/Conversation/<xsl:value-of select="conversation/interlocutor/account/id"/>/</xsl:with-param>
 											</xsl:apply-templates>
 										</td>
 									</tr>
@@ -34,7 +34,7 @@
 										<td>
 											<xsl:text>страницы:</xsl:text>
 											<xsl:apply-templates select="messages/pageOuter" mode="withCurrent">
-												<xsl:with-param name="baseLink">/Conversation/<xsl:value-of select="conversation/interlocutor/account/id"/>/</xsl:with-param>
+												<xsl:with-param name="baseLink">/My/Conversations/Conversation/<xsl:value-of select="conversation/interlocutor/account/id"/>/</xsl:with-param>
 											</xsl:apply-templates>
 										</td>
 									</tr>
@@ -52,7 +52,7 @@
 	<xsl:template name="conversationInfo">
 		<p>
 			<font class="catandforum">
-				<a href="/Conversations"><xsl:text>Приватные сообщения</xsl:text></a>
+				<a href="/My/Conversations/"><xsl:text>Приватные сообщения</xsl:text></a>
 				<xsl:text> &gt;&gt; </xsl:text>
 				<xsl:value-of select="conversation/interlocutor/account/user/name"/>
 			</font>

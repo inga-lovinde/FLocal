@@ -23,7 +23,7 @@
 				</xsl:choose>
 				<a>
 					<xsl:attribute name="href">
-						<xsl:text>/Conversation/</xsl:text>
+						<xsl:text>/My/Conversations/Conversation/</xsl:text>
 						<xsl:value-of select="interlocutor/account/id"/>
 						<xsl:text>/</xsl:text>
 						<xsl:if test="afterLastRead&lt;=lastMessageId">

@@ -9,7 +9,7 @@
 			<xsl:text> [</xsl:text>
 			<a>
 				<xsl:if test="session/sessionKey">
-					<xsl:attribute name="href">/PMSend/</xsl:attribute>
+					<xsl:attribute name="href">/My/Conversations/PMSend/</xsl:attribute>
 				</xsl:if>
 				<xsl:text>New Message</xsl:text>
 			</a>
@@ -27,7 +27,7 @@
 					<font class="onbody">
 						<xsl:text>страницы:</xsl:text>
 						<xsl:apply-templates select="conversations/pageOuter" mode="withCurrent">
-							<xsl:with-param name="baseLink">/Conversations/</xsl:with-param>
+							<xsl:with-param name="baseLink">/My/Conversations/</xsl:with-param>
 						</xsl:apply-templates>
 					</font>
 				</td>

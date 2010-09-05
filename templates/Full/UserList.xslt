@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="Windows-1251"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml">
 	<xsl:import href="elems\Main.xslt"/>
+	<xsl:import href="elems\UsersHeader.xslt"/>
 	<xsl:template name="specificTitle">Пользователи</xsl:template>
 	<xsl:template name="specific">
-		<xsl:call-template name="subHeader"/>
+		<xsl:call-template name="usersHeader"/>
 		<table width="95%" align="center" cellpadding="1" cellspacing="1" class="tablesurround">
 			<tr>
 				<td>
@@ -89,7 +90,7 @@
 			</td>
 			<td>
 				<a>
-					<xsl:attribute name="href">/User/<xsl:value-of select="id"/>/Posts/</xsl:attribute>
+					<xsl:attribute name="href">/Users/User/<xsl:value-of select="id"/>/Posts/</xsl:attribute>
 					<xsl:value-of select="totalPosts"/>
 					<xsl:if test="actualPosts">
 						<xsl:text> (</xsl:text>
@@ -108,36 +109,6 @@
 				<xsl:apply-templates select="regDate" mode="dateTime"/>
 			</td>
 		</tr>
-	</xsl:template>
-
-	<xsl:template name="subHeader">
-		<table width="95%" align="center" class="tablesurround" cellpadding="1" cellspacing="1">
-			<tr>
-				<td>
-					<table width="100%" class="tableborders" cellpadding="3" cellspacing="1">
-						<tr>
-							<td align="center" class="menubar">
-								<xsl:call-template name="headerLink">
-									<xsl:with-param name="url">/Users/All/</xsl:with-param>
-									<xsl:with-param name="text">Все</xsl:with-param>
-								</xsl:call-template>
-								<xsl:text> | </xsl:text>
-								<xsl:call-template name="headerLink">
-									<xsl:with-param name="url">/Users/Active/</xsl:with-param>
-									<xsl:with-param name="text">Активные (смигрированные)</xsl:with-param>
-								</xsl:call-template>
-								<xsl:text> | </xsl:text>
-								<xsl:call-template name="headerLink">
-									<xsl:with-param name="url">/Users/Online/</xsl:with-param>
-									<xsl:with-param name="text">В онлайне</xsl:with-param>
-								</xsl:call-template>
-							</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-		</table>
-		<center>&#160;&#160;</center>
 	</xsl:template>
 
 </xsl:stylesheet>

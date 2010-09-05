@@ -198,7 +198,7 @@
 				<xsl:text>separate </xsl:text>
 				<xsl:text>UG_</xsl:text><xsl:value-of select="group/name"/>
 			</xsl:attribute>
-			<xsl:attribute name="href">/User/<xsl:value-of select="id"/>/</xsl:attribute>
+			<xsl:attribute name="href">/Users/User/<xsl:value-of select="id"/>/</xsl:attribute>
 			<xsl:value-of select="name"/>
 			<xsl:if test="isModerator='true'">
 				<img src="/static/images/mod.gif" border="0"/>

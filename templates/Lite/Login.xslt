@@ -51,7 +51,7 @@
 						</tr> 
 						<tr> 
 							<td class="lighttable"> 
-								<form method="post" action="/MigrateAccount/">
+								<form method="post" action="/My/Login/MigrateAccount/">
 									<xsl:text>Логин</xsl:text><br /> 
 									<input type="text" name="username" class="formboxes" /><br/>
 									<input type="submit" name="buttlogin" value="Далее" class="buttons" /> 

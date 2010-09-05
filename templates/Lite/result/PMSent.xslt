@@ -24,12 +24,12 @@
 								<p align="center">
 									<xsl:text>[&#8592;] </xsl:text>
 									<a id="actionLink_left">
-										<xsl:attribute name="href">/Conversations/</xsl:attribute>
+										<xsl:attribute name="href">/My/Conversations/</xsl:attribute>
 										<xsl:text>Вернуться к личным сообщениям</xsl:text>
 									</a>
 									<xsl:text> | </xsl:text>
 									<a id="actionLink_right">
-										<xsl:attribute name="href">/Conversation/<xsl:value-of select="message/interlocutor/account/id"/>/p<xsl:value-of select="message/id"/></xsl:attribute>
+										<xsl:attribute name="href">/My/Conversations/Conversation/<xsl:value-of select="message/interlocutor/account/id"/>/p<xsl:value-of select="message/id"/></xsl:attribute>
 										<xsl:text>Просмотреть сообщение</xsl:text>
 									</a>
 									<xsl:text> [&#8594;]</xsl:text>

@@ -16,8 +16,8 @@ namespace FLocal.IISHandler.handlers.response {
 		}
 
 		protected override IEnumerable<XElement> getSpecificData(WebContext context) {
-			int inviteId = int.Parse(context.requestParts[1]);
-			string code = context.requestParts[2];
+			int inviteId = int.Parse(context.requestParts[3]);
+			string code = context.requestParts[4];
 			Invite invite = Invite.LoadById(inviteId);
 			if(invite.isUsed) throw new FLocalException("Invite is already used");
 			if(invite.code != code) throw new FLocalException("Code mismatch");

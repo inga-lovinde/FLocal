@@ -58,14 +58,14 @@
 										<br />
 										<a>
 											<xsl:if test="session/user">
-												<xsl:attribute name="href">/User/<xsl:value-of select="session/user/id"/>/Replies/</xsl:attribute>
+												<xsl:attribute name="href">/Users/User/<xsl:value-of select="session/user/id"/>/Replies/</xsl:attribute>
 											</xsl:if>
 											<xsl:text>Последние ответы на мои сообщения</xsl:text>
 										</a>
 										<br />
 										<a>
 											<xsl:if test="session/user">
-												<xsl:attribute name="href">/User/<xsl:value-of select="session/user/id"/>/PollsParticipated/</xsl:attribute>
+												<xsl:attribute name="href">/Users/User/<xsl:value-of select="session/user/id"/>/PollsParticipated/</xsl:attribute>
 											</xsl:if>
 											<xsl:text>Последние опросы с моим участием</xsl:text>
 										</a>

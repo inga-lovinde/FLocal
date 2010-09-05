@@ -33,7 +33,7 @@ namespace FLocal.IISHandler.handlers.request {
 			try {
 				Account tmpAccount = Account.LoadByName(context.httprequest.Form["name"]);
 				if(tmpAccount.needsMigration) {
-					throw new RedirectException("/MigrateAccount/" + context.httprequest.Form["name"]);
+					throw new RedirectException("/My/Login/MigrateAccount/" + context.httprequest.Form["name"]);
 				}
 			} catch(NotFoundInDBException) {
 			}

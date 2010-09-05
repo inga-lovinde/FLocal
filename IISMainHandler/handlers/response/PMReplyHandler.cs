@@ -19,7 +19,7 @@ namespace FLocal.IISHandler.handlers.response {
 		}
 
 		override protected IEnumerable<XElement> getSpecificNewMessageData(WebContext context) {
-			PMMessage message = PMMessage.LoadById(int.Parse(context.requestParts[1]));
+			PMMessage message = PMMessage.LoadById(int.Parse(context.requestParts[3]));
 			string quoted = UBBParser.StripQuotes(message.bodyUBB).Trim();
 			return new XElement[] {
 				message.exportToXml(context),

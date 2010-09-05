@@ -183,7 +183,7 @@
 										<td valign="top" colspan="3" align="center" class="darktable">
 											<a>
 												<xsl:if test="accountId">
-													<xsl:attribute name="href">/PMSend/<xsl:value-of select="accountId"/>/</xsl:attribute>
+													<xsl:attribute name="href">/My/Conversations/PMSend/<xsl:value-of select="accountId"/>/</xsl:attribute>
 												</xsl:if>
 												<img src="/static/images/sendprivate.gif" border="0" style="vertical-align: text-bottom" />
 												<xsl:text> Послать личное сообщение</xsl:text>
@@ -191,7 +191,7 @@
 											<xsl:text> | </xsl:text>
 											<a>
 												<xsl:if test="accountId">
-													<xsl:attribute name="href">/Conversation/<xsl:value-of select="accountId"/>/</xsl:attribute>
+													<xsl:attribute name="href">/My/Conversations/Conversation/<xsl:value-of select="accountId"/>/</xsl:attribute>
 												</xsl:if>
 												<img src="/static/images/sundial.gif" border="0" style="vertical-align: text-bottom" />
 												<xsl:text> История</xsl:text>
@@ -203,13 +203,13 @@
 											</a>
 											<xsl:text> | </xsl:text>
 											<a>
-												<xsl:attribute name="href">/User/<xsl:value-of select="user/id"/>/Posts/</xsl:attribute>
+												<xsl:attribute name="href">/Users/User/<xsl:value-of select="user/id"/>/Posts/</xsl:attribute>
 												<img src="/static/images/viewposts.gif" align="top" style="vertical-align: text-bottom" />
 												<xsl:text> Сообщения</xsl:text>
 											</a>
 											<xsl:text> | </xsl:text>
 											<a>
-												<xsl:attribute name="href">/User/<xsl:value-of select="user/id"/>/Replies/</xsl:attribute>
+												<xsl:attribute name="href">/Users/User/<xsl:value-of select="user/id"/>/Replies/</xsl:attribute>
 												<xsl:text>Ответы</xsl:text>
 											</a>
 											<xsl:text> | </xsl:text>

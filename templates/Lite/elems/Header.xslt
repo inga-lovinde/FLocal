@@ -4,7 +4,7 @@
 		<p>
 			<xsl:if test="session/sessionKey">
 				<a>
-					<xsl:attribute name="href">/Conversations/?<xsl:value-of select="current/date/ticks"/></xsl:attribute>
+					<xsl:attribute name="href">/My/Conversations/?<xsl:value-of select="current/date/ticks"/></xsl:attribute>
 					<xsl:if test="session/indicators/unreadPrivateMessages != '0'">
 						<img src="/static/images/newpm.gif" border="0">
 							<xsl:attribute name="alt">
@@ -25,7 +25,7 @@
 			</xsl:if>
 			<xsl:if test="session/notLoggedIn">
 				<a target="_top">
-					<xsl:attribute name="href">/Login/</xsl:attribute>
+					<xsl:attribute name="href">/My/Login/</xsl:attribute>
 					<xsl:text>¬ход</xsl:text>
 				</a>
 			</xsl:if>

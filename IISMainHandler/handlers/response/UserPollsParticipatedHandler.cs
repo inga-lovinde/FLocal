@@ -21,11 +21,11 @@ namespace FLocal.IISHandler.handlers.response {
 		}
 
 		override protected IEnumerable<XElement> getSpecificData(WebContext context) {
-			User user = User.LoadById(int.Parse(context.requestParts[1]));
+			User user = User.LoadById(int.Parse(context.requestParts[2]));
 			PageOuter pageOuter = PageOuter.createFromGet(
 				context.requestParts,
 				context.userSettings.postsPerPage,
-				3
+				4
 			);
 			IEnumerable<Poll.Vote> votes = Poll.Vote.LoadByIds(
 				from stringId in Config.instance.mainConnection.LoadIdsByConditions(

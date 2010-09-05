@@ -21,10 +21,10 @@ namespace FLocal.IISHandler.handlers.response {
 			if(context.httprequest.Form["username"] != null && context.httprequest.Form["username"] != "") {
 				username = context.httprequest.Form["username"];
 			} else {
-				if(context.requestParts.Length != 2) {
+				if(context.requestParts.Length != 4) {
 					throw new CriticalException("Username is not specified");
 				}
-				username = context.requestParts[1];
+				username = context.requestParts[3];
 			}
 			Account account = Account.LoadByName(username);
 			if(!account.needsMigration) throw new FLocalException("Already migrated");

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="Windows-1251"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml">
 	<xsl:import href="elems\Main.xslt"/>
+	<xsl:import href="elems\UsersHeader.xslt"/>
 	<xsl:import href="elems\PollShortInfo.xslt"/>
 	<xsl:template name="specificTitle">Опросы</xsl:template>
 	<xsl:template name="specific">
+		<xsl:call-template name="usersHeader"/>
 		<table width="95%" align="center" cellpadding="1" cellspacing="1" class="tablesurround">
 			<tr>
 				<td>
@@ -48,7 +50,7 @@
 								<font class="onbody">
 									<xsl:text>страницы:</xsl:text>
 									<xsl:apply-templates select="polls/pageOuter" mode="withCurrent">
-										<xsl:with-param name="baseLink">/User/<xsl:value-of select="user/id"/>/PollsParticipated/</xsl:with-param>
+										<xsl:with-param name="baseLink">/Users/User/<xsl:value-of select="user/id"/>/PollsParticipated/</xsl:with-param>
 									</xsl:apply-templates>
 								</font>
 							</td>

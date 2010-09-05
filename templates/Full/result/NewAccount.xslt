@@ -29,7 +29,7 @@
 									</a>
 									<xsl:text> | </xsl:text>
 									<a id="actionLink_right">
-										<xsl:attribute name="href">/Login/</xsl:attribute>
+										<xsl:attribute name="href">/My/Login/</xsl:attribute>
 										<xsl:text>Войти</xsl:text>
 									</a>
 									<xsl:text> [&#8594;]</xsl:text>

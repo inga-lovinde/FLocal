@@ -76,12 +76,48 @@ namespace FLocal.IISHandler {
 						default:
 							return new handlers.WrongUrlHandler();
 					}
-				case "login":
-					return new handlers.response.LoginHandler();
-				case "migrateaccount":
-					return new handlers.response.MigrateAccountHandler();
-				case "registerbyinvite":
-					return new handlers.response.RegisterByInviteHandler();
+				case "my":
+					if(context.requestParts.Length == 1) {
+						if(context.account != null) {
+							throw new RedirectException("/My/Conversations/");
+						} else {
+							throw new RedirectException("/My/Login/");
+						}
+					}
+					switch(context.requestParts[1].ToLower()) {
+						case "login":
+							if(context.requestParts.Length == 2) {
+								return new handlers.response.LoginHandler();
+							} else {
+								switch(context.requestParts[2].ToLower()) {
+									case "migrateaccount":
+										return new handlers.response.MigrateAccountHandler();
+									case "registerbyinvite":
+										return new handlers.response.RegisterByInviteHandler();
+									default:
+										return new handlers.WrongUrlHandler();
+								}
+							}
+						case "settings":
+							return new handlers.response.SettingsHandler();
+						case "conversations":
+							if(context.requestParts.Length == 2) {
+								return new handlers.response.ConversationsHandler();
+							} else {
+								switch(context.requestParts[2].ToLower()) {
+									case "conversation":
+										return new handlers.response.ConversationHandler();
+									case "pmsend":
+										return new handlers.response.PMSendHandler();
+									case "pmreply":
+										return new handlers.response.PMReplyHandler();
+									default:
+										return new handlers.response.ConversationsHandler();
+								}
+							}
+						default:
+							return new handlers.WrongUrlHandler();
+					}
 				case "users":
 					if(context.requestParts.Length == 1) {
 						throw new RedirectException("/Users/All/");
@@ -93,39 +129,29 @@ namespace FLocal.IISHandler {
 							return new handlers.response.ActiveAccountListHandler();
 						case "online":
 							return new handlers.response.WhoIsOnlineHandler();
+						case "user":
+							if(context.requestParts.Length < 3) {
+								return new handlers.WrongUrlHandler();
+							}
+							if(context.requestParts.Length == 3) {
+								return new handlers.response.UserInfoHandler();
+							}
+							switch(context.requestParts[3].ToLower()) {
+								case "posts":
+									return new handlers.response.UserPostsHandler();
+								case "replies":
+									return new handlers.response.UserRepliesHandler();
+								case "pollsparticipated":
+									return new handlers.response.UserPollsParticipatedHandler();
+								default:
+									return new handlers.WrongUrlHandler();
+							}
 						default:
 							return new handlers.WrongUrlHandler();
 					}
-				case "user":
-					if(context.requestParts.Length < 2) {
-						return new handlers.WrongUrlHandler();
-					}
-					if(context.requestParts.Length == 2) {
-						return new handlers.response.UserInfoHandler();
-					}
-					switch(context.requestParts[2].ToLower()) {
-						case "posts":
-							return new handlers.response.UserPostsHandler();
-						case "replies":
-							return new handlers.response.UserRepliesHandler();
-						case "pollsparticipated":
-							return new handlers.response.UserPollsParticipatedHandler();
-						default:
-							return new handlers.WrongUrlHandler();
-					}
-				case "settings":
-					return new handlers.response.SettingsHandler();
-				case "conversations":
-					return new handlers.response.ConversationsHandler();
-				case "conversation":
-					return new handlers.response.ConversationHandler();
-				case "pmsend":
-					return new handlers.response.PMSendHandler();
-				case "pmreply":
-					return new handlers.response.PMReplyHandler();
 				case "upload":
 					if(context.requestParts.Length < 2) {
-						return new handlers.WrongUrlHandler();
+						throw new RedirectException("/Upload/List/");
 					}
 					switch(context.requestParts[1].ToLower()) {
 						case "item":
@@ -161,6 +187,14 @@ namespace FLocal.IISHandler {
 					return new handlers.response.LocalNetworksListHandler();
 				case "static":
 					return new handlers.StaticHandler(context.requestParts);
+				case "registerbyinvite":
+					string[] rbi_parts = context.requestParts;
+					rbi_parts[0] = "My/Login/RegisterByInvite";
+					throw new RedirectException("/" + string.Join("/", rbi_parts));
+				case "user":
+					string[] u_parts = context.requestParts;
+					u_parts[0] = "Users/User";
+					throw new RedirectException("/" + string.Join("/", u_parts));
 				case "do":
 					if(context.requestParts.Length < 2) {
 						return new handlers.WrongUrlHandler();

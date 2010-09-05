@@ -21,7 +21,7 @@ namespace FLocal.IISHandler.handlers.response {
 		}
 
 		override protected IEnumerable<XElement> getSpecificData(WebContext context) {
-			Account interlocutor = Account.LoadById(int.Parse(context.requestParts[1]));
+			Account interlocutor = Account.LoadById(int.Parse(context.requestParts[3]));
 			PMConversation conversation = PMConversation.LoadByAccounts(context.session.account, interlocutor);
 			PageOuter pageOuter = PageOuter.createFromGet(
 				context.requestParts,
@@ -52,7 +52,7 @@ namespace FLocal.IISHandler.handlers.response {
 						)
 					}
 				},
-				2
+				4
 			);
 			IEnumerable<PMMessage> messages = conversation.getMessages(pageOuter, context);
 

@@ -45,7 +45,7 @@
 														<tr>
 															<td class="navigation">
 																<a>
-																	<xsl:attribute name="href">/PMReply/<xsl:value-of select="id"/>/</xsl:attribute>
+																	<xsl:attribute name="href">/My/Conversations/PMReply/<xsl:value-of select="id"/>/</xsl:attribute>
 																	<img src="/static/images/reply.gif" border="0" alt="Ответ на сообщение" width="27" height="14" title="Ответ на сообщение" style="vertical-align: text-bottom" />
 																</a>
 															</td>

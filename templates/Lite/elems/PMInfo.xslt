@@ -27,7 +27,7 @@
 				<span style="padding-left:1em">
 					<xsl:text> | </xsl:text>
 					<a>
-						<xsl:attribute name="href">/PMReply/<xsl:value-of select="id"/>/</xsl:attribute>
+						<xsl:attribute name="href">/My/Conversations/PMReply/<xsl:value-of select="id"/>/</xsl:attribute>
 						<xsl:text>Reply</xsl:text>
 					</a>
 					<xsl:text> | </xsl:text>

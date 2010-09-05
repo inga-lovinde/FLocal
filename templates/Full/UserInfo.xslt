@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="Windows-1251"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml">
 	<xsl:import href="elems\Main.xslt"/>
+	<xsl:import href="elems\UsersHeader.xslt"/>
 	<xsl:template name="specificTitle"><xsl:value-of select="user/name"/></xsl:template>
 	<xsl:template name="specific">
+		<xsl:call-template name="usersHeader"/>
 		<table width="95%" align="center" cellpadding="1" cellspacing="1" class="tablesurround">
 			<tr>
 				<td>
@@ -183,7 +185,7 @@
 										<td valign="top" colspan="3" align="center" class="darktable">
 											<a>
 												<xsl:if test="accountId">
-													<xsl:attribute name="href">/PMSend/<xsl:value-of select="accountId"/>/</xsl:attribute>
+													<xsl:attribute name="href">/My/Conversations/PMSend/<xsl:value-of select="accountId"/>/</xsl:attribute>
 												</xsl:if>
 												<img src="/static/images/sendprivate.gif" border="0" style="vertical-align: text-bottom" />
 												<xsl:text> Послать личное сообщение</xsl:text>
@@ -191,7 +193,7 @@
 											<xsl:text> | </xsl:text>
 											<a>
 												<xsl:if test="accountId">
-													<xsl:attribute name="href">/Conversation/<xsl:value-of select="accountId"/>/</xsl:attribute>
+													<xsl:attribute name="href">/My/Conversations/Conversation/<xsl:value-of select="accountId"/>/</xsl:attribute>
 												</xsl:if>
 												<img src="/static/images/sundial.gif" border="0" style="vertical-align: text-bottom" />
 												<xsl:text> История</xsl:text>
@@ -203,13 +205,13 @@
 											</a>
 											<xsl:text> | </xsl:text>
 											<a>
-												<xsl:attribute name="href">/User/<xsl:value-of select="user/id"/>/Posts/</xsl:attribute>
+												<xsl:attribute name="href">/Users/User/<xsl:value-of select="user/id"/>/Posts/</xsl:attribute>
 												<img src="/static/images/viewposts.gif" align="top" style="vertical-align: text-bottom" />
 												<xsl:text> Сообщения</xsl:text>
 											</a>
 											<xsl:text> | </xsl:text>
 											<a>
-												<xsl:attribute name="href">/User/<xsl:value-of select="user/id"/>/Replies/</xsl:attribute>
+												<xsl:attribute name="href">/Users/User/<xsl:value-of select="user/id"/>/Replies/</xsl:attribute>
 												<xsl:text>Ответы</xsl:text>
 											</a>
 											<xsl:text> | </xsl:text>

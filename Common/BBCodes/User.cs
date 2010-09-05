@@ -13,7 +13,7 @@ namespace FLocal.Common.BBCodes {
 
 		public override string Format(ITextFormatter formatter) {
 			var user = dataobjects.User.LoadByName(this.Default);
-			return String.Format("<a class=\"separate UG_{0}\" href=\"/User/{1}/\">{2}</a>", this.Safe(user.userGroup.name), user.id, this.Safe(user.name));
+			return String.Format("<a class=\"separate UG_{0}\" href=\"/Users/User/{1}/\">{2}</a>", this.Safe(user.userGroup.name), user.id, this.Safe(user.name));
 		}
 
 	}

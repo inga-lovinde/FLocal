@@ -24,7 +24,7 @@
 				</img>
 				<a>
 					<xsl:attribute name="href">
-						<xsl:text>/Conversation/</xsl:text>
+						<xsl:text>/My/Conversations/Conversation/</xsl:text>
 						<xsl:value-of select="interlocutor/account/id"/>
 						<xsl:text>/</xsl:text>
 						<xsl:if test="afterLastRead&lt;=lastMessageId">
@@ -36,7 +36,7 @@
 				</a>
 				<span class="small" style="margin-left:1.5em">
 					<xsl:apply-templates select="pageOuter" mode="withoutCurrent">
-						<xsl:with-param name="baseLink">/Conversation/<xsl:value-of select="interlocutor/account/id"/>/</xsl:with-param>
+						<xsl:with-param name="baseLink">/My/Conversations/Conversation/<xsl:value-of select="interlocutor/account/id"/>/</xsl:with-param>
 					</xsl:apply-templates>
 				</span>
 			</td>

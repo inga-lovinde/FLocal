@@ -17,7 +17,7 @@ namespace FLocal.IISHandler.handlers.request {
 			try {
 				Account tmpAccount = Account.LoadByName(context.httprequest.Form["login"]);
 				if(tmpAccount.needsMigration) {
-					throw new RedirectException("/MigrateAccount/" + context.httprequest.Form["login"]);
+					throw new RedirectException("/My/Login/MigrateAccount/" + context.httprequest.Form["login"]);
 				}
 			} catch(NotFoundInDBException) {
 			}
