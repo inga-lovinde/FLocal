@@ -36,6 +36,10 @@ namespace FLocal.IISHandler.handlers {
 		public void Handle(WebContext context) {
 			try {
 				context.httpresponse.Write(context.Transform(this.templateName, this.getData(context)));
+			} catch(RedirectException) {
+				throw;
+			} catch(WrongUrlException) {
+				throw;
 			} catch(Exception e) {
 				context.LogError(e);
 				context.httpresponse.Write(context.Transform("Exception.xslt", new XDocument(new XElement("root", this.getCommonData(context), e.ToXml()))));

@@ -56,6 +56,10 @@ namespace FLocal.IISHandler.handlers.request {
 				if(this.shouldBeGuest && context.session != null) throw new FLocalException("Should be guest");
 				if(this.shouldBeLoggedIn && context.session == null) throw new FLocalException("Should be anonymous");
 				context.httpresponse.Write(context.Transform(this.templateName, this.getData(context)));
+			} catch(RedirectException) {
+				throw;
+			} catch(WrongUrlException) {
+				throw;
 			} catch(Exception e) {
 				context.LogError(e);
 				context.httpresponse.Write(context.Transform("Exception.xslt", new XDocument(new XElement("root", this.getCommonData(context), e.ToXml()))));
