@@ -21,7 +21,7 @@
 				<xsl:if test="firstPost/post/layerName='offtop'">{o}</xsl:if>
 				<xsl:if test="firstPost/post/layerName='garbage'">{g}</xsl:if>
 				<xsl:choose>
-					<xsl:when test="afterLastRead&lt;=lastPostId">
+					<xsl:when test="totalNewPosts and totalNewPosts!='0'">
 						<xsl:text>(*</xsl:text>
 						<xsl:value-of select="totalNewPosts"/>
 						<xsl:text>)</xsl:text>
@@ -35,7 +35,7 @@
 						<xsl:text>/Thread/</xsl:text>
 						<xsl:value-of select="id"/>
 						<xsl:text>/</xsl:text>
-						<xsl:if test="afterLastRead&lt;=lastPostId">
+						<xsl:if test="totalNewPosts and totalNewPosts!='0'">
 							<xsl:text>p</xsl:text>
 							<xsl:value-of select="afterLastRead"/>
 						</xsl:if>

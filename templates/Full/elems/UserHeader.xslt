@@ -15,6 +15,11 @@
 								</xsl:call-template>
 								<xsl:text> | </xsl:text>
 								<xsl:call-template name="headerLink">
+									<xsl:with-param name="url"><xsl:value-of select="$baseLink"/>Threads/</xsl:with-param>
+									<xsl:with-param name="text">Темы</xsl:with-param>
+								</xsl:call-template>
+								<xsl:text> | </xsl:text>
+								<xsl:call-template name="headerLink">
 									<xsl:with-param name="url"><xsl:value-of select="$baseLink"/>Posts/</xsl:with-param>
 									<xsl:with-param name="text">Сообщения</xsl:with-param>
 								</xsl:call-template>

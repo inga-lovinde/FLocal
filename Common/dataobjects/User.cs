@@ -255,5 +255,26 @@ namespace FLocal.Common.dataobjects {
 			);
 		}
 
+		public IEnumerable<Thread> getThreads(Diapasone diapasone) {
+			return Thread.LoadByIds(
+				from stringId in Config.instance.mainConnection.LoadIdsByConditions(
+					Thread.TableSpec.instance,
+					new ComparisonCondition(
+						Thread.TableSpec.instance.getColumnSpec(Thread.TableSpec.FIELD_TOPICSTARTERID),
+						ComparisonType.EQUAL,
+						this.id.ToString()
+					),
+					diapasone,
+					new JoinSpec[0],
+					new SortSpec[] {
+						new SortSpec(
+							Thread.TableSpec.instance.getColumnSpec(Thread.TableSpec.FIELD_LASTPOSTID),
+							false
+						),
+					}
+				) select int.Parse(stringId)
+			);
+		}
+
 	}
 }

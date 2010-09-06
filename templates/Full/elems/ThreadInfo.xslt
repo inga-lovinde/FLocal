@@ -23,7 +23,7 @@
 				</xsl:if>
 				<img alt="*" hspace="5" style="vertical-align: text-bottom">
 					<xsl:choose>
-						<xsl:when test="afterLastRead&lt;=lastPostId">
+						<xsl:when test="totalNewPosts and totalNewPosts!='0'">
 							<xsl:attribute name="src">/static/images/message-<xsl:value-of select="firstPost/post/layerName"/>-notread.gif</xsl:attribute>
 						</xsl:when>
 						<xsl:otherwise>
@@ -37,7 +37,7 @@
 						<xsl:text>/Thread/</xsl:text>
 						<xsl:value-of select="id"/>
 						<xsl:text>/</xsl:text>
-						<xsl:if test="afterLastRead&lt;=lastPostId">
+						<xsl:if test="totalNewPosts and totalNewPosts!='0'">
 							<xsl:text>p</xsl:text>
 							<xsl:value-of select="afterLastRead"/>
 						</xsl:if>

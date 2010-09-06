@@ -139,6 +139,8 @@ namespace FLocal.IISHandler {
 							switch(context.requestParts[3].ToLower()) {
 								case "info":
 									return new handlers.response.UserInfoHandler();
+								case "threads":
+									return new handlers.response.UserThreadsHandler();
 								case "posts":
 									return new handlers.response.UserPostsHandler();
 								case "replies":
