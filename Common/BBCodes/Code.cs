@@ -12,7 +12,7 @@ namespace FLocal.Common.BBCodes {
 		}
 
 		public override string Format(ITextFormatter formatter) {
-			return "<pre>" + System.Web.HttpUtility.HtmlEncode(this.InnerBBCode.Trim()) + "</pre><br/>";
+			return "<pre>" + System.Web.HttpUtility.HtmlEncode(this.InnerBBCode) + "</pre><br/>";
 		}
 
 	}
