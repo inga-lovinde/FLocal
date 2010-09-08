@@ -33,6 +33,11 @@ namespace FLocal.Common {
 
 		private static HashSet<string> allowedExtensions = new HashSet<string>() {
 			"jpg",
+			"jpe",
+			"jpeg",
+			"jfif",
+			"jif",
+			"svg",
 			"gif",
 			"png",
 		};
