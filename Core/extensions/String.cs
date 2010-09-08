@@ -49,5 +49,23 @@ namespace FLocal.Core {
             return str.ToLower().Contains(from needle in needles select needle.ToLower());
         }
 
+		private static readonly string[] TrimHtml_EmptyFragments = new string[] {
+			"<br/>",
+			"<br />",
+			"&nbsp;",
+		};
+		public static string TrimHtml(this string str) {
+			string result = str.Trim();
+			foreach(var fragment in TrimHtml_EmptyFragments) {
+				if(result.StartsWith(fragment)) {
+					return result.Substring(fragment.Length).TrimHtml();
+				}
+				if(result.EndsWith(fragment)) {
+					return result.Substring(0, result.Length-fragment.Length).TrimHtml();
+				}
+			}
+			return result;
+		}
+
     }
 }

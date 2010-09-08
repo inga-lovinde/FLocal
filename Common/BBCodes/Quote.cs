@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using FLocal.Core;
 using PJonDevelopment.BBCode;
 
 namespace FLocal.Common.BBCodes {
@@ -12,9 +13,11 @@ namespace FLocal.Common.BBCodes {
 		}
 
 		public override string Format(ITextFormatter formatter) {
+			string inner = this.GetInnerHTML(formatter).TrimHtml();
+			if(inner == "") return "";
 			string marker = this.Default;
 			if(marker == null) marker = "Quote:";
-			return "<br/><blockquote><font class=\"small\">" + marker + "</font><hr/>" + this.GetInnerHTML(formatter).Trim() + "<br/><hr/></blockquote><br/>";
+			return "<br/><blockquote><font class=\"small\">" + marker + "</font><hr/>" + inner + "<br/><hr/></blockquote><br/>";
 		}
 
 	}
