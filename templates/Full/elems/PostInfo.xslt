@@ -54,14 +54,6 @@
 												<td align="right">
 													<table class="tablesurround" border="0">
 														<tr>
-															<xsl:if test="isPunishmentEnabled='true'">
-																<td class="navigation">
-																	<a>
-																		<xsl:attribute name="href">/Post/<xsl:value-of select="id"/>/Punish/</xsl:attribute>
-																		<img src="/static/images/punish.gif" border="0" alt="Модерировать сообщение" title="Модерировать сообщение" style="vertical-align: text-bottom" />
-																	</a>
-																</td>
-															</xsl:if>
 															<td class="navigation">
 																<a>
 																	<xsl:if test="$isReplyDisabled='false'">
@@ -93,9 +85,19 @@
 																</a>
 															</td>
 															<td class="navigation">
-																<a>
-																	<img src="/static/images/notifymod.gif" border="0" alt="Известить модератора" title="Известить модератора" />
-																</a>
+																<xsl:choose>
+																	<xsl:when test="isPunishmentEnabled='true'">
+																		<a>
+																			<xsl:attribute name="href">/Post/<xsl:value-of select="id"/>/Punish/</xsl:attribute>
+																			<img src="/static/images/punish.gif" border="0" alt="Модерировать сообщение" title="Модерировать сообщение" style="vertical-align: text-bottom" />
+																		</a>
+																	</xsl:when>
+																	<xsl:otherwise>
+																		<a>
+																			<img src="/static/images/notifymod.gif" border="0" alt="Известить модератора" title="Известить модератора" />
+																		</a>
+																	</xsl:otherwise>
+																</xsl:choose>
 															</td>
 															<td class="navigation">
 																<a>
