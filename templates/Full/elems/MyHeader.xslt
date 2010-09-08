@@ -52,6 +52,14 @@
 										<xsl:if test="not(session/sessionKey)">true</xsl:if>
 									</xsl:with-param>
 								</xsl:call-template>
+								<xsl:text> | &gt;&gt;</xsl:text>
+								<xsl:call-template name="headerLink">
+									<xsl:with-param name="url">/Users/User/<xsl:value-of select="session/user/id"/>/Info/</xsl:with-param>
+									<xsl:with-param name="text">Профиль</xsl:with-param>
+									<xsl:with-param name="isDisabled">
+										<xsl:if test="not(session/sessionKey)">true</xsl:if>
+									</xsl:with-param>
+								</xsl:call-template>
 								<xsl:text> | </xsl:text>
 								<a target="_top">
 									<xsl:if test="session/sessionKey">
