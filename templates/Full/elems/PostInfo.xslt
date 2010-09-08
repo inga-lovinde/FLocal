@@ -138,7 +138,7 @@
 									<tr>
 										<td>
 											<div style="width:100%;max-height:50px;height: expression( this.scrollHeight > 49 ? '50px' : 'auto' );overflow:hidden">
-												<font size="-2"><xsl:value-of select="poster/user/signature"/><br /></font>
+												<font size="-2"><xsl:value-of select="poster/user/signature" disable-output-escaping="yes" /><br /></font>
 											</div>
 										</td>
 									</tr>

@@ -100,6 +100,8 @@ namespace FLocal.IISHandler {
 							}
 						case "settings":
 							return new handlers.response.SettingsHandler();
+						case "userdata":
+							return new handlers.response.UserDataHandler();
 						case "conversations":
 							if(context.requestParts.Length == 2) {
 								return new handlers.response.ConversationsHandler();
@@ -224,6 +226,8 @@ namespace FLocal.IISHandler {
 								return new handlers.request.CreateThreadHandler();
 							case "settings":
 								return new handlers.request.SettingsHandler();
+							case "userdata":
+								return new handlers.request.UserDataHandler();
 							case "sendpm":
 								return new handlers.request.SendPMHandler();
 							case "markthreadasread":

@@ -45,6 +45,14 @@
 									</xsl:with-param>
 								</xsl:call-template>
 								<xsl:text> | </xsl:text>
+								<xsl:call-template name="headerLink">
+									<xsl:with-param name="url">/My/UserData/</xsl:with-param>
+									<xsl:with-param name="text">Личные данные</xsl:with-param>
+									<xsl:with-param name="isDisabled">
+										<xsl:if test="not(session/sessionKey)">true</xsl:if>
+									</xsl:with-param>
+								</xsl:call-template>
+								<xsl:text> | </xsl:text>
 								<a target="_top">
 									<xsl:if test="session/sessionKey">
 										<xsl:attribute name="href">/do/Logout/?sessionKey=<xsl:value-of select="session/sessionKey"/></xsl:attribute>

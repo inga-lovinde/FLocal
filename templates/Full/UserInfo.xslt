@@ -112,7 +112,7 @@
 											<xsl:text>Биография</xsl:text>
 										</td>
 										<td colspan="2">
-											<xsl:value-of select="user/biography"/>
+											<xsl:value-of select="user/biography" disable-output-escaping="yes" />
 										</td>
 									</tr>
 									<tr>
@@ -152,7 +152,7 @@
 											<xsl:text>Подпись</xsl:text>
 										</td>
 										<td>
-											<xsl:value-of select="user/signature"/>
+											<xsl:value-of select="user/signature" disable-output-escaping="yes" />
 										</td>
 									</tr>
 									<tr>

@@ -184,11 +184,13 @@ namespace FLocal.Common.dataobjects {
 				new Dictionary<string, AbstractFieldValue> {
 					{ User.TableSpec.FIELD_AVATARID, new ScalarFieldValue(null) },
 					{ User.TableSpec.FIELD_BIOGRAPHY, new ScalarFieldValue("") },
+					{ User.TableSpec.FIELD_BIOGRAPHYUBB, new ScalarFieldValue("") },
 					{ User.TableSpec.FIELD_LOCATION, new ScalarFieldValue("") },
 					{ User.TableSpec.FIELD_NAME, new ScalarFieldValue(name) },
 					{ User.TableSpec.FIELD_REGDATE, new ScalarFieldValue(DateTime.Now.ToUTCString()) },
 					{ User.TableSpec.FIELD_SHOWPOSTSTOUSERS, new ScalarFieldValue(User.ENUM_SHOWPOSTSTOUSERS_ALL) },
 					{ User.TableSpec.FIELD_SIGNATURE, new ScalarFieldValue("") },
+					{ User.TableSpec.FIELD_SIGNATUREUBB, new ScalarFieldValue("") },
 					{ User.TableSpec.FIELD_TITLE, new ScalarFieldValue("novice") },
 					{ User.TableSpec.FIELD_TOTALPOSTS, new ScalarFieldValue("0") },
 					{ User.TableSpec.FIELD_USERGROUPID, new ScalarFieldValue("1") },

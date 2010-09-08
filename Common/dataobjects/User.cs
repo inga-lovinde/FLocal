@@ -6,6 +6,7 @@ using System.Xml.Linq;
 using FLocal.Core;
 using FLocal.Core.DB;
 using FLocal.Core.DB.conditions;
+using FLocal.Common.actions;
 
 namespace FLocal.Common.dataobjects {
 	public class User : SqlObject<User> {
@@ -15,18 +16,27 @@ namespace FLocal.Common.dataobjects {
 		public const string ENUM_SHOWPOSTSTOUSERS_PRIVELEGED = "Priveleged";
 		public const string ENUM_SHOWPOSTSTOUSERS_NONE = "None";
 
+		public struct UserData {
+			public string title;
+			public string location;
+			public string signatureUbb;
+			public string biographyUbb;
+		}
+
 		public class TableSpec : ISqlObjectTableSpec {
 			public const string TABLE = "Users";
 			public const string FIELD_ID = "Id";
 			public const string FIELD_REGDATE = "RegDate";
 			public const string FIELD_TOTALPOSTS = "TotalPosts";
 			public const string FIELD_SIGNATURE = "Signature";
+			public const string FIELD_SIGNATUREUBB = "SignatureUbb";
 			public const string FIELD_TITLE = "Title";
 			public const string FIELD_LOCATION = "Location";
 			public const string FIELD_NAME = "Name";
 			public const string FIELD_USERGROUPID = "UserGroupId";
 			public const string FIELD_SHOWPOSTSTOUSERS = "ShowPostsToUsers";
 			public const string FIELD_BIOGRAPHY = "Biography";
+			public const string FIELD_BIOGRAPHYUBB = "BiographyUbb";
 			public const string FIELD_AVATARID = "AvatarId";
 			public static readonly TableSpec instance = new TableSpec();
 			public string name { get { return TABLE; } }
@@ -57,6 +67,14 @@ namespace FLocal.Common.dataobjects {
 			get {
 				this.LoadIfNotLoaded();
 				return this._signature;
+			}
+		}
+
+		private string _signatureUbb;
+		public string signatureUbb {
+			get {
+				this.LoadIfNotLoaded();
+				return this._signatureUbb;
 			}
 		}
 
@@ -113,6 +131,14 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
+		private string _biographyUbb;
+		public string biographyUbb {
+			get {
+				this.LoadIfNotLoaded();
+				return this._biographyUbb;
+			}
+		}
+
 		private int? _avatarId;
 		public int? avatarId {
 			get {
@@ -147,12 +173,14 @@ namespace FLocal.Common.dataobjects {
 			this._regDate = new DateTime(long.Parse(data[TableSpec.FIELD_REGDATE]));
 			this._totalPosts = int.Parse(data[TableSpec.FIELD_TOTALPOSTS]);
 			this._signature = data[TableSpec.FIELD_SIGNATURE];
+			this._signatureUbb = data[TableSpec.FIELD_SIGNATUREUBB];
 			this._title = data[TableSpec.FIELD_TITLE];
 			this._location = data[TableSpec.FIELD_LOCATION];
 			this._name = data[TableSpec.FIELD_NAME];
 			this._userGroupId = int.Parse(data[TableSpec.FIELD_USERGROUPID]);
 			this._showPostsToUsers = data[TableSpec.FIELD_SHOWPOSTSTOUSERS];
 			this._biography = data[TableSpec.FIELD_BIOGRAPHY];
+			this._biographyUbb = data[TableSpec.FIELD_BIOGRAPHYUBB];
 			this._avatarId = Util.ParseInt(data[TableSpec.FIELD_AVATARID]);
 		}
 
@@ -161,7 +189,10 @@ namespace FLocal.Common.dataobjects {
 				new XElement("id", this.id),
 				new XElement("regDate", this.regDate.ToXml()),
 				new XElement("totalPosts", this.totalPosts),
-				new XElement("signature", this.signature),
+				new XElement("signature", context.outputParams.preprocessBodyIntermediate(this.signature)),
+				new XElement("signatureUbb", this.signatureUbb),
+				new XElement("biography", context.outputParams.preprocessBodyIntermediate(this.biography)),
+				new XElement("biographyUbb", this.biographyUbb),
 				new XElement("title", this.title),
 				new XElement("location", this.location),
 				new XElement("name", this.name),
@@ -273,6 +304,23 @@ namespace FLocal.Common.dataobjects {
 						),
 					}
 				) select int.Parse(stringId)
+			);
+		}
+
+		public void UpdateData(UserData newData) {
+			ChangeSetUtil.ApplyChanges(
+				new UpdateChange(
+					TableSpec.instance,
+					new Dictionary<string,AbstractFieldValue> {
+						{ TableSpec.FIELD_LOCATION, new ScalarFieldValue(newData.location) },
+						{ TableSpec.FIELD_TITLE, new ScalarFieldValue(newData.title) },
+						{ TableSpec.FIELD_BIOGRAPHYUBB, new ScalarFieldValue(newData.biographyUbb) },
+						{ TableSpec.FIELD_BIOGRAPHY, new ScalarFieldValue(UBBParser.UBBToIntermediate(newData.biographyUbb)) },
+						{ TableSpec.FIELD_SIGNATUREUBB, new ScalarFieldValue(newData.signatureUbb) },
+						{ TableSpec.FIELD_SIGNATURE, new ScalarFieldValue(UBBParser.UBBToIntermediate(newData.signatureUbb)) },
+					},
+					this.id
+				)
 			);
 		}
 
