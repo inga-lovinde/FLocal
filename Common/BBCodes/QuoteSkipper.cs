@@ -16,9 +16,11 @@ namespace FLocal.Common.BBCodes {
 			} else if(this.Name.ToLower() == "code") {
 				return "[code]" + this.InnerBBCode + "[/code]";
 			} else {
+				string name = this.Name;
+				if(name.ToLower() == "uploadimage") name = "uploadLink";
 				var sb = new StringBuilder();
 				sb.Append("[");
-				sb.Append(this.Name);
+				sb.Append(name);
 				if(this.Default != null && this.Default != "") {
 					sb.Append("='");
 					sb.Append(this.Default.Replace("'", "''"));
@@ -36,7 +38,7 @@ namespace FLocal.Common.BBCodes {
 				if(this.RequireClosingTag) {
 					sb.Append(this.GetInnerHTML(formatter));
 					sb.Append("[/");
-					sb.Append(this.Name);
+					sb.Append(name);
 					sb.Append("]");
 				}
 				return sb.ToString();
