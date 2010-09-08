@@ -360,7 +360,7 @@ namespace FLocal.Common.dataobjects {
 		}
 
 		private readonly object Punish_Locker = new object();
-		public void Punish(Account account, PunishmentType type, string comment, PunishmentTransfer.NewTransferInfo? transferInfo) {
+		public void Punish(Account account, PunishmentType type, string comment, PunishmentTransfer.NewTransferInfo? transferInfo, PunishmentLayerChange.NewLayerChangeInfo? layerChangeInfo) {
 
 			if(string.IsNullOrEmpty(comment)) throw new FLocalException("Comment is empty");
 
@@ -386,12 +386,58 @@ namespace FLocal.Common.dataobjects {
 						)
 					);
 
+					InsertChange layerChangeInsert = null;
+					if(layerChangeInfo.HasValue) {
+						var _layerChangeInfo = layerChangeInfo.Value;
+
+						if(_layerChangeInfo.newLayer.name == PostLayer.NAME_HIDDEN) throw new FLocalException("You cannot hide posts");
+						
+						layerChangeInsert = new InsertChange(
+							PunishmentLayerChange.TableSpec.instance,
+							new Dictionary<string,AbstractFieldValue> {
+								{ PunishmentLayerChange.TableSpec.FIELD_OLDLAYERID, new ScalarFieldValue(this.layerId.ToString()) },
+								{ PunishmentLayerChange.TableSpec.FIELD_NEWLAYERID, new ScalarFieldValue(_layerChangeInfo.newLayerId.ToString()) },
+								{ PunishmentLayerChange.TableSpec.FIELD_ISSUBTHREADCHANGE, new ScalarFieldValue(_layerChangeInfo.isSubthreadChange.ToDBString()) },
+							}
+						);
+						changes.Union(layerChangeInsert);
+
+						List<Post> postsAffected;
+						if(_layerChangeInfo.isSubthreadChange) {
+							postsAffected = this.ToSequence(post => post.subPosts).OrderBy(post => post.id).ToList();
+						} else {
+							postsAffected = new List<Post>();
+							postsAffected.Add(this);
+						}
+
+						changes = changes.Union(
+							from post in postsAffected
+							select (AbstractChange)new UpdateChange(
+								Post.TableSpec.instance,
+								new Dictionary<string,AbstractFieldValue> {
+									{ Post.TableSpec.FIELD_LAYERID, new ScalarFieldValue(_layerChangeInfo.newLayerId.ToString()) },
+								},
+								post.id
+							)
+						);
+
+					}
+
 					InsertChange transferInsert = null;
-
-
 					if(transferInfo.HasValue) {
 
 						var _transferInfo = transferInfo.Value;
+
+						transferInsert = new InsertChange(
+							PunishmentTransfer.TableSpec.instance,
+							new Dictionary<string,AbstractFieldValue> {
+								{ PunishmentTransfer.TableSpec.FIELD_OLDBOARDID, new ScalarFieldValue(this.thread.boardId.ToString()) },
+								{ PunishmentTransfer.TableSpec.FIELD_NEWBOARDID, new ScalarFieldValue(_transferInfo.newBoardId.ToString()) },
+								{ PunishmentTransfer.TableSpec.FIELD_ISSUBTHREADTRANSFER, new ScalarFieldValue(_transferInfo.isSubthreadTransfer.ToDBString()) },
+								{ PunishmentTransfer.TableSpec.FIELD_OLDPARENTPOSTID, new ScalarFieldValue(this.parentPostId.HasValue ? this.parentPostId.ToString() : null) },
+							}
+						);
+						changes = changes.Union(transferInsert);
 
 						Post lastAffectedPost;
 						int totalAffectedPosts;
@@ -493,17 +539,6 @@ namespace FLocal.Common.dataobjects {
 							)
 						);
 
-						transferInsert = new InsertChange(
-							PunishmentTransfer.TableSpec.instance,
-							new Dictionary<string,AbstractFieldValue> {
-								{ PunishmentTransfer.TableSpec.FIELD_OLDBOARDID, new ScalarFieldValue(this.thread.boardId.ToString()) },
-								{ PunishmentTransfer.TableSpec.FIELD_NEWBOARDID, new ScalarFieldValue(_transferInfo.newBoardId.ToString()) },
-								{ PunishmentTransfer.TableSpec.FIELD_ISSUBTHREADTRANSFER, new ScalarFieldValue(_transferInfo.isSubthreadTransfer.ToDBString()) },
-								{ PunishmentTransfer.TableSpec.FIELD_OLDPARENTPOSTID, new ScalarFieldValue(this.parentPostId.HasValue ? this.parentPostId.ToString() : null) },
-							}
-						);
-						changes = changes.Union(transferInsert);
-
 						changes = changes.Union(
 							new UpdateChange(
 								TableSpec.instance,
@@ -548,6 +583,7 @@ namespace FLocal.Common.dataobjects {
 								{ Punishment.TableSpec.FIELD_COMMENT, new ScalarFieldValue(comment) },
 								{ Punishment.TableSpec.FIELD_EXPIRES, new ScalarFieldValue(DateTime.Now.Add(type.timeSpan).ToUTCString()) },
 								{ Punishment.TableSpec.FIELD_TRANSFERID, (transferInsert != null) ? (AbstractFieldValue)new ReferenceFieldValue(transferInsert) : (AbstractFieldValue)new ScalarFieldValue(null) },
+								{ Punishment.TableSpec.FIELD_LAYERCHANGEID, (layerChangeInsert != null) ? (AbstractFieldValue)new ReferenceFieldValue(layerChangeInsert) : (AbstractFieldValue)new ScalarFieldValue(null) },
 							}
 						)
 					);

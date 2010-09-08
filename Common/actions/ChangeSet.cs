@@ -37,6 +37,7 @@ namespace FLocal.Common.actions {
 						dataobjects.Moderator.TableSpec.TABLE,
 						dataobjects.Punishment.TableSpec.TABLE,
 						dataobjects.PunishmentTransfer.TableSpec.TABLE,
+						dataobjects.PunishmentLayerChange.TableSpec.TABLE,
 						dataobjects.Session.TableSpec.TABLE,
 					}
 				);

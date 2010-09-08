@@ -26,6 +26,11 @@ namespace FLocal.IISHandler.handlers.request {
 					?
 					(PunishmentTransfer.NewTransferInfo?)new PunishmentTransfer.NewTransferInfo(Board.LoadById(int.Parse(context.httprequest.Form["transfer_boardId"])), context.httprequest.Form["transfer_subThread"] == "transfer_subThread")
 					:
+					null,
+				(context.httprequest.Form["layerChange"] == "layerChange")
+					?
+					(PunishmentLayerChange.NewLayerChangeInfo?)new PunishmentLayerChange.NewLayerChangeInfo(PostLayer.LoadById(int.Parse(context.httprequest.Form["layerChange_layerId"])), context.httprequest.Form["layerChange_subThread"] == "layerChange_subThread")
+					:
 					null
 			);
 			

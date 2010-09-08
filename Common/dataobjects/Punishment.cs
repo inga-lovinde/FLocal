@@ -23,6 +23,7 @@ namespace FLocal.Common.dataobjects {
 			public const string FIELD_COMMENT = "Comment";
 			public const string FIELD_EXPIRES = "Expires";
 			public const string FIELD_TRANSFERID = "TransferId";
+			public const string FIELD_LAYERCHANGEID = "LayerChangeId";
 			public static readonly TableSpec instance = new TableSpec();
 			public string name { get { return TABLE; } }
 			public string idName { get { return FIELD_ID; } }
@@ -141,6 +142,19 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
+		private int? _layerChangeId;
+		public int? layerChangeId {
+			get {
+				this.LoadIfNotLoaded();
+				return this._layerChangeId;
+			}
+		}
+		public PunishmentLayerChange layerChange {
+			get {
+				return PunishmentLayerChange.LoadById(this.layerChangeId.Value);
+			}
+		}
+
 		protected override void doFromHash(Dictionary<string, string> data) {
 			this._postId = int.Parse(data[TableSpec.FIELD_POSTID]);
 			this._ownerId = int.Parse(data[TableSpec.FIELD_OWNERID]);
@@ -152,6 +166,7 @@ namespace FLocal.Common.dataobjects {
 			this._comment = data[TableSpec.FIELD_COMMENT];
 			this._expires = Util.ParseDateTimeFromTimestamp(data[TableSpec.FIELD_EXPIRES]).Value;
 			this._transferId = Util.ParseInt(data[TableSpec.FIELD_TRANSFERID]);
+			this._layerChangeId = Util.ParseInt(data[TableSpec.FIELD_LAYERCHANGEID]);
 		}
 
 		public XElement exportToXml(UserContext context) {
@@ -165,7 +180,8 @@ namespace FLocal.Common.dataobjects {
 				new XElement("isWithdrawed", this.isWithdrawed.ToPlainString()),
 				new XElement("comment", this.comment),
 				new XElement("expires", this.expires),
-				this.transferId.HasValue ? this.transfer.exportToXml(context) : null
+				this.transferId.HasValue ? this.transfer.exportToXml(context) : null,
+				this.layerChangeId.HasValue ? this.layerChange.exportToXml(context) : null
 			);
 		}
 

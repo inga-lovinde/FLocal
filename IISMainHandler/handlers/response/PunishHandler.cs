@@ -28,7 +28,7 @@ namespace FLocal.IISHandler.handlers.response {
 				post.thread.exportToXml(context),
 				post.exportToXml(context),
 				new XElement("layers",
-					from layer in PostLayer.allLayers select layer.exportToXml(context)
+					from layer in PostLayer.allLayers where layer.name != PostLayer.NAME_HIDDEN select layer.exportToXml(context)
 				),
 				new XElement("categories",
 					from category in Category.allCategories select

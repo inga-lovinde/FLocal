@@ -40,6 +40,21 @@
 										<xsl:text> со всеми ответами</xsl:text>
 									</label>
 									<br/>
+									<input type="checkbox" name="layerChange" value="layerChange" id="LayerChange"/>
+									<label for="LayerChange">
+										<xsl:text> Изменить слой</xsl:text>
+									</label>
+									<select name="layerChange_layerId">
+										<option value="-1">Выберите слой</option>
+										<xsl:apply-templates select="layers/layer">
+											<xsl:with-param name="defaultLayerId"><xsl:value-of select="post/layerId"/></xsl:with-param>
+										</xsl:apply-templates>
+									</select>
+									<input type="checkbox" name="layerChange_subThread" value="layerChange_subThread" id="LayerChange_SubThread"/>
+									<label for="LayerChange_SubThread">
+										<xsl:text> со всеми ответами</xsl:text>
+									</label>
+									<br/>
 									<br/>
 									<xsl:text>Комментарий: </xsl:text>
 									<br/>

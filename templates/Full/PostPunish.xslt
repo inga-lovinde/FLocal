@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="Windows-1251"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml">
 	<xsl:import href="elems\Main.xslt"/>
+	<xsl:import href="elems\TextEditor.xslt"/>
 	<xsl:template name="specificTitle">
 		<xsl:text>Модерирование сообщения - </xsl:text>
 		<xsl:value-of select="post/title"/>
@@ -41,6 +42,21 @@
 									</select>
 									<input type="checkbox" name="transfer_subThread" value="transfer_subThread" id="Transfer_SubThread"/>
 									<label for="Transfer_SubThread">
+										<xsl:text> со всеми ответами</xsl:text>
+									</label>
+									<br/>
+									<input type="checkbox" name="layerChange" value="layerChange" id="LayerChange"/>
+									<label for="LayerChange">
+										<xsl:text> Изменить слой</xsl:text>
+									</label>
+									<select name="layerChange_layerId">
+										<option value="-1">Выберите слой</option>
+										<xsl:apply-templates select="layers/layer">
+											<xsl:with-param name="defaultLayerId"><xsl:value-of select="post/layerId"/></xsl:with-param>
+										</xsl:apply-templates>
+									</select>
+									<input type="checkbox" name="layerChange_subThread" value="layerChange_subThread" id="LayerChange_SubThread"/>
+									<label for="LayerChange_SubThread">
 										<xsl:text> со всеми ответами</xsl:text>
 									</label>
 									<br/>

@@ -220,6 +220,19 @@
 						</a>
 						<br/>
 					</xsl:if>
+					<xsl:if test="layerChange">
+						<xsl:choose>
+							<xsl:when test="layerChange/isSubthreadChange='true'">
+								<xsl:text>Слой подветки был изменён</xsl:text>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:text>Слой сообщения был изменён</xsl:text>
+							</xsl:otherwise>
+						</xsl:choose>
+						<xsl:text> с </xsl:text>
+						<xsl:value-of select="layerChange/oldLayer/layer/name"/>
+						<br/>
+					</xsl:if>
 					<br/>
 				</font>
 			</td>
