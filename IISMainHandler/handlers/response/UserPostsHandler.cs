@@ -12,7 +12,7 @@ using FLocal.Core.DB.conditions;
 
 namespace FLocal.IISHandler.handlers.response {
 
-	class UserPostsHandler : AbstractGetHandler {
+	class UserPostsHandler : AbstractUserGetHandler {
 
 		override protected string templateName {
 			get {
@@ -20,8 +20,7 @@ namespace FLocal.IISHandler.handlers.response {
 			}
 		}
 
-		override protected IEnumerable<XElement> getSpecificData(WebContext context) {
-			User user = User.LoadById(int.Parse(context.requestParts[2]));
+		override protected IEnumerable<XElement> getUserSpecificData(WebContext context, User user) {
 			PageOuter pageOuter = PageOuter.createFromGet(
 				context.requestParts,
 				context.userSettings.postsPerPage,
@@ -29,15 +28,12 @@ namespace FLocal.IISHandler.handlers.response {
 			);
 			IEnumerable<Post> posts = user.getPosts(pageOuter);
 
-			XElement[] result = new XElement[] {
-				user.exportToXmlForViewing(context),
+			return new XElement[] {
 				new XElement("posts",
 					from post in posts select post.exportToXml(context),
 					pageOuter.exportToXml(2, 5, 2)
 				)
 			};
-
-			return result;
 		}
 
 	}

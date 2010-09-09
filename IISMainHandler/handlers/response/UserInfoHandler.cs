@@ -12,7 +12,7 @@ using FLocal.Core.DB.conditions;
 
 namespace FLocal.IISHandler.handlers.response {
 
-	class UserInfoHandler : AbstractGetHandler {
+	class UserInfoHandler : AbstractUserGetHandler {
 
 		override protected string templateName {
 			get {
@@ -20,31 +20,8 @@ namespace FLocal.IISHandler.handlers.response {
 			}
 		}
 
-		override protected IEnumerable<XElement> getSpecificData(WebContext context) {
-			User user;
-			{
-				int userId;
-				if(int.TryParse(context.requestParts[2], out userId)) {
-					user = User.LoadById(userId);
-				} else {
-					user = User.LoadByName(context.requestParts[2]);
-				}
-			}
-			Account account = null;
-			if(context.session != null) {
-				try {
-					account = Account.LoadByUser(user);
-				} catch(NotFoundInDBException) {
-				}
-			}
-			Session lastSession = null;
-			if(account != null && !account.isDetailedStatusHidden) {
-				lastSession = Session.GetLastSession(account);
-			}
+		override protected IEnumerable<XElement> getUserSpecificData(WebContext context, User user) {
 			return new XElement[] {
-				user.exportToXmlForViewing(context),
-				(account == null) ? null : new XElement("accountId", account.id.ToString()), //for PM history, PM send etc
-				(lastSession == null) ? null : new XElement("lastActivity", lastSession.lastActivity.ToXml())
 			};
 		}
 

@@ -12,7 +12,7 @@ using FLocal.Core.DB.conditions;
 
 namespace FLocal.IISHandler.handlers.response {
 
-	class UserPollsParticipatedHandler : AbstractGetHandler {
+	class UserPollsParticipatedHandler : AbstractUserGetHandler {
 
 		override protected string templateName {
 			get {
@@ -20,8 +20,7 @@ namespace FLocal.IISHandler.handlers.response {
 			}
 		}
 
-		override protected IEnumerable<XElement> getSpecificData(WebContext context) {
-			User user = User.LoadById(int.Parse(context.requestParts[2]));
+		override protected IEnumerable<XElement> getUserSpecificData(WebContext context, User user) {
 			PageOuter pageOuter = PageOuter.createFromGet(
 				context.requestParts,
 				context.userSettings.postsPerPage,
@@ -46,15 +45,12 @@ namespace FLocal.IISHandler.handlers.response {
 				) select int.Parse(stringId)
 			);
 
-			XElement[] result = new XElement[] {
-				user.exportToXmlForViewing(context),
+			return new XElement[] {
 				new XElement("polls",
 					from vote in votes select vote.poll.exportToXml(context),
 					pageOuter.exportToXml(2, 5, 2)
 				)
 			};
-
-			return result;
 		}
 
 	}

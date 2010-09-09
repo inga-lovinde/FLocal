@@ -1,0 +1,49 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Web;
+using System.Xml.Linq;
+using FLocal.Common;
+using FLocal.Common.dataobjects;
+using FLocal.Core;
+using FLocal.Core.DB;
+using FLocal.Core.DB.conditions;
+
+namespace FLocal.IISHandler.handlers.response {
+
+	abstract class AbstractUserGetHandler : AbstractGetHandler {
+
+		abstract protected IEnumerable<XElement> getUserSpecificData(WebContext context, User user);
+
+		sealed override protected IEnumerable<XElement> getSpecificData(WebContext context) {
+			User user;
+			{
+				int userId;
+				if(int.TryParse(context.requestParts[2], out userId)) {
+					user = User.LoadById(userId);
+				} else {
+					user = User.LoadByName(context.requestParts[2]);
+				}
+			}
+			Account account = null;
+			if(context.session != null) {
+				try {
+					account = Account.LoadByUser(user);
+				} catch(NotFoundInDBException) {
+				}
+			}
+			Session lastSession = null;
+			if(account != null && !account.isDetailedStatusHidden) {
+				lastSession = Session.GetLastSession(account);
+			}
+			return new XElement[] {
+				user.exportToXmlForViewing(context),
+				(account == null) ? null : new XElement("accountId", account.id.ToString()), //for PM history, PM send etc
+				(lastSession == null) ? null : new XElement("lastActivity", lastSession.lastActivity.ToXml()),
+			}.Union(this.getUserSpecificData(context, user));
+		}
+
+	}
+
+}
