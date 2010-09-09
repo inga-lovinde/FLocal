@@ -144,7 +144,7 @@
 											<xsl:text>Последний раз онлайн</xsl:text>
 										</td>                                                         
 										<td>                                                          
-											<xsl:text>Not implemented</xsl:text>
+											<xsl:apply-templates select="lastActivity" mode="dateTime"/>
 										</td>                                                         
 									</tr>
 									<tr>

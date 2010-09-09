@@ -92,7 +92,7 @@ namespace FLocal.IISHandler {
 					var session = Session.LoadByKey(sessionCookie.Value);
 					var tmp = session.account;
 					sessionCookie.Expires = DateTime.Now.AddDays(3);
-					session.updateLastActivity();
+					session.updateLastActivity(this.httprequest.RequestType == "GET" ? this.httprequest.Path : null);
 					this.httpresponse.AppendCookie(sessionCookie);
 					this.session = session;
 				} catch(NotFoundInDBException) {

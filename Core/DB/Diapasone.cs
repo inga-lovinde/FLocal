@@ -24,5 +24,11 @@ namespace FLocal.Core.DB {
 			}
 		}
 
+		public static Diapasone first {
+			get {
+				return new Diapasone(0, 1);
+			}
+		}
+
 	}
 }

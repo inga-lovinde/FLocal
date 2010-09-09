@@ -20,6 +20,8 @@ namespace FLocal.Common.dataobjects {
 			public const string FIELD_NAME = "Name";
 			public const string FIELD_IPADDRESS = "IpAddress";
 			public const string FIELD_REGISTRATIONEMAIL = "RegistrationEmail";
+			public const string FIELD_ISSTATUSHIDDEN = "IsStatusHidden";
+			public const string FIELD_ISDETAILEDSTATUSHIDDEN = "IsDetailedStatusHidden";
 			public static readonly TableSpec instance = new TableSpec();
 			public string name { get { return TABLE; } }
 			public string idName { get { return FIELD_ID; } }
@@ -65,11 +67,29 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
+		private bool _isStatusHidden;
+		public bool isStatusHidden {
+			get {
+				this.LoadIfNotLoaded();
+				return this._isStatusHidden;
+			}
+		}
+
+		private bool _isDetailedStatusHidden;
+		public bool isDetailedStatusHidden {
+			get {
+				this.LoadIfNotLoaded();
+				return this._isDetailedStatusHidden;
+			}
+		}
+
 		protected override void doFromHash(Dictionary<string, string> data) {
 			this._userId = int.Parse(data[TableSpec.FIELD_USERID]);
 			this._passwordHash = data[TableSpec.FIELD_PASSWORDHASH];
 			this._needsMigration = Util.string2bool(data[TableSpec.FIELD_NEEDSMIGRATION]);
 			this._name = data[TableSpec.FIELD_NAME];
+			this._isStatusHidden = Util.string2bool(data[TableSpec.FIELD_ISSTATUSHIDDEN]);
+			this._isDetailedStatusHidden = Util.string2bool(data[TableSpec.FIELD_ISDETAILEDSTATUSHIDDEN]);
 		}
 
 		public XElement exportToXml(UserContext context) {
@@ -205,6 +225,8 @@ namespace FLocal.Common.dataobjects {
 					{ Account.TableSpec.FIELD_USERID, new ReferenceFieldValue(userInsert) },
 					{ Account.TableSpec.FIELD_IPADDRESS, new ScalarFieldValue(ip) },
 					{ Account.TableSpec.FIELD_REGISTRATIONEMAIL, new ScalarFieldValue(registrationEmail) },
+					{ Account.TableSpec.FIELD_ISSTATUSHIDDEN, new ScalarFieldValue("0") },
+					{ Account.TableSpec.FIELD_ISDETAILEDSTATUSHIDDEN, new ScalarFieldValue("0") },
 				}
 			);
 			var indicatorInsert = new InsertChange(

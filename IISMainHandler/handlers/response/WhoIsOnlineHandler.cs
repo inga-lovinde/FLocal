@@ -16,7 +16,7 @@ namespace FLocal.IISHandler.handlers.response {
 
 		override protected string templateName {
 			get {
-				return "UserList.xslt";
+				return "WhoIsOnline.xslt";
 			}
 		}
 
@@ -25,16 +25,31 @@ namespace FLocal.IISHandler.handlers.response {
 			IEnumerable<Session> sessions = 
 				from stringId in Config.instance.mainConnection.LoadIdsByConditions(
 					Session.TableSpec.instance,
-					new Core.DB.conditions.ComparisonCondition(
-						Session.TableSpec.instance.getColumnSpec(Session.TableSpec.FIELD_LASTACTIVITY),
-						Core.DB.conditions.ComparisonType.GREATEROREQUAL,
-						DateTime.Now.Subtract(Config.instance.ActivityThreshold).ToUTCString()
+					new ComplexCondition(
+						ConditionsJoinType.AND,
+						new ComparisonCondition(
+							Session.TableSpec.instance.getColumnSpec(Session.TableSpec.FIELD_LASTACTIVITY),
+							Core.DB.conditions.ComparisonType.GREATEROREQUAL,
+							DateTime.Now.Subtract(Config.instance.ActivityThreshold).ToUTCString()
+						),
+						new	ComparisonCondition(
+							Session.TableSpec.instance.getColumnSpec(Session.TableSpec.FIELD_ISDELETED),
+							Core.DB.conditions.ComparisonType.EQUAL,
+							"0"
+						)
 					),
 					pageOuter
 				) select Session.LoadByKey(stringId);
 			return new XElement[] {
-				new XElement("users", 
-					from session in sessions select session.account.user.exportToXmlForViewing(context)
+				new XElement("users",
+					from session in sessions
+					let account = session.account
+					where !account.isStatusHidden
+					select account.user.exportToXmlForViewing(
+						context,
+						new XElement("lastActivity", session.lastActivity.ToXml()),
+						!account.isDetailedStatusHidden ? new XElement("lastUrl", session.lastUrl) : null
+					)
 				)
 			};
 		}

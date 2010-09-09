@@ -48,6 +48,8 @@ namespace FLocal.Common.dataobjects {
 			public const string FIELD_SESSIONKEY = "SessionKey";
 			public const string FIELD_ACCOUNTID = "AccountId";
 			public const string FIELD_LASTACTIVITY = "LastActivity";
+			public const string FIELD_LASTURL = "LastUrl";
+			public const string FIELD_ISDELETED = "IsDeleted";
 			public static readonly TableSpec instance = new TableSpec();
 			public string name { get { return TABLE; } }
 			public string idName { get { return FIELD_ID; } }
@@ -85,13 +87,31 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
+		private string _lastUrl;
+		public string lastUrl {
+			get {
+				this.LoadIfNotLoaded();
+				return this._lastUrl;
+			}
+		}
+
+		private bool _isDeleted;
+		public bool isDeleted {
+			get {
+				this.LoadIfNotLoaded();
+				return this._isDeleted;
+			}
+		}
+
 		protected override void doFromHash(Dictionary<string, string> data) {
 			this._sessionKey = data[TableSpec.FIELD_SESSIONKEY];
 			this._lastActivity = new DateTime(long.Parse(data[TableSpec.FIELD_LASTACTIVITY]));
 			this._accountId = int.Parse(data[TableSpec.FIELD_ACCOUNTID]);
+			this._lastUrl = data[TableSpec.FIELD_LASTURL];
+			this._isDeleted = Util.string2bool(data[TableSpec.FIELD_ISDELETED]);
 		}
 
-		public void updateLastActivity() {
+		public void updateLastActivity(string lastUrl) {
 			if(DateTime.Now.Subtract(this.lastActivity).TotalSeconds < 30) return; //to partially remove db load
 			try {
 				Config.Transactional(transaction => {
@@ -100,7 +120,8 @@ namespace FLocal.Common.dataobjects {
 						TableSpec.instance,
 						this.id.ToString(),
 						new Dictionary<string,string>() {
-							{ TableSpec.FIELD_LASTACTIVITY, DateTime.Now.ToUTCString() }
+							{ TableSpec.FIELD_LASTACTIVITY, DateTime.Now.ToUTCString() },
+							{ TableSpec.FIELD_LASTURL, (lastUrl != null) ? lastUrl : this.lastUrl },
 						}
 					);
 				});
@@ -128,6 +149,8 @@ namespace FLocal.Common.dataobjects {
 						{ TableSpec.FIELD_SESSIONKEY, key },
 						{ TableSpec.FIELD_ACCOUNTID, account.id.ToString() },
 						{ TableSpec.FIELD_LASTACTIVITY, DateTime.Now.ToUTCString() },
+						{ TableSpec.FIELD_LASTURL, "" },
+						{ TableSpec.FIELD_ISDELETED, "0" },
 					}
 				);
 			});
@@ -135,8 +158,20 @@ namespace FLocal.Common.dataobjects {
 		}
 
 		public void delete() {
-			Config.Transactional(transaction => Config.instance.mainConnection.delete(transaction, TableSpec.instance, this.id.ToString()));
-			this.deleteFromRegistry();
+			try {
+				Config.Transactional(transaction => {
+					Config.instance.mainConnection.update(
+						transaction,
+						TableSpec.instance,
+						this.id.ToString(),
+						new Dictionary<string,string>() {
+							{ TableSpec.FIELD_ISDELETED, "1" },
+						}
+					);
+				});
+			} finally {
+				this.ReLoad();
+			}
 		}
 
 		public XElement exportToXml(UserContext context) {
@@ -149,7 +184,33 @@ namespace FLocal.Common.dataobjects {
 		}
 
 		public static Session LoadByKey(string sessionKey) {
-			return LoadById(SessionKey.Parse(sessionKey));
+			Session result = LoadById(SessionKey.Parse(sessionKey));
+			if(result.isDeleted) throw new NotFoundInDBException(TableSpec.instance, sessionKey);
+			return result;
+		}
+
+		public static Session GetLastSession(Account account) {
+			var ids = Config.instance.mainConnection.LoadIdsByConditions(
+				TableSpec.instance,
+				new ComparisonCondition(
+					TableSpec.instance.getColumnSpec(TableSpec.FIELD_ACCOUNTID),
+					ComparisonType.EQUAL,
+					account.id.ToString()
+				),
+				Diapasone.first,
+				new JoinSpec[0],
+				new SortSpec[] {
+					new SortSpec(
+						TableSpec.instance.getColumnSpec(TableSpec.FIELD_LASTACTIVITY),
+						false
+					)
+				}
+			);
+			if(ids.Count < 1) {
+				throw new NotFoundInDBException(TableSpec.instance.getColumnSpec(TableSpec.FIELD_ACCOUNTID), account.id.ToString());
+			}
+
+			return Session.LoadById(SessionKey.Parse(ids[0]));
 		}
 
 	}

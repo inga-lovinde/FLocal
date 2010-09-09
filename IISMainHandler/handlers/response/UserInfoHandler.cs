@@ -37,9 +37,14 @@ namespace FLocal.IISHandler.handlers.response {
 				} catch(NotFoundInDBException) {
 				}
 			}
+			Session lastSession = null;
+			if(account != null && !account.isDetailedStatusHidden) {
+				lastSession = Session.GetLastSession(account);
+			}
 			return new XElement[] {
 				user.exportToXmlForViewing(context),
 				(account == null) ? null : new XElement("accountId", account.id.ToString()), //for PM history, PM send etc
+				(lastSession == null) ? null : new XElement("lastActivity", lastSession.lastActivity.ToXml())
 			};
 		}
 
