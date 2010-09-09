@@ -112,7 +112,12 @@ namespace FLocal.Common.dataobjects {
 		}
 
 		public void updateLastActivity(string lastUrl) {
-			if(DateTime.Now.Subtract(this.lastActivity).TotalSeconds < 30) return; //to partially remove db load
+			if(DateTime.Now.Subtract(this.lastActivity).TotalSeconds < 10) return; //to partially remove db load
+			if(lastUrl != null) {
+				string _url = lastUrl.ToLower();
+				if(_url.StartsWith("/upload/item")) return;
+				if(_url.StartsWith("/static")) return;
+			}
 			try {
 				Config.Transactional(transaction => {
 					Config.instance.mainConnection.update(
