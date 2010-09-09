@@ -35,7 +35,10 @@ namespace FLocal.IISHandler.handlers.response {
 			}
 			Session lastSession = null;
 			if(account != null && !account.isDetailedStatusHidden) {
-				lastSession = Session.GetLastSession(account);
+				try {
+					lastSession = Session.GetLastSession(account);
+				} catch(NotFoundInDBException) {
+				}
 			}
 			return new XElement[] {
 				user.exportToXmlForViewing(context),
