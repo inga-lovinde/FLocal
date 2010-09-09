@@ -57,15 +57,21 @@ namespace FLocal.Common.BBCodes {
 			if(title == null) {
 				title = link;
 			}
+			bool isExternal = true;
 			string url;
 			if(shortenRelative) {
 				var urlInfo = UrlProcessor.Process(link);
 				url = urlInfo.relativeUrl;
+				isExternal = !urlInfo.isLocal;
 			} else {
 				var urlInfo = new Uri(link);
 				url = urlInfo.ToString();
 			}
-			return "<a href=\"" + url + "\">" + title + "</a>";
+			string result = "<a href=\"" + url + "\">" + title + "</a>";
+			if(isExternal) {
+				result += "<img src=\"/static/images/external.png\" border=\"0\"/>";
+			}
+			return result;
 		}
 
 	}

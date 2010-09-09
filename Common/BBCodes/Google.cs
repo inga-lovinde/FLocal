@@ -13,7 +13,7 @@ namespace FLocal.Common.BBCodes {
 		}
 
 		public override string Format(ITextFormatter formatter) {
-			return "<a href=\"http://lmgtfy.com/?q=" + HttpUtility.UrlEncode(this.DefaultOrValue) + "\">" + this.GetInnerHTML(formatter) + "</a>";
+			return "<a href=\"http://lmgtfy.com/?q=" + HttpUtility.UrlEncode(this.DefaultOrValue) + "\">g:" + this.GetInnerHTML(formatter) + "</a>";
 		}
 
 	}
