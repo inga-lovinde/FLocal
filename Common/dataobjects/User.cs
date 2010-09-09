@@ -308,6 +308,9 @@ namespace FLocal.Common.dataobjects {
 		}
 
 		public void UpdateData(UserData newData) {
+			if(newData.location.Length > 30) throw new FLocalException("Location is too long");
+			if(newData.title.Length > 30) throw new FLocalException("Title is too long");
+			if(newData.signatureUbb.Length > 1024) throw new FLocalException("Signature is too long");
 			ChangeSetUtil.ApplyChanges(
 				new UpdateChange(
 					TableSpec.instance,

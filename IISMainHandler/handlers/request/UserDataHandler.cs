@@ -18,10 +18,10 @@ namespace FLocal.IISHandler.handlers.request {
 		protected override XElement[] Do(WebContext context) {
 
 			User.UserData newData = new User.UserData {
-				location = context.httprequest.Form["location"],
-				title = context.httprequest.Form["title"],
-				signatureUbb = context.httprequest.Form["signature"],
-				biographyUbb = context.httprequest.Form["biography"],
+				location = context.httprequest.Form["location"].Trim(),
+				title = context.httprequest.Form["title"].Trim(),
+				signatureUbb = context.httprequest.Form["signature"].Trim(),
+				biographyUbb = context.httprequest.Form["biography"].Trim(),
 			};
 
 			context.account.user.UpdateData(newData);
