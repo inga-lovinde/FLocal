@@ -67,5 +67,9 @@ namespace FLocal.Core {
 			return result;
 		}
 
+		public static string Join<T>(this IEnumerable<T> parts, string separator) {
+			return String.Join(separator, (from part in parts select part.ToString()).ToArray());
+		}
+
     }
 }
