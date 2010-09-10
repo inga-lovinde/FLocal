@@ -153,6 +153,14 @@ namespace FLocal.Common {
 			}
 		}
 
+		internal actions.UpdateChange GetUpdateChange(Dictionary<string, actions.AbstractFieldValue> data) {
+			return new actions.UpdateChange(
+				this.table,
+				data,
+				this.id
+			);
+		}
+
 	}
 
 }
