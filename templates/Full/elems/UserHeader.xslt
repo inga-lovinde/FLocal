@@ -34,6 +34,7 @@
 									<xsl:with-param name="text">Опросы</xsl:with-param>
 								</xsl:call-template>
 								<xsl:text> | </xsl:text>
+								<img src="/static/images/shortcut.png" border="0"/>
 								<xsl:call-template name="headerLink">
 									<xsl:with-param name="url">/My/Conversations/Conversation/<xsl:value-of select="accountId"/>/</xsl:with-param>
 									<xsl:with-param name="text">История</xsl:with-param>
@@ -41,8 +42,8 @@
 										<xsl:if test="not(accountId)">true</xsl:if>
 									</xsl:with-param>
 								</xsl:call-template>
-								<img src="/static/images/external.png" border="0"/>
 								<xsl:text> | </xsl:text>
+								<img src="/static/images/shortcut.png" border="0"/>
 								<xsl:call-template name="headerLink">
 									<xsl:with-param name="url">/My/Conversations/PMSend/<xsl:value-of select="accountId"/>/</xsl:with-param>
 									<xsl:with-param name="text">Написать</xsl:with-param>
@@ -50,7 +51,6 @@
 										<xsl:if test="not(accountId)">true</xsl:if>
 									</xsl:with-param>
 								</xsl:call-template>
-								<img src="/static/images/external.png" border="0"/>
 							</td>
 						</tr>
 					</table>

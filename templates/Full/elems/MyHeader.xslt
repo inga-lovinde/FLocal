@@ -53,6 +53,7 @@
 									</xsl:with-param>
 								</xsl:call-template>
 								<xsl:text> | </xsl:text>
+								<img src="/static/images/shortcut.png" border="0"/>
 								<xsl:call-template name="headerLink">
 									<xsl:with-param name="url">/Users/User/<xsl:value-of select="session/user/id"/>/Info/</xsl:with-param>
 									<xsl:with-param name="text">Профиль</xsl:with-param>
@@ -60,7 +61,6 @@
 										<xsl:if test="not(session/sessionKey)">true</xsl:if>
 									</xsl:with-param>
 								</xsl:call-template>
-								<img src="/static/images/external.png" border="0"/>
 								<xsl:text> | </xsl:text>
 								<a target="_top">
 									<xsl:if test="session/sessionKey">
