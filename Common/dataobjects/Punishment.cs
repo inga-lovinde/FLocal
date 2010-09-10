@@ -179,7 +179,7 @@ namespace FLocal.Common.dataobjects {
 				this.punishmentType.exportToXml(context),
 				new XElement("isWithdrawed", this.isWithdrawed.ToPlainString()),
 				new XElement("comment", this.comment),
-				new XElement("expires", this.expires),
+				new XElement("expires", this.expires.ToXml()),
 				this.transferId.HasValue ? this.transfer.exportToXml(context) : null,
 				this.layerChangeId.HasValue ? this.layerChange.exportToXml(context) : null
 			);

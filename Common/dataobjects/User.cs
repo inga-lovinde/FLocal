@@ -342,5 +342,32 @@ namespace FLocal.Common.dataobjects {
 			);
 		}
 
+		public IEnumerable<Punishment> getPunishments(Diapasone diapasone) {
+			return Punishment.LoadByIds(
+				from stringId in Config.instance.mainConnection.LoadIdsByConditions(
+					Punishment.TableSpec.instance,
+					new ComplexCondition(
+						ConditionsJoinType.AND,
+						new ComparisonCondition(
+							Punishment.TableSpec.instance.getColumnSpec(Punishment.TableSpec.FIELD_OWNERID),
+							ComparisonType.EQUAL,
+							this.id.ToString()
+						),
+						new ComparisonCondition(
+							Punishment.TableSpec.instance.getColumnSpec(Punishment.TableSpec.FIELD_EXPIRES),
+							ComparisonType.GREATEROREQUAL,
+							DateTime.Now.ToUTCString()
+						),
+						new ComparisonCondition(
+							Punishment.TableSpec.instance.getColumnSpec(Punishment.TableSpec.FIELD_ISWITHDRAWED),
+							ComparisonType.EQUAL,
+							"0"
+						)
+					),
+					diapasone
+				) select int.Parse(stringId)
+			);
+		}
+
 	}
 }

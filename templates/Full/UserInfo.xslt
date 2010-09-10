@@ -168,7 +168,16 @@
 											<xsl:text>Penalties</xsl:text>
 										</td>
 										<td colspan="2">
-											<xsl:text>Not implemented</xsl:text>
+											<table border="1" width="90%">
+												<tr class="tdheader">
+													<td width="4%">Вес</td>
+													<td width="38%">Сообщение</td>
+													<td width="10%">Модератор</td>
+													<td width="38%">Комментарий</td>
+													<td width="10%">Истекает</td>
+												</tr>
+												<xsl:apply-templates select="punishments/punishment"/>
+											</table>
 										</td>
 									</tr>
 									<tr>
@@ -186,6 +195,21 @@
 				</td>
 			</tr>
 		</table>
+	</xsl:template>
+
+	<xsl:template match="punishment">
+		<tr>
+			<td><xsl:value-of select="punishmentType/weightDescription"/></td>
+			<td>
+				<a>
+					<xsl:attribute name="href">/Post/<xsl:value-of select="post/id"/>/</xsl:attribute>
+					<xsl:value-of select="post/title"/>
+				</a>
+			</td>
+			<td><xsl:apply-templates select="moderator" mode="userLink"/></td>
+			<td><xsl:value-of select="comment"/></td>
+			<td><xsl:apply-templates select="expires" mode="dateTime"/></td>
+		</tr>
 	</xsl:template>
 
 </xsl:stylesheet>
