@@ -63,7 +63,9 @@ namespace FLocal.Common {
 
 				private static readonly Regex LINKS_MATCHER = new Regex("https?://[^\\s\\[<]+", RegexOptions.Singleline | RegexOptions.Compiled);
 				private static string LINKS_REPLACE(Match match) {
-					return BBCodes.UrlProcessor.ProcessLink(match.Value, null, true);
+					string url = match.Value.TrimEnd('!', '?', ',', '.');
+					string remainder = match.Value.Substring(url.Length);
+					return BBCodes.UrlProcessor.ProcessLink(url, null, true) + remainder;
 				}
 
 				private static readonly Dictionary<Regex, MatchEvaluator> TYPOGRAPHICS = new Dictionary<Regex, MatchEvaluator> {
