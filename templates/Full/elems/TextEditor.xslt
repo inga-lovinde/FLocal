@@ -174,8 +174,11 @@ function insertInBody(str) {
 							<td class="darktable">
 								<a pseudolink="pseudolink" onclick="alert('Not implemented');return;DoPrompt('video');">YouTube</a>
 							</td>
-							<td class="darktable" colspan="2">
-								<a pseudolink="pseudolink" onclick="alert('Not implemented');return;DoPrompt('math');">Math</a>
+							<td class="darktable">
+								<a pseudolink="pseudolink" onclick="DoPrompt('math');">Math</a>
+							</td>
+							<td class="darktable">
+								<a pseudolink="pseudolink" onclick="DoPrompt('tex');">TeX</a>
 							</td>
 						</tr>
 					</table>
