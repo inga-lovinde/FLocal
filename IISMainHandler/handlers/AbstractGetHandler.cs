@@ -16,6 +16,7 @@ namespace FLocal.IISHandler.handlers {
 
 		protected IEnumerable<XElement> getCommonData(WebContext context) {
 			return new XElement[] {
+				new XElement("handlerName", this.GetType().FullName),
 				new XElement("title", Config.instance.AppInfo),
 				new XElement("current", DateTime.Now.ToXml()),
 				context.exportSession(),
