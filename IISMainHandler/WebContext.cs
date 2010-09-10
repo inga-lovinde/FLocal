@@ -156,6 +156,9 @@ namespace FLocal.IISHandler {
 			using(StreamWriter writer = new StreamWriter(Common.Config.instance.dataDir + "Logs\\" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + "." + e.GetGuid().ToString() + ".txt")) {
 				writer.WriteLine("Requested url: " + this.httprequest.RawUrl);
 				writer.WriteLine("Remote ip: " + this.httprequest.UserHostAddress);
+				if(this.httprequest.UrlReferrer != null) {
+					writer.WriteLine("Referer: " + this.httprequest.UrlReferrer.ToString());
+				}
 				if(this.httprequest.Cookies["session"] != null) {
 					writer.WriteLine("Session: " + this.httprequest.Cookies["session"].Value);
 				}
