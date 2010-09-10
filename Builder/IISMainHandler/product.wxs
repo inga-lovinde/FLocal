@@ -72,6 +72,12 @@
 			<Component Id="PJonDevelopment.BBCode.pdb" Guid="EFFBA1FA-A3A8-4D20-8894-AFD255B9F00{targetId}">
 				<File Id="PJonDevelopment.BBCode.pdb" Source="..\..\ThirdParty\BBCode\bin\Release\PJonDevelopment.BBCode.pdb" KeyPath="yes" Checksum="yes"/>
 			</Component>
+			<Component Id="TexCompiler.dll" Guid="6FD050AF-61D7-4BFF-B206-A4420A83FB5{targetId}">
+				<File Id="TexCompiler.dll" Source="..\..\TexCompiler\bin\Release\TexCompiler.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="TexCompiler.pdb" Guid="707304A1-9774-446F-B672-FA25EAD8E4F{targetId}">
+				<File Id="TexCompiler.pdb" Source="..\..\TexCompiler\bin\Release\TexCompiler.pdb" KeyPath="yes" Checksum="yes"/>
+			</Component>
 			<!--Component Id="MySql.Data.dll" Guid="90646729-6B21-4BEE-94C3-F39F5288EFB{targetId}">
 				<File Id="MySql.Data.dll" Source="..\..\ThirdParty\mysql-connector-net-6.2.3\MySql.Data\Provider\bin\Release\MySql.Data.dll" KeyPath="yes" Checksum="yes"/>
 			</Component>
@@ -115,6 +121,10 @@
 		<Feature Id='MySQLConnector' Title='Adapter to DbConnection' Level='1'>
 			<ComponentRef Id='MySQLConnector.dll' />
 			<ComponentRef Id='MySQLConnector.pdb' />
+		</Feature>
+		<Feature Id='TexCompiler' Title='Compiler of TeX code' Level='1'>
+			<ComponentRef Id='TexCompiler.dll' />
+			<ComponentRef Id='TexCompiler.pdb' />
 		</Feature>
 		<Feature Id='ThirdParty' Title='ThirdParty libraries/tools' Level='1'>
 			<Feature Id='NConsoler' Title='NConsoler' Level='1'>

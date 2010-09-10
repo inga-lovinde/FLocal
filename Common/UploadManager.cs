@@ -50,8 +50,9 @@ namespace FLocal.Common {
 			if(fileStream.Length > MAX_UPLOAD_FILESIZE) throw new FLocalException("File is too big");
 
 			byte[] data = new byte[fileStream.Length];
-			if(fileStream.Read(data, 0, (int)fileStream.Length) != fileStream.Length) {
-				throw new FLocalException("File is incomplete");
+			int readBytes = fileStream.Read(data, 0, (int)fileStream.Length);
+			if(readBytes != fileStream.Length) {
+				throw new FLocalException("File is incomplete (read " + readBytes + " of " + fileStream.Length + ")");
 			}
 
 			string file_md5 = Util.md5(fileStream);
@@ -116,6 +117,16 @@ namespace FLocal.Common {
 				);
 			}
 			return Upload.LoadById(uploadId.Value);
+		}
+
+		public static Upload SafeUploadFile(Stream fileStream, string filename, User uploader) {
+			Upload upload;
+			try {
+				upload = UploadManager.UploadFile(fileStream, filename, DateTime.Now, uploader, null);
+			} catch(UploadManager.AlreadyUploadedException e) {
+				upload = Upload.LoadById(e.uploadId);
+			}
+			return upload;
 		}
 
 	}

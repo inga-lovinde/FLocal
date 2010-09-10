@@ -121,12 +121,14 @@ namespace FLocal.Common {
 				this.parser.ElementTypes.Add("image", typeof(BBCodes.Image), true);
 				this.parser.ElementTypes.Add("list", typeof(BBCodes.List), true);
 				this.parser.ElementTypes.Add("lurk", typeof(BBCodes.Lurk), true);
+				this.parser.ElementTypes.Add("math", typeof(BBCodes.Math), true);
 				this.parser.ElementTypes.Add("*", typeof(BBCodes.ListElem), false);
 				this.parser.ElementTypes.Add("poll", typeof(BBCodes.Poll), true);
 				this.parser.ElementTypes.Add("post", typeof(BBCodes.Post), true);
 				this.parser.ElementTypes.Add("quote", typeof(BBCodes.Quote), true);this.parser.ElementTypes.Add("q", typeof(BBCodes.Quote), true);
 				this.parser.ElementTypes.Add("s", typeof(BBCodes.S), true);
 				this.parser.ElementTypes.Add("spoiler", typeof(BBCodes.Spoiler), true);this.parser.ElementTypes.Add("cut", typeof(BBCodes.Spoiler), true);
+				this.parser.ElementTypes.Add("tex", typeof(BBCodes.Tex), true);
 				this.parser.ElementTypes.Add("thread", typeof(BBCodes.Thread), true);
 				this.parser.ElementTypes.Add("u", typeof(BBCodes.U), true);
 				this.parser.ElementTypes.Add("uploadimage", typeof(BBCodes.UploadImage), true);

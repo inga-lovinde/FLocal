@@ -65,10 +65,12 @@
     <Compile Include="BBCodes\helpers\BBCode.cs" />
     <Compile Include="BBCodes\Code.cs" />
     <Compile Include="BBCodes\FUrl.cs" />
+    <Compile Include="BBCodes\helpers\TexProcessor.cs" />
     <Compile Include="BBCodes\Image.cs" />
     <Compile Include="BBCodes\List.cs" />
     <Compile Include="BBCodes\ListElem.cs" />
     <Compile Include="BBCodes\Lurk.cs" />
+    <Compile Include="BBCodes\Math.cs" />
     <Compile Include="BBCodes\Poll.cs" />
     <Compile Include="BBCodes\Post.cs" />
     <Compile Include="BBCodes\Quote.cs" />
@@ -76,6 +78,7 @@
     <Compile Include="BBCodes\RuWiki.cs" />
     <Compile Include="BBCodes\S.cs" />
     <Compile Include="BBCodes\Spoiler.cs" />
+    <Compile Include="BBCodes\Tex.cs" />
     <Compile Include="BBCodes\Thread.cs" />
     <Compile Include="BBCodes\U.cs" />
     <Compile Include="BBCodes\UploadImage.cs" />
@@ -133,6 +136,10 @@
     <ProjectReference Include="..\MySQLConnector\MySQLConnector.csproj">
       <Project>{E38DE5B1-F9C2-43BA-A5DF-0743ABD4DFC7}</Project>
       <Name>MySQLConnector</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TexCompiler\TexCompiler.csproj">
+      <Project>{7D2A38F8-C42D-4F9F-AF64-1DDD5842C7EC}</Project>
+      <Name>TexCompiler</Name>
     </ProjectReference>
     <ProjectReference Include="..\ThirdParty\BBCode\BBCode.vbproj">
       <Project>{ACDDD5D1-119F-4B82-8FE6-6515C812795B}</Project>

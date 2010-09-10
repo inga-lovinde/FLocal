@@ -24,12 +24,7 @@ namespace FLocal.IISHandler.handlers.request {
 			HttpPostedFile file = context.httprequest.Files["file"];
 			if(file == null) throw new FLocalException("file not uploaded");
 			if(file.ContentLength != file.InputStream.Length) throw new FLocalException("file is not uploaded completely");
-			Upload upload;
-			try {
-				upload = UploadManager.UploadFile(file.InputStream, System.IO.Path.GetFileName(file.FileName), DateTime.Now, context.session.account.user, null);
-			} catch(UploadManager.AlreadyUploadedException e) {
-				upload = Upload.LoadById(e.uploadId);
-			}
+			Upload upload = UploadManager.SafeUploadFile(file.InputStream, System.IO.Path.GetFileName(file.FileName), context.session.account.user);
 			return new XElement[] {
 				new XElement("uploadedId", upload.id)
 			};

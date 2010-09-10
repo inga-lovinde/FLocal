@@ -25,11 +25,7 @@ namespace FLocal.IISHandler.handlers.request.avatars {
 			if(context.httprequest.Files["file"] != null && context.httprequest.Files["file"].ContentLength > 0) {
 				HttpPostedFile file = context.httprequest.Files["file"];
 				if(file.ContentLength != file.InputStream.Length) throw new FLocalException("file is not uploaded completely");
-				try {
-					upload = UploadManager.UploadFile(file.InputStream, System.IO.Path.GetFileName(file.FileName), DateTime.Now, context.session.account.user, null);
-				} catch(UploadManager.AlreadyUploadedException e) {
-					upload = Upload.LoadById(e.uploadId);
-				}
+				upload = UploadManager.SafeUploadFile(file.InputStream, System.IO.Path.GetFileName(file.FileName), context.session.account.user);
 			} else {
 				upload = Upload.LoadById(int.Parse(context.httprequest.Form["uploadId"]));
 			}
