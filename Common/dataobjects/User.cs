@@ -327,5 +327,20 @@ namespace FLocal.Common.dataobjects {
 			);
 		}
 
+		public void SetAvatar(Upload avatar) {
+
+			if((avatar != null) && (avatar.size > Upload.AVATAR_MAX_FILESIZE)) throw new FLocalException("Avatar is too big (max. 80KB allowed)");
+
+			ChangeSetUtil.ApplyChanges(
+				new UpdateChange(
+					TableSpec.instance,
+					new Dictionary<string,AbstractFieldValue> {
+						{ TableSpec.FIELD_AVATARID, new ScalarFieldValue((avatar != null) ? avatar.id.ToString() : null) },
+					},
+					this.id
+				)
+			);
+		}
+
 	}
 }

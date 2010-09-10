@@ -144,19 +144,21 @@ namespace FLocal.Common.dataobjects {
 		}
 
 		public static void Save(Account account, int postsPerPage, int threadsPerPage, int usersPerPage, int uploadsPerPage, Skin skin) {
-			Dictionary<string, AbstractFieldValue> data = new Dictionary<string,AbstractFieldValue> {
-				{ TableSpec.FIELD_ACCOUNTID, new ScalarFieldValue(account.id.ToString()) },
+			Dictionary<string, AbstractFieldValue> dataToUpdate = new Dictionary<string,AbstractFieldValue> {
 				{ TableSpec.FIELD_POSTSPERPAGE, new ScalarFieldValue(postsPerPage.ToString()) },
 				{ TableSpec.FIELD_THREADSPERPAGE, new ScalarFieldValue(threadsPerPage.ToString()) },
 				{ TableSpec.FIELD_USERSPERPAGE, new ScalarFieldValue(usersPerPage.ToString()) },
 				{ TableSpec.FIELD_UPLOADSPERPAGE, new ScalarFieldValue(uploadsPerPage.ToString()) },
 				{ TableSpec.FIELD_SKINID, new ScalarFieldValue(skin.id.ToString()) },
 			};
+			Dictionary<string, AbstractFieldValue> dataToInsert = new Dictionary<string,AbstractFieldValue>(dataToUpdate) {
+				{ TableSpec.FIELD_ACCOUNTID, new ScalarFieldValue(account.id.ToString()) },
+			};
 			ChangeSetUtil.ApplyChanges(
 				new InsertOrUpdateChange(
 					TableSpec.instance,
-					data,
-					data,
+					dataToInsert,
+					dataToUpdate,
 					new ComparisonCondition(
 						TableSpec.instance.getColumnSpec(TableSpec.FIELD_ACCOUNTID),
 						ComparisonType.EQUAL,

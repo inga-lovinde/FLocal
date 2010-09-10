@@ -87,6 +87,7 @@
     <Compile Include="Config.cs" />
     <Compile Include="dataobjects\Account.cs" />
     <Compile Include="dataobjects\AccountIndicator.cs" />
+    <Compile Include="dataobjects\AvatarsSettings.cs" />
     <Compile Include="dataobjects\Board.cs" />
     <Compile Include="dataobjects\Category.cs" />
     <Compile Include="dataobjects\Invite.cs" />

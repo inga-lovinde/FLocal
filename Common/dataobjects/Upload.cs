@@ -10,6 +10,8 @@ using FLocal.Core.DB.conditions;
 namespace FLocal.Common.dataobjects {
 	public class Upload : SqlObject<Upload> {
 
+		public const int AVATAR_MAX_FILESIZE = 80*1024;
+
 		public class TableSpec : ISqlObjectTableSpec {
 			public const string TABLE = "Uploads";
 			public const string FIELD_ID = "Id";

@@ -26,6 +26,7 @@ namespace FLocal.Common.actions {
 						dataobjects.Account.TableSpec.TABLE,
 						dataobjects.User.TableSpec.TABLE,
 						dataobjects.AccountSettings.TableSpec.TABLE,
+						dataobjects.AvatarsSettings.TableSpec.TABLE,
 						dataobjects.AccountIndicator.TableSpec.TABLE,
 						dataobjects.PMConversation.TableSpec.TABLE,
 						dataobjects.PMMessage.TableSpec.TABLE,

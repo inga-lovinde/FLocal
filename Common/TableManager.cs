@@ -11,6 +11,7 @@ namespace FLocal.Common {
 			dataobjects.Account.TableSpec.instance,
 			dataobjects.AccountIndicator.TableSpec.instance,
 			dataobjects.AccountSettings.TableSpec.instance,
+			dataobjects.AvatarsSettings.TableSpec.instance,
 			dataobjects.Board.TableSpec.instance,
 			dataobjects.Category.TableSpec.instance,
 			dataobjects.Invite.TableSpec.instance,

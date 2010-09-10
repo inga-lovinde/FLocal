@@ -53,6 +53,14 @@
 									</xsl:with-param>
 								</xsl:call-template>
 								<xsl:text> | </xsl:text>
+								<xsl:call-template name="headerLink">
+									<xsl:with-param name="url">/My/Avatars/</xsl:with-param>
+									<xsl:with-param name="text">Аватарки</xsl:with-param>
+									<xsl:with-param name="isDisabled">
+										<xsl:if test="not(session/sessionKey)">true</xsl:if>
+									</xsl:with-param>
+								</xsl:call-template>
+								<xsl:text> | </xsl:text>
 								<img src="/static/images/shortcut.png" border="0"/>
 								<xsl:call-template name="headerLink">
 									<xsl:with-param name="url">/Users/User/<xsl:value-of select="session/user/id"/>/Info/</xsl:with-param>

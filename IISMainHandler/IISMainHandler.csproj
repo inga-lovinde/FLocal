@@ -144,8 +144,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="handlers\request\avatars\AddHandler.cs" />
+    <Compile Include="handlers\request\avatars\RemoveHandler.cs" />
+    <Compile Include="handlers\request\avatars\SetAsDefaultHandler.cs" />
     <Compile Include="handlers\request\UserDataHandler.cs" />
     <Compile Include="handlers\response\AbstractUserGetHandler.cs" />
+    <Compile Include="handlers\response\AvatarsSettingsHandler.cs" />
     <Compile Include="handlers\response\UserDataHandler.cs" />
     <Compile Include="handlers\response\UserThreadsHandler.cs" />
   </ItemGroup>

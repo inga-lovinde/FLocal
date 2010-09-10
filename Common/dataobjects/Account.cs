@@ -279,6 +279,13 @@ namespace FLocal.Common.dataobjects {
 						{ User.TableSpec.FIELD_SHOWPOSTSTOUSERS, new ScalarFieldValue(User.ENUM_SHOWPOSTSTOUSERS_ALL) },
 					},
 					this.user.id
+				),
+				new InsertChange(
+					AvatarsSettings.TableSpec.instance,
+					new Dictionary<string,AbstractFieldValue> {
+						{ AvatarsSettings.TableSpec.FIELD_ACCOUNTID, new ScalarFieldValue(this.id.ToString()) },
+						{ AvatarsSettings.TableSpec.FIELD_AVATARS, new ScalarFieldValue(this.user.avatarId.HasValue ? this.user.avatarId.ToString() : "") },
+					}
 				)
 			});
 		}

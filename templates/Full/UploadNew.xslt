@@ -16,7 +16,7 @@
 							<td> 
 								<xsl:text>Выберите файл для загрузки</xsl:text>
 								<br/>
-								<xsl:text>Максимальный размер файла &#8211; 1МБ, допустимые разрешения: gif, jpg, png</xsl:text>
+								<xsl:text>Максимальный размер файла &#8211; 1МБ, допустимые разрешения: gif, jpg, png, svg, jpe, jpeg, jfif, jif</xsl:text>
 							</td> 
 						</tr> 
 						<tr> 

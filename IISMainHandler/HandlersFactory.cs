@@ -102,6 +102,8 @@ namespace FLocal.IISHandler {
 							return new handlers.response.SettingsHandler();
 						case "userdata":
 							return new handlers.response.UserDataHandler();
+						case "avatars":
+							return new handlers.response.AvatarsSettingsHandler();
 						case "conversations":
 							if(context.requestParts.Length == 2) {
 								return new handlers.response.ConversationsHandler();
@@ -238,6 +240,20 @@ namespace FLocal.IISHandler {
 								return new handlers.request.CreatePollHandler();
 							case "vote":
 								return new handlers.request.VoteHandler();
+							case "avatars":
+								if(context.requestParts.Length < 3) {
+									return new handlers.WrongUrlHandler();
+								}
+								switch(context.requestParts[2].ToLower()) {
+									case "add":
+										return new handlers.request.avatars.AddHandler();
+									case "remove":
+										return new handlers.request.avatars.RemoveHandler();
+									case "setasdefault":
+										return new handlers.request.avatars.SetAsDefaultHandler();
+									default:
+										return new handlers.WrongUrlHandler();
+								}
 							case "maintenance":
 								if(context.requestParts.Length < 3) {
 									return new handlers.WrongUrlHandler();
