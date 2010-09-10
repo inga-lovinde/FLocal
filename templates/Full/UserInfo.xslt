@@ -117,9 +117,10 @@
 													<table border="1" width="90%">
 														<tr class="tdheader">
 															<td width="4%">Вес</td>
-															<td width="38%">Сообщение</td>
+															<td width="10%">Раздел</td>
+															<td width="33%">Сообщение</td>
 															<td width="10%">Модератор</td>
-															<td width="38%">Комментарий</td>
+															<td width="33%">Комментарий</td>
 															<td width="10%">Истекает</td>
 														</tr>
 														<xsl:apply-templates select="punishments/punishment"/>
@@ -151,6 +152,12 @@
 	<xsl:template match="punishment">
 		<tr>
 			<td><xsl:value-of select="punishmentType/weightDescription"/></td>
+			<td>
+				<a>
+					<xsl:attribute name="href">/Board/<xsl:value-of select="originalBoard/board/id"/>/</xsl:attribute>
+					<xsl:value-of select="originalBoard/board/name"/>
+				</a>
+			</td>
 			<td>
 				<a>
 					<xsl:attribute name="href">/Post/<xsl:value-of select="post/id"/>/</xsl:attribute>
