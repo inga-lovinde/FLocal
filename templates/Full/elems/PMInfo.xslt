@@ -46,22 +46,34 @@
 															<td class="navigation">
 																<a>
 																	<xsl:attribute name="href">/My/Conversations/PMReply/<xsl:value-of select="id"/>/</xsl:attribute>
-																	<img src="/static/images/reply.gif" border="0" alt="Ответ на сообщение" width="27" height="14" title="Ответ на сообщение" style="vertical-align: text-bottom" />
+																	<xsl:apply-templates select="postDate/date" mode="navigationImageFor">
+																		<xsl:with-param name="src">reply.gif</xsl:with-param>
+																		<xsl:with-param name="alt">Ответ</xsl:with-param>
+																	</xsl:apply-templates>
 																</a>
 															</td>
 															<td class="navigation">
 																<a>
-																	<img src="/static/images/edit.gif" border="0" alt="Правка сообщения" title="Правка сообщения" width="21" height="14" style="vertical-align: text-bottom" />
+																	<xsl:apply-templates select="postDate/date" mode="navigationImageFor">
+																		<xsl:with-param name="src">edit.gif</xsl:with-param>
+																		<xsl:with-param name="alt">Правка</xsl:with-param>
+																	</xsl:apply-templates>
 																</a>
 															</td>
 															<td class="navigation">
 																<a target="_blank">
-																	<img src="/static/images/print.gif" border="0" alt="Печать сообщения" title="Печать сообщения" />
+																	<xsl:apply-templates select="postDate/date" mode="navigationImageFor">
+																		<xsl:with-param name="src">print.gif</xsl:with-param>
+																		<xsl:with-param name="alt">Печать</xsl:with-param>
+																	</xsl:apply-templates>
 																</a>
 															</td>
 															<td class="navigation">
 																<a>
-																	<img src="/static/images/email2.gif" border="0" alt="Ответить приватом" title="Ответить приватом" />
+																	<xsl:apply-templates select="postDate/date" mode="navigationImageFor">
+																		<xsl:with-param name="src">email2.gif</xsl:with-param>
+																		<xsl:with-param name="alt">Ответить в ПМ</xsl:with-param>
+																	</xsl:apply-templates>
 																</a>
 															</td>
 														</tr>

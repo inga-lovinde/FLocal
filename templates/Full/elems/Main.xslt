@@ -64,6 +64,30 @@
 		<xsl:value-of select="*/name"/>
 	</xsl:template>
 
+	<xsl:template match="date" mode="navigationImageFor">
+		<xsl:param name="alt"/>
+		<xsl:param name="src"/>
+		<img border="0" style="vertical-align: text-bottom">
+			<xsl:attribute name="src">
+				<xsl:text>/static/images/</xsl:text>
+				<xsl:choose>
+					<xsl:when test="year = /root/current/date/year">
+						<xsl:value-of select="$src"/>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:text>slowpoke.png</xsl:text>
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:attribute>
+			<xsl:attribute name="alt">
+				<xsl:value-of select="$alt"/>
+			</xsl:attribute>
+			<xsl:attribute name="title">
+				<xsl:value-of select="$alt"/>
+			</xsl:attribute>
+		</img>
+	</xsl:template>
+
 	<xsl:template match="date" mode="_date">
 		<xsl:choose>
 			<xsl:when test="year=/root/current/date/year and month=/root/current/date/month and mday=/root/current/date/mday">

@@ -63,7 +63,10 @@
 																			<xsl:attribute name="onMouseDown">submitSelText(this.href);return false;</xsl:attribute>
 																		</xsl:if>
 																	</xsl:if>
-																	<img src="/static/images/reply.gif" border="0" alt="Ответ на сообщение" width="27" height="14" title="Ответ на сообщение" style="vertical-align: text-bottom" />
+																	<xsl:apply-templates select="postDate/date" mode="navigationImageFor">
+																		<xsl:with-param name="src">reply.gif</xsl:with-param>
+																		<xsl:with-param name="alt">Ответ</xsl:with-param>
+																	</xsl:apply-templates>
 																</a>
 															</td>
 															<td class="navigation">
@@ -71,17 +74,26 @@
 																	<xsl:if test="isOwner='true'">
 																		<xsl:attribute name="href">/Post/<xsl:value-of select="id"/>/Edit/</xsl:attribute>
 																	</xsl:if>
-																	<img src="/static/images/edit.gif" border="0" alt="Правка сообщения" title="Правка сообщения" width="21" height="14" style="vertical-align: text-bottom" />
+																	<xsl:apply-templates select="postDate/date" mode="navigationImageFor">
+																		<xsl:with-param name="src">edit.gif</xsl:with-param>
+																		<xsl:with-param name="alt">Правка</xsl:with-param>
+																	</xsl:apply-templates>
 																</a>
 															</td>
 															<td class="navigation">
 																<a target="_blank">
-																	<img src="/static/images/print.gif" border="0" alt="Печать сообщения" title="Печать сообщения" />
+																	<xsl:apply-templates select="postDate/date" mode="navigationImageFor">
+																		<xsl:with-param name="src">print.gif</xsl:with-param>
+																		<xsl:with-param name="alt">Печать</xsl:with-param>
+																	</xsl:apply-templates>
 																</a>
 															</td>
 															<td class="navigation">
 																<a>
-																	<img src="/static/images/addreminder.gif" border="0" alt="Добавить тему в напоминания!" title="Добавить тему в напоминания!" />
+																	<xsl:apply-templates select="postDate/date" mode="navigationImageFor">
+																		<xsl:with-param name="src">addreminder.gif</xsl:with-param>
+																		<xsl:with-param name="alt">Запомнить</xsl:with-param>
+																	</xsl:apply-templates>
 																</a>
 															</td>
 															<td class="navigation">
@@ -89,12 +101,18 @@
 																	<xsl:when test="isPunishmentEnabled='true'">
 																		<a>
 																			<xsl:attribute name="href">/Post/<xsl:value-of select="id"/>/Punish/</xsl:attribute>
-																			<img src="/static/images/punish.gif" border="0" alt="Модерировать сообщение" title="Модерировать сообщение" style="vertical-align: text-bottom" />
+																			<xsl:apply-templates select="postDate/date" mode="navigationImageFor">
+																				<xsl:with-param name="src">punish.gif</xsl:with-param>
+																				<xsl:with-param name="alt">Модерировать</xsl:with-param>
+																			</xsl:apply-templates>
 																		</a>
 																	</xsl:when>
 																	<xsl:otherwise>
 																		<a>
-																			<img src="/static/images/notifymod.gif" border="0" alt="Известить модератора" title="Известить модератора" />
+																			<xsl:apply-templates select="postDate/date" mode="navigationImageFor">
+																				<xsl:with-param name="src">notifymod.gif</xsl:with-param>
+																				<xsl:with-param name="alt">Известить модератора</xsl:with-param>
+																			</xsl:apply-templates>
 																		</a>
 																	</xsl:otherwise>
 																</xsl:choose>
@@ -106,7 +124,10 @@
 																		<xsl:attribute name="onClick">submitSelText(this.href);return false;</xsl:attribute>
 																		<xsl:attribute name="onMouseDown">submitSelText(this.href);return false;</xsl:attribute>
 																	</xsl:if>
-																	<img src="/static/images/email2.gif" border="0" alt="Ответить приватом" title="Ответить приватом" />
+																	<xsl:apply-templates select="postDate/date" mode="navigationImageFor">
+																		<xsl:with-param name="src">email2.gif</xsl:with-param>
+																		<xsl:with-param name="alt">Ответить в ПМ</xsl:with-param>
+																	</xsl:apply-templates>
 																</a>
 															</td>
 														</tr>
