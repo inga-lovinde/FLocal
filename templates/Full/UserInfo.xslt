@@ -112,16 +112,23 @@
 											<xsl:text>Penalties</xsl:text>
 										</td>
 										<td colspan="2">
-											<table border="1" width="90%">
-												<tr class="tdheader">
-													<td width="4%">Вес</td>
-													<td width="38%">Сообщение</td>
-													<td width="10%">Модератор</td>
-													<td width="38%">Комментарий</td>
-													<td width="10%">Истекает</td>
-												</tr>
-												<xsl:apply-templates select="punishments/punishment"/>
-											</table>
+											<xsl:choose>
+												<xsl:when test="punishments">
+													<table border="1" width="90%">
+														<tr class="tdheader">
+															<td width="4%">Вес</td>
+															<td width="38%">Сообщение</td>
+															<td width="10%">Модератор</td>
+															<td width="38%">Комментарий</td>
+															<td width="10%">Истекает</td>
+														</tr>
+														<xsl:apply-templates select="punishments/punishment"/>
+													</table>
+												</xsl:when>
+												<xsl:otherwise>
+													<xsl:text>Нет</xsl:text>
+												</xsl:otherwise>
+											</xsl:choose>
 										</td>
 									</tr>
 									<tr>
