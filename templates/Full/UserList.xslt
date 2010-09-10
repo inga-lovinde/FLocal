@@ -15,22 +15,12 @@
 							</td>
 							<td align="left" width="12%" nowrap="nowrap">
 								<a>
-									<xsl:text>Статус</xsl:text>
-								</a>
-							</td>
-							<td align="left" width="28%" nowrap="nowrap">
-								<a>
-									<xsl:text>Домашняя страница</xsl:text>
+									<xsl:text>Группа</xsl:text>
 								</a>
 							</td>
 							<td align="left" width="5%" nowrap="nowrap">
 								<a>
 									<xsl:text>Итого сообщений</xsl:text>
-								</a>
-							</td>
-							<td align="left" width="12%" nowrap="nowrap">
-								<a>
-									<xsl:text>Номер ICQ</xsl:text>
 								</a>
 							</td>
 							<td align="left" width="5%" nowrap="nowrap">
@@ -81,10 +71,7 @@
 				<xsl:apply-templates select="current()" mode="userLink"/>
 			</td>
 			<td>
-				<xsl:text>Пользователь</xsl:text>
-			</td>
-			<td>
-				<xsl:text>TODO</xsl:text>
+				<xsl:value-of select="group/name"/>
 			</td>
 			<td>
 				<a>
@@ -96,9 +83,6 @@
 						<xsl:text>)</xsl:text>
 					</xsl:if>
 				</a>
-			</td>
-			<td>
-				<xsl:text>TODO</xsl:text>
 			</td>
 			<td>
 				<xsl:text>TODO</xsl:text>

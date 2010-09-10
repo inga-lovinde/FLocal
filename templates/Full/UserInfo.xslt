@@ -45,14 +45,6 @@
 									</tr>
 									<tr>
 										<td class="darktable">
-											<xsl:text>Имя</xsl:text>
-										</td>
-										<td>
-											<xsl:text>Not implemented</xsl:text>
-										</td>
-									</tr>
-									<tr>
-										<td class="darktable">
 											<xsl:text>Титул</xsl:text>
 										</td>
 										<td>
@@ -76,30 +68,6 @@
 										</td>
 									</tr>
 									<tr>
-										<td class="darktable">
-											<xsl:text>Домашняя страница</xsl:text>
-										</td>
-										<td>
-											<xsl:text>Not implemented</xsl:text>
-										</td>
-									</tr>
-									<tr>
-										<td valign="top" class="darktable">
-											<xsl:text>Род занятий</xsl:text>
-										</td>
-										<td>
-											<xsl:text>Not implemented</xsl:text>
-										</td>
-									</tr>
-									<tr>
-										<td valign="top" class="darktable">
-											<xsl:text>Хобби</xsl:text>
-										</td>
-										<td>
-											<xsl:text>Not implemented</xsl:text>
-										</td>
-									</tr>
-									<tr>
 										<td valign="top" class="darktable">
 											<xsl:text>Расположение</xsl:text>
 										</td>
@@ -113,22 +81,6 @@
 										</td>
 										<td colspan="2">
 											<xsl:value-of select="user/biography" disable-output-escaping="yes" />
-										</td>
-									</tr>
-									<tr>
-										<td valign="top" class="darktable">
-											<xsl:text>Номер ICQ</xsl:text>
-										</td>
-										<td>
-											<xsl:text>Not implemented</xsl:text>
-										</td>
-									</tr>
-									<tr>
-										<td valign="top" class="darktable">
-											<xsl:text>Пол (gender)</xsl:text>
-										</td>
-										<td>
-											<xsl:text>Not implemented</xsl:text>
 										</td>
 									</tr>
 									<tr>
@@ -153,14 +105,6 @@
 										</td>
 										<td>
 											<xsl:value-of select="user/signature" disable-output-escaping="yes" />
-										</td>
-									</tr>
-									<tr>
-										<td valign="top" class="darktable">
-											<xsl:text>Симпатии</xsl:text>
-										</td>
-										<td title="Выразить симпатию этому человеку">
-											<input type="submit" class="buttons" value=" " style="width:24px;background-image:url('/static/images/heart.gif');background-position:center left;background-repeat:no-repeat;"/>
 										</td>
 									</tr>
 									<tr>
