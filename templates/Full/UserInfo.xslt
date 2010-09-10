@@ -113,7 +113,7 @@
 										</td>
 										<td colspan="2">
 											<xsl:choose>
-												<xsl:when test="punishments">
+												<xsl:when test="punishments/punishment">
 													<table border="1" width="90%">
 														<tr class="tdheader">
 															<td width="4%">Вес</td>
