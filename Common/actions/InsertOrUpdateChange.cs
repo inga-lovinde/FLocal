@@ -66,11 +66,14 @@ namespace FLocal.Common.actions {
 				foreach(KeyValuePair<string, AbstractFieldValue> kvp in this.dataToInsert) {
 					processedData[kvp.Key] = kvp.Value.getStringRepresentation();
 				}
-				Config.instance.mainConnection.insert(
+				this.id = int.Parse(Config.instance.mainConnection.insert(
 					transaction,
 					this.tableSpec,
 					processedData
-				);
+				));
+				if(processedData.ContainsKey(this.tableSpec.idName)) {
+					this.id = int.Parse(processedData[this.tableSpec.idName]);
+				}
 			}
 		}
 
