@@ -134,6 +134,27 @@
 									</tr>
 									<tr>
 										<td valign="top" class="darktable">
+											<xsl:text>Restrictions</xsl:text>
+										</td>
+										<td colspan="2">
+											<xsl:choose>
+												<xsl:when test="restrictions/restriction">
+													<table border="1" width="90%">
+														<tr class="tdheader">
+															<td width="20%">Раздел</td>
+															<td width="80%">Ограничение</td>
+														</tr>
+														<xsl:apply-templates select="restrictions/restriction"/>
+													</table>
+												</xsl:when>
+												<xsl:otherwise>
+													<xsl:text>Нет</xsl:text>
+												</xsl:otherwise>
+											</xsl:choose>
+										</td>
+									</tr>
+									<tr>
+										<td valign="top" class="darktable">
 											<xsl:text>Комментарий</xsl:text>
 										</td>
 										<td>
@@ -168,6 +189,28 @@
 			<td><xsl:value-of select="comment"/></td>
 			<td><xsl:apply-templates select="expires" mode="dateTime"/></td>
 		</tr>
+	</xsl:template>
+
+	<xsl:template match="restriction">
+		<tr>
+			<td>
+				<a>
+					<xsl:attribute name="href">/Board/<xsl:value-of select="board/id"/>/</xsl:attribute>
+					<xsl:value-of select="board/name"/>
+				</a>
+			</td>
+			<td>
+				<xsl:apply-templates select="layers/layer"/>
+			</td>
+		</tr>
+	</xsl:template>
+
+	<xsl:template match="restriction/layers/layer">
+		<xsl:if test="position() &gt; 1"><br/></xsl:if>
+		<xsl:text>Запрещено использование слоя </xsl:text>
+		<xsl:value-of select="name"/>
+		<xsl:text> до </xsl:text>
+		<xsl:apply-templates select="restrictionExpires" mode="dateTime"/>
 	</xsl:template>
 
 </xsl:stylesheet>

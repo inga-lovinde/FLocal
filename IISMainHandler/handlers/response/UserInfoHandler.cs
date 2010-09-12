@@ -23,6 +23,7 @@ namespace FLocal.IISHandler.handlers.response {
 		override protected IEnumerable<XElement> getUserSpecificData(WebContext context, User user) {
 			return new XElement[] {
 				new XElement("punishments", from punishment in user.getPunishments(Diapasone.unlimited) select punishment.exportToXml(context)),
+				new XElement("restrictions", from restriction in Restriction.GetRestrictions(user) select restriction.exportToXml(context)),
 			};
 		}
 

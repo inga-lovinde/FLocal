@@ -81,6 +81,20 @@ namespace FLocal.Common.dataobjects {
 			).ToDictionary();
 		}
 
+		public XElement exportToXml(UserContext context) {
+			return new XElement("restriction",
+				this.user.exportToXmlForViewing(context),
+				this.board.exportToXmlSimple(context, Board.SubboardsOptions.None),
+				new XElement("layers",
+					from kvp in this.data
+					select PostLayer.LoadById(kvp.Key).exportToXml(
+						context,
+						new XElement("restrictionExpires", kvp.Value.ToXml())
+					)
+				)
+			);
+		}
+
 		private static readonly Dictionary<int, Dictionary<int, int?>> restrictionId_cache = new Dictionary<int,Dictionary<int, int?>>();
 		public static Restriction GetRestriction(User user, Board board) {
 
@@ -171,11 +185,11 @@ namespace FLocal.Common.dataobjects {
 					select Restriction.LoadById(int.Parse(stringId)).id;
 			}
 		}
-		public static IEnumerable<Board> GetRestrictions(User user) {
+		public static IEnumerable<Restriction> GetRestrictions(User user) {
 			if(!byUser_cache.ContainsKey(user.id)) {
 				byUser_Recalculate(user.id);
 			}
-			return from id in byUser_cache[user.id] select Restriction.LoadById(id).board;
+			return from id in byUser_cache[user.id] select Restriction.LoadById(id);
 		}
 
 		public static void RecalculateRestrictions(Board board, User user) {
