@@ -113,7 +113,7 @@ namespace FLocal.Common.dataobjects {
 			return isModerator_cache[account.id][board.id];
 		}
 		public static bool isModerator(Account account, Thread thread) {
-			return (thread.board.isTopicstarterModeration && thread.topicstarterId == account.userId) || isTrueModerator(account, thread.board);
+			return (thread.board.isFloobage) || (thread.board.isTopicstarterModeration && thread.topicstarterId == account.userId) || isTrueModerator(account, thread.board);
 		}
 		public static bool isModerator(User user, Thread thread) {
 			Account account;

@@ -32,6 +32,7 @@ namespace FLocal.Common.dataobjects {
 			public const string FIELD_LEGACYNAME = "LegacyName";
 			public const string FIELD_ISTRANSFERTARGET = "IsTransferTarget";
 			public const string FIELD_ISTOPICSTARTERMODERATION = "IsTopicstarterModeration";
+			public const string FIELD_ISFLOOBAGE = "IsFloobage";
 			public static readonly TableSpec instance = new TableSpec();
 			public string name { get { return TABLE; } }
 			public string idName { get { return FIELD_ID; } }
@@ -159,6 +160,14 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
+		private bool _isFloobage;
+		public bool isFloobage {
+			get {
+				this.LoadIfNotLoaded();
+				return this._isFloobage;
+			}
+		}
+
 		protected override void doFromHash(Dictionary<string, string> data) {
 			this._sortOrder = int.Parse(data[TableSpec.FIELD_SORTORDER]);
 			this._categoryId = Util.ParseInt(data[TableSpec.FIELD_CATEGORYID]);
@@ -171,6 +180,7 @@ namespace FLocal.Common.dataobjects {
 			this._legacyName = data[TableSpec.FIELD_LEGACYNAME].ToLower();
 			this._isTransferTarget = Util.string2bool(data[TableSpec.FIELD_ISTRANSFERTARGET]);
 			this._isTopicstarterModeration = Util.string2bool(data[TableSpec.FIELD_ISTOPICSTARTERMODERATION]);
+			this._isFloobage = Util.string2bool(data[TableSpec.FIELD_ISFLOOBAGE]);
 		}
 
 		private readonly object subBoards_Locker = new object();
