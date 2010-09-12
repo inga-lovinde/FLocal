@@ -11,6 +11,28 @@ namespace FLocal.TexCompiler {
 
 		private static readonly Encoding ENCODING = Encoding.UTF8;
 
+		private const string HEADER = @"
+\documentclass[12pt]{article}
+\pagestyle{empty}
+\usepackage[utf8x]{inputenc}
+\usepackage{ucs}
+\usepackage[russian]{babel}
+\usepackage{cmap}
+\usepackage[T1,T2A]{fontenc}
+\usepackage{pifont}
+\usepackage{textcomp}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\begin{document}
+";
+
+		private const string FOOTER = @"
+\end{document}
+";
+
 		/// <summary>
 		/// http://msdn.microsoft.com/en-us/library/system.io.stream.write.aspx
 		/// </summary>
@@ -27,8 +49,8 @@ namespace FLocal.TexCompiler {
 
 			Dictionary<string, string> postData = new Dictionary<string,string> {
 				{ "dev", "png16m" },
-				{ "template", "textutf8" },
-				{ "src", tex },
+				{ "template", "no" },
+				{ "src", HEADER + tex + FOOTER },
 			};
 			string post = string.Join("&", (from kvp in postData select string.Format("{0}={1}", HttpUtility.UrlEncode(kvp.Key, ENCODING), HttpUtility.UrlEncode(kvp.Value, ENCODING))).ToArray());
 			byte[] postBytes = Encoding.ASCII.GetBytes(post);
