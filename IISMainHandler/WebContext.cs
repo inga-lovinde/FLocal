@@ -154,7 +154,10 @@ namespace FLocal.IISHandler {
 
 		public void LogError(Exception e) {
 			using(StreamWriter writer = new StreamWriter(Common.Config.instance.dataDir + "Logs\\" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + "." + e.GetGuid().ToString() + ".txt")) {
-				writer.WriteLine("Requested url: " + this.httprequest.RawUrl);
+				writer.WriteLine("Requested url: " + this.httprequest.Url.ToString());
+				foreach(string key in this.httprequest.Form.Keys) {
+					writer.WriteLine(string.Format("Form[{0}]: {1}", key, this.httprequest.Form[key]));
+				}
 				writer.WriteLine("Remote ip: " + this.httprequest.UserHostAddress);
 				if(this.httprequest.UrlReferrer != null) {
 					writer.WriteLine("Referer: " + this.httprequest.UrlReferrer.ToString());
