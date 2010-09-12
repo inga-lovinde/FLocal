@@ -337,7 +337,7 @@ function insertInBody(str) {
 			<xsl:with-param name="defaultLayerId">
 				<xsl:choose>
 					<xsl:when test="$defaultLayerId and not(layer[id=$defaultLayerId]/isRestricted='true')">
-						<xsl:value-of select="defaultLayerId"/>
+						<xsl:value-of select="$defaultLayerId"/>
 					</xsl:when>
 					<xsl:otherwise>
 						<xsl:value-of select="layer[not(isRestricted='true')][1]/id"/>
