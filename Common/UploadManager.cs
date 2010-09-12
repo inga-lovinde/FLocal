@@ -46,7 +46,7 @@ namespace FLocal.Common {
 			
 			string extension = filename.Split('.').Last().ToLower();
 
-			if(!allowedExtensions.Contains(extension)) throw new FLocalException("Unsupported extension");
+			if(!allowedExtensions.Contains(extension)) throw new FLocalException("Unsupported extension '" + extension + "'");
 			if(fileStream.Length > MAX_UPLOAD_FILESIZE) throw new FLocalException("File is too big");
 
 			byte[] data = new byte[fileStream.Length];

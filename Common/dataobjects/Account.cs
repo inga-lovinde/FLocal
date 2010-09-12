@@ -190,7 +190,7 @@ namespace FLocal.Common.dataobjects {
 			if(newName.Length > 16) throw new FLocalException("Name is too long");
 			try {
 				Account.LoadByName(newName);
-				throw new FLocalException("Name is already used");
+				throw new FLocalException("Name '" + newName + "' is already used");
 			} catch(NotFoundInDBException) {
 			}
 		}

@@ -15,7 +15,7 @@ namespace FLocal.IISHandler.handlers.request {
 
 		protected override Account DoCreateAccount(WebContext context) {
 			Account account = Account.LoadById(int.Parse(context.httprequest.Form["accountId"]));
-			if(!account.needsMigration) throw new FLocalException("Already migrated");
+			if(!account.needsMigration) throw new FLocalException("Account '" + account.name + "' is already migrated");
 			string userInfo = ShallerGateway.getUserInfoAsString(account.user.name);
 			Regex regex = new Regex("\\(fhn\\:([a-z0-9]+)\\)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
 			Match match = regex.Match(userInfo);
