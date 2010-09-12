@@ -19,6 +19,7 @@ namespace FLocal.Common.dataobjects {
 			public const string TABLE = "Layers";
 			public const string FIELD_ID = "Id";
 			public const string FIELD_NAME = "Name";
+			public const string FIELD_MAXPUNISHMENTS = "MaxPunishments";
 			public static readonly TableSpec instance = new TableSpec();
 			public string name { get { return TABLE; } }
 			public string idName { get { return FIELD_ID; } }
@@ -35,8 +36,17 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
+		private int? _maxPunishments;
+		public int? maxPunishments {
+			get {
+				this.LoadIfNotLoaded();
+				return this._maxPunishments;
+			}
+		}
+
 		protected override void doFromHash(Dictionary<string, string> data) {
 			this._name = data[TableSpec.FIELD_NAME];
+			this._maxPunishments = Util.ParseInt(data[TableSpec.FIELD_MAXPUNISHMENTS]);
 		}
 
 		private static readonly object allLayers_Locker = new object();
@@ -46,11 +56,11 @@ namespace FLocal.Common.dataobjects {
 					from id in Cache<IEnumerable<int>>.instance.get(
 						allLayers_Locker,
 						() => {
-							IEnumerable<int> ids = from stringId in Config.instance.mainConnection.LoadIdsByConditions(
+							IEnumerable<int> ids = (from stringId in Config.instance.mainConnection.LoadIdsByConditions(
 								TableSpec.instance,
 								new FLocal.Core.DB.conditions.EmptyCondition(),
 								Diapasone.unlimited
-							) select int.Parse(stringId);
+							) select int.Parse(stringId)).ToList();
 							PostLayer.LoadByIds(ids);
 							return ids;
 						}
@@ -64,11 +74,15 @@ namespace FLocal.Common.dataobjects {
 			Cache<IEnumerable<int>>.instance.delete(allLayers_Locker);
 		}
 
-		public XElement exportToXml(UserContext context) {
-			return new XElement("layer",
+		public XElement exportToXml(UserContext context, params XElement[] additional) {
+			XElement result = new XElement("layer",
 				new XElement("id", this.id),
 				new XElement("name", this.name)
 			);
+			if(additional.Length > 0) {
+				result.Add(additional);
+			}
+			return result;
 		}
 
 	}

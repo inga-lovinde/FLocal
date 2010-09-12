@@ -608,6 +608,10 @@ namespace FLocal.Common.dataobjects {
 						newMessage.conversation.markAsRead(account, newMessage, newMessage);
 					}
 
+					HashSet<int> punishmentsBoards = new HashSet<int>(from punishment in this.punishments select punishment.originalBoardId);
+					foreach(int boardId in punishmentsBoards) {
+						Restriction.RecalculateRestrictions(Board.LoadById(boardId), this.poster);
+					}
 				}
 			}
 		}

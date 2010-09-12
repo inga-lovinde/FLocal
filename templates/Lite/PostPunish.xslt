@@ -46,7 +46,7 @@
 									</label>
 									<select name="layerChange_layerId">
 										<option value="-1">Выберите слой</option>
-										<xsl:apply-templates select="layers/layer">
+										<xsl:apply-templates select="layers">
 											<xsl:with-param name="defaultLayerId"><xsl:value-of select="post/layerId"/></xsl:with-param>
 										</xsl:apply-templates>
 									</select>

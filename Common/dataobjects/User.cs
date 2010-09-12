@@ -226,6 +226,8 @@ namespace FLocal.Common.dataobjects {
 		}
 
 		public PostLayer getActualLayer(Board board, PostLayer desiredLayer) {
+			Dictionary<int, DateTime> restrictionData = Restriction.GetRestrictionData(this, board);
+			if(restrictionData.ContainsKey(desiredLayer.id) && (restrictionData[desiredLayer.id].CompareTo(DateTime.Now) >= 0)) throw new FLocalException("You're restricted from posting in this layer until " + restrictionData[desiredLayer.id].ToString());
 			return desiredLayer;
 		}
 

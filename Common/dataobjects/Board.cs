@@ -435,5 +435,24 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
+		public XElement exportLayersInfoForUser(UserContext context) {
+			Dictionary<int, DateTime> restrictionData = new Dictionary<int,DateTime>();
+			if(context.account != null) {
+				restrictionData = Restriction.GetRestrictionData(context.account.user, this);
+			}
+			return new XElement("layers",
+				from layer in PostLayer.allLayers
+				select layer.exportToXml(
+					context,
+					new XElement("isRestricted",
+						(restrictionData.ContainsKey(layer.id) && restrictionData[layer.id].CompareTo(DateTime.Now) >= 0).ToPlainString()
+					),
+					new XElement("restrictionExpires",
+						restrictionData.ContainsKey(layer.id) ? restrictionData[layer.id].ToXml() : null
+					)
+				)
+			);
+		}
+
 	}
 }

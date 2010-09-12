@@ -34,9 +34,7 @@ namespace FLocal.IISHandler.handlers.response {
 				post.thread.board.exportToXml(context, Board.SubboardsOptions.None),
 				post.thread.exportToXml(context),
 				post.exportToXml(context),
-				new XElement("layers",
-					from layer in PostLayer.allLayers select layer.exportToXml(context)
-				),
+				post.thread.board.exportLayersInfoForUser(context),
 				new XElement("quoted", quoted),
 			};
 		}

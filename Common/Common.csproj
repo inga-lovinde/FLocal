@@ -108,6 +108,7 @@
     <Compile Include="dataobjects\PunishmentTransfer.cs" />
     <Compile Include="dataobjects\PunishmentType.cs" />
     <Compile Include="dataobjects\QuickLink.cs" />
+    <Compile Include="dataobjects\Restriction.cs" />
     <Compile Include="dataobjects\Revision.cs" />
     <Compile Include="dataobjects\Session.cs" />
     <Compile Include="dataobjects\Skin.cs" />

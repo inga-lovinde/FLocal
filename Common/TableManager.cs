@@ -26,6 +26,7 @@ namespace FLocal.Common {
 			dataobjects.PunishmentLayerChange.TableSpec.instance,
 			dataobjects.PunishmentTransfer.TableSpec.instance,
 			dataobjects.PunishmentType.TableSpec.instance,
+			dataobjects.Restriction.TableSpec.instance,
 			dataobjects.QuickLink.TableSpec.instance,
 			dataobjects.Revision.TableSpec.instance,
 			dataobjects.Session.TableSpec.instance,

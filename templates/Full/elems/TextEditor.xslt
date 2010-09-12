@@ -319,11 +319,32 @@ function insertInBody(str) {
 		<xsl:param name="defaultLayerId"/>
 		<option>
 			<xsl:attribute name="value"><xsl:value-of select="id"/></xsl:attribute>
-			<xsl:if test="id=$defaultLayerId">
-				<xsl:attribute name="selected">selected</xsl:attribute>
-			</xsl:if>
+			<xsl:choose>
+				<xsl:when test="isRestricted='true'">
+					<xsl:attribute name="disabled">disabled</xsl:attribute>
+				</xsl:when>
+				<xsl:when test="id=$defaultLayerId">
+					<xsl:attribute name="selected">selected</xsl:attribute>
+				</xsl:when>
+			</xsl:choose>
 			<xsl:value-of select="name"/>
 		</option>
+	</xsl:template>
+
+	<xsl:template match="layers">
+		<xsl:param name="defaultLayerId"/>
+		<xsl:apply-templates select="layer">
+			<xsl:with-param name="defaultLayerId">
+				<xsl:choose>
+					<xsl:when test="$defaultLayerId and not(layer[id=$defaultLayerId]/isRestricted='true')">
+						<xsl:value-of select="defaultLayerId"/>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="layer[not(isRestricted='true')][1]/id"/>
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:with-param>
+		</xsl:apply-templates>
 	</xsl:template>
 
 </xsl:stylesheet>

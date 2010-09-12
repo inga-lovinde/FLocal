@@ -185,5 +185,36 @@ namespace FLocal.Common.dataobjects {
 			);
 		}
 
+		public static IEnumerable<Punishment> getEffectivePunishments(User user, Board board) {
+			return
+				from stringId in Config.instance.mainConnection.LoadIdsByConditions(
+					TableSpec.instance,
+					new ComplexCondition(
+						ConditionsJoinType.AND,
+						new ComparisonCondition(
+							TableSpec.instance.getColumnSpec(TableSpec.FIELD_OWNERID),
+							ComparisonType.EQUAL,
+							user.id.ToString()
+						),
+						new ComparisonCondition(
+							TableSpec.instance.getColumnSpec(TableSpec.FIELD_ORIGINALBOARDID),
+							ComparisonType.EQUAL,
+							board.id.ToString()
+						),
+						new ComparisonCondition(
+							TableSpec.instance.getColumnSpec(TableSpec.FIELD_ISWITHDRAWED),
+							ComparisonType.EQUAL,
+							"0"
+						),
+						new ComparisonCondition(
+							TableSpec.instance.getColumnSpec(TableSpec.FIELD_EXPIRES),
+							ComparisonType.GREATEROREQUAL,
+							DateTime.Now.ToUTCString()
+						)
+					),
+					Diapasone.unlimited
+				) select Punishment.LoadById(int.Parse(stringId));
+		}
+
 	}
 }

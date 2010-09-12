@@ -33,9 +33,7 @@
 									<input type="text" tabindex="1" name="title" maxlength="70" class="formboxes" size="60"/>
 									<span class="small">Слой сообщения:</span> 
 									<select class="formboxes" name="layerId">
-										<xsl:apply-templates select="layers/layer">
-											<!--xsl:with-param name="defaultLayerId"><xsl:value-of select="post/layerId"/></xsl:with-param-->
-										</xsl:apply-templates>
+										<xsl:apply-templates select="layers"/>
 									</select>
 									<br/>
 									<br/>
