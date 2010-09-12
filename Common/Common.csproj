@@ -111,6 +111,7 @@
     <Compile Include="dataobjects\Revision.cs" />
     <Compile Include="dataobjects\Session.cs" />
     <Compile Include="dataobjects\Skin.cs" />
+    <Compile Include="dataobjects\TexImage.cs" />
     <Compile Include="dataobjects\Thread.cs" />
     <Compile Include="dataobjects\Upload.cs" />
     <Compile Include="dataobjects\User.cs" />

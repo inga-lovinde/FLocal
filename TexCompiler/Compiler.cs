@@ -23,7 +23,7 @@ namespace FLocal.TexCompiler {
 			}
 		}
 
-		public static Stream GetPngStream(string tex) {
+		public static MemoryStream GetPngStream(string tex) {
 
 			Dictionary<string, string> postData = new Dictionary<string,string> {
 				{ "dev", "png16m" },

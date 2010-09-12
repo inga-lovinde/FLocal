@@ -30,6 +30,7 @@ namespace FLocal.Common {
 			dataobjects.Revision.TableSpec.instance,
 			dataobjects.Session.TableSpec.instance,
 			dataobjects.Skin.TableSpec.instance,
+			dataobjects.TexImage.TableSpec.instance,
 			dataobjects.Thread.TableSpec.instance,
 			dataobjects.Upload.TableSpec.instance,
 			dataobjects.User.TableSpec.instance,
