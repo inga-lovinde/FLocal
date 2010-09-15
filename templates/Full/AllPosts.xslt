@@ -5,6 +5,7 @@
 	<xsl:template name="specificTitle">
 		<xsl:text>Все сообщения</xsl:text>
 	</xsl:template>
+	<xsl:template name="isRssEnabled">true</xsl:template>
 	<xsl:template name="specific">
 		<table width="95%" align="center" cellpadding="1" cellspacing="1" class="tablesurround">
 			<tr>

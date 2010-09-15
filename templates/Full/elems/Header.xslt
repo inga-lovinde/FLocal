@@ -5,6 +5,7 @@
 	<xsl:import href="UploadHeader.xslt"/>
 
 	<xsl:template name="isLiteEnabled">false</xsl:template>
+	<xsl:template name="isRssEnabled">false</xsl:template>
 
 	<xsl:template name="headerLink">
 		<xsl:param name="url"/>
@@ -71,6 +72,9 @@
 									<xsl:variable name="isLiteEnabled">
 										<xsl:call-template name="isLiteEnabled"/>
 									</xsl:variable>
+									<xsl:variable name="isRssEnabled">
+										<xsl:call-template name="isRssEnabled"/>
+									</xsl:variable>
 									<xsl:variable name="prefix">
 										<xsl:text>https://</xsl:text>
 										<xsl:value-of select="url/host"/>
@@ -97,6 +101,33 @@
 											</xsl:attribute>
 										</img>
 									</a>
+									<a>
+										<xsl:if test="$isRssEnabled='true'">
+											<xsl:attribute name="href">
+												<xsl:value-of select="$prefix"/>
+												<xsl:text>449</xsl:text>
+												<xsl:value-of select="currentUrl"/>
+											</xsl:attribute>
+										</xsl:if>
+										<img>
+											<xsl:attribute name="src">
+												<xsl:text>/static/images/rss</xsl:text>
+												<xsl:if test="not($isRssEnabled='true')">
+													<xsl:text>-disabled</xsl:text>
+												</xsl:if>
+												<xsl:text>.png</xsl:text>
+											</xsl:attribute>
+										</img>
+									</a>
+									<xsl:if test="$isRssEnabled='true'">
+										<link rel="alternate" type="application/rss+xml" title="RSS">
+											<xsl:attribute name="href">
+												<xsl:value-of select="$prefix"/>
+												<xsl:text>449</xsl:text>
+												<xsl:value-of select="currentUrl"/>
+											</xsl:attribute>
+										</link>
+									</xsl:if>
 								</span>
 							</td>
 						</tr>
