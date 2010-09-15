@@ -50,11 +50,14 @@
 										<xsl:apply-templates select="currentDate" mode="dateTime"/>
 									</td>
 									<td width="30%" class="small" valign="top">
-										<b>Просмотр новых сообщений</b>
-										<br />
 										<a>
 											<xsl:attribute name="href">/AllPosts/</xsl:attribute>
-											<xsl:text>Последние 7 дней</xsl:text>
+											<xsl:text>Последние сообщения</xsl:text>
+										</a>
+										<br />
+										<a>
+											<xsl:attribute name="href">/AllThreads/</xsl:attribute>
+											<xsl:text>Последние темы</xsl:text>
 										</a>
 										<br />
 										<a>

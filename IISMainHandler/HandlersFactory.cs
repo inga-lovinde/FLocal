@@ -41,6 +41,8 @@ namespace FLocal.IISHandler {
 					return new handlers.response.QuickLinkHandler();
 				case "allposts":
 					return new handlers.response.AllPostsHandler();
+				case "allthreads":
+					return new handlers.response.AllThreadsHandler();
 				case "boards":
 					return new handlers.BoardsHandler();
 				case "board":

@@ -149,6 +149,7 @@
     <Compile Include="handlers\request\avatars\SetAsDefaultHandler.cs" />
     <Compile Include="handlers\request\UserDataHandler.cs" />
     <Compile Include="handlers\response\AbstractUserGetHandler.cs" />
+    <Compile Include="handlers\response\AllThreadsHandler.cs" />
     <Compile Include="handlers\response\AvatarsSettingsHandler.cs" />
     <Compile Include="handlers\response\UserDataHandler.cs" />
     <Compile Include="handlers\response\UserThreadsHandler.cs" />
