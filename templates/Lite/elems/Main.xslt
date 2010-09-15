@@ -201,20 +201,19 @@
 		</xsl:if>
 		<a>
 			<xsl:attribute name="class">
-				<xsl:text>separate </xsl:text>
 				<xsl:text>UG_</xsl:text><xsl:value-of select="group/name"/>
 			</xsl:attribute>
 			<xsl:attribute name="href">/Users/User/<xsl:value-of select="id"/>/Info/</xsl:attribute>
 			<xsl:value-of select="name"/>
-			<xsl:choose>
-				<xsl:when test="isAdministrator='true'">
-					<xsl:text>^A</xsl:text>
-				</xsl:when>
-				<xsl:when test="isModerator='true'">
-					<xsl:text>^M</xsl:text>
-				</xsl:when>
-			</xsl:choose>
 		</a>
+		<xsl:choose>
+			<xsl:when test="isAdministrator='true'">
+				<xsl:text>^A</xsl:text>
+			</xsl:when>
+			<xsl:when test="isModerator='true'">
+				<xsl:text>^M</xsl:text>
+			</xsl:when>
+		</xsl:choose>
 	</xsl:template>
 
 </xsl:stylesheet>
