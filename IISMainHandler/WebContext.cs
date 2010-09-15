@@ -141,7 +141,7 @@ namespace FLocal.IISHandler {
 		public void WriteTransformResult(string templateName, System.Xml.Linq.XDocument data) {
 			this.httpresponse.ContentType = this.design.ContentType;
 			this.httpresponse.ContentEncoding = OutputEncoding;
-			TemplateEngine.WriteCompiled(this.design.GetFSName(templateName), data, OutputEncoding, this.httpresponse.Output);
+			TemplateEngine.WriteCompiled(this.design.GetFSName(templateName), data, this.httpresponse.Output);
 		}
 
 		public XElement exportSession() {
