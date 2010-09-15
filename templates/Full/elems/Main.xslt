@@ -18,7 +18,9 @@
 				</title>
 			</head>
 			<body>
-				<xsl:call-template name="header"/>
+				<xsl:if test="not(get/param[@name='headers'] = 'false')">
+					<xsl:call-template name="header"/>
+				</xsl:if>
 				<xsl:call-template name="specific"/>
 				<div style="display:none">
 					<form action="" method="POST" id="systemForm">
