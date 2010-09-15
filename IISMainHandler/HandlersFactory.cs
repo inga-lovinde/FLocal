@@ -13,7 +13,10 @@ namespace FLocal.IISHandler {
 //				return new handlers.WrongUrlHandler();
 //				throw new FLocalException("Malformed url");
 //			}
-			if(context.requestParts.Length < 1) return new handlers.RootHandler();
+			if(context.requestParts.Length < 1) {
+				//return new handlers.RootHandler();
+				throw new RedirectException("/Boards/");
+			}
 
 			#region legacy
 			if(context.httprequest.Path.ToLower().StartsWith("/user/upload/")) {
