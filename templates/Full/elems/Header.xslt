@@ -91,7 +91,7 @@
 												<xsl:value-of select="currentUrl"/>
 											</xsl:attribute>
 										</xsl:if>
-										<img>
+										<img border="0">
 											<xsl:attribute name="src">
 												<xsl:text>/static/images/light</xsl:text>
 												<xsl:if test="not($isLiteEnabled='true')">
@@ -109,7 +109,7 @@
 												<xsl:value-of select="currentUrl"/>
 											</xsl:attribute>
 										</xsl:if>
-										<img>
+										<img border="0">
 											<xsl:attribute name="src">
 												<xsl:text>/static/images/rss</xsl:text>
 												<xsl:if test="not($isRssEnabled='true')">
