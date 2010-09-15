@@ -196,18 +196,20 @@
 				</xsl:choose>
 			</xsl:with-param>
 		</xsl:apply-templates>
-		<xsl:text>&#8201;|&#8201;</xsl:text>
-		<xsl:choose>
-			<xsl:when test="unlimited='false'">
-				<a>
-					<xsl:attribute name="href"><xsl:value-of select="$baseLink"/>all</xsl:attribute>
+		<xsl:if test="total &lt;= 1000">
+			<xsl:text>&#8201;|&#8201;</xsl:text>
+			<xsl:choose>
+				<xsl:when test="unlimited='false'">
+					<a>
+						<xsl:attribute name="href"><xsl:value-of select="$baseLink"/>all</xsl:attribute>
+						<xsl:text>все</xsl:text>
+					</a>
+				</xsl:when>
+				<xsl:otherwise>
 					<xsl:text>все</xsl:text>
-				</a>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:text>все</xsl:text>
-			</xsl:otherwise>
-		</xsl:choose>
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:if>
 		<xsl:if test="next">
 			<xsl:text>&#8201;|&#8201;</xsl:text>
 			<a rel="next">
