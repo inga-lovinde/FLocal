@@ -5,6 +5,7 @@
 	<xsl:template name="specificTitle">
 		<xsl:value-of select="currentLocation/thread/name"/>
 	</xsl:template>
+	<xsl:template name="isLiteEnabled">true</xsl:template>
 	<xsl:template name="specific">
 		<xsl:call-template name="threadInfo"/>
 		<br />

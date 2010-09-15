@@ -4,6 +4,8 @@
 	<xsl:import href="UsersHeader.xslt"/>
 	<xsl:import href="UploadHeader.xslt"/>
 
+	<xsl:template name="isLiteEnabled">false</xsl:template>
+
 	<xsl:template name="headerLink">
 		<xsl:param name="url"/>
 		<xsl:param name="text"/>
@@ -65,6 +67,37 @@
 									<xsl:with-param name="url">/Users/</xsl:with-param>
 									<xsl:with-param name="text">Пользователи</xsl:with-param>
 								</xsl:call-template>
+								<span style="float:right">
+									<xsl:variable name="isLiteEnabled">
+										<xsl:call-template name="isLiteEnabled"/>
+									</xsl:variable>
+									<xsl:variable name="prefix">
+										<xsl:text>https://</xsl:text>
+										<xsl:value-of select="url/host"/>
+										<xsl:text>:</xsl:text>
+										<xsl:if test="url/port &gt;= 1000">
+											<xsl:value-of select="floor(url/port div 1000)"/>
+										</xsl:if>
+									</xsl:variable>
+									<a>
+										<xsl:if test="$isLiteEnabled='true'">
+											<xsl:attribute name="href">
+												<xsl:value-of select="$prefix"/>
+												<xsl:text>447</xsl:text>
+												<xsl:value-of select="currentUrl"/>
+											</xsl:attribute>
+										</xsl:if>
+										<img>
+											<xsl:attribute name="src">
+												<xsl:text>/static/images/light</xsl:text>
+												<xsl:if test="not($isLiteEnabled='true')">
+													<xsl:text>-disabled</xsl:text>
+												</xsl:if>
+												<xsl:text>.png</xsl:text>
+											</xsl:attribute>
+										</img>
+									</a>
+								</span>
 							</td>
 						</tr>
 					</table>

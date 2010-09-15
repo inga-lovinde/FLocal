@@ -6,6 +6,7 @@
 		<xsl:text>Новая тема - </xsl:text>
 		<xsl:value-of select="board/name"/>
 	</xsl:template>
+	<xsl:template name="isLiteEnabled">true</xsl:template>
 	<xsl:template name="specific">
 		<table width="95%" align="center" cellpadding="1" cellspacing="1" class="tablesurround">
 			<tr>

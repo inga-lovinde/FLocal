@@ -5,6 +5,7 @@
 	<xsl:template name="specificTitle">
 		<xsl:value-of select="conversationInfo/interlocutor/account/user/name"/>
 	</xsl:template>
+	<xsl:template name="isLiteEnabled">true</xsl:template>
 	<xsl:template name="specific">
 		<xsl:call-template name="conversationInfo"/>
 		<br />
