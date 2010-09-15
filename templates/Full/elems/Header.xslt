@@ -29,106 +29,113 @@
 					<table width="100%" class="tableborders" cellpadding="3" cellspacing="1">
 						<tr>
 							<td align="center" class="menubar">
-								<xsl:if test="session/sessionKey and (session/indicators/unreadPrivateMessages != '0')">
-									<a href="/My/Conversations/">
-										<img src="/static/images/newpm.gif" border="0">
-											<xsl:attribute name="alt">
-												<xsl:text>У вас </xsl:text>
-												<xsl:value-of select="session/indicators/unreadPrivateMessages"/>
-												<xsl:text> непрочитанных личных сообщений</xsl:text>
-											</xsl:attribute>
-										</img>
-									</a>
-									<xsl:text> | </xsl:text>
-								</xsl:if>
-								<xsl:call-template name="headerLink">
-									<xsl:with-param name="url">/Boards/</xsl:with-param>
-									<xsl:with-param name="text">Список форумов</xsl:with-param>
-								</xsl:call-template>
-								<xsl:text> | </xsl:text>
-								<xsl:call-template name="headerLink">
-									<xsl:with-param name="url">/Upload/</xsl:with-param>
-									<xsl:with-param name="text">Аплоад</xsl:with-param>
-									<xsl:with-param name="isDisabled">
-										<xsl:if test="not(session/sessionKey)">true</xsl:if>
-									</xsl:with-param>
-								</xsl:call-template>
-								<xsl:text> | </xsl:text>
-								<xsl:call-template name="headerLink">
-									<xsl:with-param name="url">/My/</xsl:with-param>
-									<xsl:with-param name="text">My Home</xsl:with-param>
-								</xsl:call-template>
-								<xsl:text> | </xsl:text>
-								<xsl:call-template name="headerLink">
-									<xsl:with-param name="url">/q/faq/</xsl:with-param>
-									<xsl:with-param name="text">FAQ</xsl:with-param>
-								</xsl:call-template>
-								<xsl:text> | </xsl:text>
-								<xsl:call-template name="headerLink">
-									<xsl:with-param name="url">/Users/</xsl:with-param>
-									<xsl:with-param name="text">Пользователи</xsl:with-param>
-								</xsl:call-template>
-								<span style="float:right">
-									<xsl:variable name="isLiteEnabled">
-										<xsl:call-template name="isLiteEnabled"/>
-									</xsl:variable>
-									<xsl:variable name="isRssEnabled">
-										<xsl:call-template name="isRssEnabled"/>
-									</xsl:variable>
-									<xsl:variable name="prefix">
-										<xsl:text>https://</xsl:text>
-										<xsl:value-of select="url/host"/>
-										<xsl:text>:</xsl:text>
-										<xsl:if test="url/port &gt;= 1000">
-											<xsl:value-of select="floor(url/port div 1000)"/>
-										</xsl:if>
-									</xsl:variable>
-									<a>
-										<xsl:if test="$isLiteEnabled='true'">
-											<xsl:attribute name="href">
-												<xsl:value-of select="$prefix"/>
-												<xsl:text>447</xsl:text>
-												<xsl:value-of select="currentUrl"/>
-											</xsl:attribute>
-										</xsl:if>
-										<img border="0">
-											<xsl:attribute name="src">
-												<xsl:text>/static/images/light</xsl:text>
-												<xsl:if test="not($isLiteEnabled='true')">
-													<xsl:text>-disabled</xsl:text>
+								<table width="100%" border="0">
+									<tr>
+										<td width="15%">&#160;</td>
+										<td width="70%" align="center">
+											<xsl:if test="session/sessionKey and (session/indicators/unreadPrivateMessages != '0')">
+												<a href="/My/Conversations/">
+													<img src="/static/images/newpm.gif" border="0">
+														<xsl:attribute name="alt">
+															<xsl:text>У вас </xsl:text>
+															<xsl:value-of select="session/indicators/unreadPrivateMessages"/>
+															<xsl:text> непрочитанных личных сообщений</xsl:text>
+														</xsl:attribute>
+													</img>
+												</a>
+												<xsl:text> | </xsl:text>
+											</xsl:if>
+											<xsl:call-template name="headerLink">
+												<xsl:with-param name="url">/Boards/</xsl:with-param>
+												<xsl:with-param name="text">Список форумов</xsl:with-param>
+											</xsl:call-template>
+											<xsl:text> | </xsl:text>
+											<xsl:call-template name="headerLink">
+												<xsl:with-param name="url">/Upload/</xsl:with-param>
+												<xsl:with-param name="text">Аплоад</xsl:with-param>
+												<xsl:with-param name="isDisabled">
+													<xsl:if test="not(session/sessionKey)">true</xsl:if>
+												</xsl:with-param>
+											</xsl:call-template>
+											<xsl:text> | </xsl:text>
+											<xsl:call-template name="headerLink">
+												<xsl:with-param name="url">/My/</xsl:with-param>
+												<xsl:with-param name="text">My Home</xsl:with-param>
+											</xsl:call-template>
+											<xsl:text> | </xsl:text>
+											<xsl:call-template name="headerLink">
+												<xsl:with-param name="url">/q/faq/</xsl:with-param>
+												<xsl:with-param name="text">FAQ</xsl:with-param>
+											</xsl:call-template>
+											<xsl:text> | </xsl:text>
+											<xsl:call-template name="headerLink">
+												<xsl:with-param name="url">/Users/</xsl:with-param>
+												<xsl:with-param name="text">Пользователи</xsl:with-param>
+											</xsl:call-template>
+										</td>
+										<td width="15%" align="right">
+											<xsl:variable name="isLiteEnabled">
+												<xsl:call-template name="isLiteEnabled"/>
+											</xsl:variable>
+											<xsl:variable name="isRssEnabled">
+												<xsl:call-template name="isRssEnabled"/>
+											</xsl:variable>
+											<xsl:variable name="prefix">
+												<xsl:text>https://</xsl:text>
+												<xsl:value-of select="url/host"/>
+												<xsl:text>:</xsl:text>
+												<xsl:if test="url/port &gt;= 1000">
+													<xsl:value-of select="floor(url/port div 1000)"/>
 												</xsl:if>
-												<xsl:text>.png</xsl:text>
-											</xsl:attribute>
-										</img>
-									</a>
-									<a>
-										<xsl:if test="$isRssEnabled='true'">
-											<xsl:attribute name="href">
-												<xsl:value-of select="$prefix"/>
-												<xsl:text>449</xsl:text>
-												<xsl:value-of select="currentUrl"/>
-											</xsl:attribute>
-										</xsl:if>
-										<img border="0">
-											<xsl:attribute name="src">
-												<xsl:text>/static/images/rss</xsl:text>
-												<xsl:if test="not($isRssEnabled='true')">
-													<xsl:text>-disabled</xsl:text>
+											</xsl:variable>
+											<a>
+												<xsl:if test="$isLiteEnabled='true'">
+													<xsl:attribute name="href">
+														<xsl:value-of select="$prefix"/>
+														<xsl:text>447</xsl:text>
+														<xsl:value-of select="currentUrl"/>
+													</xsl:attribute>
 												</xsl:if>
-												<xsl:text>.png</xsl:text>
-											</xsl:attribute>
-										</img>
-									</a>
-									<xsl:if test="$isRssEnabled='true'">
-										<link rel="alternate" type="application/rss+xml" title="RSS">
-											<xsl:attribute name="href">
-												<xsl:value-of select="$prefix"/>
-												<xsl:text>449</xsl:text>
-												<xsl:value-of select="currentUrl"/>
-											</xsl:attribute>
-										</link>
-									</xsl:if>
-								</span>
+												<img border="0">
+													<xsl:attribute name="src">
+														<xsl:text>/static/images/light</xsl:text>
+														<xsl:if test="not($isLiteEnabled='true')">
+															<xsl:text>-disabled</xsl:text>
+														</xsl:if>
+														<xsl:text>.png</xsl:text>
+													</xsl:attribute>
+												</img>
+											</a>
+											<a>
+												<xsl:if test="$isRssEnabled='true'">
+													<xsl:attribute name="href">
+														<xsl:value-of select="$prefix"/>
+														<xsl:text>449</xsl:text>
+														<xsl:value-of select="currentUrl"/>
+													</xsl:attribute>
+												</xsl:if>
+												<img border="0">
+													<xsl:attribute name="src">
+														<xsl:text>/static/images/rss</xsl:text>
+														<xsl:if test="not($isRssEnabled='true')">
+															<xsl:text>-disabled</xsl:text>
+														</xsl:if>
+														<xsl:text>.png</xsl:text>
+													</xsl:attribute>
+												</img>
+											</a>
+											<xsl:if test="$isRssEnabled='true'">
+												<link rel="alternate" type="application/rss+xml" title="RSS">
+													<xsl:attribute name="href">
+														<xsl:value-of select="$prefix"/>
+														<xsl:text>449</xsl:text>
+														<xsl:value-of select="currentUrl"/>
+													</xsl:attribute>
+												</link>
+											</xsl:if>
+										</td>
+									</tr>
+								</table>
 							</td>
 						</tr>
 					</table>
