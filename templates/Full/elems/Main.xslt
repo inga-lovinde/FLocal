@@ -230,9 +230,14 @@
 			</xsl:attribute>
 			<xsl:attribute name="href">/Users/User/<xsl:value-of select="id"/>/Info/</xsl:attribute>
 			<xsl:value-of select="name"/>
-			<xsl:if test="isModerator='true'">
-				<img src="/static/images/mod.gif" border="0"/>
-			</xsl:if>
+			<xsl:choose>
+				<xsl:when test="isAdministrator='true'">
+					<img src="/static/images/adm.gif" border="0"/>
+				</xsl:when>
+				<xsl:when test="isModerator='true'">
+					<img src="/static/images/mod.gif" border="0"/>
+				</xsl:when>
+			</xsl:choose>
 		</a>
 	</xsl:template>
 

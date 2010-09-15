@@ -33,6 +33,7 @@ namespace FLocal.Common.dataobjects {
 			public const string FIELD_ISTRANSFERTARGET = "IsTransferTarget";
 			public const string FIELD_ISTOPICSTARTERMODERATION = "IsTopicstarterModeration";
 			public const string FIELD_ISFLOOBAGE = "IsFloobage";
+			public const string FIELD_ADMINISTRATORID = "AdministratorId";
 			public static readonly TableSpec instance = new TableSpec();
 			public string name { get { return TABLE; } }
 			public string idName { get { return FIELD_ID; } }
@@ -168,6 +169,19 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
+		private int _administratorId;
+		public int administratorId {
+			get {
+				this.LoadIfNotLoaded();
+				return this._administratorId;
+			}
+		}
+		public Account administrator {
+			get {
+				return Account.LoadById(this._administratorId);
+			}
+		}
+
 		protected override void doFromHash(Dictionary<string, string> data) {
 			this._sortOrder = int.Parse(data[TableSpec.FIELD_SORTORDER]);
 			this._categoryId = Util.ParseInt(data[TableSpec.FIELD_CATEGORYID]);
@@ -181,6 +195,7 @@ namespace FLocal.Common.dataobjects {
 			this._isTransferTarget = Util.string2bool(data[TableSpec.FIELD_ISTRANSFERTARGET]);
 			this._isTopicstarterModeration = Util.string2bool(data[TableSpec.FIELD_ISTOPICSTARTERMODERATION]);
 			this._isFloobage = Util.string2bool(data[TableSpec.FIELD_ISFLOOBAGE]);
+			this._administratorId = int.Parse(data[TableSpec.FIELD_ADMINISTRATORID]);
 		}
 
 		private readonly object subBoards_Locker = new object();
@@ -264,7 +279,8 @@ namespace FLocal.Common.dataobjects {
 				new XElement("lastPostInfo", this.exportLastPostInfo(context)),
 				new XElement("moderators", from moderator in Moderator.GetModerators(this) select moderator.user.exportToXmlForViewing(context)),
 				new XElement("isTopicstarterModeration", this.isTopicstarterModeration.ToPlainString()),
-				new XElement("isTransferTarget", this.isTransferTarget.ToPlainString())
+				new XElement("isTransferTarget", this.isTransferTarget.ToPlainString()),
+				new XElement("administrator", this.administrator.user.exportToXmlForViewing(context, new XElement("isAdministrator", "true")))
 			);
 
 			if(context.account != null) {

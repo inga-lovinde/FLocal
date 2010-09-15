@@ -76,6 +76,7 @@ namespace FLocal.Common.dataobjects {
 		private static readonly Dictionary<int, Dictionary<int, bool>> isModerator_cache = new Dictionary<int,Dictionary<int,bool>>();
 		public static bool isTrueModerator(Account account, Board board) {
 			//slight optimisation...
+			if(board.administratorId == account.id) return true;
 			UserGroup group = account.user.userGroup;
 			if(group.name != UserGroup.NAME_ADMINISTRATORS && group.name != UserGroup.NAME_MODERATORS) return false;
 
@@ -113,7 +114,14 @@ namespace FLocal.Common.dataobjects {
 			return isModerator_cache[account.id][board.id];
 		}
 		public static bool isModerator(Account account, Thread thread) {
-			return (thread.board.isFloobage) || (thread.board.isTopicstarterModeration && thread.topicstarterId == account.userId) || isTrueModerator(account, thread.board);
+			return
+				(thread.board.isFloobage)
+				||
+				(thread.board.administratorId == account.id)
+				||
+				(thread.board.isTopicstarterModeration && thread.topicstarterId == account.userId)
+				||
+				isTrueModerator(account, thread.board);
 		}
 		public static bool isModerator(User user, Thread thread) {
 			Account account;
@@ -125,11 +133,11 @@ namespace FLocal.Common.dataobjects {
 			return isModerator(account, thread);
 		}
 
-		private static readonly Dictionary<int, IEnumerable<int>> byBoard_cache = new Dictionary<int,IEnumerable<int>>();
+		private static readonly Dictionary<int, List<int>> byBoard_cache = new Dictionary<int, List<int>>();
 		private static void byBoard_Recalculate(int boardId) {
 			lock(byBoard_cache) {
 				byBoard_cache[boardId] = 
-					from stringId in Config.instance.mainConnection.LoadIdsByConditions(
+					(from stringId in Config.instance.mainConnection.LoadIdsByConditions(
 						TableSpec.instance,
 						new ComparisonCondition(
 							TableSpec.instance.getColumnSpec(TableSpec.FIELD_BOARDID),
@@ -138,7 +146,10 @@ namespace FLocal.Common.dataobjects {
 						),
 						Diapasone.unlimited
 					)
-					select Moderator.LoadById(int.Parse(stringId)).accountId;
+					let moderator = Moderator.LoadById(int.Parse(stringId))
+					where moderator.isActive
+					select moderator.accountId)
+					.ToList();
 			}
 		}
 		public static IEnumerable<Account> GetModerators(Board board) {
@@ -148,11 +159,11 @@ namespace FLocal.Common.dataobjects {
 			return from id in byBoard_cache[board.id] select Account.LoadById(id);
 		}
 
-		private static readonly Dictionary<int, IEnumerable<int>> byAccount_cache = new Dictionary<int,IEnumerable<int>>();
+		private static readonly Dictionary<int, List<int>> byAccount_cache = new Dictionary<int, List<int>>();
 		private static void byAccount_Recalculate(int accountId) {
 			lock(byAccount_cache) {
 				byAccount_cache[accountId] = 
-					from stringId in Config.instance.mainConnection.LoadIdsByConditions(
+					(from stringId in Config.instance.mainConnection.LoadIdsByConditions(
 						TableSpec.instance,
 						new ComparisonCondition(
 							TableSpec.instance.getColumnSpec(TableSpec.FIELD_ACCOUNTID),
@@ -161,7 +172,10 @@ namespace FLocal.Common.dataobjects {
 						),
 						Diapasone.unlimited
 					)
-					select Moderator.LoadById(int.Parse(stringId)).boardId;
+					let moderator = Moderator.LoadById(int.Parse(stringId))
+					where moderator.isActive
+					select moderator.boardId)
+					.ToList();
 			}
 		}
 		public static IEnumerable<Board> GetModeratedBoards(Account account) {

@@ -239,7 +239,8 @@ namespace FLocal.Common.dataobjects {
 				new XElement("poster",
 					this.poster.exportToXmlForViewing(
 						context,
-						new XElement("isModerator", Moderator.isModerator(this.poster, this.thread).ToPlainString())
+						new XElement("isModerator", Moderator.isModerator(this.poster, this.thread).ToPlainString()),
+						new XElement("isAdministrator", (this.thread.board.administrator.userId == this.poster.id).ToPlainString())
 					)
 				),
 				new XElement("postDate", this.postDate.ToXml()),
