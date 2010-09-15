@@ -16,5 +16,12 @@ namespace FLocal.IISHandler.designs {
 				Replace("</f:src><f:alt>", "\" alt=\"").
 				Replace("</f:alt></f:img>", "\"/>");
 		}
+
+		public string ContentType {
+			get {
+				return "text/html";
+			}
+		}
+
 	}
 }

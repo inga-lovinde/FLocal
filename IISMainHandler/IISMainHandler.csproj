@@ -144,6 +144,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="designs\Rss.cs" />
     <Compile Include="handlers\request\avatars\AddHandler.cs" />
     <Compile Include="handlers\request\avatars\RemoveHandler.cs" />
     <Compile Include="handlers\request\avatars\SetAsDefaultHandler.cs" />

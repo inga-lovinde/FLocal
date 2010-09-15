@@ -13,5 +13,12 @@ namespace FLocal.IISHandler.designs {
 		string FLocal.Common.IOutputParams.preprocessBodyIntermediate(string bodyIntermediate) {
 			return bodyIntermediate;
 		}
+
+		public string ContentType {
+			get {
+				return "application/xml";
+			}
+		}
+
 	}
 }

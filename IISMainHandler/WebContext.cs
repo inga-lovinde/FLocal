@@ -13,6 +13,8 @@ using System.IO;
 namespace FLocal.IISHandler {
 	class WebContext : Common.UserContext {
 
+		private static readonly Encoding OutputEncoding = Encoding.GetEncoding(1251);
+
 		public readonly HttpContext httpcontext;
 
 		public HttpRequest httprequest {
@@ -115,6 +117,9 @@ namespace FLocal.IISHandler {
 				case 447:
 					this.design = new designs.Lite();
 					break;
+				case 449:
+					this.design = new designs.Rss();
+					break;
 				case 443:
 				default:
 					this.design = new designs.Classic();
@@ -122,9 +127,10 @@ namespace FLocal.IISHandler {
 			}
 		}
 
-		public string Transform(string templateName, System.Xml.Linq.XDocument data) {
-			//TODO: this should work according to design!
-			return TemplateEngine.Compile(this.design.GetFSName(templateName), data);
+		public void WriteTransformResult(string templateName, System.Xml.Linq.XDocument data) {
+			this.httpresponse.ContentType = this.design.ContentType;
+			this.httpresponse.ContentEncoding = OutputEncoding;
+			TemplateEngine.WriteCompiled(this.design.GetFSName(templateName), data, OutputEncoding, this.httpresponse.Output);
 		}
 
 		public XElement exportSession() {

@@ -8,5 +8,9 @@ namespace FLocal.IISHandler.designs {
 
 		string GetFSName(string template);
 
+		string ContentType {
+			get;
+		}
+
 	}
 }

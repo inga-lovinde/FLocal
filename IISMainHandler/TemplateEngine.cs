@@ -5,6 +5,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Xsl;
+using System.IO;
 
 namespace FLocal.IISHandler {
 	class TemplateEngine {
@@ -32,14 +33,12 @@ namespace FLocal.IISHandler {
 
 		}
 
-		public static string Compile(string templateName, XDocument data) {
-			StringBuilder builder = new StringBuilder();
-			using(XmlWriter writer = XmlWriter.Create(builder, new XmlWriterSettings { Indent = false })) {
+		public static void WriteCompiled(string templateName, XDocument data, Encoding encoding, TextWriter outStream) {
+			using(XmlWriter writer = XmlWriter.Create(outStream, new XmlWriterSettings { Indent = false, Encoding = encoding })) {
 				using(XmlReader reader = data.CreateReader()) {
 					TemplateCacher.instance.getCompiledTransform(templateName).Transform(reader, writer);
 				}
 			}
-			return builder.ToString();
 		}
 
 	}

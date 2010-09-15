@@ -4,22 +4,19 @@ using System.Linq;
 using System.Text;
 
 namespace FLocal.IISHandler.designs {
-	class Lite : IDesign {
+	class Rss : IDesign {
 
 		public string GetFSName(string template) {
-			return System.IO.Path.Combine("Lite", template);
+			return System.IO.Path.Combine("Rss", template);
 		}
 
 		string FLocal.Common.IOutputParams.preprocessBodyIntermediate(string bodyIntermediate) {
-			return bodyIntermediate.
-				Replace("<f:img><f:src>", "<a href=\"").
-				Replace("</f:src><f:alt>", "\">").
-				Replace("</f:alt></f:img>", "</a>");
+			return bodyIntermediate;
 		}
 
 		public string ContentType {
 			get {
-				return "text/html";
+				return "application/rss+xml";
 			}
 		}
 
