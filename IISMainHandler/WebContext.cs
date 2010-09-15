@@ -42,7 +42,7 @@ namespace FLocal.IISHandler {
 			return new XElement("get",
 				from i in Enumerable.Range(0, this.httprequest.QueryString.Count)
 				select new XElement("param",
-					new XAttribute("name", this.httprequest.QueryString.GetKey(i)),
+					new XAttribute("name", this.httprequest.QueryString.GetKey(i).ToString()),
 					this.httprequest.QueryString[i]
 				)
 			);
