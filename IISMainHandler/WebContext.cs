@@ -13,7 +13,7 @@ using System.IO;
 namespace FLocal.IISHandler {
 	class WebContext : Common.UserContext {
 
-		private static readonly Encoding OutputEncoding = Encoding.GetEncoding(1251);
+		private static readonly Encoding OutputEncoding = Encoding.UTF8;
 
 		public readonly HttpContext httpcontext;
 
