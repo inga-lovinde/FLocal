@@ -46,7 +46,8 @@ namespace FLocal.Common {
 				new XElement("hour", dateTime.Hour),
 				new XElement("minute", dateTime.Minute),
 				new XElement("second", dateTime.Second),
-				new XElement("ticks", dateTime.Ticks)
+				new XElement("ticks", dateTime.Ticks),
+				new XElement("rss", dateTime.ToString("o"))
 			);
 		}
 
