@@ -6,6 +6,7 @@
 		<xsl:text>Темы - </xsl:text>
 		<xsl:value-of select="user/name"/>
 	</xsl:template>
+	<xsl:template name="isRssEnabled">true</xsl:template>
 	<xsl:template name="specific">
 		<table width="95%" align="center" class="tablesurround">
 			<tr>

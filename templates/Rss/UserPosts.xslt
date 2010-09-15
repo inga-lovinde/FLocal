@@ -3,7 +3,8 @@
 	<xsl:import href="elems\Main.xslt"/>
 	<xsl:import href="elems\PostInfo.xslt"/>
 	<xsl:template name="specificTitle">
-		<xsl:text>Все сообщения</xsl:text>
+		<xsl:text>Сообщения пользователя </xsl:text>
+		<xsl:value-of select="user/name"/>
 	</xsl:template>
 	<xsl:template name="specific">
 		<xsl:apply-templates select="posts/post"/>
