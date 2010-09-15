@@ -9,7 +9,7 @@
 				<xsl:value-of select="poster/user/name"/>
 			</title>
 			<description>
-				<xsl:value-of select="bodyShort"/>
+				<xsl:value-of select="body"/>
 			</description>
 			<link>
 				<xsl:value-of select="$mainUrl"/>
