@@ -38,6 +38,16 @@ namespace FLocal.IISHandler {
 			}
 		}
 
+		public XElement exportRequestParameters() {
+			return new XElement("get",
+				from i in Enumerable.Range(0, this.httprequest.QueryString.Count)
+				select new XElement("param",
+					new XAttribute("name", this.httprequest.QueryString.GetKey(i)),
+					this.httprequest.QueryString[i]
+				)
+			);
+		}
+
 		public HttpResponse httpresponse {
 			get {
 				return this.httpcontext.Response;

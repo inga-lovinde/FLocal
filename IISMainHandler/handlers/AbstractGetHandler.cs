@@ -27,6 +27,7 @@ namespace FLocal.IISHandler.handlers {
 				context.exportSession(),
 				context.userSettings.skin.exportToXml(),
 				new XElement("currentUrl", "/" + String.Join("/", context.requestParts) + "/"),
+				context.exportRequestParameters(),
 			};
 		}
 

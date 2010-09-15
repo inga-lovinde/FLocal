@@ -25,11 +25,13 @@
 						<input type="hidden" name="data"/>
 					</form>
 				</div>
-				<xsl:text disable-output-escaping="yes"><![CDATA[<!--]]></xsl:text>
-				<br />
-				<xsl:text>Data used for authoring this XHTML document:</xsl:text>
-				<xmp><xsl:copy-of select="/"/></xmp>
-				<xsl:text disable-output-escaping="yes"><![CDATA[-->]]></xsl:text>
+				<xsl:if test="get/param[@name='debug'] = 'true'">
+					<xsl:text disable-output-escaping="yes"><![CDATA[<!--]]></xsl:text>
+					<br />
+					<xsl:text>Data used for authoring this XHTML document:</xsl:text>
+					<xmp><xsl:copy-of select="/"/></xmp>
+					<xsl:text disable-output-escaping="yes"><![CDATA[-->]]></xsl:text>
+				</xsl:if>
 			</body>
 		</html>
 	</xsl:template>
