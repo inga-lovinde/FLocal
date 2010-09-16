@@ -39,9 +39,9 @@
 					</form>
 				</div>
 				<xsl:if test="not(get/param[@name='headers'] = 'false')">
-					<div style="position:absolute;right:0px;top:0px;height:100%;text-align:right;">
+					<div style="min-width:20px;width:20px;max-width:20px;overflow:visible;position:absolute;right:0px;top:0px;height:100%;text-align:right;">
 						<br/>
-						<div style="text-align:right;height:260px;min-height:260px;max-height:260px;overflow:visible;">
+						<div style="min-width:20px;width:20px;max-width:20px;overflow:visible;text-align:right;height:260px;min-height:260px;max-height:260px;">
 							<div style="position:absolute;top:20px;right:20px;display:none" id="pokerPlaceholder">
 								<img border="0" src="/static/images/poker.jpg" align="top"/>
 							</div>
@@ -52,7 +52,7 @@
 							</div>
 						</div>
 						<br/>
-						<div style="text-align:right;height:260px;min-height:260px;max-height:260px;overflow:visible;">
+						<div style="min-width:20px;width:20px;max-width:20px;overflow:visible;text-align:right;height:260px;min-height:260px;max-height:260px;">
 							<div style="position:absolute;top:20px;right:20px;display:none" id="courtesansPlaceholder">
 								<img border="0" src="/static/images/courtesans.jpg" align="top"/>
 							</div>
