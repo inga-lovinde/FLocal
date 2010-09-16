@@ -26,6 +26,8 @@
 					<xsl:text>p</xsl:text>
 					<xsl:value-of select="afterLastRead"/>
 				</xsl:if>
+				<xsl:text>?</xsl:text>
+				<xsl:value-of select="lastMessageDate/date/ticks"/>
 			</link>
 			<guid>
 				<xsl:text>conversation-</xsl:text>

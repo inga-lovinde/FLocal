@@ -17,7 +17,8 @@
 			</description>
 			<link>
 				<xsl:value-of select="$mainUrl"/>
-				<xsl:text>/Users/Online/</xsl:text>
+				<xsl:text>/Users/Online/?</xsl:text>
+				<xsl:value-of select="lastActivity/date/ticks"/>
 			</link>
 			<guid>
 				<xsl:text>online-</xsl:text>
