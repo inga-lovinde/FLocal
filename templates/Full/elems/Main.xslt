@@ -31,6 +31,7 @@
 				</div>
 				<xsl:if test="not(get/param[@name='headers'] = 'false')">
 					<div style="position:absolute;right:0px;top:0px;height:100%;width:3%;text-align:right;">
+						<br/>
 						<div style="text-align:right;">
 							<a pseudolink="pseudolink">
 								<xsl:attribute name="onClick">alert("Not implemented");</xsl:attribute>
