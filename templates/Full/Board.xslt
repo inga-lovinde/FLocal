@@ -8,6 +8,8 @@
 	</xsl:template>
 	<xsl:template name="isLiteEnabled">true</xsl:template>
 	<xsl:template name="isRssEnabled">true</xsl:template>
+	<xsl:variable name="baseLink">/Board/<xsl:value-of select="/root/currentLocation/board/id"/>/</xsl:variable>
+	<xsl:template name="rssRelativeLink"><xsl:value-of select="$baseLink"/></xsl:template>
 	<xsl:template name="specific">
 		<table width="95%" align="center" cellpadding="1" cellspacing="1" class="tablesurround">
 			<tr>
@@ -126,7 +128,7 @@
 								<font class="onbody">
 									<xsl:text>страницы:</xsl:text>
 									<xsl:apply-templates select="threads/pageOuter" mode="withCurrent">
-										<xsl:with-param name="baseLink">/Board/<xsl:value-of select="currentLocation/board/id"/>/</xsl:with-param>
+										<xsl:with-param name="baseLink"><xsl:value-of select="$baseLink"/></xsl:with-param>
 									</xsl:apply-templates>
 								</font>
 							</td>

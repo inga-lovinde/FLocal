@@ -6,6 +6,7 @@
 
 	<xsl:template name="isLiteEnabled">false</xsl:template>
 	<xsl:template name="isRssEnabled">false</xsl:template>
+	<xsl:template name="rssRelativeLink"><xsl:value-of select="currentUrl"/></xsl:template>
 
 	<xsl:template name="headerLink">
 		<xsl:param name="url"/>
@@ -80,6 +81,9 @@
 											<xsl:variable name="isRssEnabled">
 												<xsl:call-template name="isRssEnabled"/>
 											</xsl:variable>
+											<xsl:variable name="rssRelativeLink">
+												<xsl:call-template name="rssRelativeLink"/>
+											</xsl:variable>
 											<xsl:variable name="prefix">
 												<xsl:text>https://</xsl:text>
 												<xsl:value-of select="url/host"/>
@@ -112,7 +116,7 @@
 													<xsl:attribute name="href">
 														<xsl:value-of select="$prefix"/>
 														<xsl:text>449</xsl:text>
-														<xsl:value-of select="currentUrl"/>
+														<xsl:value-of select="$rssRelativeLink"/>
 													</xsl:attribute>
 												</xsl:if>
 												<img border="0">
@@ -130,7 +134,7 @@
 													<xsl:attribute name="href">
 														<xsl:value-of select="$prefix"/>
 														<xsl:text>449</xsl:text>
-														<xsl:value-of select="currentUrl"/>
+														<xsl:value-of select="$rssRelativeLink"/>
 													</xsl:attribute>
 												</link>
 											</xsl:if>

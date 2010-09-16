@@ -7,6 +7,8 @@
 		<xsl:value-of select="user/name"/>
 	</xsl:template>
 	<xsl:template name="isRssEnabled">true</xsl:template>
+	<xsl:variable name="baseLink">/Users/User/<xsl:value-of select="/root/user/id"/>/Replies/</xsl:variable>
+	<xsl:template name="rssRelativeLink"><xsl:value-of select="$baseLink"/></xsl:template>
 	<xsl:template name="specific">
 		<table width="95%" align="center" cellpadding="1" cellspacing="1" class="tablesurround">
 			<tr>
@@ -19,7 +21,7 @@
 										<td>
 											<xsl:text>страницы:</xsl:text>
 											<xsl:apply-templates select="posts/pageOuter" mode="withCurrent">
-												<xsl:with-param name="baseLink">/Users/User/<xsl:value-of select="user/id"/>/Replies/</xsl:with-param>
+												<xsl:with-param name="baseLink"><xsl:value-of select="$baseLink"/></xsl:with-param>
 											</xsl:apply-templates>
 										</td>
 									</tr>
@@ -34,7 +36,7 @@
 										<td>
 											<xsl:text>страницы:</xsl:text>
 											<xsl:apply-templates select="posts/pageOuter" mode="withCurrent">
-												<xsl:with-param name="baseLink">/Users/User/<xsl:value-of select="user/id"/>/Replies/</xsl:with-param>
+												<xsl:with-param name="baseLink"><xsl:value-of select="$baseLink"/></xsl:with-param>
 											</xsl:apply-templates>
 										</td>
 									</tr>
