@@ -3,6 +3,24 @@
 	<xsl:import href="elems\Main.xslt"/>
 	<xsl:template name="specificTitle">Настройки</xsl:template>
 	<xsl:template name="specific">
+		<script language="Javascript" type="text/javascript">
+<xsl:text disable-output-escaping="yes"><![CDATA[
+function changeSkin(newSkin) {
+	var links = document.getElementsByTagName("link");
+	for(i=0;i<links.length;i++) {
+		var link = links[i];
+		if((typeof(link.getAttribute) != "undefined") && (link.getAttribute("rel") == "stylesheet") && (link.getAttribute("skin") == "skin")) {
+			var newLink = document.createElement("link");
+			newLink.setAttribute("skin", "skin");
+			newLink.setAttribute("rel", "stylesheet");
+			newLink.setAttribute("type", "text/css");
+			newLink.setAttribute("href", "/static/css/" + newSkin + ".css");
+			link.parentNode.replaceChild(newLink, link);
+		}
+	}
+}
+]]></xsl:text>
+		</script>
 		<table width="95%" align="center" cellpadding="1" cellspacing="1" class="tablesurround">
 			<tr>
 				<td>
@@ -71,6 +89,7 @@
 										<xsl:text>Цветовая схема:</xsl:text>
 										<br/>
 										<select name="skinId">
+											<xsl:attribute name="onChange">changeSkin(this.options[this.selectedIndex].innerText);</xsl:attribute>
 											<xsl:apply-templates select="skins/skin" mode="skinOption">
 												<xsl:with-param name="currentSkin"><xsl:value-of select="settings/skinId"/></xsl:with-param>
 											</xsl:apply-templates>
