@@ -11,7 +11,7 @@
 				</link>
 				<link rel="shortcut icon" href="/static/favicons/smirk.ico" type="image/x-icon" />
 				<script language="Javascript" type="text/javascript" src="/static/js/common.js"><xsl:text> </xsl:text></script>
-				<script language="Javascript" type="text/javascript" src="/static/js/machichara/simple.js"><xsl:text> </xsl:text></script>
+				<script language="Javascript" type="text/javascript" src="/static/js/machichara/simple.js?v1"><xsl:text> </xsl:text></script>
 				<title>
 					<xsl:call-template name="specificTitle"/>
 					<xsl:text> - </xsl:text>
