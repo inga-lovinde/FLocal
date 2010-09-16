@@ -1,7 +1,7 @@
 
 function simpleMachicharaUpdate(element) {
-	element.style.top = Math.floor(Math.random()*110 - 10) + "%";
-	element.style.left = Math.floor(Math.random()*110 - 10) + "%";
+	element.style.top = Math.floor(Math.random()*90) + "%";
+	element.style.left = Math.floor(Math.random()*90) + "%";
 	window.setTimeout(function() {
 		simpleMachicharaUpdate(element);
 	}, 5000+Math.floor(Math.random()*25000));
