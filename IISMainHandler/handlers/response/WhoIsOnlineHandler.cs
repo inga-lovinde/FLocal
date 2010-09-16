@@ -38,7 +38,14 @@ namespace FLocal.IISHandler.handlers.response {
 							"0"
 						)
 					),
-					pageOuter
+					pageOuter,
+					new JoinSpec[0],
+					new SortSpec[] {
+						new SortSpec(
+							Session.TableSpec.instance.getColumnSpec(Session.TableSpec.FIELD_LASTHUMANACTIVITY),
+							false
+						),
+					}
 				) select Session.LoadByKey(stringId);
 			return new XElement[] {
 				new XElement("users",
