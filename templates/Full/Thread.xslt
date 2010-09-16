@@ -6,6 +6,9 @@
 		<xsl:value-of select="currentLocation/thread/name"/>
 	</xsl:template>
 	<xsl:template name="isLiteEnabled">true</xsl:template>
+	<xsl:template name="isRssEnabled">true</xsl:template>
+	<xsl:variable name="baseLink">/Thread/<xsl:value-of select="/root/currentLocation/thread/id"/>/</xsl:variable>
+	<xsl:template name="rssRelativeLink"><xsl:value-of select="$baseLink"/>0/reversed</xsl:template>
 	<xsl:template name="specific">
 		<xsl:if test="not(get/param[@name='headers'] = 'false')">
 			<xsl:call-template name="threadInfo"/>
@@ -22,7 +25,7 @@
 										<td>
 											<xsl:text>страницы:</xsl:text>
 											<xsl:apply-templates select="posts/pageOuter" mode="withCurrent">
-												<xsl:with-param name="baseLink">/Thread/<xsl:value-of select="currentLocation/thread/id"/>/</xsl:with-param>
+												<xsl:with-param name="baseLink"><xsl:value-of select="$baseLink"/></xsl:with-param>
 											</xsl:apply-templates>
 										</td>
 									</tr>
@@ -39,7 +42,7 @@
 										<td>
 											<xsl:text>страницы:</xsl:text>
 											<xsl:apply-templates select="posts/pageOuter" mode="withCurrent">
-												<xsl:with-param name="baseLink">/Thread/<xsl:value-of select="currentLocation/thread/id"/>/</xsl:with-param>
+												<xsl:with-param name="baseLink"><xsl:value-of select="$baseLink"/></xsl:with-param>
 											</xsl:apply-templates>
 										</td>
 									</tr>
