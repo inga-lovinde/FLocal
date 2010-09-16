@@ -42,25 +42,25 @@
 					<div style="position:absolute;right:0px;top:0px;height:100%;text-align:right;">
 						<br/>
 						<div style="text-align:right;height:260px;min-height:260px;max-height:260px;overflow:visible;">
-							<span style="height:0px;min-height:0px;max-height:0px;overflow:visible;visibility:hidden" id="pokerPlaceholder">
+							<div style="position:absolute;top:20px;right:20px;display:none" id="pokerPlaceholder">
 								<img border="0" src="/static/images/poker.jpg" align="top"/>
-							</span>
-							<span>
-								<xsl:attribute name="onMouseOver">document.getElementById("pokerPlaceholder").style.visibility = "visible";</xsl:attribute>
-								<xsl:attribute name="onMouseOut">document.getElementById("pokerPlaceholder").style.visibility = "hidden";</xsl:attribute>
+							</div>
+							<div>
+								<xsl:attribute name="onMouseOver">document.getElementById("pokerPlaceholder").style.display = "block";</xsl:attribute>
+								<xsl:attribute name="onMouseOut">document.getElementById("pokerPlaceholder").style.display = "none";</xsl:attribute>
 								<img border="0" src="/static/images/tab_poker.png" align="top"/>
-							</span>
+							</div>
 						</div>
 						<br/>
 						<div style="text-align:right;height:260px;min-height:260px;max-height:260px;overflow:visible;">
-							<span style="height:0px;min-height:0px;max-height:0px;overflow:visible;visibility:hidden" id="courtesansPlaceholder">
+							<div style="position:absolute;top:20px;right:20px;display:none" id="courtesansPlaceholder">
 								<img border="0" src="/static/images/courtesans.jpg" align="top"/>
-							</span>
-							<span>
-								<xsl:attribute name="onMouseOver">document.getElementById("courtesansPlaceholder").style.visibility = "visible";</xsl:attribute>
-								<xsl:attribute name="onMouseOut">document.getElementById("courtesansPlaceholder").style.visibility = "hidden";</xsl:attribute>
+							</div>
+							<div>
+								<xsl:attribute name="onMouseOver">document.getElementById("courtesansPlaceholder").style.display = "block";</xsl:attribute>
+								<xsl:attribute name="onMouseOut">document.getElementById("courtesansPlaceholder").style.display = "none";</xsl:attribute>
 								<img border="0" src="/static/images/tab_courtesans.png" align="top"/>
-							</span>
+							</div>
 						</div>
 					</div>
 				</xsl:if>
