@@ -27,6 +27,10 @@ namespace FLocal.Common.dataobjects {
 			get;
 		}
 
+		Machichara machichara {
+			get;
+		}
+
 		bool isPostVisible(Post post);
 
 	}
@@ -39,7 +43,8 @@ namespace FLocal.Common.dataobjects {
 				new XElement("threadsPerPage", settings.threadsPerPage),
 				new XElement("usersPerPage", settings.usersPerPage),
 				new XElement("uploadsPerPage", settings.uploadsPerPage),
-				new XElement("skinId", settings.skin.id)
+				new XElement("skinId", settings.skin.id),
+				new XElement("machicharaId", settings.machichara.id)
 			);
 		}
 

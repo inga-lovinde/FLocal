@@ -16,6 +16,7 @@ namespace FLocal.Common {
 			dataobjects.Category.TableSpec.instance,
 			dataobjects.Invite.TableSpec.instance,
 			dataobjects.LocalNetwork.TableSpec.instance,
+			dataobjects.Machichara.TableSpec.instance,
 			dataobjects.Moderator.TableSpec.instance,
 			dataobjects.PMConversation.TableSpec.instance,
 			dataobjects.PMMessage.TableSpec.instance,

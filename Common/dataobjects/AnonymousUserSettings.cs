@@ -11,6 +11,7 @@ namespace FLocal.Common.dataobjects {
 			var allSkins = Skin.allSkins.ToArray();
 			//this._skinId = allSkins[Util.RandomInt(0, allSkins.Length)].id;
 			this._skinId = 28;
+			this._machicharaId = 2;
 		}
 
 		public int threadsPerPage {
@@ -41,6 +42,13 @@ namespace FLocal.Common.dataobjects {
 		public Skin skin {
 			get {
 				return Skin.LoadById(this._skinId);
+			}
+		}
+
+		private int _machicharaId;
+		public Machichara machichara {
+			get {
+				return Machichara.LoadById(this._machicharaId);
 			}
 		}
 

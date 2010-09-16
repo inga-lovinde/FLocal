@@ -26,6 +26,7 @@ namespace FLocal.IISHandler.handlers {
 				new XElement("current", DateTime.Now.ToXml()),
 				context.exportSession(),
 				context.userSettings.skin.exportToXml(),
+				context.userSettings.machichara.exportToXml(),
 				new XElement("currentUrl", "/" + String.Join("/", context.requestParts) + "/"),
 				context.exportRequestParameters(),
 			};

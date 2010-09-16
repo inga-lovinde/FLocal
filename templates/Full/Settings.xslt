@@ -19,6 +19,10 @@ function changeSkin(newSkin) {
 		}
 	}
 }
+
+function changeMachichara(newMachichara) {
+	document.getElementById("machicharaPreview").src = "/static/images/machichara/" + newMachichara + "-preview.gif";
+}
 ]]></xsl:text>
 		</script>
 		<table width="95%" align="center" cellpadding="1" cellspacing="1" class="tablesurround">
@@ -95,6 +99,20 @@ function changeSkin(newSkin) {
 											</xsl:apply-templates>
 										</select>
 									</p>
+									<p>
+										<xsl:text>Machi-chara:</xsl:text>
+										<br/>
+										<select name="machicharaId">
+											<xsl:attribute name="onChange">changeMachichara(this.options[this.selectedIndex].innerText);</xsl:attribute>
+											<xsl:apply-templates select="machicharas/machichara" mode="machicharaOption">
+												<xsl:with-param name="currentMachichara"><xsl:value-of select="settings/machicharaId"/></xsl:with-param>
+											</xsl:apply-templates>
+										</select>
+										<br/>
+										<img id="machicharaPreview" border="0">
+											<xsl:attribute name="src">/static/images/machichara/<xsl:value-of select="machichara/name"/>-preview.gif</xsl:attribute>
+										</img>
+									</p>
 									<input type="submit" name="buttlogin" value="Отправить!" class="buttons" /> 
 								</form> 
 							</td> 
@@ -110,6 +128,17 @@ function changeSkin(newSkin) {
 		<option>
 			<xsl:attribute name="value"><xsl:value-of select="id"/></xsl:attribute>
 			<xsl:if test="id=$currentSkin">
+				<xsl:attribute name="selected">selected</xsl:attribute>
+			</xsl:if>
+			<xsl:value-of select="name"/>
+		</option>
+	</xsl:template>
+
+	<xsl:template match="machichara" mode="machicharaOption">
+		<xsl:param name="currentMachichara"/>
+		<option>
+			<xsl:attribute name="value"><xsl:value-of select="id"/></xsl:attribute>
+			<xsl:if test="id=$currentMachichara">
 				<xsl:attribute name="selected">selected</xsl:attribute>
 			</xsl:if>
 			<xsl:value-of select="name"/>

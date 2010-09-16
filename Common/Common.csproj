@@ -97,6 +97,7 @@
     <Compile Include="dataobjects\IUserSettings.cs" />
     <Compile Include="dataobjects\AnonymousUserSettings.cs" />
     <Compile Include="dataobjects\LocalNetwork.cs" />
+    <Compile Include="dataobjects\Machichara.cs" />
     <Compile Include="dataobjects\Moderator.cs" />
     <Compile Include="dataobjects\PMConversation.cs" />
     <Compile Include="dataobjects\PMMessage.cs" />
