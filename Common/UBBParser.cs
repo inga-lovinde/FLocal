@@ -79,6 +79,10 @@ namespace FLocal.Common {
 					{ new Regex("&gt;=", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => "≥" },
 					{ new Regex("!=", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => "≠" },
 					{ new Regex("~=", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => "≈" },
+					{ new Regex("=>", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => "⇒" },
+					{ new Regex("<->", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => "↔" },
+					{ new Regex("->", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => "→" },
+					{ new Regex("<-", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => "←" },
 				};
 
 				private ITextFormatter inner;
