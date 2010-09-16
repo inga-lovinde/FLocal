@@ -26,7 +26,7 @@ namespace FLocal.IISHandler.handlers.response {
 				context.userSettings.postsPerPage,
 				4
 			);
-			IEnumerable<Post> posts = user.getPosts(pageOuter);
+			IEnumerable<Post> posts = user.getPosts(pageOuter, pageOuter.descendingDirection);
 
 			return new XElement[] {
 				new XElement("posts",

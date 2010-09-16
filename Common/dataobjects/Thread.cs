@@ -230,7 +230,7 @@ namespace FLocal.Common.dataobjects {
 			return result;
 		}
 
-		public IEnumerable<Post> getPosts(Diapasone diapasone) {
+		public IEnumerable<Post> getPosts(Diapasone diapasone, bool isAscending) {
 			return Post.LoadByIds(
 				from stringId in Config.instance.mainConnection.LoadIdsByConditions(
 					Post.TableSpec.instance,
@@ -244,7 +244,7 @@ namespace FLocal.Common.dataobjects {
 					new SortSpec[] {
 						new SortSpec(
 							Post.TableSpec.instance.getIdSpec(),
-							true
+							isAscending
 						),
 					}
 				) select int.Parse(stringId)

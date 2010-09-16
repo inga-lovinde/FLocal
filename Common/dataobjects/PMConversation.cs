@@ -155,7 +155,7 @@ namespace FLocal.Common.dataobjects {
 			return result;
 		}
 
-		public IEnumerable<PMMessage> getMessages(Diapasone diapasone, UserContext context) {
+		public IEnumerable<PMMessage> getMessages(Diapasone diapasone, UserContext context, bool isAscending) {
 			return PMMessage.LoadByIds(
 				from stringId in Config.instance.mainConnection.LoadIdsByConditions(
 					PMMessage.TableSpec.instance,
@@ -177,7 +177,7 @@ namespace FLocal.Common.dataobjects {
 					new SortSpec[] {
 						new SortSpec(
 							PMMessage.TableSpec.instance.getIdSpec(),
-							true
+							isAscending
 						),
 					}
 				) select int.Parse(stringId)
@@ -240,7 +240,7 @@ namespace FLocal.Common.dataobjects {
 			});
 		}
 
-		public static IEnumerable<PMConversation> getConversations(Account owner, Diapasone diapasone) {
+		public static IEnumerable<PMConversation> getConversations(Account owner, Diapasone diapasone, bool isAscending) {
 			return LoadByIds(
 				from stringId in Config.instance.mainConnection.LoadIdsByConditions(
 					TableSpec.instance,
@@ -254,7 +254,7 @@ namespace FLocal.Common.dataobjects {
 					new SortSpec[] {
 						new SortSpec(
 							TableSpec.instance.getColumnSpec(TableSpec.FIELD_LASTMESSAGEID),
-							false
+							isAscending
 						)
 					}
 				) select int.Parse(stringId)

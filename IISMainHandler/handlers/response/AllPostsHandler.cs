@@ -40,7 +40,7 @@ namespace FLocal.IISHandler.handlers.response {
 					new SortSpec[] {
 						new SortSpec(
 							Post.TableSpec.instance.getIdSpec(),
-							false
+							pageOuter.descendingDirection
 						)
 					}
 				)

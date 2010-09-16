@@ -39,7 +39,7 @@ namespace FLocal.IISHandler.handlers.response {
 					new SortSpec[] {
 						new SortSpec(
 							Poll.Vote.TableSpec.instance.getIdSpec(),
-							false
+							pageOuter.descendingDirection
 						)
 					}
 				) select int.Parse(stringId)

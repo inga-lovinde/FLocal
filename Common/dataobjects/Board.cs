@@ -332,7 +332,7 @@ namespace FLocal.Common.dataobjects {
 			);
 		}
 
-		public IEnumerable<Thread> getThreads(Diapasone diapasone) {
+		public IEnumerable<Thread> getThreads(Diapasone diapasone, bool isAscending) {
 			return this.getThreads(
 				diapasone,
 				new SortSpec[] {
@@ -342,7 +342,7 @@ namespace FLocal.Common.dataobjects {
 					),
 					new SortSpec(
 						Thread.TableSpec.instance.getColumnSpec(Thread.TableSpec.FIELD_LASTPOSTID),
-						false
+						isAscending
 					),
 				}
 			);

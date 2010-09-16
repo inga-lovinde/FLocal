@@ -21,7 +21,7 @@ namespace FLocal.IISHandler.handlers.response {
 
 		override protected IEnumerable<XElement> getSpecificData(WebContext context) {
 			PageOuter pageOuter = PageOuter.createFromGet(context.requestParts, context.userSettings.threadsPerPage, 2);
-			IEnumerable<PMConversation> conversations = PMConversation.getConversations(context.session.account, pageOuter);
+			IEnumerable<PMConversation> conversations = PMConversation.getConversations(context.session.account, pageOuter, pageOuter.descendingDirection);
 			XElement[] result = new XElement[] {
 				new XElement("conversations", 
 					from conversation in conversations select conversation.exportToXml(context, false),

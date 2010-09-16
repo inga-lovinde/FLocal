@@ -11,54 +11,64 @@ namespace FLocal.IISHandler {
 
 		public readonly long perPage;
 
-		private PageOuter(long start, long count, long perPage)
-			: base(start, count) {
-			this.perPage = perPage;
+		public readonly bool reversed;
+
+		public bool ascendingDirection {
+			get {
+				return !this.reversed;
+			}
 		}
 
-		private PageOuter(long perPage)
+		public bool descendingDirection {
+			get {
+				return this.reversed;
+			}
+		}
+
+		private PageOuter(long start, long count, long perPage, bool reversed)
+			: base(start, count) {
+			this.perPage = perPage;
+			this.reversed = reversed;
+		}
+
+		private PageOuter(long perPage, bool reversed)
 			: base(0, -1) {
 			this.perPage = perPage;
+			this.reversed = reversed;
 		}
 
 		public static PageOuter createUnlimited(long perPage) {
-			return new PageOuter(perPage);
+			return new PageOuter(perPage, false);
 		}
 
 		public static PageOuter create(long perPage, long total) {
-			PageOuter result = new PageOuter(0, perPage, perPage);
+			PageOuter result = new PageOuter(0, perPage, perPage, false);
 			result.total = total;
 			return result;
 		}
 
 		public static PageOuter createFromGet(string[] requestParts, long perPage, Dictionary<char, Func<long>> customAction, int offset) {
+			bool reversed = (requestParts.Length > (offset+1)) && (requestParts[offset+1].ToLower() == "reversed");
 			if(requestParts.Length > offset) {
 				if(requestParts[offset].ToLower() == "all") {
-					return new PageOuter(perPage);
+					return new PageOuter(perPage, reversed);
 				} else if(Char.IsDigit(requestParts[offset][0])) {
-					return new PageOuter(long.Parse(requestParts[offset]), perPage, perPage);
+					return new PageOuter(long.Parse(requestParts[offset]), perPage, perPage, reversed);
 				} else {
-					return new PageOuter(customAction[requestParts[offset][0]](), perPage, perPage);
+					return new PageOuter(customAction[requestParts[offset][0]](), perPage, perPage, reversed);
 				}
 			} else {
-				return new PageOuter(0, perPage, perPage);
+				return new PageOuter(0, perPage, perPage, reversed);
 			}
 		}
-
-		/*public static PageOuter createFromGet(string[] requestParts, long perPage, Dictionary<char, Func<long>> customAction) {
-			return createFromGet(requestParts, perPage, customAction, 2);
-		}*/
 
 		public static PageOuter createFromGet(string[] requestParts, long perPage, int offset) {
 			return createFromGet(requestParts, perPage, new Dictionary<char, Func<long>>(), offset);
 		}
 
-		/*public static PageOuter createFromGet(string[] requestParts, long perPage) {
-			return createFromGet(requestParts, perPage, new Dictionary<char,Func<long>>());
-		}*/
-
 		public XElement exportToXml(int left, int current, int right) {
 			XElement result = new XElement("pageOuter",
+				new XElement("isReversed", this.reversed),
 				new XElement("unlimited", (this.count < 1).ToPlainString()),
 				new XElement("start", this.start),
 				new XElement("count", this.count),

@@ -26,7 +26,7 @@ namespace FLocal.IISHandler.handlers.response {
 				context.userSettings.postsPerPage,
 				4
 			);
-			IEnumerable<Thread> threads = user.getThreads(pageOuter);
+			IEnumerable<Thread> threads = user.getThreads(pageOuter, pageOuter.descendingDirection);
 
 			return new XElement[] {
 				new XElement("threads",

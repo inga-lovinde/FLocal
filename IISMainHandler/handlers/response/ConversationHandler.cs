@@ -54,7 +54,7 @@ namespace FLocal.IISHandler.handlers.response {
 				},
 				4
 			);
-			IEnumerable<PMMessage> messages = conversation.getMessages(pageOuter, context);
+			IEnumerable<PMMessage> messages = conversation.getMessages(pageOuter, context, pageOuter.ascendingDirection);
 
 			XElement[] result = new XElement[] {
 				conversation.exportToXml(context, false),

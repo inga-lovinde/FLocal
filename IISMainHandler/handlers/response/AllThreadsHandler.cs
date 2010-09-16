@@ -40,7 +40,7 @@ namespace FLocal.IISHandler.handlers.response {
 					new SortSpec[] {
 						new SortSpec(
 							Thread.TableSpec.instance.getColumnSpec(Thread.TableSpec.FIELD_LASTPOSTID),
-							false
+							pageOuter.descendingDirection
 						)
 					}
 				)

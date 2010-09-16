@@ -208,7 +208,7 @@ namespace FLocal.Common.dataobjects {
 			return result;
 		}
 
-		public static IEnumerable<User> getUsers(Diapasone diapasone) {
+		public static IEnumerable<User> getUsers(Diapasone diapasone, bool isAscending) {
 			return User.LoadByIds(
 				from stringId in Config.instance.mainConnection.LoadIdsByConditions(
 					User.TableSpec.instance,
@@ -218,7 +218,7 @@ namespace FLocal.Common.dataobjects {
 					new SortSpec[] {
 						new SortSpec(
 							User.TableSpec.instance.getIdSpec(),
-							true
+							isAscending
 						),
 					}
 				) select int.Parse(stringId)
@@ -231,7 +231,7 @@ namespace FLocal.Common.dataobjects {
 			return desiredLayer;
 		}
 
-		public IEnumerable<Post> getPosts(Diapasone diapasone) {
+		public IEnumerable<Post> getPosts(Diapasone diapasone, bool isAscending) {
 			return Post.LoadByIds(
 				from stringId in Config.instance.mainConnection.LoadIdsByConditions(
 					Post.TableSpec.instance,
@@ -245,14 +245,14 @@ namespace FLocal.Common.dataobjects {
 					new SortSpec[] {
 						new SortSpec(
 							Post.TableSpec.instance.getIdSpec(),
-							false
+							isAscending
 						),
 					}
 				) select int.Parse(stringId)
 			);
 		}
 
-		public IEnumerable<Post> getReplies(Diapasone diapasone) {
+		public IEnumerable<Post> getReplies(Diapasone diapasone, bool isAscending) {
 			JoinSpec parent = new JoinSpec(
 				Post.TableSpec.instance.getColumnSpec(Post.TableSpec.FIELD_PARENTPOSTID),
 				Post.TableSpec.instance,
@@ -281,14 +281,14 @@ namespace FLocal.Common.dataobjects {
 					new SortSpec[] {
 						new SortSpec(
 							Post.TableSpec.instance.getIdSpec(),
-							false
+							isAscending
 						),
 					}
 				) select int.Parse(stringId)
 			);
 		}
 
-		public IEnumerable<Thread> getThreads(Diapasone diapasone) {
+		public IEnumerable<Thread> getThreads(Diapasone diapasone, bool isAscending) {
 			return Thread.LoadByIds(
 				from stringId in Config.instance.mainConnection.LoadIdsByConditions(
 					Thread.TableSpec.instance,
@@ -302,7 +302,7 @@ namespace FLocal.Common.dataobjects {
 					new SortSpec[] {
 						new SortSpec(
 							Thread.TableSpec.instance.getColumnSpec(Thread.TableSpec.FIELD_LASTPOSTID),
-							false
+							isAscending
 						),
 					}
 				) select int.Parse(stringId)
