@@ -10,7 +10,7 @@ function simpleMachicharaUpdate(element) {
 function simpleMachichara(imageUrl) {
 	var machicharaSimpleElement = document.createElement("div");
 	machicharaSimpleElement.zIndex = 1000;
-	machicharaSimpleElement.style.position = "absolute";
+	machicharaSimpleElement.style.position = "fixed";
 	machicharaSimpleElement.style.top = "50%";
 	machicharaSimpleElement.style.left = "50%";
 	document.body.appendChild(machicharaSimpleElement);
