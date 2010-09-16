@@ -21,6 +21,21 @@
 			<body>
 				<xsl:attribute name="onLoad">simpleMachichara("/static/images/machichara/simple/hexsex.gif");</xsl:attribute>
 				<xsl:if test="not(get/param[@name='headers'] = 'false')">
+					<div style="position:fixed;right:0px;top:0px;height:100%;width:3%;text-align:right;">
+						<div style="text-align:right;">
+							<a pseudolink="pseudolink">
+								<xsl:attribute name="onClick">alert("Not implemented");</xsl:attribute>
+								<img border="0" src="/static/images/tab_poker.png"/>
+							</a>
+						</div>
+						<br/>
+						<div style="text-align:right;">
+							<a pseudolink="pseudolink">
+								<xsl:attribute name="onClick">alert("Not implemented");</xsl:attribute>
+								<img border="0" src="/static/images/tab_courtesans.png"/>
+							</a>
+						</div>
+					</div>
 					<xsl:call-template name="header"/>
 				</xsl:if>
 				<xsl:call-template name="specific"/>
