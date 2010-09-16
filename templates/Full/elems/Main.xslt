@@ -45,7 +45,7 @@
 							<div style="position:absolute;top:20px;right:20px;display:none" id="pokerPlaceholder">
 								<img border="0" src="/static/images/poker.jpg" align="top"/>
 							</div>
-							<div>
+							<div style="min-width:20px;width:20px;max-width:20px;text-align:right;">
 								<xsl:attribute name="onMouseOver">document.getElementById("pokerPlaceholder").style.display = "block";</xsl:attribute>
 								<xsl:attribute name="onMouseOut">document.getElementById("pokerPlaceholder").style.display = "none";</xsl:attribute>
 								<img border="0" src="/static/images/tab_poker.png" align="top"/>
@@ -56,7 +56,7 @@
 							<div style="position:absolute;top:20px;right:20px;display:none" id="courtesansPlaceholder">
 								<img border="0" src="/static/images/courtesans.jpg" align="top"/>
 							</div>
-							<div>
+							<div style="min-width:20px;width:20px;max-width:20px;text-align:right;">
 								<xsl:attribute name="onMouseOver">document.getElementById("courtesansPlaceholder").style.display = "block";</xsl:attribute>
 								<xsl:attribute name="onMouseOut">document.getElementById("courtesansPlaceholder").style.display = "none";</xsl:attribute>
 								<img border="0" src="/static/images/tab_courtesans.png" align="top"/>
