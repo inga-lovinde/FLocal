@@ -14,7 +14,7 @@ namespace FLocal.IISHandler.handlers.response {
 		protected override IEnumerable<XElement> getSpecificData(WebContext context) {
 			var result = new List<XElement>();
 			if(context.httprequest.Form.AllKeys.Contains("title")) {
-				result.Add(new XElement("title", context.httprequest.Form["title"]));
+				result.Add(new XElement("newTitle", context.httprequest.Form["title"]));
 			}
 			if(context.httprequest.Form.AllKeys.Contains("Body")) {
 				result.Add(new XElement("bodyUBB", context.httprequest.Form["Body"]));

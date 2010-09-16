@@ -276,7 +276,7 @@ function insertInBody(str) {
 											<xsl:attribute name="src">/static/images/message-normal-read.gif</xsl:attribute>
 										</img>
 									</a>
-									<b class="separate"><xsl:value-of select="title"/></b>
+									<b class="separate"><xsl:value-of select="newTitle"/></b>
 									<br />
 									<font class="small" style="padding-left:2em"><xsl:apply-templates select="postDate/date" mode="dateTime"/></font>
 								</td>

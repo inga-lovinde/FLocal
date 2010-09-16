@@ -37,17 +37,20 @@
 									<xsl:text>Тема: </xsl:text>
 									<br/>
 									<input type="text" tabindex="1" name="title" maxlength="70" class="formboxes" size="60">
-										<xsl:choose>
-											<xsl:when test="substring(post/title, 1, 4)='Re: '">
-												<xsl:attribute name="value"><xsl:value-of select="post/title"/></xsl:attribute>
-											</xsl:when>
-											<xsl:otherwise>
-												<xsl:attribute name="value">
+										<xsl:attribute name="value">
+											<xsl:choose>
+												<xsl:when test="newTitle and (newTitle != '')">
+													<xsl:value-of select="newTitle"/>
+												</xsl:when>
+												<xsl:when test="substring(post/title, 1, 4)='Re: '">
+													<xsl:value-of select="post/title"/>
+												</xsl:when>
+												<xsl:otherwise>
 													<xsl:text>Re: </xsl:text>
 													<xsl:value-of select="post/title"/>
-												</xsl:attribute>
-											</xsl:otherwise>
-										</xsl:choose>
+												</xsl:otherwise>
+											</xsl:choose>
+										</xsl:attribute>
 									</input>
 									<span class="small">Слой сообщения:</span> 
 									<select class="formboxes" name="layerId">

@@ -36,7 +36,9 @@
 									<br/>
 									<xsl:text>Тема: </xsl:text>
 									<br/>
-									<input type="text" tabindex="1" name="title" maxlength="70" class="formboxes" size="60"/>
+									<input type="text" tabindex="1" name="title" maxlength="70" class="formboxes" size="60">
+										<xsl:attribute name="value"><xsl:value-of select="newTitle"/></xsl:attribute>
+									</input>
 									<span class="small">Слой сообщения:</span> 
 									<select class="formboxes" name="layerId">
 										<xsl:apply-templates select="layers">
