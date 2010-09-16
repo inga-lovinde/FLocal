@@ -50,12 +50,12 @@ namespace FLocal.Common {
 
 				private static readonly Dictionary<Regex, MatchEvaluator> SMILEYS_DATA = (from smile in SMILEYS select new KeyValuePair<Regex, MatchEvaluator>(new Regex("(^|\\s|>)" + Regex.Escape(smile.Key) + "($|\\s|<)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => match.Groups[1] + "<img src=\"/static/smileys/" + smile.Value + ".gif\" alt=\"" + smile.Key + "\"/>" + match.Groups[2])).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
 
-				private static readonly Regex SMILEYS_MATCHER = new Regex("(^|\\s|>)\\:(\\w+)\\:($|\\s|<)", RegexOptions.Compiled | RegexOptions.Singleline);
+				private static readonly Regex SMILEYS_MATCHER = new Regex("(?<=^|\\s|>)\\:(\\w+)\\:(?=$|\\s|<)", RegexOptions.Compiled | RegexOptions.Singleline);
 
 				private static string SMILEYS_REPLACE(Match match) {
-					FileInfo smiley = new FileInfo(Config.instance.dataDir + "Static\\smileys\\" + match.Groups[2] + ".gif");
+					FileInfo smiley = new FileInfo(Config.instance.dataDir + "Static\\smileys\\" + match.Groups[1] + ".gif");
 					if(smiley.Exists && smiley.FullName.StartsWith(Config.instance.dataDir + "Static\\smileys\\")) {
-						return match.Groups[1] + "<img src=\"/static/smileys/" + match.Groups[2] + ".gif\" alt=\"" + match.Groups[2] + "\"/>" + match.Groups[3];
+						return "<img src=\"/static/smileys/" + match.Groups[1] + ".gif\" alt=\"" + match.Groups[1] + "\"/>";
 					} else {
 						return match.Value;
 					}
@@ -69,8 +69,8 @@ namespace FLocal.Common {
 				}
 
 				private static readonly Dictionary<Regex, MatchEvaluator> TYPOGRAPHICS = new Dictionary<Regex, MatchEvaluator> {
-					{ new Regex("(\\s+)--?(\\s+)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => match.Groups[1] + "–" + match.Groups[2] },
-					{ new Regex("(\\s+)---(\\s+)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => match.Groups[1] + "—" + match.Groups[2] },
+					{ new Regex("(?<=\\s)--?(?=\\s)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => "–" },
+					{ new Regex("(?<=\\s)---(?=\\s)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => "—" },
 					{ new Regex("\\(c\\)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => "©" },
 					{ new Regex("\\(r\\)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => "®" },
 					{ new Regex("\\(tm\\)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => "™" },
@@ -79,10 +79,10 @@ namespace FLocal.Common {
 					{ new Regex("&gt;=", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => "≥" },
 					{ new Regex("!=", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => "≠" },
 					{ new Regex("~=", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => "≈" },
-					{ new Regex("=>", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => "⇒" },
-					{ new Regex("<->", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => "↔" },
-					{ new Regex("->", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => "→" },
-					{ new Regex("<-", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => "←" },
+					{ new Regex("=&gt;", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => "⇒" },
+					{ new Regex("&lt;-&gt;", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => "↔" },
+					{ new Regex("-&gt;", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => "→" },
+					{ new Regex("&lt;-", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => "←" },
 				};
 
 				private ITextFormatter inner;
