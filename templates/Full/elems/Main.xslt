@@ -184,6 +184,7 @@
 
 	<xsl:template match="pageOuter/pages/page" mode="withoutCurrent">
 		<xsl:param name="baseLink"/>
+		<xsl:param name="postfix"/>
 		<xsl:param name="selected">-1</xsl:param>
 		<xsl:if test="current() != '0'">
 			<xsl:text>&#8201;|&#8201;</xsl:text>
@@ -191,7 +192,11 @@
 		<xsl:choose>
 			<xsl:when test="current() != $selected">
 				<a>
-					<xsl:attribute name="href"><xsl:value-of select="$baseLink"/><xsl:value-of select="current()"/></xsl:attribute>
+					<xsl:attribute name="href">
+						<xsl:value-of select="$baseLink"/>
+						<xsl:value-of select="current()"/>
+						<xsl:value-of select="$postfix"/>
+					</xsl:attribute>
 					<xsl:value-of select="current()"/>
 				</a>
 			</xsl:when>
@@ -205,6 +210,7 @@
 		<xsl:param name="baseLink"/>
 		<xsl:apply-templates select="pages/page" mode="withoutCurrent">
 			<xsl:with-param name="baseLink"><xsl:value-of select="$baseLink"/></xsl:with-param>
+			<xsl:with-param name="postfix"/>
 			<xsl:with-param name="selected">-1</xsl:with-param>
 		</xsl:apply-templates>
 	</xsl:template>
@@ -214,6 +220,9 @@
 		<xsl:text> </xsl:text>
 		<xsl:apply-templates select="pages/page" mode="withoutCurrent">
 			<xsl:with-param name="baseLink"><xsl:value-of select="$baseLink"/></xsl:with-param>
+			<xsl:with-param name="postfix">
+				<xsl:if test="isReversed='true'">/reversed</xsl:if>
+			</xsl:with-param>
 			<xsl:with-param name="selected">
 				<xsl:choose>
 					<xsl:when test="unlimited='false'">

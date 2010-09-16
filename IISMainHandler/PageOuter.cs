@@ -68,7 +68,7 @@ namespace FLocal.IISHandler {
 
 		public XElement exportToXml(int left, int current, int right) {
 			XElement result = new XElement("pageOuter",
-				new XElement("isReversed", this.reversed),
+				new XElement("isReversed", this.reversed.ToPlainString()),
 				new XElement("unlimited", (this.count < 1).ToPlainString()),
 				new XElement("start", this.start),
 				new XElement("count", this.count),
