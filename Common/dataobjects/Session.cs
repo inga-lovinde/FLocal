@@ -122,12 +122,14 @@ namespace FLocal.Common.dataobjects {
 		}
 
 		public void updateLastActivity(string lastUrl) {
-			if(DateTime.Now.Subtract(this.lastActivity).TotalSeconds < 10) return; //to partially remove db load
 			if(lastUrl != null) {
 				string _url = lastUrl.ToLower();
 				if(_url.StartsWith("/upload/item")) return;
 				if(_url.StartsWith("/static")) return;
 				if(_url.StartsWith("/favicon.ico")) return;
+				if(DateTime.Now.Subtract(this.lastHumanActivity).TotalSeconds < 10) return; //to partially remove db load
+			} else {
+				if(DateTime.Now.Subtract(this.lastActivity).TotalSeconds < 10) return; //to partially remove db load
 			}
 			try {
 				Dictionary<string, string> dataToUpdate = new Dictionary<string,string>();
