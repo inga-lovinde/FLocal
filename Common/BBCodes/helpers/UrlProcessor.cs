@@ -22,6 +22,10 @@ namespace FLocal.Common.BBCodes {
 			}
 		}
 
+		private static string Safe(string str) {
+			return System.Web.HttpUtility.HtmlEncode(str);
+		}
+
 		public static HashSet<string> KnownAliases = new HashSet<string> {
 			"forum.local",
 			"forum.b.gz.ru",
@@ -54,9 +58,6 @@ namespace FLocal.Common.BBCodes {
 		}
 
 		public static string ProcessLink(string link, string title, bool shortenRelative) {
-			if(title == null) {
-				title = link;
-			}
 			bool isExternal = true;
 			string url;
 			if(shortenRelative) {
@@ -66,6 +67,27 @@ namespace FLocal.Common.BBCodes {
 			} else {
 				var urlInfo = new Uri(link);
 				url = urlInfo.ToString();
+			}
+			if(title == null) {
+				if(!isExternal) {
+					var parts = url.Split(new char[] {'/'}, StringSplitOptions.RemoveEmptyEntries);
+					var combinedToLower = string.Join("/", parts).ToLower();
+					if(combinedToLower.StartsWith("upload/item/")) {
+						title = Safe(dataobjects.Upload.LoadById(int.Parse(parts[2])).filename);
+					} else if(combinedToLower.StartsWith("post/")) {
+						title = Safe(dataobjects.Post.LoadById(int.Parse(parts[1])).title);
+					} else if(combinedToLower.StartsWith("thread/")) {
+						title = Safe(dataobjects.Thread.LoadById(int.Parse(parts[1])).title);
+					} else if(combinedToLower.StartsWith("board/") || combinedToLower.StartsWith("boardasthread/")) {
+						title = Safe(dataobjects.Board.LoadById(int.Parse(parts[1])).name);
+					} else if(combinedToLower.StartsWith("poll/")) {
+						title = Safe(dataobjects.Poll.LoadById(int.Parse(parts[1])).title);
+					} else {
+						title = link;
+					}
+				} else {
+					title = link;
+				}
 			}
 			string result = "<a href=\"" + url + "\">" + title + "</a>";
 			if(isExternal) {
