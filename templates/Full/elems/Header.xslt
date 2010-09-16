@@ -106,6 +106,7 @@
 													</xsl:attribute>
 												</img>
 											</a>
+											<xsl:text>&#160;&#160;</xsl:text>
 											<a>
 												<xsl:if test="$isRssEnabled='true'">
 													<xsl:attribute name="href">
