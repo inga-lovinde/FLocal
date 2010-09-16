@@ -20,5 +20,11 @@ namespace FLocal.IISHandler.designs {
 			}
 		}
 
+		public bool IsHuman {
+			get {
+				return false;
+			}
+		}
+
 	}
 }

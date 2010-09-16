@@ -48,6 +48,7 @@ namespace FLocal.Common.dataobjects {
 			public const string FIELD_SESSIONKEY = "SessionKey";
 			public const string FIELD_ACCOUNTID = "AccountId";
 			public const string FIELD_LASTACTIVITY = "LastActivity";
+			public const string FIELD_LASTHUMANACTIVITY = "LastHumanActivity";
 			public const string FIELD_LASTURL = "LastUrl";
 			public const string FIELD_ISDELETED = "IsDeleted";
 			public static readonly TableSpec instance = new TableSpec();
@@ -87,6 +88,14 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
+		private DateTime _lastHumanActivity;
+		public DateTime lastHumanActivity {
+			get {
+				this.LoadIfNotLoaded();
+				return this._lastHumanActivity;
+			}
+		}
+
 		private string _lastUrl;
 		public string lastUrl {
 			get {
@@ -105,7 +114,8 @@ namespace FLocal.Common.dataobjects {
 
 		protected override void doFromHash(Dictionary<string, string> data) {
 			this._sessionKey = data[TableSpec.FIELD_SESSIONKEY];
-			this._lastActivity = new DateTime(long.Parse(data[TableSpec.FIELD_LASTACTIVITY]));
+			this._lastActivity = Util.ParseDateTimeFromTimestamp(data[TableSpec.FIELD_LASTACTIVITY]).Value;
+			this._lastHumanActivity = Util.ParseDateTimeFromTimestamp(data[TableSpec.FIELD_LASTHUMANACTIVITY]).Value;
 			this._accountId = int.Parse(data[TableSpec.FIELD_ACCOUNTID]);
 			this._lastUrl = data[TableSpec.FIELD_LASTURL];
 			this._isDeleted = Util.string2bool(data[TableSpec.FIELD_ISDELETED]);
@@ -117,17 +127,21 @@ namespace FLocal.Common.dataobjects {
 				string _url = lastUrl.ToLower();
 				if(_url.StartsWith("/upload/item")) return;
 				if(_url.StartsWith("/static")) return;
+				if(_url.StartsWith("/favicon.ico")) return;
 			}
 			try {
+				Dictionary<string, string> dataToUpdate = new Dictionary<string,string>();
+				dataToUpdate[TableSpec.FIELD_LASTACTIVITY] = DateTime.Now.ToUTCString();
+				if(lastUrl != null) {
+					dataToUpdate[TableSpec.FIELD_LASTURL] = lastUrl;
+					dataToUpdate[TableSpec.FIELD_LASTHUMANACTIVITY] = DateTime.Now.ToUTCString();
+				}
 				Config.Transactional(transaction => {
 					Config.instance.mainConnection.update(
 						transaction,
 						TableSpec.instance,
 						this.id.ToString(),
-						new Dictionary<string,string>() {
-							{ TableSpec.FIELD_LASTACTIVITY, DateTime.Now.ToUTCString() },
-							{ TableSpec.FIELD_LASTURL, (lastUrl != null) ? lastUrl : this.lastUrl },
-						}
+						dataToUpdate
 					);
 				});
 			} finally {
@@ -154,6 +168,7 @@ namespace FLocal.Common.dataobjects {
 						{ TableSpec.FIELD_SESSIONKEY, key },
 						{ TableSpec.FIELD_ACCOUNTID, account.id.ToString() },
 						{ TableSpec.FIELD_LASTACTIVITY, DateTime.Now.ToUTCString() },
+						{ TableSpec.FIELD_LASTHUMANACTIVITY, DateTime.Now.ToUTCString() },
 						{ TableSpec.FIELD_LASTURL, "" },
 						{ TableSpec.FIELD_ISDELETED, "0" },
 					}
@@ -181,7 +196,7 @@ namespace FLocal.Common.dataobjects {
 
 		public XElement exportToXml(UserContext context) {
 			return new XElement("session",
-				new XElement("lastActivity", this.lastActivity.ToXml()),
+				new XElement("lastActivity", this.lastHumanActivity.ToXml()),
 				new XElement("sessionKey", this.sessionKey),
 				this.account.user.exportToXmlForViewing(context),
 				AccountIndicator.LoadByAccount(this.account).exportToXml(context)
@@ -206,7 +221,7 @@ namespace FLocal.Common.dataobjects {
 				new JoinSpec[0],
 				new SortSpec[] {
 					new SortSpec(
-						TableSpec.instance.getColumnSpec(TableSpec.FIELD_LASTACTIVITY),
+						TableSpec.instance.getColumnSpec(TableSpec.FIELD_LASTHUMANACTIVITY),
 						false
 					)
 				}

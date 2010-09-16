@@ -28,7 +28,7 @@ namespace FLocal.IISHandler.handlers.response {
 					new ComplexCondition(
 						ConditionsJoinType.AND,
 						new ComparisonCondition(
-							Session.TableSpec.instance.getColumnSpec(Session.TableSpec.FIELD_LASTACTIVITY),
+							Session.TableSpec.instance.getColumnSpec(Session.TableSpec.FIELD_LASTHUMANACTIVITY),
 							Core.DB.conditions.ComparisonType.GREATEROREQUAL,
 							DateTime.Now.Subtract(Config.instance.ActivityThreshold).ToUTCString()
 						),
@@ -47,7 +47,7 @@ namespace FLocal.IISHandler.handlers.response {
 					where !account.isStatusHidden
 					select account.user.exportToXmlForViewing(
 						context,
-						new XElement("lastActivity", session.lastActivity.ToXml()),
+						new XElement("lastActivity", session.lastHumanActivity.ToXml()),
 						!account.isDetailedStatusHidden ? new XElement("lastUrl", session.lastUrl) : null
 					)
 				)

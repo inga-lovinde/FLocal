@@ -29,7 +29,7 @@ namespace FLocal.IISHandler.handlers {
 					new XElement("sessions", Config.instance.mainConnection.GetCountByConditions(
 						Session.TableSpec.instance,
 						new ComparisonCondition(
-							Session.TableSpec.instance.getColumnSpec(Session.TableSpec.FIELD_LASTACTIVITY),
+							Session.TableSpec.instance.getColumnSpec(Session.TableSpec.FIELD_LASTHUMANACTIVITY),
 							ComparisonType.GREATEROREQUAL,
 							DateTime.Now.Subtract(Config.instance.ActivityThreshold).ToUTCString()
 						)

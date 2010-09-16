@@ -43,7 +43,7 @@ namespace FLocal.IISHandler.handlers.response {
 			return new XElement[] {
 				user.exportToXmlForViewing(context),
 				(account == null) ? null : new XElement("accountId", account.id.ToString()), //for PM history, PM send etc
-				(lastSession == null) ? null : new XElement("lastActivity", lastSession.lastActivity.ToXml()),
+				(lastSession == null) ? null : new XElement("lastActivity", lastSession.lastHumanActivity.ToXml()),
 			}.Union(this.getUserSpecificData(context, user));
 		}
 

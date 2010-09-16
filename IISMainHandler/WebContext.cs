@@ -99,27 +99,6 @@ namespace FLocal.IISHandler {
 		public WebContext(HttpContext httpcontext) {
 			this.httpcontext = httpcontext;
 			this.requestTime = DateTime.Now;
-			HttpCookie sessionCookie = this.httprequest.Cookies["session"];
-			if(sessionCookie != null && sessionCookie.Value != null && sessionCookie.Value != "") {
-				try {
-					var session = Session.LoadByKey(sessionCookie.Value);
-					var tmp = session.account;
-					sessionCookie.Expires = DateTime.Now.AddDays(3);
-					session.updateLastActivity(this.httprequest.RequestType == "GET" ? this.httprequest.Path : null);
-					this.httpresponse.AppendCookie(sessionCookie);
-					this.session = session;
-				} catch(NotFoundInDBException) {
-					sessionCookie.Value = "";
-					sessionCookie.Expires = DateTime.Now.AddDays(-1);
-					this.httpresponse.AppendCookie(sessionCookie);
-					//throw; //TODO: remove me!
-				}
-			}
-			if(this.session != null) {
-				this.userSettings = AccountSettings.LoadByAccount(this.session.account);
-			} else {
-				this.userSettings = new AnonymousUserSettings();
-			}
 
 			switch(this.httprequest.Url.Port % 1000) {
 				case 445:
@@ -135,6 +114,34 @@ namespace FLocal.IISHandler {
 				default:
 					this.design = new designs.Classic();
 					break;
+			}
+
+			HttpCookie sessionCookie = this.httprequest.Cookies["session"];
+			if(sessionCookie != null && sessionCookie.Value != null && sessionCookie.Value != "") {
+				try {
+					var session = Session.LoadByKey(sessionCookie.Value);
+					var tmp = session.account;
+					sessionCookie.Expires = DateTime.Now.AddDays(3);
+					string lastUrl = null;
+					if(this.httprequest.RequestType == "GET") {
+						if(this.design.IsHuman) {
+							lastUrl = this.httprequest.Path;
+						}
+					}
+					session.updateLastActivity(lastUrl);
+					this.httpresponse.AppendCookie(sessionCookie);
+					this.session = session;
+				} catch(NotFoundInDBException) {
+					sessionCookie.Value = "";
+					sessionCookie.Expires = DateTime.Now.AddDays(-1);
+					this.httpresponse.AppendCookie(sessionCookie);
+					//throw; //TODO: remove me!
+				}
+			}
+			if(this.session != null) {
+				this.userSettings = AccountSettings.LoadByAccount(this.session.account);
+			} else {
+				this.userSettings = new AnonymousUserSettings();
 			}
 		}
 
