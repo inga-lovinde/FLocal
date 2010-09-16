@@ -139,7 +139,7 @@
 										</td>
 										<td colspan="2">
 											<xsl:choose>
-												<xsl:when test="restrictions/restriction">
+												<xsl:when test="restrictions/restriction/layers/layer">
 													<table border="1" width="90%">
 														<tr class="tdheader">
 															<td width="20%">Раздел</td>
@@ -193,17 +193,19 @@
 	</xsl:template>
 
 	<xsl:template match="restriction">
-		<tr>
-			<td>
-				<a>
-					<xsl:attribute name="href">/Board/<xsl:value-of select="board/id"/>/</xsl:attribute>
-					<xsl:value-of select="board/name"/>
-				</a>
-			</td>
-			<td>
-				<xsl:apply-templates select="layers/layer"/>
-			</td>
-		</tr>
+		<xsl:if test="layers/layer">
+			<tr>
+				<td>
+					<a>
+						<xsl:attribute name="href">/Board/<xsl:value-of select="board/id"/>/</xsl:attribute>
+						<xsl:value-of select="board/name"/>
+					</a>
+				</td>
+				<td>
+					<xsl:apply-templates select="layers/layer"/>
+				</td>
+			</tr>
+		</xsl:if>
 	</xsl:template>
 
 	<xsl:template match="restriction/layers/layer">
