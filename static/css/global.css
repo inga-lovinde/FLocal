@@ -116,3 +116,6 @@ p {
 .currentLink {
 	font-weight:bold;
 }
+input {
+	z-index:90000;
+}

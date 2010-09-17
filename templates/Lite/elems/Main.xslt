@@ -46,7 +46,14 @@
 		</xsl:if>
 		<xsl:if test="thread/id">
 			<a>
-				<xsl:attribute name="href">/Thread/<xsl:value-of select="thread/id"/>/</xsl:attribute>
+				<xsl:attribute name="href">
+					<xsl:text>/Thread/</xsl:text>
+					<xsl:value-of select="thread/id"/>
+					<xsl:if test="parent::post/id">
+						<xsl:text>/p</xsl:text>
+						<xsl:value-of select="parent::post/id"/>
+					</xsl:if>
+				</xsl:attribute>
 				<xsl:value-of select="thread/name"/>
 			</a>
 			<xsl:text> &gt;&gt; </xsl:text>
