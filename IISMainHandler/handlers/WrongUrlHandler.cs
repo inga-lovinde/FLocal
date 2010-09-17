@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Xml.Linq;
+using FLocal.Core;
 
 namespace FLocal.IISHandler.handlers {
 	class WrongUrlHandler : AbstractGetHandler  {
@@ -15,6 +16,7 @@ namespace FLocal.IISHandler.handlers {
 		}
 
 		protected override IEnumerable<XElement> getSpecificData(WebContext context) {
+			context.LogError(new WrongUrlException());
 			return new XElement[] {
 				new XElement("path", context.httprequest.Path)
 			};
