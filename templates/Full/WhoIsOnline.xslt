@@ -50,8 +50,8 @@
 			</td>
 			<td>
 				<a>
-					<xsl:attribute name="href"><xsl:value-of select="lastUrl"/></xsl:attribute>
-					<xsl:value-of select="lastUrl"/>
+					<xsl:attribute name="href"><xsl:value-of select="lastUrl/url"/></xsl:attribute>
+					<xsl:value-of select="lastUrl/title"/>
 				</a>
 			</td>
 		</tr>

@@ -323,5 +323,14 @@ namespace FLocal.Common.URL {
 			}
 		}
 
+		public static string TryGetTitle(string Path) {
+			try {
+				AbstractUrl url = Parse(Path, new NameValueCollection(), true);
+				return url.title;
+			} catch(Exception) {
+				return Path;
+			}
+		}
+
 	}
 }

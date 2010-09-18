@@ -13,7 +13,10 @@
 			</title>
 			<description>
 				<xsl:text>Посещает </xsl:text>
-				<xsl:value-of select="lastUrl"/>
+				<xsl:value-of select="lastUrl/url"/>
+				<xsl:text> (</xsl:text>
+				<xsl:value-of select="lastUrl/title"/>
+				<xsl:text>)</xsl:text>
 			</description>
 			<link>
 				<xsl:value-of select="$mainUrl"/>

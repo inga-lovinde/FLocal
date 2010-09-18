@@ -9,6 +9,7 @@ using FLocal.Common.dataobjects;
 using FLocal.Core;
 using FLocal.Core.DB;
 using FLocal.Core.DB.conditions;
+using FLocal.Common.URL;
 
 namespace FLocal.IISHandler.handlers.response {
 
@@ -55,7 +56,7 @@ namespace FLocal.IISHandler.handlers.response {
 					select account.user.exportToXmlForViewing(
 						context,
 						new XElement("lastActivity", session.lastHumanActivity.ToXml()),
-						!account.isDetailedStatusHidden ? new XElement("lastUrl", session.lastUrl) : null
+						!account.isDetailedStatusHidden ? new XElement("lastUrl", new XElement("url", session.lastUrl), new XElement("title", UrlManager.TryGetTitle(session.lastUrl))) : null
 					)
 				)
 			};
