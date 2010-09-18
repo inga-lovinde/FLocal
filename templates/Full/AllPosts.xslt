@@ -6,7 +6,6 @@
 		<xsl:text>Все сообщения</xsl:text>
 	</xsl:template>
 	<xsl:template name="isRssEnabled">true</xsl:template>
-	<xsl:template name="rssRelativeLink">/AllPosts/</xsl:template>
 	<xsl:template name="specific">
 		<table width="95%" align="center" cellpadding="1" cellspacing="1" class="tablesurround">
 			<tr>
@@ -40,9 +39,7 @@
 									<tr>
 										<td>
 											<xsl:text>страницы:</xsl:text>
-											<xsl:apply-templates select="posts/pageOuter" mode="withCurrent">
-												<xsl:with-param name="baseLink">/AllPosts/</xsl:with-param>
-											</xsl:apply-templates>
+											<xsl:apply-templates select="posts/pageOuter" mode="withCurrent"/>
 										</td>
 									</tr>
 								</table>
@@ -55,9 +52,7 @@
 									<tr>
 										<td>
 											<xsl:text>страницы:</xsl:text>
-											<xsl:apply-templates select="posts/pageOuter" mode="withCurrent">
-												<xsl:with-param name="baseLink">/AllPosts/</xsl:with-param>
-											</xsl:apply-templates>
+											<xsl:apply-templates select="posts/pageOuter" mode="withCurrent"/>
 										</td>
 									</tr>
 								</table>

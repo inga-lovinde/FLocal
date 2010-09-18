@@ -20,9 +20,7 @@
 							<td colspan="3">
 								<font class="onbody">
 									<xsl:text>страницы:</xsl:text>
-									<xsl:apply-templates select="polls/pageOuter" mode="withCurrent">
-										<xsl:with-param name="baseLink">/Users/User/<xsl:value-of select="user/id"/>/PollsParticipated/</xsl:with-param>
-									</xsl:apply-templates>
+									<xsl:apply-templates select="polls/pageOuter" mode="withCurrent"/>
 								</font>
 							</td>
 						</tr>

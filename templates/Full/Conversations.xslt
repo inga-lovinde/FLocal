@@ -5,7 +5,6 @@
 	<xsl:template name="specificTitle">Личные сообщения</xsl:template>
 	<xsl:template name="isLiteEnabled">true</xsl:template>
 	<xsl:template name="isRssEnabled">true</xsl:template>
-	<xsl:template name="rssRelativeLink">/My/Conversations/</xsl:template>
 	<xsl:template name="specific">
 		<table width="95%" align="center" cellpadding="1" cellspacing="1" class="tablesurround">
 			<tr>
@@ -81,9 +80,7 @@
 							<td colspan="3">
 								<font class="onbody">
 									<xsl:text>страницы:</xsl:text>
-									<xsl:apply-templates select="conversations/pageOuter" mode="withCurrent">
-										<xsl:with-param name="baseLink">/My/Conversations/</xsl:with-param>
-									</xsl:apply-templates>
+									<xsl:apply-templates select="conversations/pageOuter" mode="withCurrent"/>
 								</font>
 							</td>
 						</tr>

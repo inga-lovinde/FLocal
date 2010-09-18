@@ -33,9 +33,7 @@
 				<td colspan="2">
 					<font class="onbody">
 						<xsl:text>страницы:</xsl:text>
-						<xsl:apply-templates select="threads/pageOuter" mode="withCurrent">
-							<xsl:with-param name="baseLink">/Board/<xsl:value-of select="currentLocation/board/id"/>/</xsl:with-param>
-						</xsl:apply-templates>
+						<xsl:apply-templates select="threads/pageOuter" mode="withCurrent"/>
 					</font>
 				</td>
 			</tr>

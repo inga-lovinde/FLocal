@@ -6,7 +6,7 @@
 
 	<xsl:template name="isLiteEnabled">false</xsl:template>
 	<xsl:template name="isRssEnabled">false</xsl:template>
-	<xsl:template name="rssRelativeLink"><xsl:value-of select="currentUrl"/></xsl:template>
+	<xsl:template name="rssRelativeLink"><xsl:value-of select="currentBaseUrl"/></xsl:template>
 
 	<xsl:template name="headerLink">
 		<xsl:param name="url"/>

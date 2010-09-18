@@ -93,9 +93,7 @@
 		<br/>
 		<div class="tdheader">
 			<xsl:text>страницы:</xsl:text>
-			<xsl:apply-templates select="posts/pageOuter" mode="withCurrent">
-				<xsl:with-param name="baseLink">/BoardAsThread/<xsl:value-of select="currentLocation/board/id"/>/</xsl:with-param>
-			</xsl:apply-templates>
+			<xsl:apply-templates select="posts/pageOuter" mode="withCurrent"/>
 		</div>
 		<xsl:apply-templates select="posts/post"/>
 		<div class="tdheader">

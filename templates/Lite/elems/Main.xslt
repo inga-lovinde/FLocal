@@ -154,7 +154,9 @@
 	</xsl:template>
 
 	<xsl:template match="pageOuter" mode="withCurrent">
-		<xsl:param name="baseLink"/>
+		<xsl:param name="baseLink">
+			<xsl:value-of select="/root/currentBaseUrl"/>
+		</xsl:param>
 		<xsl:text> </xsl:text>
 		<xsl:apply-templates select="pages/page" mode="withoutCurrent">
 			<xsl:with-param name="baseLink"><xsl:value-of select="$baseLink"/></xsl:with-param>

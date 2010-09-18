@@ -26,9 +26,7 @@
 				<td colspan="3">
 					<font class="onbody">
 						<xsl:text>страницы:</xsl:text>
-						<xsl:apply-templates select="conversations/pageOuter" mode="withCurrent">
-							<xsl:with-param name="baseLink">/My/Conversations/</xsl:with-param>
-						</xsl:apply-templates>
+						<xsl:apply-templates select="conversations/pageOuter" mode="withCurrent"/>
 					</font>
 				</td>
 			</tr>

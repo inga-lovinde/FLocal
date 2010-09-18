@@ -18,9 +18,7 @@
 									<tr>
 										<td>
 											<xsl:text>страницы:</xsl:text>
-											<xsl:apply-templates select="messages/pageOuter" mode="withCurrent">
-												<xsl:with-param name="baseLink">/My/Conversations/Conversation/<xsl:value-of select="conversation/interlocutor/account/id"/>/</xsl:with-param>
-											</xsl:apply-templates>
+											<xsl:apply-templates select="messages/pageOuter" mode="withCurrent"/>
 										</td>
 									</tr>
 								</table>
@@ -33,9 +31,7 @@
 									<tr>
 										<td>
 											<xsl:text>страницы:</xsl:text>
-											<xsl:apply-templates select="messages/pageOuter" mode="withCurrent">
-												<xsl:with-param name="baseLink">/My/Conversations/Conversation/<xsl:value-of select="conversation/interlocutor/account/id"/>/</xsl:with-param>
-											</xsl:apply-templates>
+											<xsl:apply-templates select="messages/pageOuter" mode="withCurrent"/>
 										</td>
 									</tr>
 								</table>
