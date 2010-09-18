@@ -78,10 +78,10 @@ namespace FLocal.Common.dataobjects {
 		public static IEnumerable<PunishmentType> allTypes {
 			get {
 				return
-					from id in Cache<IEnumerable<int>>.instance.get(
+					from id in Cache<List<int>>.instance.get(
 						allTypes_Locker,
 						() => {
-							IEnumerable<int> ids = (from stringId in Config.instance.mainConnection.LoadIdsByConditions(
+							List<int> ids = (from stringId in Config.instance.mainConnection.LoadIdsByConditions(
 								TableSpec.instance,
 								new FLocal.Core.DB.conditions.EmptyCondition(),
 								Diapasone.unlimited

@@ -53,10 +53,10 @@ namespace FLocal.Common.dataobjects {
 		public static IEnumerable<PostLayer> allLayers {
 			get {
 				return
-					from id in Cache<IEnumerable<int>>.instance.get(
+					from id in Cache<List<int>>.instance.get(
 						allLayers_Locker,
 						() => {
-							IEnumerable<int> ids = (from stringId in Config.instance.mainConnection.LoadIdsByConditions(
+							List<int> ids = (from stringId in Config.instance.mainConnection.LoadIdsByConditions(
 								TableSpec.instance,
 								new FLocal.Core.DB.conditions.EmptyCondition(),
 								Diapasone.unlimited
