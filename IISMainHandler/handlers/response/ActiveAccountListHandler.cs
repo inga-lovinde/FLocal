@@ -11,7 +11,7 @@ using FLocal.Core.DB.conditions;
 
 namespace FLocal.IISHandler.handlers.response {
 
-	class ActiveAccountListHandler : AbstractGetHandler {
+	class ActiveAccountListHandler : AbstractGetHandler<FLocal.Common.URL.users.Active> {
 
 		override protected string templateName {
 			get {
@@ -20,7 +20,6 @@ namespace FLocal.IISHandler.handlers.response {
 		}
 
 		override protected IEnumerable<XElement> getSpecificData(WebContext context) {
-			//PageOuter pageOuter = PageOuter.createFromGet(context.requestParts, context.userSettings.usersPerPage, 1);
 			PageOuter pageOuter = PageOuter.createUnlimited(context.userSettings.usersPerPage);
 			IEnumerable<Account> accounts = Account.LoadByIds(
 				from stringId in Config.instance.mainConnection.LoadIdsByConditions(

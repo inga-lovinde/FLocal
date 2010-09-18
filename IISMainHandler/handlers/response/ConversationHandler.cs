@@ -12,7 +12,7 @@ using FLocal.Core.DB.conditions;
 
 namespace FLocal.IISHandler.handlers.response {
 
-	class ConversationHandler : AbstractGetHandler {
+	class ConversationHandler : AbstractGetHandler<FLocal.Common.URL.my.conversations.Conversation> {
 
 		override protected string templateName {
 			get {
@@ -21,15 +21,15 @@ namespace FLocal.IISHandler.handlers.response {
 		}
 
 		override protected IEnumerable<XElement> getSpecificData(WebContext context) {
-			Account interlocutor = Account.LoadById(int.Parse(context.requestParts[3]));
+			Account interlocutor = this.url.interlocutor;
 			PMConversation conversation = PMConversation.LoadByAccounts(context.session.account, interlocutor);
-			PageOuter pageOuter = PageOuter.createFromGet(
-				context.requestParts,
+			PageOuter pageOuter = PageOuter.createFromUrl(
+				this.url,
 				context.userSettings.postsPerPage,
-				new Dictionary<char,Func<long>> {
+				new Dictionary<char, Func<string, long>> {
 					{
 						'p',
-						() => Config.instance.mainConnection.GetCountByConditions(
+						s => Config.instance.mainConnection.GetCountByConditions(
 							PMMessage.TableSpec.instance,
 							new ComplexCondition(
 								ConditionsJoinType.AND,
@@ -46,13 +46,12 @@ namespace FLocal.IISHandler.handlers.response {
 								new ComparisonCondition(
 									PMMessage.TableSpec.instance.getIdSpec(),
 									ComparisonType.LESSTHAN,
-									int.Parse(context.requestParts[4].PHPSubstring(1)).ToString()
+									int.Parse(s).ToString()
 								)
 							)
 						)
 					}
-				},
-				4
+				}
 			);
 			IEnumerable<PMMessage> messages = conversation.getMessages(pageOuter, context, pageOuter.ascendingDirection);
 

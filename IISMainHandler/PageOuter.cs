@@ -47,7 +47,9 @@ namespace FLocal.IISHandler {
 			return result;
 		}
 
-		public static PageOuter createFromGet(string[] requestParts, long perPage, Dictionary<char, Func<long>> customAction, int offset) {
+		public static PageOuter createFromUrl(FLocal.Common.URL.AbstractUrl url, long perPage, Dictionary<char, Func<string, long>> customAction) {
+			string[] requestParts = url.remainder.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+			int offset = 0;
 			bool reversed = (requestParts.Length > (offset+1)) && (requestParts[offset+1].ToLower() == "reversed");
 			if(requestParts.Length > offset) {
 				if(requestParts[offset].ToLower() == "all") {
@@ -55,15 +57,15 @@ namespace FLocal.IISHandler {
 				} else if(Char.IsDigit(requestParts[offset][0])) {
 					return new PageOuter(long.Parse(requestParts[offset]), perPage, perPage, reversed);
 				} else {
-					return new PageOuter(customAction[requestParts[offset][0]](), perPage, perPage, reversed);
+					return new PageOuter(customAction[requestParts[offset][0]](requestParts[offset].Substring(1)), perPage, perPage, reversed);
 				}
 			} else {
 				return new PageOuter(0, perPage, perPage, reversed);
 			}
 		}
 
-		public static PageOuter createFromGet(string[] requestParts, long perPage, int offset) {
-			return createFromGet(requestParts, perPage, new Dictionary<char, Func<long>>(), offset);
+		public static PageOuter createFromUrl(FLocal.Common.URL.AbstractUrl url, long perPage) {
+			return createFromUrl(url, perPage, new Dictionary<char, Func<string, long>>());
 		}
 
 		public XElement exportToXml(int left, int current, int right) {

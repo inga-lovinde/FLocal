@@ -12,7 +12,7 @@ using FLocal.Core.DB.conditions;
 
 namespace FLocal.IISHandler.handlers.response {
 
-	class AllPostsHandler : AbstractGetHandler {
+	class AllPostsHandler : AbstractGetHandler<FLocal.Common.URL.forum.AllPosts> {
 
 		override protected string templateName {
 			get {
@@ -21,11 +21,7 @@ namespace FLocal.IISHandler.handlers.response {
 		}
 
 		override protected IEnumerable<XElement> getSpecificData(WebContext context) {
-			PageOuter pageOuter = PageOuter.createFromGet(
-				context.requestParts,
-				context.userSettings.postsPerPage,
-				1
-			);
+			PageOuter pageOuter = PageOuter.createFromUrl(this.url, context.userSettings.postsPerPage);
 			IEnumerable<Post> posts = Post.LoadByIds(
 				from stringId
 				in Config.instance.mainConnection.LoadIdsByConditions(

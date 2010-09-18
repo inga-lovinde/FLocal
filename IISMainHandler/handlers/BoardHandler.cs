@@ -11,7 +11,7 @@ using FLocal.Core.DB;
 
 namespace FLocal.IISHandler.handlers {
 
-	class BoardHandler : AbstractGetHandler {
+	class BoardHandler : AbstractGetHandler<FLocal.Common.URL.forum.board.Threads> {
 
 		override protected string templateName {
 			get {
@@ -20,8 +20,8 @@ namespace FLocal.IISHandler.handlers {
 		}
 
 		override protected IEnumerable<XElement> getSpecificData(WebContext context) {
-			Board board = Board.LoadById(int.Parse(context.requestParts[1]));
-			PageOuter pageOuter = PageOuter.createFromGet(context.requestParts, context.userSettings.threadsPerPage, 2);
+			Board board = this.url.board;
+			PageOuter pageOuter = PageOuter.createFromUrl(this.url, context.userSettings.threadsPerPage);
 			IEnumerable<Thread> threads = board.getThreads(pageOuter, pageOuter.descendingDirection);
 			XElement[] result = new XElement[] {
 				new XElement("currentLocation", board.exportToXmlSimpleWithParent(context)),

@@ -12,7 +12,7 @@ using FLocal.Core.DB.conditions;
 
 namespace FLocal.IISHandler.handlers.response {
 
-	class UserInfoHandler : AbstractUserGetHandler {
+	class UserInfoHandler : AbstractUserGetHandler<FLocal.Common.URL.users.user.Info> {
 
 		override protected string templateName {
 			get {

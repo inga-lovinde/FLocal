@@ -12,7 +12,7 @@ using FLocal.Core.DB.conditions;
 
 namespace FLocal.IISHandler.handlers.response {
 
-	class PollHandler : AbstractGetHandler {
+	class PollHandler : AbstractGetHandler<FLocal.Common.URL.polls.Info> {
 
 		override protected string templateName {
 			get {
@@ -21,7 +21,7 @@ namespace FLocal.IISHandler.handlers.response {
 		}
 
 		override protected IEnumerable<XElement> getSpecificData(WebContext context) {
-			Poll poll = Poll.LoadById(int.Parse(context.requestParts[1]));
+			Poll poll = this.url.poll;
 			return new XElement[] {
 				poll.exportToXmlWithVotes(context)
 			};

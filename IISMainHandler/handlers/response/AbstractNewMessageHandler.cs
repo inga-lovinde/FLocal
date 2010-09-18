@@ -7,7 +7,7 @@ using FLocal.Core;
 using FLocal.Common;
 
 namespace FLocal.IISHandler.handlers.response {
-	abstract class AbstractNewMessageHandler : AbstractGetHandler {
+	abstract class AbstractNewMessageHandler<TUrl> : AbstractGetHandler<TUrl> where TUrl : FLocal.Common.URL.AbstractUrl {
 
 		abstract protected IEnumerable<XElement> getSpecificNewMessageData(WebContext context);
 
@@ -20,7 +20,7 @@ namespace FLocal.IISHandler.handlers.response {
 				result.Add(new XElement("bodyUBB", context.httprequest.Form["Body"]));
 				result.Add(new XElement("bodyIntermediate", context.outputParams.preprocessBodyIntermediate(UBBParser.UBBToIntermediate(context.httprequest.Form["Body"]))));
 			}
-			return result.Union(this.getSpecificNewMessageData(context));
+			return result.Concat(this.getSpecificNewMessageData(context));
 		}
 
 	}

@@ -10,7 +10,7 @@ using FLocal.Common.dataobjects;
 
 namespace FLocal.IISHandler.handlers.response {
 
-	class PMReplyToPostHandler : AbstractNewMessageHandler {
+	class PMReplyToPostHandler : AbstractNewMessageHandler<FLocal.Common.URL.forum.board.thread.post.PMReply> {
 
 		override protected string templateName {
 			get {
@@ -20,7 +20,7 @@ namespace FLocal.IISHandler.handlers.response {
 
 		override protected IEnumerable<XElement> getSpecificNewMessageData(WebContext context) {
 
-			Post post = Post.LoadById(int.Parse(context.requestParts[1]));
+			Post post = this.url.post;
 			Account receiver = Account.LoadByUser(post.poster);
 			if(receiver.needsMigration) throw new ApplicationException("User is not migrated");
 

@@ -11,7 +11,7 @@ using FLocal.Core.DB;
 
 namespace FLocal.IISHandler.handlers.response {
 
-	class ConversationsHandler : AbstractGetHandler {
+	class ConversationsHandler : AbstractGetHandler<FLocal.Common.URL.my.conversations.List> {
 
 		override protected string templateName {
 			get {
@@ -20,7 +20,7 @@ namespace FLocal.IISHandler.handlers.response {
 		}
 
 		override protected IEnumerable<XElement> getSpecificData(WebContext context) {
-			PageOuter pageOuter = PageOuter.createFromGet(context.requestParts, context.userSettings.threadsPerPage, 2);
+			PageOuter pageOuter = PageOuter.createFromUrl(this.url, context.userSettings.threadsPerPage);
 			IEnumerable<PMConversation> conversations = PMConversation.getConversations(context.session.account, pageOuter, pageOuter.descendingDirection);
 			XElement[] result = new XElement[] {
 				new XElement("conversations", 

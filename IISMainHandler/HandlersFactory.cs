@@ -4,278 +4,125 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using FLocal.Core;
+using FLocal.Common.URL;
+using URL = FLocal.Common.URL;
 
 namespace FLocal.IISHandler {
 	class HandlersFactory {
 
+		private static readonly Dictionary<Type, Func<AbstractUrl, ISpecificHandler>> handlersDictionary = new Dictionary<Type,Func<AbstractUrl,ISpecificHandler>> {
+			{ typeof(URL.forum.AllPosts),CreateHandler<URL.forum.AllPosts, handlers.response.AllPostsHandler> },
+			{ typeof(URL.forum.AllThreads), CreateHandler<URL.forum.AllThreads, handlers.response.AllThreadsHandler> },
+			{ typeof(URL.forum.board.Headlines), CreateHandler<URL.forum.board.Headlines, handlers.response.BoardAsThreadHandler> },
+			{ typeof(URL.forum.board.NewThread), CreateHandler<URL.forum.board.NewThread, handlers.response.CreateThreadHandler> },
+			{ typeof(URL.forum.board.thread.post.Edit), CreateHandler<URL.forum.board.thread.post.Edit, handlers.response.EditHandler> },
+			{ typeof(URL.forum.board.thread.post.PMReply), CreateHandler<URL.forum.board.thread.post.PMReply, handlers.response.PMReplyToPostHandler> },
+			{ typeof(URL.forum.board.thread.post.Punish), CreateHandler<URL.forum.board.thread.post.Punish, handlers.response.PunishHandler> },
+			{ typeof(URL.forum.board.thread.post.Reply), CreateHandler<URL.forum.board.thread.post.Reply, handlers.response.ReplyHandler> },
+			{ typeof(URL.forum.board.thread.post.Show), CreateHandler<URL.forum.board.thread.post.Show, handlers.PostHandler> },
+			{ typeof(URL.forum.board.thread.Posts), CreateHandler<URL.forum.board.thread.Posts, handlers.ThreadHandler> },
+			{ typeof(URL.forum.board.Threads), CreateHandler<URL.forum.board.Threads, handlers.BoardHandler> },
+			{ typeof(URL.forum.Boards), CreateHandler<URL.forum.Boards, handlers.BoardsHandler> },
+			{ typeof(URL.maintenance.CleanCache), CreateHandler<URL.maintenance.CleanCache, handlers.response.maintenance.CleanCacheHandler> },
+			{ typeof(URL.maintenance.LocalNetworks), CreateHandler<URL.maintenance.LocalNetworks, handlers.response.LocalNetworksListHandler> },
+			{ typeof(URL.my.Avatars), CreateHandler<URL.my.Avatars, handlers.response.AvatarsSettingsHandler> },
+			{ typeof(URL.my.conversations.Conversation), CreateHandler<URL.my.conversations.Conversation, handlers.response.ConversationHandler> },
+			{ typeof(URL.my.conversations.List), CreateHandler<URL.my.conversations.List, handlers.response.ConversationsHandler> },
+			{ typeof(URL.my.conversations.NewPM), CreateHandler<URL.my.conversations.NewPM, handlers.response.PMSendHandler> },
+			{ typeof(URL.my.conversations.Reply), CreateHandler<URL.my.conversations.Reply, handlers.response.PMReplyHandler> },
+			{ typeof(URL.my.login.Login), CreateHandler<URL.my.login.Login, handlers.response.LoginHandler> },
+			{ typeof(URL.my.login.Migrate), CreateHandler<URL.my.login.Migrate, handlers.response.MigrateAccountHandler> },
+			{ typeof(URL.my.login.RegisterByInvite), CreateHandler<URL.my.login.RegisterByInvite, handlers.response.RegisterByInviteHandler> },
+			{ typeof(URL.my.Settings), CreateHandler<URL.my.Settings, handlers.response.SettingsHandler> },
+			{ typeof(URL.my.UserData), CreateHandler<URL.my.UserData, handlers.response.UserDataHandler> },
+			{ typeof(URL.polls.Info), CreateHandler<URL.polls.Info, handlers.response.PollHandler> },
+			{ typeof(URL.polls.NewPoll), CreateHandler<URL.polls.NewPoll, handlers.response.CreatePollHandler> },
+			{ typeof(URL.QuickLink), CreateHandler<URL.QuickLink, handlers.response.QuickLinkHandler> },
+			{ typeof(URL.Robots), CreateHandler<URL.Robots, handlers.response.RobotsHandler> },
+			{ typeof(URL.Static), CreateHandler<URL.Static, handlers.StaticHandler> },
+			{ typeof(URL.upload.Item), CreateHandler<URL.upload.Item, handlers.response.UploadHandler> },
+			{ typeof(URL.upload.List), CreateHandler<URL.upload.List, handlers.response.UploadListHandler> },
+			{ typeof(URL.upload.New), CreateHandler<URL.upload.New, handlers.response.UploadNewHandler> },
+			{ typeof(URL.users.Active), CreateHandler<URL.users.Active, handlers.response.ActiveAccountListHandler> },
+			{ typeof(URL.users.All), CreateHandler<URL.users.All, handlers.response.UserListHandler> },
+			{ typeof(URL.users.Online), CreateHandler<URL.users.Online, handlers.response.WhoIsOnlineHandler> },
+			{ typeof(URL.users.user.Info), CreateHandler<URL.users.user.Info, handlers.response.UserInfoHandler> },
+			{ typeof(URL.users.user.PollsParticipated), CreateHandler<URL.users.user.PollsParticipated, handlers.response.UserPollsParticipatedHandler> },
+			{ typeof(URL.users.user.Posts), CreateHandler<URL.users.user.Posts, handlers.response.UserPostsHandler> },
+			{ typeof(URL.users.user.Replies), CreateHandler<URL.users.user.Replies, handlers.response.UserRepliesHandler> },
+			{ typeof(URL.users.user.Threads), CreateHandler<URL.users.user.Threads, handlers.response.UserThreadsHandler> },
+		};
+
+		private static ISpecificHandler CreateHandler<TUrl, THandler>(AbstractUrl url)
+			where TUrl : AbstractUrl
+			where THandler : handlers.AbstractGetHandler<TUrl>, new()
+		{
+			return new THandler() {
+				url = (TUrl)url
+			};
+		}
+
 		public static ISpecificHandler getHandler(WebContext context) {
-//			if(!context.httprequest.Path.EndsWith("/")) {
-//				return new handlers.WrongUrlHandler();
-//				throw new FLocalException("Malformed url");
-//			}
-			if(context.requestParts.Length < 1) {
-				//return new handlers.RootHandler();
-				throw new RedirectException("/Boards/");
+			if(context.httprequest.Path.ToLower().StartsWith("/do/")) {
+				string action = context.httprequest.Path.ToLower().Substring(4).Trim('/');
+				if(action.StartsWith("markthreadasread")) {
+					return new handlers.request.MarkThreadAsReadHandler();
+				}
+				switch(action) {
+					case "login":
+						return new handlers.request.LoginHandler();
+					case "logout":
+						return new handlers.request.LogoutHandler();
+					case "migrateaccount":
+						return new handlers.request.MigrateAccountHandler();
+					case "register":
+						return new handlers.request.RegisterHandler();
+					case "registerbyinvite":
+						return new handlers.request.RegisterByInviteHandler();
+					case "edit":
+						return new handlers.request.EditHandler();
+					case "punish":
+						return new handlers.request.PunishHandler();
+					case "reply":
+						return new handlers.request.ReplyHandler();
+					case "newthread":
+						return new handlers.request.CreateThreadHandler();
+					case "settings":
+						return new handlers.request.SettingsHandler();
+					case "userdata":
+						return new handlers.request.UserDataHandler();
+					case "sendpm":
+						return new handlers.request.SendPMHandler();
+					case "upload":
+						return new handlers.request.UploadHandler();
+					case "newpoll":
+						return new handlers.request.CreatePollHandler();
+					case "vote":
+						return new handlers.request.VoteHandler();
+					case "avatars/add":
+						return new handlers.request.avatars.AddHandler();
+					case "avatars/remove":
+						return new handlers.request.avatars.RemoveHandler();
+					case "avatars/setasdefault":
+						return new handlers.request.avatars.SetAsDefaultHandler();
+					case "maintenance/cleancache":
+						return new handlers.request.maintenance.CleanCacheHandler();
+					default:
+						return new handlers.WrongUrlHandler();
+				}
 			}
 
-			#region legacy
-			if(context.httprequest.Path.ToLower().StartsWith("/user/upload/")) {
-				return new handlers.response.LegacyUploadHandler();
+			AbstractUrl url = UrlManager.Parse(context.httprequest.Path, context.httprequest.QueryString, context.account != null);
+			if(url == null) {
+				return new handlers.WrongUrlHandler();
 			}
-			if(context.httprequest.Path.EndsWith(".php")) {
-				return new handlers.response.LegacyPHPHandler();
-			}
-			if(context.httprequest.Path.ToLower().StartsWith("/images/graemlins/")) {
-				throw new RedirectException("/static/smileys/" + context.requestParts[2]);
-			}
-			#endregion
 
-			#region robots
-			if(context.httprequest.Path.ToLower().StartsWith("/robots.txt")) {
-				return new handlers.response.RobotsHandler();
+			if(!context.httprequest.Path.StartsWith(url.canonical)) {
+				throw new RedirectException(url.canonicalFull);
 			}
-			#endregion
 
-			switch(context.requestParts[0].ToLower()) {
-				case "q":
-					return new handlers.response.QuickLinkHandler();
-				case "allposts":
-					return new handlers.response.AllPostsHandler();
-				case "allthreads":
-					return new handlers.response.AllThreadsHandler();
-				case "boards":
-					return new handlers.BoardsHandler();
-				case "board":
-					if(context.requestParts.Length < 2) {
-						return new handlers.WrongUrlHandler();
-					}
-					if(context.requestParts.Length == 2) {
-						return new handlers.BoardHandler();
-					}
-					switch(context.requestParts[2].ToLower()) {
-						case "newthread":
-							return new handlers.response.CreateThreadHandler();
-						default:
-							return new handlers.BoardHandler();
-					}
-				case "boardasthread":
-					return new handlers.response.BoardAsThreadHandler();
-				case "thread":
-					return new handlers.ThreadHandler();
-				case "post":
-					if(context.requestParts.Length < 2) {
-						return new handlers.WrongUrlHandler();
-					}
-					if(context.requestParts.Length == 2) {
-						return new handlers.PostHandler();
-					}
-					switch(context.requestParts[2].ToLower()) {
-						case "edit":
-							return new handlers.response.EditHandler();
-						case "reply":
-							return new handlers.response.ReplyHandler();
-						case "pmreply":
-							return new handlers.response.PMReplyToPostHandler();
-						case "punish":
-							return new handlers.response.PunishHandler();
-						default:
-							return new handlers.WrongUrlHandler();
-					}
-				case "my":
-					if(context.requestParts.Length == 1) {
-						if(context.account != null) {
-							throw new RedirectException("/My/Conversations/");
-						} else {
-							throw new RedirectException("/My/Login/");
-						}
-					}
-					switch(context.requestParts[1].ToLower()) {
-						case "login":
-							if(context.requestParts.Length == 2) {
-								return new handlers.response.LoginHandler();
-							} else {
-								switch(context.requestParts[2].ToLower()) {
-									case "migrateaccount":
-										return new handlers.response.MigrateAccountHandler();
-									case "registerbyinvite":
-										return new handlers.response.RegisterByInviteHandler();
-									default:
-										return new handlers.WrongUrlHandler();
-								}
-							}
-						case "settings":
-							return new handlers.response.SettingsHandler();
-						case "userdata":
-							return new handlers.response.UserDataHandler();
-						case "avatars":
-							return new handlers.response.AvatarsSettingsHandler();
-						case "conversations":
-							if(context.requestParts.Length == 2) {
-								return new handlers.response.ConversationsHandler();
-							} else {
-								switch(context.requestParts[2].ToLower()) {
-									case "conversation":
-										return new handlers.response.ConversationHandler();
-									case "pmsend":
-										return new handlers.response.PMSendHandler();
-									case "pmreply":
-										return new handlers.response.PMReplyHandler();
-									default:
-										return new handlers.response.ConversationsHandler();
-								}
-							}
-						default:
-							return new handlers.WrongUrlHandler();
-					}
-				case "users":
-					if(context.requestParts.Length == 1) {
-						throw new RedirectException("/Users/All/");
-					}
-					switch(context.requestParts[1].ToLower()) {
-						case "all":
-							return new handlers.response.UserListHandler();
-						case "active":
-							return new handlers.response.ActiveAccountListHandler();
-						case "online":
-							return new handlers.response.WhoIsOnlineHandler();
-						case "user":
-							if(context.requestParts.Length < 3) {
-								return new handlers.WrongUrlHandler();
-							}
-							if(context.requestParts.Length == 3) {
-								throw new RedirectException("/Users/User/" + context.requestParts[2] + "/Info/");
-							}
-							switch(context.requestParts[3].ToLower()) {
-								case "info":
-									return new handlers.response.UserInfoHandler();
-								case "threads":
-									return new handlers.response.UserThreadsHandler();
-								case "posts":
-									return new handlers.response.UserPostsHandler();
-								case "replies":
-									return new handlers.response.UserRepliesHandler();
-								case "pollsparticipated":
-									return new handlers.response.UserPollsParticipatedHandler();
-								default:
-									return new handlers.WrongUrlHandler();
-							}
-						default:
-							return new handlers.WrongUrlHandler();
-					}
-				case "upload":
-					if(context.requestParts.Length < 2) {
-						throw new RedirectException("/Upload/List/");
-					}
-					switch(context.requestParts[1].ToLower()) {
-						case "item":
-							return new handlers.response.UploadHandler();
-						case "new":
-							return new handlers.response.UploadNewHandler();
-						case "list":
-							return new handlers.response.UploadListHandler();
-						default:
-							return new handlers.WrongUrlHandler();
-					}
-				case "maintenance":
-					if(context.requestParts.Length < 2) {
-						return new handlers.WrongUrlHandler();
-					}
-					switch(context.requestParts[1].ToLower()) {
-						case "cleancache":
-							return new handlers.response.maintenance.CleanCacheHandler();
-						default:
-							return new handlers.WrongUrlHandler();
-					}
-				case "poll":
-					if(context.requestParts.Length < 2) {
-						return new handlers.WrongUrlHandler();
-					}
-					switch(context.requestParts[1].ToLower()) {
-						case "create":
-							return new handlers.response.CreatePollHandler();
-						default:
-							return new handlers.response.PollHandler();
-					}
-				case "localnetworks":
-					return new handlers.response.LocalNetworksListHandler();
-				case "static":
-					return new handlers.StaticHandler(context.requestParts);
-				case "registerbyinvite":
-					string[] rbi_parts = context.requestParts;
-					rbi_parts[0] = "My/Login/RegisterByInvite";
-					throw new RedirectException("/" + string.Join("/", rbi_parts));
-				case "user":
-					string[] u_parts = context.requestParts;
-					u_parts[0] = "Users/User";
-					throw new RedirectException("/" + string.Join("/", u_parts));
-				case "do":
-					if(context.requestParts.Length < 2) {
-						return new handlers.WrongUrlHandler();
-					} else {
-						switch(context.requestParts[1].ToLower()) {
-							case "login":
-								return new handlers.request.LoginHandler();
-							case "logout":
-								return new handlers.request.LogoutHandler();
-							case "migrateaccount":
-								return new handlers.request.MigrateAccountHandler();
-							case "register":
-								return new handlers.request.RegisterHandler();
-							case "registerbyinvite":
-								return new handlers.request.RegisterByInviteHandler();
-							case "edit":
-								return new handlers.request.EditHandler();
-							case "punish":
-								return new handlers.request.PunishHandler();
-							case "reply":
-								return new handlers.request.ReplyHandler();
-							case "newthread":
-								return new handlers.request.CreateThreadHandler();
-							case "settings":
-								return new handlers.request.SettingsHandler();
-							case "userdata":
-								return new handlers.request.UserDataHandler();
-							case "sendpm":
-								return new handlers.request.SendPMHandler();
-							case "markthreadasread":
-								return new handlers.request.MarkThreadAsReadHandler();
-							case "upload":
-								return new handlers.request.UploadHandler();
-							case "newpoll":
-								return new handlers.request.CreatePollHandler();
-							case "vote":
-								return new handlers.request.VoteHandler();
-							case "avatars":
-								if(context.requestParts.Length < 3) {
-									return new handlers.WrongUrlHandler();
-								}
-								switch(context.requestParts[2].ToLower()) {
-									case "add":
-										return new handlers.request.avatars.AddHandler();
-									case "remove":
-										return new handlers.request.avatars.RemoveHandler();
-									case "setasdefault":
-										return new handlers.request.avatars.SetAsDefaultHandler();
-									default:
-										return new handlers.WrongUrlHandler();
-								}
-							case "maintenance":
-								if(context.requestParts.Length < 3) {
-									return new handlers.WrongUrlHandler();
-								}
-								switch(context.requestParts[2].ToLower()) {
-									case "cleancache":
-										return new handlers.request.maintenance.CleanCacheHandler();
-									default:
-										return new handlers.WrongUrlHandler();
-								}
-							default:
-								return new handlers.WrongUrlHandler();
-						}
-					}
-				default:
-					return new handlers.WrongUrlHandler();
-			}
+			return handlersDictionary[url.GetType()](url);
+
 		}
 
 	}

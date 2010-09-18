@@ -12,7 +12,7 @@ using FLocal.Core.DB.conditions;
 
 namespace FLocal.IISHandler.handlers.response {
 
-	class AllThreadsHandler : AbstractGetHandler {
+	class AllThreadsHandler : AbstractGetHandler<FLocal.Common.URL.forum.AllThreads> {
 
 		override protected string templateName {
 			get {
@@ -21,11 +21,7 @@ namespace FLocal.IISHandler.handlers.response {
 		}
 
 		override protected IEnumerable<XElement> getSpecificData(WebContext context) {
-			PageOuter pageOuter = PageOuter.createFromGet(
-				context.requestParts,
-				context.userSettings.threadsPerPage,
-				1
-			);
+			PageOuter pageOuter = PageOuter.createFromUrl(this.url, context.userSettings.threadsPerPage);
 			IEnumerable<Thread> threads = Thread.LoadByIds(
 				from stringId
 				in Config.instance.mainConnection.LoadIdsByConditions(

@@ -23,7 +23,7 @@ namespace FLocal.IISHandler {
 			}
 		}
 
-		private object requestParts_Locker = new object();
+		/*private object requestParts_Locker = new object();
 		private string[] requestParts_Data = null;
 		public string[] requestParts {
 			get {
@@ -36,7 +36,7 @@ namespace FLocal.IISHandler {
 				}
 				return this.requestParts_Data;
 			}
-		}
+		}*/
 
 		public XElement exportRequestParameters() {
 			return new XElement("get",

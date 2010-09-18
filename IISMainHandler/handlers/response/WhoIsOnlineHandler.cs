@@ -12,7 +12,7 @@ using FLocal.Core.DB.conditions;
 
 namespace FLocal.IISHandler.handlers.response {
 
-	class WhoIsOnlineHandler : AbstractGetHandler {
+	class WhoIsOnlineHandler : AbstractGetHandler<FLocal.Common.URL.users.Online> {
 
 		override protected string templateName {
 			get {

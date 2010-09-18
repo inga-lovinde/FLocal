@@ -10,7 +10,7 @@ using FLocal.Common.dataobjects;
 
 namespace FLocal.IISHandler.handlers.response {
 
-	class ReplyHandler : AbstractNewMessageHandler {
+	class ReplyHandler : AbstractNewMessageHandler<FLocal.Common.URL.forum.board.thread.post.Reply> {
 
 		override protected string templateName {
 			get {
@@ -20,7 +20,7 @@ namespace FLocal.IISHandler.handlers.response {
 
 		override protected IEnumerable<XElement> getSpecificNewMessageData(WebContext context) {
 			
-			Post post = Post.LoadById(int.Parse(context.requestParts[1]));
+			Post post = this.url.post;
 
 			string quoted = context.httprequest.Form["data"];
 			if(quoted != null) quoted = quoted.Trim();

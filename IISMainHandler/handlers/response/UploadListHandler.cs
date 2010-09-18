@@ -10,7 +10,7 @@ using FLocal.Core.DB;
 using FLocal.Core.DB.conditions;
 
 namespace FLocal.IISHandler.handlers.response {
-	class UploadListHandler : AbstractGetHandler {
+	class UploadListHandler : AbstractGetHandler<FLocal.Common.URL.upload.List> {
 
 		protected override string templateName {
 			get {
@@ -20,7 +20,7 @@ namespace FLocal.IISHandler.handlers.response {
 
 		protected override IEnumerable<XElement> getSpecificData(WebContext context) {
 			if(context.session == null) throw new AccessViolationException();
-			PageOuter pageOuter = PageOuter.createFromGet(context.requestParts, context.userSettings.uploadsPerPage, 2);
+			PageOuter pageOuter = PageOuter.createFromUrl(this.url, context.userSettings.uploadsPerPage);
 			List<Upload> uploads = Upload.LoadByIds(
 				from stringId in Config.instance.mainConnection.LoadIdsByConditions(
 					Upload.TableSpec.instance,

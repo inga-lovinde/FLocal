@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 using FLocal.Common;
+using FLocal.Common.URL;
 
 namespace FLocal.IISHandler.handlers {
+
 	abstract class AbstractGetHandler : ISpecificHandler {
 		
 		abstract protected string templateName {
@@ -14,7 +16,7 @@ namespace FLocal.IISHandler.handlers {
 
 		abstract protected IEnumerable<XElement> getSpecificData(WebContext context);
 
-		protected IEnumerable<XElement> getCommonData(WebContext context) {
+		virtual protected IEnumerable<XElement> getCommonData(WebContext context) {
 			return new XElement[] {
 				new XElement(
 					"url",
@@ -27,7 +29,6 @@ namespace FLocal.IISHandler.handlers {
 				context.exportSession(),
 				context.userSettings.skin.exportToXml(),
 				context.userSettings.machichara.exportToXml(),
-				new XElement("currentUrl", "/" + String.Join("/", context.requestParts) + "/"),
 				context.exportRequestParameters(),
 			};
 		}
@@ -44,6 +45,7 @@ namespace FLocal.IISHandler.handlers {
 		public void Handle(WebContext context) {
 			try {
 				context.WriteTransformResult(this.templateName, this.getData(context));
+			} catch(response.SkipXsltTransformException) {
 			} catch(RedirectException) {
 				throw;
 			} catch(WrongUrlException) {
@@ -55,4 +57,20 @@ namespace FLocal.IISHandler.handlers {
 		}
 
 	}
+
+	abstract class AbstractGetHandler<TUrl> : AbstractGetHandler where TUrl : AbstractUrl {
+
+		public TUrl url;
+
+		protected override IEnumerable<XElement> getCommonData(WebContext context) {
+			return base.getCommonData(context).Concat(
+				new XElement[] {
+					new XElement("currentUrl", this.url.canonicalFull),
+					new XElement("currentBaseUrl", this.url.canonical),
+				}
+			);
+		}
+
+	}
+
 }

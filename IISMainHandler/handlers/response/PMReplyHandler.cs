@@ -10,7 +10,7 @@ using FLocal.Common.dataobjects;
 
 namespace FLocal.IISHandler.handlers.response {
 
-	class PMReplyHandler : AbstractNewMessageHandler {
+	class PMReplyHandler : AbstractNewMessageHandler<FLocal.Common.URL.my.conversations.Reply> {
 
 		override protected string templateName {
 			get {
@@ -19,7 +19,7 @@ namespace FLocal.IISHandler.handlers.response {
 		}
 
 		override protected IEnumerable<XElement> getSpecificNewMessageData(WebContext context) {
-			PMMessage message = PMMessage.LoadById(int.Parse(context.requestParts[3]));
+			PMMessage message = this.url.pm;
 			string quoted = UBBParser.StripQuotes(message.bodyUBB).Trim();
 			return new XElement[] {
 				message.exportToXml(context),

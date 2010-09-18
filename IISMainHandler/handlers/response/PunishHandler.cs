@@ -10,7 +10,7 @@ using FLocal.Common.dataobjects;
 
 namespace FLocal.IISHandler.handlers.response {
 
-	class PunishHandler : AbstractNewMessageHandler {
+	class PunishHandler : AbstractNewMessageHandler<FLocal.Common.URL.forum.board.thread.post.Punish> {
 
 		override protected string templateName {
 			get {
@@ -19,7 +19,7 @@ namespace FLocal.IISHandler.handlers.response {
 		}
 
 		override protected IEnumerable<XElement> getSpecificNewMessageData(WebContext context) {
-			Post post = Post.LoadById(int.Parse(context.requestParts[1]));
+			Post post = this.url.post;
 
 			if(!Moderator.isModerator(context.account, post.thread)) throw new FLocalException(context.account.id + " is not a moderator in board " + post.thread.board.id);
 			

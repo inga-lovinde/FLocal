@@ -10,7 +10,7 @@ using FLocal.Core.DB;
 
 namespace FLocal.IISHandler.handlers.response {
 
-	class BoardAsThreadHandler : AbstractGetHandler {
+	class BoardAsThreadHandler : AbstractGetHandler<FLocal.Common.URL.forum.board.Headlines> {
 
 		override protected string templateName {
 			get {
@@ -19,8 +19,8 @@ namespace FLocal.IISHandler.handlers.response {
 		}
 
 		override protected IEnumerable<XElement> getSpecificData(WebContext context) {
-			Board board = Board.LoadById(int.Parse(context.requestParts[1]));
-			PageOuter pageOuter = PageOuter.createFromGet(context.requestParts, context.userSettings.postsPerPage, 2);
+			Board board = this.url.board;
+			PageOuter pageOuter = PageOuter.createFromUrl(this.url, context.userSettings.postsPerPage);
 			IEnumerable<Thread> threads = board.getThreads(
 				pageOuter,
 				new SortSpec[] {

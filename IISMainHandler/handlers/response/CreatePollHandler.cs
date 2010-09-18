@@ -10,7 +10,7 @@ using FLocal.Common.dataobjects;
 
 namespace FLocal.IISHandler.handlers.response {
 
-	class CreatePollHandler : AbstractGetHandler {
+	class CreatePollHandler : AbstractGetHandler<FLocal.Common.URL.polls.NewPoll> {
 
 		override protected string templateName {
 			get {

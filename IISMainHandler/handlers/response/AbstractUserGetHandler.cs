@@ -12,20 +12,12 @@ using FLocal.Core.DB.conditions;
 
 namespace FLocal.IISHandler.handlers.response {
 
-	abstract class AbstractUserGetHandler : AbstractGetHandler {
+	abstract class AbstractUserGetHandler<TUrl> : AbstractGetHandler<TUrl> where TUrl : FLocal.Common.URL.users.user.Abstract {
 
 		abstract protected IEnumerable<XElement> getUserSpecificData(WebContext context, User user);
 
 		sealed override protected IEnumerable<XElement> getSpecificData(WebContext context) {
-			User user;
-			{
-				int userId;
-				if(int.TryParse(context.requestParts[2], out userId)) {
-					user = User.LoadById(userId);
-				} else {
-					user = User.LoadByName(context.requestParts[2]);
-				}
-			}
+			User user = this.url.user;
 			Account account = null;
 			if(context.session != null) {
 				try {
@@ -44,7 +36,7 @@ namespace FLocal.IISHandler.handlers.response {
 				user.exportToXmlForViewing(context),
 				(account == null) ? null : new XElement("accountId", account.id.ToString()), //for PM history, PM send etc
 				(lastSession == null) ? null : new XElement("lastActivity", lastSession.lastHumanActivity.ToXml()),
-			}.Union(this.getUserSpecificData(context, user));
+			}.Concat(this.getUserSpecificData(context, user));
 		}
 
 	}

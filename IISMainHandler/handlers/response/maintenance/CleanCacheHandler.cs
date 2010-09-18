@@ -10,7 +10,7 @@ using FLocal.Common.dataobjects;
 
 namespace FLocal.IISHandler.handlers.response.maintenance {
 
-	class CleanCacheHandler : AbstractGetHandler {
+	class CleanCacheHandler : AbstractGetHandler<FLocal.Common.URL.maintenance.CleanCache> {
 
 		override protected string templateName {
 			get {

@@ -8,28 +8,26 @@ using System.IO;
 using FLocal.Core;
 
 namespace FLocal.IISHandler.handlers {
-	class StaticHandler : ISpecificHandler {
+	class StaticHandler : AbstractGetHandler<FLocal.Common.URL.Static> {
 
-		private string[] requestParts;
-
-		public StaticHandler(string[] requestParts) {
-			this.requestParts = requestParts;
+		protected override string templateName {
+			get {
+				return null;
+			}
 		}
 
-		public void Handle(WebContext context) {
-			if(this.requestParts.Length < 2) {
-				//throw new HttpException(403, "listing not allowed");
-				throw new WrongUrlException();
-			}
-			
+		protected override IEnumerable<System.Xml.Linq.XElement> getSpecificData(WebContext context) {
+
+			string[] requestParts = this.url.remainder.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+
 			Regex checker = new Regex("^[a-z][0-9a-z\\-_]*(\\.[a-zA-Z]+)?$", RegexOptions.Compiled | RegexOptions.CultureInvariant | RegexOptions.IgnoreCase | RegexOptions.Singleline);
 			string path = "";
-			for(int i=1; i<this.requestParts.Length; i++) {
-				if(!checker.IsMatch(this.requestParts[i])) {
+			for(int i=0; i<requestParts.Length; i++) {
+				if(!checker.IsMatch(requestParts[i])) {
 					//throw new HttpException(400, "wrong url (checker='" + checker.ToString() + "'; string='" + this.requestParts[i] + "'");
 					throw new WrongUrlException();
 				}
-				path += FLocal.Common.Config.instance.DirSeparator + this.requestParts[i];
+				path += FLocal.Common.Config.instance.DirSeparator + requestParts[i];
 			}
 
 			string fullPath = FLocal.Common.Config.instance.dataDir + "Static" + path;
@@ -56,6 +54,8 @@ namespace FLocal.IISHandler.handlers {
 			context.httpresponse.Cache.SetCacheability(HttpCacheability.Public);
 
 			context.httpresponse.TransmitFile(fileinfo.FullName);
+
+			throw new response.SkipXsltTransformException();
 		}
 
 	}

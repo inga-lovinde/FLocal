@@ -12,7 +12,7 @@ using FLocal.Core.DB.conditions;
 
 namespace FLocal.IISHandler.handlers {
 
-	class BoardsHandler : AbstractGetHandler {
+	class BoardsHandler : AbstractGetHandler<FLocal.Common.URL.forum.Boards> {
 
 		override protected string templateName {
 			get {

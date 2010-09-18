@@ -10,7 +10,7 @@ using FLocal.Common.dataobjects;
 
 namespace FLocal.IISHandler.handlers.response {
 
-	class PMSendHandler : AbstractNewMessageHandler {
+	class PMSendHandler : AbstractNewMessageHandler<FLocal.Common.URL.my.conversations.NewPM> {
 
 		override protected string templateName {
 			get {
@@ -19,8 +19,8 @@ namespace FLocal.IISHandler.handlers.response {
 		}
 
 		override protected IEnumerable<XElement> getSpecificNewMessageData(WebContext context) {
-			if(context.requestParts.Length > 3) {
-				Account receiver = Account.LoadById(int.Parse(context.requestParts[3]));
+			if(!string.IsNullOrEmpty(this.url.remainder)) {
+				Account receiver = Account.LoadById(int.Parse(this.url.remainder));
 				if(receiver.needsMigration) throw new ApplicationException("User is not migrated");
 				return new XElement[] {
 					new XElement("receiver", receiver.exportToXml(context)),

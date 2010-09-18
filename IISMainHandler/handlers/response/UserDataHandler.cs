@@ -10,7 +10,7 @@ using FLocal.Common.dataobjects;
 
 namespace FLocal.IISHandler.handlers.response {
 
-	class UserDataHandler : AbstractGetHandler {
+	class UserDataHandler : AbstractGetHandler<FLocal.Common.URL.my.UserData> {
 
 		override protected string templateName {
 			get {

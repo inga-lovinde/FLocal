@@ -10,7 +10,7 @@ using FLocal.Core.DB;
 using FLocal.Core.DB.conditions;
 
 namespace FLocal.IISHandler.handlers.response {
-	class UploadHandler : AbstractGetHandler {
+	class UploadHandler : RedirectGetHandler<FLocal.Common.URL.upload.Item> {
 
 		protected override string templateName {
 			get {
@@ -18,9 +18,8 @@ namespace FLocal.IISHandler.handlers.response {
 			}
 		}
 
-		protected override IEnumerable<XElement> getSpecificData(WebContext context) {
-			Upload upload = Upload.LoadById(int.Parse(context.requestParts[2]));
-			throw new RedirectException(Config.instance.UploaderUrl + "Data/" + upload.hash + "." + upload.extension);
+		protected override string getRedirectUrl(WebContext context) {
+			return Config.instance.UploaderUrl + "Data/" + this.url.upload.hash + "." + this.url.upload.extension;
 		}
 
 	}

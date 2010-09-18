@@ -12,7 +12,7 @@ using FLocal.Core.DB.conditions;
 
 namespace FLocal.IISHandler.handlers.response {
 
-	class UserPollsParticipatedHandler : AbstractUserGetHandler {
+	class UserPollsParticipatedHandler : AbstractUserGetHandler<FLocal.Common.URL.users.user.PollsParticipated> {
 
 		override protected string templateName {
 			get {
@@ -21,11 +21,7 @@ namespace FLocal.IISHandler.handlers.response {
 		}
 
 		override protected IEnumerable<XElement> getUserSpecificData(WebContext context, User user) {
-			PageOuter pageOuter = PageOuter.createFromGet(
-				context.requestParts,
-				context.userSettings.postsPerPage,
-				4
-			);
+			PageOuter pageOuter = PageOuter.createFromUrl(this.url, context.userSettings.postsPerPage);
 			IEnumerable<Poll.Vote> votes = Poll.Vote.LoadByIds(
 				from stringId in Config.instance.mainConnection.LoadIdsByConditions(
 					Poll.Vote.TableSpec.instance,

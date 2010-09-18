@@ -15,10 +15,13 @@ namespace FLocal.IISHandler.handlers.request {
 	class MarkThreadAsReadHandler : ReturnPostHandler {
 
 		protected override void _Do(WebContext context) {
+
+			string[] requestParts = context.httprequest.Path.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+
 			Account account = context.session.account;
-			Thread thread = Thread.LoadById(int.Parse(context.requestParts[2]));
-			if(!context.requestParts[3].StartsWith("p")) throw new WrongUrlException(); //throw new CriticalException("wrong url");
-			Post post = Post.LoadById(int.Parse(context.requestParts[3].PHPSubstring(1)));
+			Thread thread = Thread.LoadById(int.Parse(requestParts[2]));
+			if(!requestParts[3].StartsWith("p")) throw new WrongUrlException(); //throw new CriticalException("wrong url");
+			Post post = Post.LoadById(int.Parse(requestParts[3].PHPSubstring(1)));
 
 			if(post.thread.id != thread.id) throw new CriticalException("id mismatch");
 

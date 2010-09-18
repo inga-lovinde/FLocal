@@ -10,7 +10,7 @@ using FLocal.Common.dataobjects;
 
 namespace FLocal.IISHandler.handlers {
 
-	class PostHandler : AbstractGetHandler {
+	class PostHandler : AbstractGetHandler<FLocal.Common.URL.forum.board.thread.post.Show> {
 
 		override protected string templateName {
 			get {
@@ -19,7 +19,7 @@ namespace FLocal.IISHandler.handlers {
 		}
 
 		override protected IEnumerable<XElement> getSpecificData(WebContext context) {
-			Post post = Post.LoadById(int.Parse(context.requestParts[1]));
+			Post post = this.url.post;
 
 			int lastReadId = 0;
 			if(context.session != null) {

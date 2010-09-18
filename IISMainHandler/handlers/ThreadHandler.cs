@@ -12,7 +12,7 @@ using FLocal.Core.DB.conditions;
 
 namespace FLocal.IISHandler.handlers {
 
-	class ThreadHandler : AbstractGetHandler {
+	class ThreadHandler : AbstractGetHandler<FLocal.Common.URL.forum.board.thread.Posts> {
 
 		override protected string templateName {
 			get {
@@ -21,14 +21,14 @@ namespace FLocal.IISHandler.handlers {
 		}
 
 		override protected IEnumerable<XElement> getSpecificData(WebContext context) {
-			Thread thread = Thread.LoadById(int.Parse(context.requestParts[1]));
-			PageOuter pageOuter = PageOuter.createFromGet(
-				context.requestParts,
+			Thread thread = this.url.thread;
+			PageOuter pageOuter = PageOuter.createFromUrl(
+				this.url,
 				context.userSettings.postsPerPage,
-				new Dictionary<char,Func<long>> {
+				new Dictionary<char,Func<string, long>> {
 					{
 						'p',
-						() => Config.instance.mainConnection.GetCountByConditions(
+						s => Config.instance.mainConnection.GetCountByConditions(
 							Post.TableSpec.instance,
 							new ComplexCondition(
 								ConditionsJoinType.AND,
@@ -40,13 +40,12 @@ namespace FLocal.IISHandler.handlers {
 								new ComparisonCondition(
 									Post.TableSpec.instance.getIdSpec(),
 									ComparisonType.LESSTHAN,
-									int.Parse(context.requestParts[2].PHPSubstring(1)).ToString()
+									int.Parse(s).ToString()
 								)
 							)
 						)
 					}
-				},
-				2
+				}
 			);
 			IEnumerable<Post> posts = thread.getPosts(pageOuter, pageOuter.ascendingDirection);
 

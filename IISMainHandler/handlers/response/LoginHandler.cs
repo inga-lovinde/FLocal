@@ -8,7 +8,7 @@ using System.Xml.Linq;
 using FLocal.Common.dataobjects;
 
 namespace FLocal.IISHandler.handlers.response {
-	class LoginHandler : AbstractGetHandler {
+	class LoginHandler : AbstractGetHandler<FLocal.Common.URL.my.login.Login> {
 
 		protected override string templateName {
 			get {

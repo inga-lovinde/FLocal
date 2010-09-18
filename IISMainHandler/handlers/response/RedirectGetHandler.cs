@@ -5,7 +5,7 @@ using System.Text;
 using System.Xml.Linq;
 
 namespace FLocal.IISHandler.handlers.response {
-	abstract class RedirectGetHandler : AbstractGetHandler {
+	abstract class RedirectGetHandler<TUrl> : AbstractGetHandler<TUrl> where TUrl : FLocal.Common.URL.AbstractUrl {
 
 		protected override string templateName {
 			get {

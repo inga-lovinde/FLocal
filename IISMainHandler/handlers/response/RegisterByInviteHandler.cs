@@ -7,7 +7,7 @@ using FLocal.Core;
 using FLocal.Common.dataobjects;
 
 namespace FLocal.IISHandler.handlers.response {
-	class RegisterByInviteHandler : AbstractGetHandler {
+	class RegisterByInviteHandler : AbstractGetHandler<FLocal.Common.URL.my.login.RegisterByInvite> {
 
 		protected override string templateName {
 			get {
@@ -16,8 +16,9 @@ namespace FLocal.IISHandler.handlers.response {
 		}
 
 		protected override IEnumerable<XElement> getSpecificData(WebContext context) {
-			int inviteId = int.Parse(context.requestParts[3]);
-			string code = context.requestParts[4];
+			string[] parts = this.url.remainder.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+			int inviteId = int.Parse(parts[0]);
+			string code = parts[1];
 			Invite invite = Invite.LoadById(inviteId);
 			if(invite.isUsed) throw new FLocalException("Invite is already used");
 			if(invite.code != code) throw new FLocalException("Code mismatch");

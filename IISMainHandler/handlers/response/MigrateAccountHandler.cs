@@ -8,7 +8,7 @@ using System.Xml.Linq;
 using FLocal.Common.dataobjects;
 
 namespace FLocal.IISHandler.handlers.response {
-	class MigrateAccountHandler : AbstractGetHandler {
+	class MigrateAccountHandler : AbstractGetHandler<FLocal.Common.URL.my.login.Migrate> {
 
 		protected override string templateName {
 			get {
@@ -21,10 +21,10 @@ namespace FLocal.IISHandler.handlers.response {
 			if(context.httprequest.Form["username"] != null && context.httprequest.Form["username"] != "") {
 				username = context.httprequest.Form["username"];
 			} else {
-				if(context.requestParts.Length != 4) {
+				if(string.IsNullOrEmpty(this.url.remainder)) {
 					throw new CriticalException("Username is not specified");
 				}
-				username = context.requestParts[3];
+				username = this.url.remainder;
 			}
 			Account account = Account.LoadByName(username);
 			if(!account.needsMigration) throw new FLocalException("Already migrated");

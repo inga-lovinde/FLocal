@@ -10,7 +10,7 @@ using FLocal.Core.DB;
 
 namespace FLocal.IISHandler.handlers.response {
 
-	class UserListHandler : AbstractGetHandler {
+	class UserListHandler : AbstractGetHandler<FLocal.Common.URL.users.All> {
 
 		override protected string templateName {
 			get {
@@ -19,7 +19,7 @@ namespace FLocal.IISHandler.handlers.response {
 		}
 
 		override protected IEnumerable<XElement> getSpecificData(WebContext context) {
-			PageOuter pageOuter = PageOuter.createFromGet(context.requestParts, context.userSettings.usersPerPage, 2);
+			PageOuter pageOuter = PageOuter.createFromUrl(this.url, context.userSettings.usersPerPage);
 			IEnumerable<User> users = User.getUsers(pageOuter, pageOuter.ascendingDirection);
 			return new XElement[] {
 				new XElement("users", 

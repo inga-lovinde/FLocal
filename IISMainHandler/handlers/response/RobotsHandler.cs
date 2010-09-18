@@ -8,18 +8,22 @@ using System.IO;
 using FLocal.Core;
 
 namespace FLocal.IISHandler.handlers.response {
-	class RobotsHandler : ISpecificHandler {
+	class RobotsHandler : AbstractGetHandler<FLocal.Common.URL.Robots> {
 
-		public RobotsHandler() {
+		protected override string templateName {
+			get {
+				return null;
+			}
 		}
 
-		public void Handle(WebContext context) {
+		protected override IEnumerable<System.Xml.Linq.XElement> getSpecificData(WebContext context) {
 			context.httpresponse.ContentType = "text/plain";
 			context.httpresponse.WriteLine("User-agent: *");
 			context.httpresponse.WriteLine("Disallow: /");
 			foreach(var subnet in context.remoteHost.matchingSubnets) {
 				context.httpresponse.WriteLine(subnet.ToString());
 			}
+			throw new SkipXsltTransformException();
 		}
 
 	}

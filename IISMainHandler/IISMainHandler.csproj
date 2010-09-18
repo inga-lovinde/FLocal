@@ -89,8 +89,6 @@
     <Compile Include="handlers\response\CreatePollHandler.cs" />
     <Compile Include="handlers\response\CreateThreadHandler.cs" />
     <Compile Include="handlers\response\EditHandler.cs" />
-    <Compile Include="handlers\response\LegacyPHPHandler.cs" />
-    <Compile Include="handlers\response\LegacyUploadHandler.cs" />
     <Compile Include="handlers\response\LocalNetworksListHandler.cs" />
     <Compile Include="handlers\response\LoginHandler.cs" />
     <Compile Include="handlers\response\maintenance\CleanCacheHandler.cs" />
@@ -152,6 +150,7 @@
     <Compile Include="handlers\response\AbstractUserGetHandler.cs" />
     <Compile Include="handlers\response\AllThreadsHandler.cs" />
     <Compile Include="handlers\response\AvatarsSettingsHandler.cs" />
+    <Compile Include="handlers\response\SkipXsltTransformException.cs" />
     <Compile Include="handlers\response\UserDataHandler.cs" />
     <Compile Include="handlers\response\UserThreadsHandler.cs" />
   </ItemGroup>

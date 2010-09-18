@@ -11,7 +11,7 @@ using FLocal.Core.DB.conditions;
 
 namespace FLocal.IISHandler.handlers.response {
 
-	class LocalNetworksListHandler : AbstractGetHandler {
+	class LocalNetworksListHandler : AbstractGetHandler<FLocal.Common.URL.maintenance.LocalNetworks> {
 
 		override protected string templateName {
 			get {

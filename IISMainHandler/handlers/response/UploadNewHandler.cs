@@ -10,7 +10,7 @@ using FLocal.Core.DB;
 using FLocal.Core.DB.conditions;
 
 namespace FLocal.IISHandler.handlers.response {
-	class UploadNewHandler : AbstractGetHandler {
+	class UploadNewHandler : AbstractGetHandler<FLocal.Common.URL.upload.New> {
 
 		protected override string templateName {
 			get {
