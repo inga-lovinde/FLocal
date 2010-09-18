@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="Windows-1251"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml">
+	<xsl:import href="ForumHeader.xslt"/>
 	<xsl:import href="MyHeader.xslt"/>
 	<xsl:import href="UsersHeader.xslt"/>
 	<xsl:import href="UploadHeader.xslt"/>
@@ -47,8 +48,8 @@
 												<xsl:text> | </xsl:text>
 											</xsl:if>
 											<xsl:call-template name="headerLink">
-												<xsl:with-param name="url">/Boards/</xsl:with-param>
-												<xsl:with-param name="text">Список форумов</xsl:with-param>
+												<xsl:with-param name="url">/Forum/</xsl:with-param>
+												<xsl:with-param name="text">Форум</xsl:with-param>
 											</xsl:call-template>
 											<xsl:text> | </xsl:text>
 											<xsl:call-template name="headerLink">
@@ -147,6 +148,9 @@
 				</td>
 			</tr>
 		</table>
+		<xsl:if test="starts-with(/root/currentUrl, '/Forum/')">
+			<xsl:call-template name="forumHeader"/>
+		</xsl:if>
 		<xsl:if test="starts-with(/root/currentUrl, '/Users/')">
 			<xsl:call-template name="usersHeader"/>
 		</xsl:if>

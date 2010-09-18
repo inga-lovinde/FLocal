@@ -22,6 +22,7 @@ namespace FLocal.IISHandler.handlers.response {
 			Board board = this.url.board;
 
 			return new XElement[] {
+				new XElement("currentLocation", board.exportToXmlSimpleWithParent(context)),
 				board.exportToXml(context, Board.SubboardsOptions.None),
 				board.exportLayersInfoForUser(context),
 			};
