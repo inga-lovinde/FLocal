@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
+using FLocal.Core;
 
 namespace FLocal.Common.BBCodes {
 	class UrlProcessor {
@@ -74,6 +75,9 @@ namespace FLocal.Common.BBCodes {
 				}
 			} else {
 				var linkInfo = URL.UrlManager.Parse(url, new System.Collections.Specialized.NameValueCollection(), true);
+				if(linkInfo == null) {
+					throw new FLocalException("Unable to parse link: " + url);
+				}
 				url = linkInfo.canonicalFull;
 				if(title == null) {
 					title = linkInfo.title;
