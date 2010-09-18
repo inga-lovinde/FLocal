@@ -68,28 +68,18 @@ namespace FLocal.Common.BBCodes {
 				var urlInfo = new Uri(link);
 				url = urlInfo.ToString();
 			}
-			if(title == null) {
-				if(!isExternal) {
-					var parts = url.Split(new char[] {'/'}, StringSplitOptions.RemoveEmptyEntries);
-					var combinedToLower = string.Join("/", parts).ToLower();
-					if(combinedToLower.StartsWith("upload/item/")) {
-						title = Safe(dataobjects.Upload.LoadById(int.Parse(parts[2])).filename);
-					} else if(combinedToLower.StartsWith("post/")) {
-						title = Safe(dataobjects.Post.LoadById(int.Parse(parts[1])).title);
-					} else if(combinedToLower.StartsWith("thread/")) {
-						title = Safe(dataobjects.Thread.LoadById(int.Parse(parts[1])).title);
-					} else if(combinedToLower.StartsWith("board/") || combinedToLower.StartsWith("boardasthread/")) {
-						title = Safe(dataobjects.Board.LoadById(int.Parse(parts[1])).name);
-					} else if(combinedToLower.StartsWith("poll/")) {
-						title = Safe(dataobjects.Poll.LoadById(int.Parse(parts[1])).title);
-					} else {
-						title = link;
-					}
-				} else {
-					title = link;
+			if(isExternal) {
+				if(title == null) {
+					title = url;
+				}
+			} else {
+				var linkInfo = URL.UrlManager.Parse(url, new System.Collections.Specialized.NameValueCollection(), true);
+				url = linkInfo.canonicalFull;
+				if(title == null) {
+					title = linkInfo.title;
 				}
 			}
-			string result = "<a href=\"" + url + "\">" + title + "</a>";
+			string result = "<a href=\"" + url + "\">" + Safe(title) + "</a>";
 			if(isExternal) {
 				result += "<img src=\"/static/images/external.png\" border=\"0\"/>";
 			}
