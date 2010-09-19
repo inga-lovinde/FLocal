@@ -57,6 +57,7 @@
     <Compile Include="actions\TwoWayReferenceFieldValue.cs" />
     <Compile Include="actions\UpdateChange.cs" />
     <Compile Include="actions\ChangeSetUtil.cs" />
+    <Compile Include="BBCodes\AbstractLocalLink.cs" />
     <Compile Include="BBCodes\B.cs" />
     <Compile Include="BBCodes\ECode.cs" />
     <Compile Include="BBCodes\Font.cs" />

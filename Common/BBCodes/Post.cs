@@ -5,19 +5,16 @@ using System.Text;
 using PJonDevelopment.BBCode;
 
 namespace FLocal.Common.BBCodes {
-	class Post : BBCode {
+	class Post : AbstractLocalLink {
 
 		public Post()
 			: base("post") {
 		}
 
-		public override string Format(ITextFormatter formatter) {
-			var post = dataobjects.Post.LoadById(int.Parse(this.DefaultOrValue));
-			var name = this.Safe(post.title);
-			if(this.Default != null) {
-				name = this.GetInnerHTML(formatter);
+		protected override FLocal.Common.URL.AbstractUrl url {
+			get {
+				return new URL.forum.board.thread.post.Show(this.DefaultOrValue, null);
 			}
-			return "<a href=\"/Post/" + post.id.ToString() + "/\">" + name + "</a>";
 		}
 
 	}
