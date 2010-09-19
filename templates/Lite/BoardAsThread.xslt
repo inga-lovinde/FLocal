@@ -97,9 +97,7 @@
 		</div>
 		<xsl:apply-templates select="posts/post"/>
 		<div class="tdheader">
-			<xsl:apply-templates select="posts/pageOuter" mode="footer">
-				<xsl:with-param name="baseLink">/BoardAsThread/<xsl:value-of select="currentLocation/board/id"/>/</xsl:with-param>
-			</xsl:apply-templates>
+			<xsl:apply-templates select="posts/pageOuter" mode="footer"/>
 		</div>
 	</xsl:template>
 

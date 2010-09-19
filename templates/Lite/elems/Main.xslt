@@ -156,9 +156,7 @@
 	</xsl:template>
 
 	<xsl:template match="pageOuter" mode="withCurrent">
-		<xsl:param name="baseLink">
-			<xsl:value-of select="/root/currentBaseUrl"/>
-		</xsl:param>
+		<xsl:param name="baseLink"/>
 		<xsl:variable name="postfix">
 			<xsl:if test="isReversed='true'">-reversed</xsl:if>
 		</xsl:variable>

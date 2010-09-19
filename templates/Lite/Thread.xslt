@@ -15,9 +15,7 @@
 			<xsl:with-param name="isReplyDisabled"><xsl:value-of select="thread/isLocked"/></xsl:with-param>
 		</xsl:apply-templates>
 		<div class="tdheader">
-			<xsl:apply-templates select="posts/pageOuter" mode="footer">
-				<xsl:with-param name="baseLink">/Thread/<xsl:value-of select="currentLocation/thread/id"/>/</xsl:with-param>
-			</xsl:apply-templates>
+			<xsl:apply-templates select="posts/pageOuter" mode="footer"/>
 		</div>
 	</xsl:template>
 
