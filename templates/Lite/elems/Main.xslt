@@ -128,6 +128,7 @@
 
 	<xsl:template match="pageOuter/pages/page" mode="withoutCurrent">
 		<xsl:param name="baseLink"/>
+		<xsl:param name="postfix"/>
 		<xsl:param name="selected">-1</xsl:param>
 		<xsl:if test="current() != '0'">
 			<xsl:text>|</xsl:text>
@@ -137,6 +138,7 @@
 				<a>
 					<xsl:attribute name="href"><xsl:value-of select="$baseLink"/><xsl:value-of select="current()"/></xsl:attribute>
 					<xsl:value-of select="current()"/>
+					<xsl:value-of select="$postfix"/>
 				</a>
 			</xsl:when>
 			<xsl:otherwise>
@@ -157,9 +159,13 @@
 		<xsl:param name="baseLink">
 			<xsl:value-of select="/root/currentBaseUrl"/>
 		</xsl:param>
+		<xsl:variable name="postfix">
+			<xsl:if test="isReversed='true'">-reversed</xsl:if>
+		</xsl:variable>
 		<xsl:text> </xsl:text>
 		<xsl:apply-templates select="pages/page" mode="withoutCurrent">
 			<xsl:with-param name="baseLink"><xsl:value-of select="$baseLink"/></xsl:with-param>
+			<xsl:with-param name="postfix"><xsl:value-of select="$postfix"/></xsl:with-param>
 			<xsl:with-param name="selected">
 				<xsl:choose>
 					<xsl:when test="unlimited='false'">
@@ -175,7 +181,11 @@
 		<xsl:choose>
 			<xsl:when test="unlimited='false'">
 				<a>
-					<xsl:attribute name="href"><xsl:value-of select="$baseLink"/>all</xsl:attribute>
+					<xsl:attribute name="href">
+						<xsl:value-of select="$baseLink"/>
+						<xsl:text>all</xsl:text>
+						<xsl:value-of select="$postfix"/>
+					</xsl:attribute>
 					<xsl:text>все</xsl:text>
 				</a>
 			</xsl:when>
@@ -186,7 +196,11 @@
 		<xsl:if test="next">
 			<xsl:text>|</xsl:text>
 			<a rel="next">
-				<xsl:attribute name="href"><xsl:value-of select="$baseLink"/><xsl:value-of select="next"/></xsl:attribute>
+				<xsl:attribute name="href">
+					<xsl:value-of select="$baseLink"/>
+					<xsl:value-of select="next"/>
+					<xsl:value-of select="$postfix"/>
+				</xsl:attribute>
 				<xsl:text>Next</xsl:text>
 			</a>
 		</xsl:if>
@@ -194,11 +208,18 @@
 
 	<xsl:template match="pageOuter" mode="footer">
 		<xsl:param name="baseLink"/>
+		<xsl:variable name="postfix">
+			<xsl:if test="isReversed='true'">-reversed</xsl:if>
+		</xsl:variable>
 		<a href="#top">Top</a>
 		<xsl:if test="next">
 			<xsl:text>|</xsl:text>
 			<a rel="next">
-				<xsl:attribute name="href"><xsl:value-of select="$baseLink"/><xsl:value-of select="next"/></xsl:attribute>
+				<xsl:attribute name="href">
+					<xsl:value-of select="$baseLink"/>
+					<xsl:value-of select="next"/>
+					<xsl:value-of select="$postfix"/>
+				</xsl:attribute>
 				<xsl:text>Next</xsl:text>
 			</a>
 		</xsl:if>
