@@ -118,6 +118,7 @@ namespace FLocal.Common {
 				this.parser = new BBCodeParser();
 				this.parser.ElementTypes.Add("b", typeof(BBCodes.B), true);
 				this.parser.ElementTypes.Add("code", typeof(BBCodes.Code), true);
+				this.parser.ElementTypes.Add("ecode", typeof(BBCodes.ECode), true);
 				this.parser.ElementTypes.Add("font", typeof(BBCodes.Font), true);
 				this.parser.ElementTypes.Add("color", typeof(BBCodes.FontColor), true);
 				this.parser.ElementTypes.Add("size", typeof(BBCodes.FontSize), true);
