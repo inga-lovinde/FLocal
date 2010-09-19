@@ -108,6 +108,11 @@ namespace FLocal.Common.dataobjects {
 				return this._title;
 			}
 		}
+		public string titleTranslit {
+			get {
+				return TranslitManager.Translit(this.title).PHPSubstring(0, 50);
+			}
+		}
 		
 		private int _lastPostId;
 		public int lastPostId {

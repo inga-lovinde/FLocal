@@ -118,6 +118,7 @@ namespace FLocal.IISHandler {
 			}
 
 			if(!context.httprequest.Path.StartsWith(url.canonical)) {
+				//throw new ApplicationException("Going to redirect to: '" + url.canonicalFull + "' (canonical='" + url.canonicalFull + "')");
 				throw new RedirectException(url.canonicalFull);
 			}
 

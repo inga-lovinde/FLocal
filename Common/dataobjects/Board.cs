@@ -115,6 +115,11 @@ namespace FLocal.Common.dataobjects {
 				return this._name;
 			}
 		}
+		public string nameTranslit {
+			get {
+				return TranslitManager.Translit(this.name);
+			}
+		}
 
 		private string _description;
 		public string description {

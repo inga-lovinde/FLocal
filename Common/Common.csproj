@@ -58,6 +58,7 @@
     <Compile Include="actions\UpdateChange.cs" />
     <Compile Include="actions\ChangeSetUtil.cs" />
     <Compile Include="BBCodes\B.cs" />
+    <Compile Include="BBCodes\ECode.cs" />
     <Compile Include="BBCodes\Font.cs" />
     <Compile Include="BBCodes\FontColor.cs" />
     <Compile Include="BBCodes\FontSize.cs" />
@@ -125,6 +126,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlObject.cs" />
     <Compile Include="TableManager.cs" />
+    <Compile Include="TranslitManager.cs" />
     <Compile Include="UBBParser.cs" />
     <Compile Include="BBCodes\I.cs" />
     <Compile Include="UploadManager.cs" />
@@ -132,9 +134,12 @@
     <Compile Include="URL\forum\AllPosts.cs" />
     <Compile Include="URL\forum\AllThreads.cs" />
     <Compile Include="URL\forum\Boards.cs" />
+    <Compile Include="URL\forum\board\Abstract.cs" />
     <Compile Include="URL\forum\board\Headlines.cs" />
     <Compile Include="URL\forum\board\NewThread.cs" />
     <Compile Include="URL\forum\board\Threads.cs" />
+    <Compile Include="URL\forum\board\thread\Abstract.cs" />
+    <Compile Include="URL\forum\board\thread\post\Abstract.cs" />
     <Compile Include="URL\forum\board\thread\post\Edit.cs" />
     <Compile Include="URL\forum\board\thread\post\PMReply.cs" />
     <Compile Include="URL\forum\board\thread\post\Punish.cs" />

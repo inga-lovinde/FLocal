@@ -5,23 +5,14 @@ using System.Text;
 using FLocal.Common.dataobjects;
 
 namespace FLocal.Common.URL.forum.board.thread {
-	public class Posts : AbstractUrl {
+	public class Posts : Abstract {
 
-		public readonly dataobjects.Thread thread;
-
-		public Posts(string threadId, string remainder) : base(remainder) {
-			this.thread = dataobjects.Thread.LoadById(int.Parse(threadId));
-		}
-
-		public override string title {
-			get {
-				return this.thread.title;
-			}
+		public Posts(string threadId, string remainder) : base(threadId, remainder) {
 		}
 
 		protected override string _canonical {
 			get {
-				return "/Forum/Board/" + this.thread.boardId + "/Thread/" + this.thread.id + "/Posts/";
+				return base._canonical + "Posts/";
 			}
 		}
 	}
