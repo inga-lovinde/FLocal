@@ -45,7 +45,7 @@ namespace FLocal.Common.URL {
 						return null;
 				}
 			}
-			if(Path.ToLower().StartsWith("/images/graemlins/")) {
+			if(Path.ToLower().StartsWith("/images/graemlins/") || Path.ToLower().StartsWith("/images/icons/")) {
 				return new Static("smileys/" + GetRemainder(requestParts, 2));
 			}
 			#endregion
