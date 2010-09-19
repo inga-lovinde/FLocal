@@ -7,7 +7,7 @@
 	</xsl:template>
 	<xsl:template name="isLiteEnabled">true</xsl:template>
 	<xsl:template name="isRssEnabled">true</xsl:template>
-	<xsl:template name="rssRelativeLink"><xsl:value-of select="/root/currentBaseUrl"/>0/reversed</xsl:template>
+	<xsl:template name="rssRelativeLink"><xsl:value-of select="/root/currentBaseUrl"/>0-reversed</xsl:template>
 	<xsl:template name="specific">
 		<xsl:if test="not(get/param[@name='headers'] = 'false')">
 			<xsl:call-template name="threadInfo"/>

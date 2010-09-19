@@ -234,11 +234,14 @@
 		<xsl:param name="baseLink">
 			<xsl:value-of select="/root/currentBaseUrl"/>
 		</xsl:param>
+		<xsl:variable name="postfix">
+			<xsl:if test="isReversed='true'">-reversed</xsl:if>
+		</xsl:variable>
 		<xsl:text> </xsl:text>
 		<xsl:apply-templates select="pages/page" mode="withoutCurrent">
 			<xsl:with-param name="baseLink"><xsl:value-of select="$baseLink"/></xsl:with-param>
 			<xsl:with-param name="postfix">
-				<xsl:if test="isReversed='true'">/reversed</xsl:if>
+				<xsl:value-of select="$postfix"/>
 			</xsl:with-param>
 			<xsl:with-param name="selected">
 				<xsl:choose>
@@ -256,7 +259,11 @@
 			<xsl:choose>
 				<xsl:when test="unlimited='false'">
 					<a>
-						<xsl:attribute name="href"><xsl:value-of select="$baseLink"/>all</xsl:attribute>
+						<xsl:attribute name="href">
+							<xsl:value-of select="$baseLink"/>
+							<xsl:text>all</xsl:text>
+							<xsl:value-of select="$postfix"/>
+						</xsl:attribute>
 						<xsl:text>все</xsl:text>
 					</a>
 				</xsl:when>
@@ -268,7 +275,11 @@
 		<xsl:if test="next">
 			<xsl:text>&#8201;|&#8201;</xsl:text>
 			<a rel="next">
-				<xsl:attribute name="href"><xsl:value-of select="$baseLink"/><xsl:value-of select="next"/></xsl:attribute>
+				<xsl:attribute name="href">
+					<xsl:value-of select="$baseLink"/>
+					<xsl:value-of select="next"/>
+					<xsl:value-of select="$postfix"/>
+				</xsl:attribute>
 				<xsl:text>Следующая страница</xsl:text>
 			</a>
 		</xsl:if>

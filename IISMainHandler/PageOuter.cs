@@ -48,16 +48,16 @@ namespace FLocal.IISHandler {
 		}
 
 		public static PageOuter createFromUrl(FLocal.Common.URL.AbstractUrl url, long perPage, Dictionary<char, Func<string, long>> customAction) {
-			string[] requestParts = url.remainder.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
-			int offset = 0;
-			bool reversed = (requestParts.Length > (offset+1)) && (requestParts[offset+1].ToLower() == "reversed");
-			if(requestParts.Length > offset) {
-				if(requestParts[offset].ToLower() == "all") {
+			if(url.remainder.Contains("/")) throw new WrongUrlException();
+			string[] requestParts = url.remainder.Split(new[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
+			bool reversed = (requestParts.Length > 1) && (requestParts[1].ToLower() == "reversed");
+			if(requestParts.Length > 0) {
+				if(requestParts[0].ToLower() == "all") {
 					return new PageOuter(perPage, reversed);
-				} else if(Char.IsDigit(requestParts[offset][0])) {
-					return new PageOuter(long.Parse(requestParts[offset]), perPage, perPage, reversed);
+				} else if(Char.IsDigit(requestParts[0][0])) {
+					return new PageOuter(long.Parse(requestParts[0]), perPage, perPage, reversed);
 				} else {
-					return new PageOuter(customAction[requestParts[offset][0]](requestParts[offset].Substring(1)), perPage, perPage, reversed);
+					return new PageOuter(customAction[requestParts[0][0]](requestParts[0].Substring(1)), perPage, perPage, reversed);
 				}
 			} else {
 				return new PageOuter(0, perPage, perPage, reversed);
