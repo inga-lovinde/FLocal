@@ -33,6 +33,7 @@ namespace FLocal.IISHandler.handlers.response {
 			}
 
 			return new XElement[] {
+				new XElement("currentLocation", post.exportToXmlSimpleWithParent(context)),
 				post.thread.board.exportToXml(context, Board.SubboardsOptions.None),
 				post.thread.exportToXml(context),
 				post.exportToXml(context),

@@ -24,6 +24,7 @@ namespace FLocal.IISHandler.handlers.response {
 			if(!Moderator.isModerator(context.account, post.thread)) throw new FLocalException(context.account.id + " is not a moderator in board " + post.thread.board.id);
 			
 			return new XElement[] {
+				new XElement("currentLocation", post.exportToXmlSimpleWithParent(context)),
 				post.thread.board.exportToXml(context, Board.SubboardsOptions.None),
 				post.thread.exportToXml(context),
 				post.exportToXml(context),
