@@ -114,7 +114,7 @@ p {
 	text-decoration: line-through;
 }
 .currentLink {
-	font-weight:bold;
+	font-weight:bolder;font-style:italic;
 }
 input {
 	z-index:90000;

@@ -5,7 +5,7 @@
 	<xsl:template match="/root">
 		<html>
 			<head>
-				<link rel="stylesheet" href="/static/css/global.css" type="text/css" />
+				<link rel="stylesheet" href="/static/css/global.css?v1" type="text/css" />
 				<link rel="stylesheet" type="text/css" skin="skin">
 					<xsl:attribute name="href">/static/css/<xsl:value-of select="skin/name"/>.css</xsl:attribute>
 				</link>
