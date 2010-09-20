@@ -7,10 +7,10 @@
 	</xsl:template>
 	<xsl:template name="isLiteEnabled">true</xsl:template>
 	<xsl:template name="specific">
-		<xsl:if test="not(get/param[@name='headers'] = 'false')">
+		<!--xsl:if test="not(get/param[@name='headers'] = 'false')">
 			<xsl:call-template name="threadInfo"/>
 		</xsl:if>
-		<br />
+		<br /-->
 		<table width="95%" align="center" cellpadding="1" cellspacing="1" class="tablesurround">
 			<tr>
 				<td>
@@ -22,10 +22,10 @@
 				</td>
 			</tr>
 		</table>
-		<br />
+		<!--br />
 		<xsl:if test="not(get/param[@name='headers'] = 'false')">
 			<xsl:call-template name="threadInfo"/>
-		</xsl:if>
+		</xsl:if-->
 	</xsl:template>
 
 	<xsl:template name="threadInfo">

@@ -13,9 +13,10 @@
 		<xsl:param name="url"/>
 		<xsl:param name="text"/>
 		<xsl:param name="isDisabled"/>
+		<xsl:param name="postfix"/>
 		<a target="_top">
 			<xsl:if test="not($isDisabled='true')">
-				<xsl:attribute name="href"><xsl:value-of select="$url"/>?<xsl:value-of select="current/date/ticks"/></xsl:attribute>
+				<xsl:attribute name="href"><xsl:value-of select="$url"/><xsl:value-of select="$postfix"/>?<xsl:value-of select="current/date/ticks"/></xsl:attribute>
 			</xsl:if>
 			<xsl:if test="starts-with(/root/currentUrl, $url)">
 				<xsl:attribute name="class">currentLink</xsl:attribute>

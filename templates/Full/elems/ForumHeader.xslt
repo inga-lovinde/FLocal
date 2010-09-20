@@ -32,12 +32,9 @@
 										<xsl:if test="not(session/sessionKey)">true</xsl:if>
 									</xsl:with-param>
 								</xsl:call-template>
-								<xsl:if test="currentLocation//board">
+								<xsl:if test="currentLocation//board[not(name(../..)='board')]">
 									<xsl:text> | </xsl:text>
-									<xsl:call-template name="headerLink">
-										<xsl:with-param name="url">/Forum/Board/<xsl:value-of select="currentLocation//board/id"/>-<xsl:value-of select="currentLocation//board/nameTranslit"/>/</xsl:with-param>
-										<xsl:with-param name="text"><xsl:value-of select="currentLocation//board/name"/></xsl:with-param>
-									</xsl:call-template>
+									<xsl:apply-templates select="currentLocation//board[not(name(../..)='board')]" mode="headerBoardLink"/>
 								</xsl:if>
 							</td>
 						</tr>
@@ -45,9 +42,27 @@
 				</td>
 			</tr>
 		</table>
-		<xsl:if test="currentLocation/board">
+		<xsl:if test="currentLocation//board">
 			<xsl:call-template name="boardHeader"/>
 		</xsl:if>
 	</xsl:template>
+
+	<xsl:template match="board" mode="headerParentBoardLink">
+		<xsl:apply-templates select="parent/board" mode="headerParentBoardLink"/>
+		<xsl:call-template name="headerLink">
+			<xsl:with-param name="url">/Forum/Board/<xsl:value-of select="id"/>-<xsl:value-of select="nameTranslit"/>/</xsl:with-param>
+			<xsl:with-param name="text"><xsl:value-of select="substring(name, 1, 1)"/></xsl:with-param>
+		</xsl:call-template>
+		<xsl:text> &#8594; </xsl:text>
+	</xsl:template>
+
+	<xsl:template match="board" mode="headerBoardLink">
+		<xsl:apply-templates select="parent/board" mode="headerParentBoardLink"/>
+		<xsl:call-template name="headerLink">
+			<xsl:with-param name="url">/Forum/Board/<xsl:value-of select="id"/>-<xsl:value-of select="nameTranslit"/>/</xsl:with-param>
+			<xsl:with-param name="text"><xsl:value-of select="name"/></xsl:with-param>
+		</xsl:call-template>
+	</xsl:template>
+
 </xsl:stylesheet>
 

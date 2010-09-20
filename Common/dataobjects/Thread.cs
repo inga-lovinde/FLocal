@@ -184,6 +184,7 @@ namespace FLocal.Common.dataobjects {
 			return new XElement("thread",
 				new XElement("id", this.id),
 				new XElement("name", this.title),
+				new XElement("nameTranslit", this.titleTranslit),
 				new XElement("parent", this.board.exportToXmlSimpleWithParent(context))
 			);
 		}
