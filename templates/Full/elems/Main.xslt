@@ -287,7 +287,7 @@
 		<xsl:if test="position() &gt; 1">
 			<xsl:text> </xsl:text>
 		</xsl:if>
-		<a>
+		<a nobr="nobr">
 			<xsl:attribute name="class">
 				<xsl:text>separate </xsl:text>
 				<xsl:text>UG_</xsl:text><xsl:value-of select="group/name"/>

@@ -119,3 +119,6 @@ p {
 input {
 	z-index:90000;
 }
+[nobr] {
+	white-space: nowrap;
+}
