@@ -3,7 +3,7 @@
 	<xsl:import href="elems\Main.xslt"/>
 	<xsl:template name="specificTitle">Кто в онлайне</xsl:template>
 	<xsl:template name="specific">
-		<xsl:apply-templates select="users/user"/>
+		<xsl:apply-templates select="users/user[not(name=/root/session/user/name)]"/>
 	</xsl:template>
 
 	<xsl:template match="users/user">
