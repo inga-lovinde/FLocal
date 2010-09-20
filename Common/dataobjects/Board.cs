@@ -253,6 +253,7 @@ namespace FLocal.Common.dataobjects {
 			return new XElement("board",
 				new XElement("id", this.id),
 				new XElement("name", this.name),
+				new XElement("nameTranslit", this.nameTranslit),
 				new XElement("description", this.description),
 				new XElement("parent", this.parentBoardId.HasValue ? this.parentBoard.exportToXmlSimpleWithParent(context) : this.category.exportToXmlSimple(context))
 			);

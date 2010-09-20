@@ -2,7 +2,7 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml">
 
 	<xsl:template name="boardHeader">
-		<xsl:variable name="baseLink">/Forum/Board/<xsl:value-of select="currentLocation/board/id"/>/</xsl:variable>
+		<xsl:variable name="baseLink">/Forum/Board/<xsl:value-of select="currentLocation/board/id"/>-<xsl:value-of select="currentLocation/board/nameTranslit"/>/</xsl:variable>
 		<table width="95%" align="center" class="tablesurround" cellpadding="1" cellspacing="1">
 			<tr>
 				<td>

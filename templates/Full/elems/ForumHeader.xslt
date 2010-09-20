@@ -35,7 +35,7 @@
 								<xsl:if test="currentLocation//board">
 									<xsl:text> | </xsl:text>
 									<xsl:call-template name="headerLink">
-										<xsl:with-param name="url">/Forum/Board/<xsl:value-of select="currentLocation//board/id"/>/</xsl:with-param>
+										<xsl:with-param name="url">/Forum/Board/<xsl:value-of select="currentLocation//board/id"/>-<xsl:value-of select="currentLocation//board/nameTranslit"/>/</xsl:with-param>
 										<xsl:with-param name="text"><xsl:value-of select="currentLocation//board/name"/></xsl:with-param>
 									</xsl:call-template>
 								</xsl:if>
