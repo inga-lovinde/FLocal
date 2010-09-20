@@ -16,7 +16,7 @@ namespace FLocal.IISHandler.handlers {
 		}
 
 		protected override IEnumerable<XElement> getSpecificData(WebContext context) {
-			context.LogError(new WrongUrlException());
+			if(!context.httprequest.Path.StartsWith("/static/")) context.LogError(new WrongUrlException());
 			return new XElement[] {
 				new XElement("path", context.httprequest.Path)
 			};
