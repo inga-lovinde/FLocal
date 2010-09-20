@@ -7,7 +7,7 @@ namespace FLocal.Common {
 	static class TranslitManager {
 
 		private static readonly string SAFE_SOURCE      = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZабвгдеёжзийклмнопрстуфхцчшщьыъэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЬЫЪЭЮЯ -0123456789";
-		private static readonly string SAFE_DESTINATION = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYSabvgdeejziyklmnoprstufxc4ww'y'eu9ABVGDEEJZIJKLMNOPRSTUFXC4WW'Y'EU9--0123456789";
+		private static readonly string SAFE_DESTINATION = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZabvgdeejziyklmnoprstufxc4ww'y'eu9ABVGDEEJZIJKLMNOPRSTUFXC4WW'Y'EU9--0123456789";
 		private static readonly Dictionary<char, char> SAFE_REPLACEMENTS = Enumerable.Range(0, SAFE_SOURCE.Length).ToDictionary(i => SAFE_SOURCE[i], i => SAFE_DESTINATION[i]);
 
 /*		private static readonly Dictionary<char, char> replacements = new Dictionary<char,char> {
