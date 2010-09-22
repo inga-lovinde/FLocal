@@ -3,6 +3,8 @@
 	<xsl:import href="elems\Main.xslt"/>
 	<xsl:import href="elems\UploadInfo.xslt"/>
 	<xsl:template name="specificTitle">Àןכמאה</xsl:template>
+	<xsl:template name="isRssEnabled">true</xsl:template>
+	<xsl:template name="rssRelativeLink"><xsl:value-of select="/root/currentBaseUrl"/>0-reversed</xsl:template>
 	<xsl:template name="specific">
 		<table width="95%" align="center" cellpadding="1" cellspacing="1" class="tablesurround">
 			<tr>
