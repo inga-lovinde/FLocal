@@ -2,6 +2,7 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml">
 	<xsl:import href="ForumHeader.xslt"/>
 	<xsl:import href="MyHeader.xslt"/>
+	<xsl:import href="PollsHeader.xslt"/>
 	<xsl:import href="UsersHeader.xslt"/>
 	<xsl:import href="UploadHeader.xslt"/>
 
@@ -51,6 +52,11 @@
 											<xsl:call-template name="headerLink">
 												<xsl:with-param name="url">/Forum/</xsl:with-param>
 												<xsl:with-param name="text">Форум</xsl:with-param>
+											</xsl:call-template>
+											<xsl:text> | </xsl:text>
+											<xsl:call-template name="headerLink">
+												<xsl:with-param name="url">/Polls/</xsl:with-param>
+												<xsl:with-param name="text">Опросы</xsl:with-param>
 											</xsl:call-template>
 											<xsl:text> | </xsl:text>
 											<xsl:call-template name="headerLink">
@@ -160,6 +166,9 @@
 		</xsl:if>
 		<xsl:if test="starts-with(/root/currentUrl, '/Upload/')">
 			<xsl:call-template name="uploadHeader"/>
+		</xsl:if>
+		<xsl:if test="starts-with(/root/currentUrl, '/Polls/')">
+			<xsl:call-template name="pollsHeader"/>
 		</xsl:if>
 		<center>&#160;&#160;</center>
 	</xsl:template>

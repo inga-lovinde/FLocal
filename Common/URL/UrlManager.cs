@@ -29,7 +29,7 @@ namespace FLocal.Common.URL {
 					return null;
 				}
 
-				switch(scriptParts[0].ToLower()) {
+				switch(scriptParts[0].TrimStart('/').ToLower()) {
 					case "showflat":
 					case "ashowflat":
 						dataobjects.Post post = dataobjects.Post.LoadById(int.Parse(Query["Number"]));
@@ -47,6 +47,8 @@ namespace FLocal.Common.URL {
 			}
 			if(Path.ToLower().StartsWith("/images/graemlins/") || Path.ToLower().StartsWith("/images/icons/")) {
 				return new Static("smileys/" + GetRemainder(requestParts, 2));
+			} else if(Path.ToLower().StartsWith("/smiles/")) {
+				return new Static("smileys/" + GetRemainder(requestParts, 1));
 			}
 			#endregion
 
@@ -245,18 +247,23 @@ namespace FLocal.Common.URL {
 				#endregion my;
 				#region polls
 				case "poll":
-				case "polls":
 					if(requestParts.Length < 2) {
 						return null;
+					}
+					return new polls.Info(requestParts[1], GetRemainder(requestParts, 2));
+				case "polls":
+					if(requestParts.Length < 2) {
+						return new polls.List("");
 					}
 					switch(requestParts[1].ToLower()) {
 						case "info":
 							return new polls.Info(requestParts[2], GetRemainder(requestParts, 3));
-						case "newpoll":
-						case "create":
-							return new polls.NewPoll(GetRemainder(requestParts, 2));
+						case "new":
+							return new polls.New(GetRemainder(requestParts, 2));
+						case "list":
+							return new polls.List(GetRemainder(requestParts, 2));
 						default:
-							return new polls.Info(requestParts[1], GetRemainder(requestParts, 2));
+							return null;
 					}
 				#endregion polls
 				#region upload;

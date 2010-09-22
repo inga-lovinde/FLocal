@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 
 namespace FLocal.Common.URL.polls {
-	public class NewPoll : AbstractUrl {
+	public class New : AbstractUrl {
 
-		public NewPoll(string remainder) : base(remainder) {
+		public New(string remainder) : base(remainder) {
 		}
 
 		public override string title {
@@ -17,7 +17,7 @@ namespace FLocal.Common.URL.polls {
 
 		protected override string _canonical {
 			get {
-				return "/Polls/NewPoll/";
+				return "/Polls/New/";
 			}
 		}
 	}

@@ -18,11 +18,11 @@
 				<xsl:text> </xsl:text>
 				<a>
 					<xsl:attribute name="href">
-						<xsl:text>/Poll/</xsl:text>
+						<xsl:text>/Poll/Info/</xsl:text>
 						<xsl:value-of select="id"/>
 						<xsl:text>/</xsl:text>
 					</xsl:attribute>
-					<xsl:value-of select="title"/>
+					<xsl:value-of select="title" disable-output-escaping="yes" />
 				</a>
 			</td>
 			<td align="left" nowrap="nowrap">

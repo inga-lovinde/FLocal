@@ -160,7 +160,8 @@
     <Compile Include="URL\my\login\RegisterByInvite.cs" />
     <Compile Include="URL\my\Settings.cs" />
     <Compile Include="URL\polls\Info.cs" />
-    <Compile Include="URL\polls\NewPoll.cs" />
+    <Compile Include="URL\polls\List.cs" />
+    <Compile Include="URL\polls\New.cs" />
     <Compile Include="URL\QuickLink.cs" />
     <Compile Include="URL\Robots.cs" />
     <Compile Include="URL\Static.cs" />

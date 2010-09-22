@@ -21,7 +21,7 @@ namespace FLocal.IISHandler.handlers.response {
 		}
 
 		override protected IEnumerable<XElement> getUserSpecificData(WebContext context, User user) {
-			PageOuter pageOuter = PageOuter.createFromUrl(this.url, context.userSettings.postsPerPage);
+			PageOuter pageOuter = PageOuter.createFromUrl(this.url, context.userSettings.threadsPerPage);
 			IEnumerable<Poll.Vote> votes = Poll.Vote.LoadByIds(
 				from stringId in Config.instance.mainConnection.LoadIdsByConditions(
 					Poll.Vote.TableSpec.instance,

@@ -150,6 +150,7 @@
     <Compile Include="handlers\response\AbstractUserGetHandler.cs" />
     <Compile Include="handlers\response\AllThreadsHandler.cs" />
     <Compile Include="handlers\response\AvatarsSettingsHandler.cs" />
+    <Compile Include="handlers\response\PollsListHandler.cs" />
     <Compile Include="handlers\response\SkipXsltTransformException.cs" />
     <Compile Include="handlers\response\UserDataHandler.cs" />
     <Compile Include="handlers\response\UserThreadsHandler.cs" />
