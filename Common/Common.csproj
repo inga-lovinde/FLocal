@@ -165,6 +165,7 @@
     <Compile Include="URL\QuickLink.cs" />
     <Compile Include="URL\Robots.cs" />
     <Compile Include="URL\Static.cs" />
+    <Compile Include="URL\upload\Info.cs" />
     <Compile Include="URL\upload\Item.cs" />
     <Compile Include="URL\upload\List.cs" />
     <Compile Include="URL\upload\New.cs" />

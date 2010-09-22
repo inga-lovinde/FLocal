@@ -274,6 +274,8 @@ namespace FLocal.Common.URL {
 					switch(requestParts[1].ToLower()) {
 						case "item":
 							return new upload.Item(requestParts[2], GetRemainder(requestParts, 3));
+						case "info":
+							return new upload.Info(requestParts[2], GetRemainder(requestParts, 3));
 						case "list":
 							return new upload.List(GetRemainder(requestParts, 2));
 						case "new":

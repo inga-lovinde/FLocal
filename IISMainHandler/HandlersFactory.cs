@@ -41,6 +41,7 @@ namespace FLocal.IISHandler {
 			{ typeof(URL.QuickLink), CreateHandler<URL.QuickLink, handlers.response.QuickLinkHandler> },
 			{ typeof(URL.Robots), CreateHandler<URL.Robots, handlers.response.RobotsHandler> },
 			{ typeof(URL.Static), CreateHandler<URL.Static, handlers.StaticHandler> },
+			{ typeof(URL.upload.Info), CreateHandler<URL.upload.Info, handlers.response.UploadInfoHandler> },
 			{ typeof(URL.upload.Item), CreateHandler<URL.upload.Item, handlers.response.UploadHandler> },
 			{ typeof(URL.upload.List), CreateHandler<URL.upload.List, handlers.response.UploadListHandler> },
 			{ typeof(URL.upload.New), CreateHandler<URL.upload.New, handlers.response.UploadNewHandler> },
