@@ -1,4 +1,3 @@
-body { font-size:11pt; }
 
 A:link {text-decoration:none;color:#aaaaaa}
 A:visited{text-decoration:none;color:#666666}
@@ -20,4 +19,7 @@ PRE{background-color:#303030;font-size:0.9em;font-family:"Consolas";BORDER:#9999
 }
 blockquote {
 	border-color:white;
+}
+.userbarcontainer {
+	background-color:#222200;
 }

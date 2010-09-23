@@ -1,3 +1,5 @@
+body { font-size:11pt; }
+
 pre 
 { 
   overflow-x: auto;
@@ -33,18 +35,22 @@ pre
 .userbar_title {
 	font-weight:bold;
 }
+.userbar_avatar {
+	text-align:right;
+}
 .avatar {
 	border:none;
-	max-height:10em;
+	max-height:8em;
 	height:expression((this.scrollHeight >= 120) ? '120px' : 'auto');
-	max-width:10em;
+	max-width:8em;
 	width:expression((this.scrollHeight >= 120) ? '120px' : 'auto');
 }
 .userbarcontainer {
 	border:none;
-	width:10em;
-	min-width:10em;
-	max-width:10em;
+	width:8em;
+	min-width:8em;
+	max-width:8em;
+	overflow:visible;
 }
 .UG_Blondes {
 	color:red !important;
