@@ -110,6 +110,7 @@
 					</div>
 				</xsl:if>
 			</div>
+			<div style="clear:both;" class="zerosize"><xsl:comment>zerosize</xsl:comment></div>
 		</div>
 	</xsl:template>
 

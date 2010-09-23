@@ -20,29 +20,31 @@
 					</xsl:choose>
 				</a>
 			</div>
-			<div class="userbar_additional" style="display:none">
-				<xsl:if test="avatar">
-					<div class="userbar_name">
-						<xsl:apply-templates select="current()" mode="userLink"/>
+			<div class="userbar_additionalcontainer" style="display:none">
+				<div class="userbar_additional">
+					<xsl:if test="avatar">
+						<div class="userbar_name">
+							<xsl:apply-templates select="current()" mode="userLink"/>
+						</div>
+					</xsl:if>
+					<div class="userbar_title">
+						<xsl:value-of select="title"/>
 					</div>
-				</xsl:if>
-				<div class="userbar_title">
-					<xsl:value-of select="title"/>
-				</div>
-				<div class="userbar_regdate">
-					<xsl:text>Рег.: </xsl:text>
-					<xsl:apply-templates select="regDate/date" mode="date"/>
-				</div>
-				<div class="userbar_totalposts">
-					<xsl:text>Сообщений: </xsl:text>
-					<xsl:value-of select="totalPosts"/>
-				</div>
-				<xsl:if test="location!=''">
-					<div class="userbar_location">
-						<xsl:text>Из: </xsl:text>
-						<xsl:value-of select="location"/>
+					<div class="userbar_regdate">
+						<xsl:text>Рег.: </xsl:text>
+						<xsl:apply-templates select="regDate/date" mode="date"/>
 					</div>
-				</xsl:if>
+					<div class="userbar_totalposts">
+						<xsl:text>Сообщений: </xsl:text>
+						<xsl:value-of select="totalPosts"/>
+					</div>
+					<xsl:if test="location!=''">
+						<div class="userbar_location">
+							<xsl:text>Из: </xsl:text>
+							<xsl:value-of select="location"/>
+						</div>
+					</xsl:if>
+				</div>
 			</div>
 		</div>
 	</xsl:template>

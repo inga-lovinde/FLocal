@@ -1,5 +1,7 @@
 body { font-size:11pt; }
 
+.zerosize { width:0px;height:0px;max-width:0px;max-height:0px; }
+
 pre 
 { 
   overflow-x: auto;
@@ -48,6 +50,12 @@ pre
 	min-width:6em;
 	max-width:6em;
 	width:expression((this.scrollHeight >= 90) ? '90px' : 'auto');
+}
+.userbar_additionalcontainer {
+	width:0px;
+	max-width:0px;
+	height:0px;
+	max-height:0px;
 	overflow:visible;
 }
 .userbar_additional {
@@ -104,4 +112,3 @@ blockquote hr {
 	padding:0px;
 	margin:0px;
 }
-
