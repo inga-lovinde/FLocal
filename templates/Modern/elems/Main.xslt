@@ -32,15 +32,11 @@
 				<xsl:if test="not(get/param[@name='headers'] = 'false')">
 					<xsl:call-template name="header"/>
 				</xsl:if>
-				<xsl:call-template name="specific"/>
-				<div style="display:none">
-					<form action="" method="POST" id="systemForm">
-						<input type="hidden" name="data"/>
-					</form>
+				<div style="float:left;width:97%;max-width:97%;overflow:visible;">
+					<xsl:call-template name="specific"/>
 				</div>
 				<xsl:if test="not(get/param[@name='headers'] = 'false')">
-					<div style="min-width:20px;width:20px;max-width:20px;overflow:visible;position:absolute;right:0px;top:0px;height:100%;text-align:right;">
-						<br/>
+					<div style="min-width:20px;width:20px;max-width:20px;overflow:visible;clear:right;float:right;text-align:right;">
 						<div style="min-width:20px;width:20px;max-width:20px;overflow:visible;text-align:right;height:260px;min-height:260px;max-height:260px;">
 							<div style="position:absolute;top:20px;right:20px;display:none" id="pokerPlaceholder">
 								<img border="0" src="/static/images/poker.jpg" align="top"/>
@@ -64,6 +60,11 @@
 						</div>
 					</div>
 				</xsl:if>
+				<div style="display:none">
+					<form action="" method="POST" id="systemForm">
+						<input type="hidden" name="data"/>
+					</form>
+				</div>
 				<xsl:if test="get/param[@name='debug'] = 'true'">
 					<xsl:text disable-output-escaping="yes"><![CDATA[<!--]]></xsl:text>
 					<br />
