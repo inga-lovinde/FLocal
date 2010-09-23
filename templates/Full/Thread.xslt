@@ -5,14 +5,9 @@
 	<xsl:template name="specificTitle">
 		<xsl:value-of select="currentLocation/thread/name"/>
 	</xsl:template>
-	<xsl:template name="isLiteEnabled">true</xsl:template>
-	<xsl:template name="isRssEnabled">true</xsl:template>
-	<xsl:template name="rssRelativeLink"><xsl:value-of select="/root/currentBaseUrl"/>0-reversed</xsl:template>
 	<xsl:template name="specific">
-		<!--xsl:if test="not(get/param[@name='headers'] = 'false')">
-			<xsl:call-template name="threadInfo"/>
-		</xsl:if>
-		<br /-->
+		<xsl:call-template name="threadInfo"/>
+		<br />
 		<table width="95%" align="center" cellpadding="1" cellspacing="1" class="tablesurround">
 			<tr>
 				<td>
@@ -48,10 +43,8 @@
 				</td>
 			</tr>
 		</table>
-		<!--br />
-		<xsl:if test="not(get/param[@name='headers'] = 'false')">
-			<xsl:call-template name="threadInfo"/>
-		</xsl:if-->
+		<br />
+		<xsl:call-template name="threadInfo"/>
 	</xsl:template>
 
 	<xsl:template name="threadInfo">

@@ -3,7 +3,6 @@
 	<xsl:import href="elems\Main.xslt"/>
 	<xsl:import href="elems\BoardInfo.xslt"/>
 	<xsl:template name="specificTitle">Разделы</xsl:template>
-	<xsl:template name="isLiteEnabled">true</xsl:template>
 	<xsl:template name="specific">
 				<table width="95%" align="center" class="tablesurround" cellspacing="1" cellpadding="1">
 					<tr>
@@ -50,14 +49,11 @@
 										<xsl:apply-templates select="currentDate" mode="dateTime"/>
 									</td>
 									<td width="30%" class="small" valign="top">
-										<a>
-											<xsl:attribute name="href">/AllPosts/</xsl:attribute>
-											<xsl:text>Последние сообщения</xsl:text>
-										</a>
+										<b>Просмотр новых сообщений</b>
 										<br />
 										<a>
-											<xsl:attribute name="href">/AllThreads/</xsl:attribute>
-											<xsl:text>Последние темы</xsl:text>
+											<xsl:attribute name="href">/AllPosts/</xsl:attribute>
+											<xsl:text>Последние 7 дней</xsl:text>
 										</a>
 										<br />
 										<a>

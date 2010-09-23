@@ -162,6 +162,46 @@
 											<xsl:text>Not implemented</xsl:text>
 										</td>
 									</tr>
+									<tr>
+										<td valign="top" colspan="3" align="center" class="darktable">
+											<a>
+												<xsl:if test="accountId">
+													<xsl:attribute name="href">/My/Conversations/NewPM/<xsl:value-of select="accountId"/>/</xsl:attribute>
+												</xsl:if>
+												<img src="/static/images/sendprivate.gif" border="0" style="vertical-align: text-bottom" />
+												<xsl:text> Послать личное сообщение</xsl:text>
+											</a>
+											<xsl:text> | </xsl:text>
+											<a>
+												<xsl:if test="accountId">
+													<xsl:attribute name="href">/My/Conversations/Conversation/<xsl:value-of select="accountId"/>/</xsl:attribute>
+												</xsl:if>
+												<img src="/static/images/sundial.gif" border="0" style="vertical-align: text-bottom" />
+												<xsl:text> История</xsl:text>
+											</a>
+											<xsl:text> | </xsl:text>
+											<a>
+												<img src="/static/images/addtobook.gif" align="top" style="vertical-align: text-bottom" />
+												<xsl:text> Добавить в адресную книгу</xsl:text>
+											</a>
+											<xsl:text> | </xsl:text>
+											<a>
+												<xsl:attribute name="href">/Users/User/<xsl:value-of select="user/id"/>/Posts/</xsl:attribute>
+												<img src="/static/images/viewposts.gif" align="top" style="vertical-align: text-bottom" />
+												<xsl:text> Сообщения</xsl:text>
+											</a>
+											<xsl:text> | </xsl:text>
+											<a>
+												<xsl:attribute name="href">/Users/User/<xsl:value-of select="user/id"/>/Replies/</xsl:attribute>
+												<xsl:text>Ответы</xsl:text>
+											</a>
+											<xsl:text> | </xsl:text>
+											<a>
+												<img src="/static/images/graph.gif" align="top" border="0" style="vertical-align: text-bottom" />
+												<xsl:text> Статистика</xsl:text>
+											</a>
+										</td>
+									</tr>
 								</table>
 							</td>
 						</tr>

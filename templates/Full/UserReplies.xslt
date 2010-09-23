@@ -6,8 +6,36 @@
 		<xsl:text>Ответы - </xsl:text>
 		<xsl:value-of select="user/name"/>
 	</xsl:template>
-	<xsl:template name="isRssEnabled">true</xsl:template>
 	<xsl:template name="specific">
+		<table width="95%" align="center" cellpadding="1" cellspacing="1" class="tablesurround">
+			<tr>
+				<td>
+					<table cellpadding="3" cellspacing="1" width="100%" class="tableborders"> 
+						<tr class="darktable">
+							<td>
+								<table width="100%" cellpadding="0" cellspacing="0">
+									<tr class="darktable">
+										<td align="left" width="33%">
+											<font class="catandforum">
+												<a>
+													<xsl:attribute name="href">/Users/</xsl:attribute>
+													<xsl:text>Пользователи</xsl:text>
+												</a>
+												<xsl:text> &gt;&gt; </xsl:text>
+												<xsl:apply-templates select="user" mode="userLink"/>
+												<xsl:text> &gt;&gt; </xsl:text>
+												<xsl:text>Ответы</xsl:text>
+											</font>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		<br />
 		<table width="95%" align="center" cellpadding="1" cellspacing="1" class="tablesurround">
 			<tr>
 				<td>

@@ -11,16 +11,6 @@
 				</link>
 				<link rel="shortcut icon" href="/static/favicons/smirk.ico" type="image/x-icon" />
 				<script language="Javascript" type="text/javascript" src="/static/js/common.js"><xsl:text> </xsl:text></script>
-				<script language="Javascript" type="text/javascript" src="/static/js/machichara/complex.js?v1"><xsl:text> </xsl:text></script>
-				<script language="Javascript" type="text/javascript" src="/static/js/machichara/simple.js?v1"><xsl:text> </xsl:text></script>
-				<script language="Javascript" type="text/javascript" src="/static/js/machichara/simple.js?v1">
-					<xsl:attribute name="src">
-						<xsl:text>/static/js/machichara/</xsl:text>
-						<xsl:value-of select="machichara/name"/>
-						<xsl:text>-specific.js</xsl:text>
-					</xsl:attribute>
-					<xsl:text> </xsl:text>
-				</script>
 				<title>
 					<xsl:call-template name="specificTitle"/>
 					<xsl:text> - </xsl:text>
@@ -28,7 +18,6 @@
 				</title>
 			</head>
 			<body>
-				<xsl:attribute name="onLoad">machicharaInit();</xsl:attribute>
 				<xsl:if test="not(get/param[@name='headers'] = 'false')">
 					<xsl:call-template name="header"/>
 				</xsl:if>
@@ -38,39 +27,6 @@
 						<input type="hidden" name="data"/>
 					</form>
 				</div>
-				<xsl:if test="not(get/param[@name='headers'] = 'false')">
-					<div style="min-width:20px;width:20px;max-width:20px;overflow:visible;position:absolute;right:0px;top:0px;height:100%;text-align:right;">
-						<br/>
-						<div style="min-width:20px;width:20px;max-width:20px;overflow:visible;text-align:right;height:260px;min-height:260px;max-height:260px;">
-							<div style="position:absolute;top:20px;right:20px;display:none" id="pokerPlaceholder">
-								<img border="0" src="/static/images/poker.jpg" align="top"/>
-							</div>
-							<div style="min-width:20px;width:20px;max-width:20px;text-align:right;">
-								<xsl:attribute name="onMouseOver">document.getElementById("pokerPlaceholder").style.display = "block";</xsl:attribute>
-								<xsl:attribute name="onMouseOut">document.getElementById("pokerPlaceholder").style.display = "none";</xsl:attribute>
-								<img border="0" src="/static/images/tab_poker.png" align="top"/>
-							</div>
-						</div>
-						<br/>
-						<div style="min-width:20px;width:20px;max-width:20px;overflow:visible;text-align:right;height:260px;min-height:260px;max-height:260px;">
-							<div style="position:absolute;top:20px;right:20px;display:none" id="courtesansPlaceholder">
-								<img border="0" src="/static/images/courtesans.jpg" align="top"/>
-							</div>
-							<div style="min-width:20px;width:20px;max-width:20px;text-align:right;">
-								<xsl:attribute name="onMouseOver">document.getElementById("courtesansPlaceholder").style.display = "block";</xsl:attribute>
-								<xsl:attribute name="onMouseOut">document.getElementById("courtesansPlaceholder").style.display = "none";</xsl:attribute>
-								<img border="0" src="/static/images/tab_courtesans.png" align="top"/>
-							</div>
-						</div>
-					</div>
-				</xsl:if>
-				<xsl:if test="get/param[@name='debug'] = 'true'">
-					<xsl:text disable-output-escaping="yes"><![CDATA[<!--]]></xsl:text>
-					<br />
-					<xsl:text>Data used for authoring this XHTML document:</xsl:text>
-					<xmp><xsl:copy-of select="/"/></xmp>
-					<xsl:text disable-output-escaping="yes"><![CDATA[-->]]></xsl:text>
-				</xsl:if>
 			</body>
 		</html>
 	</xsl:template>
