@@ -91,3 +91,6 @@ blockquote {
 	display:block;
 	border:solid 2px;
 }
+blockquote hr {
+	display:none;
+}
