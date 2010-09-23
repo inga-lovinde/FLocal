@@ -83,18 +83,23 @@
 					</img>
 				</a>
 				<xsl:text> </xsl:text>
-				<xsl:if test="parentPost/post">
-					<font class="small separate">
-						<xsl:text>[</xsl:text>
-						<a>
-							<xsl:attribute name="title"><xsl:value-of select="parentPost/post/bodyShort"/></xsl:attribute>
-							<xsl:attribute name="href">/Thread/<xsl:value-of select="threadId"/>/p<xsl:value-of select="parentPost/post/id"/>/</xsl:attribute>
-							<xsl:text>re: </xsl:text>
-							<xsl:value-of select="parentPost/post/poster/user/name"/>
-						</a>
-						<xsl:text>]</xsl:text>
-					</font>
-				</xsl:if>
+				<xsl:choose>
+					<xsl:when test="parentPost/post">
+						<font class="small separate">
+							<xsl:text>[</xsl:text>
+							<a>
+								<xsl:attribute name="title"><xsl:value-of select="parentPost/post/bodyShort"/></xsl:attribute>
+								<xsl:attribute name="href">/Thread/<xsl:value-of select="threadId"/>/p<xsl:value-of select="parentPost/post/id"/>/</xsl:attribute>
+								<xsl:text>re: </xsl:text>
+								<xsl:value-of select="parentPost/post/poster/user/name"/>
+							</a>
+							<xsl:text>]</xsl:text>
+						</font>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="title"/>
+					</xsl:otherwise>
+				</xsl:choose>
 				<div class="postbody">
 					<xsl:value-of select="body" disable-output-escaping="yes" />
 				</div>
