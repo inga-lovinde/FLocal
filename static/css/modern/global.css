@@ -84,8 +84,9 @@ input {
 }
 .postcontainer {
 	border-style:none none solid none;
+	border-width:0 0 1px 0;
 	padding-bottom:5pt;
-	margin-bottom:5pt;
+	padding-top:5pt;
 }
 blockquote {
 	display:block;
