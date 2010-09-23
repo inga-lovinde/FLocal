@@ -4,13 +4,13 @@ A:visited{text-decoration:none;color:#666666}
 A:active{text-decoration:none;color:#999999}
 A:hover{COLOR:white;text-decoration:none}
 
-BODY, P, TABLE, TD, TR {font-family:"Calibri"}
+BODY, P, TABLE, TD, TR {font-family:"Calibri", sans-serif;}
 BODY{color:#ffffff;background-color:black}
 FORM{DISPLAY:inline;MARGIN-BOTTOM:0}
 
-.formboxes{font-size:1em;font-family:"Segoe Print";color:#eeeeee;BACKGROUND-COLOR:black}
+.formboxes{font-size:1em;font-family:"Segoe Print", cursive;color:#eeeeee;BACKGROUND-COLOR:black;}
 
-PRE{background-color:#303030;font-size:0.9em;font-family:"Consolas";BORDER:#999999 1px solid;PADDING: 0.2em 0.3em;MARGIN:0 0.5em 0 1em;color:white}
+PRE{background-color:#303030;font-size:0.9em;font-family:"Consolas",monospace;BORDER:#999999 1px solid;PADDING: 0.2em 0.3em;MARGIN:0 0.5em 0 1em;color:white}
 
 .confluent{COLOR:black;}
 
@@ -19,7 +19,7 @@ PRE{background-color:#303030;font-size:0.9em;font-family:"Consolas";BORDER:#9999
 }
 blockquote {
 	border:solid 1px #606060;
-	font-family:"Segoe Print";
+	font-family:"Segoe Print", cursive;
 }
 .userbar_additional {
 	background-color:#202020;
