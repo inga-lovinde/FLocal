@@ -12,14 +12,15 @@ FORM{DISPLAY:inline;MARGIN-BOTTOM:0}
 
 PRE{background-color:#303030;font-size:0.9em;font-family:"Consolas";BORDER:#999999 1px solid;PADDING: 0.2em 0.3em;MARGIN:0 0.5em 0 1em;color:white}
 
-.confluent{COLOR:#141414;}
+.confluent{COLOR:black;}
 
 .postcontainer {
 	border-color:white;
 }
 blockquote {
-	border-color:white;
+	border:solid 1px #606060;
+	font-family:"Segoe Print";
 }
 .userbar_additional {
-	background-color:#181818;
+	background-color:#202020;
 }

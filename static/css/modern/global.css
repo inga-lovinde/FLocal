@@ -97,5 +97,11 @@ blockquote {
 	border:solid 2px;
 }
 blockquote hr {
-	display:none;
+	display:block;
+	visibility:hidden;
+	width:0px;
+	height:0px;
+	padding:0px;
+	margin:0px;
 }
+
