@@ -6,6 +6,7 @@
 	<xsl:import href="UsersHeader.xslt"/>
 	<xsl:import href="UploadHeader.xslt"/>
 
+	<xsl:template name="isClassicEnabled">true</xsl:template>
 	<xsl:template name="isLiteEnabled">false</xsl:template>
 	<xsl:template name="isRssEnabled">false</xsl:template>
 	<xsl:template name="rssRelativeLink"><xsl:value-of select="currentBaseUrl"/></xsl:template>
@@ -83,6 +84,9 @@
 											</xsl:call-template>
 										</td>
 										<td width="15%" align="right">
+											<xsl:variable name="isClassicEnabled">
+												<xsl:call-template name="isClassicEnabled"/>
+											</xsl:variable>
 											<xsl:variable name="isLiteEnabled">
 												<xsl:call-template name="isLiteEnabled"/>
 											</xsl:variable>
@@ -100,6 +104,21 @@
 													<xsl:value-of select="floor(url/port div 1000)"/>
 												</xsl:if>
 											</xsl:variable>
+											<a>
+												<xsl:if test="$isClassicEnabled='true'">
+													<xsl:attribute name="href">
+														<xsl:value-of select="$prefix"/>
+														<xsl:text>451</xsl:text>
+														<xsl:value-of select="currentUrl"/>
+													</xsl:attribute>
+												</xsl:if>
+												<img border="0">
+													<xsl:attribute name="src">
+														<xsl:text>/static/images/classic.jpg</xsl:text>
+													</xsl:attribute>
+												</img>
+											</a>
+											<xsl:text>&#160;&#160;</xsl:text>
 											<a>
 												<xsl:if test="$isLiteEnabled='true'">
 													<xsl:attribute name="href">
