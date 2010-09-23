@@ -7,39 +7,17 @@
 	</xsl:template>
 	<xsl:template name="isRssEnabled">true</xsl:template>
 	<xsl:template name="specific">
-		<table width="95%" align="center" cellpadding="1" cellspacing="1" class="tablesurround">
-			<tr>
-				<td>
-					<table cellpadding="0" cellspacing="1" width="100%" class="tableborders">
-						<tr class="tdheader">
-							<td>
-								<table width="100%" cellspacing="1" cellpadding="3" border="0">
-									<tr>
-										<td>
-											<xsl:text>страницы:</xsl:text>
-											<xsl:apply-templates select="posts/pageOuter" mode="withCurrent"/>
-										</td>
-									</tr>
-								</table>
-							</td>
-						</tr>
-						<xsl:apply-templates select="posts/post"/>
-						<tr class="tdheader">
-							<td>
-								<table width="100%" cellspacing="1" cellpadding="3" border="0">
-									<tr>
-										<td>
-											<xsl:text>страницы:</xsl:text>
-											<xsl:apply-templates select="posts/pageOuter" mode="withCurrent"/>
-										</td>
-									</tr>
-								</table>
-							</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-		</table>
+		<div>
+			<xsl:text>страницы:</xsl:text>
+			<xsl:apply-templates select="posts/pageOuter" mode="withCurrent"/>
+		</div>
+		<div id="postsContainer">
+			<xsl:apply-templates select="posts/post"/>
+		</div>
+		<div>
+			<xsl:text>страницы:</xsl:text>
+			<xsl:apply-templates select="posts/pageOuter" mode="withCurrent"/>
+		</div>
 	</xsl:template>
 
 </xsl:stylesheet>

@@ -5,9 +5,9 @@
 	<xsl:template match="/root">
 		<html>
 			<head>
-				<link rel="stylesheet" href="/static/css/global.css?v1" type="text/css" />
+				<link rel="stylesheet" href="/static/css/modern/global.css" type="text/css" />
 				<link rel="stylesheet" type="text/css" skin="skin">
-					<xsl:attribute name="href">/static/css/<xsl:value-of select="skin/name"/>.css</xsl:attribute>
+					<xsl:attribute name="href">/static/css/modern/penartur.css</xsl:attribute>
 				</link>
 				<link rel="shortcut icon" href="/static/favicons/smirk.ico" type="image/x-icon" />
 				<script language="Javascript" type="text/javascript" src="/static/js/common.js"><xsl:text> </xsl:text></script>
@@ -293,6 +293,24 @@
 				<xsl:text>UG_</xsl:text><xsl:value-of select="group/name"/>
 			</xsl:attribute>
 			<xsl:attribute name="href">/Users/User/<xsl:value-of select="id"/>/Info/</xsl:attribute>
+			<xsl:value-of select="name"/>
+			<xsl:choose>
+				<xsl:when test="isAdministrator='true'">
+					<img src="/static/images/adm.gif" border="0"/>
+				</xsl:when>
+				<xsl:when test="isModerator='true'">
+					<img src="/static/images/mod.gif" border="0"/>
+				</xsl:when>
+			</xsl:choose>
+		</a>
+	</xsl:template>
+
+	<xsl:template match="user" mode="userNick">
+		<a nobr="nobr">
+			<xsl:attribute name="class">
+				<xsl:text>separate </xsl:text>
+				<xsl:text>UG_</xsl:text><xsl:value-of select="group/name"/>
+			</xsl:attribute>
 			<xsl:value-of select="name"/>
 			<xsl:choose>
 				<xsl:when test="isAdministrator='true'">

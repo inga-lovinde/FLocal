@@ -1,0 +1,83 @@
+pre 
+{ 
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin: 10px;
+  width: 99%;
+  font-family:Consolas, monospace;
+}
+
+[type=button].iconize, [type=submit].iconize {
+	padding-left:16px;
+	background-position:center left;
+	background-repeat:no-repeat;
+	font-size:10px;
+}
+
+[pseudolink] {
+	cursor:hand;
+	text-decoration:underline;
+}
+[spoiler] [inner] {
+	display:none;
+}
+[spoiler] [opener] {
+	cursor:hand;
+}
+.warning {
+	background-color:red;
+}
+.userbar_name {
+	font-size:2em;
+}
+.userbar_title {
+	font-weight:bold;
+}
+.avatar {
+	border:none;
+	max-height:10em;
+	height:expression((this.scrollHeight >= 120) ? '120px' : 'auto');
+	max-width:10em;
+	width:expression((this.scrollHeight >= 120) ? '120px' : 'auto');
+}
+.userbarcontainer {
+	border:none;
+	width:10em;
+	min-width:10em;
+	max-width:10em;
+}
+.UG_Blondes {
+	color:red !important;
+	background-color:yellow !important;
+	font-weight: bold !important;
+}
+.UG_Moderators {
+	color:blue !important;
+}
+.UG_Administrators {
+	color:black !important;
+}
+p {
+	margin:0em;
+}
+.punishment {
+	color:red !important;
+}
+.punishment.withdrawed {
+	color:red !important;
+	text-decoration: line-through;
+}
+.currentLink {
+	font-weight:bolder;font-style:italic;
+}
+input {
+	z-index:90000;
+}
+[nobr] {
+	white-space: nowrap;
+}
+.postcontainer {
+	border-style:none none solid none;
+	padding-bottom:5pt;
+	margin-bottom:5pt;
+}
