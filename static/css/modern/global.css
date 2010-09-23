@@ -30,27 +30,31 @@ pre
 	background-color:red;
 }
 .userbar_name {
-	font-size:2em;
+	font-size:1.7em;
 }
 .userbar_title {
 	font-weight:bold;
 }
-.userbar_avatar {
-	text-align:right;
-}
-.avatar {
+.avatar, .userbar_avatar {
 	border:none;
-	max-height:8em;
-	height:expression((this.scrollHeight >= 120) ? '120px' : 'auto');
-	max-width:8em;
-	width:expression((this.scrollHeight >= 120) ? '120px' : 'auto');
+	max-height:6em;
+	height:expression((this.scrollHeight >= 90) ? '90px' : 'auto');
+	max-width:6em;
+	width:expression((this.scrollHeight >= 90) ? '90px' : 'auto');
 }
 .userbarcontainer {
 	border:none;
-	width:8em;
-	min-width:8em;
-	max-width:8em;
+	width:6em;
+	min-width:6em;
+	max-width:6em;
+	width:expression((this.scrollHeight >= 90) ? '90px' : 'auto');
 	overflow:visible;
+}
+.userbar_additional {
+	position:absolute;
+	white-space:nowrap;
+	padding:5pt;
+	font-size:1.2em;
 }
 .UG_Blondes {
 	color:red !important;
