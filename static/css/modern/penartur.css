@@ -19,8 +19,23 @@ PRE{background-color:#303030;font-size:0.9em;font-family:"Consolas",monospace;BO
 }
 blockquote {
 	border:solid 1px #606060;
+	background-color:#303030;
 	font-family:"Segoe Print", cursive;
 }
 .userbar_additional {
 	background-color:#202020;
 }
+
+.tablesurround{BACKGROUND:#191919;margin-top:-0.1em;margin-bottom:-0.1em}
+.tableborders{BACKGROUND:#191919}
+.tdheader{FONT-WEIGHT:bold;font-size:1em;BACKGROUND:#333333;color:#ffffff}
+.tdheader a{font-size:1em;color:#dddddd;text-decoration:underline}
+.tdheader a:hover{color:#BBBBBB;text-decoration:none}
+.tdheader a:visited{color:#999999;text-decoration:underline}
+.tdheader a:active{color:#000000;text-decoration:underline}
+.lighttable{BACKGROUND:#141414;color:#cccccc}
+.darktable{BACKGROUND:black}
+.cleartable{BACKGROUND:black}
+.alternatetable{BACKGROUND:black}
+.subjecttable{BACKGROUND:black}
+.footertable{BACKGROUND:#666666}

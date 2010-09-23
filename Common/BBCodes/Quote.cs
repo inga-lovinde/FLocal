@@ -17,7 +17,7 @@ namespace FLocal.Common.BBCodes {
 			if(inner == "") return "";
 			string marker = this.Default;
 			if(marker == null) marker = "Quote:";
-			return "<br/><blockquote><font class=\"small\">" + marker + "</font><hr/>" + inner + "<br/><hr/></blockquote><br/>";
+			return "<blockquote><div class=\"quotetitle\">" + marker + "</div><div class=\"quotecontent\">" + inner + "</div></blockquote>";
 		}
 
 	}
