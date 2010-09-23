@@ -110,9 +110,12 @@ namespace FLocal.IISHandler {
 				case 449:
 					this.design = new designs.Rss();
 					break;
+				case 451:
+					this.design = new designs.Classic();
+					break;
 				case 443:
 				default:
-					this.design = new designs.Classic();
+					this.design = new designs.Modern();
 					break;
 			}
 

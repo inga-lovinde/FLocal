@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="Windows-1251"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml">
+	<xsl:import href="elems\Main.xslt"/>
+	<xsl:import href="elems\BoardInfo.xslt"/>
+	<xsl:import href="elems\ThreadInfo.xslt"/>
+	<xsl:template name="specificTitle">
+		<xsl:value-of select="currentLocation/board/name"/>
+	</xsl:template>
+	<xsl:template name="isLiteEnabled">true</xsl:template>
+	<xsl:template name="isRssEnabled">true</xsl:template>
+	<xsl:template name="specific">
+		<xsl:if test="boards/board">
+			<table width="95%" align="center" class="tableborders" border="1">
+				<tr>
+					<td class="tdheader" colspan="2" width="61%">Подразделы</td>
+					<td class="tdheader" align="center" width="7%">Темы</td>
+					<td class="tdheader" align="center" width="7%">Сообщений</td>
+					<td class="tdheader" align="center" width="15%">Последнее</td>
+					<td class="tdheader" align="center" width="10%">Модератор</td>
+				</tr>
+				<xsl:apply-templates select="boards/board"/>
+			</table>
+			<br/>
+		</xsl:if>
+		<table width="95%" align="center" class="tablesurround">
+			<tr>
+				<td>
+					<table cellpadding="3" cellspacing="1" width="100%" class="tableborders">
+						<tr>
+							<td align="left" width="55%" class="tdheader">Тема</td>
+							<td align="left" nowrap="nowrap" width="15%" class="tdheader">Автор</td>
+							<td nowrap="nowrap" width="5%" class="tdheader" align="center">Просмотров</td>
+							<td nowrap="nowrap" width="5%" class="tdheader" align="center">Постов</td>
+							<td nowrap="nowrap" width="20%" class="tdheader" align="center">Последнее</td>
+						</tr>
+						<!-- BEGIN POST LOOP DO NOT DELETE -->
+						<xsl:apply-templates select="threads/thread"/>
+						<!-- END OF LOOP -->
+						<tr class="tdheader">
+							<td colspan="5">
+								<font class="onbody">
+									<xsl:text>страницы:</xsl:text>
+									<xsl:apply-templates select="threads/pageOuter" mode="withCurrent"/>
+								</font>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</xsl:template>
+
+</xsl:stylesheet>
