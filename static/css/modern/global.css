@@ -81,3 +81,7 @@ input {
 	padding-bottom:5pt;
 	margin-bottom:5pt;
 }
+blockquote {
+	display:block;
+	border:solid 2px;
+}
