@@ -8,7 +8,6 @@
 				<xsl:with-param name="text">Список</xsl:with-param>
 			</xsl:call-template>
 			<xsl:text>&#160;&#160;&#160;</xsl:text>
-			<img src="/static/images/shortcut.png" border="0"/>
 			<xsl:call-template name="headerLink">
 				<xsl:with-param name="url">/Users/User/<xsl:value-of select="session/user/id"/>/PollsParticipated/</xsl:with-param>
 				<xsl:with-param name="text">Мои (?)</xsl:with-param>
