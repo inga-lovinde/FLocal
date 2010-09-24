@@ -18,7 +18,7 @@
 				<xsl:text> </xsl:text>
 				<a>
 					<xsl:attribute name="href">
-						<xsl:text>/Poll/Info/</xsl:text>
+						<xsl:text>/Polls/Info/</xsl:text>
 						<xsl:value-of select="id"/>
 						<xsl:text>/</xsl:text>
 					</xsl:attribute>
