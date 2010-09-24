@@ -5,12 +5,16 @@
 	<xsl:template match="/root">
 		<html>
 			<head>
-				<link rel="stylesheet" href="/static/css/modern/global.css?v1" type="text/css" />
+				<link rel="stylesheet" href="/static/css/modern/global.css?v3" type="text/css" />
+				<xsl:comment>[if lte IE 7]&gt;<![CDATA[
+					<link rel="stylesheet" href="/static/css/modern/iefixes.css?v3" type="text/css" />
+				]]>&lt;![endif]</xsl:comment>
 				<link rel="stylesheet" type="text/css" skin="skin">
-					<xsl:attribute name="href">/static/css/modern/penartur.css?v1</xsl:attribute>
+					<xsl:attribute name="href">/static/css/modern/penartur.css?v3</xsl:attribute>
 				</link>
 				<link rel="shortcut icon" href="/static/favicons/smirk.ico" type="image/x-icon" />
 				<script language="Javascript" type="text/javascript" src="/static/js/common.js"><xsl:text> </xsl:text></script>
+				<script language="Javascript" type="text/javascript" src="/static/js/modern.js"><xsl:text> </xsl:text></script>
 				<script language="Javascript" type="text/javascript" src="/static/js/machichara/complex.js?v1"><xsl:text> </xsl:text></script>
 				<script language="Javascript" type="text/javascript" src="/static/js/machichara/simple.js?v1"><xsl:text> </xsl:text></script>
 				<script language="Javascript" type="text/javascript" src="/static/js/machichara/simple.js?v1">

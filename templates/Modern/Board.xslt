@@ -10,16 +10,9 @@
 	<xsl:template name="isRssEnabled">true</xsl:template>
 	<xsl:template name="specific">
 		<xsl:if test="boards/board">
-			<table width="95%" align="center" class="tableborders" border="1">
-				<tr>
-					<td class="tdheader" colspan="2" width="61%">Подразделы</td>
-					<td class="tdheader" align="center" width="7%">Темы</td>
-					<td class="tdheader" align="center" width="7%">Сообщений</td>
-					<td class="tdheader" align="center" width="15%">Последнее</td>
-					<td class="tdheader" align="center" width="10%">Модератор</td>
-				</tr>
+			<ul class="boardscontainer">
 				<xsl:apply-templates select="boards/board"/>
-			</table>
+			</ul>
 			<br/>
 		</xsl:if>
 		<table width="95%" align="center" class="tablesurround">

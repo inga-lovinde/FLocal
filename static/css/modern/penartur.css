@@ -1,5 +1,5 @@
 
-A:link {text-decoration:none;color:#aaaaaa}
+A:link, a[pseudolink], a.pseudolink {text-decoration:none;color:#aaaaaa}
 A:visited{text-decoration:none;color:#666666}
 A:active{text-decoration:none;color:#999999}
 A:hover{COLOR:white;text-decoration:none}
@@ -24,6 +24,21 @@ blockquote {
 }
 .userbar_additional {
 	background-color:#202020;
+}
+.categorycontainer_title {
+	background-color:#101010;
+}
+.boardscontainer {
+	background-color:#101010;
+}
+.boardcontainer {
+	background-color:#202020;
+}
+.boardcontainer.updated {
+	background-color:#208020;
+}
+.board_additional {
+	background-color:#302010;
 }
 
 .tablesurround{BACKGROUND:#191919;margin-top:-0.1em;margin-bottom:-0.1em}

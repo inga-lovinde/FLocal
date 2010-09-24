@@ -18,9 +18,8 @@ pre
 	font-size:10px;
 }
 
-[pseudolink] {
+[pseudolink], .pseudolink {
 	cursor:hand;
-	text-decoration:underline;
 }
 [spoiler] [inner] {
 	display:none;
@@ -120,4 +119,46 @@ BLOCKQUOTE BR {FONT-SIZE:1px}
 }
 .header .header {
 	font-size:0.8em;
+}
+ul.categoriescontainer {
+	padding:0px;
+}
+li.categorycontainer {
+	display:inline-block;
+	vertical-align:top;
+	margin:5pt;
+}
+.categorycontainer_title {
+	display:inline;
+	font-size:1.2em;
+	margin:0px;
+	margin-left:1em;
+	padding:0.3em;
+}
+ul.boardscontainer {
+	padding:0px;
+}
+li.boardcontainer {
+	display:inline-block;
+	width:13em;
+	vertical-align:top;
+	font-size:1.25em;
+	margin:5pt;
+}
+.boardcontainer_name {
+	font-size:1.2em;
+	margin:0px;
+}
+.board_additionalcontainer {
+	width:0px;
+	max-width:0px;
+	height:0px;
+	max-height:0px;
+	overflow:visible;
+}
+.board_additional {
+	position:absolute;
+	padding:5pt;
+	font-size:0.8em;
+	width:16.25em;
 }

@@ -5,13 +5,9 @@
 	<xsl:template name="specificTitle">Разделы</xsl:template>
 	<xsl:template name="isLiteEnabled">true</xsl:template>
 	<xsl:template name="specific">
-				<table width="95%" align="center" class="tablesurround" cellspacing="1" cellpadding="1">
-					<tr>
-						<td>
-							<xsl:apply-templates select="categories/category"/>
-						</td>
-					</tr>
-				</table>
+		<ul class="categoriescontainer">
+			<xsl:apply-templates select="categories/category"/>
+		</ul>
 				<br />
 				<table width="95%" align="center" class="tablesurround" cellpadding="1" cellspacing="1">
 					<tr>
@@ -95,16 +91,16 @@
 	</xsl:template>
 
 	<xsl:template match="category">
-		<table width="100%" align="center" class="tableborders" cellpadding="3" cellspacing="1">
-			<tr>
-				<td class="tdheader" colspan="2" width="61%"><xsl:value-of select="name"/></td>
-				<td class="tdheader" align="center" width="7%">Темы</td>
-				<td class="tdheader" align="center" width="7%">Сообщений</td>
-				<td class="tdheader" align="center" width="15%">Последнее</td>
-				<td class="tdheader" align="center" width="10%">Модератор</td>
-			</tr>
-			<xsl:apply-templates select="boards/board"/>
-		</table>
+		<li class="categorycontainer">
+			<h2 class="categorycontainer_title"><xsl:value-of select="name"/></h2>
+			<ul class="boardscontainer">
+				<xsl:apply-templates select="boards/board">
+					<xsl:with-param name="maxPerLine">
+						<xsl:value-of select="ceiling(count(boards/board) div 2)"/>
+					</xsl:with-param>
+				</xsl:apply-templates>
+			</ul>
+		</li>
 	</xsl:template>
 
 </xsl:stylesheet>

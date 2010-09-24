@@ -3,8 +3,8 @@
 
 	<xsl:template match="user" mode="userInfoBar">
 		<div class="userbar">
-			<xsl:attribute name="onMouseOver">for(var i=0;i&lt;this.childNodes.length;i++) if(this.childNodes[i].nodeName == "DIV") this.childNodes[i].style.display="block";</xsl:attribute>
-			<xsl:attribute name="onMouseOut">for(var i=0;i&lt;this.childNodes.length;i++) if(this.childNodes[i].nodeName == "DIV" &amp;&amp; this.childNodes[i].getAttribute("default") != "default") this.childNodes[i].style.display="none";</xsl:attribute>
+			<xsl:attribute name="onMouseOver">showChildren(this);</xsl:attribute>
+			<xsl:attribute name="onMouseOut">hideChildren(this);</xsl:attribute>
 			<div class="userbar_avatar" default="default">
 				<a>
 					<xsl:attribute name="href">/Users/User/<xsl:value-of select="id"/>/Info/</xsl:attribute>

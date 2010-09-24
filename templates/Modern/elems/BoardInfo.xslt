@@ -2,73 +2,93 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml">
 
 	<xsl:template match="board">
-		<tr>
-			<td width="4%" class="darktable" align="center" valign="middle">
-				<a>
-					<xsl:attribute name="onClick">if(!confirm('Пометить все сообщения как прочитанные?')) {event.returnValue=false; return false;} else { alert("Not implemented yet"); }</xsl:attribute>
-					<xsl:choose>
-						<xsl:when test="(hasNewPosts='true') and not(lastPostInfo/post/poster/user/id = /root/session/user/id)">
-							<img border="0" width="17" height="21" src="/static/images/newposts.gif" alt=""/>
-						</xsl:when>
-						<xsl:otherwise>
-							<img border="0" width="17" height="21" src="/static/images/nonewposts.gif" alt=""/>
-						</xsl:otherwise>
-					</xsl:choose>
-				</a>
-			</td>
-			<td width="57%" class="darktable">
-				<font class="forumtitle">
-					<a>
-						<xsl:attribute name="href">/Board/<xsl:value-of select="id"/>/</xsl:attribute>
-						<xsl:value-of select="name"/>
-					</a>
-				</font>
-				<br />
-				<xsl:if test="(description != '') or (subBoards/board)">
-					<table cellpadding="0" cellspacing="0">
-						<xsl:if test="description != ''">
-							<tr>
-								<td class="forumdescript"><xsl:value-of select="description"/></td>
-							</tr>
-						</xsl:if>
-						<xsl:if test="subBoards/board">
-							<tr>
-								<td class="forumdescript" style="padding-top:0.3em">
-									<xsl:apply-templates select="subBoards/board"/>
-								</td>
-							</tr>
-						</xsl:if>
-					</table>
+		<xsl:param name="maxPerLine">100</xsl:param>
+		<xsl:if test="((position() mod $maxPerLine) = 1) and (position() != 1)">
+			<br/>
+		</xsl:if>
+		<li>
+			<xsl:attribute name="class">
+				<xsl:text>boardcontainer</xsl:text>
+				<xsl:if test="(hasNewPosts='true') and not(lastPostInfo/post/poster/user/id = /root/session/user/id)">
+					<xsl:text> updated</xsl:text>
 				</xsl:if>
-			</td>
-			<td width="7%" align="center" class="threadtotal" nowrap="nowrap"><xsl:value-of select="totalThreads"/></td>
-			<td width="7%" align="center" class="posttotal" nowrap="nowrap"><xsl:value-of select="totalPosts"/></td>
-			<td width="15%" nowrap="nowrap" class="posttime">
-				<xsl:apply-templates select="lastPostInfo"/>
-			</td>
-			<td width="10%" class="modcolumn" align="center">
-				<xsl:apply-templates select="administrator/user | moderators/user" mode="userLink"/>
-			</td>
-		</tr>
+			</xsl:attribute>
+			<a>
+				<xsl:attribute name="href">/Forum/Board/<xsl:value-of select="id"/>/Threads/</xsl:attribute>
+				<h3 class="boardcontainer_name">
+					<xsl:value-of select="name"/>
+				</h3>
+				<xsl:if test="description != ''">
+					<p class="boardcontainer_description">
+						<xsl:attribute name="href">/Forum/Board/<xsl:value-of select="id"/>/Threads/</xsl:attribute>
+						<xsl:value-of select="description"/>
+					</p>
+				</xsl:if>
+			</a>
+			<p>Тем: <xsl:value-of select="totalThreads"/></p>
+			<p>Сообщений: <xsl:value-of select="totalPosts"/></p>
+			<xsl:if test="subBoards/board">
+				<div style="float:left">
+					<xsl:attribute name="onMouseOver">showChildren(this);</xsl:attribute>
+					<xsl:attribute name="onMouseOut">hideChildren(this);</xsl:attribute>
+					<div default="default">
+						<a class="pseudolink">Подразделы</a>
+					</div>
+					<div class="board_additionalcontainer" style="display:none">
+						<div class="board_additional">
+							<p>
+								<xsl:apply-templates select="subBoards/board"/>
+							</p>
+						</div>
+					</div>
+				</div>
+			</xsl:if>
+			<div style="float:right;">
+				<xsl:attribute name="onMouseOver">showChildren(this);</xsl:attribute>
+				<xsl:attribute name="onMouseOut">hideChildren(this);</xsl:attribute>
+				<div default="default">
+					<a class="pseudolink">Информация</a>
+				</div>
+				<div class="board_additionalcontainer" style="display:none;">
+					<div class="board_additional">
+						<xsl:apply-templates select="lastPostInfo"/>
+						<p>
+							<xsl:text>Модераторы:</xsl:text>
+							<br/>
+							<xsl:apply-templates select="administrator/user | moderators/user" mode="userLink"/>
+						</p>
+					</div>
+				</div>
+			</div>
+		</li>
 	</xsl:template>
 
 	<xsl:template match="lastPostInfo">
 		<xsl:if test="post">
-			<xsl:apply-templates select="post/postDate/date" mode="dateTime"/><br />
-			<a>
-				<xsl:attribute name="href">/Thread/<xsl:value-of select="post/threadId"/>/p<xsl:value-of select="post/id"/>/</xsl:attribute>
-				<xsl:text>от </xsl:text>
-				<xsl:value-of select="post/poster/user/name"/>
-			</a>
+			<p>
+				<xsl:text>Последнее сообщение:</xsl:text>
+				<br/>
+				<a>
+					<xsl:attribute name="href">/Thread/<xsl:value-of select="post/threadId"/>/p<xsl:value-of select="post/id"/>/</xsl:attribute>
+					<xsl:apply-templates select="post/postDate/date" mode="dateTime"/>
+					<xsl:text> от </xsl:text>
+					<xsl:value-of select="post/poster/user/name"/>
+				</a>
+			</p>
 		</xsl:if>
 	</xsl:template>
 
 	<xsl:template match="subBoards/board">
-		<xsl:text> [</xsl:text>
+		<xsl:if test="position() &gt; 1">
+			<hr/>
+		</xsl:if>
 		<a>
 			<xsl:attribute name="href">/Board/<xsl:value-of select="id"/>/</xsl:attribute>
 			<xsl:value-of select="name"/>
+			<xsl:if test="description != ''">
+				<br/>
+				<xsl:value-of select="description"/>
+			</xsl:if>
 		</a>
-		<xsl:text>]</xsl:text>
 	</xsl:template>
 </xsl:stylesheet>
