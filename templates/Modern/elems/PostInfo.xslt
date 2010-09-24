@@ -9,17 +9,7 @@
 			<div class="userbarcontainer" style="float:left">
 				<xsl:apply-templates select="poster/user" mode="userInfoBar"/>
 			</div>
-			<div class="linkscontainer" style="float:right">
-				<xsl:if test="isOwner='true'">
-					<a>
-						<xsl:attribute name="href">/Post/<xsl:value-of select="id"/>/Edit/</xsl:attribute>
-						<xsl:apply-templates select="postDate/date" mode="navigationImageFor">
-							<xsl:with-param name="src">edit.gif</xsl:with-param>
-							<xsl:with-param name="alt">Правка</xsl:with-param>
-						</xsl:apply-templates>
-					</a>
-				</xsl:if>
-				<xsl:text> </xsl:text>
+			<div class="linkscontainer" style="float:right;text-align:right;">
 				<a>
 					<xsl:if test="$isReplyDisabled='false'">
 						<xsl:if test="/root/session/sessionKey">
@@ -65,6 +55,16 @@
 						</a>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:if test="isOwner='true'">
+					<br/>
+					<a>
+						<xsl:attribute name="href">/Post/<xsl:value-of select="id"/>/Edit/</xsl:attribute>
+						<xsl:apply-templates select="postDate/date" mode="navigationImageFor">
+							<xsl:with-param name="src">edit.gif</xsl:with-param>
+							<xsl:with-param name="alt">Правка</xsl:with-param>
+						</xsl:apply-templates>
+					</a>
+				</xsl:if>
 			</div>
 			<div class="postcontent">
 				<a target="_blank" class="separate">
