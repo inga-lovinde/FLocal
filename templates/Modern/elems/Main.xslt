@@ -5,9 +5,9 @@
 	<xsl:template match="/root">
 		<html>
 			<head>
-				<link rel="stylesheet" href="/static/css/modern/global.css" type="text/css" />
+				<link rel="stylesheet" href="/static/css/modern/global.css?v1" type="text/css" />
 				<link rel="stylesheet" type="text/css" skin="skin">
-					<xsl:attribute name="href">/static/css/modern/penartur.css</xsl:attribute>
+					<xsl:attribute name="href">/static/css/modern/penartur.css?v1</xsl:attribute>
 				</link>
 				<link rel="shortcut icon" href="/static/favicons/smirk.ico" type="image/x-icon" />
 				<script language="Javascript" type="text/javascript" src="/static/js/common.js"><xsl:text> </xsl:text></script>

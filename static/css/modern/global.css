@@ -113,3 +113,9 @@ blockquote hr {
 	margin:0px;
 }
 BLOCKQUOTE BR {FONT-SIZE:1px}
+.header {
+	font-size:1.5em;
+}
+.header a.selected {
+	font-size:1.13em;
+}

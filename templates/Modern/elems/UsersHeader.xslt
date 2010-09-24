@@ -3,39 +3,29 @@
 	<xsl:import href="UserHeader.xslt"/>
 
 	<xsl:template name="usersHeader">
-		<table width="95%" align="center" class="tablesurround" cellpadding="1" cellspacing="1">
-			<tr>
-				<td>
-					<table width="100%" class="tableborders" cellpadding="3" cellspacing="1">
-						<tr>
-							<td align="center" class="menubar">
-								<xsl:call-template name="headerLink">
-									<xsl:with-param name="url">/Users/All/</xsl:with-param>
-									<xsl:with-param name="text">Все</xsl:with-param>
-								</xsl:call-template>
-								<xsl:text> | </xsl:text>
-								<xsl:call-template name="headerLink">
-									<xsl:with-param name="url">/Users/Active/</xsl:with-param>
-									<xsl:with-param name="text">Активные (смигрированные)</xsl:with-param>
-								</xsl:call-template>
-								<xsl:text> | </xsl:text>
-								<xsl:call-template name="headerLink">
-									<xsl:with-param name="url">/Users/Online/</xsl:with-param>
-									<xsl:with-param name="text">В онлайне</xsl:with-param>
-								</xsl:call-template>
-								<xsl:if test="user">
-									<xsl:text> | </xsl:text>
-									<xsl:call-template name="headerLink">
-										<xsl:with-param name="url">/Users/User/<xsl:value-of select="user/id"/>/</xsl:with-param>
-										<xsl:with-param name="text"><xsl:value-of select="user/name"/></xsl:with-param>
-									</xsl:call-template>
-								</xsl:if>
-							</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-		</table>
+		<div class="header">
+			<xsl:call-template name="headerLink">
+				<xsl:with-param name="url">/Users/All/</xsl:with-param>
+				<xsl:with-param name="text">Все</xsl:with-param>
+			</xsl:call-template>
+			<xsl:text>&#160;&#160;&#160;</xsl:text>
+			<xsl:call-template name="headerLink">
+				<xsl:with-param name="url">/Users/Active/</xsl:with-param>
+				<xsl:with-param name="text">Активные</xsl:with-param>
+			</xsl:call-template>
+			<xsl:text>&#160;&#160;&#160;</xsl:text>
+			<xsl:call-template name="headerLink">
+				<xsl:with-param name="url">/Users/Online/</xsl:with-param>
+				<xsl:with-param name="text">Онлайн</xsl:with-param>
+			</xsl:call-template>
+			<xsl:if test="user">
+				<xsl:text>&#160;&#160;&#160;</xsl:text>
+				<xsl:call-template name="headerLink">
+					<xsl:with-param name="url">/Users/User/<xsl:value-of select="user/id"/>/</xsl:with-param>
+					<xsl:with-param name="text"><xsl:value-of select="user/name"/></xsl:with-param>
+				</xsl:call-template>
+			</xsl:if>
+		</div>
 		<xsl:if test="user">
 			<xsl:call-template name="userHeader"/>
 		</xsl:if>

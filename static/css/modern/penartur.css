@@ -39,3 +39,14 @@ blockquote {
 .alternatetable{BACKGROUND:black}
 .subjecttable{BACKGROUND:black}
 .footertable{BACKGROUND:#666666}
+.header, .header a {
+	color:#BFBFBF;
+	text-transform:lowercase;
+	font-family:"Segoe UI", sans-serif;
+}
+.header a.selected {
+	color:white;
+}
+.header a.disabled {
+	color:#404040;
+}
