@@ -116,10 +116,16 @@
 
 	<xsl:template match="specific/changeInfo">
 		<xsl:if test="(revision != '') and (revision != '0')">
-			<span style="font-size:0.8em" class="revision">
+			<span style="font-size:0.6em" class="revision">
+				<xsl:variable name="lastChangeDate">
+					<xsl:apply-templates select="lastChangeDate/date" mode="dateTime"/>
+				</xsl:variable>
+				<xsl:attribute name="title">
+					<xsl:text>последн€€ </xsl:text>
+					<xsl:value-of select="$lastChangeDate"/>
+				</xsl:attribute>
 				<xsl:value-of select="revision"/>
-				<xsl:text> правок, последн€€ </xsl:text>
-				<xsl:apply-templates select="lastChangeDate/date" mode="dateTime"/>
+				<xsl:text> правок</xsl:text>
 			</span>
 			<xsl:text> </xsl:text>
 		</xsl:if>
@@ -127,7 +133,7 @@
 
 	<xsl:template match="specific/punishment">
 		<xsl:if test="not(isWithdrawed='true')">
-			<span style="font-size:0.8em" class="punishment">
+			<span style="font-size:0.6em" class="punishment">
 				<xsl:value-of select="punishmentType/description"/>
 				<xsl:text>. </xsl:text>
 				<xsl:value-of select="comment"/>
