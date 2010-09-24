@@ -161,22 +161,22 @@
 				<xsl:with-param name="url">/Users/</xsl:with-param>
 				<xsl:with-param name="text">Пользователи</xsl:with-param>
 			</xsl:call-template>
+			<xsl:if test="starts-with(/root/currentUrl, '/Forum/')">
+				<xsl:call-template name="forumHeader"/>
+			</xsl:if>
+			<xsl:if test="starts-with(/root/currentUrl, '/Users/')">
+				<xsl:call-template name="usersHeader"/>
+			</xsl:if>
+			<xsl:if test="starts-with(/root/currentUrl, '/My/')">
+				<xsl:call-template name="myHeader"/>
+			</xsl:if>
+			<xsl:if test="starts-with(/root/currentUrl, '/Upload/')">
+				<xsl:call-template name="uploadHeader"/>
+			</xsl:if>
+			<xsl:if test="starts-with(/root/currentUrl, '/Polls/')">
+				<xsl:call-template name="pollsHeader"/>
+			</xsl:if>
 		</div>
-		<xsl:if test="starts-with(/root/currentUrl, '/Forum/')">
-			<xsl:call-template name="forumHeader"/>
-		</xsl:if>
-		<xsl:if test="starts-with(/root/currentUrl, '/Users/')">
-			<xsl:call-template name="usersHeader"/>
-		</xsl:if>
-		<xsl:if test="starts-with(/root/currentUrl, '/My/')">
-			<xsl:call-template name="myHeader"/>
-		</xsl:if>
-		<xsl:if test="starts-with(/root/currentUrl, '/Upload/')">
-			<xsl:call-template name="uploadHeader"/>
-		</xsl:if>
-		<xsl:if test="starts-with(/root/currentUrl, '/Polls/')">
-			<xsl:call-template name="pollsHeader"/>
-		</xsl:if>
 		<center>&#160;&#160;</center>
 	</xsl:template>
 </xsl:stylesheet>

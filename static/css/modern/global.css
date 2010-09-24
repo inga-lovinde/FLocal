@@ -119,3 +119,6 @@ BLOCKQUOTE BR {FONT-SIZE:1px}
 .header a.selected {
 	font-size:1.13em;
 }
+.header .header {
+	font-size:0.8em;
+}

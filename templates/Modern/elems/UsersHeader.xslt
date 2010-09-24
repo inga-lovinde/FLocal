@@ -25,10 +25,10 @@
 					<xsl:with-param name="text"><xsl:value-of select="user/name"/></xsl:with-param>
 				</xsl:call-template>
 			</xsl:if>
+			<xsl:if test="user">
+				<xsl:call-template name="userHeader"/>
+			</xsl:if>
 		</div>
-		<xsl:if test="user">
-			<xsl:call-template name="userHeader"/>
-		</xsl:if>
 	</xsl:template>
 </xsl:stylesheet>
 

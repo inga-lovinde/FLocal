@@ -30,10 +30,10 @@
 				<xsl:text>&#160;&#160;&#160;</xsl:text>
 				<xsl:apply-templates select="currentLocation//board[not(name(../..)='board')]" mode="headerBoardLink"/>
 			</xsl:if>
+			<xsl:if test="currentLocation//board">
+				<xsl:call-template name="boardHeader"/>
+			</xsl:if>
 		</div>
-		<xsl:if test="currentLocation//board">
-			<xsl:call-template name="boardHeader"/>
-		</xsl:if>
 	</xsl:template>
 
 	<xsl:template match="board" mode="headerParentBoardLink">
