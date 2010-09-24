@@ -6,64 +6,6 @@
 	<xsl:template name="isLiteEnabled">true</xsl:template>
 	<xsl:template name="isRssEnabled">true</xsl:template>
 	<xsl:template name="specific">
-		<table width="95%" align="center" cellpadding="1" cellspacing="1" class="tablesurround">
-			<tr>
-				<td>
-					<table cellpadding="3" cellspacing="1" width="100%" border="0" class="tableborders">
-						<tr class="darktable">
-							<td colspan="6">
-								<table width="100%" cellpadding="0" cellspacing="0">
-									<tr>
-										<td colspan="2" class="catandforum">
-											<xsl:text>Приватные сообщения</xsl:text>
-										</td>
-										<td align="right" valign="bottom">
-											<table border="0" class="tablesurround">
-												<tr>
-													<td class="navigation" nowrap="nowrap">
-														<!-- postoption is either newpost.gif or greynewpost.gif -->
-														<a>
-															<xsl:attribute name="href">/My/Conversations/PMSend/</xsl:attribute>
-															<img src="/static/images/newpost.gif" alt="Новое сообщение" border="0" width="13" height="15" style="vertical-align: text-bottom" />
-															<xsl:text>Сообщение</xsl:text>
-														</a>
-													</td>
-													<td class="navigation" nowrap="nowrap">
-														<!-- prevoption is either previous.gif or greyprevious.gif -->
-														<a>
-															<img alt="Предыдущая страница" border="0" width="12" height="15" style="vertical-align: text-bottom">
-																<xsl:attribute name="src">/static/images/greyprevious.gif</xsl:attribute>
-															</img>
-															<xsl:text>Пред.</xsl:text>
-														</a>
-													</td>
-													<td class="navigation" nowrap="nowrap">
-														<a>
-															<img src="/static/images/all.gif" alt="Список форумов" border="0" width="19" height="15" style="vertical-align: text-bottom" />
-															<xsl:text>Список</xsl:text>
-														</a>
-													</td>
-													<td class="navigation" nowrap="nowrap">
-														<!-- nextoption is either next.gif or greynext.gif -->
-														<a>
-															<img alt="Следующая страница" border="0" width="14" height="15" style="vertical-align: text-bottom">
-																<xsl:attribute name="src">/static/images/next.gif</xsl:attribute>
-															</img>
-															<xsl:text>След.</xsl:text>
-														</a>
-													</td>
-												</tr>
-											</table>
-										</td>
-									</tr>
-								</table>
-							</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-		</table>
-		<br/>
 		<table width="95%" align="center" class="tablesurround">
 			<tr>
 				<td>
