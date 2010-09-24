@@ -53,3 +53,10 @@ blockquote {
 .header a:hover {
 	color:white;
 }
+.UG_Moderators {
+	color:#1f1fff !important;
+}
+.UG_Administrators {
+	color:black !important;
+	background-color:white !important;
+}
