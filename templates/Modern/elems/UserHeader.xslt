@@ -29,7 +29,6 @@
 				<xsl:with-param name="text">Опросы</xsl:with-param>
 			</xsl:call-template>
 			<xsl:text>&#160;&#160;&#160;</xsl:text>
-			<img src="/static/images/shortcut.png" border="0"/>
 			<xsl:call-template name="headerLink">
 				<xsl:with-param name="url">/My/Conversations/Conversation/<xsl:value-of select="accountId"/>/</xsl:with-param>
 				<xsl:with-param name="text">История</xsl:with-param>
@@ -38,7 +37,6 @@
 				</xsl:with-param>
 			</xsl:call-template>
 			<xsl:text>&#160;&#160;&#160;</xsl:text>
-			<img src="/static/images/shortcut.png" border="0"/>
 			<xsl:call-template name="headerLink">
 				<xsl:with-param name="url">/My/Conversations/PMSend/<xsl:value-of select="accountId"/>/</xsl:with-param>
 				<xsl:with-param name="text">Написать</xsl:with-param>
