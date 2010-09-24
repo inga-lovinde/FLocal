@@ -67,9 +67,9 @@
 				</xsl:if>
 			</div>
 			<div class="postcontent">
+				<xsl:variable name="postDate"><xsl:apply-templates select="postDate/date" mode="dateTime"/></xsl:variable>
 				<a target="_blank" class="separate">
 					<xsl:attribute name="href">/Post/<xsl:value-of select="id"/>/</xsl:attribute>
-					<xsl:variable name="postDate"><xsl:apply-templates select="postDate/date" mode="dateTime"/></xsl:variable>
 					<xsl:attribute name="title"><xsl:value-of select="$postDate"/></xsl:attribute>
 					<img border="0" alt="" style="vertical-align: text-bottom">
 						<xsl:choose>
