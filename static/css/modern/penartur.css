@@ -50,3 +50,6 @@ blockquote {
 .header a.disabled {
 	color:#404040;
 }
+.header a:hover {
+	color:white;
+}
