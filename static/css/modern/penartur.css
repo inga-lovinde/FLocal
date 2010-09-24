@@ -34,8 +34,14 @@ blockquote {
 .boardcontainer {
 	background-color:#202020;
 }
+.boardcontainer:hover {
+	background-color:#303030;
+}
 .boardcontainer.updated {
-	background-color:#208020;
+	background-color:#502800;
+}
+.boardcontainer.updated:hover {
+	background-color:#684000;
 }
 .board_additional {
 	background-color:#302010;
