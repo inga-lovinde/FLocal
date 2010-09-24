@@ -15,7 +15,9 @@
 							</img>
 						</xsl:when>
 						<xsl:otherwise>
-							<xsl:apply-templates select="current()" mode="userLink"/>
+							<div class="userbar_name">
+								<xsl:apply-templates select="current()" mode="userLink"/>
+							</div>
 						</xsl:otherwise>
 					</xsl:choose>
 				</a>
