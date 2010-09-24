@@ -103,14 +103,19 @@
 				<div class="postbody">
 					<xsl:value-of select="body" disable-output-escaping="yes" />
 				</div>
-				<xsl:apply-templates select="specific"/>
-				<xsl:if test="poster/user/signature != ''">
-					<div style="width:100%;max-height:3.5em;height: expression( this.scrollHeight > 49 ? '50px' : 'auto' );overflow:hidden;text-align:right;font-size:0.8em;">
-						<xsl:value-of select="poster/user/signature" disable-output-escaping="yes" />
-					</div>
-				</xsl:if>
+				<div style="">
+					<xsl:if test="poster/user/signature != ''">
+						<div style="float:right;max-height:3.5em;height: expression( this.scrollHeight > 49 ? '50px' : 'auto' );overflow:hidden;text-align:right;font-size:0.8em;">
+							<xsl:value-of select="poster/user/signature" disable-output-escaping="yes" />
+						</div>
+					</xsl:if>
+					<xsl:apply-templates select="specific"/>
+					<xsl:comment>fill</xsl:comment>
+				</div>
 			</div>
-			<div style="clear:both;" class="zerosize"><xsl:comment>zerosize</xsl:comment></div>
+			<div style="clear:both;" class="zerosize">
+				<xsl:comment>fill</xsl:comment>
+			</div>
 		</div>
 	</xsl:template>
 
