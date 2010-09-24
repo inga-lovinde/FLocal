@@ -36,9 +36,9 @@
 					<xsl:call-template name="specific"/>
 				</div>
 				<xsl:if test="not(get/param[@name='headers'] = 'false')">
-					<div style="min-width:20px;width:20px;max-width:20px;overflow:visible;clear:right;float:right;text-align:right;">
+					<div style="min-width:20px;width:20px;max-width:20px;overflow:visible;position:absolute;top:4em;right:0px;text-align:right;">
 						<div style="min-width:20px;width:20px;max-width:20px;overflow:visible;text-align:right;height:260px;min-height:260px;max-height:260px;">
-							<div style="position:absolute;top:20px;right:20px;display:none" id="pokerPlaceholder">
+							<div style="position:absolute;top:0px;right:20px;display:none" id="pokerPlaceholder">
 								<img border="0" src="/static/images/poker.jpg" align="top"/>
 							</div>
 							<div style="min-width:20px;width:20px;max-width:20px;text-align:right;">
@@ -49,7 +49,7 @@
 						</div>
 						<br/>
 						<div style="min-width:20px;width:20px;max-width:20px;overflow:visible;text-align:right;height:260px;min-height:260px;max-height:260px;">
-							<div style="position:absolute;top:20px;right:20px;display:none" id="courtesansPlaceholder">
+							<div style="position:absolute;top:0px;right:20px;display:none" id="courtesansPlaceholder">
 								<img border="0" src="/static/images/courtesans.jpg" align="top"/>
 							</div>
 							<div style="min-width:20px;width:20px;max-width:20px;text-align:right;">
