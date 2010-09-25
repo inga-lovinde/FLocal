@@ -40,7 +40,7 @@
 					<xsl:value-of select="title"/>
 				</a>
 			</h4>
-			<div style="position:absolute;right:0px;bottom:0px;background-color:inherit;padding:3pt 0pt 0pt 3pt;">
+			<div style="position:absolute;text-align:right;right:0px;bottom:0px;background-color:inherit;padding:3pt 0pt 0pt 3pt;">
 				<xsl:attribute name="onmouseover">showChildren(this);</xsl:attribute>
 				<xsl:attribute name="onmouseout">hideChildren(this);</xsl:attribute>
 				<div default="default" style="z-index:1;">

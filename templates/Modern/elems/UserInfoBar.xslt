@@ -24,11 +24,9 @@
 			</div>
 			<div class="userbar_additionalcontainer" style="display:none">
 				<div class="userbar_additional">
-					<xsl:if test="avatar">
-						<div class="userbar_name">
-							<xsl:apply-templates select="current()" mode="userLink"/>
-						</div>
-					</xsl:if>
+					<div class="userbar_name">
+						<xsl:apply-templates select="current()" mode="userLink"/>
+					</div>
 					<div class="userbar_title">
 						<xsl:value-of select="title"/>
 					</div>
