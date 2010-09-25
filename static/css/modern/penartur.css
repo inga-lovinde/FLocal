@@ -1,5 +1,6 @@
 @import "fonts.css";
 
+a { text-decoration:none;color:#aaaaaa}
 A:link, a[pseudolink], a.pseudolink {text-decoration:none;color:#aaaaaa}
 A:visited{text-decoration:none;color:#666666}
 A:active{text-decoration:none;color:#999999}
