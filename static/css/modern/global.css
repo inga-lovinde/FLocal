@@ -135,6 +135,7 @@ li.categorycontainer {
 	margin:0px;
 	margin-left:1em;
 	padding:0.3em;
+	font-weight:normal;
 }
 ul.boardscontainer {
 	padding:0px;
@@ -147,8 +148,9 @@ li.boardcontainer {
 	margin:5pt;
 }
 .boardcontainer_name {
-	font-size:1.2em;
+	font-size:1.5em;
 	margin:0px;
+	font-weight:normal;
 }
 .board_additionalcontainer {
 	height:0px;
