@@ -151,11 +151,10 @@ li.boardcontainer {
 	margin:0px;
 }
 .board_additionalcontainer {
-	width:0px;
-	max-width:0px;
 	height:0px;
 	max-height:0px;
 	overflow:visible;
+	position:relative;
 }
 .board_additional {
 	position:absolute;

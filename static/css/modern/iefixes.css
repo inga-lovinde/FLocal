@@ -4,3 +4,7 @@ li.categorycontainer {
 li.boardcontainer {
 	display:inline;
 }
+.board_additionalcontainer {
+	width:0px;
+	max-width:0px;
+}

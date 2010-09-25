@@ -28,14 +28,14 @@
 			<p>Тем: <xsl:value-of select="totalThreads"/></p>
 			<p>Сообщений: <xsl:value-of select="totalPosts"/></p>
 			<xsl:if test="subBoards/board">
-				<div style="float:left">
+				<div style="float:left;text-align:left;">
 					<xsl:attribute name="onMouseOver">showChildren(this);</xsl:attribute>
 					<xsl:attribute name="onMouseOut">hideChildren(this);</xsl:attribute>
 					<div default="default">
 						<a class="pseudolink">Подразделы</a>
 					</div>
 					<div class="board_additionalcontainer" style="display:none">
-						<div class="board_additional">
+						<div class="board_additional" style="left:0px;">
 							<p>
 								<xsl:apply-templates select="subBoards/board"/>
 							</p>
@@ -43,14 +43,14 @@
 					</div>
 				</div>
 			</xsl:if>
-			<div style="float:right;">
+			<div style="float:right;text-align:right;">
 				<xsl:attribute name="onMouseOver">showChildren(this);</xsl:attribute>
 				<xsl:attribute name="onMouseOut">hideChildren(this);</xsl:attribute>
 				<div default="default">
 					<a class="pseudolink">Информация</a>
 				</div>
 				<div class="board_additionalcontainer" style="display:none;">
-					<div class="board_additional">
+					<div class="board_additional" style="right:0px;">
 						<xsl:apply-templates select="lastPostInfo"/>
 						<p>
 							<xsl:text>Модераторы:</xsl:text>
