@@ -14,8 +14,8 @@
 					<xsl:if test="$isReplyDisabled='false'">
 						<xsl:if test="/root/session/sessionKey">
 							<xsl:attribute name="href">/Post/<xsl:value-of select="id"/>/Reply/</xsl:attribute>
-							<xsl:attribute name="onClick">submitSelText(this.href);return false;</xsl:attribute>
-							<xsl:attribute name="onMouseDown">submitSelText(this.href);return false;</xsl:attribute>
+							<xsl:attribute name="onclick">submitSelText(this.href);return false;</xsl:attribute>
+							<xsl:attribute name="onmousedown">submitSelText(this.href);return false;</xsl:attribute>
 						</xsl:if>
 					</xsl:if>
 					<xsl:apply-templates select="postDate/date" mode="navigationImageFor">
@@ -27,8 +27,8 @@
 				<a>
 					<xsl:if test="/root/session/sessionKey">
 						<xsl:attribute name="href">/Post/<xsl:value-of select="id"/>/PMReply/</xsl:attribute>
-						<xsl:attribute name="onClick">submitSelText(this.href);return false;</xsl:attribute>
-						<xsl:attribute name="onMouseDown">submitSelText(this.href);return false;</xsl:attribute>
+						<xsl:attribute name="onclick">submitSelText(this.href);return false;</xsl:attribute>
+						<xsl:attribute name="onmousedown">submitSelText(this.href);return false;</xsl:attribute>
 					</xsl:if>
 					<xsl:apply-templates select="postDate/date" mode="navigationImageFor">
 						<xsl:with-param name="src">email2.gif</xsl:with-param>

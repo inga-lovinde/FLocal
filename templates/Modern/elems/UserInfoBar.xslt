@@ -3,8 +3,8 @@
 
 	<xsl:template match="user" mode="userInfoBar">
 		<div class="userbar">
-			<xsl:attribute name="onMouseOver">showChildren(this);</xsl:attribute>
-			<xsl:attribute name="onMouseOut">hideChildren(this);</xsl:attribute>
+			<xsl:attribute name="onmouseover">showChildren(this);</xsl:attribute>
+			<xsl:attribute name="onmouseout">hideChildren(this);</xsl:attribute>
 			<div class="userbar_avatar" default="default">
 				<a>
 					<xsl:attribute name="href">/Users/User/<xsl:value-of select="id"/>/Info/</xsl:attribute>

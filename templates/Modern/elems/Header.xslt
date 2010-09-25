@@ -62,7 +62,7 @@
 						<xsl:value-of select="currentUrl"/>
 					</xsl:attribute>
 				</xsl:if>
-				<img border="0">
+				<img border="0" alt="Switch to classic mode">
 					<xsl:attribute name="src">
 						<xsl:text>/static/images/classic.jpg</xsl:text>
 					</xsl:attribute>
@@ -77,7 +77,7 @@
 						<xsl:value-of select="currentUrl"/>
 					</xsl:attribute>
 				</xsl:if>
-				<img border="0">
+				<img border="0" alt="Switch to lite mode">
 					<xsl:attribute name="src">
 						<xsl:text>/static/images/light</xsl:text>
 						<xsl:if test="not($isLiteEnabled='true')">
@@ -96,7 +96,7 @@
 						<xsl:value-of select="$rssRelativeLink"/>
 					</xsl:attribute>
 				</xsl:if>
-				<img border="0">
+				<img border="0" alt="Switch to RSS mode">
 					<xsl:attribute name="src">
 						<xsl:text>/static/images/rss</xsl:text>
 						<xsl:if test="not($isRssEnabled='true')">

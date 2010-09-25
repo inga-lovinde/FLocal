@@ -9,9 +9,9 @@
 		<xsl:text>Сообщение</xsl:text>
 		<br/>
 		<textarea cols="100" tabindex="2" rows="10" class="formboxes" name="Body">
-			<xsl:attribute name="onKeyUp">storeCaret(this);</xsl:attribute>
-			<xsl:attribute name="onClick">storeCaret(this);</xsl:attribute>
-			<xsl:attribute name="onKeyPress">checkKeyPressed(document.replier,event,false);</xsl:attribute>
+			<xsl:attribute name="onkeyup">storeCaret(this);</xsl:attribute>
+			<xsl:attribute name="onclick">storeCaret(this);</xsl:attribute>
+			<xsl:attribute name="onkeypress">checkKeyPressed(document.replier,event,false);</xsl:attribute>
 			<xsl:choose>
 				<xsl:when test="bodyUBB">
 					<xsl:value-of select="bodyUBB"/>
@@ -40,59 +40,59 @@ function insertInBody(str) {
 			</tr>
 			<tr>
 				<td valign="top" align="left" nowrap="nowrap">
-					<a pseudolink="pseudolink" onClick="insertInBody(' :) ');">
+					<a pseudolink="pseudolink" onclick="insertInBody(' :) ');">
 						<img src="/static/smileys/smile.gif" border="0" alt="smile" />
 					</a>
 					<xsl:text> &#160; </xsl:text>
-					<a pseudolink="pseudolink" onClick="insertInBody(' :( ');">
+					<a pseudolink="pseudolink" onclick="insertInBody(' :( ');">
 						<img src="/static/smileys/frown.gif" border="0" alt="frown" />
 					</a>
 					<xsl:text> &#160; </xsl:text>
-					<a pseudolink="pseudolink" onClick="insertInBody(' :o ');">
+					<a pseudolink="pseudolink" onclick="insertInBody(' :o ');">
 						<img src="/static/smileys/blush.gif" border="0" alt="blush" />
 					</a>
 					<xsl:text> &#160; </xsl:text>
-					<a pseudolink="pseudolink" onClick="insertInBody(' :D ');">
+					<a pseudolink="pseudolink" onclick="insertInBody(' :D ');">
 						<img src="/static/smileys/laugh.gif" border="0" alt="laugh" />
 					</a>
 					<xsl:text> &#160; </xsl:text>
-					<a pseudolink="pseudolink" onClick="insertInBody(' ;) ');">
+					<a pseudolink="pseudolink" onclick="insertInBody(' ;) ');">
 						<img src="/static/smileys/wink.gif" border="0" alt="wink" />
 					</a>
 					<xsl:text> &#160; </xsl:text>
-					<a pseudolink="pseudolink" onClick="insertInBody(' :p ');">
+					<a pseudolink="pseudolink" onclick="insertInBody(' :p ');">
 						<img src="/static/smileys/tongue.gif" border="0" alt="tongue" />
 					</a>
 					<br/>
-					<a pseudolink="pseudolink" onClick="insertInBody(' :cool: ');">
+					<a pseudolink="pseudolink" onclick="insertInBody(' :cool: ');">
 						<img src="/static/smileys/cool.gif" border="0" alt="cool" />
 					</a>
 					<xsl:text> &#160; </xsl:text>
-					<a pseudolink="pseudolink" onClick="insertInBody(' :crazy: ');">
+					<a pseudolink="pseudolink" onclick="insertInBody(' :crazy: ');">
 						<img src="/static/smileys/crazy.gif" border="0" alt="crazy" />
 					</a>
 					<xsl:text> &#160; </xsl:text>
-					<a pseudolink="pseudolink" onClick="insertInBody(' :mad: ');">
+					<a pseudolink="pseudolink" onclick="insertInBody(' :mad: ');">
 						<img src="/static/smileys/mad.gif" border="0" alt="mad" />
 					</a>
 					<xsl:text> &#160; </xsl:text>
-					<a pseudolink="pseudolink" onClick="insertInBody(' :shocked: ');">
+					<a pseudolink="pseudolink" onclick="insertInBody(' :shocked: ');">
 						<img src="/static/smileys/shocked.gif" border="0" alt="shocked" />
 					</a>
 					<xsl:text> &#160; </xsl:text>
-					<a pseudolink="pseudolink" onClick="insertInBody(' :smirk: ');">
+					<a pseudolink="pseudolink" onclick="insertInBody(' :smirk: ');">
 						<img src="/static/smileys/smirk.gif" border="0" alt="smirk" />
 					</a>
 					<xsl:text> &#160; </xsl:text>
-					<a pseudolink="pseudolink" onClick="insertInBody(' :grin: ');">
+					<a pseudolink="pseudolink" onclick="insertInBody(' :grin: ');">
 						<img src="/static/smileys/grin.gif" border="0" alt="grin" />
 					</a>
 					<br/>
-					<a pseudolink="pseudolink" onClick="insertInBody(' :ooo: ');">
+					<a pseudolink="pseudolink" onclick="insertInBody(' :ooo: ');">
 						<img src="/static/smileys/ooo.gif" border="0" alt="ooo" />
 					</a>
 					<xsl:text> &#160; </xsl:text>
-					<a pseudolink="pseudolink" onClick="insertInBody(' :confused: ');">
+					<a pseudolink="pseudolink" onclick="insertInBody(' :confused: ');">
 						<img src="/static/smileys/confused.gif" border="0" alt="confused" />
 					</a>
 					<xsl:text> &#160; </xsl:text>
@@ -258,7 +258,7 @@ function insertInBody(str) {
 		</table>
 
 		<br/>
-		<input type="checkbox" name="preview" value="1" class="formboxes" onClick="changeActionToSelf(this)" id="preview" />
+		<input type="checkbox" name="preview" value="1" class="formboxes" onclick="changeActionToSelf(this)" id="preview" />
 		<label for="preview"> Я хочу предварительно просмотреть сообщение перед отправкой</label>
 		<xsl:if test="bodyIntermediate">
 			<br/>

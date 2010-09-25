@@ -7,12 +7,12 @@
 		<html>
 			<head>
 				<meta http-equiv="x-ua-compatible" content="IE=8"/>
-				<link rel="stylesheet" href="/static/css/modern/global.css?v3.2" type="text/css" />
+				<link rel="stylesheet" href="/static/css/modern/global.css?v3.3" type="text/css" />
 				<xsl:comment>[if lte IE 7]&gt;<![CDATA[
-					<link rel="stylesheet" href="/static/css/modern/iefixes.css?v3.2" type="text/css" />
+					<link rel="stylesheet" href="/static/css/modern/iefixes.css?v3.3" type="text/css" />
 				]]>&lt;![endif]</xsl:comment>
 				<link rel="stylesheet" type="text/css" skin="skin">
-					<xsl:attribute name="href">/static/css/modern/penartur.css?v3.2</xsl:attribute>
+					<xsl:attribute name="href">/static/css/modern/penartur.css?v3.3</xsl:attribute>
 				</link>
 				<link rel="shortcut icon" href="/static/favicons/smirk.ico" type="image/x-icon" />
 				<script language="Javascript" type="text/javascript" src="/static/js/common.js"><xsl:text> </xsl:text></script>
@@ -34,7 +34,7 @@
 				</title>
 			</head>
 			<body>
-				<xsl:attribute name="onLoad">machicharaInit();</xsl:attribute>
+				<xsl:attribute name="onload">machicharaInit();</xsl:attribute>
 				<xsl:if test="not(get/param[@name='headers'] = 'false')">
 					<xsl:call-template name="header"/>
 				</xsl:if>
@@ -45,29 +45,29 @@
 					<div style="min-width:20px;width:20px;max-width:20px;overflow:visible;position:absolute;top:4em;right:0px;text-align:right;">
 						<div style="min-width:20px;width:20px;max-width:20px;overflow:visible;text-align:right;height:260px;min-height:260px;max-height:260px;">
 							<div style="position:absolute;top:0px;right:20px;display:none" id="pokerPlaceholder">
-								<img border="0" src="/static/images/poker.jpg" align="top"/>
+								<img border="0" src="/static/images/poker.jpg" alt="poker" align="top"/>
 							</div>
 							<div style="min-width:20px;width:20px;max-width:20px;text-align:right;">
-								<xsl:attribute name="onMouseOver">document.getElementById("pokerPlaceholder").style.display = "block";</xsl:attribute>
-								<xsl:attribute name="onMouseOut">document.getElementById("pokerPlaceholder").style.display = "none";</xsl:attribute>
-								<img border="0" src="/static/images/tab_poker.png" align="top"/>
+								<xsl:attribute name="onmouseover">document.getElementById("pokerPlaceholder").style.display = "block";</xsl:attribute>
+								<xsl:attribute name="onmouseout">document.getElementById("pokerPlaceholder").style.display = "none";</xsl:attribute>
+								<img border="0" src="/static/images/tab_poker.png" alt="tab_poker" align="top"/>
 							</div>
 						</div>
 						<br/>
 						<div style="min-width:20px;width:20px;max-width:20px;overflow:visible;text-align:right;height:260px;min-height:260px;max-height:260px;">
 							<div style="position:absolute;top:0px;right:20px;display:none" id="courtesansPlaceholder">
-								<img border="0" src="/static/images/courtesans.jpg" align="top"/>
+								<img border="0" src="/static/images/courtesans.jpg" alt="courtesans" align="top"/>
 							</div>
 							<div style="min-width:20px;width:20px;max-width:20px;text-align:right;">
-								<xsl:attribute name="onMouseOver">document.getElementById("courtesansPlaceholder").style.display = "block";</xsl:attribute>
-								<xsl:attribute name="onMouseOut">document.getElementById("courtesansPlaceholder").style.display = "none";</xsl:attribute>
-								<img border="0" src="/static/images/tab_courtesans.png" align="top"/>
+								<xsl:attribute name="onmouseover">document.getElementById("courtesansPlaceholder").style.display = "block";</xsl:attribute>
+								<xsl:attribute name="onmouseout">document.getElementById("courtesansPlaceholder").style.display = "none";</xsl:attribute>
+								<img border="0" src="/static/images/tab_courtesans.png" alt="tab_courtesans" align="top"/>
 							</div>
 						</div>
 					</div>
 				</xsl:if>
 				<div style="display:none">
-					<form action="" method="POST" id="systemForm">
+					<form action="" method="post" id="systemForm">
 						<input type="hidden" name="data"/>
 					</form>
 				</div>
@@ -303,10 +303,10 @@
 			<xsl:value-of select="name"/>
 			<xsl:choose>
 				<xsl:when test="isAdministrator='true'">
-					<img src="/static/images/adm.gif" border="0"/>
+					<img src="/static/images/adm.gif" alt="Administrator" border="0"/>
 				</xsl:when>
 				<xsl:when test="isModerator='true'">
-					<img src="/static/images/mod.gif" border="0"/>
+					<img src="/static/images/mod.gif" alt="Moderator" border="0"/>
 				</xsl:when>
 			</xsl:choose>
 		</a>
@@ -321,10 +321,10 @@
 			<xsl:value-of select="name"/>
 			<xsl:choose>
 				<xsl:when test="isAdministrator='true'">
-					<img src="/static/images/adm.gif" border="0"/>
+					<img src="/static/images/adm.gif" alt="Administrator" border="0"/>
 				</xsl:when>
 				<xsl:when test="isModerator='true'">
-					<img src="/static/images/mod.gif" border="0"/>
+					<img src="/static/images/mod.gif" alt="Moderator" border="0"/>
 				</xsl:when>
 			</xsl:choose>
 		</a>

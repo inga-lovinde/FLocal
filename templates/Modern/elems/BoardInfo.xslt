@@ -20,7 +20,6 @@
 				</h3>
 				<xsl:if test="description != ''">
 					<p class="boardcontainer_description">
-						<xsl:attribute name="href">/Forum/Board/<xsl:value-of select="id"/>/Threads/</xsl:attribute>
 						<xsl:value-of select="description"/>
 					</p>
 				</xsl:if>
@@ -29,8 +28,8 @@
 			<p>Сообщений: <xsl:value-of select="totalPosts"/></p>
 			<xsl:if test="subBoards/board">
 				<div style="float:left;text-align:left;">
-					<xsl:attribute name="onMouseOver">showChildren(this);</xsl:attribute>
-					<xsl:attribute name="onMouseOut">hideChildren(this);</xsl:attribute>
+					<xsl:attribute name="onmouseover">showChildren(this);</xsl:attribute>
+					<xsl:attribute name="onmouseout">hideChildren(this);</xsl:attribute>
 					<div default="default">
 						<a class="pseudolink">Подразделы</a>
 					</div>
@@ -44,8 +43,8 @@
 				</div>
 			</xsl:if>
 			<div style="float:right;text-align:right;">
-				<xsl:attribute name="onMouseOver">showChildren(this);</xsl:attribute>
-				<xsl:attribute name="onMouseOut">hideChildren(this);</xsl:attribute>
+				<xsl:attribute name="onmouseover">showChildren(this);</xsl:attribute>
+				<xsl:attribute name="onmouseout">hideChildren(this);</xsl:attribute>
 				<div default="default">
 					<a class="pseudolink">Информация</a>
 				</div>
