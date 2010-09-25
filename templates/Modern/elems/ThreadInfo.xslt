@@ -15,13 +15,20 @@
 				<xsl:apply-templates select="firstPost/post/poster/user" mode="userInfoBar"/>
 			</div>
 			<div class="threadicons" style="float:right">
+				<xsl:if test="firstPost/post/layerName != 'normal'">
+					<xsl:text> </xsl:text>
+					<img width="16" height="16" border="0" style="vertical-align: text-bottom;">
+						<xsl:attribute name="alt"><xsl:value-of select="firstPost/post/layer/name"/></xsl:attribute>
+						<xsl:attribute name="src">/static/images/message-<xsl:value-of select="firstPost/post/layerName"/>-read.gif</xsl:attribute>
+					</img>
+				</xsl:if>
 				<xsl:if test="isAnnouncement='true'">
 					<xsl:text> </xsl:text>
-					<img src="/static/images/sticky.gif" width="16" height="16" alt="" border="0" style="vertical-align: text-bottom;" />
+					<img src="/static/images/sticky.gif" width="16" height="16" alt="sticky" border="0" style="vertical-align: text-bottom;" />
 				</xsl:if>
 				<xsl:if test="isLocked='true'">
 					<xsl:text> </xsl:text>
-					<img src="/static/images/lock.gif" width="16" height="16" alt="" border="0" style="vertical-align:text-bottom"/>
+					<img src="/static/images/lock.gif" width="16" height="16" alt="locked" border="0" style="vertical-align:text-bottom"/>
 				</xsl:if>
 				<xsl:comment>fill</xsl:comment>
 			</div>
