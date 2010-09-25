@@ -7,33 +7,17 @@
 	</xsl:template>
 	<xsl:template name="isLiteEnabled">true</xsl:template>
 	<xsl:template name="specific">
-		<table width="95%" align="center" cellpadding="1" cellspacing="1" class="tablesurround">
-			<tr>
-				<td>
-					<table cellpadding="0" cellspacing="1" width="100%" class="tableborders">
-						<tr class="tdheader">
-							<td colspan="5">
-								<font class="onbody">
-									<xsl:text>страницы:</xsl:text>
-									<xsl:apply-templates select="posts/pageOuter" mode="withCurrent"/>
-								</font>
-							</td>
-						</tr>
-						<!-- BEGIN POST LOOP DO NOT DELETE -->
-						<xsl:apply-templates select="posts/post"/>
-						<!-- END OF LOOP -->
-						<tr class="tdheader">
-							<td colspan="5">
-								<font class="onbody">
-									<xsl:text>страницы:</xsl:text>
-									<xsl:apply-templates select="posts/pageOuter" mode="withCurrent"/>
-								</font>
-							</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-		</table>
+		<div>
+			<xsl:text>страницы:</xsl:text>
+			<xsl:apply-templates select="posts/pageOuter" mode="withCurrent"/>
+		</div>
+		<div id="postsContainer">
+			<xsl:apply-templates select="posts/post"/>
+		</div>
+		<div>
+			<xsl:text>страницы:</xsl:text>
+			<xsl:apply-templates select="posts/pageOuter" mode="withCurrent"/>
+		</div>
 	</xsl:template>
 
 </xsl:stylesheet>

@@ -47,6 +47,7 @@ pre
 	border:none;
 	max-width:6em;
 	width:expression((this.scrollHeight >= 90) ? '90px' : 'auto');
+	overflow:hidden;
 	margin:5pt;
 }
 .userbar_additionalcontainer {
