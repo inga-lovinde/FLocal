@@ -23,7 +23,7 @@ namespace FLocal.IISHandler.handlers.request {
 			if(!requestParts[3].StartsWith("p")) throw new WrongUrlException(); //throw new CriticalException("wrong url");
 			Post post = Post.LoadById(int.Parse(requestParts[3].PHPSubstring(1)));
 
-			if(post.thread.id != thread.id) throw new CriticalException("id mismatch");
+			//if(post.thread.id != thread.id) throw new CriticalException("id mismatch");
 
 			thread.forceMarkAsRead(account, post);
 		}
