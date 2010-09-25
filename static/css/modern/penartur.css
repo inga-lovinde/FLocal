@@ -66,11 +66,11 @@ blockquote {
 .header a.selected {
 	color:white;
 }
-.header a.disabled {
-	color:#404040;
-}
 .header a:hover {
 	color:white;
+}
+.header a.disabled, .header a.disabled:hover {
+	color:#404040;
 }
 .UG_Moderators {
 	color:#1f1fff !important;
