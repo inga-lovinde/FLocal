@@ -109,7 +109,7 @@
 				</div>
 				<div style="">
 					<xsl:if test="poster/user/signature != ''">
-						<div style="float:right;max-height:3.5em;height: expression( this.scrollHeight > 49 ? '50px' : 'auto' );overflow:hidden;text-align:right;font-size:0.8em;">
+						<div class="signature" style="float:right;">
 							<xsl:value-of select="poster/user/signature" disable-output-escaping="yes" />
 						</div>
 					</xsl:if>

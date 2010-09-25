@@ -7,12 +7,12 @@
 		<html>
 			<head>
 				<meta http-equiv="x-ua-compatible" content="IE=8"/>
-				<link rel="stylesheet" href="/static/css/modern/global.css?v3.3" type="text/css" />
+				<link rel="stylesheet" href="/static/css/modern/global.css?v3.4" type="text/css" />
 				<xsl:comment>[if lte IE 7]&gt;<![CDATA[
-					<link rel="stylesheet" href="/static/css/modern/iefixes.css?v3.3" type="text/css" />
+					<link rel="stylesheet" href="/static/css/modern/iefixes.css?v3.4" type="text/css" />
 				]]>&lt;![endif]</xsl:comment>
 				<link rel="stylesheet" type="text/css" skin="skin">
-					<xsl:attribute name="href">/static/css/modern/penartur.css?v3.3</xsl:attribute>
+					<xsl:attribute name="href">/static/css/modern/penartur.css?v3.4</xsl:attribute>
 				</link>
 				<link rel="shortcut icon" href="/static/favicons/smirk.ico" type="image/x-icon" />
 				<script language="Javascript" type="text/javascript" src="/static/js/common.js"><xsl:text> </xsl:text></script>

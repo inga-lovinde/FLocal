@@ -1,3 +1,13 @@
+.signature {
+	height: expression( this.scrollHeight > 49 ? '50px' : 'auto' );
+}
+.avatar, .userbar_avatar {
+	height:expression((this.scrollHeight >= 90) ? '90px' : 'auto');
+	width:expression((this.scrollHeight >= 90) ? '90px' : 'auto');
+}
+.userbarcontainer {
+	width:expression((this.scrollHeight >= 90) ? '90px' : 'auto');
+}
 .categorycontainer {
 	display:inline;
 }
@@ -7,4 +17,14 @@
 .board_additionalcontainer {
 	width:0px;
 	max-width:0px;
+}
+.threadcontainer {
+	display:inline;
+}
+.threadcontainer .avatar, .threadcontainer .userbar_avatar {
+	height:expression((this.scrollHeight >= 45) ? '45px' : 'auto');
+	width:expression((this.scrollHeight >= 60) ? '60px' : 'auto');
+}
+.threadcontainer .userbarcontainer {
+	width:expression((this.scrollHeight >= 60) ? '60px' : 'auto');
 }

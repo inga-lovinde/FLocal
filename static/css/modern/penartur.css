@@ -30,19 +30,19 @@ blockquote {
 .boardscontainer {
 	background-color:#101010;
 }
-.boardcontainer {
+.boardcontainer, .threadcontainer {
 	background-color:#202020;
 }
-.boardcontainer:hover {
+.boardcontainer:hover, .threadcontainer:hover {
 	background-color:#303030;
 }
-.boardcontainer.updated {
+.boardcontainer.updated, .threadcontainer.updated {
 	background-color:#502800;
 }
-.boardcontainer.updated:hover {
+.boardcontainer.updated:hover, .threadcontainer.updated:hover {
 	background-color:#684000;
 }
-.board_additional {
+.board_additional, .threadcontainer_additional {
 	background-color:#302010;
 }
 
