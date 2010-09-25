@@ -3,10 +3,10 @@
 }
 .avatar, .userbar_avatar {
 	height:expression((this.scrollHeight >= 90) ? '90px' : 'auto');
-	width:expression((this.scrollHeight >= 90) ? '90px' : 'auto');
+	width:expression((this.scrollWidth >= 90) ? '90px' : 'auto');
 }
 .userbarcontainer {
-	width:expression((this.scrollHeight >= 90) ? '90px' : 'auto');
+	width:expression((this.scrollWidth >= 90) ? '90px' : 'auto');
 }
 .categorycontainer {
 	display:inline;
@@ -23,8 +23,12 @@
 }
 .threadcontainer .avatar, .threadcontainer .userbar_avatar {
 	height:expression((this.scrollHeight >= 45) ? '45px' : 'auto');
-	width:expression((this.scrollHeight >= 60) ? '60px' : 'auto');
+	width:expression((this.scrollWidth >= 60) ? '60px' : 'auto');
 }
 .threadcontainer .userbarcontainer {
-	width:expression((this.scrollHeight >= 60) ? '60px' : 'auto');
+	width:expression((this.scrollWidth >= 60) ? '60px' : 'auto');
+}
+.threadcontainer_additionalcontainer {
+	width:0px;
+	max-width:0px;
 }
