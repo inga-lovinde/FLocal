@@ -107,6 +107,7 @@ input {
 blockquote {
 	display:block;
 	border:solid 2px;
+	font-size:0.8em;
 }
 blockquote hr {
 	display:block;
