@@ -5,9 +5,9 @@
 	<xsl:template name="specificTitle">Разделы</xsl:template>
 	<xsl:template name="isLiteEnabled">true</xsl:template>
 	<xsl:template name="specific">
-		<ul class="categoriescontainer">
+		<div class="categoriescontainer">
 			<xsl:apply-templates select="categories/category"/>
-		</ul>
+		</div>
 				<br />
 				<table width="95%" align="center" class="tablesurround" cellpadding="1" cellspacing="1">
 					<tr>
@@ -91,16 +91,16 @@
 	</xsl:template>
 
 	<xsl:template match="category">
-		<li class="categorycontainer">
+		<div class="categorycontainer">
 			<h2 class="categorycontainer_title"><xsl:value-of select="name"/></h2>
-			<ul class="boardscontainer">
+			<div class="boardscontainer">
 				<xsl:apply-templates select="boards/board">
 					<xsl:with-param name="maxPerLine">
 						<xsl:value-of select="ceiling(count(boards/board) div 2)"/>
 					</xsl:with-param>
 				</xsl:apply-templates>
-			</ul>
-		</li>
+			</div>
+		</div>
 	</xsl:template>
 
 </xsl:stylesheet>

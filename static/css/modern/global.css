@@ -121,10 +121,10 @@ BLOCKQUOTE BR {FONT-SIZE:1px}
 .header .header {
 	font-size:0.8em;
 }
-ul.categoriescontainer {
+.categoriescontainer {
 	padding:0px;
 }
-li.categorycontainer {
+.categorycontainer {
 	display:inline-block;
 	vertical-align:top;
 	margin:5pt;
@@ -137,10 +137,10 @@ li.categorycontainer {
 	padding:0.3em;
 	font-weight:normal;
 }
-ul.boardscontainer {
+.boardscontainer {
 	padding:0px;
 }
-li.boardcontainer {
+.boardcontainer {
 	display:inline-block;
 	width:13em;
 	vertical-align:top;

@@ -10,10 +10,10 @@
 	<xsl:template name="isRssEnabled">true</xsl:template>
 	<xsl:template name="specific">
 		<xsl:if test="boards/board">
-			<ul class="boardscontainer">
+			<div class="boardscontainer">
 				<xsl:apply-templates select="boards/board"/>
-			</ul>
-			<br/>
+			</div>
+			<hr/>
 		</xsl:if>
 		<table width="95%" align="center" class="tablesurround">
 			<tr>

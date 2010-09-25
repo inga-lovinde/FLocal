@@ -6,7 +6,7 @@
 		<xsl:if test="((position() mod $maxPerLine) = 1) and (position() != 1)">
 			<br/>
 		</xsl:if>
-		<li>
+		<div>
 			<xsl:attribute name="class">
 				<xsl:text>boardcontainer</xsl:text>
 				<xsl:if test="(hasNewPosts='true') and not(lastPostInfo/post/poster/user/id = /root/session/user/id)">
@@ -60,7 +60,7 @@
 					</div>
 				</div>
 			</div>
-		</li>
+		</div>
 	</xsl:template>
 
 	<xsl:template match="lastPostInfo">
