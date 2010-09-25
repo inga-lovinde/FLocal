@@ -18,7 +18,7 @@ pre
 	font-size:10px;
 }
 
-[pseudolink], .pseudolink. a.pseudolink {
+[pseudolink], .pseudolink, a.pseudolink {
 	cursor:pointer;
 }
 [spoiler] [inner] {
