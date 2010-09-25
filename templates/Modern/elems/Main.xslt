@@ -3,8 +3,10 @@
 	<xsl:import href="Header.xslt"/>
 	<xsl:output method="xml" indent="no" />
 	<xsl:template match="/root">
+		<xsl:text disable-output-escaping="yes">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</xsl:text>
 		<html>
 			<head>
+				<meta http-equiv="x-ua-compatible" content="IE=8"/>
 				<link rel="stylesheet" href="/static/css/modern/global.css?v3.2" type="text/css" />
 				<xsl:comment>[if lte IE 7]&gt;<![CDATA[
 					<link rel="stylesheet" href="/static/css/modern/iefixes.css?v3.2" type="text/css" />
