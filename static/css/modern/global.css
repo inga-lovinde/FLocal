@@ -19,7 +19,7 @@ pre
 }
 
 [pseudolink], .pseudolink. a.pseudolink {
-	cursor:hand;
+	cursor:pointer;
 }
 [spoiler] [inner] {
 	display:none;
