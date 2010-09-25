@@ -18,6 +18,7 @@ function simpleMachichara(imageUrl) {
 	machicharaSimpleElement.style.position = isIe ? "absolute" : "fixed";
 	machicharaSimpleElement.style.top = "50%";
 	machicharaSimpleElement.style.left = "50%";
+	machicharaSimpleElement.style.zIndex = 11;
 	document.body.appendChild(machicharaSimpleElement);
 	var machicharaSimpleImageElement = document.createElement("img");
 	machicharaSimpleImageElement.src = imageUrl;
