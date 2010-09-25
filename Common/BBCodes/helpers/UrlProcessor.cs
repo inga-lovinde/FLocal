@@ -71,7 +71,7 @@ namespace FLocal.Common.BBCodes {
 			}
 			if(isExternal) {
 				if(title == null) {
-					title = url;
+					title = Safe(url);
 				}
 			} else {
 				var linkInfo = URL.UrlManager.Parse(url, new System.Collections.Specialized.NameValueCollection(), true);
@@ -80,13 +80,10 @@ namespace FLocal.Common.BBCodes {
 				}
 				url = linkInfo.canonicalFull;
 				if(title == null) {
-					title = linkInfo.title;
+					title = Safe(linkInfo.title);
 				}
 			}
-			string result = "<a href=\"" + url + "\">" + Safe(title) + "</a>";
-			if(isExternal) {
-				result += "<img src=\"/static/images/external.png\" border=\"0\"/>";
-			}
+			string result = String.Format("<a href=\"{0}\"{1}>{2}</a>", url, (isExternal ? " class=\"external\"" : ""), title);
 			return result;
 		}
 

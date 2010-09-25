@@ -167,3 +167,9 @@ BLOCKQUOTE BR {FONT-SIZE:1px}
 	font-size:0.8em;
 	width:16.25em;
 }
+a.external {
+	padding-right:13px;
+	background-image:url(/static/images/external.png);
+	background-repeat:no-repeat;
+	background-position:right center;
+}
