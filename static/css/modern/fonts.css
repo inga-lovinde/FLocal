@@ -1,0 +1,6 @@
+BODY, P, TABLE, TD, TR { font-family:"Calibri", sans-serif; }
+.formboxes{ font-family:"Segoe Print", cursive; }
+PRE{ font-family:"Consolas", monospace; }
+blockquote { font-family:"Segoe Print", cursive; }
+.header, .header a { text-transform:lowercase; line-height:100%; font-family:"Segoe UI", sans-serif; }
+.categorycontainer_title, .boardcontainer_name { text-transform:lowercase; line-height:110%; font-family:"Segoe UI", sans-serif; }
