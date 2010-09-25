@@ -147,6 +147,9 @@ BLOCKQUOTE BR {FONT-SIZE:1px}
 	font-size:1.25em;
 	margin:5pt;
 }
+.boardcontainer_info {
+	overflow:hidden;
+}
 .boardcontainer_name {
 	font-size:1.5em;
 	margin:0px;

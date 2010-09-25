@@ -13,19 +13,21 @@
 					<xsl:text> updated</xsl:text>
 				</xsl:if>
 			</xsl:attribute>
-			<a>
-				<xsl:attribute name="href">/Forum/Board/<xsl:value-of select="id"/>/Threads/</xsl:attribute>
-				<h3 class="boardcontainer_name">
-					<xsl:value-of select="name"/>
-				</h3>
-				<xsl:if test="description != ''">
-					<p class="boardcontainer_description">
-						<xsl:value-of select="description"/>
-					</p>
-				</xsl:if>
-			</a>
-			<p>Тем: <xsl:value-of select="totalThreads"/></p>
-			<p>Сообщений: <xsl:value-of select="totalPosts"/></p>
+			<div class="boardcontainer_info">
+				<a>
+					<xsl:attribute name="href">/Forum/Board/<xsl:value-of select="id"/>/Threads/</xsl:attribute>
+					<h3 class="boardcontainer_name">
+						<xsl:value-of select="name"/>
+					</h3>
+					<xsl:if test="description != ''">
+						<p class="boardcontainer_description">
+							<xsl:value-of select="description"/>
+						</p>
+					</xsl:if>
+				</a>
+				<p>Тем: <xsl:value-of select="totalThreads"/></p>
+				<p>Сообщений: <xsl:value-of select="totalPosts"/></p>
+			</div>
 			<xsl:if test="subBoards/board">
 				<div style="float:left;text-align:left;">
 					<xsl:attribute name="onmouseover">showChildren(this);</xsl:attribute>
