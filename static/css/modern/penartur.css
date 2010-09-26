@@ -31,19 +31,19 @@ blockquote {
 .boardscontainer {
 	background-color:#101010;
 }
-.boardcontainer, .threadcontainer {
+.boardcontainer, .threadcontainer, .conversationcontainer {
 	background-color:#202020;
 }
-.boardcontainer:hover, .threadcontainer:hover {
+.boardcontainer:hover, .threadcontainer:hover, .conversationcontainer:hover {
 	background-color:#303030;
 }
-.boardcontainer.updated, .threadcontainer.updated {
+.boardcontainer.updated, .threadcontainer.updated, .conversationcontainer.updated {
 	background-color:#502800;
 }
-.boardcontainer.updated:hover, .threadcontainer.updated:hover {
+.boardcontainer.updated:hover, .threadcontainer.updated:hover, .conversationcontainer.updated:hover {
 	background-color:#684000;
 }
-.board_additional, .threadcontainer_additional {
+.board_additional, .threadcontainer_additional, .conversationcontainer_additional {
 	background-color:#1C281C;
 }
 

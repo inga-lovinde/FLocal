@@ -123,6 +123,7 @@ namespace FLocal.Common.dataobjects {
 				new XElement("lastMessageDate", this.lastMessageDate.ToXml()),
 				new XElement("lastReadMessageId", this.lastReadMessageId),
 				new XElement("afterLastRead", this.lastReadMessageId + 1),
+				new XElement("lastMessage", this.lastMessage.exportToXml(context)),
 				new XElement(
 					"totalNewMessages",
 					Config.instance.mainConnection.GetCountByConditions(

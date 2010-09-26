@@ -180,10 +180,10 @@ a.external {
 	background-repeat:no-repeat;
 	background-position:right center;
 }
-.threadscontainer {
+.threadscontainer, .conversationscontainer {
 	vertical-align:top;
 }
-.threadcontainer {
+.threadcontainer, .conversationcontainer {
 	vertical-align:top;
 	display:inline-block;
 	width:17em;
@@ -192,30 +192,36 @@ a.external {
 	margin:5pt;
 	position:relative;
 }
-.threadcontainer .avatar, .threadcontainer .userbar_avatar {
+.threadcontainer .avatar, .threadcontainer .userbar_avatar,
+.conversationcontainer .avatar, .conversationcontainer .userbar_avatar {
 	max-height:3em;
 	max-width:4em;
 }
-.threadcontainer .userbarcontainer {
+.threadcontainer .userbarcontainer, .conversationcontainer .userbarcontainer {
 	max-width:4em;
 }
-.threadcontainer .userbar_additional {
+.threadcontainer .userbar_additional, .conversationcontainer .userbar_additional {
 	font-size:1em;
 }
-.threadcontainer_title {
-	font-size:1.1em;
+.threadcontainer_title, .conversationcontainer_title {
 	font-weight:normal;
 	margin:0px;
 	height:3.5em;
 	overflow:hidden;
 }
-.threadcontainer_additionalcontainer {
+.threadcontainer_title {
+	font-size:1.1em;
+}
+.conversationcontainer_title {
+	font-size:1.5em;
+}
+.threadcontainer_additionalcontainer, .conversationcontainer_additionalcontainer {
 	height:0px;
 	max-height:0px;
 	overflow:visible;
 	position:relative;
 }
-.threadcontainer_additional {
+.threadcontainer_additional, .conversationcontainer_additional {
 	position:absolute;
 	padding:5pt;
 	width:15em;

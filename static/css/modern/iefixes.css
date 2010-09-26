@@ -18,17 +18,18 @@
 	width:0px;
 	max-width:0px;
 }
-.threadcontainer {
+.threadcontainer, .conversationcontainer {
 	display:inline;
 }
-.threadcontainer .avatar, .threadcontainer .userbar_avatar {
+.threadcontainer .avatar, .threadcontainer .userbar_avatar,
+.conversationcontainer .avatar, .conversationcontainer .userbar_avatar {
 	height:expression((this.scrollHeight >= 45) ? '45px' : 'auto');
 	width:expression((this.scrollWidth >= 60) ? '60px' : 'auto');
 }
-.threadcontainer .userbarcontainer {
+.threadcontainer .userbarcontainer, .conversationcontainer .userbarcontainer {
 	width:expression((this.scrollWidth >= 60) ? '60px' : 'auto');
 }
-.threadcontainer_additionalcontainer {
+.threadcontainer_additionalcontainer, .conversationcontainer_additionalcontainer {
 	width:0px;
 	max-width:0px;
 }
