@@ -17,13 +17,13 @@
 					<xsl:choose>
 						<xsl:when test="session/sessionKey and (session/indicators/unreadPrivateMessages != '0')">
 							<b>
-								<xsl:text>Сообщения (</xsl:text>
+								<xsl:text>Инбокс (</xsl:text>
 								<xsl:value-of select="session/indicators/unreadPrivateMessages"/>
 								<xsl:text>)</xsl:text>
 							</b>
 						</xsl:when>
 						<xsl:otherwise>
-							<xsl:text>Сообщения (?)</xsl:text>
+							<xsl:text>Инбокс</xsl:text>
 						</xsl:otherwise>
 					</xsl:choose>
 				</xsl:with-param>
@@ -31,6 +31,17 @@
 					<xsl:if test="not(session/sessionKey)">true</xsl:if>
 				</xsl:with-param>
 			</xsl:call-template>
+			<xsl:if test="conversation">
+				<xsl:text> &#8594; </xsl:text>
+				<xsl:call-template name="headerLink">
+					<xsl:with-param name="url">
+						<xsl:text>/My/Conversations/Conversation/</xsl:text>
+						<xsl:value-of select="conversation/interlocutor/account/id"/>
+						<xsl:text>/</xsl:text>
+					</xsl:with-param>
+					<xsl:with-param name="text"><xsl:value-of select="conversation/interlocutor/account/user/name"/></xsl:with-param>
+				</xsl:call-template>
+			</xsl:if>
 			<xsl:text>&#160;&#160;&#160;</xsl:text>
 			<xsl:call-template name="headerLink">
 				<xsl:with-param name="url">/My/Settings/</xsl:with-param>
