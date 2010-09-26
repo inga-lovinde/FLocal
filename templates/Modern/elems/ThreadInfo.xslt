@@ -58,7 +58,29 @@
 					<xsl:value-of select="title"/>
 				</a>
 			</h4>
-			<div style="position:absolute;text-align:right;right:0px;bottom:0px;background-color:inherit;padding:3pt 0pt 0pt 3pt;">
+			<div>
+				<xsl:attribute name="style">
+					<xsl:variable name="rawHotness">
+						<xsl:call-template name="log2">
+							<xsl:with-param name="number">
+								<xsl:value-of select="totalPosts"/>
+							</xsl:with-param>
+						</xsl:call-template>
+					</xsl:variable>
+					<xsl:variable name="hotness">
+						<xsl:choose>
+							<xsl:when test="$rawHotness &lt; 0">0</xsl:when>
+							<xsl:when test="$rawHotness &gt; 12">12</xsl:when>
+							<xsl:otherwise><xsl:value-of select="$rawHotness"/></xsl:otherwise>
+						</xsl:choose>
+					</xsl:variable>
+					<xsl:text>position:absolute;text-align:right;right:0px;bottom:0px;padding:3pt 0pt 0pt 3pt;</xsl:text>
+					<xsl:text>background-color:rgb(</xsl:text>
+					<xsl:value-of select="round($hotness*12)"/>
+					<xsl:text>,0,</xsl:text>
+					<xsl:value-of select="144-round($hotness*12)"/>
+					<xsl:text>)</xsl:text>
+				</xsl:attribute>
 				<xsl:attribute name="onmouseover">showChildren(this);</xsl:attribute>
 				<xsl:attribute name="onmouseout">hideChildren(this);</xsl:attribute>
 				<div default="default" style="z-index:1;">
@@ -98,48 +120,6 @@
 				</div>
 			</div>
 		</div>
-<!--
-				<img alt="*" hspace="5" style="vertical-align: text-bottom">
-					<xsl:choose>
-						<xsl:when test="totalNewPosts and totalNewPosts!='0'">
-							<xsl:attribute name="src">/static/images/message-<xsl:value-of select="firstPost/post/layerName"/>-notread.gif</xsl:attribute>
-						</xsl:when>
-						<xsl:otherwise>
-							<xsl:attribute name="src">/static/images/message-<xsl:value-of select="firstPost/post/layerName"/>-read.gif</xsl:attribute>
-						</xsl:otherwise>
-					</xsl:choose>
-				</img>
-				<xsl:text> </xsl:text>
-				<xsl:if test="pageOuter/isEmpty='false'">
-					<span class="small" style="margin-left:1.5em">
-						<xsl:apply-templates select="pageOuter" mode="withoutCurrent">
-							<xsl:with-param name="baseLink">/Thread/<xsl:value-of select="id"/>/</xsl:with-param>
-						</xsl:apply-templates>
-					</span>
-				</xsl:if>
-			</td>
-			<td align="left" nowrap="nowrap">
-				<xsl:apply-templates select="firstPost/post/poster/user" mode="userLink"/>
-			</td>
-			<td align="center">
-				<xsl:value-of select="totalViews"/>
-			</td>
-			<td align="center" nowrap="nowrap">
-				<span class="separate"><xsl:value-of select="totalPosts"/></span>
-				<xsl:if test="totalNewPosts and totalNewPosts!='0'">
-					<a class="cup separate">
-						<xsl:if test="/root/session/sessionKey">
-							<xsl:attribute name="href">/do/MarkThreadAsRead/<xsl:value-of select="id"/>/p<xsl:value-of select="lastPostId"/>/</xsl:attribute>
-						</xsl:if>
-						<font class="new"><i>(<xsl:value-of select="totalNewPosts"/>)</i></font>
-					</a>
-				</xsl:if>
-			</td>
-			<td nowrap="nowrap" align="center">
-				<xsl:apply-templates select="lastPostDate/date" mode="dateTime"/>
-			</td>
-		</tr>
--->
 	</xsl:template>
 
 

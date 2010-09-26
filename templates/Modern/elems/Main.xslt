@@ -330,5 +330,34 @@
 		</a>
 	</xsl:template>
 
+	<xsl:template name="log2">
+		<xsl:param name="number"/>
+		<xsl:choose>
+			<xsl:when test="not($number) or $number=''"/>
+			<xsl:when test="$number &lt; 1">-1</xsl:when>
+			<xsl:when test="$number &lt; 2">0</xsl:when>
+			<xsl:when test="$number &lt; 4">1</xsl:when>
+			<xsl:when test="$number &lt; 8">2</xsl:when>
+			<xsl:when test="$number &lt; 16">3</xsl:when>
+			<xsl:when test="$number &lt; 32">4</xsl:when>
+			<xsl:when test="$number &lt; 64">5</xsl:when>
+			<xsl:when test="$number &lt; 128">6</xsl:when>
+			<xsl:when test="$number &lt; 256">7</xsl:when>
+			<xsl:when test="$number &lt; 512">8</xsl:when>
+			<xsl:when test="$number &lt; 1024">9</xsl:when>
+			<xsl:when test="$number &lt; 2048">10</xsl:when>
+			<xsl:when test="$number &lt; 4096">11</xsl:when>
+			<xsl:when test="$number &lt; 8192">12</xsl:when>
+			<xsl:when test="$number &lt; 16384">13</xsl:when>
+			<xsl:when test="$number &lt; 32768">14</xsl:when>
+			<xsl:when test="$number &lt; 65536">15</xsl:when>
+			<xsl:when test="$number &lt; 131072">16</xsl:when>
+			<xsl:when test="$number &lt; 262144">17</xsl:when>
+			<xsl:when test="$number &lt; 524288">18</xsl:when>
+			<xsl:when test="$number &lt; 1048576">19</xsl:when>
+			<xsl:otherwise>9000</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+
 </xsl:stylesheet>
 
