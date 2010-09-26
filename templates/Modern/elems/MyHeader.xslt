@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="Windows-1251"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml">
 
+	<xsl:import href="ConversationsHeader.xslt"/>
+
 	<xsl:template name="myHeader">
 		<div class="header">
 			<xsl:call-template name="headerLink">
@@ -31,17 +33,6 @@
 					<xsl:if test="not(session/sessionKey)">true</xsl:if>
 				</xsl:with-param>
 			</xsl:call-template>
-			<xsl:if test="conversation">
-				<xsl:text> &#8594; </xsl:text>
-				<xsl:call-template name="headerLink">
-					<xsl:with-param name="url">
-						<xsl:text>/My/Conversations/Conversation/</xsl:text>
-						<xsl:value-of select="conversation/interlocutor/account/id"/>
-						<xsl:text>/</xsl:text>
-					</xsl:with-param>
-					<xsl:with-param name="text"><xsl:value-of select="conversation/interlocutor/account/user/name"/></xsl:with-param>
-				</xsl:call-template>
-			</xsl:if>
 			<xsl:text>&#160;&#160;&#160;</xsl:text>
 			<xsl:call-template name="headerLink">
 				<xsl:with-param name="url">/My/Settings/</xsl:with-param>
@@ -81,6 +72,9 @@
 				</xsl:if>
 				<xsl:text>Выход</xsl:text>
 			</a>
+			<xsl:if test="starts-with(/root/currentUrl, '/My/Conversations/')">
+				<xsl:call-template name="conversationsHeader"/>
+			</xsl:if>
 		</div>
 	</xsl:template>
 </xsl:stylesheet>
