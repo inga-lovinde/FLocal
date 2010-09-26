@@ -74,20 +74,20 @@
 							<xsl:otherwise><xsl:value-of select="$rawHotness"/></xsl:otherwise>
 						</xsl:choose>
 					</xsl:variable>
-					<xsl:text>position:absolute;text-align:right;right:0px;bottom:0px;padding:3pt 0pt 0pt 3pt;</xsl:text>
+					<xsl:text>position:absolute;text-align:right;right:0px;bottom:0px;padding:2pt 5pt 0pt 5pt;</xsl:text>
 					<xsl:text>background-color:rgb(</xsl:text>
-					<xsl:value-of select="round($hotness*12)"/>
+					<xsl:value-of select="round($hotness*21.25)"/>
 					<xsl:text>,0,</xsl:text>
-					<xsl:value-of select="144-round($hotness*12)"/>
+					<xsl:value-of select="255-round($hotness*21.25)"/>
 					<xsl:text>)</xsl:text>
 				</xsl:attribute>
 				<xsl:attribute name="onmouseover">showChildren(this);</xsl:attribute>
 				<xsl:attribute name="onmouseout">hideChildren(this);</xsl:attribute>
 				<div default="default" style="z-index:1;">
-					<a class="pseudolink">Информация</a>
+					<a class="pseudolink" style="color:black;">?</a>
 				</div>
 				<div class="threadcontainer_additionalcontainer" style="display:none;">
-					<div class="threadcontainer_additional" style="right:0px;">
+					<div class="threadcontainer_additional" style="right:-5pt;">
 						<p>
 							<xsl:text>Сообщений: </xsl:text>
 							<xsl:value-of select="totalPosts"/>
