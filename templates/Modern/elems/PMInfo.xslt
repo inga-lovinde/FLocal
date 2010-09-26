@@ -47,32 +47,8 @@
 																<a>
 																	<xsl:attribute name="href">/My/Conversations/PMReply/<xsl:value-of select="id"/>/</xsl:attribute>
 																	<xsl:apply-templates select="postDate/date" mode="navigationImageFor">
-																		<xsl:with-param name="src">reply.gif</xsl:with-param>
+																		<xsl:with-param name="src">woocons/Mail.png</xsl:with-param>
 																		<xsl:with-param name="alt">Ответ</xsl:with-param>
-																	</xsl:apply-templates>
-																</a>
-															</td>
-															<td class="navigation">
-																<a>
-																	<xsl:apply-templates select="postDate/date" mode="navigationImageFor">
-																		<xsl:with-param name="src">edit.gif</xsl:with-param>
-																		<xsl:with-param name="alt">Правка</xsl:with-param>
-																	</xsl:apply-templates>
-																</a>
-															</td>
-															<td class="navigation">
-																<a target="_blank">
-																	<xsl:apply-templates select="postDate/date" mode="navigationImageFor">
-																		<xsl:with-param name="src">print.gif</xsl:with-param>
-																		<xsl:with-param name="alt">Печать</xsl:with-param>
-																	</xsl:apply-templates>
-																</a>
-															</td>
-															<td class="navigation">
-																<a>
-																	<xsl:apply-templates select="postDate/date" mode="navigationImageFor">
-																		<xsl:with-param name="src">email2.gif</xsl:with-param>
-																		<xsl:with-param name="alt">Ответить в ПМ</xsl:with-param>
 																	</xsl:apply-templates>
 																</a>
 															</td>
