@@ -15,8 +15,11 @@ PRE{background-color:#303030;font-size:0.9em;BORDER:#999999 1px solid;PADDING: 0
 
 .confluent{COLOR:black;}
 
-.postcontainer {
+.postcontainer, .pmcontainer {
 	border-color:#808080;
+}
+.pmcontainer.unread {
+	background-color:#200000;
 }
 blockquote {
 	border:solid 1px #606060;
