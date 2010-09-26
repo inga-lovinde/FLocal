@@ -91,7 +91,7 @@
 										<br/>
 									</xsl:otherwise>
 								</xsl:choose>
-								<a href="/LocalNetworks/">Список разрешённых подсетей</a>
+								<a href="/Maintenance/LocalNetworks/">Список разрешённых подсетей</a>
 							</td> 
 						</tr>
 						<xsl:if test="isLocalNetwork='true'">
