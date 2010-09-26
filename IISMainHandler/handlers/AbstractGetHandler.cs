@@ -28,6 +28,7 @@ namespace FLocal.IISHandler.handlers {
 				new XElement("current", DateTime.Now.ToXml()),
 				context.exportSession(),
 				context.userSettings.skin.exportToXml(),
+				context.userSettings.modernSkin.exportToXml(),
 				context.userSettings.machichara.exportToXml(),
 				context.exportRequestParameters(),
 			};

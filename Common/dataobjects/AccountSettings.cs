@@ -21,6 +21,7 @@ namespace FLocal.Common.dataobjects {
 			public const string FIELD_USERSPERPAGE = "UsersPerPage";
 			public const string FIELD_BOARDSVIEWSETTINGS = "BoardsViewSettings";
 			public const string FIELD_SKINID = "SkinId";
+			public const string FIELD_MODERNSKINID = "ModernSkinId";
 			public const string FIELD_MACHICHARAID = "MachicharaId";
 			public static readonly TableSpec instance = new TableSpec();
 			public string name { get { return TABLE; } }
@@ -90,6 +91,19 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
+		private int _modernSkinId;
+		public int modernSkinId {
+			get {
+				this.LoadIfNotLoaded();
+				return this._modernSkinId;
+			}
+		}
+		public ModernSkin modernSkin {
+			get {
+				return ModernSkin.LoadById(this.modernSkinId);
+			}
+		}
+
 		private int _machicharaId;
 		public int machicharaId {
 			get {
@@ -118,6 +132,7 @@ namespace FLocal.Common.dataobjects {
 			this._usersPerPage = int.Parse(data[TableSpec.FIELD_USERSPERPAGE]);
 			this._boardsViewSettings = data[TableSpec.FIELD_BOARDSVIEWSETTINGS];
 			this._skinId = int.Parse(data[TableSpec.FIELD_SKINID]);
+			this._modernSkinId = int.Parse(data[TableSpec.FIELD_MODERNSKINID]);
 			this._machicharaId = int.Parse(data[TableSpec.FIELD_MACHICHARAID]);
 		}
 
@@ -158,13 +173,14 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
-		public static void Save(Account account, int postsPerPage, int threadsPerPage, int usersPerPage, int uploadsPerPage, Skin skin, Machichara machichara) {
+		public static void Save(Account account, int postsPerPage, int threadsPerPage, int usersPerPage, int uploadsPerPage, Skin skin, ModernSkin modernSkin, Machichara machichara) {
 			Dictionary<string, AbstractFieldValue> dataToUpdate = new Dictionary<string,AbstractFieldValue> {
 				{ TableSpec.FIELD_POSTSPERPAGE, new ScalarFieldValue(postsPerPage.ToString()) },
 				{ TableSpec.FIELD_THREADSPERPAGE, new ScalarFieldValue(threadsPerPage.ToString()) },
 				{ TableSpec.FIELD_USERSPERPAGE, new ScalarFieldValue(usersPerPage.ToString()) },
 				{ TableSpec.FIELD_UPLOADSPERPAGE, new ScalarFieldValue(uploadsPerPage.ToString()) },
 				{ TableSpec.FIELD_SKINID, new ScalarFieldValue(skin.id.ToString()) },
+				{ TableSpec.FIELD_MODERNSKINID, new ScalarFieldValue(modernSkin.id.ToString()) },
 				{ TableSpec.FIELD_MACHICHARAID, new ScalarFieldValue(machichara.id.ToString()) },
 			};
 			Dictionary<string, AbstractFieldValue> dataToInsert = new Dictionary<string,AbstractFieldValue>(dataToUpdate) {

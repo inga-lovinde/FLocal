@@ -24,6 +24,7 @@ namespace FLocal.IISHandler.handlers.response {
 			return new XElement[] {
 				settings.exportToXml(context),
 				new XElement("skins", from skin in Skin.allSkins select skin.exportToXml()),
+				new XElement("modernSkins", from modernSkin in ModernSkin.allSkins select modernSkin.exportToXml()),
 				new XElement("machicharas", from machichara in Machichara.allMachicharas select machichara.exportToXml())
 			};
 		}

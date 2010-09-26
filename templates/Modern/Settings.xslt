@@ -14,7 +14,7 @@ function changeSkin(newSkin) {
 			newLink.setAttribute("skin", "skin");
 			newLink.setAttribute("rel", "stylesheet");
 			newLink.setAttribute("type", "text/css");
-			newLink.setAttribute("href", "/static/css/" + newSkin + ".css");
+			newLink.setAttribute("href", "/static/css/modern/" + newSkin + ".css");
 			link.parentNode.replaceChild(newLink, link);
 		}
 	}
@@ -92,8 +92,17 @@ function changeMachichara(newMachichara) {
 									<p>
 										<xsl:text>÷ветова€ схема:</xsl:text>
 										<br/>
-										<select name="skinId">
+										<select name="modernSkinId">
 											<xsl:attribute name="onChange">changeSkin(this.options[this.selectedIndex].innerText);</xsl:attribute>
+											<xsl:apply-templates select="modernSkins/modernSkin" mode="skinOption">
+												<xsl:with-param name="currentSkin"><xsl:value-of select="settings/modernSkinId"/></xsl:with-param>
+											</xsl:apply-templates>
+										</select>
+									</p>
+									<p>
+										<xsl:text>÷ветова€ схема дл€ классического интерфейса и лайта:</xsl:text>
+										<br/>
+										<select name="skinId">
 											<xsl:apply-templates select="skins/skin" mode="skinOption">
 												<xsl:with-param name="currentSkin"><xsl:value-of select="settings/skinId"/></xsl:with-param>
 											</xsl:apply-templates>
@@ -124,6 +133,17 @@ function changeMachichara(newMachichara) {
 	</xsl:template>
 
 	<xsl:template match="skin" mode="skinOption">
+		<xsl:param name="currentSkin"/>
+		<option>
+			<xsl:attribute name="value"><xsl:value-of select="id"/></xsl:attribute>
+			<xsl:if test="id=$currentSkin">
+				<xsl:attribute name="selected">selected</xsl:attribute>
+			</xsl:if>
+			<xsl:value-of select="name"/>
+		</option>
+	</xsl:template>
+
+	<xsl:template match="modernSkin" mode="skinOption">
 		<xsl:param name="currentSkin"/>
 		<option>
 			<xsl:attribute name="value"><xsl:value-of select="id"/></xsl:attribute>

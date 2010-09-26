@@ -27,6 +27,10 @@ namespace FLocal.Common.dataobjects {
 			get;
 		}
 
+		ModernSkin modernSkin {
+			get;
+		}
+
 		Machichara machichara {
 			get;
 		}
@@ -44,6 +48,7 @@ namespace FLocal.Common.dataobjects {
 				new XElement("usersPerPage", settings.usersPerPage),
 				new XElement("uploadsPerPage", settings.uploadsPerPage),
 				new XElement("skinId", settings.skin.id),
+				new XElement("modernSkinId", settings.modernSkin.id),
 				new XElement("machicharaId", settings.machichara.id)
 			);
 		}

@@ -11,6 +11,7 @@ namespace FLocal.Common.dataobjects {
 			var allSkins = Skin.allSkins.ToArray();
 			//this._skinId = allSkins[Util.RandomInt(0, allSkins.Length)].id;
 			this._skinId = 28;
+			this._modernSkinId = 1;
 			this._machicharaId = 2;
 		}
 
@@ -42,6 +43,13 @@ namespace FLocal.Common.dataobjects {
 		public Skin skin {
 			get {
 				return Skin.LoadById(this._skinId);
+			}
+		}
+
+		private int _modernSkinId;
+		public ModernSkin modernSkin {
+			get {
+				return ModernSkin.LoadById(this._modernSkinId);
 			}
 		}
 

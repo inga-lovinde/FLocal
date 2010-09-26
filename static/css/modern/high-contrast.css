@@ -15,7 +15,7 @@ PRE{background-color:#303030;font-size:0.9em;BORDER:#999999 1px solid;PADDING: 0
 
 .confluent{COLOR:black;}
 
-.postcontainer, .pmcontainer {
+.postcontainer, .pmcontainer, .uploadcontainer {
 	border-color:#808080;
 }
 .pmcontainer.unread {
@@ -49,20 +49,6 @@ blockquote {
 .board_additional, .threadcontainer_additional, .conversationcontainer_additional {
 	background-color:#1C281C;
 }
-
-.tablesurround{BACKGROUND:#191919;margin-top:-0.1em;margin-bottom:-0.1em}
-.tableborders{BACKGROUND:#191919}
-.tdheader{FONT-WEIGHT:bold;font-size:1em;BACKGROUND:#333333;color:#ffffff}
-.tdheader a{font-size:1em;color:#dddddd;text-decoration:underline}
-.tdheader a:hover{color:#BBBBBB;text-decoration:none}
-.tdheader a:visited{color:#999999;text-decoration:underline}
-.tdheader a:active{color:#000000;text-decoration:underline}
-.lighttable{BACKGROUND:#141414;color:#cccccc}
-.darktable{BACKGROUND:black}
-.cleartable{BACKGROUND:black}
-.alternatetable{BACKGROUND:black}
-.subjecttable{BACKGROUND:black}
-.footertable{BACKGROUND:#666666}
 
 .header, .header a {
 	color:#BFBFBF;
