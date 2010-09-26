@@ -3,7 +3,7 @@
 
 	<xsl:import href="UserInfoBar.xslt"/>
 	<xsl:template match="message">
-		<div class="pmcontainer" style="clear:both">
+		<div style="clear:both">
 			<xsl:attribute name="class">
 				<xsl:text>pmcontainer</xsl:text>
 				<xsl:if test="isReadByInterlocutor='false'">
