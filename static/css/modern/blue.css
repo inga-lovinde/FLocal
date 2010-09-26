@@ -5,7 +5,8 @@ A:link, a[pseudolink], a.pseudolink {text-decoration:none;color:#404040}
 A:visited{text-decoration:none;color:#404040}
 A:active{text-decoration:none;color:black}
 A:hover{color:black;text-decoration:none}
-a.current { border:solid 1px black; }
+a.current { border:solid 1px black;color:black; }
+a.current:hover { color:black; }
 
 body {
 	color:black;
