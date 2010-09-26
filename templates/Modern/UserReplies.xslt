@@ -12,7 +12,7 @@
 			<xsl:text>страницы:</xsl:text>
 			<xsl:apply-templates select="posts/pageOuter" mode="withCurrent"/>
 		</div>
-		<div id="postsContainer">
+		<div id="postscontainer">
 			<xsl:apply-templates select="posts/post"/>
 		</div>
 		<div>

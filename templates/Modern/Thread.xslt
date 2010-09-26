@@ -13,7 +13,7 @@
 			<xsl:text>страницы:</xsl:text>
 			<xsl:apply-templates select="posts/pageOuter" mode="withCurrent"/>
 		</div>
-		<div id="postsContainer">
+		<div id="postscontainer">
 			<xsl:apply-templates select="posts/post">
 				<xsl:with-param name="isReplyDisabled"><xsl:value-of select="thread/isLocked"/></xsl:with-param>
 			</xsl:apply-templates>

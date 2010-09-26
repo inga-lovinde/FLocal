@@ -1,5 +1,21 @@
 body { font-size:11pt; }
 
+FORM{
+	DISPLAY:inline;
+	MARGIN-BOTTOM:0;
+}
+
+pre {
+	font-size:0.9em;
+	BORDER:solid 1px;
+	PADDING: 0.2em 0.3em;
+	MARGIN:0 0.5em 0 1em;
+}
+
+.formboxes {
+	font-size:1em;
+}
+
 .signature {
 	max-height:3.5em;
 	overflow:hidden;
@@ -214,6 +230,7 @@ a.external {
 }
 .conversationcontainer_title {
 	font-size:1.5em;
+	height:2.5em;
 }
 .threadcontainer_additionalcontainer, .conversationcontainer_additionalcontainer {
 	height:0px;

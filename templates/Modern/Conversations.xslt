@@ -10,7 +10,7 @@
 			<xsl:text>страницы:</xsl:text>
 			<xsl:apply-templates select="conversations/pageOuter" mode="withCurrent"/>
 		</div>
-		<div id="conversationsContainer">
+		<div id="conversationscontainer">
 			<xsl:apply-templates select="conversations/conversation"/>
 		</div>
 		<div>

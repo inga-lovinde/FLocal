@@ -4,7 +4,7 @@
 	<xsl:import href="elems\UploadInfo.xslt"/>
 	<xsl:template name="specificTitle">Àןכמאה</xsl:template>
 	<xsl:template name="specific">
-		<div id="uploadsContainer">
+		<div id="uploadscontainer">
 			<xsl:apply-templates select="upload"/>
 		</div>
 	</xsl:template>

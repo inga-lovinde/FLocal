@@ -1,0 +1,84 @@
+@import "fonts.css";
+
+a { text-decoration:none;color:#404040}
+A:link, a[pseudolink], a.pseudolink {text-decoration:none;color:#404040}
+A:visited{text-decoration:none;color:#404040}
+A:active{text-decoration:none;color:black}
+A:hover{color:black;text-decoration:none}
+
+body {
+	color:black;
+	background-color:#1E90FF;
+	background-image:url(/static/images/modern/blue/clouds-seamless-background-blue1.jpg);
+}
+
+.formboxes{
+	color:#404040;
+	background-color:white;
+}
+pre {
+	background-color:#9f9f9f;
+	color:white
+}
+
+.confluent{
+	color:#dbedff;
+}
+
+.postcontainer, .pmcontainer, .uploadcontainer {
+	border-color:#808080;
+}
+.pmcontainer.unread {
+	background-color:#bbcddf;
+}
+blockquote {
+	border:solid 1px #9f9f9f;
+	background-color:#cfcfcf;
+}
+.userbar_additional {
+	background-color:#CCD0FF;
+}
+.boardscontainer, .threadscontainer, .postscontainer, .conversationscontainer {
+	background-color:#dbedff;
+}
+.categorycontainer .boardscontainer, .categorycontainer_title {
+	background-color:#99CCFF;
+}
+
+.boardcontainer, .threadcontainer, .conversationcontainer {
+	background-color:#dbedff;
+}
+.boardcontainer:hover, .threadcontainer:hover, .conversationcontainer:hover {
+	background-color:#EDF6FF;
+}
+.boardcontainer.updated, .threadcontainer.updated, .conversationcontainer.updated {
+	background-color:#FFDBDB;
+}
+.boardcontainer.updated:hover, .threadcontainer.updated:hover, .conversationcontainer.updated:hover {
+	background-color:#FFEDED;
+}
+.board_additional, .threadcontainer_additional, .conversationcontainer_additional {
+	background-color:#E0FFDB;
+}
+.postcontainer, .pmcontainer, .uploadcontainer {
+	background-color:#dbedff;
+}
+
+.header, .header a {
+	color:#606060;
+}
+.header a.selected {
+	color:black;
+}
+.header a:hover {
+	color:black;
+}
+.header a.disabled, .header a.disabled:hover {
+	color:#BFBFBF;
+}
+.UG_Moderators {
+	color:blue !important;
+}
+.UG_Administrators {
+	color:black !important;
+}
