@@ -71,13 +71,13 @@
 				<a target="_blank" class="separate">
 					<xsl:attribute name="href">/Post/<xsl:value-of select="id"/>/</xsl:attribute>
 					<xsl:attribute name="title"><xsl:value-of select="$postDate"/></xsl:attribute>
-					<img border="0" alt="" style="vertical-align: text-bottom">
+					<img border="0" alt="" style="vertical-align: text-bottom" width="16" height="16">
 						<xsl:choose>
 							<xsl:when test="isUnread='true'">
-								<xsl:attribute name="src">/static/images/message-<xsl:value-of select="layerName"/>-notread.gif</xsl:attribute>
+								<xsl:attribute name="src">/static/images/woocons/compat/<xsl:value-of select="layerName"/>-notread.png</xsl:attribute>
 							</xsl:when>
 							<xsl:otherwise>
-								<xsl:attribute name="src">/static/images/message-<xsl:value-of select="layerName"/>-read.gif</xsl:attribute>
+								<xsl:attribute name="src">/static/images/woocons/compat/<xsl:value-of select="layerName"/>-read.png</xsl:attribute>
 							</xsl:otherwise>
 						</xsl:choose>
 					</img>

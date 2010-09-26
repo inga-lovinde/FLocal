@@ -15,10 +15,10 @@
 				<img alt="*" hspace="5" style="vertical-align: text-bottom">
 					<xsl:choose>
 						<xsl:when test="afterLastRead and afterLastRead&gt;lastMessageId">
-							<xsl:attribute name="src">/static/images/message-normal-read.gif</xsl:attribute>
+							<xsl:attribute name="src">/static/images/woocons/Mail.png</xsl:attribute>
 						</xsl:when>
 						<xsl:otherwise>
-							<xsl:attribute name="src">/static/images/message-normal-notread.gif</xsl:attribute>
+							<xsl:attribute name="src">/static/images/woocons/Mail-notread.gif</xsl:attribute>
 						</xsl:otherwise>
 					</xsl:choose>
 				</img>

@@ -23,7 +23,14 @@
 					<xsl:text> </xsl:text>
 					<img width="16" height="16" border="0" style="vertical-align: text-bottom;">
 						<xsl:attribute name="alt"><xsl:value-of select="firstPost/post/layer/name"/></xsl:attribute>
-						<xsl:attribute name="src">/static/images/woocons/compat/<xsl:value-of select="firstPost/post/layerName"/>.png</xsl:attribute>
+						<xsl:choose>
+							<xsl:when test="totalNewPosts and totalNewPosts!='0'">
+								<xsl:attribute name="src">/static/images/woocons/compat/<xsl:value-of select="firstPost/post/layerName"/>-notread.png</xsl:attribute>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:attribute name="src">/static/images/woocons/compat/<xsl:value-of select="firstPost/post/layerName"/>-read.png</xsl:attribute>
+							</xsl:otherwise>
+						</xsl:choose>
 					</img>
 				</xsl:if>
 				<xsl:if test="isAnnouncement='true'">

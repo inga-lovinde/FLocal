@@ -19,13 +19,13 @@
 								<tr>
 									<td align="left" width="65%" valign="top">
 										<a target="_blank" class="separate">
-											<img border="0" alt="" style="vertical-align: text-bottom">
+											<img border="0" alt="" style="vertical-align: text-bottom" width="16" height="16">
 												<xsl:choose>
 													<xsl:when test="isRead='false'">
-														<xsl:attribute name="src">/static/images/message-normal-notread.gif</xsl:attribute>
+														<xsl:attribute name="src">/static/images/woocons/Mail-notread.png</xsl:attribute>
 													</xsl:when>
 													<xsl:otherwise>
-														<xsl:attribute name="src">/static/images/message-normal-read.gif</xsl:attribute>
+														<xsl:attribute name="src">/static/images/woocons/Mail.png</xsl:attribute>
 													</xsl:otherwise>
 												</xsl:choose>
 											</img>
@@ -47,7 +47,7 @@
 																<a>
 																	<xsl:attribute name="href">/My/Conversations/PMReply/<xsl:value-of select="id"/>/</xsl:attribute>
 																	<xsl:apply-templates select="postDate/date" mode="navigationImageFor">
-																		<xsl:with-param name="src">woocons/Mail.png</xsl:with-param>
+																		<xsl:with-param name="src">woocons/MailReply.png</xsl:with-param>
 																		<xsl:with-param name="alt">Ответ</xsl:with-param>
 																	</xsl:apply-templates>
 																</a>
