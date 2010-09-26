@@ -66,12 +66,14 @@
 				</xsl:with-param>
 			</xsl:call-template>
 			<xsl:text>&#160;&#160;&#160;</xsl:text>
-			<a target="_top">
-				<xsl:if test="session/sessionKey">
-					<xsl:attribute name="href">/do/Logout/?sessionKey=<xsl:value-of select="session/sessionKey"/></xsl:attribute>
-				</xsl:if>
-				<xsl:text>Выход</xsl:text>
-			</a>
+			<xsl:call-template name="headerLink">
+				<xsl:with-param name="url">/do/Logout/?sessionKey=<xsl:value-of select="session/sessionKey"/></xsl:with-param>
+				<xsl:with-param name="text">Выход</xsl:with-param>
+				<xsl:with-param name="isDisabled">
+					<xsl:if test="not(session/sessionKey)">true</xsl:if>
+				</xsl:with-param>
+				<xsl:with-param name="skipDatePostfix">true</xsl:with-param>
+			</xsl:call-template>
 			<xsl:if test="starts-with(/root/currentUrl, '/My/Conversations/')">
 				<xsl:call-template name="conversationsHeader"/>
 			</xsl:if>

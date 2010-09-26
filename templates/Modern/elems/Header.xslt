@@ -16,6 +16,7 @@
 		<xsl:param name="text"/>
 		<xsl:param name="isDisabled"/>
 		<xsl:param name="postfix"/>
+		<xsl:param name="skipDatePostfix"/>
 		<a target="_top">
 			<xsl:choose>
 				<xsl:when test="$isDisabled='true'">
@@ -25,7 +26,11 @@
 					<xsl:if test="starts-with(/root/currentUrl, $url)">
 						<xsl:attribute name="class">selected</xsl:attribute>
 					</xsl:if>
-					<xsl:attribute name="href"><xsl:value-of select="$url"/><xsl:value-of select="$postfix"/>?<xsl:value-of select="current/date/ticks"/></xsl:attribute>
+					<xsl:attribute name="href">
+						<xsl:value-of select="$url"/>
+						<xsl:value-of select="$postfix"/>
+						<xsl:if test="not($skipDatePostfix='true')">?<xsl:value-of select="current/date/ticks"/></xsl:if>
+					</xsl:attribute>
 				</xsl:otherwise>
 			</xsl:choose>
 			<xsl:value-of select="$text"/>
