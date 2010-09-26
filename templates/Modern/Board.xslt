@@ -10,7 +10,7 @@
 	<xsl:template name="isRssEnabled">true</xsl:template>
 	<xsl:template name="specific">
 		<xsl:if test="boards/board">
-			<div class="boardscontainer">
+			<div class="boardscontainer" style="position:relative;z-index:2000;">
 				<xsl:apply-templates select="boards/board"/>
 			</div>
 		</xsl:if>
@@ -20,10 +20,13 @@
 		</div>
 		<div id="threadsContainer">
 			<xsl:if test="threads/thread[isAnnouncement='true']">
-				<xsl:apply-templates select="threads/thread[isAnnouncement='true']"/>
-				<br/>
+				<div style="position:relative;z-index:1000">
+					<xsl:apply-templates select="threads/thread[isAnnouncement='true']"/>
+				</div>
 			</xsl:if>
-			<xsl:apply-templates select="threads/thread[not(isAnnouncement='true')]"/>
+			<div style="position:relative;z-index:0">
+				<xsl:apply-templates select="threads/thread[not(isAnnouncement='true')]"/>
+			</div>
 		</div>
 		<div>
 			<xsl:text>страницы:</xsl:text>

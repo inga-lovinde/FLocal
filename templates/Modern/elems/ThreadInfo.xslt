@@ -11,6 +11,10 @@
 					<xsl:text> updated</xsl:text>
 				</xsl:if>
 			</xsl:attribute>
+			<xsl:attribute name="style">
+				<xsl:text>z-index:</xsl:text>
+				<xsl:value-of select="1000-position()"/>
+			</xsl:attribute>
 			<div class="userbarcontainer" style="float:left">
 				<xsl:apply-templates select="firstPost/post/poster/user" mode="userInfoBar"/>
 			</div>

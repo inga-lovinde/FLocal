@@ -14,11 +14,10 @@ function simpleMachicharaUpdate(element) {
 
 function simpleMachichara(imageUrl) {
 	var machicharaSimpleElement = document.createElement("div");
-	machicharaSimpleElement.zIndex = 1000;
 	machicharaSimpleElement.style.position = isIe ? "absolute" : "fixed";
 	machicharaSimpleElement.style.top = "50%";
 	machicharaSimpleElement.style.left = "50%";
-	machicharaSimpleElement.style.zIndex = 11;
+	machicharaSimpleElement.style.zIndex = 5000;
 	document.body.appendChild(machicharaSimpleElement);
 	var machicharaSimpleImageElement = document.createElement("img");
 	machicharaSimpleImageElement.src = imageUrl;
