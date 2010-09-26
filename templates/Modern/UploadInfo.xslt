@@ -4,15 +4,9 @@
 	<xsl:import href="elems\UploadInfo.xslt"/>
 	<xsl:template name="specificTitle">Àןכמאה</xsl:template>
 	<xsl:template name="specific">
-		<table width="95%" align="center" cellpadding="1" cellspacing="1" class="tablesurround">
-			<tr>
-				<td>
-					<table cellpadding="0" cellspacing="1" width="100%" class="tableborders">
-						<xsl:apply-templates select="upload"/>
-					</table>
-				</td>
-			</tr>
-		</table>
+		<div id="uploadsContainer">
+			<xsl:apply-templates select="upload"/>
+		</div>
 	</xsl:template>
 
 </xsl:stylesheet>

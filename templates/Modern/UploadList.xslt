@@ -6,39 +6,17 @@
 	<xsl:template name="isRssEnabled">true</xsl:template>
 	<xsl:template name="rssRelativeLink"><xsl:value-of select="/root/currentBaseUrl"/>0-reversed</xsl:template>
 	<xsl:template name="specific">
-		<table width="95%" align="center" cellpadding="1" cellspacing="1" class="tablesurround">
-			<tr>
-				<td>
-					<table cellpadding="0" cellspacing="1" width="100%" class="tableborders">
-						<tr class="tdheader">
-							<td>
-								<table width="100%" cellspacing="1" cellpadding="3" border="0">
-									<tr>
-										<td>
-											<xsl:text>страницы:</xsl:text>
-											<xsl:apply-templates select="uploads/pageOuter" mode="withCurrent"/>
-										</td>
-									</tr>
-								</table>
-							</td>
-						</tr>
-						<xsl:apply-templates select="uploads/upload"/>
-						<tr class="tdheader">
-							<td>
-								<table width="100%" cellspacing="1" cellpadding="3" border="0">
-									<tr>
-										<td>
-											<xsl:text>страницы:</xsl:text>
-											<xsl:apply-templates select="uploads/pageOuter" mode="withCurrent"/>
-										</td>
-									</tr>
-								</table>
-							</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-		</table>
+		<div>
+			<xsl:text>страницы:</xsl:text>
+			<xsl:apply-templates select="uploads/pageOuter" mode="withCurrent"/>
+		</div>
+		<div id="uploadsContainer">
+			<xsl:apply-templates select="uploads/upload"/>
+		</div>
+		<div>
+			<xsl:text>страницы:</xsl:text>
+			<xsl:apply-templates select="uploads/pageOuter" mode="withCurrent"/>
+		</div>
 	</xsl:template>
 
 </xsl:stylesheet>

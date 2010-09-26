@@ -3,6 +3,56 @@
 
 	<xsl:import href="UserInfoBar.xslt"/>
 	<xsl:template match="upload">
+		<div class="uploadcontainer" style="clear:both">
+			<a><xsl:attribute name="name">Upload<xsl:value-of select="id"/></xsl:attribute></a>
+			<div class="userbarcontainer" style="float:left">
+				<xsl:apply-templates select="uploader/user" mode="userInfoBar"/>
+			</div>
+			<div class="linkscontainer" style="float:right;text-align:right;">
+				<xsl:comment>fill</xsl:comment>
+			</div>
+			<div class="uploadcontent">
+				<xsl:variable name="uploadDate"><xsl:apply-templates select="uploadDate/date" mode="dateTime"/></xsl:variable>
+				<a target="_blank" class="separate">
+					<xsl:attribute name="href">/Upload/Info/<xsl:value-of select="id"/>/</xsl:attribute>
+					<xsl:attribute name="title"><xsl:value-of select="$uploadDate"/></xsl:attribute>
+					<img border="0" alt="" style="vertical-align: text-bottom" width="16" height="16">
+						<xsl:attribute name="src">/static/images/woocons/Pictures.png</xsl:attribute>
+					</img>
+				</a>
+				<xsl:text> </xsl:text>
+				<xsl:value-of select="filename"/>
+				<xsl:text>&#160;&#160;</xsl:text>
+				<font style="font-size:0.6em">
+					<xsl:text>(</xsl:text>
+					<xsl:value-of select="$uploadDate"/>
+					<xsl:text>)</xsl:text>
+				</font>
+				<div class="uploadbody">
+					<img style="max-width:800px;max-height:600px;">
+						<xsl:attribute name="src">/Upload/Item/<xsl:value-of select="id"/>/</xsl:attribute>
+					</img>
+					<br/>
+					<br/>
+					<xsl:text>Для вставки ссылки в форум используйте тэг [uploadLink]</xsl:text>
+					<xsl:value-of select="id"/>
+					<xsl:text>[/uploadLink]</xsl:text>
+					<br/>
+					<xsl:text>Для вставки изображения в форум используйте тэг [uploadImage]</xsl:text>
+					<xsl:value-of select="id"/>
+					<xsl:text>[/uploadImage]</xsl:text>
+				</div>
+				<xsl:if test="uploader/user/signature != ''">
+					<div class="signature" style="float:right;">
+						<xsl:value-of select="uploader/user/signature" disable-output-escaping="yes" />
+					</div>
+				</xsl:if>
+			</div>
+			<div style="clear:both;" class="zerosize">
+				<xsl:comment>fill</xsl:comment>
+			</div>
+		</div>
+<!--
 		<tr>
 			<td>
 				<table width="100%" cellspacing="1" cellpadding="3" border="0">
@@ -59,6 +109,7 @@
 				</table>
 			</td>
 		</tr>
+-->
 	</xsl:template>
 
 </xsl:stylesheet>
