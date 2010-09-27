@@ -12,7 +12,7 @@
 			<xsl:apply-templates select="threads/pageOuter" mode="withCurrent"/>
 		</div>
 		<div class="threadscontainer">
-			<xsl:apply-templates select="threads/thread[not(isAnnouncement='true')]"/>
+			<xsl:apply-templates select="threads/thread"/>
 		</div>
 		<div>
 			<xsl:text>страницы:</xsl:text>
