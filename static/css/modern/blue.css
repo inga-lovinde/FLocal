@@ -40,11 +40,17 @@ blockquote {
 .userbar_additional {
 	background-color:#CCD0FF;
 }
-.boardscontainer, .threadscontainer, .postscontainer, .conversationscontainer {
+.postscontainer {
 	background-color:#dbedff;
 }
-.categorycontainer .boardscontainer, .categorycontainer_title {
+.categorycontainer_title {
 	background-color:#99CCFF;
+}
+.categorycontainer .boardscontainer {
+	border:solid 7pt #99ccff;
+}
+.boardscontainer, .threadscontainer, .conversationscontainer {
+	background-color:white;
 }
 
 .boardcontainer, .threadcontainer, .conversationcontainer {
