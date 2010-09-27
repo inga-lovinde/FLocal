@@ -7,7 +7,7 @@
 	</xsl:template>
 	<xsl:template name="isLiteEnabled">true</xsl:template>
 	<xsl:template name="specific">
-		<div id="postscontainer">
+		<div class="postscontainer">
 			<xsl:apply-templates select="posts/post">
 				<xsl:with-param name="isReplyDisabled"><xsl:value-of select="thread/isLocked"/></xsl:with-param>
 			</xsl:apply-templates>

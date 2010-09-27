@@ -10,7 +10,7 @@
 			<xsl:text>страницы:</xsl:text>
 			<xsl:apply-templates select="uploads/pageOuter" mode="withCurrent"/>
 		</div>
-		<div id="uploadscontainer">
+		<div class="uploadscontainer">
 			<xsl:apply-templates select="uploads/upload"/>
 		</div>
 		<div>

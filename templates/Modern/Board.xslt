@@ -18,7 +18,7 @@
 			<xsl:text>страницы:</xsl:text>
 			<xsl:apply-templates select="threads/pageOuter" mode="withCurrent"/>
 		</div>
-		<div id="threadscontainer">
+		<div class="threadscontainer">
 			<xsl:if test="threads/thread[isAnnouncement='true']">
 				<div style="position:relative;z-index:1000">
 					<xsl:apply-templates select="threads/thread[isAnnouncement='true']"/>
