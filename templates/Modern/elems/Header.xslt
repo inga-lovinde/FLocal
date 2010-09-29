@@ -154,7 +154,10 @@
 			<xsl:text>&#160;&#160;&#160;</xsl:text>
 			<xsl:call-template name="headerLink">
 				<xsl:with-param name="url">/My/</xsl:with-param>
-				<xsl:with-param name="text">Личное</xsl:with-param>
+				<xsl:with-param name="text">
+					<xsl:when test="session/sessionKey">Личное</xsl:when>
+					<xsl:otherwise>Вход</xsl:otherwise>
+				</xsl:with-param>
 			</xsl:call-template>
 			<xsl:text>&#160;&#160;&#160;</xsl:text>
 			<xsl:call-template name="headerLink">
