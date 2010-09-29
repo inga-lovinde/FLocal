@@ -125,6 +125,9 @@ blockquote {
 	border:solid 2px;
 	font-size:0.8em;
 }
+blockquote blockquote {
+	font-size:1em;
+}
 blockquote hr {
 	display:block;
 	visibility:hidden;
