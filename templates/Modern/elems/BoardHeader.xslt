@@ -17,6 +17,9 @@
 			<xsl:call-template name="headerLink">
 				<xsl:with-param name="url"><xsl:value-of select="$baseLink"/>NewThread/</xsl:with-param>
 				<xsl:with-param name="text">Новая (?)</xsl:with-param>
+				<xsl:with-param name="isDisabled">
+					<xsl:if test="not(session/sessionKey)">true</xsl:if>
+				</xsl:with-param>
 			</xsl:call-template>
 			<xsl:if test="currentLocation//thread">
 				<xsl:text>&#160;&#160;&#160;</xsl:text>
