@@ -8,6 +8,11 @@ A:hover{color:black;text-decoration:none}
 a.current { border:solid 1px black;color:black; }
 a.current:hover { color:black; }
 
+a[pseudolink], a.pseudolink {
+	border-bottom:dashed 1px #404040;
+	margin-bottom:1px;
+}
+
 body {
 	color:black;
 	background-color:#1E90FF;

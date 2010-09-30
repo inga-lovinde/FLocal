@@ -6,6 +6,11 @@ A:visited{text-decoration:none;color:#666666}
 A:active{text-decoration:none;color:#999999}
 A:hover{COLOR:white;text-decoration:none}
 
+a[pseudolink], a.pseudolink {
+	border-bottom:dashed 1px #aaaaaa;
+	margin-bottom:1px;
+}
+
 BODY{color:#ffffff;background-color:black}
 
 .formboxes{color:#eeeeee;BACKGROUND-COLOR:black;}

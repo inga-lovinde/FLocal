@@ -57,8 +57,8 @@
 				</xsl:attribute>
 				<xsl:attribute name="onmouseover">showChildren(this);</xsl:attribute>
 				<xsl:attribute name="onmouseout">hideChildren(this);</xsl:attribute>
-				<div default="default" style="z-index:1;">
-					<a class="pseudolink" style="color:black;">?</a>
+				<div default="default" style="z-index:1;" class="pseudolink">
+					<a style="color:black;">?</a>
 				</div>
 				<div class="conversationcontainer_additionalcontainer" style="display:none;">
 					<div class="conversationcontainer_additional" style="right:-5pt;">
