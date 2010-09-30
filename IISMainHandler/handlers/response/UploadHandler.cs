@@ -19,6 +19,11 @@ namespace FLocal.IISHandler.handlers.response {
 		}
 
 		protected override string getRedirectUrl(WebContext context) {
+			Uri referer = context.httprequest.UrlReferrer;
+			if(referer == null || referer.Host != context.httprequest.Url.Host) {
+				throw new AccessViolationException();
+			}
+
 			return Config.instance.UploaderUrl + "Data/" + this.url.upload.hash + "." + this.url.upload.extension;
 		}
 
