@@ -58,7 +58,7 @@ namespace FLocal.IISHandler.handlers.request {
 				}
 
 				if(this.shouldBeGuest && context.session != null) throw new FLocalException("Should be guest");
-				if(this.shouldBeLoggedIn && context.session == null) throw new FLocalException("Should be anonymous");
+				if(this.shouldBeLoggedIn && context.session == null) throw new FLocalException("Should be logged in");
 				context.WriteTransformResult(this.templateName, this.getData(context));
 			} catch(RedirectException) {
 				throw;
