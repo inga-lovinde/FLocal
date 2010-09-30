@@ -7,8 +7,8 @@ function simpleMachicharaUpdater(element) {
 
 function simpleMachicharaUpdate(element) {
 	clearTimeout(element.interval);
-	element.style.top = Math.floor(Math.random()*90) + "%";
-	element.style.left = Math.floor(Math.random()*90) + "%";
+	element.style.top = 5 + Math.floor(Math.random()*80) + "%";
+	element.style.left = 5 + Math.floor(Math.random()*80) + "%";
 	element.interval = window.setTimeout(simpleMachicharaUpdater(element), 5000+Math.floor(Math.random()*25000));
 }
 
