@@ -1,4 +1,4 @@
-function x() {
+﻿function x() {
 	return;
 }
 var cancelEnter = false;
@@ -156,12 +156,12 @@ function DoPrompt(action) {
 		insertAtCaret(document.replier.Body, ' ' + "[i]" + thisItal + "[/i]" + ' ');
 		document.replier.Body.focus();
 		return;
-	} else if(action == "image") {
-		var thisImage = prompt("Введите полный URL картинки, которую вы хотите вставить в сообщение.", "http://");
+	} else if(action == "furl") {
+		var thisImage = prompt("Введите полный URL адреса на старом форуме.", "http://");
 		if(thisImage == null) {
 			return;
 		}
-		insertAtCaret(document.replier.Body, ' ' + "[image]" + thisImage + "[/image]" + ' ' );
+		insertAtCaret(document.replier.Body, ' ' + "[furl]" + thisImage + "[/furl]" + ' ' );
 		document.replier.Body.focus();
 		return;
 	} else if(action == "quote") {

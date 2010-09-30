@@ -118,7 +118,7 @@ function insertInBody(str) {
 								<a pseudolink="pseudolink" onclick="DoPrompt('code');">Код</a>
 							</td>
 							<td class="darktable">
-								<a pseudolink="pseudolink" onclick="DoPrompt('image');">Картинка</a>
+								<a pseudolink="pseudolink" onclick="DoPrompt('furl');">Старый URL</a>
 							</td>
 						</tr>
 						<tr>
