@@ -4,7 +4,8 @@ a { text-decoration:none;color:#aaaaaa}
 A:link, a[pseudolink], a.pseudolink {text-decoration:none;color:#aaaaaa}
 A:visited{text-decoration:none;color:#666666}
 A:active{text-decoration:none;color:#999999}
-A:hover{COLOR:white;text-decoration:none}
+A:hover{COLOR:white;text-decoration:none;background-color:#404040; }
+A:hover * { background-color:inherit; }
 
 a[pseudolink], a.pseudolink {
 	border-bottom:dashed 1px #aaaaaa;
@@ -62,9 +63,11 @@ blockquote {
 }
 .header a:hover {
 	color:white;
+	background-color:transparent;
 }
 .header a.disabled, .header a.disabled:hover {
 	color:#404040;
+	background-color:transparent;
 }
 .UG_Moderators {
 	color:#1f1fff !important;
