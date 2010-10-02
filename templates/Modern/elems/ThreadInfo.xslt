@@ -74,7 +74,7 @@
 							<xsl:otherwise><xsl:value-of select="$rawHotness"/></xsl:otherwise>
 						</xsl:choose>
 					</xsl:variable>
-					<xsl:text>position:absolute;text-align:right;right:0px;bottom:0px;padding:2pt 5pt 0pt 5pt;</xsl:text>
+					<xsl:text>position:absolute;text-align:right;right:0px;bottom:0px;padding:3pt;</xsl:text>
 					<xsl:text>background-color:rgb(</xsl:text>
 					<xsl:value-of select="round($hotness*21.25)"/>
 					<xsl:text>,0,</xsl:text>
@@ -84,7 +84,7 @@
 				<xsl:attribute name="onmouseover">showChildren(this);</xsl:attribute>
 				<xsl:attribute name="onmouseout">hideChildren(this);</xsl:attribute>
 				<div class="pseudolink" default="default" style="z-index:1;">
-					<a style="color:black;">?</a>
+					<img src="/static/images/woocons/ButtonWhiteInfo.png" width="16" height="16" alt="info" border="0" style="vertical-align: text-bottom;" />
 				</div>
 				<div class="threadcontainer_additionalcontainer" style="display:none;">
 					<div class="threadcontainer_additional" style="right:-5pt;">
