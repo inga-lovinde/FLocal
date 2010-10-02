@@ -48,7 +48,11 @@ pre
 	display:none;
 }
 [spoiler] [opener] {
-	cursor:hand;
+	padding-right:17px;
+	background-image:url(/static/images/woocons/ArrowDown-small.png);
+	background-repeat:no-repeat;
+	background-position:right center;
+	cursor:pointer;
 }
 .warning {
 	background-color:red;
