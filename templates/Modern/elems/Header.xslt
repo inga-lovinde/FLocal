@@ -53,7 +53,8 @@
 			</xsl:variable>
 			<xsl:variable name="prefix">
 				<xsl:text>https://</xsl:text>
-				<xsl:value-of select="url/host"/>
+				<!--xsl:value-of select="url/host"/-->
+				<xsl:text>full.forum.hn</xsl:text>
 				<xsl:text>:</xsl:text>
 				<xsl:if test="url/port &gt;= 1000">
 					<xsl:value-of select="floor(url/port div 1000)"/>
