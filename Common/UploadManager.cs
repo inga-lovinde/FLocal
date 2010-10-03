@@ -129,5 +129,25 @@ namespace FLocal.Common {
 			return upload;
 		}
 
+		public static void WriteUpload(Upload upload, Stream output) {
+			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Config.instance.UploaderUrl + "Data/" + upload.hash + "." + upload.extension);
+			request.Method = "GET";
+			HttpWebResponse response = null;
+			try {
+				try {
+					response = (HttpWebResponse)request.GetResponse();
+				} catch(WebException e) {
+					response = (HttpWebResponse)e.Response;
+				}
+				using(Stream responseStream = response.GetResponseStream()) {
+					responseStream.WriteTo(output);
+				}
+			} finally {
+				if(response != null) {
+					response.Close();
+				}
+			}
+		}
+
 	}
 }

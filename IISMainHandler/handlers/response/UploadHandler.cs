@@ -24,7 +24,22 @@ namespace FLocal.IISHandler.handlers.response {
 				throw new AccessViolationException();
 			}
 
-			return Config.instance.UploaderUrl + "Data/" + this.url.upload.hash + "." + this.url.upload.extension;
+			string mime = Util.getMimeByExtension(this.url.upload.extension);
+			if(mime != null) {
+				context.httpresponse.ContentType = mime;
+			} else {
+				//throw new HttpException(403, "wrong file type");
+				throw new WrongUrlException();
+			}
+			context.httpresponse.AddHeader("content-disposition", "attachment; filename=" + this.url.upload.filename);
+
+			context.httpresponse.Cache.SetExpires(DateTime.Now.AddDays(10));
+			context.httpresponse.Cache.SetLastModified(this.url.upload.uploadDate);
+			context.httpresponse.Cache.SetCacheability(System.Web.HttpCacheability.Public);
+
+			UploadManager.WriteUpload(this.url.upload, context.httpresponse.OutputStream);
+
+			throw new response.SkipXsltTransformException();
 		}
 
 	}

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 
 namespace FLocal.Core {
 	
@@ -245,6 +246,19 @@ namespace FLocal.Core {
 
 		public static IEnumerable<T> Union<T>(this IEnumerable<T> enumerable, params T[] second) {
 			return enumerable.Union((IEnumerable<T>)second);
+		}
+
+		/// <summary>
+		/// Code taken from http://msdn.microsoft.com/en-us/library/system.io.stream.write.aspx
+		/// </summary>
+		/// <param name="input"></param>
+		/// <param name="output"></param>
+		public static void WriteTo(this Stream input, Stream output) {
+			const int size = 4096;
+			byte[] bytes = new byte[4096];
+			int numBytes;
+			while((numBytes = input.Read(bytes, 0, size)) > 0)
+				output.Write(bytes, 0, numBytes);
 		}
 
     }
