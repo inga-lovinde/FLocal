@@ -124,7 +124,6 @@ namespace FLocal.IISHandler {
 				try {
 					var session = Session.LoadByKey(sessionCookie.Value);
 					var tmp = session.account;
-					sessionCookie.Expires = DateTime.Now.AddDays(3);
 					string lastUrl = null;
 					if(this.httprequest.RequestType == "GET") {
 						if(this.design.IsHuman) {
@@ -132,7 +131,10 @@ namespace FLocal.IISHandler {
 						}
 					}
 					session.updateLastActivity(lastUrl);
-					this.httpresponse.AppendCookie(sessionCookie);
+					HttpCookie newCookie = this.createCookie("session");
+					newCookie.Value = session.sessionKey;
+					newCookie.Expires = DateTime.Now.AddDays(3);
+					this.httpresponse.AppendCookie(newCookie);
 					this.session = session;
 				} catch(NotFoundInDBException) {
 					sessionCookie.Value = "";
@@ -164,12 +166,16 @@ namespace FLocal.IISHandler {
 			}
 		}
 
+		private void AddCommonData(HttpCookie cookie) {
+			cookie.HttpOnly = true;
+			cookie.Secure = true;
+			cookie.Domain = "." + String.Join(".", this.httprequest.Url.Host.Split(".", StringSplitOptions.RemoveEmptyEntries).Slice(1).ToArray());
+			cookie.Path = "/";
+		}
+
 		public HttpCookie createCookie(string name) {
 			HttpCookie result = new HttpCookie(name);
-			result.HttpOnly = true;
-			result.Secure = true;
-			result.Domain = "." + String.Join(".", this.httprequest.Url.Host.Split(".", StringSplitOptions.RemoveEmptyEntries).Slice(1).ToArray());
-			result.Path = "/";
+			this.AddCommonData(result);
 			return result;
 		}
 
