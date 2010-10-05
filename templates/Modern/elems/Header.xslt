@@ -157,7 +157,7 @@
 				<xsl:with-param name="url">/My/</xsl:with-param>
 				<xsl:with-param name="text">
 					<xsl:choose>
-					<xsl:when test="session/sessionKey">Ћичное</xsl:when>
+					<xsl:when test="session/sessionKey"><xsl:value-of select="session/user/name"/></xsl:when>
 					<xsl:otherwise>¬ход</xsl:otherwise>
 					</xsl:choose>
 				</xsl:with-param>
