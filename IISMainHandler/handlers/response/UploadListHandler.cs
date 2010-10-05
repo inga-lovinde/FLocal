@@ -19,7 +19,7 @@ namespace FLocal.IISHandler.handlers.response {
 		}
 
 		protected override IEnumerable<XElement> getSpecificData(WebContext context) {
-			if(context.session == null) throw new AccessViolationException();
+			if(context.session == null) throw new AccessDeniedException();
 			PageOuter pageOuter = PageOuter.createFromUrl(this.url, context.userSettings.uploadsPerPage);
 			List<Upload> uploads = Upload.LoadByIds(
 				from stringId in Config.instance.mainConnection.LoadIdsByConditions(

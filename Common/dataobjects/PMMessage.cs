@@ -151,7 +151,7 @@ namespace FLocal.Common.dataobjects {
 
 		public XElement exportToXml(UserContext context, params XElement[] additional) {
 			if((context.account == null) || (context.account.id != this.owner.id)) {
-				throw new AccessViolationException();
+				throw new AccessDeniedException();
 			}
 
 			XElement result = new XElement("message",
@@ -176,7 +176,7 @@ namespace FLocal.Common.dataobjects {
 
 		private readonly object MarkAsRead_locker = new object();
 		public void MarkAsRead(Account account) {
-			if(account.id != this.owner.id) throw new AccessViolationException();
+			if(account.id != this.owner.id) throw new AccessDeniedException();
 			if(!this.isRead) {
 				lock(MarkAsRead_locker) {
 					//so we can safely decrease ReadPrivateMessages counter

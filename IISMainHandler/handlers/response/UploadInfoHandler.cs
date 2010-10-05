@@ -20,7 +20,7 @@ namespace FLocal.IISHandler.handlers.response {
 
 		protected override IEnumerable<XElement> getSpecificData(WebContext context) {
 			if(context.session == null) {
-				throw new AccessViolationException();
+				throw new AccessDeniedException();
 			}
 			return new XElement[] {
 				this.url.upload.exportToXml(context),

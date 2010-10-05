@@ -70,6 +70,7 @@
     <Compile Include="DB\Transaction.cs" />
     <Compile Include="delegates\Lazy.cs" />
     <Compile Include="delegates\Predicate.cs" />
+    <Compile Include="exceptions\AccessDeniedException.cs" />
     <Compile Include="exceptions\CriticalException.cs" />
     <Compile Include="exceptions\FLocalException.cs" />
     <Compile Include="exceptions\NotFoundInDBException.cs" />

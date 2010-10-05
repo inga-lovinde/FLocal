@@ -113,7 +113,7 @@ namespace FLocal.Common.dataobjects {
 		}
 
 		public XElement exportToXml(UserContext context, bool includeFirstPost, params XElement[] additional) {
-			if((context.account == null) || (context.account.id != this.owner.id)) throw new AccessViolationException();
+			if((context.account == null) || (context.account.id != this.owner.id)) throw new AccessDeniedException();
 			XElement result = new XElement("conversation",
 				new XElement("id", this.id),
 				new XElement("owner", this.owner.exportToXml(context)),
@@ -186,7 +186,7 @@ namespace FLocal.Common.dataobjects {
 		}
 
 		public void markAsRead(Account account, PMMessage minMessage, PMMessage maxMessage) {
-			if(this.ownerId != account.id) throw new AccessViolationException();
+			if(this.ownerId != account.id) throw new AccessDeniedException();
 			ChangeSetUtil.ApplyChanges(new AbstractChange[] {
 				new UpdateChange(
 					TableSpec.instance,

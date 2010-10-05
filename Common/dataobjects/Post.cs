@@ -299,7 +299,7 @@ namespace FLocal.Common.dataobjects {
 		private readonly object Edit_locker = new object(); //TODO: move locking to DB
 		public void Edit(User user, string newTitle, string newBody, PostLayer newDesiredLayer) {
 			if(this.poster.id != user.id) {
-				throw new AccessViolationException();
+				throw new AccessDeniedException();
 			}
 			PostLayer actualLayer = poster.getActualLayer(this.thread.board, newDesiredLayer);
 			if(actualLayer.id < this.layer.id) {
