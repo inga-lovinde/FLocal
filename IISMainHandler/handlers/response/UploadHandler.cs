@@ -21,7 +21,8 @@ namespace FLocal.IISHandler.handlers.response {
 		protected override string getRedirectUrl(WebContext context) {
 			Uri referer = context.httprequest.UrlReferrer;
 			if(referer == null || referer.Host != context.httprequest.Url.Host) {
-				throw new AccessDeniedException();
+				//throw new AccessDeniedException();
+				return new Common.URL.upload.Info(this.url.upload.id.ToString(), null).canonical;
 			}
 
 			string mime = Util.getMimeByExtension(this.url.upload.extension);
