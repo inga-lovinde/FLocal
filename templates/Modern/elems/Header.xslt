@@ -56,20 +56,22 @@
 				<xsl:text>:</xsl:text>
 				<xsl:value-of select="url/port"/>
 			</xsl:variable>
-			<a>
-				<xsl:if test="$isClassicEnabled='true'">
-					<xsl:attribute name="href">
-						<xsl:text>https://classic</xsl:text>
-						<xsl:value-of select="$postfix"/>
-						<xsl:value-of select="currentUrl"/>
-					</xsl:attribute>
-				</xsl:if>
-				<img border="0" alt="Switch to classic mode">
-					<xsl:attribute name="src">
-						<xsl:text>/static/images/classic.jpg</xsl:text>
-					</xsl:attribute>
-				</img>
-			</a>
+			<xsl:if test="not(starts-with(url/host, 'public.'))">
+				<a>
+					<xsl:if test="$isClassicEnabled='true'">
+						<xsl:attribute name="href">
+							<xsl:text>https://classic</xsl:text>
+							<xsl:value-of select="$postfix"/>
+							<xsl:value-of select="currentUrl"/>
+						</xsl:attribute>
+					</xsl:if>
+					<img border="0" alt="Switch to classic mode">
+						<xsl:attribute name="src">
+							<xsl:text>/static/images/classic.jpg</xsl:text>
+						</xsl:attribute>
+					</img>
+				</a>
+			</xsl:if>
 			<xsl:text>&#160;&#160;</xsl:text>
 			<a>
 				<xsl:if test="$isLiteEnabled='true'">
