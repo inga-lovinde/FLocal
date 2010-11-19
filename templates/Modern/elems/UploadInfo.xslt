@@ -3,6 +3,7 @@
 
 	<xsl:import href="UserInfoBar.xslt"/>
 	<xsl:template match="upload">
+		<xsl:param name="dimensionsLimit">max-width:800px;max-height:600px;</xsl:param>
 		<div class="uploadcontainer" style="clear:both">
 			<a><xsl:attribute name="name">Upload<xsl:value-of select="id"/></xsl:attribute></a>
 			<div class="userbarcontainer" style="float:left">
@@ -29,7 +30,8 @@
 					<xsl:text>)</xsl:text>
 				</font>
 				<div class="uploadbody">
-					<img style="max-width:800px;max-height:600px;">
+					<img>
+						<xsl:attribute name="style"><xsl:value-of select="$dimensionsLimit"/></xsl:attribute>
 						<xsl:attribute name="src">/Upload/Item/<xsl:value-of select="id"/>/</xsl:attribute>
 					</img>
 					<br/>

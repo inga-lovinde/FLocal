@@ -5,7 +5,9 @@
 	<xsl:template name="specificTitle">Àןכמאה</xsl:template>
 	<xsl:template name="specific">
 		<div class="uploadscontainer">
-			<xsl:apply-templates select="upload"/>
+			<xsl:apply-templates select="upload">
+				<xsl:with-param name="dimensionsLimit"/>
+			</xsl:apply-templates>
 		</div>
 	</xsl:template>
 
