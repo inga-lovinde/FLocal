@@ -3,19 +3,21 @@
 	<xsl:import href="elems\Main.xslt"/>
 	<xsl:import href="elems\PostInfo.xslt"/>
 	<xsl:template name="specificTitle">
-		<xsl:text>Все сообщения</xsl:text>
+		<xsl:call-template name="Messages_AllPosts"/>
 	</xsl:template>
 	<xsl:template name="isRssEnabled">true</xsl:template>
 	<xsl:template name="specific">
 		<div>
-			<xsl:text>страницы:</xsl:text>
+			<xsl:call-template name="Messages_PageOuterTitle"/>
+			<xsl:text>:</xsl:text>
 			<xsl:apply-templates select="posts/pageOuter" mode="withCurrent"/>
 		</div>
 		<div class="postscontainer">
 			<xsl:apply-templates select="posts/post"/>
 		</div>
 		<div>
-			<xsl:text>страницы:</xsl:text>
+			<xsl:call-template name="Messages_PageOuterTitle"/>
+			<xsl:text>:</xsl:text>
 			<xsl:apply-templates select="posts/pageOuter" mode="withCurrent"/>
 		</div>
 	</xsl:template>

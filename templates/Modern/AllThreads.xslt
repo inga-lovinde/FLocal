@@ -3,19 +3,21 @@
 	<xsl:import href="elems\Main.xslt"/>
 	<xsl:import href="elems\ThreadInfo.xslt"/>
 	<xsl:template name="specificTitle">
-		<xsl:text>Все темы</xsl:text>
+		<xsl:call-template name="Messages_AllThreads"/>
 	</xsl:template>
 	<xsl:template name="isRssEnabled">true</xsl:template>
 	<xsl:template name="specific">
 		<div>
-			<xsl:text>страницы:</xsl:text>
+			<xsl:call-template name="Messages_PageOuterTitle"/>
+			<xsl:text>:</xsl:text>
 			<xsl:apply-templates select="threads/pageOuter" mode="withCurrent"/>
 		</div>
 		<div class="threadscontainer">
 			<xsl:apply-templates select="threads/thread"/>
 		</div>
 		<div>
-			<xsl:text>страницы:</xsl:text>
+			<xsl:call-template name="Messages_PageOuterTitle"/>
+			<xsl:text>:</xsl:text>
 			<xsl:apply-templates select="threads/pageOuter" mode="withCurrent"/>
 		</div>
 	</xsl:template>
