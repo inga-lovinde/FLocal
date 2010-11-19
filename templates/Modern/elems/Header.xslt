@@ -51,20 +51,16 @@
 			<xsl:variable name="rssRelativeLink">
 				<xsl:call-template name="rssRelativeLink"/>
 			</xsl:variable>
-			<xsl:variable name="prefix">
-				<xsl:text>https://</xsl:text>
-				<!--xsl:value-of select="url/host"/-->
-				<xsl:text>full.forum.hn</xsl:text>
+			<xsl:variable name="postfix">
+				<xsl:text>.forum.hn</xsl:text>
 				<xsl:text>:</xsl:text>
-				<xsl:if test="url/port &gt;= 1000">
-					<xsl:value-of select="floor(url/port div 1000)"/>
-				</xsl:if>
+				<xsl:value-of select="url/port"/>
 			</xsl:variable>
 			<a>
 				<xsl:if test="$isClassicEnabled='true'">
 					<xsl:attribute name="href">
-						<xsl:value-of select="$prefix"/>
-						<xsl:text>451</xsl:text>
+						<xsl:text>https://classic</xsl:text>
+						<xsl:value-of select="$postfix"/>
 						<xsl:value-of select="currentUrl"/>
 					</xsl:attribute>
 				</xsl:if>
@@ -78,8 +74,8 @@
 			<a>
 				<xsl:if test="$isLiteEnabled='true'">
 					<xsl:attribute name="href">
-						<xsl:value-of select="$prefix"/>
-						<xsl:text>447</xsl:text>
+						<xsl:text>https://lite</xsl:text>
+						<xsl:value-of select="$postfix"/>
 						<xsl:value-of select="currentUrl"/>
 					</xsl:attribute>
 				</xsl:if>
@@ -97,8 +93,8 @@
 			<a>
 				<xsl:if test="$isRssEnabled='true'">
 					<xsl:attribute name="href">
-						<xsl:value-of select="$prefix"/>
-						<xsl:text>449</xsl:text>
+						<xsl:text>https://rss</xsl:text>
+						<xsl:value-of select="$postfix"/>
 						<xsl:value-of select="$rssRelativeLink"/>
 					</xsl:attribute>
 				</xsl:if>
@@ -115,8 +111,8 @@
 			<xsl:if test="$isRssEnabled='true'">
 				<link rel="alternate" type="application/rss+xml" title="RSS">
 					<xsl:attribute name="href">
-						<xsl:value-of select="$prefix"/>
-						<xsl:text>449</xsl:text>
+						<xsl:text>https://rss</xsl:text>
+						<xsl:value-of select="$postfix"/>
 						<xsl:value-of select="$rssRelativeLink"/>
 					</xsl:attribute>
 				</link>

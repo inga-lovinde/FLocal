@@ -96,28 +96,39 @@ namespace FLocal.IISHandler {
 			return this.userSettings.isPostVisible(post);
 		}
 
+		private designs.IDesign detectDesign() {
+			switch(this.httprequest.Url.Port % 1000) {
+				case 445:
+					return new designs.Raw();
+				case 447:
+					return new designs.Lite();
+				case 449:
+					return new designs.Rss();
+				case 451:
+					return new designs.Classic();
+				case 443:
+				default:
+					string[] parts = this.httprequest.Url.Host.Split('.');
+					switch(parts[0].ToLower()) {
+						case "raw":
+							return new designs.Raw();
+						case "lite":
+							return new designs.Lite();
+						case "rss":
+							return new designs.Rss();
+						case "classic":
+							return new designs.Classic();
+						case "modern":
+						default:
+							return new designs.Modern();
+					}
+			}
+		}
+
 		public WebContext(HttpContext httpcontext) {
 			this.httpcontext = httpcontext;
 			this.requestTime = DateTime.Now;
-
-			switch(this.httprequest.Url.Port % 1000) {
-				case 445:
-					this.design = new designs.Raw();
-					break;
-				case 447:
-					this.design = new designs.Lite();
-					break;
-				case 449:
-					this.design = new designs.Rss();
-					break;
-				case 451:
-					this.design = new designs.Classic();
-					break;
-				case 443:
-				default:
-					this.design = new designs.Modern();
-					break;
-			}
+			this.design = this.detectDesign();
 
 			HttpCookie sessionCookie = this.httprequest.Cookies["session"];
 			if(sessionCookie != null && sessionCookie.Value != null && sessionCookie.Value != "") {
