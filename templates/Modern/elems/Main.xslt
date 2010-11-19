@@ -304,24 +304,9 @@
 			</xsl:attribute>
 			<xsl:attribute name="href">/Users/User/<xsl:value-of select="id"/>/Info/</xsl:attribute>
 			<xsl:value-of select="name"/>
-			<xsl:choose>
-				<xsl:when test="isAdministrator='true'">
-					<img src="/static/images/adm.gif" alt="Administrator" border="0"/>
-				</xsl:when>
-				<xsl:when test="isModerator='true'">
-					<img src="/static/images/mod.gif" alt="Moderator" border="0"/>
-				</xsl:when>
-			</xsl:choose>
-		</a>
-	</xsl:template>
-
-	<xsl:template match="user" mode="userNick">
-		<a nobr="nobr">
-			<xsl:attribute name="class">
-				<xsl:text>separate </xsl:text>
-				<xsl:text>UG_</xsl:text><xsl:value-of select="group/name"/>
-			</xsl:attribute>
-			<xsl:value-of select="name"/>
+			<xsl:if test="group/name='Judges'">
+				<img src="/static/images/judge.gif" alt="Judge" border="0"/>
+			</xsl:if>
 			<xsl:choose>
 				<xsl:when test="isAdministrator='true'">
 					<img src="/static/images/adm.gif" alt="Administrator" border="0"/>

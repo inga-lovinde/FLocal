@@ -11,6 +11,7 @@ namespace FLocal.Common.dataobjects {
 	public class UserGroup : SqlObject<UserGroup> {
 
 		public const string NAME_MODERATORS = "Moderators";
+		public const string NAME_JUDGES = "Judges";
 		public const string NAME_ADMINISTRATORS = "Administrators";
 
 		public class TableSpec : ISqlObjectTableSpec {

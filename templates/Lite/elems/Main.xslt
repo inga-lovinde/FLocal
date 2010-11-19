@@ -234,6 +234,9 @@
 			<xsl:attribute name="href">/Users/User/<xsl:value-of select="id"/>/Info/</xsl:attribute>
 			<xsl:value-of select="name"/>
 		</a>
+		<xsl:if test="group/name='Judges'">
+			<xsl:text>^J</xsl:text>
+		</xsl:if>
 		<xsl:choose>
 			<xsl:when test="isAdministrator='true'">
 				<xsl:text>^A</xsl:text>

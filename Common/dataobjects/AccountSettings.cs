@@ -118,9 +118,9 @@ namespace FLocal.Common.dataobjects {
 		}
 
 		public bool isPostVisible(Post post) {
-			if(post.poster.showPostsToUsers == User.ENUM_SHOWPOSTSTOUSERS_NONE) return false;
-			if(post.poster.showPostsToUsers == User.ENUM_SHOWPOSTSTOUSERS_PRIVELEGED) return false;
 			if(post.layer.name == PostLayer.NAME_HIDDEN) return false;
+			if(post.poster.showPostsToUsers == User.ENUM_SHOWPOSTSTOUSERS_NONE) return false;
+			if(post.poster.showPostsToUsers == User.ENUM_SHOWPOSTSTOUSERS_PRIVELEGED) return this.account.user.userGroup.name == UserGroup.NAME_JUDGES || this.account.user.userGroup.name == UserGroup.NAME_ADMINISTRATORS;
 			return true;
 		}
 		

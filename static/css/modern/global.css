@@ -99,6 +99,10 @@ pre
 .UG_Administrators {
 	color:black !important;
 }
+.UG_Judges {
+	color:black !important;
+	background-color:white !important;
+}
 p {
 	margin:0em;
 }

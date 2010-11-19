@@ -78,7 +78,7 @@ namespace FLocal.Common.dataobjects {
 			//slight optimisation...
 			if(board.administratorId == account.id) return true;
 			UserGroup group = account.user.userGroup;
-			if(group.name != UserGroup.NAME_ADMINISTRATORS && group.name != UserGroup.NAME_MODERATORS) return false;
+			if(group.name != UserGroup.NAME_ADMINISTRATORS && group.name != UserGroup.NAME_MODERATORS && group.name != UserGroup.NAME_JUDGES) return false;
 
 			if(!isModerator_cache.ContainsKey(account.id) || !isModerator_cache[account.id].ContainsKey(board.id)) {
 				lock(isModerator_cache) {
