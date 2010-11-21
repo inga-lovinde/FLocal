@@ -27,7 +27,8 @@
 							<td class="lighttable">
 								<form method="post" action="/do/Avatars/SetAsDefault">
 									<input type="hidden" name="uploadId" value=""/>
-									<input type="submit" class="buttons" value="Отключить аватарку">
+									<input type="submit" class="buttons">
+										<xsl:attribute name="value"><xsl:call-template name="Messages_DisableAvatar"/></xsl:attribute>
 										<xsl:if test="not(/root/currentAvatar)">
 											<xsl:attribute name="disabled">disabled</xsl:attribute>
 										</xsl:if>
@@ -46,19 +47,21 @@
 					<table cellpadding="3" cellspacing="1" width="100%" class="tableborders">
 						<tr>
 							<td class="tdheader">
-								<xsl:text>Выберите аватарку для загрузки</xsl:text>
+								<xsl:call-template name="Messages_UploadNewAvatar"/>
 							</td>
 						</tr>
 						<tr class="darktable">
 							<td>
-								<xsl:text>Максимальный размер файла &#8211; 80КБ, допустимые разрешения: gif, jpg, png, svg, jpe, jpeg, jfif, jif</xsl:text>
+								<xsl:call-template name="Messages_MaxAvatarSize"/>
 							</td> 
 						</tr> 
 						<tr> 
 							<td class="lighttable"> 
 								<form method="post" action="/do/Avatars/Add" enctype="multipart/form-data">
 									<input type="file" name="file" class="formboxes" /><br/>
-									<input type="submit" name="buttlogin" value="Отправить!" class="buttons" /> 
+									<input type="submit" name="buttlogin" class="buttons"> 
+										<xsl:attribute name="value"><xsl:call-template name="Messages_UploadButton"/></xsl:attribute>
+									</input>
 								</form> 
 							</td> 
 						</tr>
@@ -73,14 +76,16 @@
 					<table cellpadding="3" cellspacing="1" width="100%" class="tableborders">
 						<tr class="tdheader"> 
 							<td> 
-								<xsl:text>Или укажите номер файла в аплоаде</xsl:text>
+								<xsl:call-template name="Messages_NewAvatarFromUpload"/>
 							</td> 
 						</tr> 
 						<tr> 
 							<td class="lighttable"> 
 								<form method="post" action="/do/Avatars/Add">
 									<input type="text" name="uploadId"/><br/>
-									<input type="submit" name="buttlogin" value="Отправить!" class="buttons" /> 
+									<input type="submit" name="buttlogin" class="buttons">
+										<xsl:attribute name="value"><xsl:call-template name="Messages_SubmitButton"/></xsl:attribute>
+									</input>
 								</form> 
 							</td> 
 						</tr> 
@@ -103,7 +108,8 @@
 						<input type="hidden" name="uploadId">
 							<xsl:attribute name="value"><xsl:value-of select="id"/></xsl:attribute>
 						</input>
-						<input type="submit" class="buttons" value="Сделать стандартной">
+						<input type="submit" class="buttons">
+							<xsl:attribute name="value"><xsl:call-template name="Messages_SetAvatarAsDefault"/></xsl:attribute>
 							<xsl:if test="/root/currentAvatar/upload/id = id">
 								<xsl:attribute name="disabled">disabled</xsl:attribute>
 							</xsl:if>
@@ -113,7 +119,8 @@
 						<input type="hidden" name="uploadId">
 							<xsl:attribute name="value"><xsl:value-of select="id"/></xsl:attribute>
 						</input>
-						<input type="submit" class="buttons" value="Удалить">
+						<input type="submit" class="buttons">
+							<xsl:attribute name="value"><xsl:call-template name="Messages_Remove"/></xsl:attribute>
 							<xsl:if test="/root/currentAvatar/upload/id = id">
 								<xsl:attribute name="disabled">disabled</xsl:attribute>
 							</xsl:if>

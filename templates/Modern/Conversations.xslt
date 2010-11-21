@@ -7,14 +7,16 @@
 	<xsl:template name="isRssEnabled">true</xsl:template>
 	<xsl:template name="specific">
 		<div>
-			<xsl:text>страницы:</xsl:text>
+			<xsl:call-template name="Messages_PageOuter"/>
+			<xsl:text>:</xsl:text>
 			<xsl:apply-templates select="conversations/pageOuter" mode="withCurrent"/>
 		</div>
 		<div class="conversationscontainer">
 			<xsl:apply-templates select="conversations/conversation"/>
 		</div>
 		<div>
-			<xsl:text>страницы:</xsl:text>
+			<xsl:call-template name="Messages_PageOuter"/>
+			<xsl:text>:</xsl:text>
 			<xsl:apply-templates select="conversations/pageOuter" mode="withCurrent"/>
 		</div>
 	</xsl:template>

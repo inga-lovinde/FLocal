@@ -8,86 +8,62 @@
 		<div class="categoriescontainer">
 			<xsl:apply-templates select="categories/category"/>
 		</div>
-				<br />
-				<table width="95%" align="center" class="tablesurround" cellpadding="1" cellspacing="1">
-					<tr>
-						<td>
-							<table width="100%" class="tableborders" cellpadding="3" cellspacing="1">
-								<tr>
-									<td colspan="3" class="tdheader">
-										<b>Дополнительная информация</b>
-									</td>
-								</tr>
-								<tr class="lighttable">
-									<td width="45%" class="small" valign="top">
-										<xsl:choose>
-											<xsl:when test="session/user">
-												<xsl:text>Вы вошли в форум как </xsl:text>
-												<xsl:apply-templates select="session/user" mode="userLink"/>
-											</xsl:when>
-											<xsl:otherwise>
-												<xsl:text>Вы не вошли в форум</xsl:text>
-											</xsl:otherwise>
-										</xsl:choose>
-										<br />
-										<xsl:value-of select="totalRegistered"/>
-										<xsl:text> Зарегистрированных пользователей.</xsl:text>
-										<br />
-										<!--xsl:text>Приветствуем нового пользователя, </xsl:text>
-										<a href="/showprofile.php?User=_PC&amp;What=ubbthreads">_PC</a>
-										<br /-->
-										<xsl:text>За последние </xsl:text>
-										<xsl:value-of select="activity/threshold"/>
-										<xsl:text> форум посещало </xsl:text>
-										<xsl:value-of select="activity/sessions"/>
-										<xsl:text> зарегистрированных пользователей.</xsl:text>
-										<br />
-										<a>Текущее время:</a><xsl:text> </xsl:text>
-										<xsl:apply-templates select="currentDate" mode="dateTime"/>
-									</td>
-									<td width="30%" class="small" valign="top">
-										<a>
-											<xsl:attribute name="href">/AllPosts/</xsl:attribute>
-											<xsl:text>Последние сообщения</xsl:text>
-										</a>
-										<br />
-										<a>
-											<xsl:attribute name="href">/AllThreads/</xsl:attribute>
-											<xsl:text>Последние темы</xsl:text>
-										</a>
-										<br />
-										<a>
-											<xsl:if test="session/user">
-												<xsl:attribute name="href">/Users/User/<xsl:value-of select="session/user/id"/>/Replies/</xsl:attribute>
-											</xsl:if>
-											<xsl:text>Последние ответы на мои сообщения</xsl:text>
-										</a>
-										<br />
-										<a>
-											<xsl:if test="session/user">
-												<xsl:attribute name="href">/Users/User/<xsl:value-of select="session/user/id"/>/PollsParticipated/</xsl:attribute>
-											</xsl:if>
-											<xsl:text>Последние опросы с моим участием</xsl:text>
-										</a>
-										<br />
-										<a>Мои сообщения с оценками</a>
-										<br />
-										<a>Рейтинги сообщений</a>
-									</td>
-									<td class="small" valign="top">
-										<b>Легенда:</b>
-										<br />
-										<img src="/static/images/newposts.gif" alt="*" />
-										<xsl:text>Новые сообщения</xsl:text>
-										<br />
-										<img src="/static/images/nonewposts.gif" alt="*" />
-										<xsl:text>Нет новых сообщений</xsl:text>
-									</td>
-								</tr>
-							</table>
-						</td>
-					</tr>
-				</table>
+		<p>
+			<xsl:choose>
+				<xsl:when test="session/user">
+					<xsl:call-template name="Messages_YouAreXXX">
+						<xsl:with-param name="userLink">
+							<xsl:apply-templates select="session/user" mode="userLink"/>
+						</xsl:with-param>
+					</xsl:call-template>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:call-template name="Messages_YouAreAnonymous"/>
+				</xsl:otherwise>
+			</xsl:choose>
+			<xsl:text>. </xsl:text>
+			<xsl:call-template name="Messages_TotalRegisteredUsers">
+				<xsl:with-param name="usersNumber">
+					<xsl:value-of select="totalRegistered"/>
+				</xsl:with-param>
+			</xsl:call-template>
+			<xsl:text>. </xsl:text>
+			<xsl:call-template name="Messages_TotalOnlineUsers">
+				<xsl:with-param name="threshold">
+					<xsl:value-of select="activity/threshold"/>
+				</xsl:with-param>
+				<xsl:with-param name="sessionsNumber">
+					<xsl:value-of select="activity/sessions"/>
+				</xsl:with-param>
+			</xsl:call-template>
+			<xsl:text>. </xsl:text>
+		</p>
+		<p>
+			<a>
+				<xsl:attribute name="href">/AllPosts/</xsl:attribute>
+				<xsl:call-template name="Messages_LastPosts"/>
+			</a>
+			<xsl:text>. </xsl:text>
+			<a>
+				<xsl:attribute name="href">/AllThreads/</xsl:attribute>
+				<xsl:call-template name="Messages_LastThreads"/>
+			</a>
+			<xsl:text>. </xsl:text>
+			<a>
+				<xsl:if test="session/user">
+					<xsl:attribute name="href">/Users/User/<xsl:value-of select="session/user/id"/>/Replies/</xsl:attribute>
+				</xsl:if>
+				<xsl:call-template name="Messages_LastReplies"/>
+			</a>
+			<xsl:text>. </xsl:text>
+			<a>
+				<xsl:if test="session/user">
+					<xsl:attribute name="href">/Users/User/<xsl:value-of select="session/user/id"/>/PollsParticipated/</xsl:attribute>
+				</xsl:if>
+				<xsl:call-template name="Messages_LastPollsParticipated"/>
+			</a>
+			<xsl:text>. </xsl:text>
+		</p>
 	</xsl:template>
 
 	<xsl:template match="category">

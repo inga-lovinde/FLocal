@@ -8,14 +8,16 @@
 	<xsl:template name="isLiteEnabled">true</xsl:template>
 	<xsl:template name="specific">
 		<div>
-			<xsl:text>страницы:</xsl:text>
+			<xsl:call-template name="Messages_PageOuter"/>
+			<xsl:text>:</xsl:text>
 			<xsl:apply-templates select="posts/pageOuter" mode="withCurrent"/>
 		</div>
 		<div class="postscontainer">
 			<xsl:apply-templates select="posts/post"/>
 		</div>
 		<div>
-			<xsl:text>страницы:</xsl:text>
+			<xsl:call-template name="Messages_PageOuter"/>
+			<xsl:text>:</xsl:text>
 			<xsl:apply-templates select="posts/pageOuter" mode="withCurrent"/>
 		</div>
 	</xsl:template>

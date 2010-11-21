@@ -15,7 +15,8 @@
 			</div>
 		</xsl:if>
 		<div>
-			<xsl:text>страницы:</xsl:text>
+			<xsl:call-template name="Messages_PageOuter"/>
+			<xsl:text>:</xsl:text>
 			<xsl:apply-templates select="threads/pageOuter" mode="withCurrent"/>
 		</div>
 		<div class="threadscontainer">
@@ -29,7 +30,8 @@
 			</div>
 		</div>
 		<div>
-			<xsl:text>страницы:</xsl:text>
+			<xsl:call-template name="Messages_PageOuter"/>
+			<xsl:text>:</xsl:text>
 			<xsl:apply-templates select="threads/pageOuter" mode="withCurrent"/>
 		</div>
 	</xsl:template>
