@@ -5,6 +5,8 @@ A:link, a[pseudolink], a.pseudolink {text-decoration:none;color:#aaaaaa}
 A:visited{text-decoration:none;color:#666666}
 A:active{text-decoration:none;color:#999999}
 A:hover{COLOR:white;text-decoration:none;background-color:#404040; }
+a.current { border:solid 1px white;color:white; }
+a.current:hover { color:white;background-color:transparent; }
 A:hover * { background-color:inherit; }
 
 a[pseudolink], a.pseudolink {
