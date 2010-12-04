@@ -14,9 +14,13 @@
 		</InstallExecuteSequence>
 		<Media Id='1' Cabinet='product.cab' EmbedCab='yes' />
 		<Directory Id="TARGETDIR" Name="SourceDir">
-			<Directory Id="INETPUBROOTDIRECTORY" Name="inetpub">
-				<Directory Id="INETPUBMAINDIRECTORY" Name="flocal-upload">
-					<Directory Id="BINARIESROOTDIRECTORY" Name="Bin"/>
+			<Directory Id="ProgramFiles64Folder">
+				<Directory Id="MANUFACTURERROOTDIRECTORY" Name="FLocal">
+					<Directory Id="APPLICATIONROOTDIRECTORY" Name="upload">
+						<Directory Id="APPLICATIONDIRECTORY" Name="{target}">
+							<Directory Id="BINARIESROOTDIRECTORY" Name="Bin"/>
+						</Directory>
+					</Directory>
 				</Directory>
 			</Directory>
 		</Directory>
