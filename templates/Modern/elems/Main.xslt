@@ -28,6 +28,13 @@
 					</xsl:attribute>
 					<xsl:text> </xsl:text>
 				</script>
+				<style>
+					<xsl:text>.uploadImage { max-width:</xsl:text>
+					<xsl:value-of select="uploadSettings/maxWidth"/>
+					<xsl:text>px; max-height:</xsl:text>
+					<xsl:value-of select="uploadSettings/maxHeight"/>
+					<xsl:text>px; }</xsl:text>
+				</style>
 				<title>
 					<xsl:call-template name="specificTitle"/>
 					<xsl:text> - </xsl:text>

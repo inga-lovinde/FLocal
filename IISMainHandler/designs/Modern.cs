@@ -12,7 +12,7 @@ namespace FLocal.IISHandler.designs {
 
 		string FLocal.Common.IOutputParams.preprocessBodyIntermediate(string bodyIntermediate) {
 			return bodyIntermediate.
-				Replace("<f:img><f:src>", "<img src=\"").
+				Replace("<f:img><f:src>", "<img class=\"uploadImage\" src=\"").
 				Replace("</f:src><f:alt>", "\" alt=\"").
 				Replace("</f:alt></f:img>", "\"/>");
 		}

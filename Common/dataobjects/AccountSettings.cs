@@ -23,6 +23,8 @@ namespace FLocal.Common.dataobjects {
 			public const string FIELD_SKINID = "SkinId";
 			public const string FIELD_MODERNSKINID = "ModernSkinId";
 			public const string FIELD_MACHICHARAID = "MachicharaId";
+			public const string FIELD_MAXUPLOADIMAGEWIDTH = "MaxUploadImageWidth";
+			public const string FIELD_MAXUPLOADIMAGEHEIGHT = "MaxUploadImageHeight";
 			public static readonly TableSpec instance = new TableSpec();
 			public string name { get { return TABLE; } }
 			public string idName { get { return FIELD_ID; } }
@@ -117,6 +119,22 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
+		private int _maxUploadImageWidth;
+		public int maxUploadImageWidth {
+			get {
+				this.LoadIfNotLoaded();
+				return this._maxUploadImageWidth;
+			}
+		}
+
+		private int _maxUploadImageHeight;
+		public int maxUploadImageHeight {
+			get {
+				this.LoadIfNotLoaded();
+				return this._maxUploadImageHeight;
+			}
+		}
+
 		public bool isPostVisible(Post post) {
 			if(post.layer.name == PostLayer.NAME_HIDDEN) return false;
 			if(post.poster.showPostsToUsers == User.ENUM_SHOWPOSTSTOUSERS_NONE) return false;
@@ -134,6 +152,8 @@ namespace FLocal.Common.dataobjects {
 			this._skinId = int.Parse(data[TableSpec.FIELD_SKINID]);
 			this._modernSkinId = int.Parse(data[TableSpec.FIELD_MODERNSKINID]);
 			this._machicharaId = int.Parse(data[TableSpec.FIELD_MACHICHARAID]);
+			this._maxUploadImageWidth = int.Parse(data[TableSpec.FIELD_MAXUPLOADIMAGEWIDTH]);
+			this._maxUploadImageHeight = int.Parse(data[TableSpec.FIELD_MAXUPLOADIMAGEHEIGHT]);
 		}
 
 		private static Dictionary<int, int?> accountid2id = new Dictionary<int, int?>();
@@ -173,7 +193,7 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
-		public static void Save(Account account, int postsPerPage, int threadsPerPage, int usersPerPage, int uploadsPerPage, Skin skin, ModernSkin modernSkin, Machichara machichara) {
+		public static void Save(Account account, int postsPerPage, int threadsPerPage, int usersPerPage, int uploadsPerPage, Skin skin, ModernSkin modernSkin, Machichara machichara, int maxUploadImageWidth, int maxUploadImageHeight) {
 			Dictionary<string, AbstractFieldValue> dataToUpdate = new Dictionary<string,AbstractFieldValue> {
 				{ TableSpec.FIELD_POSTSPERPAGE, new ScalarFieldValue(postsPerPage.ToString()) },
 				{ TableSpec.FIELD_THREADSPERPAGE, new ScalarFieldValue(threadsPerPage.ToString()) },
@@ -182,6 +202,8 @@ namespace FLocal.Common.dataobjects {
 				{ TableSpec.FIELD_SKINID, new ScalarFieldValue(skin.id.ToString()) },
 				{ TableSpec.FIELD_MODERNSKINID, new ScalarFieldValue(modernSkin.id.ToString()) },
 				{ TableSpec.FIELD_MACHICHARAID, new ScalarFieldValue(machichara.id.ToString()) },
+				{ TableSpec.FIELD_MAXUPLOADIMAGEWIDTH, new ScalarFieldValue(maxUploadImageWidth.ToString()) },
+				{ TableSpec.FIELD_MAXUPLOADIMAGEHEIGHT, new ScalarFieldValue(maxUploadImageHeight.ToString()) },
 			};
 			Dictionary<string, AbstractFieldValue> dataToInsert = new Dictionary<string,AbstractFieldValue>(dataToUpdate) {
 				{ TableSpec.FIELD_ACCOUNTID, new ScalarFieldValue(account.id.ToString()) },

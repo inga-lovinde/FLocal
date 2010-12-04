@@ -5,5 +5,5 @@ Builder IISMainHandler release
 move /Y IISMainHandler\product-release.msi ..\IISMainHandler-release.msi
 Builder IISMainHandler debug
 move /Y IISMainHandler\product-debug.msi ..\IISMainHandler-debug.msi
-rem Builder IISUploadHandler release
-rem move /Y IISUploadHandler\product-release.msi ..\IISUploadHandler-release.msi
+Builder IISUploadHandler release
+move /Y IISUploadHandler\product-release.msi ..\IISUploadHandler-release.msi

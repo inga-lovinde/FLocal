@@ -65,6 +65,19 @@ namespace FLocal.Common.dataobjects {
 			if(post.layer.name != PostLayer.NAME_NORMAL) return false;
 			return true;
 		}
-		
+
+
+		public int maxUploadImageWidth {
+			get {
+				return 800;
+			}
+		}
+
+		public int maxUploadImageHeight {
+			get {
+				return 600;
+			}
+		}
+
 	}
 }

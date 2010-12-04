@@ -5,6 +5,7 @@ using System.Text;
 using System.Xml.Linq;
 using FLocal.Common;
 using FLocal.Common.URL;
+using FLocal.Common.dataobjects;
 
 namespace FLocal.IISHandler.handlers {
 
@@ -30,6 +31,7 @@ namespace FLocal.IISHandler.handlers {
 				context.userSettings.skin.exportToXml(),
 				context.userSettings.modernSkin.exportToXml(),
 				context.userSettings.machichara.exportToXml(),
+				context.userSettings.exportUploadSettingsToXml(context),
 				context.exportRequestParameters(),
 			};
 		}

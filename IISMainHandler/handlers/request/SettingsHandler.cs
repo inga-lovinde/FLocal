@@ -27,6 +27,8 @@ namespace FLocal.IISHandler.handlers.request {
 			Skin skin = Skin.LoadById(int.Parse(context.httprequest.Form["skinId"]));
 			ModernSkin modernSkin = ModernSkin.LoadById(int.Parse(context.httprequest.Form["modernSkinId"]));
 			Machichara machichara = Machichara.LoadById(int.Parse(context.httprequest.Form["machicharaId"]));
+			int maxUploadImageWidth = int.Parse(context.httprequest.Form["maxUploadImageWidth"]);
+			int maxUploadImageHeight = int.Parse(context.httprequest.Form["maxUploadImageHeight"]);
 
 			if((postsPerPage < 1) || (postsPerPage > 200)) throw new FLocalException("wrong number for postsPerPage");
 			if((threadsPerPage < 1) || (threadsPerPage > 200)) throw new FLocalException("wrong number for threadsPerPage");
@@ -35,7 +37,7 @@ namespace FLocal.IISHandler.handlers.request {
 
 			if(!context.account.checkPassword(currentPassword)) throw new FLocalException("Wrong password. You should enter your current password in order to change settings.");
 
-			AccountSettings.Save(context.session.account, postsPerPage, threadsPerPage, usersPerPage, uploadsPerPage, skin, modernSkin, machichara);
+			AccountSettings.Save(context.session.account, postsPerPage, threadsPerPage, usersPerPage, uploadsPerPage, skin, modernSkin, machichara, maxUploadImageWidth, maxUploadImageHeight);
 
 			if(newPassword != null && newPassword != "") {
 				context.account.updatePassword(newPassword);

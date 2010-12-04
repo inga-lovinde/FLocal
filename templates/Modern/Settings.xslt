@@ -90,6 +90,17 @@ function changeMachichara(newMachichara) {
 										</input>
 									</p>
 									<p>
+										<xsl:text>Максимальный размер картинки:</xsl:text>
+										<br/>
+										<input type="text" name="maxUploadImageWidth" size="4">
+											<xsl:attribute name="value"><xsl:value-of select="settings/maxUploadImageWidth"/></xsl:attribute>
+										</input>
+										<xsl:text> x </xsl:text>
+										<input type="text" name="maxUploadImageHeight" size="4">
+											<xsl:attribute name="value"><xsl:value-of select="settings/maxUploadImageHeight"/></xsl:attribute>
+										</input>
+									</p>
+									<p>
 										<xsl:text>Цветовая схема:</xsl:text>
 										<br/>
 										<select name="modernSkinId">

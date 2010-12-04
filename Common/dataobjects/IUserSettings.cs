@@ -37,6 +37,14 @@ namespace FLocal.Common.dataobjects {
 
 		bool isPostVisible(Post post);
 
+		int maxUploadImageWidth {
+			get;
+		}
+
+		int maxUploadImageHeight {
+			get;
+		}
+
 	}
 
 	public static class IUserSettings_Extension {
@@ -49,7 +57,16 @@ namespace FLocal.Common.dataobjects {
 				new XElement("uploadsPerPage", settings.uploadsPerPage),
 				new XElement("skinId", settings.skin.id),
 				new XElement("modernSkinId", settings.modernSkin.id),
-				new XElement("machicharaId", settings.machichara.id)
+				new XElement("machicharaId", settings.machichara.id),
+				new XElement("maxUploadImageWidth", settings.maxUploadImageWidth),
+				new XElement("maxUploadImageHeight", settings.maxUploadImageHeight)
+			);
+		}
+
+		public static XElement exportUploadSettingsToXml(this IUserSettings settings, UserContext context) {
+			return new XElement("uploadSettings",
+				new XElement("maxWidth", settings.maxUploadImageWidth),
+				new XElement("maxHeight", settings.maxUploadImageHeight)
 			);
 		}
 
