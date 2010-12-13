@@ -29,6 +29,8 @@ namespace FLocal.Common {
 
 		public readonly string AdminUserName;
 
+		public readonly bool IsIndexingDisabled;
+
 		protected Config(NameValueCollection data) : base(data) {
 			this.InitTime = DateTime.Now.ToLongTimeString();
 			this.mainConnection = new MySQLConnector.Connection(data["ConnectionString"], MySQLConnector.PostgresDBTraits.instance);
@@ -40,6 +42,7 @@ namespace FLocal.Common {
 			this.UploaderUrl = data["UploaderUrl"];
 			this.AdminUserName = data["AdminUserName"];
 			this.ActivityThreshold = TimeSpan.FromMinutes(int.Parse(data["ActivityThreshold"]));
+			this.IsIndexingDisabled = parseBool(data["DisableIndexing"]);
 		}
 
 		public static void Init(NameValueCollection data) {

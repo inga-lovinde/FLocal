@@ -52,5 +52,24 @@ namespace FLocal.Core {
 		public virtual void Dispose() {
 		}
 
+		protected static bool parseBool(string value) {
+			switch(value.ToLower().Trim()) {
+				case "1":
+				case "true":
+				case "on":
+				case "enabled":
+				case "yes":
+					return true;
+				case "0":
+				case "false":
+				case "off":
+				case "disabled":
+				case "no":
+					return false;
+				default:
+					throw new CriticalException("Cannot parse '" + value + "'");
+			}
+		}
+
 	}
 }
