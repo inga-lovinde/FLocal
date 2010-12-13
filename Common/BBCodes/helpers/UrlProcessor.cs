@@ -27,20 +27,6 @@ namespace FLocal.Common.BBCodes {
 			return System.Web.HttpUtility.HtmlEncode(str);
 		}
 
-		public static HashSet<string> KnownAliases = new HashSet<string> {
-			"forum.local",
-			"forum.b.gz.ru",
-			"www.snto-msu.net",
-			"hq.sectorb.msk.ru",
-			"petaflop.b.gz.ru",
-			"194.88.210.5",
-			"forumlocal.ru",
-			"forumbgz.ru",
-			"forum.hn",
-		};
-
-		public const string DOMAIN = ".forum.hn";
-
 		public static UrlInfo Process(string url) {
 			if (url.StartsWith("/")) {
 				return new UrlInfo(true, url);
@@ -51,7 +37,7 @@ namespace FLocal.Common.BBCodes {
 			} catch(UriFormatException) {
 				throw new Core.FLocalException("wrong url: " + url);
 			}
-			if (KnownAliases.Contains(uri.Host.ToLower()) || uri.Host.ToLower().EndsWith(DOMAIN)) {
+			if (Config.instance.AdditionalHosts.Contains(uri.Host.ToLower()) || uri.Host.ToLower().EndsWith(Config.instance.BaseHost)) {
 				return new UrlInfo(true, uri.PathAndQuery);
 			} else {
 				return new UrlInfo(false, uri.ToString());

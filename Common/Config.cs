@@ -33,6 +33,10 @@ namespace FLocal.Common {
 
 		public readonly bool IsMigrationEnabled;
 
+		public readonly string BaseHost;
+		
+		public readonly HashSet<string> AdditionalHosts;
+
 		protected Config(NameValueCollection data) : base(data) {
 			this.InitTime = DateTime.Now.ToLongTimeString();
 			this.mainConnection = new MySQLConnector.Connection(data["ConnectionString"], MySQLConnector.PostgresDBTraits.instance);
@@ -46,6 +50,8 @@ namespace FLocal.Common {
 			this.ActivityThreshold = TimeSpan.FromMinutes(int.Parse(data["ActivityThreshold"]));
 			this.IsIndexingDisabled = parseBool(data["DisableIndexing"]);
 			this.IsMigrationEnabled = parseBool(data["EnableMigration"]);
+			this.BaseHost = data["BaseHost"];
+			this.AdditionalHosts = new HashSet<string>(from host in data["AdditionalHosts"].Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries) select host.Trim());
 		}
 
 		public static void Init(NameValueCollection data) {
