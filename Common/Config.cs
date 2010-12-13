@@ -37,6 +37,8 @@ namespace FLocal.Common {
 		
 		public readonly HashSet<string> AdditionalHosts;
 
+		public readonly int MinPostId;
+
 		protected Config(NameValueCollection data) : base(data) {
 			this.InitTime = DateTime.Now.ToLongTimeString();
 			this.mainConnection = new MySQLConnector.Connection(data["ConnectionString"], MySQLConnector.PostgresDBTraits.instance);
@@ -52,6 +54,7 @@ namespace FLocal.Common {
 			this.IsMigrationEnabled = parseBool(data["EnableMigration"]);
 			this.BaseHost = data["BaseHost"];
 			this.AdditionalHosts = new HashSet<string>(from host in data["AdditionalHosts"].Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries) select host.Trim());
+			this.MinPostId = int.Parse(data["MinPostId"]);
 		}
 
 		public static void Init(NameValueCollection data) {

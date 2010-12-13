@@ -11,7 +11,7 @@ using FLocal.Common.actions;
 namespace FLocal.Common.dataobjects {
 	public class Thread : SqlObject<Thread> {
 
-		public const int FORMALREADMIN = 10000001;
+		public static readonly int FORMALREADMIN = Config.instance.MinPostId;
 
 		public class TableSpec : ISqlObjectTableSpec {
 			public const string TABLE = "Threads";
