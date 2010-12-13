@@ -37,6 +37,8 @@ namespace FLocal.Common {
 		
 		public readonly HashSet<string> AdditionalHosts;
 
+		public readonly string CookiesPrefix;
+
 		public readonly int MinPostId;
 
 		protected Config(NameValueCollection data) : base(data) {
@@ -54,6 +56,7 @@ namespace FLocal.Common {
 			this.IsMigrationEnabled = parseBool(data["EnableMigration"]);
 			this.BaseHost = data["BaseHost"];
 			this.AdditionalHosts = new HashSet<string>(from host in data["AdditionalHosts"].Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries) select host.Trim());
+			this.CookiesPrefix = data["CookiesPrefix"];
 			this.MinPostId = int.Parse(data["MinPostId"]);
 		}
 

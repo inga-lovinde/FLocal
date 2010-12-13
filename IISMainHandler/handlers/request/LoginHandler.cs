@@ -43,7 +43,7 @@ namespace FLocal.IISHandler.handlers.request {
 			Account account = Account.tryAuthorize(context.httprequest.Form["name"], context.httprequest.Form["password"]);
 			Session session = Session.create(account);
 
-			HttpCookie sessionCookie = context.createCookie("session");
+			HttpCookie sessionCookie = context.createCookie(Config.instance.CookiesPrefix + "_session");
 			sessionCookie.Value = session.sessionKey;
 			sessionCookie.Expires = DateTime.Now.AddDays(3);
 			context.httpresponse.AppendCookie(sessionCookie);

@@ -135,11 +135,11 @@ namespace FLocal.Common.dataobjects {
 		}
 
 		private string hashPasswordLegacy(string password) {
-			return Util.md5(Util.md5(password) + " " + Util.md5(Config.instance.SaltMigration) + " " + Util.md5(this.id.ToString()));
+			return Util.md5(Util.md5(password) + " " + Util.md5(Config.instance.SaltPasswords) + " " + Util.md5(this.id.ToString()));
 		}
 
 		private static string hashPassword(string password, string name) {
-			return Util.md5(Util.md5(password) + " " + Util.md5(Config.instance.SaltMigration) + " " + Util.md5(name));
+			return Util.md5(Util.md5(password) + " " + Util.md5(Config.instance.SaltPasswords) + " " + Util.md5(name));
 		}
 
 		private string hashPassword(string password) {

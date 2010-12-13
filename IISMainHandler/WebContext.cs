@@ -130,7 +130,7 @@ namespace FLocal.IISHandler {
 			this.requestTime = DateTime.Now;
 			this.design = this.detectDesign();
 
-			HttpCookie sessionCookie = this.httprequest.Cookies["session"];
+			HttpCookie sessionCookie = this.httprequest.Cookies[Config.instance.CookiesPrefix + "_session"];
 			if(sessionCookie != null && sessionCookie.Value != null && sessionCookie.Value != "") {
 				try {
 					var session = Session.LoadByKey(sessionCookie.Value);
@@ -142,7 +142,7 @@ namespace FLocal.IISHandler {
 						}
 					}
 					session.updateLastActivity(lastUrl);
-					HttpCookie newCookie = this.createCookie("session");
+					HttpCookie newCookie = this.createCookie(Config.instance.CookiesPrefix + "_session");
 					newCookie.Value = session.sessionKey;
 					newCookie.Expires = DateTime.Now.AddDays(3);
 					this.httpresponse.AppendCookie(newCookie);

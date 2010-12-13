@@ -26,10 +26,11 @@ namespace FLocal.IISHandler.handlers.request {
 			}
 			context.session.delete();
 
-			HttpCookie sessionCookie = context.createCookie("session");
+			HttpCookie sessionCookie = context.createCookie(Config.instance.CookiesPrefix + "_session");
 			sessionCookie.Value = "";
 			sessionCookie.Expires = DateTime.Now.AddDays(-1);
 			context.httpresponse.AppendCookie(sessionCookie);
+	
 			context.session = null;
 			
 			return new XElement[0];
