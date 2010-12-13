@@ -14,12 +14,15 @@ namespace FLocal.IISHandler.handlers.request {
 	class RegisterByInviteHandler : AbstractNewAccountHandler {
 
 		protected override Account DoCreateAccount(WebContext context) {
-			try {
-				Account tmpAccount = Account.LoadByName(context.httprequest.Form["login"]);
-				if(tmpAccount.needsMigration) {
-					throw new RedirectException("/My/Login/MigrateAccount/" + context.httprequest.Form["login"]);
+
+			if(Config.instance.IsMigrationEnabled) {
+				try {
+					Account tmpAccount = Account.LoadByName(context.httprequest.Form["login"]);
+					if(tmpAccount.needsMigration) {
+						throw new RedirectException("/My/Login/MigrateAccount/" + context.httprequest.Form["login"]);
+					}
+				} catch(NotFoundInDBException) {
 				}
-			} catch(NotFoundInDBException) {
 			}
 
 			Invite invite = Invite.LoadById(int.Parse(context.httprequest.Form["inviteId"]));

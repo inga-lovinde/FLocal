@@ -20,6 +20,7 @@ namespace FLocal.IISHandler.handlers.response {
 			return new XElement[] {
 				new XElement("isLocalNetwork", LocalNetwork.IsLocalNetwork(context.remoteHost).ToPlainString()),
 				new XElement("ip", context.remoteHost.ToString()),
+				new XElement("isMigrationEnabled", Config.instance.IsMigrationEnabled.ToPlainString()),
 			};
 		}
 

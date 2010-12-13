@@ -14,12 +14,14 @@ namespace FLocal.IISHandler.handlers.request {
 	class RegisterHandler : AbstractNewAccountHandler {
 
 		protected override Account DoCreateAccount(WebContext context) {
-			try {
-				Account tmpAccount = Account.LoadByName(context.httprequest.Form["login"]);
-				if(tmpAccount.needsMigration) {
-					throw new RedirectException("/My/Login/MigrateAccount/" + context.httprequest.Form["login"]);
+			if(Config.instance.IsMigrationEnabled) {
+				try {
+					Account tmpAccount = Account.LoadByName(context.httprequest.Form["login"]);
+					if(tmpAccount.needsMigration) {
+						throw new RedirectException("/My/Login/MigrateAccount/" + context.httprequest.Form["login"]);
+					}
+				} catch(NotFoundInDBException) {
 				}
-			} catch(NotFoundInDBException) {
 			}
 
 			if(!LocalNetwork.IsLocalNetwork(context.remoteHost)) throw new FLocalException("IP '" + context.remoteHost.ToString() + "' is not allowed");

@@ -36,6 +36,7 @@
 			</tr> 
 		</table> 
 		<br/>
+		<xsl:if test="isMigrationEnabled='true'">
 		<table width="95%" align="center" cellpadding="1" cellspacing="1" class="tablesurround">
 			<tr>
 				<td>
@@ -64,6 +65,7 @@
 			</tr> 
 		</table> 
 		<br/>
+		</xsl:if>
 		<table width="95%" align="center" cellpadding="1" cellspacing="1" class="tablesurround">
 			<tr>
 				<td>

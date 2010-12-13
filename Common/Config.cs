@@ -31,6 +31,8 @@ namespace FLocal.Common {
 
 		public readonly bool IsIndexingDisabled;
 
+		public readonly bool IsMigrationEnabled;
+
 		protected Config(NameValueCollection data) : base(data) {
 			this.InitTime = DateTime.Now.ToLongTimeString();
 			this.mainConnection = new MySQLConnector.Connection(data["ConnectionString"], MySQLConnector.PostgresDBTraits.instance);
@@ -43,6 +45,7 @@ namespace FLocal.Common {
 			this.AdminUserName = data["AdminUserName"];
 			this.ActivityThreshold = TimeSpan.FromMinutes(int.Parse(data["ActivityThreshold"]));
 			this.IsIndexingDisabled = parseBool(data["DisableIndexing"]);
+			this.IsMigrationEnabled = parseBool(data["EnableMigration"]);
 		}
 
 		public static void Init(NameValueCollection data) {

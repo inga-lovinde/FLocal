@@ -17,6 +17,7 @@ namespace FLocal.IISHandler.handlers.response {
 		}
 
 		protected override IEnumerable<XElement> getSpecificData(WebContext context) {
+			if(!Config.instance.IsMigrationEnabled) throw new FLocalException("Migration is disabled");
 			string username;
 			if(context.httprequest.Form["username"] != null && context.httprequest.Form["username"] != "") {
 				username = context.httprequest.Form["username"];

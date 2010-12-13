@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
+using FLocal.Common;
 using FLocal.Common.dataobjects;
 
 namespace FLocal.IISHandler.handlers.request {
@@ -25,7 +26,7 @@ namespace FLocal.IISHandler.handlers.request {
 				throw new ApplicationException("receiverId/receiverName not passed");
 			}
 
-			if(receiver.needsMigration) throw new ApplicationException("User is not migrated");
+			if(Config.instance.IsMigrationEnabled && receiver.needsMigration) throw new ApplicationException("User is not migrated");
 
 			PMMessage newMessage = PMConversation.SendPMMessage(
 				context.account,
