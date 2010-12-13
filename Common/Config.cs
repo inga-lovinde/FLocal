@@ -27,7 +27,7 @@ namespace FLocal.Common {
 
 		public readonly TimeSpan ActivityThreshold;
 
-		public readonly string AdminUserName = "inga-lovinde";
+		public readonly string AdminUserName;
 
 		protected Config(NameValueCollection data) : base(data) {
 			this.InitTime = DateTime.Now.ToLongTimeString();
@@ -38,6 +38,7 @@ namespace FLocal.Common {
 			this.SaltPasswords = data["SaltPasswords"];
 			this.SaltUploader = data["SaltUploader"];
 			this.UploaderUrl = data["UploaderUrl"];
+			this.AdminUserName = data["AdminUserName"];
 			this.ActivityThreshold = TimeSpan.FromMinutes(int.Parse(data["ActivityThreshold"]));
 		}
 
