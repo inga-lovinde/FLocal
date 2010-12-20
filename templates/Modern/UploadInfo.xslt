@@ -6,7 +6,7 @@
 	<xsl:template name="specific">
 		<div class="uploadscontainer">
 			<xsl:apply-templates select="upload">
-				<xsl:with-param name="dimensionsLimit"/>
+				<xsl:with-param name="className"/>
 			</xsl:apply-templates>
 		</div>
 	</xsl:template>
