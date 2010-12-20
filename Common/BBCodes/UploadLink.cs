@@ -17,7 +17,7 @@ namespace FLocal.Common.BBCodes {
 			if(this.Default != null) {
 				name = this.GetInnerHTML(formatter);
 			}
-			return "<a href=\"/Upload/Item/" + upload.id.ToString() + "/\">" + name + "</a>";
+			return "<a href=\"/Upload/Info/" + upload.id.ToString() + "/\">" + name + "</a>";
 		}
 
 	}
