@@ -157,7 +157,7 @@ namespace FLocal.IISHandler {
 			if(this.session != null) {
 				this.userSettings = AccountSettings.LoadByAccount(this.session.account);
 			} else {
-				this.userSettings = new AnonymousUserSettings();
+				this.userSettings = new AnonymousUserSettings(null);
 			}
 		}
 

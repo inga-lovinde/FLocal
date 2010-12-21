@@ -183,7 +183,7 @@ namespace FLocal.Common.dataobjects {
 			if(accountid2id[account.id].HasValue) {
 				return AccountSettings.LoadById(accountid2id[account.id].Value);
 			} else {
-				return new AnonymousUserSettings();
+				return new AnonymousUserSettings(account);
 				//If cache for this account was just cleared, we will return AnonymousUserSettings. It is ok.
 			}
 		}

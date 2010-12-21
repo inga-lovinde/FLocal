@@ -7,8 +7,11 @@ using FLocal.Core;
 namespace FLocal.Common.dataobjects {
 	public class AnonymousUserSettings : IUserSettings {
 
-		public AnonymousUserSettings() {
-			var allSkins = Skin.allSkins.ToArray();
+		private readonly Account account;
+
+		public AnonymousUserSettings(Account account) {
+			this.account = account;
+			//var allSkins = Skin.allSkins.ToArray();
 			//this._skinId = allSkins[Util.RandomInt(0, allSkins.Length)].id;
 			this._skinId = 28;
 			this._modernSkinId = 2;
@@ -61,9 +64,16 @@ namespace FLocal.Common.dataobjects {
 		}
 
 		public bool isPostVisible(Post post) {
-			if(post.poster.showPostsToUsers != User.ENUM_SHOWPOSTSTOUSERS_ALL) return false;
-			if(post.layer.name != PostLayer.NAME_NORMAL) return false;
-			return true;
+			if(this.account != null) {
+				if(post.layer.name == PostLayer.NAME_HIDDEN) return false;
+				if(post.poster.showPostsToUsers == User.ENUM_SHOWPOSTSTOUSERS_NONE) return false;
+				if(post.poster.showPostsToUsers == User.ENUM_SHOWPOSTSTOUSERS_PRIVELEGED) return account.user.userGroup.name == UserGroup.NAME_JUDGES || account.user.userGroup.name == UserGroup.NAME_ADMINISTRATORS;
+				return true;
+			} else {
+				if(post.poster.showPostsToUsers != User.ENUM_SHOWPOSTSTOUSERS_ALL) return false;
+				if(post.layer.name != PostLayer.NAME_NORMAL) return false;
+				return true;
+			}
 		}
 
 
