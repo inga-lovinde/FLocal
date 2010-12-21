@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Configuration;
+using FLocal.Common;
 
 namespace FLocal.IISHandler {
 	public class MainHandler : IHttpHandler {
@@ -19,12 +20,17 @@ namespace FLocal.IISHandler {
 				throw new HttpException(403, "You have come from the static page '" + referer + "'");
 			}
 
-			if(!FLocal.Common.Config.isInitialized) {
-				lock(typeof(FLocal.Common.Config)) {
-					if(!FLocal.Common.Config.isInitialized) {
-						FLocal.Common.Config.Init(ConfigurationManager.AppSettings);
+			if(!Config.isInitialized) {
+				lock(typeof(Config)) {
+					if(!Config.isInitialized) {
+						Config.Init(ConfigurationManager.AppSettings);
 					}
 				}
+			}
+
+			Uri current = httpcontext.Request.Url;
+			if(!current.Host.EndsWith(Config.instance.BaseHost)) {
+				throw new FLocal.Core.FLocalException("Wrong host: " + current.Host + " (expected *" + Config.instance.BaseHost + ")");
 			}
 
 			WebContext context = new WebContext(httpcontext);
