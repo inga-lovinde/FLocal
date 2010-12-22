@@ -21,9 +21,6 @@
 (function() {
     // If we don't have a working <canvas> element, apologize and quit
     if (!document.createElement("canvas").getContext) {
-        alert("Your browser doesn't support <canvas>\n" +
-              "No snow for you!\n" +
-              "Please try a recent version of Firefox, Chrome or Safari");
         return;
     }
 
@@ -70,9 +67,6 @@
     var deg = Math.PI/180;         // For converting degrees to radians
     var sqrt3_2 = Math.sqrt(3)/2;  // Height of an equilateral triangle
     var flakes = [];               // Things that are dropping
-    var cover = new Image();
-    cover.src = "http://covers.oreilly.com/images/0636920016045/cat.gif";
-    var coverwidth = 180, coverheight = 296;
     var scrollspeed = 80;   // How often we animate things
     var snowspeed = 500;    // How often we add a new snowflake
     var rand = function(n) { return Math.floor(n*Math.random()); }
@@ -104,47 +98,6 @@
         // Add the canvas to the document and to our array of snowflakes
         document.body.appendChild(canvas);
         flakes.push({elt:canvas, x: x, y:y, vy:3+rand(3)});
-
-        // Once in a while, add something different to the mix
-        if (rand(100) == 1) {
-            // drop the cover image
-            var img = document.createElement("img");
-            img.src = cover.src;
-            var scale = Math.random()/2 + .25;
-            img.width = Math.round(coverwidth * scale);
-            img.height = Math.round(coverheight*scale);
-            img.style.position = "absolute";
-            var x = rand(window.innerWidth - img.width - 150);
-            var y = window.pageYOffset;
-            img.style.top = y + "px";
-            img.style.left = x + "px";
-            img.style.zIndex = 200;
-            document.body.appendChild(img);
-            flakes.push({elt:img, x:x, y:y, vy:4});
-
-            // and drop a message, too
-            var div = document.createElement("div");
-            div.style.width = "120px";
-            div.style.height = "40px";
-            div.style.position = "absolute";
-            x = x + img.width + 20;
-            y = y + 30;
-            div.style.top =  y + "px";
-            div.style.left = x + "px";
-            div.style.zIndex = 200;
-            document.body.appendChild(div);
-
-            div.innerHTML = "<a style='color:#fff' href='http://oreilly.com/catalog/0636920016045/'>Save 40% with code AUTHD</a>";
-            div.style.border = "solid red 2px";
-            div.style.backgroundColor = "#c00";
-            div.style.border = "solid black 1px";
-            div.style.font = "bold 10pt sans-serif";
-            div.style.color = "#fff";
-            div.style.textAlign = "center";
-            div.style.padding = "3px";
-
-            flakes.push({elt:div, x:x, y:y, vy:4});
-        }
     }
 
     // This function animates the flakes falling down the screen
@@ -182,41 +135,6 @@
         var scrolltimer = setInterval(moveSnowflakes, scrollspeed);
         var snowtimer = setInterval(createSnowflake, snowspeed);
 
-        // 
-        var controls = document.createElement("div");
-        controls.style.position = "fixed";
-        controls.style.left = "2%";
-        controls.style.top = "5px";
-        controls.style.width = "96%";
-        controls.style.padding = "5px";
-        controls.style.zIndex = 1000;
-        controls.style.backgroundColor = "#c00";
-        controls.style.border = "solid black 1px";
-        controls.style.borderRadius = "4px";
-        controls.style.font = "bold 10pt sans-serif";
-        controls.style.color = "#fff";
-
-        document.body.appendChild(controls);
-
-        controls.innerHTML =
-            "Koch snowflake fractals from " + 
-            "<i><a style='font:inherit; color:#fff' " +
-            "href='http://oreilly.com/catalog/0636920016045/'>" +
-            "Canvas Pocket Reference</a></i>.   " +
-            "<a style='font:inherit; color:#fff' " +
-            "href='http://www.davidflanagan.com/2010/12/let-it-snow.html'>" +
-            "Learn how it works</a>.   Happy Holidays! ";
-        var stopbutton = document.createElement("button");
-        stopbutton.innerHTML = "Stop";
-        controls.appendChild(stopbutton);
-
-        stopbutton.onclick = function() {
-            clearInterval(scrolltimer);
-            clearInterval(snowtimer);
-            for(var i = 0; i < flakes.length; i++)
-                document.body.removeChild(flakes[i].elt);
-            document.body.removeChild(controls);
-        };
     }
     
     if (document.readyState === "complete") snow();

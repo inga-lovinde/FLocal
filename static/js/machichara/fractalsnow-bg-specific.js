@@ -18,6 +18,8 @@
             Snow();
         else
             window.addEventListener('DOMContentLoaded', Snow, false);
+    } else {
+        return;
     }
 
     var deg = Math.PI / 180;         // For converting degrees to radians
@@ -37,7 +39,7 @@
         canvas.style.position = 'fixed';
         canvas.style.top = '0px';
         canvas.style.left = '0px';
-        canvas.style.zIndex = '0';
+        canvas.style.zIndex = '-1';
         document.body.insertBefore(canvas, document.body.firstChild);
         sky = canvas.getContext('2d');
 
