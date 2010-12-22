@@ -68,20 +68,22 @@
     var sqrt3_2 = Math.sqrt(3)/2;  // Height of an equilateral triangle
     var flakes = [];               // Things that are dropping
     var scrollspeed = 80;   // How often we animate things
-    var snowspeed = 500;    // How often we add a new snowflake
+    var snowspeed = 1500;    // How often we add a new snowflake
     var rand = function(n) { return Math.floor(n*Math.random()); }
 
     // Add a new snowflake at the top of the viewport
     function createSnowflake() {
         var order = 2 + rand(3);    // 2nd, 3rd, or 4th order fractal
         var size = 10 + rand(90);   
+        var width = size;
+        var height = size*sqrt3_2*4/3;
         var x = rand(window.innerWidth - size);
         var y = window.pageYOffset;
 
         // Create a <canvas> element
         var canvas = document.createElement("canvas");
-        canvas.width = size;
-        canvas.height = size*sqrt3_2*4/3;
+        canvas.width = width;
+        canvas.height = height;
         canvas.style.position = "absolute";
         canvas.style.left = x + "px";
         canvas.style.top = y + "px";
@@ -97,17 +99,18 @@
 
         // Add the canvas to the document and to our array of snowflakes
         document.body.appendChild(canvas);
-        flakes.push({elt:canvas, x: x, y:y, vy:3+rand(3)});
+        flakes.push({elt:canvas, x: x, y:y, vy:3+rand(3), width:width, height:height});
     }
 
     // This function animates the flakes falling down the screen
     function moveSnowflakes() {
         var maxy = window.pageYOffset + window.innerHeight;
+        var maxx = window.pageXOffset + window.innerWidth;
         var i = 0;
         while(i < flakes.length) {  // Loop through the array of flakes
             var flake = flakes[i];
             flake.y += flake.vy;
-            if (flake.y > maxy) {
+            if ((flake.y+flake.height > maxy) || (flake.x+flake.width > maxx)) {
                 // The flake has scrolled off, so get rid of it
                 document.body.removeChild(flake.elt);
                 flakes.splice(i, 1);

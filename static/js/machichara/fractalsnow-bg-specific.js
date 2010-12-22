@@ -26,7 +26,7 @@
     var sqrt3_2 = Math.sqrt(3) / 2;  // Height of an equilateral triangle
     var flakes = [];               // Things that are dropping
     var scrollspeed = 64;   // How often we animate things
-    var snowspeed = 500;    // How often we add a new snowflake
+    var snowspeed = 200;    // How often we add a new snowflake
     var maxflakes = 20;     // Max number of flakes to be added at the same time
     var rand = function (n) { return Math.floor(n * Math.random()); }
 
@@ -110,8 +110,9 @@
     function createSnowflake() {
         var order = 2;
         var size = 10 + rand(90);
-        var t = (document.body.offsetWidth - 964) / 2;
-        var x = (rand(2) == 0) ? rand(t) : t + 964 + rand(t); // Make it fit with my blog
+//        var t = (document.body.offsetWidth - 964) / 2;
+//        var x = (rand(2) == 0) ? rand(t) : t + 964 + rand(t); // Make it fit with my blog
+        var x = rand(document.body.offsetWidth);
         var y = window.pageYOffset;
 
         flakes.push({ x: x, y: y, vx: 0, vy: 3 + rand(3), size: size, order: order });
