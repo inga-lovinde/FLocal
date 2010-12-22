@@ -138,6 +138,9 @@ namespace FLocal.Common {
 					response = (HttpWebResponse)request.GetResponse();
 				} catch(WebException e) {
 					response = (HttpWebResponse)e.Response;
+					if(response == null) {
+						throw;
+					}
 				}
 				using(Stream responseStream = response.GetResponseStream()) {
 					responseStream.WriteTo(output);
