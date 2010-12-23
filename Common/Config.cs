@@ -41,6 +41,8 @@ namespace FLocal.Common {
 
 		public readonly int MinPostId;
 
+		public readonly int SessionLifetime;
+
 		protected Config(NameValueCollection data) : base(data) {
 			this.InitTime = DateTime.Now.ToLongTimeString();
 			this.mainConnection = new MySQLConnector.Connection(data["ConnectionString"], MySQLConnector.PostgresDBTraits.instance);
@@ -58,6 +60,7 @@ namespace FLocal.Common {
 			this.AdditionalHosts = new HashSet<string>(from host in data["AdditionalHosts"].Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries) select host.Trim());
 			this.CookiesPrefix = data["CookiesPrefix"];
 			this.MinPostId = int.Parse(data["MinPostId"]);
+			this.SessionLifetime = int.Parse(data["SessionLifetime"]);
 		}
 
 		public static void Init(NameValueCollection data) {

@@ -144,7 +144,7 @@ namespace FLocal.IISHandler {
 					session.updateLastActivity(lastUrl);
 					HttpCookie newCookie = this.createCookie(Config.instance.CookiesPrefix + "_session");
 					newCookie.Value = session.sessionKey;
-					newCookie.Expires = DateTime.Now.AddDays(3);
+					newCookie.Expires = DateTime.Now.AddSeconds(Config.instance.SessionLifetime);
 					this.httpresponse.AppendCookie(newCookie);
 					this.session = session;
 				} catch(NotFoundInDBException) {

@@ -45,7 +45,7 @@ namespace FLocal.IISHandler.handlers.request {
 
 			HttpCookie sessionCookie = context.createCookie(Config.instance.CookiesPrefix + "_session");
 			sessionCookie.Value = session.sessionKey;
-			sessionCookie.Expires = DateTime.Now.AddDays(3);
+			sessionCookie.Expires = DateTime.Now.AddSeconds(Config.instance.SessionLifetime);
 			context.httpresponse.AppendCookie(sessionCookie);
 			context.session = session;
 
