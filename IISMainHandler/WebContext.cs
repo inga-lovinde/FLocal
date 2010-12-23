@@ -212,8 +212,8 @@ namespace FLocal.IISHandler {
 				if(this.httprequest.UrlReferrer != null) {
 					writer.WriteLine("Referer: " + this.httprequest.UrlReferrer.ToString());
 				}
-				if(this.httprequest.Cookies["session"] != null) {
-					writer.WriteLine("Session: " + this.httprequest.Cookies["session"].Value);
+				if(this.httprequest.Cookies[Config.instance.CookiesPrefix + "_session"] != null) {
+					writer.WriteLine("Session: " + this.httprequest.Cookies[Config.instance.CookiesPrefix + "_session"].Value);
 				}
 				writer.WriteLine();
 				writer.WriteLine("Exception: " + e.GetType().FullName);
