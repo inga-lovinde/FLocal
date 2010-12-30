@@ -2,10 +2,27 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml">
 
 	<xsl:import href="UserInfoBar.xslt"/>
-	<xsl:template match="post">
+	<xsl:template match="post[hidden]">
+		<div class="postcontainer" style="clear:both">
+			<a>
+				<xsl:attribute name="name">Post<xsl:value-of select="id"/></xsl:attribute>
+				<xsl:comment>fill</xsl:comment>
+			</a>
+			<div class="postContent">
+				<p>Вам нельзя видеть этот сладкий и запретный плод.</p>
+				<xsl:if test="/root/session/notLoggedIn">
+					<p>Возможно, <a href="/My/Login/Login/">вход на форум</a> исправит ситуацию</p>
+				</xsl:if>
+			</div>
+		</div>
+	</xsl:template>
+	<xsl:template match="post[not(hidden)]">
 		<xsl:param name="isReplyDisabled">true</xsl:param>
 		<div class="postcontainer" style="clear:both">
-			<a><xsl:attribute name="name">Post<xsl:value-of select="id"/></xsl:attribute></a>
+			<a>
+				<xsl:attribute name="name">Post<xsl:value-of select="id"/></xsl:attribute>
+				<xsl:comment>fill</xsl:comment>
+			</a>
 			<div class="userbarcontainer" style="float:left">
 				<xsl:apply-templates select="poster/user" mode="userInfoBar"/>
 			</div>

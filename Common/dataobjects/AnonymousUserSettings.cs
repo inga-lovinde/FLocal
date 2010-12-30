@@ -63,16 +63,16 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
-		public bool isPostVisible(Post post) {
+		public PostVisibilityEnum isPostVisible(Post post) {
 			if(this.account != null) {
-				if(post.layer.name == PostLayer.NAME_HIDDEN) return false;
-				if(post.poster.showPostsToUsers == User.ENUM_SHOWPOSTSTOUSERS_NONE) return false;
-				if(post.poster.showPostsToUsers == User.ENUM_SHOWPOSTSTOUSERS_PRIVELEGED) return account.user.userGroup.name == UserGroup.NAME_JUDGES || account.user.userGroup.name == UserGroup.NAME_ADMINISTRATORS;
-				return true;
+				if(post.layer.name == PostLayer.NAME_HIDDEN) return PostVisibilityEnum.HIDDEN;
+				if(post.poster.showPostsToUsers == User.ENUM_SHOWPOSTSTOUSERS_NONE) return PostVisibilityEnum.HIDDEN;
+				if(post.poster.showPostsToUsers == User.ENUM_SHOWPOSTSTOUSERS_PRIVELEGED) return (account.user.userGroup.name == UserGroup.NAME_JUDGES || account.user.userGroup.name == UserGroup.NAME_ADMINISTRATORS) ? PostVisibilityEnum.VISIBLE : PostVisibilityEnum.HIDDEN;
+				return PostVisibilityEnum.VISIBLE;
 			} else {
-				if(post.poster.showPostsToUsers != User.ENUM_SHOWPOSTSTOUSERS_ALL) return false;
-				if(post.layer.name != PostLayer.NAME_NORMAL) return false;
-				return true;
+				if(post.poster.showPostsToUsers != User.ENUM_SHOWPOSTSTOUSERS_ALL) return PostVisibilityEnum.HIDDEN;
+				if(post.layer.name != PostLayer.NAME_NORMAL) return PostVisibilityEnum.HIDDEN;
+				return PostVisibilityEnum.VISIBLE;
 			}
 		}
 

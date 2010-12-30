@@ -221,7 +221,7 @@ namespace FLocal.Common.dataobjects {
 			return new XElement("post",
 				new XElement("id", this.id),
 				new XElement("poster", this.poster.exportToXmlForViewing(context)),
-				new XElement("bodyShort", context.isPostVisible(this) ? this.bodyShort : ""),
+				new XElement("bodyShort", context.isPostVisible(this) == PostVisibilityEnum.VISIBLE ? this.bodyShort : ""),
 				new XElement("title", this.title)
 			);
 		}
@@ -232,41 +232,53 @@ namespace FLocal.Common.dataobjects {
 
 		public XElement exportToXml(UserContext context, params XElement[] additional) {
 			
-			if(!context.isPostVisible(this)) return null;
+			XElement result = null;
 
-			XElement result = new XElement("post",
-				new XElement("id", this.id),
-				new XElement("poster",
-					this.poster.exportToXmlForViewing(
-						context,
-						new XElement("isModerator", Moderator.isModerator(this.poster, this.thread).ToPlainString()),
-						new XElement("isAdministrator", (this.thread.board.administrator.userId == this.poster.id).ToPlainString())
-					)
-				),
-				new XElement("postDate", this.postDate.ToXml()),
-				new XElement("layerId", this.layerId),
-				new XElement("layerName", this.layer.name),
-				new XElement("title", this.title),
-				new XElement("body", context.outputParams.preprocessBodyIntermediate(this.body)),
-				//this.XMLBody(context),
-				new XElement("bodyShort", this.bodyShort),
-				new XElement("threadId", this.threadId),
-				new XElement("isPunishmentEnabled", ((context.account != null) && Moderator.isModerator(context.account, this.thread)).ToPlainString()),
-				new XElement("isOwner", ((context.account != null) && (this.poster.id == context.account.user.id)).ToPlainString()),
-				new XElement(
-					"specific",
-					new XElement(
-						"changeInfo",
-						new XElement("lastChangeDate", this.lastChangeDate.ToXml()),
-						new XElement("revision", this.revision.ToString())
-					)
-				)
-			);
-			if(this.totalPunishments > 0) {
-				result.Add(from punishment in punishments select new XElement("specific", punishment.exportToXml(context)));
-			}
-			if(this.parentPostId.HasValue) {
-				result.Add(new XElement("parentPost", this.parentPost.exportToXmlBase(context)));
+			switch(context.isPostVisible(this)) {
+				case PostVisibilityEnum.UNVISIBLE:
+					return null;
+				case PostVisibilityEnum.HIDDEN:
+					result = new XElement("post",
+						new XElement("hidden"),
+						new XElement("id", this.id)
+					);
+					break;
+				case PostVisibilityEnum.VISIBLE:
+					result = new XElement("post",
+						new XElement("id", this.id),
+						new XElement("poster",
+							this.poster.exportToXmlForViewing(
+								context,
+								new XElement("isModerator", Moderator.isModerator(this.poster, this.thread).ToPlainString()),
+								new XElement("isAdministrator", (this.thread.board.administrator.userId == this.poster.id).ToPlainString())
+							)
+						),
+						new XElement("postDate", this.postDate.ToXml()),
+						new XElement("layerId", this.layerId),
+						new XElement("layerName", this.layer.name),
+						new XElement("title", this.title),
+						new XElement("body", context.outputParams.preprocessBodyIntermediate(this.body)),
+						//this.XMLBody(context),
+						new XElement("bodyShort", this.bodyShort),
+						new XElement("threadId", this.threadId),
+						new XElement("isPunishmentEnabled", ((context.account != null) && Moderator.isModerator(context.account, this.thread)).ToPlainString()),
+						new XElement("isOwner", ((context.account != null) && (this.poster.id == context.account.user.id)).ToPlainString()),
+						new XElement(
+							"specific",
+							new XElement(
+								"changeInfo",
+								new XElement("lastChangeDate", this.lastChangeDate.ToXml()),
+								new XElement("revision", this.revision.ToString())
+							)
+						)
+					);
+					if(this.totalPunishments > 0) {
+						result.Add(from punishment in punishments select new XElement("specific", punishment.exportToXml(context)));
+					}
+					if(this.parentPostId.HasValue) {
+						result.Add(new XElement("parentPost", this.parentPost.exportToXmlBase(context)));
+					}
+					break;
 			}
 			if(additional.Length > 0) {
 				result.Add(additional);

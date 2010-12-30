@@ -35,7 +35,7 @@ namespace FLocal.Common.dataobjects {
 			get;
 		}
 
-		bool isPostVisible(Post post);
+		PostVisibilityEnum isPostVisible(Post post);
 
 		int maxUploadImageWidth {
 			get;

@@ -28,7 +28,7 @@ namespace FLocal.Common {
 			get;
 		}
 
-		abstract public bool isPostVisible(dataobjects.Post post);
+		abstract public PostVisibilityEnum isPostVisible(dataobjects.Post post);
 
 	}
 

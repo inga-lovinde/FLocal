@@ -92,7 +92,7 @@ namespace FLocal.IISHandler {
 			}
 		}
 
-		public override bool isPostVisible(Post post) {
+		public override PostVisibilityEnum isPostVisible(Post post) {
 			return this.userSettings.isPostVisible(post);
 		}
 

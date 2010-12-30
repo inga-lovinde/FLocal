@@ -191,7 +191,7 @@ namespace FLocal.Common.dataobjects {
 
 		public XElement exportToXml(UserContext context, params XElement[] additional) {
 
-			if(!context.isPostVisible(this.firstPost)) return null;
+			if(context.isPostVisible(this.firstPost) != PostVisibilityEnum.VISIBLE) return null;
 
 			XElement result = new XElement("thread",
 				new XElement("id", this.id),

@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="Windows-1251"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml">
 
-	<xsl:template match="post">
+	<xsl:template match="post[not(hidden)]">
+		<div>
+			<div class="darktable">
+				<a>
+					<xsl:attribute name="name">Post<xsl:value-of select="id"/></xsl:attribute>
+					<xsl:comment>fill</xsl:comment>
+				</a>
+				<div class="lighttable post">
+					<p>Вам нельзя видеть этот сладкий и запретный плод.</p>
+					<xsl:if test="/root/session/notLoggedIn">
+						<p>Возможно, <a href="/My/Login/Login/">вход на форум</a> исправит ситуацию</p>
+					</xsl:if>
+				</div>
+			</div>
+		</div>
+	</xsl:template>
+	<xsl:template match="post[hidden]">
 		<xsl:param name="isReplyDisabled">true</xsl:param>
 		<div>
 			<div class="darktable">

@@ -135,11 +135,11 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
-		public bool isPostVisible(Post post) {
-			if(post.layer.name == PostLayer.NAME_HIDDEN) return false;
-			if(post.poster.showPostsToUsers == User.ENUM_SHOWPOSTSTOUSERS_NONE) return false;
-			if(post.poster.showPostsToUsers == User.ENUM_SHOWPOSTSTOUSERS_PRIVELEGED) return this.account.user.userGroup.name == UserGroup.NAME_JUDGES || this.account.user.userGroup.name == UserGroup.NAME_ADMINISTRATORS;
-			return true;
+		public PostVisibilityEnum isPostVisible(Post post) {
+			if(post.layer.name == PostLayer.NAME_HIDDEN) return PostVisibilityEnum.HIDDEN;
+			if(post.poster.showPostsToUsers == User.ENUM_SHOWPOSTSTOUSERS_NONE) return PostVisibilityEnum.HIDDEN;
+			if(post.poster.showPostsToUsers == User.ENUM_SHOWPOSTSTOUSERS_PRIVELEGED) return (this.account.user.userGroup.name == UserGroup.NAME_JUDGES || this.account.user.userGroup.name == UserGroup.NAME_ADMINISTRATORS) ? PostVisibilityEnum.VISIBLE : PostVisibilityEnum.HIDDEN;
+			return PostVisibilityEnum.VISIBLE;
 		}
 		
 		protected override void doFromHash(Dictionary<string, string> data) {
