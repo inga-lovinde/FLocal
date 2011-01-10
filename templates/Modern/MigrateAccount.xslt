@@ -10,8 +10,9 @@
 					<table cellpadding="3" cellspacing="1" width="100%" class="tableborders">
 						<tr>
 							<td class="tdheader">
-								<xsl:text>Миграция пользователя </xsl:text>
-								<xsl:value-of select="migrationInfo/account/user/name"/>
+								<xsl:call-template name="Messages_Migration">
+									<xsl:with-param name="userName"><xsl:value-of select="migrationInfo/account/user/name"/></xsl:with-param>
+								</xsl:call-template>
 							</td> 
 						</tr>
 						<tr class="darktable"> 

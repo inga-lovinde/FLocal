@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="Windows-1251"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml">
 	<xsl:import href="elems\Main.xslt"/>
-	<xsl:template name="specificTitle">Локальные сети</xsl:template>
+	<xsl:template name="specificTitle">
+		<xsl:call-template name="Messages_LocalNetworks"/>
+	</xsl:template>
 	<xsl:template name="specific">
 		<table width="95%" align="center" cellpadding="1" cellspacing="1" class="tablesurround">
 			<tr>
@@ -13,7 +15,7 @@
 									<tr class="darktable">
 										<td align="left" width="33%">
 											<font class="catandforum">
-												<xsl:text>Локальные сети</xsl:text>
+												<xsl:call-template name="Messages_LocalNetworks"/>
 											</font>
 										</td>
 									</tr>
@@ -28,9 +30,15 @@
 		<xsl:if test="localNetworks/localNetwork">
 			<table width="95%" align="center" class="tableborders" border="1">
 				<tr>
-					<td class="tdheader" align="center" width="15%">Подсеть</td>
-					<td class="tdheader" width="70%">Описание</td>
-					<td class="tdheader" align="center" width="15%">Состояние</td>
+					<td class="tdheader" align="center" width="15%">
+						<xsl:call-template name="Messages_Subnet"/>
+					</td>
+					<td class="tdheader" width="70%">
+						<xsl:call-template name="Messages_Description"/>
+					</td>
+					<td class="tdheader" align="center" width="15%">
+						<xsl:call-template name="Messages_State"/>
+					</td>
 				</tr>
 				<xsl:apply-templates select="localNetworks/localNetwork"/>
 			</table>
@@ -57,10 +65,10 @@
 			<td align="center">
 				<xsl:choose>
 					<xsl:when test="isEnabled='true'">
-						<xsl:text>Включена</xsl:text>
+						<xsl:call-template name="Messages_Enabled"/>
 					</xsl:when>
 					<xsl:otherwise>
-						<xsl:text>Отключена</xsl:text>
+						<xsl:call-template name="Messages_Disabled"/>
 					</xsl:otherwise>
 				</xsl:choose>
 			</td>

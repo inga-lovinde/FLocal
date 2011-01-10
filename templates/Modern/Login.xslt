@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="Windows-1251"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml">
 	<xsl:import href="elems\Main.xslt"/>
-	<xsl:template name="specificTitle">Вход</xsl:template>
+	<xsl:template name="specificTitle">
+		<xsl:call-template name="Messages_Login"/>
+	</xsl:template>
 	<xsl:template name="isLiteEnabled">true</xsl:template>
 	<xsl:template name="specific">
 		<table width="95%" align="center" cellpadding="1" cellspacing="1" class="tablesurround">
@@ -10,24 +12,30 @@
 					<table cellpadding="3" cellspacing="1" width="100%" class="tableborders">
 						<tr>
 							<td class="tdheader">
-								<xsl:text>Вход</xsl:text>
+								<xsl:call-template name="Messages_Login"/>
 							</td> 
 						</tr>
 						<tr class="darktable"> 
 							<td> 
-								<xsl:text>Введите ваше имя пользователя и пароль для регистрации в форуме.</xsl:text>
-								<br/>
-								<xsl:text>Если вы ещё не пользовались этим форумом, но пришли со старого форум.локала &#8211; вы можете создать пароль в форме миграции.</xsl:text>
+								<xsl:call-template name="Messages_LoginText"/>
+								<xsl:if test="isMigrationEnabled='true'">
+									<br/>
+									<xsl:call-template name="Messages_LoginMigrationText"/>
+								</xsl:if>
 							</td> 
 						</tr> 
 						<tr> 
 							<td class="lighttable"> 
 								<form method="post" action="/do/Login/">
-									<xsl:text>Логин</xsl:text><br /> 
+									<xsl:call-template name="Messages_Username"/>
+									<br/> 
 									<input type="text" name="name" class="formboxes" /><br/>
-									<xsl:text>Пароль</xsl:text><br/> 
+									<xsl:call-template name="Messages_Password"/>
+									<br/> 
 									<input type="password" name="password" class="formboxes" /><br/>
-									<input type="submit" name="buttlogin" value="Войти!" class="buttons" /> 
+									<input type="submit" name="buttlogin" class="buttons">
+										<xsl:attribute name="value"><xsl:call-template name="Messages_Login"/></xsl:attribute>
+									</input>
 								</form> 
 							</td> 
 						</tr> 
@@ -43,20 +51,23 @@
 					<table cellpadding="3" cellspacing="1" width="100%" class="tableborders">
 						<tr>
 							<td class="tdheader">
-								<xsl:text>Миграция</xsl:text>
+								<xsl:call-template name="Messages_Migration"/>
 							</td> 
 						</tr>
 						<tr class="darktable"> 
 							<td> 
-								<xsl:text>Если вы пришли со старого форум.локала &#8211; введите свой логин.</xsl:text>
+								<xsl:call-template name="Messages_MigrationText"/>
 							</td> 
 						</tr> 
 						<tr> 
 							<td class="lighttable"> 
 								<form method="post" action="/My/Login/Migrate/">
-									<xsl:text>Логин</xsl:text><br /> 
+									<xsl:call-template name="Messages_Username"/>
+									<br/> 
 									<input type="text" name="username" class="formboxes" /><br/>
-									<input type="submit" name="buttlogin" value="Далее" class="buttons" /> 
+									<input type="submit" name="buttlogin" class="buttons">
+										<xsl:attribute name="value"><xsl:call-template name="Messages_Migration"/></xsl:attribute>
+									</input>
 								</form> 
 							</td> 
 						</tr> 
@@ -72,41 +83,45 @@
 					<table cellpadding="3" cellspacing="1" width="100%" class="tableborders">
 						<tr>
 							<td class="tdheader">
-								<xsl:text>Регистрация</xsl:text>
+								<xsl:call-template name="Messages_Registration"/>
 							</td> 
 						</tr>
 						<tr class="darktable"> 
 							<td>
 								<xsl:choose>
 									<xsl:when test="isLocalNetwork='false'">
-										<xsl:text>Ваш IP </xsl:text>
-										<xsl:value-of select="ip"/>
-										<xsl:text> не входит в список разрешённых подсетей.</xsl:text>
-										<br/>
-										<xsl:text>Если вы считаете, что это ошибка, сообщите администратору свой IP-адрес и описание сети (общежитие/учебный корпус, университет и прочее).</xsl:text>
-										<br/>
+										<xsl:call-template name="Messages_IpForbidden">
+											<xsl:with-param name="ip"><xsl:value-of select="ip"/></xsl:with-param>
+										</xsl:call-template>
 									</xsl:when>
 									<xsl:otherwise>
-										<xsl:text>Ваш IP </xsl:text>
-										<xsl:value-of select="ip"/>
-										<xsl:text> входит в список разрешённых подсетей.</xsl:text>
-										<br/>
+										<xsl:call-template name="Messages_IpForbidden">
+											<xsl:with-param name="ip"><xsl:value-of select="ip"/></xsl:with-param>
+										</xsl:call-template>
 									</xsl:otherwise>
 								</xsl:choose>
-								<a href="/Maintenance/LocalNetworks/">Список разрешённых подсетей</a>
+								<br/>
+								<a href="/Maintenance/LocalNetworks/">
+									<xsl:call-template name="Messages_LocalNetworks"/>
+								</a>
 							</td> 
 						</tr>
 						<xsl:if test="isLocalNetwork='true'">
 							<tr> 
 								<td class="lighttable"> 
 									<form method="post" action="/do/Register/">
-										<xsl:text>Имя пользователя</xsl:text><br/>
+										<xsl:call-template name="Messages_Username"/>
+										<br/>
 										<input type="text" name="login" class="formboxes" maxlength="16"/><br/>
-										<xsl:text>Новый пароль</xsl:text><br /> 
-										<input type="password" name="password" class="formboxes" /><br/>
-										<xsl:text>Повторите пароль</xsl:text><br/> 
+										<xsl:call-template name="Messages_NewPassword"/>
+										<br/>
+										<input type="password" name="password" class="formboxes"/>
+										<br/>
+										<xsl:call-template name="Messages_NewPasswordRepeat"/>
+										<br/>
 										<input type="password" name="password2" class="formboxes" /><br/>
-										<xsl:text>e-mail для восстановления пароля (необязательно)</xsl:text><br/>
+										<xsl:call-template name="Messages_AccountEmail"/>
+										<br/>
 										<input type="text" name="registrationEmail" class="formboxes" />
 										<br/>
 										<input type="checkbox" name="constitution" value="constitution" id="constitution"/>
