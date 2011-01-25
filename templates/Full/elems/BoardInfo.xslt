@@ -52,7 +52,7 @@
 		</tr>
 	</xsl:template>
 
-	<xsl:template match="lastPostInfo">
+	<xsl:template match="lastPostInfo[not(post/hidden)]">
 		<xsl:if test="post">
 			<xsl:apply-templates select="post/postDate/date" mode="dateTime"/><br />
 			<a>
@@ -61,6 +61,9 @@
 				<xsl:value-of select="post/poster/user/name"/>
 			</a>
 		</xsl:if>
+	</xsl:template>
+
+	<xsl:template match="lastPostInfo[post/hidden]">
 	</xsl:template>
 
 	<xsl:template match="subBoards/board">

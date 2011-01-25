@@ -64,7 +64,7 @@
 		</div>
 	</xsl:template>
 
-	<xsl:template match="lastPostInfo">
+	<xsl:template match="lastPostInfo[not(post/hidden)]">
 		<xsl:if test="post">
 			<p>
 				<xsl:text>Последнее сообщение:</xsl:text>
@@ -77,6 +77,9 @@
 				</a>
 			</p>
 		</xsl:if>
+	</xsl:template>
+
+	<xsl:template match="lastPostInfo[post/hidden]">
 	</xsl:template>
 
 	<xsl:template match="subBoards/board">

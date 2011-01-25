@@ -240,7 +240,8 @@ namespace FLocal.Common.dataobjects {
 				case PostVisibilityEnum.HIDDEN:
 					result = new XElement("post",
 						new XElement("hidden"),
-						new XElement("id", this.id)
+						new XElement("id", this.id),
+						new XElement("postDate", this.postDate.ToXml())
 					);
 					break;
 				case PostVisibilityEnum.VISIBLE:
