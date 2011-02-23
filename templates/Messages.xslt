@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
-	<xsl:variable name="lang">en</xsl:variable>
+	<xsl:variable name="lang">ru</xsl:variable>
 
 	<xsl:template name="Messages_AllPosts"><xsl:choose>
 		<xsl:when test="$lang='ru'">Все сообщения</xsl:when>
@@ -221,6 +221,19 @@
 		<xsl:otherwise>Users of forum.local please enter your forum.local user name.</xsl:otherwise>
 	</xsl:choose></xsl:template>
 
+	<xsl:template match="user" mode="Messages_MigrationUserFound"><xsl:choose>
+		<xsl:when test="$lang='ru'">Пользователь <xsl:apply-templates select="current()" mode="userLink"/> найден в списке пользователей старого форума.</xsl:when>
+		<xsl:otherwise>User <xsl:apply-templates select="current()" mode="userLink"/> is found in the list of users of forum.local.</xsl:otherwise>
+	</xsl:choose></xsl:template>
+
+	<xsl:template name="Messages_MigrationKeyInfo">
+		<xsl:param name="key"/>
+		<xsl:choose>
+			<xsl:when test="$lang='ru'">Введите строку <b>(fhn:<xsl:value-of select="$key"/>)</b> (вместе со скобками) в поле биографии в своём профайле на старом форуме.</xsl:when>
+			<xsl:otherwise>Write the key <b>(fhn:<xsl:value-of select="$key"/>)</b> (including the braces) in your `biography' field on forum.local.</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+
 	<xsl:template name="Messages_Registration"><xsl:choose>
 		<xsl:when test="$lang='ru'">Регистрация</xsl:when>
 		<xsl:otherwise>First-time registration</xsl:otherwise>
@@ -241,5 +254,86 @@
 			<xsl:otherwise>Registration from your IP <xsl:value-of select="$ip"/> is allowed.</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
+
+	<xsl:template name="Messages_AcceptanceRequired"><xsl:choose>
+		<xsl:when test="$lang='ru'">обязательно</xsl:when>
+		<xsl:otherwise>required</xsl:otherwise>
+	</xsl:choose></xsl:template>
+
+	<xsl:template name="Messages_AcceptConstitution"><xsl:choose>
+		<xsl:when test="$lang='ru'">Да, я согласен/согласна/согласно с тем, что на этом форуме действует <a href="/q/constitution/" style="text-decoration:underline">описанная по этой ссылке конституция</a>.</xsl:when>
+		<xsl:otherwise>I accept the <a href="/q/constitution">constitution described on this link</a>.</xsl:otherwise>
+	</xsl:choose></xsl:template>
+
+	<xsl:template name="Messages_AcceptPostsVisibility"><xsl:choose>
+		<xsl:when test="$lang='ru'">Да, я согласен/согласна/согласно с тем, чтобы мои сообщения, размещённые на этом форуме, были доступны публично.</xsl:when>
+		<xsl:otherwise>I accept that all the messages hosted on this resource are to be available publicly.</xsl:otherwise>
+	</xsl:choose></xsl:template>
+
+	<xsl:template name="Messages_AcceptLaws"><xsl:choose>
+		<xsl:when test="$lang='ru'">Да, я обязуюсь соблюдать законы Российской Федерации и Федеративной Республики Германия в общении на этом форуме.</xsl:when>
+		<xsl:otherwise>I swear not to violate state laws of the Russian Federation and of the Federal Republic of Germany.</xsl:otherwise>
+	</xsl:choose></xsl:template>
+
+	<xsl:template name="Messages_NewPoll"><xsl:choose>
+		<xsl:when test="$lang='ru'">Создание нового опроса</xsl:when>
+		<xsl:otherwise>Create new poll</xsl:otherwise>
+	</xsl:choose></xsl:template>
+
+	<xsl:template match="user" mode="Messages_CurrentUser"><xsl:choose>
+		<xsl:when test="$lang='ru'">Пользователь: <xsl:apply-templates select="current()" mode="userLink"/></xsl:when>
+		<xsl:otherwise>User: <xsl:apply-templates select="current()" mode="userLink"/></xsl:otherwise>
+	</xsl:choose></xsl:template>
+	
+	<xsl:template match="user" mode="Messages_Receiver"><xsl:choose>
+		<xsl:when test="$lang='ru'">Получатель: <xsl:apply-templates select="current()" mode="userLink"/></xsl:when>
+		<xsl:otherwise>Receiver: <xsl:apply-templates select="current()" mode="userLink"/></xsl:otherwise>
+	</xsl:choose></xsl:template>
+	
+	<xsl:template match="user" mode="Messages_Author"><xsl:choose>
+		<xsl:when test="$lang='ru'">Автор: <xsl:apply-templates select="current()" mode="userLink"/></xsl:when>
+		<xsl:otherwise>Author: <xsl:apply-templates select="current()" mode="userLink"/></xsl:otherwise>
+	</xsl:choose></xsl:template>
+	
+	<xsl:template name="Messages_Title"><xsl:choose>
+		<xsl:when test="$lang='ru'">Заголовок</xsl:when>
+		<xsl:otherwise>Title</xsl:otherwise>
+	</xsl:choose></xsl:template>
+
+	<xsl:template name="Messages_Layer"><xsl:choose>
+		<xsl:when test="$lang='ru'">Слой</xsl:when>
+		<xsl:otherwise>Layer</xsl:otherwise>
+	</xsl:choose></xsl:template>
+
+	<xsl:template name="Messages_PollIsDetailed"><xsl:choose>
+		<xsl:when test="$lang='ru'">Показывать имена проголосовавших</xsl:when>
+		<xsl:otherwise>Show users voted</xsl:otherwise>
+	</xsl:choose></xsl:template>
+
+	<xsl:template name="Messages_PollIsMultiOption"><xsl:choose>
+		<xsl:when test="$lang='ru'">Разрешить выбор нескольких вариантов</xsl:when>
+		<xsl:otherwise>Allow multiple chooses</xsl:otherwise>
+	</xsl:choose></xsl:template>
+
+	<xsl:template name="Messages_NewThread">
+		<xsl:param name="boardName"/>
+		<xsl:choose>
+			<xsl:when test="$lang='ru'">Создать новую тему в <xsl:value-of select="$boardName"/></xsl:when>
+			<xsl:otherwise>Create new thread in <xsl:value-of select="$boardName"/></xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+	
+	<xsl:template name="Messages_NewPM">
+		<xsl:param name="userName"/>
+		<xsl:choose>
+			<xsl:when test="$lang='ru'">Написать личное сообщение<xsl:if test="$userName!=''"> пользователю <xsl:value-of select="$userName"/></xsl:if></xsl:when>
+			<xsl:otherwise>Send a private message<xsl:if test="$userName!=''"> to user <xsl:value-of select="$userName"/></xsl:if></xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+	
+	<xsl:template name="Messages_OriginalMessage"><xsl:choose>
+		<xsl:when test="$lang='ru'">Исходное сообщение</xsl:when>
+		<xsl:otherwise>Original message</xsl:otherwise>
+	</xsl:choose></xsl:template>
 
 </xsl:stylesheet>

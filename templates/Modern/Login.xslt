@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="Windows-1251"?>
+<?xml version="1.0" encoding="ASCII"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml">
 	<xsl:import href="elems\Main.xslt"/>
 	<xsl:template name="specificTitle">
@@ -125,20 +125,20 @@
 										<input type="text" name="registrationEmail" class="formboxes" />
 										<br/>
 										<input type="checkbox" name="constitution" value="constitution" id="constitution"/>
-										<label for="constitution"> Да, я согласен/согласна/согласно с тем, что на этом форуме действует </label>
-										<a href="/q/constitution/" style="text-decoration:underline">описанная по этой ссылке конституция</a>
-										<xsl:text>.</xsl:text>
-										<i> (обязательно)</i>
+										<label for="constitution"> <xsl:call-template name="Messages_AcceptConstitution"/></label>
+										<i> (<xsl:call-template name="Messages_AcceptanceRequired"/>)</i>
 										<br/>
 										<input type="checkbox" name="showPostsToAll" value="showPostsToAll" id="showPostsToAll"/>
-										<label for="showPostsToAll"> Да, я согласен/согласна/согласно с тем, чтобы мои сообщения, размещённые на этом форуме, были доступны публично.</label>
-										<i> (обязательно)</i>
+										<label for="showPostsToAll"> <xsl:call-template name="Messages_AcceptPostsVisibility"/></label>
+										<i> (<xsl:call-template name="Messages_AcceptanceRequired"/>)</i>
 										<br/>
 										<input type="checkbox" name="law" value="law" id="law"/>
-										<label for="law"> Да, я обязуюсь соблюдать законы Российской Федерации и Федеративной Республики Германия в общении на этом форуме.</label>
-										<i> (обязательно)</i>
+										<label for="law"> <xsl:call-template name="Messages_AcceptLaws"/></label>
+										<i> (<xsl:call-template name="Messages_AcceptanceRequired"/>)</i>
 										<br/>
-										<input type="submit" name="buttlogin" value="Зарегистрироваться!" class="buttons" /> 
+										<input type="submit" name="buttlogin" class="buttons">
+											<xsl:attribute name="value"><xsl:call-template name="Messages_Registration"/></xsl:attribute>
+										</input>
 									</form>
 								</td> 
 							</tr> 

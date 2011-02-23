@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="Windows-1251"?>
+<?xml version="1.0" encoding="ASCII"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml">
 	<xsl:import href="elems\Main.xslt"/>
 	<xsl:template name="specificTitle">Миграция</xsl:template>
@@ -17,13 +17,11 @@
 						</tr>
 						<tr class="darktable"> 
 							<td>
-								<xsl:text>Пользователь </xsl:text>
-								<xsl:apply-templates select="migrationInfo/account/user" mode="userLink"/>
-								<xsl:text> найден в списке пользователей старого форума.</xsl:text>
+								<xsl:apply-templates mode="Messages_MigrationUserFound" select="migrationInfo/account/user"/>
 								<br/>
-								<xsl:text>Введите строку </xsl:text>
-								<b>(fhn:<xsl:value-of select="migrationInfo/key"/>)</b>
-								<xsl:text> (вместе со скобками) в поле биографии в своём профайле на старом форуме.</xsl:text>
+								<xsl:call-template name="Messages_MigrationKeyInfo">
+									<xsl:with-param name="key"><xsl:value-of select="migrationInfo/key"/></xsl:with-param>
+								</xsl:call-template>
 							</td> 
 						</tr> 
 						<tr> 
@@ -35,28 +33,32 @@
 									<input type="hidden" name="check">
 										<xsl:attribute name="value"><xsl:value-of select="migrationInfo/check"/></xsl:attribute>
 									</input>
-									<xsl:text>Новый пароль</xsl:text><br /> 
-									<input type="password" name="password" class="formboxes" /><br/>
-									<xsl:text>Повторите пароль</xsl:text><br/> 
+									<xsl:call-template name="Messages_NewPassword"/>
+									<br/>
+									<input type="password" name="password" class="formboxes"/>
+									<br/>
+									<xsl:call-template name="Messages_NewPasswordRepeat"/>
+									<br/>
 									<input type="password" name="password2" class="formboxes" /><br/>
-									<xsl:text>e-mail для восстановления пароля (необязательно)</xsl:text><br/>
+									<xsl:call-template name="Messages_AccountEmail"/>
+									<br/>
 									<input type="text" name="registrationEmail" class="formboxes" />
 									<br/>
 									<input type="checkbox" name="constitution" value="constitution" id="constitution"/>
-									<label for="constitution"> Да, я согласен/согласна/согласно с тем, что на этом форуме действует </label>
-									<a href="/q/constitution/" style="text-decoration:underline">описанная по этой ссылке конституция</a>
-									<xsl:text>.</xsl:text>
-									<i> (обязательно)</i>
+									<label for="constitution"> <xsl:call-template name="Messages_AcceptConstitution"/></label>
+									<i> (<xsl:call-template name="Messages_AcceptanceRequired"/>)</i>
 									<br/>
 									<input type="checkbox" name="showPostsToAll" value="showPostsToAll" id="showPostsToAll"/>
-									<label for="showPostsToAll"> Да, я согласен/согласна/согласно с тем, чтобы мои сообщения, размещённые на этом форуме или на форум.локале (форумбгз.ру), были доступны публично.</label>
-									<i> (обязательно)</i>
+									<label for="showPostsToAll"> <xsl:call-template name="Messages_AcceptPostsVisibility"/></label>
+									<i> (<xsl:call-template name="Messages_AcceptanceRequired"/>)</i>
 									<br/>
 									<input type="checkbox" name="law" value="law" id="law"/>
-									<label for="law"> Да, я обязуюсь соблюдать законы Российской Федерации и Федеративной Республики Германия в общении на этом форуме.</label>
-									<i> (обязательно)</i>
+									<label for="law"> <xsl:call-template name="Messages_AcceptLaws"/></label>
+									<i> (<xsl:call-template name="Messages_AcceptanceRequired"/>)</i>
 									<br/>
-									<input type="submit" name="buttlogin" value="Мигрировать!" class="buttons" /> 
+									<input type="submit" name="buttlogin" class="buttons">
+										<xsl:call-template name="Messages_Migration"/>
+									</input>
 								</form>
 								<h3 style="color:red">
 									<xsl:text>Если у вас что-то не получается - прочитайте </xsl:text>

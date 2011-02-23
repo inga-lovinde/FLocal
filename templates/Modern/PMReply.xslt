@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="Windows-1251"?>
+<?xml version="1.0" encoding="ASCII"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml">
 	<xsl:import href="elems\Main.xslt"/>
 	<xsl:import href="elems\TextEditor.xslt"/>
 	<xsl:template name="specificTitle">
-		<xsl:text>Ответ на личное сообщение - </xsl:text>
-		<xsl:value-of select="message/interlocutor/account/user/name"/>
+		<xsl:call-template name="Messages_NewPM">
+			<xsl:with-param name="userName" select="message/interlocutor/account/user/name"/>
+		</xsl:call-template>
 	</xsl:template>
 	<xsl:template name="isLiteEnabled">true</xsl:template>
 	<xsl:template name="specific">
@@ -14,27 +15,24 @@
 					<table cellpadding="3" cellspacing="1" width="100%" class="tableborders">
 						<tr>
 							<td class="tdheader">
-								<xsl:text>Ответ на личное сообщение (</xsl:text>
-								<xsl:value-of select="message/interlocutor/account/user/name"/>
-								<xsl:text>)</xsl:text>
+								<xsl:call-template name="Messages_NewPM">
+									<xsl:with-param name="userName" select="message/interlocutor/account/user/name"/>
+								</xsl:call-template>
 							</td> 
 						</tr>
-						<tr class="darktable"> 
-							<td> 
-								<xsl:text>Заполните приведенную ниже форму для отправки личного сообщения. HTML отключен. UBBCode включен, и вы можете использовать UBBCode в ваших сообщениях. Анонимные сообщения разрешены, и вы можете выбрать любое незарегистрированное имя.</xsl:text>
-							</td> 
-						</tr> 
 						<tr> 
 							<td class="lighttable"> 
 								<form method="post" action="/do/SendPM/" name="replier">
 									<input type="hidden" name="receiverId">
 										<xsl:attribute name="value"><xsl:value-of select="message/interlocutor/account/id"/></xsl:attribute>
 									</input>
-									<xsl:text>Пользователь: </xsl:text>
-									<xsl:value-of select="session/user/name"/>
+									<xsl:apply-templates select="session/user" mode="Messages_CurrentUser"/>
+									<br/>
+									<xsl:apply-templates select="message/interlocutor/account/user" mode="Messages_Receiver"/>
 									<br/>
 									<br/>
-									<xsl:text>Тема: </xsl:text>
+									<xsl:call-template name="Messages_Title"/>
+									<xsl:text>:</xsl:text>
 									<br/>
 									<input type="text" tabindex="1" name="title" maxlength="70" class="formboxes" size="60">
 										<xsl:choose>
@@ -59,7 +57,13 @@
 </xsl:text>
 										</xsl:with-param>
 									</xsl:call-template>
-									<input type="submit" tabindex="3" name="textcont" taborder="2" value="Продолжить" class="buttons"/>
+									<input type="submit" tabindex="3" name="textcont" taborder="2" class="buttons">
+										<xsl:attribute name="value">
+											<xsl:call-template name="Messages_NewPM">
+												<xsl:with-param name="userName" select="message/interlocutor/account/user/name"/>
+											</xsl:call-template>
+										</xsl:attribute>
+									</input>
 								</form>
 							</td>
 						</tr>
@@ -76,16 +80,16 @@
 					<table cellpadding="3" cellspacing="1" width="100%" class="tableborders">
 						<tr>
 							<td class="tdheader">
-								<xsl:text>Ответ на сообщение</xsl:text>
+								<xsl:call-template name="Messages_OriginalMessage"/>
 							</td> 
 						</tr>
 						<tr class="darktable"> 
 							<td>
 								<b>
-									<xsl:text>Автор: </xsl:text>
-									<xsl:value-of select="message/poster/account/user/name"/>
+									<xsl:apply-templates select="message/interlocutor/account/user" mode="Messages_Author"/>
 									<br/>
-									<xsl:text>Тема: </xsl:text>
+									<xsl:call-template name="Messages_Title"/>
+									<xsl:text>: </xsl:text>
 									<xsl:value-of select="message/title"/>
 								</b>
 							</td> 

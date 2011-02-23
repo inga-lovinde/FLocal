@@ -2,7 +2,7 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml">
 	<xsl:import href="elems\Main.xslt"/>
 	<xsl:template name="specificTitle">
-		<xsl:text>Новый опорос</xsl:text>
+		<xsl:call-template name="Messages_NewPoll"/>
 	</xsl:template>
 	<xsl:template name="isLiteEnabled">true</xsl:template>
 	<xsl:template name="specific">
@@ -12,22 +12,17 @@
 					<table cellpadding="3" cellspacing="1" width="100%" class="tableborders">
 						<tr>
 							<td class="tdheader">
-								<xsl:text>Создание нового опроса</xsl:text>
+								<xsl:call-template name="Messages_NewPoll"/>
 							</td> 
 						</tr>
-						<tr class="darktable"> 
-							<td> 
-								<xsl:text>Заполните приведенную ниже форму для отправки сообщения в форум. HTML отключен. UBBCode включен, и вы можете использовать UBBCode в ваших сообщениях. Анонимные сообщения разрешены, и вы можете выбрать любое незарегистрированное имя.</xsl:text>
-							</td> 
-						</tr> 
 						<tr> 
 							<td class="lighttable"> 
 								<form method="post" action="/do/NewPoll/" name="replier">
-									<xsl:text>Пользователь: </xsl:text>
-									<xsl:value-of select="session/user/name"/>
+									<xsl:apply-templates select="session/user" mode="Messages_User"/>
 									<br/>
 									<br/>
-									<xsl:text>Тема: </xsl:text>
+									<xsl:call-template name="Messages_Title"/>
+									<xsl:text>:</xsl:text>
 									<br/>
 									<textarea cols="100" tabindex="2" rows="3" class="formboxes" name="title">
 										<xsl:text> </xsl:text>
@@ -35,10 +30,10 @@
 									<br/>
 									<br/>
 									<input type="checkbox" name="isDetailed" value="isDetailed" id="isDetailed"/>
-									<label for="isDetailed"> Показывать имена проголосовавших</label>
+									<label for="isDetailed"> <xsl:call-template name="Messages_PollIsDetailed"/></label>
 									<br/>
 									<input type="checkbox" name="isMultiOption" value="isMultiOption" id="isMultiOption"/>
-									<label for="isMultiOption"> Разрешить выбор нескольких вариантов</label>
+									<label for="isMultiOption"> <xsl:call-template name="Messages_PollIsMultioption"/></label>
 									<br/>
 									<br/>
 									<xsl:text>Вариант 1: </xsl:text>
@@ -181,7 +176,9 @@
 									</textarea>
 									<br/>
 									<br/>
-									<input type="submit" tabindex="3" name="textcont" taborder="2" value="Продолжить" class="buttons"/>
+									<input type="submit" tabindex="3" name="textcont" taborder="2" class="buttons">
+										<xsl:call-template name="Messages_NewPoll"/>
+									</input>
 								</form>
 							</td>
 						</tr>
