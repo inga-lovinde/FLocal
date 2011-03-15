@@ -52,7 +52,7 @@ namespace FLocal.Common.dataobjects {
 
 		protected override void doFromHash(Dictionary<string, string> data) {
 			this._accountId = int.Parse(data[TableSpec.FIELD_ACCOUNTID]);
-			this._avatarsIds = new HashSet<int>(from stringId in data[TableSpec.FIELD_AVATARS].Split(',') select int.Parse(stringId));
+			this._avatarsIds = new HashSet<int>(from stringId in data[TableSpec.FIELD_AVATARS].Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries) select int.Parse(stringId));
 		}
 
 		private static readonly Dictionary<int, int> accountid2id = new Dictionary<int,int>();
