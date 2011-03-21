@@ -310,7 +310,7 @@
 		<xsl:otherwise>Show users voted</xsl:otherwise>
 	</xsl:choose></xsl:template>
 
-	<xsl:template name="Messages_PollIsMultiOption"><xsl:choose>
+	<xsl:template name="Messages_PollIsMultioption"><xsl:choose>
 		<xsl:when test="$lang='ru'">Разрешить выбор нескольких вариантов</xsl:when>
 		<xsl:otherwise>Allow multiple chooses</xsl:otherwise>
 	</xsl:choose></xsl:template>

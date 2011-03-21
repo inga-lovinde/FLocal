@@ -18,7 +18,7 @@
 						<tr> 
 							<td class="lighttable"> 
 								<form method="post" action="/do/NewPoll/" name="replier">
-									<xsl:apply-templates select="session/user" mode="Messages_User"/>
+									<xsl:apply-templates select="session/user" mode="Messages_CurrentUser"/>
 									<br/>
 									<br/>
 									<xsl:call-template name="Messages_Title"/>
