@@ -95,7 +95,7 @@
 										</xsl:call-template>
 									</xsl:when>
 									<xsl:otherwise>
-										<xsl:call-template name="Messages_IpForbidden">
+										<xsl:call-template name="Messages_IpAllowed">
 											<xsl:with-param name="ip"><xsl:value-of select="ip"/></xsl:with-param>
 										</xsl:call-template>
 									</xsl:otherwise>
