@@ -179,7 +179,7 @@ namespace FLocal.IISHandler {
 
 		private void AddCommonData(HttpCookie cookie) {
 			cookie.HttpOnly = true;
-			cookie.Secure = true;
+			cookie.Secure = Config.instance.forceHttps;
 			cookie.Domain = "." + String.Join(".", this.httprequest.Url.Host.Split(".", StringSplitOptions.RemoveEmptyEntries).Slice(1).ToArray());
 			cookie.Path = "/";
 		}

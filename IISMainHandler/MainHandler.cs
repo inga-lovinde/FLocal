@@ -15,11 +15,6 @@ namespace FLocal.IISHandler {
 
 		private void doProcessRequest(HttpContext httpcontext) {
 
-			Uri referer = httpcontext.Request.UrlReferrer;
-			if(referer != null && referer.PathAndQuery.StartsWith("/static") && !httpcontext.Request.Path.StartsWith("/static")) {
-				throw new HttpException(403, "You have come from the static page '" + referer + "'");
-			}
-
 			if(!Config.isInitialized) {
 				lock(typeof(Config)) {
 					if(!Config.isInitialized) {
@@ -31,6 +26,14 @@ namespace FLocal.IISHandler {
 			Uri current = httpcontext.Request.Url;
 			if(!current.Host.EndsWith(Config.instance.BaseHost)) {
 				throw new FLocal.Core.FLocalException("Wrong host: " + current.Host + " (expected *" + Config.instance.BaseHost + ")");
+			}
+			if(Config.instance.forceHttps && !httpcontext.Request.IsSecureConnection) {
+				throw new FLocal.Core.FLocalException("Only HTTPS connections are allowed");
+			}
+
+			Uri referer = httpcontext.Request.UrlReferrer;
+			if(referer != null && referer.PathAndQuery.StartsWith("/static") && !httpcontext.Request.Path.StartsWith("/static")) {
+				throw new HttpException(403, "You have come from the static page '" + referer + "'");
 			}
 
 			WebContext context = new WebContext(httpcontext);

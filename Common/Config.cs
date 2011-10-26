@@ -38,6 +38,8 @@ namespace FLocal.Common {
 		public readonly HashSet<string> AdditionalHosts;
 
 		public readonly string CookiesPrefix;
+		
+		public readonly bool forceHttps;
 
 		public readonly int MinPostId;
 
@@ -59,6 +61,7 @@ namespace FLocal.Common {
 			this.BaseHost = data["BaseHost"];
 			this.AdditionalHosts = new HashSet<string>(from host in data["AdditionalHosts"].Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries) select host.Trim());
 			this.CookiesPrefix = data["CookiesPrefix"];
+			this.forceHttps = parseBool(data["ForceHTTPS"]);
 			this.MinPostId = int.Parse(data["MinPostId"]);
 			this.SessionLifetime = int.Parse(data["SessionLifetime"]);
 		}
