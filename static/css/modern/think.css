@@ -1,0 +1,11 @@
+@import "high-contrast.css";
+
+BODY{
+	background-image:url('/static/images/modern/think/think.png');
+	background-repeat:no-repeat;
+	background-attachment:fixed;
+	background-position:right bottom;
+}
+
+.header, .header a { text-transform:uppercase; font-family:Courier, monospace; }
+.categorycontainer_title, .boardcontainer_name { text-transform:uppercase; font-family:Courier, monospace; }
