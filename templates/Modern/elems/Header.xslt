@@ -60,7 +60,8 @@
 				<a>
 					<xsl:if test="$isClassicEnabled='true'">
 						<xsl:attribute name="href">
-							<xsl:text>https://classic</xsl:text>
+							<xsl:value-of select="url/scheme"/>
+							<xsl:text>://classic</xsl:text>
 							<xsl:value-of select="$postfix"/>
 							<xsl:value-of select="currentUrl"/>
 						</xsl:attribute>
@@ -76,7 +77,8 @@
 			<a>
 				<xsl:if test="$isLiteEnabled='true'">
 					<xsl:attribute name="href">
-						<xsl:text>https://lite</xsl:text>
+						<xsl:value-of select="url/scheme"/>
+						<xsl:text>://lite</xsl:text>
 						<xsl:value-of select="$postfix"/>
 						<xsl:value-of select="currentUrl"/>
 					</xsl:attribute>
@@ -95,7 +97,8 @@
 			<a>
 				<xsl:if test="$isRssEnabled='true'">
 					<xsl:attribute name="href">
-						<xsl:text>https://rss</xsl:text>
+						<xsl:value-of select="url/scheme"/>
+						<xsl:text>://rss</xsl:text>
 						<xsl:value-of select="$postfix"/>
 						<xsl:value-of select="$rssRelativeLink"/>
 					</xsl:attribute>
@@ -113,7 +116,8 @@
 			<xsl:if test="$isRssEnabled='true'">
 				<link rel="alternate" type="application/rss+xml" title="RSS">
 					<xsl:attribute name="href">
-						<xsl:text>https://rss</xsl:text>
+						<xsl:value-of select="url/scheme"/>
+						<xsl:text>://rss</xsl:text>
 						<xsl:value-of select="$postfix"/>
 						<xsl:value-of select="$rssRelativeLink"/>
 					</xsl:attribute>

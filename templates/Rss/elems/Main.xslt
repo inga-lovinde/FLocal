@@ -3,7 +3,8 @@
 	<xsl:output method="xml" indent="no" />
 
 	<xsl:variable name="mainUrl">
-		<xsl:text>https://</xsl:text>
+		<xsl:value-of select="/root/url/scheme"/>
+		<xsl:text>://</xsl:text>
 		<xsl:value-of select="/root/url/host"/>
 		<xsl:text>:</xsl:text>
 		<xsl:if test="/root/url/port &gt;= 1000">

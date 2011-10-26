@@ -21,6 +21,7 @@ namespace FLocal.IISHandler.handlers {
 			return new XElement[] {
 				new XElement(
 					"url",
+					new XElement("scheme", context.httprequest.Url.Scheme),
 					new XElement("host", context.httprequest.Url.Host),
 					new XElement("port", context.httprequest.Url.Port)
 				),

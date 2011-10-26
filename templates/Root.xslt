@@ -28,7 +28,8 @@
 									</xsl:choose>
 								</h1>
 								<xsl:variable name="prefix">
-									<xsl:text>https://</xsl:text>
+									<xsl:value-of select="url/scheme"/>
+									<xsl:text>://</xsl:text>
 									<xsl:value-of select="url/host"/>
 									<xsl:text>:</xsl:text>
 									<xsl:if test="url/port &gt;= 1000">
