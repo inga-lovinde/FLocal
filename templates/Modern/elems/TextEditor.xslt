@@ -145,7 +145,7 @@ function insertInBody(str) {
 							</td>
 							-->
 							<td class="darktable" colspan="3" align="center">
-								<a href="/Polls/New/">Создать опрос</a>
+								<a href="/Polls/New/" target="_blank">Создать опрос</a>
 							</td>
 						</tr>
 						<tr>
