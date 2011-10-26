@@ -66,5 +66,23 @@ namespace FLocal.Common.dataobjects {
 			);
 		}
 
+		private static Dictionary<string, int> name2id = new Dictionary<string, int>();
+		public static Skin LoadByName(string _name) {
+			string name = _name;
+			if(!name2id.ContainsKey(name)) {
+				lock(name2id) {
+					if(!name2id.ContainsKey(name)) {
+						name2id[name] = int.Parse(
+							Config.instance.mainConnection.LoadIdByField(
+								TableSpec.instance.getColumnSpec(TableSpec.FIELD_NAME),
+								name
+							)
+						);
+					}
+				}
+			}
+			return Skin.LoadById(name2id[name]);
+		}
+
 	}
 }

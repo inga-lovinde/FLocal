@@ -45,6 +45,10 @@ namespace FLocal.Common {
 
 		public readonly int SessionLifetime;
 
+		public readonly string DefaultModernSkin;
+		public readonly string DefaultLegacySkin;
+		public readonly string DefaultMachichara;
+
 		protected Config(NameValueCollection data) : base(data) {
 			this.InitTime = DateTime.Now.ToLongTimeString();
 			this.mainConnection = new MySQLConnector.Connection(data["ConnectionString"], MySQLConnector.PostgresDBTraits.instance);
@@ -64,6 +68,9 @@ namespace FLocal.Common {
 			this.forceHttps = parseBool(data["ForceHTTPS"]);
 			this.MinPostId = int.Parse(data["MinPostId"]);
 			this.SessionLifetime = int.Parse(data["SessionLifetime"]);
+			this.DefaultLegacySkin = data["DefaultLegacySkin"];
+			this.DefaultModernSkin = data["DefaultModernSkin"];
+			this.DefaultMachichara = data["DefaultMachichara"];
 		}
 
 		public static void Init(NameValueCollection data) {

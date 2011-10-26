@@ -13,9 +13,10 @@ namespace FLocal.Common.dataobjects {
 			this.account = account;
 			//var allSkins = Skin.allSkins.ToArray();
 			//this._skinId = allSkins[Util.RandomInt(0, allSkins.Length)].id;
-			this._skinId = 28;
-			this._modernSkinId = 2;
-			this._machicharaId = 5;
+			//this._skinId = 28;
+			this._skinId = Skin.LoadByName(Config.instance.DefaultLegacySkin).id;
+			this._modernSkinId = ModernSkin.LoadByName(Config.instance.DefaultModernSkin).id;
+			this._machicharaId = Machichara.LoadByName(Config.instance.DefaultMachichara).id;
 		}
 
 		public int threadsPerPage {
