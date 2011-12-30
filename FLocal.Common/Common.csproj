@@ -185,7 +185,7 @@
     <Compile Include="UserSettingsGateway.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core\Core.csproj">
+    <ProjectReference Include="..\Web.Core\Core.csproj">
       <Project>{6F532626-E9F8-498E-9683-1538E7CD62CB}</Project>
       <Name>Core</Name>
     </ProjectReference>
@@ -197,7 +197,7 @@
       <Project>{7D2A38F8-C42D-4F9F-AF64-1DDD5842C7EC}</Project>
       <Name>TexCompiler</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ThirdParty\BBCode\BBCode.vbproj">
+    <ProjectReference Include="..\ThirdParty\PJonDevelopment.BBCode\BBCode.vbproj">
       <Project>{ACDDD5D1-119F-4B82-8FE6-6515C812795B}</Project>
       <Name>BBCode</Name>
     </ProjectReference>

@@ -28,49 +28,58 @@
 		</Directory>
 		<DirectoryRef Id="BINARIESROOTDIRECTORY">
 			<Component Id="Core.dll" Guid="B8542489-E367-4AC6-9FCF-EA3454F0D64{targetId}">
-				<File Id="Core.dll" Source="..\..\Core\bin\Release\Core.dll" KeyPath="yes" Checksum="yes"/>
+				<File Id="Core.dll" Source="..\..\Web.Core\bin\Release\Core.dll" KeyPath="yes" Checksum="yes"/>
 			</Component>
 			<Component Id="Core.pdb" Guid="3109981C-0182-48CA-B1CA-8F68F1C0F4B{targetId}">
-				<File Id="Core.pdb" Source="..\..\Core\bin\Release\Core.pdb" KeyPath="yes" Checksum="yes"/>
+				<File Id="Core.pdb" Source="..\..\Web.Core\bin\Release\Core.pdb" KeyPath="yes" Checksum="yes"/>
 			</Component>
 			<Component Id="Common.dll" Guid="4CD35090-702C-479D-826B-2DE966FB0D4{targetId}">
-				<File Id="Common.dll" Source="..\..\Common\bin\Release\Common.dll" KeyPath="yes" Checksum="yes"/>
+				<File Id="Common.dll" Source="..\..\FLocal.Common\bin\Release\Common.dll" KeyPath="yes" Checksum="yes"/>
 			</Component>
 			<Component Id="Common.pdb" Guid="78F773B8-0B28-4657-8E13-739FDB16F3C{targetId}">
-				<File Id="Common.pdb" Source="..\..\Common\bin\Release\Common.pdb" KeyPath="yes" Checksum="yes"/>
+				<File Id="Common.pdb" Source="..\..\FLocal.Common\bin\Release\Common.pdb" KeyPath="yes" Checksum="yes"/>
 			</Component>
 			<Component Id="MySQLConnector.dll" Guid="924EC439-F1F0-431F-A6EA-152C321F614{targetId}">
 				<File Id="MySQLConnector.dll" Source="..\..\MySQLConnector\bin\Release\MySQLConnector.dll" KeyPath="yes" Checksum="yes"/>
 			</Component>
 			<Component Id="MySQLConnector.pdb" Guid="32AA82C5-1561-4612-A113-C7A099C3ECE{targetId}">
-				<File Id="MySQLConnector.pdb" Source="..\..\IISMainHandler\bin\Release\MySQLConnector.pdb" KeyPath="yes" Checksum="yes"/>
+				<File Id="MySQLConnector.pdb" Source="..\..\MySQLConnector\bin\Release\MySQLConnector.pdb" KeyPath="yes" Checksum="yes"/>
 			</Component>
 			<Component Id="IISMainHandler.dll" Guid="E3BCF3A1-75C0-4CD7-95D4-4A0245B1CA1{targetId}">
-				<File Id="IISMainHandler.dll" Source="..\..\IISMainHandler\bin\Release\IISMainHandler.dll" KeyPath="yes" Checksum="yes"/>
+				<File Id="IISMainHandler.dll" Source="..\..\FLocal.IISHandler\bin\Release\IISMainHandler.dll" KeyPath="yes" Checksum="yes"/>
 			</Component>
 			<Component Id="IISMainHandler.pdb" Guid="4F5F1280-8EC8-4C56-80F4-8C810F0C839{targetId}">
-				<File Id="IISMainHandler.pdb" Source="..\..\IISMainHandler\bin\Release\IISMainHandler.pdb" KeyPath="yes" Checksum="yes"/>
+				<File Id="IISMainHandler.pdb" Source="..\..\FLocal.IISHandler\bin\Release\IISMainHandler.pdb" KeyPath="yes" Checksum="yes"/>
 			</Component>
 			<Component Id="Importer.dll" Guid="F25304A3-2705-4E97-B0E9-1DF04C277AD{targetId}">
-				<File Id="Importer.dll" Source="..\..\Importer\bin\Release\Importer.dll" KeyPath="yes" Checksum="yes"/>
+				<File Id="Importer.dll" Source="..\..\FLocal.Migration.Gateway\bin\Release\Importer.dll" KeyPath="yes" Checksum="yes"/>
 			</Component>
 			<Component Id="Importer.pdb" Guid="6AE31E67-EFC6-471B-BB55-0DF628399D3{targetId}">
-				<File Id="Importer.pdb" Source="..\..\Importer\bin\Release\Importer.pdb" KeyPath="yes" Checksum="yes"/>
+				<File Id="Importer.pdb" Source="..\..\FLocal.Migration.Gateway\bin\Release\Importer.pdb" KeyPath="yes" Checksum="yes"/>
 			</Component>
 			<Component Id="ImportConsole.exe" Guid="45962809-9BE4-4792-9759-21C49FCA57F{targetId}">
-				<File Id="ImportConsole.exe" Source="..\..\ImportConsole\bin\Release\ImportConsole.exe" KeyPath="yes" Checksum="yes"/>
+				<File Id="ImportConsole.exe" Source="..\..\FLocal.Migration.Console\bin\Release\ImportConsole.exe" KeyPath="yes" Checksum="yes"/>
 			</Component>
 			<Component Id="ImportConsole.pdb" Guid="6E5DCF23-7247-4DE0-BB6D-1A846372343{targetId}">
-				<File Id="ImportConsole.pdb" Source="..\..\ImportConsole\bin\Release\ImportConsole.pdb" KeyPath="yes" Checksum="yes"/>
+				<File Id="ImportConsole.pdb" Source="..\..\FLocal.Migration.Console\bin\Release\ImportConsole.pdb" KeyPath="yes" Checksum="yes"/>
 			</Component>
 			<Component Id="NConsoler.dll" Guid="F39FD087-8961-4871-9D59-FDB83002BC9{targetId}">
 				<File Id="NConsoler.dll" Source="..\..\ThirdParty\NConsoler\NConsoler.dll" KeyPath="yes" Checksum="yes"/>
 			</Component>
+			<Component Id="Mono.Security.dll" Guid="FCE3247F-DF6C-4F48-B6B9-F72C20D4E51{targetId}">
+				<File Id="Mono.Security.dll" Source="..\..\ThirdParty\Mono.Security\Mono.Security.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="Npgsql.dll" Guid="BE0FFB89-9304-41DE-B365-7213AD44114{targetId}">
+				<File Id="Npgsql.dll" Source="..\..\ThirdParty\Npgsql\Npgsql.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="Npgsql.pdb" Guid="1AFEC953-FAE1-4B51-A24B-BFF09C4CFBC{targetId}">
+				<File Id="Npgsql.pdb" Source="..\..\ThirdParty\Npgsql\Npgsql.pdb" KeyPath="yes" Checksum="yes"/>
+			</Component>
 			<Component Id="PJonDevelopment.BBCode.dll" Guid="5271E184-FCCB-433C-B789-959B410D6DD{targetId}">
-				<File Id="PJonDevelopment.BBCode.dll" Source="..\..\ThirdParty\BBCode\bin\Release\PJonDevelopment.BBCode.dll" KeyPath="yes" Checksum="yes"/>
+				<File Id="PJonDevelopment.BBCode.dll" Source="..\..\ThirdParty\PJonDevelopment.BBCode\bin\Release\PJonDevelopment.BBCode.dll" KeyPath="yes" Checksum="yes"/>
 			</Component>
 			<Component Id="PJonDevelopment.BBCode.pdb" Guid="EFFBA1FA-A3A8-4D20-8894-AFD255B9F00{targetId}">
-				<File Id="PJonDevelopment.BBCode.pdb" Source="..\..\ThirdParty\BBCode\bin\Release\PJonDevelopment.BBCode.pdb" KeyPath="yes" Checksum="yes"/>
+				<File Id="PJonDevelopment.BBCode.pdb" Source="..\..\ThirdParty\PJonDevelopment.BBCode\bin\Release\PJonDevelopment.BBCode.pdb" KeyPath="yes" Checksum="yes"/>
 			</Component>
 			<Component Id="TexCompiler.dll" Guid="6FD050AF-61D7-4BFF-B206-A4420A83FB5{targetId}">
 				<File Id="TexCompiler.dll" Source="..\..\TexCompiler\bin\Release\TexCompiler.dll" KeyPath="yes" Checksum="yes"/>
@@ -78,12 +87,6 @@
 			<Component Id="TexCompiler.pdb" Guid="707304A1-9774-446F-B672-FA25EAD8E4F{targetId}">
 				<File Id="TexCompiler.pdb" Source="..\..\TexCompiler\bin\Release\TexCompiler.pdb" KeyPath="yes" Checksum="yes"/>
 			</Component>
-			<!--Component Id="MySql.Data.dll" Guid="90646729-6B21-4BEE-94C3-F39F5288EFB{targetId}">
-				<File Id="MySql.Data.dll" Source="..\..\ThirdParty\mysql-connector-net-6.2.3\MySql.Data\Provider\bin\Release\MySql.Data.dll" KeyPath="yes" Checksum="yes"/>
-			</Component>
-			<Component Id="MySql.Data.pdb" Guid="7105BA2A-A10A-4E41-AA4F-30FA66499BE{targetId}">
-				<File Id="MySql.Data.pdb" Source="..\..\ThirdParty\mysql-connector-net-6.2.3\MySql.Data\Provider\bin\Release\MySql.Data.pdb" KeyPath="yes" Checksum="yes"/>
-			</Component-->
 		</DirectoryRef>
 		<DirectoryRef Id="ARCHIVEDIRECTORY">
 			<Component Id="Templates.7z" Guid="B41F4142-A39C-43BE-8D20-F31BFFA9B48{targetId}">
@@ -134,10 +137,13 @@
 				<ComponentRef Id='PJonDevelopment.BBCode.dll' />
 				<ComponentRef Id='PJonDevelopment.BBCode.pdb' />
 			</Feature>
-			<!--Feature Id='MySql.Data' Title='MySql Connector/NET' Level='1'>
-				<ComponentRef Id='MySql.Data.dll' />
-				<ComponentRef Id='MySql.Data.pdb' />
-			</Feature-->
+			<Feature Id='Mono.Security' Title='Mono.Security' Level='1'>
+				<ComponentRef Id='Mono.Security.dll' />
+			</Feature>
+			<Feature Id='Npgsql' Title='PostgreSQL driver' Level='1'>
+				<ComponentRef Id='Npgsql.dll' />
+				<ComponentRef Id='Npgsql.pdb' />
+			</Feature>
 		</Feature>
 		<Feature Id="Data" Title="Various data sets" Level="1">
 			<ComponentRef Id="_7z.exe"/>

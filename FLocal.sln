@@ -1,25 +1,23 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Web Developer Express 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IISMainHandler", "IISMainHandler\IISMainHandler.csproj", "{9A902732-E7F1-4F41-869B-316AF2254B36}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IISMainHandler", "FLocal.IISHandler\IISMainHandler.csproj", "{9A902732-E7F1-4F41-869B-316AF2254B36}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{6F532626-E9F8-498E-9683-1538E7CD62CB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Web.Core\Core.csproj", "{6F532626-E9F8-498E-9683-1538E7CD62CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{CE888859-9E46-41F7-91CE-8EC106F3A625}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "FLocal.Common\Common.csproj", "{CE888859-9E46-41F7-91CE-8EC106F3A625}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySQLConnector", "MySQLConnector\MySQLConnector.csproj", "{E38DE5B1-F9C2-43BA-A5DF-0743ABD4DFC7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Builder", "Builder\Builder.csproj", "{D8D6EFEC-76D7-4870-BD71-C90FA6D7368A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tmp", "tmp\tmp.csproj", "{BDC42785-41F7-4C32-880E-A6C43A448054}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Importer", "FLocal.Migration.Gateway\Importer.csproj", "{E2ECF86C-C0BA-4782-A485-E267BB213BB2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Importer", "Importer\Importer.csproj", "{E2ECF86C-C0BA-4782-A485-E267BB213BB2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImportConsole", "FLocal.Migration.Console\ImportConsole.csproj", "{208B84AF-A5DD-4C20-83D5-160EA243BA43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImportConsole", "ImportConsole\ImportConsole.csproj", "{208B84AF-A5DD-4C20-83D5-160EA243BA43}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IISUploadHandler", "Web.IISUploadHandler\IISUploadHandler.csproj", "{09F13185-3B2A-4FCB-AB6A-750112FFF920}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IISUploadHandler", "IISUploadHandler\IISUploadHandler.csproj", "{09F13185-3B2A-4FCB-AB6A-750112FFF920}"
-EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BBCode", "ThirdParty\BBCode\BBCode.vbproj", "{ACDDD5D1-119F-4B82-8FE6-6515C812795B}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BBCode", "ThirdParty\PJonDevelopment.BBCode\BBCode.vbproj", "{ACDDD5D1-119F-4B82-8FE6-6515C812795B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TexCompiler", "TexCompiler\TexCompiler.csproj", "{7D2A38F8-C42D-4F9F-AF64-1DDD5842C7EC}"
 EndProject
