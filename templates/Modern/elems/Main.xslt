@@ -257,7 +257,7 @@
 		<xsl:variable name="postfix">
 			<xsl:if test="isReversed='true'">-reversed</xsl:if>
 		</xsl:variable>
-		<xsl:when test="total &gt; 0">
+		<xsl:if test="total &gt; 0">
 			<div>
 				<xsl:call-template name="Messages_PageOuterTitle"/>
 				<xsl:text>: </xsl:text>
