@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{09F13185-3B2A-4FCB-AB6A-750112FFF920}</ProjectGuid>
+    <ProjectGuid>{E2ECF86C-C0BA-4782-A485-E267BB213BB2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Web.IISUploadHandler</RootNamespace>
-    <AssemblyName>IISUploadHandler</AssemblyName>
+    <RootNamespace>FLocal.Migration.Gateway</RootNamespace>
+    <AssemblyName>FLocal.Migration.Gateway</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -37,6 +37,7 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Web" />
+    <Reference Include="System.XML" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -44,18 +45,13 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Config.cs" />
+    <Compile Include="DictionaryConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UploadHandler.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Web.Core\Core.csproj">
-      <Project>{6F532626-E9F8-498E-9683-1538E7CD62CB}</Project>
-      <Name>Core</Name>
-    </ProjectReference>
+    <Compile Include="ShallerConnector.cs" />
+    <Compile Include="ShallerGateway.cs" />
+    <Compile Include="FileInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

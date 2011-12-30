@@ -27,17 +27,17 @@
 			</Directory>
 		</Directory>
 		<DirectoryRef Id="BINARIESROOTDIRECTORY">
-			<Component Id="Core.dll" Guid="B8542489-E367-4AC6-9FCF-EA3454F0D64{targetId}">
-				<File Id="Core.dll" Source="..\..\Web.Core\bin\Release\Core.dll" KeyPath="yes" Checksum="yes"/>
+			<Component Id="Web.Core.dll" Guid="B8542489-E367-4AC6-9FCF-EA3454F0D64{targetId}">
+				<File Id="Web.Core.dll" Source="..\..\Web.Core\bin\Release\Web.Core.dll" KeyPath="yes" Checksum="yes"/>
 			</Component>
-			<Component Id="Core.pdb" Guid="3109981C-0182-48CA-B1CA-8F68F1C0F4B{targetId}">
-				<File Id="Core.pdb" Source="..\..\Web.Core\bin\Release\Core.pdb" KeyPath="yes" Checksum="yes"/>
+			<Component Id="Web.Core.pdb" Guid="3109981C-0182-48CA-B1CA-8F68F1C0F4B{targetId}">
+				<File Id="Web.Core.pdb" Source="..\..\Web.Core\bin\Release\Web.Core.pdb" KeyPath="yes" Checksum="yes"/>
 			</Component>
-			<Component Id="Common.dll" Guid="4CD35090-702C-479D-826B-2DE966FB0D4{targetId}">
-				<File Id="Common.dll" Source="..\..\FLocal.Common\bin\Release\Common.dll" KeyPath="yes" Checksum="yes"/>
+			<Component Id="FLocal.Common.dll" Guid="4CD35090-702C-479D-826B-2DE966FB0D4{targetId}">
+				<File Id="FLocal.Common.dll" Source="..\..\FLocal.Common\bin\Release\FLocal.Common.dll" KeyPath="yes" Checksum="yes"/>
 			</Component>
-			<Component Id="Common.pdb" Guid="78F773B8-0B28-4657-8E13-739FDB16F3C{targetId}">
-				<File Id="Common.pdb" Source="..\..\FLocal.Common\bin\Release\Common.pdb" KeyPath="yes" Checksum="yes"/>
+			<Component Id="FLocal.Common.pdb" Guid="78F773B8-0B28-4657-8E13-739FDB16F3C{targetId}">
+				<File Id="FLocal.Common.pdb" Source="..\..\FLocal.Common\bin\Release\FLocal.Common.pdb" KeyPath="yes" Checksum="yes"/>
 			</Component>
 			<Component Id="MySQLConnector.dll" Guid="924EC439-F1F0-431F-A6EA-152C321F614{targetId}">
 				<File Id="MySQLConnector.dll" Source="..\..\MySQLConnector\bin\Release\MySQLConnector.dll" KeyPath="yes" Checksum="yes"/>
@@ -45,23 +45,23 @@
 			<Component Id="MySQLConnector.pdb" Guid="32AA82C5-1561-4612-A113-C7A099C3ECE{targetId}">
 				<File Id="MySQLConnector.pdb" Source="..\..\MySQLConnector\bin\Release\MySQLConnector.pdb" KeyPath="yes" Checksum="yes"/>
 			</Component>
-			<Component Id="IISMainHandler.dll" Guid="E3BCF3A1-75C0-4CD7-95D4-4A0245B1CA1{targetId}">
-				<File Id="IISMainHandler.dll" Source="..\..\FLocal.IISHandler\bin\Release\IISMainHandler.dll" KeyPath="yes" Checksum="yes"/>
+			<Component Id="FLocal.IISHandler.dll" Guid="E3BCF3A1-75C0-4CD7-95D4-4A0245B1CA1{targetId}">
+				<File Id="FLocal.IISHandler.dll" Source="..\..\FLocal.IISHandler\bin\Release\FLocal.IISHandler.dll" KeyPath="yes" Checksum="yes"/>
 			</Component>
-			<Component Id="IISMainHandler.pdb" Guid="4F5F1280-8EC8-4C56-80F4-8C810F0C839{targetId}">
-				<File Id="IISMainHandler.pdb" Source="..\..\FLocal.IISHandler\bin\Release\IISMainHandler.pdb" KeyPath="yes" Checksum="yes"/>
+			<Component Id="FLocal.IISHandler.pdb" Guid="4F5F1280-8EC8-4C56-80F4-8C810F0C839{targetId}">
+				<File Id="FLocal.IISHandler.pdb" Source="..\..\FLocal.IISHandler\bin\Release\FLocal.IISHandler.pdb" KeyPath="yes" Checksum="yes"/>
 			</Component>
-			<Component Id="Importer.dll" Guid="F25304A3-2705-4E97-B0E9-1DF04C277AD{targetId}">
-				<File Id="Importer.dll" Source="..\..\FLocal.Migration.Gateway\bin\Release\Importer.dll" KeyPath="yes" Checksum="yes"/>
+			<Component Id="FLocal.Migration.Gateway.dll" Guid="F25304A3-2705-4E97-B0E9-1DF04C277AD{targetId}">
+				<File Id="FLocal.Migration.Gateway.dll" Source="..\..\FLocal.Migration.Gateway\bin\Release\FLocal.Migration.Gateway.dll" KeyPath="yes" Checksum="yes"/>
 			</Component>
-			<Component Id="Importer.pdb" Guid="6AE31E67-EFC6-471B-BB55-0DF628399D3{targetId}">
-				<File Id="Importer.pdb" Source="..\..\FLocal.Migration.Gateway\bin\Release\Importer.pdb" KeyPath="yes" Checksum="yes"/>
+			<Component Id="FLocal.Migration.Gateway.pdb" Guid="6AE31E67-EFC6-471B-BB55-0DF628399D3{targetId}">
+				<File Id="FLocal.Migration.Gateway.pdb" Source="..\..\FLocal.Migration.Gateway\bin\Release\FLocal.Migration.Gateway.pdb" KeyPath="yes" Checksum="yes"/>
 			</Component>
-			<Component Id="ImportConsole.exe" Guid="45962809-9BE4-4792-9759-21C49FCA57F{targetId}">
-				<File Id="ImportConsole.exe" Source="..\..\FLocal.Migration.Console\bin\Release\ImportConsole.exe" KeyPath="yes" Checksum="yes"/>
+			<Component Id="FLocal.Migration.Console.exe" Guid="45962809-9BE4-4792-9759-21C49FCA57F{targetId}">
+				<File Id="FLocal.Migration.Console.exe" Source="..\..\FLocal.Migration.Console\bin\Release\FLocal.Migration.Console.exe" KeyPath="yes" Checksum="yes"/>
 			</Component>
-			<Component Id="ImportConsole.pdb" Guid="6E5DCF23-7247-4DE0-BB6D-1A846372343{targetId}">
-				<File Id="ImportConsole.pdb" Source="..\..\FLocal.Migration.Console\bin\Release\ImportConsole.pdb" KeyPath="yes" Checksum="yes"/>
+			<Component Id="FLocal.Migration.Console.pdb" Guid="6E5DCF23-7247-4DE0-BB6D-1A846372343{targetId}">
+				<File Id="FLocal.Migration.Console.pdb" Source="..\..\FLocal.Migration.Console\bin\Release\FLocal.Migration.Console.pdb" KeyPath="yes" Checksum="yes"/>
 			</Component>
 			<Component Id="NConsoler.dll" Guid="F39FD087-8961-4871-9D59-FDB83002BC9{targetId}">
 				<File Id="NConsoler.dll" Source="..\..\ThirdParty\NConsoler\NConsoler.dll" KeyPath="yes" Checksum="yes"/>
@@ -89,37 +89,37 @@
 			</Component>
 		</DirectoryRef>
 		<DirectoryRef Id="ARCHIVEDIRECTORY">
-			<Component Id="Templates.7z" Guid="B41F4142-A39C-43BE-8D20-F31BFFA9B48{targetId}">
-				<File Id="Templates.7z" Source="Templates.7z" KeyPath="yes" Checksum="yes"/>
+			<Component Id="Resources.FLocal.Templates.7z" Guid="B41F4142-A39C-43BE-8D20-F31BFFA9B48{targetId}">
+				<File Id="Resources.FLocal.Templates.7z" Source="Resources.FLocal.Templates.7z" KeyPath="yes" Checksum="yes"/>
 			</Component>
-			<Component Id="Static.7z" Guid="C5D6456D-39B0-40E1-8DB1-0950199B15D{targetId}">
-				<File Id="Static.7z" Source="Static.7z" KeyPath="yes" Checksum="yes"/>
+			<Component Id="Resources.FLocal.Static.7z" Guid="C5D6456D-39B0-40E1-8DB1-0950199B15D{targetId}">
+				<File Id="Resources.FLocal.Static.7z" Source="Resources.FLocal.Static.7z" KeyPath="yes" Checksum="yes"/>
 			</Component>
 			<Component Id="_7z.exe" Guid="57AD7901-2C9B-4349-ABD8-C8FBA82F272{targetId}">
 				<File Id="_7z.exe" Name="7z.exe" Source="7z.exe" KeyPath="yes" Checksum="yes"/>
 			</Component>
 		</DirectoryRef>
-		<Feature Id='IISMainHandler' Title='IISMainHandler' Level='1'>
-			<ComponentRef Id='IISMainHandler.dll' />
-			<ComponentRef Id='IISMainHandler.pdb' />
+		<Feature Id='FLocal.IISHandler' Title='IISMainHandler' Level='1'>
+			<ComponentRef Id='FLocal.IISHandler.dll' />
+			<ComponentRef Id='FLocal.IISHandler.pdb' />
 		</Feature>
-		<Feature Id='Import' Title='Import utilities' Level='1'>
+		<Feature Id='FLocal.Migration.Gateway' Title='Import utilities' Level='1'>
 			<Feature Id='Importer' Title='Importer library' Level='1'>
-				<ComponentRef Id='Importer.dll' />
-				<ComponentRef Id='Importer.pdb' />
+				<ComponentRef Id='FLocal.Migration.Gateway.dll' />
+				<ComponentRef Id='FLocal.Migration.Gateway.pdb' />
 			</Feature>
-			<Feature Id='ImportConsole' Title='Import console' Level='1'>
-				<ComponentRef Id='ImportConsole.exe' />
-				<ComponentRef Id='ImportConsole.pdb' />
+			<Feature Id='FLocal.Migration.Console' Title='Import console' Level='1'>
+				<ComponentRef Id='FLocal.Migration.Console.exe' />
+				<ComponentRef Id='FLocal.Migration.Console.pdb' />
 			</Feature>
 		</Feature>
-		<Feature Id='Core' Title='Core library' Level='1'>
-			<ComponentRef Id='Core.dll' />
-			<ComponentRef Id='Core.pdb' />
+		<Feature Id='Web.Core' Title='Core library' Level='1'>
+			<ComponentRef Id='Web.Core.dll' />
+			<ComponentRef Id='Web.Core.pdb' />
 		</Feature>
-		<Feature Id='Common' Title='Common FLocal libraries' Level='1'>
-			<ComponentRef Id='Common.dll' />
-			<ComponentRef Id='Common.pdb' />
+		<Feature Id='FLocal.Common' Title='Common FLocal libraries' Level='1'>
+			<ComponentRef Id='FLocal.Common.dll' />
+			<ComponentRef Id='FLocal.Common.pdb' />
 		</Feature>
 		<Feature Id='MySQLConnector' Title='Adapter to DbConnection' Level='1'>
 			<ComponentRef Id='MySQLConnector.dll' />
@@ -147,16 +147,16 @@
 		</Feature>
 		<Feature Id="Data" Title="Various data sets" Level="1">
 			<ComponentRef Id="_7z.exe"/>
-			<Feature Id="Templates" Title="Templates" Level="1">
-				<ComponentRef Id="Templates.7z"/>
+			<Feature Id="Resources.FLocal.Templates" Title="Templates" Level="1">
+				<ComponentRef Id="Resources.FLocal.Templates.7z"/>
 			</Feature>
-			<Feature Id="Static" Title="Static images css etc" Level="1">
-				<ComponentRef Id="Static.7z"/>
+			<Feature Id="Resources.FLocal.Static" Title="Static images css etc" Level="1">
+				<ComponentRef Id="Resources.FLocal.Static.7z"/>
 			</Feature>
 		</Feature>
 
-		<CustomAction Id="InstallTemplates" FileKey="_7z.exe" ExeCommand="x &quot;C:\Program Files\FLocal\main\{target}\archive\Templates.7z&quot; -o&quot;C:\Program Files\FLocal\main\{target}\data\templates\&quot; -aoa -y" Execute="deferred" Impersonate="no" Return="check"/>
-		<CustomAction Id="InstallStatic" FileKey="_7z.exe" ExeCommand="x &quot;C:\Program Files\FLocal\main\{target}\archive\Static.7z&quot; -o&quot;C:\Program Files\FLocal\main\{target}\data\Static\&quot; -aoa -y" Execute="deferred" Impersonate="no" Return="check"/>
+		<CustomAction Id="InstallTemplates" FileKey="_7z.exe" ExeCommand="x &quot;C:\Program Files\FLocal\main\{target}\archive\Resources.FLocal.Templates.7z&quot; -o&quot;C:\Program Files\FLocal\main\{target}\data\templates\&quot; -aoa -y" Execute="deferred" Impersonate="no" Return="check"/>
+		<CustomAction Id="InstallStatic" FileKey="_7z.exe" ExeCommand="x &quot;C:\Program Files\FLocal\main\{target}\archive\Resources.FLocal.Static.7z&quot; -o&quot;C:\Program Files\FLocal\main\{target}\data\Static\&quot; -aoa -y" Execute="deferred" Impersonate="no" Return="check"/>
 		<InstallExecuteSequence>
 			<Custom Action="InstallTemplates" Before="InstallFinalize">
 				<![CDATA[NOT REMOVE]]>

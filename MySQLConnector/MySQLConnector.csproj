@@ -33,7 +33,7 @@
   <ItemGroup>
     <Reference Include="Npgsql, Version=2.0.8.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files (x86)\PostgreSQL\Npgsql\bin\Npgsql.dll</HintPath>
+      <HintPath>..\ThirdParty\Npgsql\Npgsql.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -60,7 +60,7 @@
     <Compile Include="Transaction.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Web.Core\Core.csproj">
+    <ProjectReference Include="..\Web.Core\Web.Core.csproj">
       <Project>{6F532626-E9F8-498E-9683-1538E7CD62CB}</Project>
       <Name>Core</Name>
     </ProjectReference>

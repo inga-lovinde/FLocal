@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FLocal.IISHandler</RootNamespace>
-    <AssemblyName>IISMainHandler</AssemblyName>
+    <AssemblyName>FLocal.IISHandler</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -128,15 +128,15 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FLocal.Common\Common.csproj">
+    <ProjectReference Include="..\FLocal.Common\FLocal.Common.csproj">
       <Project>{CE888859-9E46-41F7-91CE-8EC106F3A625}</Project>
       <Name>Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Web.Core\Core.csproj">
+    <ProjectReference Include="..\Web.Core\Web.Core.csproj">
       <Project>{6F532626-E9F8-498E-9683-1538E7CD62CB}</Project>
       <Name>Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FLocal.Migration.Gateway\Importer.csproj">
+    <ProjectReference Include="..\FLocal.Migration.Gateway\FLocal.Migration.Gateway.csproj">
       <Project>{E2ECF86C-C0BA-4782-A485-E267BB213BB2}</Project>
       <Name>Importer</Name>
     </ProjectReference>

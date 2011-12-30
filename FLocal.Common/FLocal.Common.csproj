@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FLocal.Common</RootNamespace>
-    <AssemblyName>Common</AssemblyName>
+    <AssemblyName>FLocal.Common</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -185,7 +185,7 @@
     <Compile Include="UserSettingsGateway.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Web.Core\Core.csproj">
+    <ProjectReference Include="..\Web.Core\Web.Core.csproj">
       <Project>{6F532626-E9F8-498E-9683-1538E7CD62CB}</Project>
       <Name>Core</Name>
     </ProjectReference>

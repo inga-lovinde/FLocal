@@ -25,27 +25,27 @@
 			</Directory>
 		</Directory>
 		<DirectoryRef Id="BINARIESROOTDIRECTORY">
-			<Component Id="Core.dll" Guid="4770412D-CAFE-469B-AD39-993832D43380">
-				<File Id="Core.dll" Source="..\..\Core\bin\Release\Core.dll" KeyPath="yes" Checksum="yes"/>
+			<Component Id="Web.Core.dll" Guid="4770412D-CAFE-469B-AD39-993832D43380">
+				<File Id="Web.Core.dll" Source="..\..\Web.Core\bin\Release\Web.Core.dll" KeyPath="yes" Checksum="yes"/>
 			</Component>
-			<Component Id="Core.pdb" Guid="D48AA0FF-F559-475B-BF27-C2BD537F7DD4">
-				<File Id="Core.pdb" Source="..\..\Core\bin\Release\Core.pdb" KeyPath="yes" Checksum="yes"/>
+			<Component Id="Web.Core.pdb" Guid="D48AA0FF-F559-475B-BF27-C2BD537F7DD4">
+				<File Id="Web.Core.pdb" Source="..\..\Web.Core\bin\Release\Web.Core.pdb" KeyPath="yes" Checksum="yes"/>
 			</Component>
-			<Component Id="IISUploadHandler.dll" Guid="285FB9C5-A16F-4C4A-885C-8743AF66A43E">
-				<File Id="IISUploadHandler.dll" Source="..\..\IISUploadHandler\bin\Release\IISUploadHandler.dll" KeyPath="yes" Checksum="yes"/>
+			<Component Id="Web.IISUploadHandler.dll" Guid="285FB9C5-A16F-4C4A-885C-8743AF66A43E">
+				<File Id="Web.IISUploadHandler.dll" Source="..\..\Web.IISUploadHandler\bin\Release\Web.IISUploadHandler.dll" KeyPath="yes" Checksum="yes"/>
 			</Component>
-			<Component Id="IISUploadHandler.pdb" Guid="DD8F0AA8-0F14-4D97-83E8-4F623921B602">
-				<File Id="IISUploadHandler.pdb" Source="..\..\IISUploadHandler\bin\Release\IISUploadHandler.pdb" KeyPath="yes" Checksum="yes"/>
+			<Component Id="Web.IISUploadHandler.pdb" Guid="DD8F0AA8-0F14-4D97-83E8-4F623921B602">
+				<File Id="IISUploadHandler.pdb" Source="..\..\Web.IISUploadHandler\bin\Release\Web.IISUploadHandler.pdb" KeyPath="yes" Checksum="yes"/>
 			</Component>
 		</DirectoryRef>
 
 		<Feature Id='IISUploadHandler' Title='IISUploadHandler' Level='1'>
-			<ComponentRef Id='IISUploadHandler.dll' />
-			<ComponentRef Id='IISUploadHandler.pdb' />
+			<ComponentRef Id='Web.IISUploadHandler.dll' />
+			<ComponentRef Id='Web.IISUploadHandler.pdb' />
 		</Feature>
 		<Feature Id='Core' Title='Core library' Level='1'>
-			<ComponentRef Id='Core.dll' />
-			<ComponentRef Id='Core.pdb' />
+			<ComponentRef Id='Web.Core.dll' />
+			<ComponentRef Id='Web.Core.pdb' />
 		</Feature>
 
 	</Product>

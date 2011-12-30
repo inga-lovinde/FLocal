@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{E2ECF86C-C0BA-4782-A485-E267BB213BB2}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{208B84AF-A5DD-4C20-83D5-160EA243BA43}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FLocal.Migration.Gateway</RootNamespace>
-    <AssemblyName>Importer</AssemblyName>
+    <RootNamespace>FLocal.Migration.Console</RootNamespace>
+    <AssemblyName>FLocal.Migration.Console</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,13 +31,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NConsoler, Version=1.0.0.0, Culture=neutral, PublicKeyToken=652faff55808657c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdParty\NConsoler\NConsoler.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Web" />
-    <Reference Include="System.XML" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -45,13 +47,29 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DictionaryConverter.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ShallerConnector.cs" />
-    <Compile Include="ShallerGateway.cs" />
-    <Compile Include="FileInfo.cs" />
+    <Compile Include="ShallerDBProcessor.cs" />
+    <Compile Include="ThreadedHTMLProcessor.cs" />
+    <Compile Include="UploadProcessor.cs" />
+    <Compile Include="UsersImporter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FLocal.Common\FLocal.Common.csproj">
+      <Project>{CE888859-9E46-41F7-91CE-8EC106F3A625}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Web.Core\Web.Core.csproj">
+      <Project>{6F532626-E9F8-498E-9683-1538E7CD62CB}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FLocal.Migration.Gateway\FLocal.Migration.Gateway.csproj">
+      <Project>{E2ECF86C-C0BA-4782-A485-E267BB213BB2}</Project>
+      <Name>Importer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
