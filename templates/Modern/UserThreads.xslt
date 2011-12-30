@@ -8,17 +8,11 @@
 	</xsl:template>
 	<xsl:template name="isRssEnabled">true</xsl:template>
 	<xsl:template name="specific">
-		<div>
-			<xsl:text>страницы:</xsl:text>
-			<xsl:apply-templates select="threads/pageOuter" mode="withCurrent"/>
-		</div>
+		<xsl:apply-templates select="threads/pageOuter" mode="withCurrent"/>
 		<div class="threadscontainer">
 			<xsl:apply-templates select="threads/thread[not(isAnnouncement='true')]"/>
 		</div>
-		<div>
-			<xsl:text>страницы:</xsl:text>
-			<xsl:apply-templates select="threads/pageOuter" mode="withCurrent"/>
-		</div>
+		<xsl:apply-templates select="threads/pageOuter" mode="withCurrent"/>
 	</xsl:template>
 
 </xsl:stylesheet>

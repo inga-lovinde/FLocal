@@ -108,14 +108,9 @@
 							<xsl:text>Просмотров: </xsl:text>
 							<xsl:value-of select="totalViews"/>
 						</p>
-						<xsl:if test="pageOuter/isEmpty='false'">
-							<p>
-								<xsl:text>Страницы: </xsl:text>
-								<xsl:apply-templates select="pageOuter" mode="withoutCurrent">
-									<xsl:with-param name="baseLink">/Thread/<xsl:value-of select="id"/>/</xsl:with-param>
-								</xsl:apply-templates>
-							</p>
-						</xsl:if>
+						<xsl:apply-templates select="pageOuter" mode="withoutCurrent">
+							<xsl:with-param name="baseLink">/Thread/<xsl:value-of select="id"/>/</xsl:with-param>
+						</xsl:apply-templates>
 					</div>
 				</div>
 			</div>

@@ -8,19 +8,11 @@
 	<xsl:template name="isLiteEnabled">true</xsl:template>
 	<xsl:template name="isRssEnabled">true</xsl:template>
 	<xsl:template name="specific">
-		<div>
-			<xsl:call-template name="Messages_PageOuter"/>
-			<xsl:text>:</xsl:text>
-			<xsl:apply-templates select="conversations/pageOuter" mode="withCurrent"/>
-		</div>
+		<xsl:apply-templates select="conversations/pageOuter" mode="withCurrent"/>
 		<div class="conversationscontainer">
 			<xsl:apply-templates select="conversations/conversation"/>
 		</div>
-		<div>
-			<xsl:call-template name="Messages_PageOuter"/>
-			<xsl:text>:</xsl:text>
-			<xsl:apply-templates select="conversations/pageOuter" mode="withCurrent"/>
-		</div>
+		<xsl:apply-templates select="conversations/pageOuter" mode="withCurrent"/>
 	</xsl:template>
 
 </xsl:stylesheet>

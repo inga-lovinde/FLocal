@@ -73,14 +73,9 @@
 							<xsl:text>Последнее: </xsl:text>
 							<xsl:apply-templates select="lastMessageDate/date" mode="dateTime"/>
 						</p>
-						<xsl:if test="pageOuter/isEmpty='false'">
-							<p>
-								<xsl:text>Страницы: </xsl:text>
-								<xsl:apply-templates select="pageOuter" mode="withoutCurrent">
-									<xsl:with-param name="baseLink">/My/Conversations/Conversation/<xsl:value-of select="interlocutor/account/id"/>/</xsl:with-param>
-								</xsl:apply-templates>
-							</p>
-						</xsl:if>
+						<xsl:apply-templates select="pageOuter" mode="withoutCurrent">
+							<xsl:with-param name="baseLink">/My/Conversations/Conversation/<xsl:value-of select="interlocutor/account/id"/>/</xsl:with-param>
+						</xsl:apply-templates>
 					</div>
 				</div>
 			</div>

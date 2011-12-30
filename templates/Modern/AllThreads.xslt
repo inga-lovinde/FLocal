@@ -7,19 +7,11 @@
 	</xsl:template>
 	<xsl:template name="isRssEnabled">true</xsl:template>
 	<xsl:template name="specific">
-		<div>
-			<xsl:call-template name="Messages_PageOuterTitle"/>
-			<xsl:text>:</xsl:text>
-			<xsl:apply-templates select="threads/pageOuter" mode="withCurrent"/>
-		</div>
+		<xsl:apply-templates select="threads/pageOuter" mode="withCurrent"/>
 		<div class="threadscontainer">
 			<xsl:apply-templates select="threads/thread"/>
 		</div>
-		<div>
-			<xsl:call-template name="Messages_PageOuterTitle"/>
-			<xsl:text>:</xsl:text>
-			<xsl:apply-templates select="threads/pageOuter" mode="withCurrent"/>
-		</div>
+		<xsl:apply-templates select="threads/pageOuter" mode="withCurrent"/>
 	</xsl:template>
 
 </xsl:stylesheet>

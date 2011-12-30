@@ -9,19 +9,13 @@
 	<xsl:template name="isRssEnabled">true</xsl:template>
 	<xsl:template name="rssRelativeLink"><xsl:value-of select="/root/currentBaseUrl"/>0-reversed</xsl:template>
 	<xsl:template name="specific">
-		<div>
-			<xsl:text>страницы:</xsl:text>
-			<xsl:apply-templates select="posts/pageOuter" mode="withCurrent"/>
-		</div>
+		<xsl:apply-templates select="posts/pageOuter" mode="withCurrent"/>
 		<div class="postscontainer">
 			<xsl:apply-templates select="posts/post">
 				<xsl:with-param name="isReplyDisabled"><xsl:value-of select="thread/isLocked"/></xsl:with-param>
 			</xsl:apply-templates>
 		</div>
-		<div>
-			<xsl:text>страницы:</xsl:text>
-			<xsl:apply-templates select="posts/pageOuter" mode="withCurrent"/>
-		</div>
+		<xsl:apply-templates select="posts/pageOuter" mode="withCurrent"/>
 	</xsl:template>
 
 </xsl:stylesheet>

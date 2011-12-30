@@ -41,7 +41,6 @@
 									<table width="100%" cellspacing="1" cellpadding="3" border="0">
 										<tr>
 											<td>
-												<xsl:text>страницы:</xsl:text>
 												<xsl:apply-templates select="users/pageOuter" mode="withCurrent"/>
 											</td>
 										</tr>

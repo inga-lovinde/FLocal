@@ -14,11 +14,7 @@
 				<xsl:apply-templates select="boards/board"/>
 			</div>
 		</xsl:if>
-		<div>
-			<xsl:call-template name="Messages_PageOuter"/>
-			<xsl:text>:</xsl:text>
-			<xsl:apply-templates select="threads/pageOuter" mode="withCurrent"/>
-		</div>
+		<xsl:apply-templates select="threads/pageOuter" mode="withCurrent"/>
 		<div class="threadscontainer">
 			<xsl:if test="threads/thread[isAnnouncement='true']">
 				<div style="position:relative;z-index:1000">
@@ -29,11 +25,7 @@
 				<xsl:apply-templates select="threads/thread[not(isAnnouncement='true')]"/>
 			</div>
 		</div>
-		<div>
-			<xsl:call-template name="Messages_PageOuter"/>
-			<xsl:text>:</xsl:text>
-			<xsl:apply-templates select="threads/pageOuter" mode="withCurrent"/>
-		</div>
+		<xsl:apply-templates select="threads/pageOuter" mode="withCurrent"/>
 	</xsl:template>
 
 </xsl:stylesheet>

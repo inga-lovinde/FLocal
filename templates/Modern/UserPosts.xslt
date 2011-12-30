@@ -8,17 +8,11 @@
 	</xsl:template>
 	<xsl:template name="isRssEnabled">true</xsl:template>
 	<xsl:template name="specific">
-		<div>
-			<xsl:text>страницы:</xsl:text>
-			<xsl:apply-templates select="posts/pageOuter" mode="withCurrent"/>
-		</div>
+		<xsl:apply-templates select="posts/pageOuter" mode="withCurrent"/>
 		<div class="postscontainer">
 			<xsl:apply-templates select="posts/post"/>
 		</div>
-		<div>
-			<xsl:text>страницы:</xsl:text>
-			<xsl:apply-templates select="posts/pageOuter" mode="withCurrent"/>
-		</div>
+		<xsl:apply-templates select="posts/pageOuter" mode="withCurrent"/>
 	</xsl:template>
 
 </xsl:stylesheet>

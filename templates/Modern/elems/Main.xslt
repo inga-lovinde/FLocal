@@ -240,11 +240,16 @@
 
 	<xsl:template match="pageOuter" mode="withoutCurrent">
 		<xsl:param name="baseLink"/>
-		<xsl:apply-templates select="pages/page" mode="withoutCurrent">
-			<xsl:with-param name="baseLink"><xsl:value-of select="$baseLink"/></xsl:with-param>
-			<xsl:with-param name="postfix"/>
-			<xsl:with-param name="selected">-1</xsl:with-param>
-		</xsl:apply-templates>
+		<xsl:if test="isEmpty = 'false'">
+			<p>
+				<xsl:text>Страницы: </xsl:text>
+				<xsl:apply-templates select="pages/page" mode="withoutCurrent">
+					<xsl:with-param name="baseLink"><xsl:value-of select="$baseLink"/></xsl:with-param>
+					<xsl:with-param name="postfix"/>
+					<xsl:with-param name="selected">-1</xsl:with-param>
+				</xsl:apply-templates>
+			</p>
+		</xsl:if>
 	</xsl:template>
 
 	<xsl:template match="pageOuter" mode="withCurrent">
@@ -252,51 +257,54 @@
 		<xsl:variable name="postfix">
 			<xsl:if test="isReversed='true'">-reversed</xsl:if>
 		</xsl:variable>
-		<xsl:text> </xsl:text>
-		<xsl:apply-templates select="pages/page" mode="withoutCurrent">
-			<xsl:with-param name="baseLink"><xsl:value-of select="$baseLink"/></xsl:with-param>
-			<xsl:with-param name="postfix">
-				<xsl:value-of select="$postfix"/>
-			</xsl:with-param>
-			<xsl:with-param name="selected">
-				<xsl:choose>
-					<xsl:when test="unlimited='false'">
-						<xsl:value-of select="start"/>
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:text>-1</xsl:text>
-					</xsl:otherwise>
-				</xsl:choose>
-			</xsl:with-param>
-		</xsl:apply-templates>
-		<xsl:if test="total &lt;= 1000">
-			<xsl:text>&#8201;|&#8201;</xsl:text>
-			<xsl:choose>
-				<xsl:when test="unlimited='false'">
-					<a>
+		<xsl:when test="total &gt; 0">
+			<div>
+				<xsl:call-template name="Messages_PageOuterTitle"/>
+				<xsl:text>: </xsl:text>
+				<xsl:apply-templates select="pages/page" mode="withoutCurrent">
+					<xsl:with-param name="baseLink"><xsl:value-of select="$baseLink"/></xsl:with-param>
+					<xsl:with-param name="postfix" select="$postfix"/>
+					<xsl:with-param name="selected">
+						<xsl:choose>
+							<xsl:when test="unlimited='false'">
+								<xsl:value-of select="start"/>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:text>-1</xsl:text>
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:with-param>
+				</xsl:apply-templates>
+				<xsl:if test="(total &lt;= 1000) and isEmpty = 'false'">
+					<xsl:text>&#8201;|&#8201;</xsl:text>
+					<xsl:choose>
+						<xsl:when test="unlimited='false'">
+							<a>
+								<xsl:attribute name="href">
+									<xsl:value-of select="$baseLink"/>
+									<xsl:text>all</xsl:text>
+									<xsl:value-of select="$postfix"/>
+								</xsl:attribute>
+								<xsl:text>все</xsl:text>
+							</a>
+						</xsl:when>
+						<xsl:otherwise>
+							<a class="current">все</a>
+						</xsl:otherwise>
+					</xsl:choose>
+				</xsl:if>
+				<xsl:if test="next">
+					<xsl:text>&#8201;|&#8201;</xsl:text>
+					<a rel="next">
 						<xsl:attribute name="href">
 							<xsl:value-of select="$baseLink"/>
-							<xsl:text>all</xsl:text>
+							<xsl:value-of select="next"/>
 							<xsl:value-of select="$postfix"/>
 						</xsl:attribute>
-						<xsl:text>все</xsl:text>
+						<xsl:text>Следующая страница</xsl:text>
 					</a>
-				</xsl:when>
-				<xsl:otherwise>
-					<a class="current">все</a>
-				</xsl:otherwise>
-			</xsl:choose>
-		</xsl:if>
-		<xsl:if test="next">
-			<xsl:text>&#8201;|&#8201;</xsl:text>
-			<a rel="next">
-				<xsl:attribute name="href">
-					<xsl:value-of select="$baseLink"/>
-					<xsl:value-of select="next"/>
-					<xsl:value-of select="$postfix"/>
-				</xsl:attribute>
-				<xsl:text>Следующая страница</xsl:text>
-			</a>
+				</xsl:if>
+			</div>
 		</xsl:if>
 	</xsl:template>
 

@@ -18,10 +18,7 @@
 						<!-- END OF LOOP -->
 						<tr class="tdheader">
 							<td colspan="3">
-								<font class="onbody">
-									<xsl:text>страницы:</xsl:text>
-									<xsl:apply-templates select="polls/pageOuter" mode="withCurrent"/>
-								</font>
+								<xsl:apply-templates select="polls/pageOuter" mode="withCurrent"/>
 							</td>
 						</tr>
 					</table>

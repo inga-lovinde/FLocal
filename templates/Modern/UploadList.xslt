@@ -6,17 +6,11 @@
 	<xsl:template name="isRssEnabled">true</xsl:template>
 	<xsl:template name="rssRelativeLink"><xsl:value-of select="/root/currentBaseUrl"/>0-reversed</xsl:template>
 	<xsl:template name="specific">
-		<div>
-			<xsl:text>страницы:</xsl:text>
-			<xsl:apply-templates select="uploads/pageOuter" mode="withCurrent"/>
-		</div>
+		<xsl:apply-templates select="uploads/pageOuter" mode="withCurrent"/>
 		<div class="uploadscontainer">
 			<xsl:apply-templates select="uploads/upload"/>
 		</div>
-		<div>
-			<xsl:text>страницы:</xsl:text>
-			<xsl:apply-templates select="uploads/pageOuter" mode="withCurrent"/>
-		</div>
+		<xsl:apply-templates select="uploads/pageOuter" mode="withCurrent"/>
 	</xsl:template>
 
 </xsl:stylesheet>
