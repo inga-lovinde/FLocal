@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace FLocal.Core.DB {
+namespace Web.Core.DB {
 	public class ColumnOrValue {
 
 		private bool _isColumn;

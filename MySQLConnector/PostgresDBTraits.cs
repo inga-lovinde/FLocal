@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Data.Common;
 using Npgsql;
-using FLocal.Core.DB;
+using Web.Core.DB;
 
-namespace FLocal.MySQLConnector {
+namespace MySQLConnector {
 	public class PostgresDBTraits : IDBTraits {
 
 		public static readonly PostgresDBTraits instance = new PostgresDBTraits();

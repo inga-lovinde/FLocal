@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-namespace FLocal.Core {
+namespace Web.Core {
 	
 	public static class ExtensionMethods {
 

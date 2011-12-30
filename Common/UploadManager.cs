@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
-using FLocal.Core;
+using Web.Core;
 using FLocal.Common.dataobjects;
-using FLocal.Core.DB;
-using FLocal.Core.DB.conditions;
+using Web.Core.DB;
+using Web.Core.DB.conditions;
 using System.Net;
 
 namespace FLocal.Common {

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
-using FLocal.Core;
-using FLocal.Core.DB;
+using Web.Core;
+using Web.Core.DB;
 using FLocal.Common;
 using FLocal.Common.actions;
 

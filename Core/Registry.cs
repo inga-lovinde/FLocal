@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace FLocal.Core {
+namespace Web.Core {
     class Registry<TKey, TData>
         where TData : IDataObject<TKey, TData>, new()
         where TKey : struct {

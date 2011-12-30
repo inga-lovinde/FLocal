@@ -6,7 +6,7 @@ using System.IO;
 using System.Net;
 using System.Web;
 
-namespace FLocal.TexCompiler {
+namespace TexCompiler {
 	public static class Compiler {
 
 		private static readonly Encoding ENCODING = Encoding.UTF8;

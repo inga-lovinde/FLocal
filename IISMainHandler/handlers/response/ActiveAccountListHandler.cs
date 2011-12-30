@@ -6,8 +6,8 @@ using System.Web;
 using System.Xml.Linq;
 using FLocal.Common;
 using FLocal.Common.dataobjects;
-using FLocal.Core.DB;
-using FLocal.Core.DB.conditions;
+using Web.Core.DB;
+using Web.Core.DB.conditions;
 
 namespace FLocal.IISHandler.handlers.response {
 
@@ -24,9 +24,9 @@ namespace FLocal.IISHandler.handlers.response {
 			IEnumerable<Account> accounts = Account.LoadByIds(
 				from stringId in Config.instance.mainConnection.LoadIdsByConditions(
 					Account.TableSpec.instance,
-					new Core.DB.conditions.ComparisonCondition(
+					new Web.Core.DB.conditions.ComparisonCondition(
 						Account.TableSpec.instance.getColumnSpec(Account.TableSpec.FIELD_NEEDSMIGRATION),
-						Core.DB.conditions.ComparisonType.EQUAL,
+						Web.Core.DB.conditions.ComparisonType.EQUAL,
 						"0"
 					),
 					pageOuter

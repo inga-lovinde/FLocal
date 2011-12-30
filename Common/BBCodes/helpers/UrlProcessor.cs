@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
-using FLocal.Core;
+using Web.Core;
 
 namespace FLocal.Common.BBCodes {
 	class UrlProcessor {
@@ -35,7 +35,7 @@ namespace FLocal.Common.BBCodes {
 			try {
 				uri = new Uri(url);
 			} catch(UriFormatException) {
-				throw new Core.FLocalException("wrong url: " + url);
+				throw new Web.Core.FLocalException("wrong url: " + url);
 			}
 			if (Config.instance.AdditionalHosts.Contains(uri.Host.ToLower()) || uri.Host.ToLower().EndsWith(Config.instance.BaseHost)) {
 				return new UrlInfo(true, uri.PathAndQuery);

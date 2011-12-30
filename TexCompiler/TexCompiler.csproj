@@ -8,7 +8,7 @@
     <ProjectGuid>{7D2A38F8-C42D-4F9F-AF64-1DDD5842C7EC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FLocal.TexCompiler</RootNamespace>
+    <RootNamespace>TexCompiler</RootNamespace>
     <AssemblyName>TexCompiler</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

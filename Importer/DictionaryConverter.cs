@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 
-namespace FLocal.Importer {
+namespace FLocal.Migration.Gateway {
 	public static class DictionaryConverter {
 
 		public static string ToDump(Dictionary<string, string> dict) {

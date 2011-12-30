@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using FLocal.Core.DB;
+using Web.Core.DB;
 using System.Data.Common;
 
-namespace FLocal.MySQLConnector {
+namespace MySQLConnector {
 	static class Extensions {
 
 		public static string compile(this ITableSpec table, IDBTraits traits) {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace FLocal.Core.DB {
+namespace Web.Core.DB {
 	public class SortSpec {
 
 		public readonly ColumnSpec column;

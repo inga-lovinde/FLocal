@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using FLocal.Core;
-using FLocal.Core.DB;
+using Web.Core;
+using Web.Core.DB;
 
 namespace FLocal.Common {
-	abstract public class SqlObject<TKey, T> : Core.DataObject<TKey, T>
+	abstract public class SqlObject<TKey, T> : Web.Core.DataObject<TKey, T>
 		where T : SqlObject<TKey, T>, new()
 		where TKey : struct {
 

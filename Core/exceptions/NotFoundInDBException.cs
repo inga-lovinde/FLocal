@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using FLocal.Core.DB;
+using Web.Core.DB;
 
-namespace FLocal.Core {
+namespace Web.Core {
 
     public partial class NotFoundInDBException : FLocalException {
 

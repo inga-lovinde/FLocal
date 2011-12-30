@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Diagnostics;
 
-namespace FLocal.Core {
+namespace Web.Core {
 
 	abstract public class DataObject<TKey, T> : IDataObject<TKey, T>
         where T : DataObject<TKey, T>, new()

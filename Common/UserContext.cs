@@ -7,9 +7,9 @@ using System.Xml.Linq;
 namespace FLocal.Common {
 	abstract public class UserContext {
 	
-		public Common.Config config {
+		public FLocal.Common.Config config {
 			get {
-				return Common.Config.instance;
+				return FLocal.Common.Config.instance;
 			}
 		}
 
@@ -62,7 +62,7 @@ namespace FLocal.Common {
 		}
 
 		public static Guid GetGuid(this Exception exception) {
-			return Core.Cache<Guid>.instance.get(exception, () => Guid.NewGuid());
+			return Web.Core.Cache<Guid>.instance.get(exception, () => Guid.NewGuid());
 		}
 
 		public static XElement ToXml(this Exception exception) {

@@ -7,7 +7,7 @@ using System.Xml.Linq;
 using System.Xml.Xsl;
 using System.IO;
 using System.Globalization;
-using FLocal.Core;
+using Web.Core;
 
 namespace FLocal.IISHandler {
 	class TemplateEngine {

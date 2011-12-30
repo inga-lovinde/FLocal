@@ -6,9 +6,9 @@ using System.Web;
 using System.Xml.Linq;
 using FLocal.Common;
 using FLocal.Common.dataobjects;
-using FLocal.Core;
-using FLocal.Core.DB;
-using FLocal.Core.DB.conditions;
+using Web.Core;
+using Web.Core.DB;
+using Web.Core.DB.conditions;
 using FLocal.Common.URL;
 
 namespace FLocal.IISHandler.handlers.response {
@@ -30,12 +30,12 @@ namespace FLocal.IISHandler.handlers.response {
 						ConditionsJoinType.AND,
 						new ComparisonCondition(
 							Session.TableSpec.instance.getColumnSpec(Session.TableSpec.FIELD_LASTHUMANACTIVITY),
-							Core.DB.conditions.ComparisonType.GREATEROREQUAL,
+							Web.Core.DB.conditions.ComparisonType.GREATEROREQUAL,
 							DateTime.Now.Subtract(Config.instance.ActivityThreshold).ToUTCString()
 						),
 						new	ComparisonCondition(
 							Session.TableSpec.instance.getColumnSpec(Session.TableSpec.FIELD_ISDELETED),
-							Core.DB.conditions.ComparisonType.EQUAL,
+							Web.Core.DB.conditions.ComparisonType.EQUAL,
 							"0"
 						)
 					),

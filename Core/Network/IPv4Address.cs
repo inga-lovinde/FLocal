@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace FLocal.Core.Network {
+namespace Web.Core.Network {
 	public class IPv4Address {
 
 		private const ulong MAX = IPv4.UNIT * IPv4.UNIT * IPv4.UNIT * IPv4.UNIT;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using FLocal.Core;
+using Web.Core;
 using FLocal.Common;
 using System.Xml.Linq;
 using FLocal.Common.dataobjects;

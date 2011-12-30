@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Xml.Linq;
-using FLocal.Core;
+using Web.Core;
 using FLocal.Common;
 using FLocal.Common.dataobjects;
 

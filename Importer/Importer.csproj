@@ -8,7 +8,7 @@
     <ProjectGuid>{E2ECF86C-C0BA-4782-A485-E267BB213BB2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FLocal.Importer</RootNamespace>
+    <RootNamespace>FLocal.Migration.Gateway</RootNamespace>
     <AssemblyName>Importer</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

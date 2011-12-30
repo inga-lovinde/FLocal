@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
-using FLocal.Core;
+using Web.Core;
 using FLocal.Common;
 using FLocal.Common.dataobjects;
 
-namespace FLocal.ImportConsole {
+namespace FLocal.Migration.Console {
 	class UploadProcessor {
 		public static void ProcessUpload(string pathToUpload) {
 			User uploader = User.LoadByName("Guest 127.0.0.1");
@@ -15,12 +15,12 @@ namespace FLocal.ImportConsole {
 			int i=0;
 			foreach(FileSystemInfo _info in directoryInfo.GetFiles()) {
 				if(i%100 == 0) {
-					Console.Write("[" + (int)(i/100) + "]");
+					System.Console.Write("[" + (int)(i/100) + "]");
 				}
 				FileInfo info = _info as FileInfo;
 				//Console.WriteLine("Processing " + info.FullName);
 				if(!info.Name.StartsWith("file")) {
-					Console.Write("!");
+					System.Console.Write("!");
 				} else {
 					string[] parts = info.Name.Split('.');
 					if(parts.Length != 2) throw new FLocalException("wrong file name");
@@ -42,7 +42,7 @@ namespace FLocal.ImportConsole {
 					if(info != null) {
 						try {
 							Upload.LoadById(id);
-							Console.Write("-");
+							System.Console.Write("-");
 						} catch(NotFoundInDBException) {
 							try {
 								UploadManager.UploadFile(
@@ -53,14 +53,14 @@ namespace FLocal.ImportConsole {
 									id
 								);
 							} catch(UploadManager.AlreadyUploadedException e) {
-								Console.WriteLine(id + " md5 is equal to that of " + e.uploadId);
-								Console.ReadLine();
+								System.Console.WriteLine(id + " md5 is equal to that of " + e.uploadId);
+								System.Console.ReadLine();
 							} catch(Exception e) {
-								Console.WriteLine(e.GetType().FullName + ": " + e.Message);
-								Console.WriteLine(e.StackTrace);
+								System.Console.WriteLine(e.GetType().FullName + ": " + e.Message);
+								System.Console.WriteLine(e.StackTrace);
 								throw;
 							}
-							Console.Write("+");
+							System.Console.Write("+");
 							//Console.WriteLine("Processed " + info.FullName);
 						}
 					}

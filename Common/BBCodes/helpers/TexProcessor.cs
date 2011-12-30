@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using FLocal.TexCompiler;
+using TexCompiler;
 using System.IO;
 
 namespace FLocal.Common.BBCodes.helpers {

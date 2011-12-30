@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace FLocal.Core.Network {
+namespace Web.Core.Network {
 	class IPv4 {
 
 		public const ulong UNIT = 256;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
-using FLocal.Core;
+using Web.Core;
 using FLocal.Common.URL;
 using URL = FLocal.Common.URL;
 

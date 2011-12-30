@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections.Specialized;
-using FLocal.Core;
+using Web.Core;
 
 namespace FLocal.Common {
 
@@ -11,7 +11,7 @@ namespace FLocal.Common {
 
 		public readonly string InitTime;
 
-		public readonly Core.DB.IDBConnection mainConnection;
+		public readonly Web.Core.DB.IDBConnection mainConnection;
 
 		public readonly string dataDir;
 
@@ -86,8 +86,8 @@ namespace FLocal.Common {
 			base.Dispose();
 		}
 
-		public static void Transactional(Action<Core.DB.Transaction> action) {
-			using(Core.DB.Transaction transaction = Core.DB.IDBConnectionExtensions.beginTransaction(instance.mainConnection)) {
+		public static void Transactional(Action<Web.Core.DB.Transaction> action) {
+			using(Web.Core.DB.Transaction transaction = Web.Core.DB.IDBConnectionExtensions.beginTransaction(instance.mainConnection)) {
 				bool success = false;
 				try {
 					action(transaction);

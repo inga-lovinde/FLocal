@@ -6,7 +6,7 @@ using System.Configuration;
 using NConsoler;
 using FLocal.Common;
 
-namespace FLocal.ImportConsole {
+namespace FLocal.Migration.Console {
 	class Program {
 		public static void Main(string[] args) {
 			Consolery.Run(typeof(Program), args);
@@ -28,8 +28,8 @@ namespace FLocal.ImportConsole {
 			try {
 				UsersImporter.ImportUsers();
 			} catch(Exception e) {
-				Console.WriteLine(e.GetType().FullName + ": " + e.Message);
-				Console.WriteLine(e.StackTrace);
+				System.Console.WriteLine(e.GetType().FullName + ": " + e.Message);
+				System.Console.WriteLine(e.StackTrace);
 			}
 		}
 

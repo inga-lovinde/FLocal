@@ -8,7 +8,7 @@
     <ProjectGuid>{09F13185-3B2A-4FCB-AB6A-750112FFF920}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FLocal.IISUploadHandler</RootNamespace>
+    <RootNamespace>Web.IISUploadHandler</RootNamespace>
     <AssemblyName>IISUploadHandler</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using FLocal.Core;
+using Web.Core;
 using FLocal.Common;
 using System.Xml.Linq;
 using FLocal.Common.dataobjects;
-using FLocal.Core.DB;
-using FLocal.Core.DB.conditions;
+using Web.Core.DB;
+using Web.Core.DB.conditions;
 
 namespace FLocal.IISHandler.handlers.response {
 	class UploadHandler : RedirectGetHandler<FLocal.Common.URL.upload.Item> {
@@ -22,7 +22,7 @@ namespace FLocal.IISHandler.handlers.response {
 			Uri referer = context.httprequest.UrlReferrer;
 			if(referer == null || referer.Host != context.httprequest.Url.Host) {
 				//throw new AccessDeniedException();
-				return new Common.URL.upload.Info(this.url.upload.id.ToString(), null).canonical;
+				return new FLocal.Common.URL.upload.Info(this.url.upload.id.ToString(), null).canonical;
 			}
 
 			string mime = Util.getMimeByExtension(this.url.upload.extension);

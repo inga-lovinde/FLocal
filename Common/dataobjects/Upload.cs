@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
-using FLocal.Core;
-using FLocal.Core.DB;
-using FLocal.Core.DB.conditions;
+using Web.Core;
+using Web.Core.DB;
+using Web.Core.DB.conditions;
 
 namespace FLocal.Common.dataobjects {
 	public class Upload : SqlObject<Upload> {

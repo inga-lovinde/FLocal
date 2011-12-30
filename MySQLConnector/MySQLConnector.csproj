@@ -8,7 +8,7 @@
     <ProjectGuid>{E38DE5B1-F9C2-43BA-A5DF-0743ABD4DFC7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FLocal.MySQLConnector</RootNamespace>
+    <RootNamespace>MySQLConnector</RootNamespace>
     <AssemblyName>MySQLConnector</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

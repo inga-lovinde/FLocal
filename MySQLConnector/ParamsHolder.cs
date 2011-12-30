@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace FLocal.MySQLConnector {
+namespace MySQLConnector {
 	class ParamsHolder {
 
 		public Dictionary<string, string> data = new Dictionary<string,string>();

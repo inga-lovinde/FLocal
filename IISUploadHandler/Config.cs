@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Configuration;
 
-namespace FLocal.IISUploadHandler {
+namespace Web.IISUploadHandler {
 	class Config {
 
 		public static readonly Config instance = new Config();

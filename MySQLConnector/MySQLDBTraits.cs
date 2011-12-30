@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Data.Common;
 //using MySql.Data.MySqlClient;
-using FLocal.Core.DB;
+using Web.Core.DB;
 
-namespace FLocal.MySQLConnector {
+namespace MySQLConnector {
 	/*
 	public class MySQLDBTraits : IDBTraits {
 

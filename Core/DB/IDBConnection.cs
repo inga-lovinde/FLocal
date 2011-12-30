@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using FLocal.Core.DB.conditions;
+using Web.Core.DB.conditions;
 
-namespace FLocal.Core.DB {
+namespace Web.Core.DB {
 	public interface IDBConnection : IDisposable {
 
 		List<Dictionary<string, string>> LoadByIds(ITableSpec table, List<string> ids);

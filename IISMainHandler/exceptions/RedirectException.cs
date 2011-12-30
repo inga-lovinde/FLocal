@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace FLocal.IISHandler {
-	class RedirectException : FLocal.Core.FLocalException {
+	class RedirectException : Web.Core.FLocalException {
 
 		public readonly string newUrl;
 

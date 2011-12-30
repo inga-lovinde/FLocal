@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.IO;
-using FLocal.Core;
+using Web.Core;
 
-namespace FLocal.IISUploadHandler {
+namespace Web.IISUploadHandler {
 	class UploadHandler : IHttpHandler {
 
 		public bool IsReusable {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using FLocal.Core;
+using Web.Core;
 
 namespace FLocal.Common.dataobjects {
 	public class AnonymousUserSettings : IUserSettings {

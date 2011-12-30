@@ -25,10 +25,10 @@ namespace FLocal.IISHandler {
 
 			Uri current = httpcontext.Request.Url;
 			if(!current.Host.EndsWith(Config.instance.BaseHost)) {
-				throw new FLocal.Core.FLocalException("Wrong host: " + current.Host + " (expected *" + Config.instance.BaseHost + ")");
+				throw new Web.Core.FLocalException("Wrong host: " + current.Host + " (expected *" + Config.instance.BaseHost + ")");
 			}
 			if(Config.instance.forceHttps && !httpcontext.Request.IsSecureConnection) {
-				throw new FLocal.Core.FLocalException("Only HTTPS connections are allowed");
+				throw new Web.Core.FLocalException("Only HTTPS connections are allowed");
 			}
 
 			Uri referer = httpcontext.Request.UrlReferrer;

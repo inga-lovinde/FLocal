@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using FLocal.Core.DB;
+using Web.Core.DB;
 using System.Xml.Linq;
-using FLocal.Core;
+using Web.Core;
 
 namespace FLocal.IISHandler {
 	class PageOuter : Diapasone {

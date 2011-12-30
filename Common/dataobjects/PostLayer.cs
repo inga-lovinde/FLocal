@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
-using FLocal.Core;
-using FLocal.Core.DB;
-using FLocal.Core.DB.conditions;
+using Web.Core;
+using Web.Core.DB;
+using Web.Core.DB.conditions;
 
 namespace FLocal.Common.dataobjects {
 	public class PostLayer : SqlObject<PostLayer> {
@@ -58,7 +58,7 @@ namespace FLocal.Common.dataobjects {
 						() => {
 							List<int> ids = (from stringId in Config.instance.mainConnection.LoadIdsByConditions(
 								TableSpec.instance,
-								new FLocal.Core.DB.conditions.EmptyCondition(),
+								new Web.Core.DB.conditions.EmptyCondition(),
 								Diapasone.unlimited
 							) select int.Parse(stringId)).ToList();
 							PostLayer.LoadByIds(ids);

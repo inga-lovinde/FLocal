@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace FLocal.Core {
+namespace Web.Core {
 
     class Switch<TResult> : List<KeyValuePair<Predicate, Func<TResult>>> {
 

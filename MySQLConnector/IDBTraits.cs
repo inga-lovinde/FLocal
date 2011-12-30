@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data.Common;
-using FLocal.Core.DB;
+using Web.Core.DB;
 
-namespace FLocal.MySQLConnector {
+namespace MySQLConnector {
 	public interface IDBTraits {
 
 		DbConnection createConnection(string connectionString);

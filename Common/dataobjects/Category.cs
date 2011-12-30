@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using FLocal.Core;
-using FLocal.Core.DB;
+using Web.Core;
+using Web.Core.DB;
 using System.Xml.Linq;
 
 namespace FLocal.Common.dataobjects {
@@ -57,7 +57,7 @@ namespace FLocal.Common.dataobjects {
 						() => {
 							IEnumerable<int> ids = (from stringId in Config.instance.mainConnection.LoadIdsByConditions(
 								TableSpec.instance,
-								new FLocal.Core.DB.conditions.EmptyCondition(),
+								new Web.Core.DB.conditions.EmptyCondition(),
 								Diapasone.unlimited
 							) select int.Parse(stringId)).ToList();
 							Category.LoadByIds(ids);
@@ -82,9 +82,9 @@ namespace FLocal.Common.dataobjects {
 						() => {
 							IEnumerable<int> ids = (from stringId in Config.instance.mainConnection.LoadIdsByConditions(
 								Board.TableSpec.instance,
-								new FLocal.Core.DB.conditions.ComparisonCondition(
+								new Web.Core.DB.conditions.ComparisonCondition(
 									Board.TableSpec.instance.getColumnSpec(Board.TableSpec.FIELD_CATEGORYID),
-									FLocal.Core.DB.conditions.ComparisonType.EQUAL,
+									Web.Core.DB.conditions.ComparisonType.EQUAL,
 									this.id.ToString()
 								),
 								Diapasone.unlimited

@@ -8,7 +8,7 @@
     <ProjectGuid>{208B84AF-A5DD-4C20-83D5-160EA243BA43}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FLocal.ImportConsole</RootNamespace>
+    <RootNamespace>FLocal.Migration.Console</RootNamespace>
     <AssemblyName>ImportConsole</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

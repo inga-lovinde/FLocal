@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
-using FLocal.Core;
+using Web.Core;
 using FLocal.Common;
 using FLocal.Common.dataobjects;
 using FLocal.Common.actions;
@@ -11,7 +11,7 @@ using System.Xml.Linq;
 using System.IO;
 
 namespace FLocal.IISHandler {
-	class WebContext : Common.UserContext {
+	class WebContext : FLocal.Common.UserContext {
 
 		private static readonly Encoding OutputEncoding = Encoding.UTF8;
 
@@ -60,7 +60,7 @@ namespace FLocal.IISHandler {
 			private set;
 		}
 
-		public override Common.IOutputParams outputParams {
+		public override FLocal.Common.IOutputParams outputParams {
 			get {
 				return this.design;
 			}
@@ -190,18 +190,18 @@ namespace FLocal.IISHandler {
 			return result;
 		}
 
-		public Core.Network.IPv4Address remoteHost {
+		public Web.Core.Network.IPv4Address remoteHost {
 			get {
-				return new Core.Network.IPv4Address(this.httprequest.UserHostAddress);
+				return new Web.Core.Network.IPv4Address(this.httprequest.UserHostAddress);
 			}
 		}
 
 		public void LogError(Exception e) {
 			string dir;
 			if(e is AccessDeniedException) {
-				dir = Common.Config.instance.dataDir + "Logs\\AccessDenied\\";
+				dir = FLocal.Common.Config.instance.dataDir + "Logs\\AccessDenied\\";
 			} else {
-				dir = Common.Config.instance.dataDir + "Logs\\";
+				dir = FLocal.Common.Config.instance.dataDir + "Logs\\";
 			}
 			using(StreamWriter writer = new StreamWriter(dir + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + "." + e.GetGuid().ToString() + ".txt")) {
 				writer.WriteLine("Requested url: " + this.httprequest.Url.ToString());

@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
-using FLocal.Core;
-using FLocal.Importer;
+using Web.Core;
+using FLocal.Migration.Gateway;
 using FLocal.Common;
 using FLocal.Common.actions;
 using FLocal.Common.dataobjects;
-using FLocal.Core.DB;
-using FLocal.Core.DB.conditions;
+using Web.Core.DB;
+using Web.Core.DB.conditions;
 
-namespace FLocal.ImportConsole {
+namespace FLocal.Migration.Console {
 	static class ShallerDBProcessor {
 
 		private readonly static Dictionary<int, string> discussions = new Dictionary<int, string> {
@@ -158,20 +158,20 @@ namespace FLocal.ImportConsole {
 						continue;
 					}
 					if(i%1000 == 0) {
-						Console.Write("[" + (int)(i/1000) + "]");
+						System.Console.Write("[" + (int)(i/1000) + "]");
 					}
 					Dictionary<string, string> data;
 					try {
 						data = DictionaryConverter.FromDump(line);
 					} catch(Exception e) {
-						Console.Error.WriteLine("Error while trying to parse line: " + e.GetType().FullName + ": " + e.Message);
-						Console.Error.WriteLine(e.StackTrace);
+						System.Console.Error.WriteLine("Error while trying to parse line: " + e.GetType().FullName + ": " + e.Message);
+						System.Console.Error.WriteLine(e.StackTrace);
 						continue;
 					}
 					int postId = int.Parse(data["Number"]);
 					try {
 						if(inserts.ContainsKey(postId)) {
-							Console.Write("-");
+							System.Console.Write("-");
 						} else if(Config.instance.mainConnection.GetCountByConditions(Post.TableSpec.instance, new ComparisonCondition(Post.TableSpec.instance.getIdSpec(), ComparisonType.EQUAL, postId.ToString())) > 0) {
 /*							Post post = Post.LoadById(postId);
 							if(post.title.StartsWith("%") || post.title.StartsWith("Re%3A") || post.body.StartsWith("%") || (post.thread.firstPost.id == post.id && post.thread.title.StartsWith("%"))) {
@@ -206,7 +206,7 @@ namespace FLocal.ImportConsole {
 							} else {
 								Console.Write("-");
 							}*/
-							Console.Write("-");
+							System.Console.Write("-");
 						} else {
 							int localMain = int.Parse(data["Local_Main"]);
 							int main = int.Parse(data["Main"]);
@@ -225,7 +225,7 @@ namespace FLocal.ImportConsole {
 							try {
 								user = User.LoadByName(username);
 							} catch(NotFoundInDBException) {
-								Console.Error.WriteLine("Cannot find user '" + username + "'; creating one...");
+								System.Console.Error.WriteLine("Cannot find user '" + username + "'; creating one...");
 								ChangeSetUtil.ApplyChanges(
 									new InsertChange(
 										User.TableSpec.instance,
@@ -284,54 +284,54 @@ namespace FLocal.ImportConsole {
 									post.Reply(user, title, body, layer, date, postId);
 								}
 							};
-							Console.Write("+");
+							System.Console.Write("+");
 						}
 					} catch(Exception e) {
-						Console.Error.WriteLine("Cannot process post #" + postId + ": " + e.GetType().FullName + ": " + e.Message);
-						Console.Error.WriteLine(e.StackTrace);
-						Console.Write("!");
+						System.Console.Error.WriteLine("Cannot process post #" + postId + ": " + e.GetType().FullName + ": " + e.Message);
+						System.Console.Error.WriteLine(e.StackTrace);
+						System.Console.Write("!");
 //						Console.ReadLine();
 					} finally {
 						i++;
 						if((i%50000)==0) {
-							Core.RegistryCleaner.CleanRegistry<int, Post>();
-							Core.RegistryCleaner.CleanRegistry<int, Thread>();
+							Web.Core.RegistryCleaner.CleanRegistry<int, Post>();
+							Web.Core.RegistryCleaner.CleanRegistry<int, Thread>();
 							GC.Collect();
-							Console.Error.WriteLine();
-							Console.Error.WriteLine("Registry cleaned; garbage collected");
-							Console.Error.WriteLine();
+							System.Console.Error.WriteLine();
+							System.Console.Error.WriteLine("Registry cleaned; garbage collected");
+							System.Console.Error.WriteLine();
 						}
 					}
 				}
 			}
 
-			Console.WriteLine("Finished parsing");
-			Console.ReadLine();
+			System.Console.WriteLine("Finished parsing");
+			System.Console.ReadLine();
 			int j=0;
 			foreach(var insert in inserts) {
 				if(j%1000 == 0) {
-					Console.Write("[" + (int)(j/1000) + "]");
+					System.Console.Write("[" + (int)(j/1000) + "]");
 				}
 				try {
 					insert.Value();
-					Console.Write("+");
+					System.Console.Write("+");
 				} catch(Exception e) {
-					Console.Error.WriteLine("Cannot process post #" + insert.Key + ": " + e.GetType().FullName + ": " + e.Message);
-					Console.Error.WriteLine(e.StackTrace);
-					Console.Write("!");
+					System.Console.Error.WriteLine("Cannot process post #" + insert.Key + ": " + e.GetType().FullName + ": " + e.Message);
+					System.Console.Error.WriteLine(e.StackTrace);
+					System.Console.Write("!");
 //						Console.ReadLine();
 				} finally {
 					j++;
 				}
 			}
 
-			Console.WriteLine("Not found discussions:");
+			System.Console.WriteLine("Not found discussions:");
 			foreach(int discussionId in discussionsIds.OrderBy(id => id)) {
-				Console.WriteLine(discussionId);
+				System.Console.WriteLine(discussionId);
 			}
 			} catch(Exception e) {
-				Console.Error.WriteLine(e.GetType().FullName + ": " + e.Message);
-				Console.Error.WriteLine(e.StackTrace);
+				System.Console.Error.WriteLine(e.GetType().FullName + ": " + e.Message);
+				System.Console.Error.WriteLine(e.StackTrace);
 			}
 
 		}

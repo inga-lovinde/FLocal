@@ -6,7 +6,7 @@ using System.Web;
 using System.Xml.Linq;
 using FLocal.Common;
 using FLocal.Common.dataobjects;
-using FLocal.Core.DB;
+using Web.Core.DB;
 
 namespace FLocal.IISHandler.handlers.response {
 

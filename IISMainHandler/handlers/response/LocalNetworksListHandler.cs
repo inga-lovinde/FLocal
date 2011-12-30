@@ -6,8 +6,8 @@ using System.Web;
 using System.Xml.Linq;
 using FLocal.Common;
 using FLocal.Common.dataobjects;
-using FLocal.Core.DB;
-using FLocal.Core.DB.conditions;
+using Web.Core.DB;
+using Web.Core.DB.conditions;
 
 namespace FLocal.IISHandler.handlers.response {
 
@@ -23,7 +23,7 @@ namespace FLocal.IISHandler.handlers.response {
 			IEnumerable<LocalNetwork> localNetworks = LocalNetwork.LoadByIds(
 				from stringId in Config.instance.mainConnection.LoadIdsByConditions(
 					LocalNetwork.TableSpec.instance,
-					new Core.DB.conditions.EmptyCondition(),
+					new Web.Core.DB.conditions.EmptyCondition(),
 					Diapasone.unlimited
 				) select int.Parse(stringId)
 			);

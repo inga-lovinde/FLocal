@@ -5,7 +5,7 @@ using System.Text;
 using System.Web;
 using System.Text.RegularExpressions;
 using System.IO;
-using FLocal.Core;
+using Web.Core;
 
 namespace FLocal.IISHandler.handlers {
 	class StaticHandler : AbstractGetHandler<FLocal.Common.URL.Static> {

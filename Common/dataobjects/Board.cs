@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
-using FLocal.Core;
-using FLocal.Core.DB;
-using FLocal.Core.DB.conditions;
+using Web.Core;
+using Web.Core.DB;
+using Web.Core.DB.conditions;
 using FLocal.Common.actions;
 
 namespace FLocal.Common.dataobjects {
@@ -212,9 +212,9 @@ namespace FLocal.Common.dataobjects {
 						() => {
 							IEnumerable<int> ids = (from stringId in Config.instance.mainConnection.LoadIdsByConditions(
 								TableSpec.instance,
-								new FLocal.Core.DB.conditions.ComparisonCondition(
+								new Web.Core.DB.conditions.ComparisonCondition(
 									TableSpec.instance.getColumnSpec(Board.TableSpec.FIELD_PARENTBOARDID),
-									FLocal.Core.DB.conditions.ComparisonType.EQUAL,
+									Web.Core.DB.conditions.ComparisonType.EQUAL,
 									this.id.ToString()
 								),
 								Diapasone.unlimited

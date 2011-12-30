@@ -7,7 +7,7 @@ using System.Net;
 using System.Web;
 using System.IO;
 
-namespace FLocal.Importer {
+namespace FLocal.Migration.Gateway {
 	public class ShallerGateway {
 
 		public static readonly Encoding encoding = ShallerConnector.encoding;

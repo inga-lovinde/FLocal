@@ -6,9 +6,9 @@ using System.Web;
 using System.Xml.Linq;
 using FLocal.Common;
 using FLocal.Common.dataobjects;
-using FLocal.Core;
-using FLocal.Core.DB;
-using FLocal.Core.DB.conditions;
+using Web.Core;
+using Web.Core.DB;
+using Web.Core.DB.conditions;
 
 namespace FLocal.IISHandler.handlers {
 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Collections.Specialized;
 
-namespace FLocal.Core {
+namespace Web.Core {
 
 	public abstract class Config<T> : IDisposable where T : Config<T> {
 

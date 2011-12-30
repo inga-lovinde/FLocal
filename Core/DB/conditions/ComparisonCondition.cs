@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace FLocal.Core.DB.conditions {
+namespace Web.Core.DB.conditions {
 	public class ComparisonCondition : SimpleCondition {
 
 		public readonly ColumnSpec left;

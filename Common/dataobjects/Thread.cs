@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
-using FLocal.Core;
-using FLocal.Core.DB;
-using FLocal.Core.DB.conditions;
+using Web.Core;
+using Web.Core.DB;
+using Web.Core.DB.conditions;
 using FLocal.Common.actions;
 
 namespace FLocal.Common.dataobjects {
@@ -174,8 +174,8 @@ namespace FLocal.Common.dataobjects {
 			this._title = data[TableSpec.FIELD_TITLE];
 			this._lastPostId = int.Parse(data[TableSpec.FIELD_LASTPOSTID]);
 			this._lastPostDate = new DateTime(long.Parse(data[TableSpec.FIELD_LASTPOSTDATE]));
-			this._isAnnouncement = FLocal.Core.Util.string2bool(data[TableSpec.FIELD_ISANNOUNCEMENT]);
-			this._isLocked = FLocal.Core.Util.string2bool(data[TableSpec.FIELD_ISLOCKED]);
+			this._isAnnouncement = Web.Core.Util.string2bool(data[TableSpec.FIELD_ISANNOUNCEMENT]);
+			this._isLocked = Web.Core.Util.string2bool(data[TableSpec.FIELD_ISLOCKED]);
 			this._totalPosts = int.Parse(data[TableSpec.FIELD_TOTALPOSTS]);
 			this._totalViews = int.Parse(data[TableSpec.FIELD_TOTALVIEWS]);
 		}

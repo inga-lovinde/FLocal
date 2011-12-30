@@ -6,7 +6,7 @@ using System.Web;
 using System.Text.RegularExpressions;
 using PJonDevelopment.BBCode;
 using System.IO;
-using FLocal.Core;
+using Web.Core;
 
 namespace FLocal.Common {
 	public static class UBBParser {

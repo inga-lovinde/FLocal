@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data.Common;
-using FLocal.Core;
-using FLocal.Core.DB;
+using Web.Core;
+using Web.Core.DB;
 
-namespace FLocal.MySQLConnector {
+namespace MySQLConnector {
 
 	public class Connection : IDBConnection {
 
@@ -85,7 +85,7 @@ namespace FLocal.MySQLConnector {
 			}
 		}
 
-		private List<string> _LoadIdsByConditions(DbCommand command, ITableSpec table, FLocal.Core.DB.conditions.AbstractCondition conditions, Diapasone diapasone, JoinSpec[] joins, SortSpec[] sorts, bool allowHugeLists) {
+		private List<string> _LoadIdsByConditions(DbCommand command, ITableSpec table, Web.Core.DB.conditions.AbstractCondition conditions, Diapasone diapasone, JoinSpec[] joins, SortSpec[] sorts, bool allowHugeLists) {
 			command.CommandType = System.Data.CommandType.Text;
 
 			var conditionsCompiled = ConditionCompiler.Compile(conditions, this.traits);
@@ -158,7 +158,7 @@ namespace FLocal.MySQLConnector {
 			}
 		}
 
-		public List<string> LoadIdsByConditions(ITableSpec table, FLocal.Core.DB.conditions.AbstractCondition conditions, Diapasone diapasone, JoinSpec[] joins, SortSpec[] sorts, bool allowHugeLists) {
+		public List<string> LoadIdsByConditions(ITableSpec table, Web.Core.DB.conditions.AbstractCondition conditions, Diapasone diapasone, JoinSpec[] joins, SortSpec[] sorts, bool allowHugeLists) {
 			using(DbConnection connection = this.createConnection()) {
 				using(DbCommand command = connection.CreateCommand()) {
 					return this._LoadIdsByConditions(command, table, conditions, diapasone, joins, sorts, allowHugeLists);
@@ -166,7 +166,7 @@ namespace FLocal.MySQLConnector {
 			}
 		}
 
-		public long GetCountByConditions(ITableSpec table, FLocal.Core.DB.conditions.AbstractCondition conditions, params JoinSpec[] joins) {
+		public long GetCountByConditions(ITableSpec table, Web.Core.DB.conditions.AbstractCondition conditions, params JoinSpec[] joins) {
 			using(DbConnection connection = this.createConnection()) {
 				using(DbCommand command = connection.CreateCommand()) {
 
@@ -196,7 +196,7 @@ namespace FLocal.MySQLConnector {
 			}
 		}
 
-		public FLocal.Core.DB.Transaction beginTransaction(System.Data.IsolationLevel iso) {
+		public Web.Core.DB.Transaction beginTransaction(System.Data.IsolationLevel iso) {
 			lock(this) {
 				Transaction transaction = new Transaction(this, iso);
 				try {
@@ -209,7 +209,7 @@ namespace FLocal.MySQLConnector {
 			}
 		}
 
-		public void lockTable(FLocal.Core.DB.Transaction _transaction, ITableSpec table) {
+		public void lockTable(Web.Core.DB.Transaction _transaction, ITableSpec table) {
 			Transaction transaction = (Transaction)_transaction;
 			lock(transaction) {
 				using(DbCommand command = transaction.sqlconnection.CreateCommand()) {
@@ -221,7 +221,7 @@ namespace FLocal.MySQLConnector {
 			}
 		}
 
-		public void lockRow(FLocal.Core.DB.Transaction _transaction, ITableSpec table, string id) {
+		public void lockRow(Web.Core.DB.Transaction _transaction, ITableSpec table, string id) {
 			Transaction transaction = (Transaction)_transaction;
 			lock(transaction) {
 				using(DbCommand command = transaction.sqlconnection.CreateCommand()) {
@@ -234,7 +234,7 @@ namespace FLocal.MySQLConnector {
 			}
 		}
 
-		public List<Dictionary<string, string>> LoadByIds(FLocal.Core.DB.Transaction _transaction, ITableSpec table, List<string> ids) {
+		public List<Dictionary<string, string>> LoadByIds(Web.Core.DB.Transaction _transaction, ITableSpec table, List<string> ids) {
 			Transaction transaction = (Transaction)_transaction;
 			lock(transaction) {
 				using(DbCommand command = transaction.sqlconnection.CreateCommand()) {
@@ -244,7 +244,7 @@ namespace FLocal.MySQLConnector {
 			}
 		}
 
-		public List<string> LoadIdsByConditions(FLocal.Core.DB.Transaction _transaction, ITableSpec table, FLocal.Core.DB.conditions.AbstractCondition conditions, Diapasone diapasone, JoinSpec[] joins, SortSpec[] sorts, bool allowHugeLists) {
+		public List<string> LoadIdsByConditions(Web.Core.DB.Transaction _transaction, ITableSpec table, Web.Core.DB.conditions.AbstractCondition conditions, Diapasone diapasone, JoinSpec[] joins, SortSpec[] sorts, bool allowHugeLists) {
 			Transaction transaction = (Transaction)_transaction;
 			lock(transaction) {
 				using(DbCommand command = transaction.sqlconnection.CreateCommand()) {
@@ -254,7 +254,7 @@ namespace FLocal.MySQLConnector {
 			}
 		}
 
-		public void update(FLocal.Core.DB.Transaction _transaction, ITableSpec table, string id, Dictionary<string, string> data) {
+		public void update(Web.Core.DB.Transaction _transaction, ITableSpec table, string id, Dictionary<string, string> data) {
 			Transaction transaction = (Transaction)_transaction;
 			lock(transaction) {
 				using(DbCommand command = transaction.sqlconnection.CreateCommand()) {
@@ -277,7 +277,7 @@ namespace FLocal.MySQLConnector {
 			}
 		}
 
-		public string insert(FLocal.Core.DB.Transaction _transaction, ITableSpec table, Dictionary<string, string> data) {
+		public string insert(Web.Core.DB.Transaction _transaction, ITableSpec table, Dictionary<string, string> data) {
 			Transaction transaction = (Transaction)_transaction;
 			lock(transaction) {
 				using(DbCommand command = transaction.sqlconnection.CreateCommand()) {
@@ -302,7 +302,7 @@ namespace FLocal.MySQLConnector {
 			}
 		}
 
-		public void delete(FLocal.Core.DB.Transaction _transaction, ITableSpec table, string id) {
+		public void delete(Web.Core.DB.Transaction _transaction, ITableSpec table, string id) {
 			Transaction transaction = (Transaction)_transaction;
 			lock(transaction) {
 				using(DbCommand command = transaction.sqlconnection.CreateCommand()) {

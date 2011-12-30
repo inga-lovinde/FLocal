@@ -2,24 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using FLocal.Core;
-using FLocal.Importer;
+using Web.Core;
+using FLocal.Migration.Gateway;
 using FLocal.Common;
 using FLocal.Common.dataobjects;
 using FLocal.Common.actions;
 
-namespace FLocal.ImportConsole {
+namespace FLocal.Migration.Console {
 	class UsersImporter {
 
 		public static void ImportUsers() {
 
 			for(int i=1; i<800; i++) {
-				Console.Write("[" + i + "]");
+				System.Console.Write("[" + i + "]");
 				foreach(string userName in ShallerGateway.getUserNames(i)) {
 					User user;
 					try {
 						User.LoadByName(userName);
-						Console.Write("-");
+						System.Console.Write("-");
 					} catch(NotFoundInDBException) {
 						Dictionary<string, string> userData = ShallerGateway.getUserInfo(userName);
 						AbstractChange addUser = new InsertChange(
@@ -56,7 +56,7 @@ namespace FLocal.ImportConsole {
 						ChangeSetUtil.ApplyChanges(addUser, addAccount, addIndicator);
 
 						user = User.LoadById(addUser.getId().Value);
-						Console.Write(".");
+						System.Console.Write(".");
 
 						if(userData["avatar"] != null && userData["avatar"] != "") {
 							Upload avatar;
@@ -78,7 +78,7 @@ namespace FLocal.ImportConsole {
 									user.id
 								)
 							);
-							Console.Write("a");
+							System.Console.Write("a");
 						}
 					}
 

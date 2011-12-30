@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using FLocal.Core.DB;
-using FLocal.Core.DB.conditions;
+using Web.Core.DB;
+using Web.Core.DB.conditions;
 
-namespace FLocal.MySQLConnector {
+namespace MySQLConnector {
 	class ConditionCompiler {
 
 		private readonly ParamsHolder paramsholder;

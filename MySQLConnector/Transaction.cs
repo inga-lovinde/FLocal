@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using FLocal.Core;
+using Web.Core;
 using System.Data.Common;
 
-namespace FLocal.MySQLConnector {
-	class Transaction : Core.DB.Transaction {
+namespace MySQLConnector {
+	class Transaction : Web.Core.DB.Transaction {
 
 		internal Connection connection;
 		internal DbConnection sqlconnection;

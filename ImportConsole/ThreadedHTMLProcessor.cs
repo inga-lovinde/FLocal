@@ -5,7 +5,7 @@ using System.Text;
 using System.IO;
 using System.Text.RegularExpressions;
 
-namespace FLocal.ImportConsole {
+namespace FLocal.Migration.Console {
 	class ThreadedHTMLProcessor {
 
 		private readonly static DateTime UNIX = new DateTime(1970, 1, 1, 0, 0, 0);
@@ -43,7 +43,7 @@ namespace FLocal.ImportConsole {
 				int i=0;
 				foreach(FileSystemInfo _info in directoryInfo.GetFiles()) {
 					if(i%100 == 0) {
-						Console.Write("[" + (int)(i/100) + "]");
+						System.Console.Write("[" + (int)(i/100) + "]");
 					}
 					if(!(_info is FileInfo)) continue;
 					FileInfo info = (FileInfo)_info;
@@ -59,7 +59,7 @@ namespace FLocal.ImportConsole {
 						string contentPoster;
 						int contentLayerId = 1;
 						string contentBoard;
-						using(StreamReader reader = new StreamReader(info.FullName, Importer.ShallerGateway.encoding)) {
+						using(StreamReader reader = new StreamReader(info.FullName, FLocal.Migration.Gateway.ShallerGateway.encoding)) {
 							string raw = reader.ReadToEnd();
 							if(raw.Contains("-CATJUMP-1")) {
 								//full mode
@@ -76,11 +76,11 @@ namespace FLocal.ImportConsole {
 										if(endPos <= 0) {
 											Match endBodyMatch = POST_ENDMARKER_FULL.Match(afterBegin);
 											if(!endBodyMatch.Success) {
-												Console.WriteLine("afterBegin:");
-												Console.WriteLine("===========================");
-												Console.WriteLine(afterBegin);
-												Console.WriteLine("===========================");
-												Console.WriteLine(POST_ENDMARKER_FULL.ToString());
+												System.Console.WriteLine("afterBegin:");
+												System.Console.WriteLine("===========================");
+												System.Console.WriteLine(afterBegin);
+												System.Console.WriteLine("===========================");
+												System.Console.WriteLine(POST_ENDMARKER_FULL.ToString());
 												throw new ApplicationException("cannot match body end");
 											}
 											endPos = endBodyMatch.Index;
@@ -300,7 +300,7 @@ namespace FLocal.ImportConsole {
 						Console.WriteLine("Body: " + contentPost);
 						Console.ReadLine();*/
 						writer.WriteLine(
-							Importer.DictionaryConverter.ToDump(
+							FLocal.Migration.Gateway.DictionaryConverter.ToDump(
 								new Dictionary<string, string> {
 									{ "Subject", contentTitle },
 									{ "Board", contentBoard },
@@ -314,10 +314,10 @@ namespace FLocal.ImportConsole {
 								}
 							)
 						);
-						Console.Write("+");
+						System.Console.Write("+");
 					} catch(Exception e) {
-						Console.Error.WriteLine("Could not process post #" + postId + ": " + e.GetType().FullName + ": " + e.Message);
-						Console.Error.WriteLine(e.StackTrace);
+						System.Console.Error.WriteLine("Could not process post #" + postId + ": " + e.GetType().FullName + ": " + e.Message);
+						System.Console.Error.WriteLine(e.StackTrace);
 					} finally {
 						i++;
 					}

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using FLocal.Core.DB;
+using Web.Core.DB;
 
 namespace FLocal.Common.actions {
 	public static class ChangeSetUtil {

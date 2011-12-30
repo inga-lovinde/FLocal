@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
-using FLocal.Core;
+using Web.Core;
 using FLocal.Common;
 
 namespace FLocal.IISHandler.handlers.request {
