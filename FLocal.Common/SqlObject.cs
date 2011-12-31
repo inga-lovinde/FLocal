@@ -77,7 +77,7 @@ namespace FLocal.Common {
 			}
 		}
 
-		protected void LoadIfNotLoaded() {
+		public void LoadIfNotLoaded() {
 			if(!this.isLoaded) {
 				lock(this.lockInitializer) {
 					if(!this.isLoaded) {

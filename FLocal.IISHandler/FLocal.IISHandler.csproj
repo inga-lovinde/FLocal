@@ -156,6 +156,7 @@
     <Compile Include="handlers\response\UploadInfoHandler.cs" />
     <Compile Include="handlers\response\UserDataHandler.cs" />
     <Compile Include="handlers\response\UserThreadsHandler.cs" />
+    <Compile Include="Initializer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
