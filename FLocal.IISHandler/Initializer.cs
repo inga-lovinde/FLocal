@@ -7,6 +7,8 @@ using Web.Core;
 using Web.Core.DB;
 using FLocal.Common;
 using FLocal.Common.dataobjects;
+using System.IO;
+using System.Threading;
 
 namespace FLocal.IISHandler {
 	class Initializer {
@@ -37,14 +39,20 @@ namespace FLocal.IISHandler {
 
 		private void DoInitialize() {
 			Config.Init(ConfigurationManager.AppSettings);
-			foreach(var cacher in this.cachers) {
-				System.Threading.ThreadPool.QueueUserWorkItem(state => this.WrapCacher(cacher));
+
+			string dir = FLocal.Common.Config.instance.dataDir + "Logs\\";
+			using(StreamWriter writer = new StreamWriter(dir + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".INITIALIZE.txt")) {
+				writer.WriteLine("###INITIALIZE###");
+				foreach(var cacher in this.cachers) {
+					System.Threading.ThreadPool.QueueUserWorkItem(this.GetCacheWrapper(cacher));
+					writer.WriteLine("Pending " + cacher.Key);
+				}
 			}
+	
 		}
 
-		private IEnumerable<Action> cachers {
+		private IEnumerable<KeyValuePair<string, Action>> cachers {
 			get {
-				yield return this.GetTableCacher<LocalNetwork>(LocalNetwork.LoadByIds, LocalNetwork.TableSpec.instance);
 				yield return this.GetTableCacher<Machichara>(Machichara.LoadByIds, Machichara.TableSpec.instance);
 				yield return this.GetTableCacher<ModernSkin>(ModernSkin.LoadByIds, ModernSkin.TableSpec.instance);
 				yield return this.GetTableCacher<PostLayer>(PostLayer.LoadByIds, PostLayer.TableSpec.instance);
@@ -52,37 +60,71 @@ namespace FLocal.IISHandler {
 				yield return this.GetTableCacher<QuickLink>(QuickLink.LoadByIds, QuickLink.TableSpec.instance);
 				yield return this.GetTableCacher<Skin>(Skin.LoadByIds, Skin.TableSpec.instance);
 				yield return this.GetTableCacher<UserGroup>(UserGroup.LoadByIds, UserGroup.TableSpec.instance);
-				yield return this.CacheCategories;
+				yield return new KeyValuePair<string, Action>("categories", this.CacheCategories);
 			}
 		}
 
-		private void WrapCacher(Action cacher) {
-			try {
-				cacher();
-			} catch(FLocalException) {
-			}
-		}
+		private WaitCallback GetCacheWrapper(KeyValuePair<string, Action> cacher) {
+			return state => {
+				string dir = FLocal.Common.Config.instance.dataDir + "Logs\\";
 
-		private Action GetTableCacher<SqlObjectType>(Func<IEnumerable<int>, List<SqlObjectType>> objectsLoader, ITableSpec tableSpec)
-			where SqlObjectType : SqlObject<SqlObjectType>, new()
-		{
-			return () => {
-				foreach(
-					SqlObjectType sqlObject
-					in
-					objectsLoader(
-						from stringId
-						in Config.instance.mainConnection.LoadIdsByConditions(
-							tableSpec,
-							new Web.Core.DB.conditions.EmptyCondition(),
-							Diapasone.unlimited
-						)
-						select int.Parse(stringId)
-					)
-				) {
-					sqlObject.LoadIfNotLoaded();
+				DateTime start = DateTime.Now;
+				/*using(StreamWriter writer = new StreamWriter(dir + start.ToString("yyyy-MM-dd_HH-mm-ss") + ".init." + cacher.Key + ".txt")) {
+					writer.WriteLine("###INITIALIZER/CACHER###");
+					writer.WriteLine("info: " + cacher.Value.Method.Name);
+					writer.WriteLine();
+				}*/
+
+				FLocalException error = null;
+				try {
+					cacher.Value();
+				} catch(FLocalException e) {
+					error = e;
+				}
+
+				DateTime end = DateTime.Now;
+				using(StreamWriter writer = new StreamWriter(dir + end.ToString("yyyy-MM-dd_HH-mm-ss") + ".initend." + cacher.Key + ".txt")) {
+					writer.WriteLine("###INITIALIZER/CACHER###");
+					writer.WriteLine("info: " + cacher.Value.Method.Name);
+					writer.WriteLine("Start: " + start);
+					writer.WriteLine();
+					if(error != null) {
+						writer.WriteLine("Exception: " + error.GetType().FullName);
+						writer.WriteLine("Guid: " + error.GetGuid().ToString());
+						writer.WriteLine(error.Message);
+						if(error is FLocalException) {
+							writer.WriteLine(((FLocalException)error).FullStackTrace);
+						} else {
+							writer.WriteLine(error.StackTrace);
+						}
+					}
 				}
 			};
+		}
+
+		private KeyValuePair<string, Action> GetTableCacher<SqlObjectType>(Func<IEnumerable<int>, List<SqlObjectType>> objectsLoader, ITableSpec tableSpec)
+			where SqlObjectType : SqlObject<SqlObjectType>, new()
+		{
+			return new KeyValuePair<string,Action>(
+				typeof(SqlObjectType).FullName,
+				() => {
+					foreach(
+						SqlObjectType sqlObject
+						in
+						objectsLoader(
+							from stringId
+							in Config.instance.mainConnection.LoadIdsByConditions(
+								tableSpec,
+								new Web.Core.DB.conditions.EmptyCondition(),
+								Diapasone.unlimited
+							)
+							select int.Parse(stringId)
+						)
+					) {
+						sqlObject.LoadIfNotLoaded();
+					}
+				}
+			);
 		}
 
 		private void CacheCategories() {
@@ -98,13 +140,13 @@ namespace FLocal.IISHandler {
 					from board in category.subBoards
 					select board.lastPostId
 				).Max();
-
+			
 			if(_maxPostId.HasValue) {
 				int maxPostId = _maxPostId.Value;
-				int minPostId = Math.Min(maxPostId - 10000, 0);
-				for(int i=maxPostId; i>minPostId; i++) {
+				int minPostId = Math.Max(maxPostId - 10000, 0);
+				for(int i=maxPostId; i>minPostId; i--) {
 					try {
-						var post = Post.LoadById(i);
+						CachePost(Post.LoadById(i));
 					} catch(NotFoundInDBException) {
 					}
 				}
@@ -116,9 +158,18 @@ namespace FLocal.IISHandler {
 			post.LoadIfNotLoaded();
 			post.thread.LoadIfNotLoaded();
 			post.poster.LoadIfNotLoaded();
-			post.latestRevision.LoadIfNotLoaded();
-			post.parentPost.LoadIfNotLoaded();
-			post.parentPost.latestRevision.LoadIfNotLoaded();
+			if(post.poster.avatarId != null) {
+				post.poster.avatar.LoadIfNotLoaded();
+			}
+			if(post.revision != null) {
+				post.latestRevision.LoadIfNotLoaded();
+			}
+			if(post.parentPostId != null) {
+				post.parentPost.LoadIfNotLoaded();
+				if(post.parentPost.revision != null) {
+					post.parentPost.latestRevision.LoadIfNotLoaded();
+				}
+			}
 			foreach(var punishment in post.punishments) {
 				punishment.LoadIfNotLoaded();
 				punishment.moderator.LoadIfNotLoaded();
