@@ -15,6 +15,8 @@ namespace FLocal.IISHandler {
 
 		private void doProcessRequest(HttpContext httpcontext) {
 
+			Initializer.instance.Initialize();
+
 			Uri current = httpcontext.Request.Url;
 			if(!current.Host.EndsWith(Config.instance.BaseHost)) {
 				throw new Web.Core.FLocalException("Wrong host: " + current.Host + " (expected *" + Config.instance.BaseHost + ")");
