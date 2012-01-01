@@ -1,0 +1,287 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<xs:simpleType name="name">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[a-z]+(-[a-z]+)*"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="longDbName">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[a-zA-Z][a-zA-Z01-9_]+(_[a-zA-Z01-9]+)*"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="dbName">
+		<xs:restriction base="longDbName">
+			<xs:pattern value=".{2,30}"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="dbType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[a-zA-Z_][a-zA-Z_01-9]+(\([01-9]+(,[01-9]+)?\))?"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="inOrOut">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="in"/>
+			<xs:enumeration value="out"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="referentialAction">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="noAction"/>
+			<xs:enumeration value="cascade"/>
+			<xs:enumeration value="setNull"/>
+			<xs:enumeration value="setDefault"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="empty"/>
+
+	<xs:complexType name="version">
+		<xs:sequence>
+			<xs:element name="number" type="xs:nonNegativeInteger" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="author" type="name" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="restrictToEnvironments">
+		<xs:sequence>
+			<xs:element name="name" type="name" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="parameterDescription">
+		<xs:sequence>
+			<xs:element name="name" type="dbName" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="direction" type="inOrOut" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="type" type="dbType" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="storedProcedureReference">
+		<xs:sequence>
+			<xs:element name="package" type="dbName" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="name" type="dbName" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="parameter" type="parameterDescription" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:simpleType name="sqlQuery">
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+
+	<xs:complexType name="sqlQueries">
+		<xs:sequence>
+			<xs:element name="query" type="sqlQuery" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="procedureCommandWithBody">
+		<xs:sequence>
+			<xs:element name="procedure" type="storedProcedureReference" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="declarations" type="sqlQuery" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="body" type="sqlQuery" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="procedureCommandWithoutBody">
+		<xs:sequence>
+			<xs:element name="procedure" type="storedProcedureReference" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:group name="tableNameGroup">
+		<xs:sequence>
+			<xs:element name="table" type="dbName" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:group>
+
+	<xs:group name="columnNameGroup">
+		<xs:sequence>
+			<xs:element name="column" type="dbName" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:group>
+
+	<xs:group name="columnReferenceGroup">
+		<xs:sequence>
+			<xs:group ref="tableNameGroup" minOccurs="1" maxOccurs="1"/>
+			<xs:group ref="columnNameGroup" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:group>
+
+	<xs:group name="columnOptionsGroup">
+		<xs:sequence>
+			<xs:element name="type" type="dbType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="defaultValue" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="isNotNull" type="empty" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:group>
+
+	<xs:complexType name="foreignKeyConstraint">
+		<xs:sequence>
+			<xs:group ref="columnNameGroup" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="referencedTable" type="dbName" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="onUpdate" type="referentialAction" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="onDelete" type="referentialAction" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="uniqueConstraint">
+		<xs:sequence>
+			<xs:group ref="columnNameGroup" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="checkConstraint">
+		<xs:sequence>
+			<xs:element name="condition" type="sqlQuery" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="constraint">
+		<xs:sequence>
+			<xs:group ref="tableNameGroup" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="constraintName" type="dbName" minOccurs="1" maxOccurs="1"/>
+			<xs:choice minOccurs="1" maxOccurs="1">
+				<xs:element name="foreignKey" type="foreignKeyConstraint" minOccurs="1" maxOccurs="1"/>
+				<xs:element name="unique" type="uniqueConstraint" minOccurs="1" maxOccurs="1"/>
+				<xs:element name="check" type="checkConstraint" minOccurs="1" maxOccurs="1"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="columnReference">
+		<xs:sequence>
+			<xs:group ref="columnReferenceGroup" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="columnReferenceWithOptions">
+		<xs:sequence>
+			<xs:group ref="columnReferenceGroup" minOccurs="1" maxOccurs="1"/>
+			<xs:group ref="columnOptionsGroup" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="columnNameWithOptions">
+		<xs:sequence>
+			<xs:group ref="columnNameGroup" minOccurs="1" maxOccurs="1"/>
+			<xs:group ref="columnOptionsGroup" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="columnCommand">
+		<xs:complexContent>
+			<xs:extension base="columnReference"/>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="columnCommandWithOptions">
+		<xs:complexContent>
+			<xs:extension base="columnReferenceWithOptions"/>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="tableDefinition">
+		<xs:sequence>
+			<xs:group ref="tableNameGroup"/>
+			<xs:element name="primaryKey" type="columnNameWithOptions" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="column" type="columnNameWithOptions" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="tableDefinitionCommand">
+		<xs:complexContent>
+			<xs:extension base="tableDefinition"/>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:group name="viewNameGroup">
+		<xs:sequence>
+			<xs:element name="view" type="dbName" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:group>
+
+	<xs:group name="viewDefinitionGroup">
+		<xs:sequence>
+			<xs:group ref="viewNameGroup" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="body" type="sqlQuery" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:group>
+
+	<xs:complexType name="viewNameCommand">
+		<xs:sequence>
+			<xs:group ref="viewNameGroup" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="viewDefinitionCommand">
+		<xs:sequence>
+			<xs:group ref="viewDefinitionGroup" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="sqlCommand">
+		<xs:sequence>
+			<xs:element name="installSql" type="sqlQueries" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="uninstallSql" type="sqlQueries" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="command">
+		<xs:choice>
+			<xs:element name="sql" type="sqlCommand" minOccurs="1" maxOccurs="1"/>
+		</xs:choice>
+		<xs:attribute name="num" type="xs:int" use="optional"/>
+	</xs:complexType>
+
+	<xs:complexType name="persistentCommand">
+		<xs:choice>
+			<xs:element name="createProcedure" type="procedureCommandWithBody" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="changeProcedure" type="procedureCommandWithBody" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="removeProcedure" type="procedureCommandWithoutBody" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="createColumn" type="columnCommandWithOptions" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="modifyColumn" type="columnCommandWithOptions" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="removeColumn" type="columnCommand" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="createConstraint" type="constraint" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="removeConstraint" type="constraint" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="createTable" type="tableDefinitionCommand" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="createView" type="viewDefinitionCommand" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="removeView" type="viewNameCommand" minOccurs="1" maxOccurs="1"/>
+		</xs:choice>
+	</xs:complexType>
+
+	<xs:complexType name="looseCommandSet">
+		<xs:choice minOccurs="1" maxOccurs="unbounded">
+			<xs:element name="command" type="command" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="persistentCommand" type="persistentCommand" minOccurs="1" maxOccurs="1"/>
+		</xs:choice>
+	</xs:complexType>
+
+	<xs:complexType name="strictCommandSet">
+		<xs:choice minOccurs="0" maxOccurs="1">
+			<xs:element name="command" type="command" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="persistentCommand" type="persistentCommand" minOccurs="1" maxOccurs="1"/>
+		</xs:choice>
+	</xs:complexType>
+
+	<xs:element name="patch">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="version" type="version" minOccurs="1" maxOccurs="1"/>
+				<xs:element name="restrictToEnvironments" type="restrictToEnvironments" minOccurs="0" maxOccurs="1"/>
+				<xs:choice minOccurs="0" maxOccurs="1">
+					<xs:element name="looseCommandSet" type="looseCommandSet" minOccurs="1" maxOccurs="1"/>
+					<xs:element name="strictCommandSet" type="strictCommandSet" minOccurs="1" maxOccurs="1"/>
+				</xs:choice>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>

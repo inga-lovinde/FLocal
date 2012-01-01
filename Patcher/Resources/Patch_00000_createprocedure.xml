@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<patch xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="IPatch.xsd">
+	<version>
+		<number>0</number>
+		<author>createprocedure</author>
+	</version>
+	<restrictToEnvironments>
+		<name>deva</name>
+		<name>devb</name>
+	</restrictToEnvironments>
+	<strictCommandSet>
+		<!--persistentCommand>
+			<createProcedure>
+				<procedure>
+					<package>DATA_IMPORTER</package>
+					<name>TEST_PROCEDURE</name>
+					<parameter>
+						<name>p_cur_user</name>
+						<direction>in</direction>
+						<type>number</type>
+					</parameter>
+					<parameter>
+						<name>p_cur_out</name>
+						<direction>out</direction>
+						<type>sys_refcursor</type>
+					</parameter>
+				</procedure>
+				<declarations>
+					v_some_var number;
+				</declarations>
+				<body>
+					v_some_var := 0;
+					open p_cur_out for
+						select v_some_var from dual;
+				</body>
+			</createProcedure>
+		</persistentCommand-->
+	</strictCommandSet>
+</patch>

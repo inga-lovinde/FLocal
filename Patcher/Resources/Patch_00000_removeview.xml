@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<patch xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="IPatch.xsd">
+	<version>
+		<number>0</number>
+		<author>removeview</author>
+	</version>
+	<restrictToEnvironments>
+		<name>iprohorov-test</name>
+	</restrictToEnvironments>
+	<strictCommandSet>
+		<persistentCommand>
+			<removeView>
+				<view>PATCHER_TEST_VIEW</view>
+			</removeView>
+	</persistentCommand>
+	</strictCommandSet>
+</patch>

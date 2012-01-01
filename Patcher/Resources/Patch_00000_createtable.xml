@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<patch xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="IPatch.xsd">
+	<version>
+		<number>0</number>
+		<author>createtable</author>
+	</version>
+	<strictCommandSet>
+		<!--persistentCommand>
+			<createTable>
+				<table>ENR_PATCHER_TEST_NEW_TABLE</table>
+				<primaryKey>
+					<column>RECORD_ID</column>
+					<type>raw(16)</type>
+					<defaultValue>sys_guid()</defaultValue>
+					<isNotNull/>
+				</primaryKey>
+				<column>
+					<column>NAME</column>
+					<type>varchar2(32)</type>
+					<isNotNull/>
+				</column>
+				<column>
+					<column>COUNT</column>
+					<type>number(12)</type>
+					<defaultValue>0</defaultValue>
+					<isNotNull/>
+				</column>
+				<column>
+					<column>THINGY</column>
+					<type>blob</type>
+				</column>
+			</createTable>
+		</persistentCommand-->
+	</strictCommandSet>
+</patch>

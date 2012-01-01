@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<patch xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="IPatch.xsd">
+	<version>
+		<number>0</number>
+		<author>createview</author>
+	</version>
+	<restrictToEnvironments>
+		<name>iprohorov-test</name>
+	</restrictToEnvironments>
+	<strictCommandSet>
+		<persistentCommand>
+			<createView>
+				<view>PATCHER_TEST_VIEW</view>
+				<body>select * from ENR_MONTH where YEAR = 2009</body>
+			</createView>
+		</persistentCommand>
+	</strictCommandSet>
+</patch>

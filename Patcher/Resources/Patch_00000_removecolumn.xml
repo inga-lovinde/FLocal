@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<patch xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="IPatch.xsd">
+	<version>
+		<number>0</number>
+		<author>removecolumn</author>
+	</version>
+	<strictCommandSet>
+		<!--persistentCommand>
+			<removeColumn>
+				<table>ENR_WTHR_FORECAST_OLD</table>
+				<column>DOLNIK_ALEXANDER</column>
+			</removeColumn>
+		</persistentCommand-->
+	</strictCommandSet>
+</patch>

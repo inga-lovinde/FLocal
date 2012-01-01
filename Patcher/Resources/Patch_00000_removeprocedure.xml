@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<patch xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="IPatch.xsd">
+	<version>
+		<number>0</number>
+		<author>removeprocedure</author>
+	</version>
+	<restrictToEnvironments>
+		<name>deva</name>
+		<name>developer</name>
+		<name>devb</name>
+	</restrictToEnvironments>
+	<strictCommandSet>
+		<!--persistentCommand>
+			<removeProcedure>
+				<procedure>
+					<package>DATA_IMPORTER</package>
+					<name>ENR_IMPORTER_QUEUE_GETLIST</name>
+					<parameter>
+						<name>p_cur_user</name>
+						<direction>in</direction>
+						<type>number</type>
+					</parameter>
+					<parameter>
+						<name>p_cur_out</name>
+						<direction>out</direction>
+						<type>sys_refcursor</type>
+					</parameter>
+				</procedure>
+			</removeProcedure>
+		</persistentCommand-->
+	</strictCommandSet>
+</patch>

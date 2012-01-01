@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{78F407CF-416D-4D1F-971C-9A51FEA69B3A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Patcher</RootNamespace>
+    <AssemblyName>Patcher</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Context.cs" />
+    <Compile Include="Data\Command\AbstractColumnCommand.cs" />
+    <Compile Include="Data\Command\AbstractColumnCommandWithOptions.cs" />
+    <Compile Include="Data\Command\AbstractCommand.cs" />
+    <Compile Include="Data\Command\AbstractConstraintCommand.cs" />
+    <Compile Include="Data\Command\AbstractPersistentCommand.cs" />
+    <Compile Include="Data\Command\AbstractStoredProcedureCommand.cs" />
+    <Compile Include="Data\Command\AbstractViewCommand.cs" />
+    <Compile Include="Data\Command\ChangeStoredProcedureCommand.cs" />
+    <Compile Include="Data\Command\CreateColumnCommand.cs" />
+    <Compile Include="Data\Command\CreateConstraintCommand.cs" />
+    <Compile Include="Data\Command\CreateStoredProcedureCommand.cs" />
+    <Compile Include="Data\Command\CreateTableCommand.cs" />
+    <Compile Include="Data\Command\CreateViewCommand.cs" />
+    <Compile Include="Data\Command\ModifyColumnCommand.cs" />
+    <Compile Include="Data\Command\RemoveColumnCommand.cs" />
+    <Compile Include="Data\Command\RemoveConstraintCommand.cs" />
+    <Compile Include="Data\Command\RemoveStoredProcedureCommand.cs" />
+    <Compile Include="Data\Command\RemoveViewCommand.cs" />
+    <Compile Include="Data\Command\SqlCommand.cs" />
+    <Compile Include="Data\Patch\AbstractPatch.cs" />
+    <Compile Include="Data\Patch\AtomicPatch.cs" />
+    <Compile Include="Data\Patch\PatchId.cs" />
+    <Compile Include="Data\Patch\PersistentPatch.cs" />
+    <Compile Include="Data\XMLParser.cs" />
+    <Compile Include="DB\AbstractConstraint.cs" />
+    <Compile Include="DB\CheckConstraint.cs" />
+    <Compile Include="DB\ColumnDescription.cs" />
+    <Compile Include="DB\ColumnOptions.cs" />
+    <Compile Include="DB\ColumnReference.cs" />
+    <Compile Include="DB\ForeignKeyConstraint.cs" />
+    <Compile Include="DB\IDBTraits.cs" />
+    <Compile Include="DB\OracleDBTraits.cs" />
+    <Compile Include="DB\OracleFakeTransactionalDBTraits.cs" />
+    <Compile Include="DB\SQLQueryManager.cs" />
+    <Compile Include="DB\StoredProcedureBody.cs" />
+    <Compile Include="DB\StoredProcedureReference.cs" />
+    <Compile Include="DB\TableDescription.cs" />
+    <Compile Include="DB\Transaction.cs" />
+    <Compile Include="DB\TransactionFactory.cs" />
+    <Compile Include="DB\UniqueConstraint.cs" />
+    <Compile Include="Exceptions\FormattableException.cs" />
+    <Compile Include="Exceptions\ResourceNotFoundException.cs" />
+    <Compile Include="Exceptions\XmlResourceNotFoundException.cs" />
+    <Compile Include="ConsoleProcessor.cs" />
+    <Compile Include="IConfig.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\ResourcesManager.cs" />
+    <Compile Include="ThirdParty\NConsoler.cs" />
+    <Compile Include="Util\Cache.cs" />
+    <Compile Include="Util\CultureReplacementWrapper.cs" />
+    <Compile Include="Util\Util.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\IPatch.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Patch_00000_removeview.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Patch_00000_removeunique.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Patch_00000_removeprocedure.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Patch_00000_removeforeignkey.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Patch_00000_removecolumn.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Patch_00000_removecheck.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Patch_00000_modifycolumn.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Patch_00000_createview.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Patch_00000_createunique.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Patch_00000_createtable.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Patch_00000_createprocedure.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Patch_00000_createforeignkey.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Patch_00000_createcolumn.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Patch_00000_createcheck.xml">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Patch_00000_changeprocedure.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

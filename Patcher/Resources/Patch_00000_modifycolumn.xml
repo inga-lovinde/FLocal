@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<patch xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="IPatch.xsd">
+	<version>
+		<number>0</number>
+		<author>modifycolumn</author>
+	</version>
+	<strictCommandSet>
+		<!--persistentCommand>
+			<modifyColumn>
+				<table>ENR_WTHR_FORECAST_OLD</table>
+				<column>MONTH_ID</column>
+				<type>NUMBER</type>
+				<defaultValue>456</defaultValue>
+				<isNotNull/>
+			</modifyColumn>
+		</persistentCommand-->
+	</strictCommandSet>
+</patch>

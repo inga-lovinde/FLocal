@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<patch xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="IPatch.xsd">
+	<version>
+		<number>0</number>
+		<author>removecheck</author>
+	</version>
+	<strictCommandSet>
+		<!--persistentCommand>
+			<removeConstraint>
+				<table>ENR_WTHR_FORECAST_OLD</table>
+				<constraintName>PATCHER_DEBUG_WTO_CHECK</constraintName>
+				<check>
+					<condition>MONTH_ID * PK_WTHR_FORECAST_ID != 271</condition>
+				</check>
+			</removeConstraint>
+		</persistentCommand-->
+	</strictCommandSet>
+</patch>
