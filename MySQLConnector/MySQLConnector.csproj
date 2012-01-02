@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="ConditionCompiler.cs" />
     <Compile Include="Connection.cs" />
+    <Compile Include="CommandExecutionLogger.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="IDBTraits.cs" />
     <Compile Include="MySQLDBTraits.cs" />

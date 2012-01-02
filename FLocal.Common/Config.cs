@@ -54,7 +54,6 @@ namespace FLocal.Common {
 
 		protected Config(NameValueCollection data) : base(data) {
 			this.InitTime = DateTime.Now.ToLongTimeString();
-			this.mainConnection = new MySQLConnector.Connection(data["ConnectionString"], MySQLConnector.PostgresDBTraits.instance);
 			this.dataDir = data["DataDir"];
 			this.DirSeparator = System.IO.Path.DirectorySeparatorChar.ToString();
 			this.SaltMigration = data["SaltMigration"];
@@ -75,6 +74,7 @@ namespace FLocal.Common {
 			this.DefaultModernSkin = data["DefaultModernSkin"];
 			this.DefaultMachichara = data["DefaultMachichara"];
 			this.Logger = new SingleFileLogger(this);
+			this.mainConnection = new MySQLConnector.Connection(data["ConnectionString"], MySQLConnector.PostgresDBTraits.instance, this.Logger);
 		}
 
 		public static void Init(NameValueCollection data) {

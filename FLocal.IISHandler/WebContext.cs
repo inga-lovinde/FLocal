@@ -164,7 +164,9 @@ namespace FLocal.IISHandler {
 		public void WriteTransformResult(string templateName, System.Xml.Linq.XDocument data) {
 			this.httpresponse.ContentType = this.design.ContentType;
 			this.httpresponse.ContentEncoding = OutputEncoding;
+			DateTime start = DateTime.Now;
 			TemplateEngine.WriteCompiled(this.design.GetFSName(templateName), data, this.httpresponse.Output);
+			Config.instance.Logger.Log(templateName + " transformation took " + (DateTime.Now-start).TotalSeconds + " seconds");
 		}
 
 		public XElement exportSession() {
