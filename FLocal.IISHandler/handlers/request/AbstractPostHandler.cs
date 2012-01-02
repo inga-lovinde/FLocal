@@ -41,10 +41,14 @@ namespace FLocal.IISHandler.handlers.request {
 		}
 
 		private XDocument getData(WebContext context) {
+			DateTime start = DateTime.Now;
+			var specificData = this.Do(context);
+			var commonData = this.getCommonData(context);
 			return new XDocument(
 				new XElement("root",
-					this.Do(context),
-					this.getCommonData(context)
+					specificData,
+					commonData,
+					new XElement("processingTime", (DateTime.Now-start).TotalSeconds)
 				)
 			);
 		}

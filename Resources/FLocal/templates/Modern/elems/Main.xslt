@@ -78,6 +78,7 @@
 					<form action="" method="post" id="systemForm">
 						<input type="hidden" name="data"/>
 					</form>
+					<span>Total time spent: <xsl:value-of select="processingTime"/> seconds</span>
 				</div>
 				<xsl:if test="get/param[@name='debug'] = 'true'">
 					<xsl:text disable-output-escaping="yes"><![CDATA[<!--]]></xsl:text>
