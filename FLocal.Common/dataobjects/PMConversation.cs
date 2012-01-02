@@ -157,6 +157,7 @@ namespace FLocal.Common.dataobjects {
 		}
 
 		public IEnumerable<PMMessage> getMessages(Diapasone diapasone, UserContext context, bool isAscending) {
+			diapasone.total = this.totalMessages;
 			return PMMessage.LoadByIds(
 				from stringId in Config.instance.mainConnection.LoadIdsByConditions(
 					PMMessage.TableSpec.instance,

@@ -138,27 +138,33 @@ namespace MySQLConnector {
 					command.AddParameter(kvp.Key, kvp.Value);
 				}
 
-				command.CommandText = logger.commandText = "SELECT COUNT(*) " + queryMain;
-				object rawCount;
-				//try {
-				rawCount = command.ExecuteScalar();
-				//} catch(Npgsql.NpgsqlException e) {
-				//throw new FLocalException("Error while trying to execute " + command.CommandText + ": " + e.Message);
-				//}
-				long count = (long)rawCount;
-				if(count < 1) {
-					diapasone.total = 0;
+				if(!diapasone.total.HasValue) {
+					command.CommandText = logger.commandText = "SELECT COUNT(*) " + queryMain;
+					object rawCount;
+					//try {
+					rawCount = command.ExecuteScalar();
+					//} catch(Npgsql.NpgsqlException e) {
+					//throw new FLocalException("Error while trying to execute " + command.CommandText + ": " + e.Message);
+					//}
+					long count = (long)rawCount;
+					if(count < 1) {
+						diapasone.total = 0;
+					} else {
+						diapasone.total = count;
+					}
+				}
+
+				if(diapasone.total.Value < 1) {
 					return new List<string>();
 				} else {
-					diapasone.total = count;
-					if(diapasone.total > 1000 && diapasone.count < 0 && !allowHugeLists) {
+					if(diapasone.total.Value > 1000 && diapasone.count < 0 && !allowHugeLists) {
 						throw new CriticalException("huge list");
 					}
 					string queryLimits = "";
 					if(diapasone.count >= 0) {
 						queryLimits = "LIMIT " + diapasone.count + " OFFSET " + diapasone.start;
 					}
-					command.CommandText = "SELECT " + table.getIdSpec().compile(this.traits) + " " + queryMain + " " + querySorts + " " + queryLimits;
+					command.CommandText = logger.commandText = "SELECT " + table.getIdSpec().compile(this.traits) + " " + queryMain + " " + querySorts + " " + queryLimits;
 
 					List<string> result = new List<string>();
 					using(DbDataReader reader = command.ExecuteReader()) {
