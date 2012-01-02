@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Box.cs" />
     <Compile Include="Cache.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Counter.cs" />

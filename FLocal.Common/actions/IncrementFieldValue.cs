@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Web.Core;
 
 namespace FLocal.Common.actions {
 	class IncrementFieldValue : AbstractFieldValue {
@@ -37,8 +38,14 @@ namespace FLocal.Common.actions {
 
 		private readonly Func<string, string> processor;
 
+		private readonly Box<string> resultBox;
+
 		public IncrementFieldValue(Func<string, string> processor) {
 			this.processor = processor;
+		}
+
+		public IncrementFieldValue(Func<string, string> processor, Box<string> resultBox) : this(processor) {
+			this.resultBox = resultBox;
 		}
 
 		public IncrementFieldValue() : this(INCREMENTOR) {
@@ -48,7 +55,11 @@ namespace FLocal.Common.actions {
 			throw new NotSupportedException();
 		}
 		public override string getStringRepresentation(string oldInfo) {
-			return this.processor(oldInfo);
+			var result = this.processor(oldInfo);
+			if(this.resultBox != null) {
+				this.resultBox.value = result;
+			}
+			return result;
 		}
 
 	}

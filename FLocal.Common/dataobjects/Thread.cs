@@ -272,7 +272,8 @@ namespace FLocal.Common.dataobjects {
 			});
 		}
 
-		public int getLastReadId(Account account) {
+		private readonly Dictionary<int, int> lastReadId_cache = new Dictionary<int, int>();
+		private int do_getLastReadId(Account account) {
 			List<string> stringIds = Config.instance.mainConnection.LoadIdsByConditions(
 				ReadMarkerTableSpec.instance,
 				this.getReadmarkerSearchCondition(account),
@@ -282,7 +283,7 @@ namespace FLocal.Common.dataobjects {
 				throw new CriticalException("more than one row");
 			}
 			if(stringIds.Count < 1) {
-				return (this.lastPostId >= FORMALREADMIN) ? 0 : this.lastPostId;
+				return (this.lastPostId >= FORMALREADMIN) ? 0 : FORMALREADMIN;
 			}
 			Dictionary<string, string> data = Config.instance.mainConnection.LoadById(ReadMarkerTableSpec.instance, stringIds[0]);
 			if((data[ReadMarkerTableSpec.FIELD_POSTID] == "") || (data[ReadMarkerTableSpec.FIELD_POSTID] == null)) {
@@ -290,8 +291,28 @@ namespace FLocal.Common.dataobjects {
 			}
 			return int.Parse(data[ReadMarkerTableSpec.FIELD_POSTID]);
 		}
+		public int getLastReadId(Account account) {
+			if(!this.lastReadId_cache.ContainsKey(account.id)) {
+				lock(this.lastReadId_cache) {
+					if(!this.lastReadId_cache.ContainsKey(account.id)) {
+						this.lastReadId_cache[account.id] = this.do_getLastReadId(account);
+					}
+				}
+			}
+			return this.lastReadId_cache[account.id];
+		}
+		private void lastReadId_Reset(Account account, int _lastReadId) {
+			int lastReadId = _lastReadId;
+			lock(this.lastReadId_cache) {
+				if(this.lastReadId_cache.ContainsKey(account.id)) {
+					lastReadId = Math.Max(lastReadId, _lastReadId);
+				}
+				this.lastReadId_cache[account.id] = lastReadId;
+			}
+		}
 
 		public void forceMarkAsRead(Account account, Post maxPost) {
+			var actualLastRead = new Box<string>();
 			ChangeSetUtil.ApplyChanges(
 				new InsertOrUpdateChange(
 					ReadMarkerTableSpec.instance,
@@ -301,14 +322,18 @@ namespace FLocal.Common.dataobjects {
 						{ ReadMarkerTableSpec.FIELD_POSTID, new ScalarFieldValue(maxPost.id.ToString()) },
 					},
 					new Dictionary<string,AbstractFieldValue> {
-						{ ReadMarkerTableSpec.FIELD_POSTID, new IncrementFieldValue(IncrementFieldValue.GREATEST(maxPost.id)) },
+						{ ReadMarkerTableSpec.FIELD_POSTID, new IncrementFieldValue(IncrementFieldValue.GREATEST(maxPost.id), actualLastRead) },
 					},
 					this.getReadmarkerSearchCondition(account)
 				)
 			);
+			int actualLastReadId = 0;
+			int.TryParse(actualLastRead.value, out actualLastReadId);
+			this.lastReadId_Reset(account, actualLastReadId);
 		}
 
 		public void markAsRead(Account account, Post minPost, Post maxPost) {
+			Box<string> actualLastRead = new Box<string>();
 			ChangeSetUtil.ApplyChanges(
 				new InsertOrUpdateChange(
 					ReadMarkerTableSpec.instance,
@@ -368,13 +393,17 @@ namespace FLocal.Common.dataobjects {
 									} else {
 										return maxPost.id.ToString();
 									}
-								}
+								},
+								actualLastRead
 							)
 						}
 					},
 					this.getReadmarkerSearchCondition(account)
 				)
 			);
+			int actualLastReadId = 0;
+			int.TryParse(actualLastRead.value, out actualLastReadId);
+			this.lastReadId_Reset(account, actualLastReadId);
 		}
 
 		internal static KeyValuePair<AbstractChange, IEnumerable<AbstractChange>> getNewPostChanges(Board board, int threadId, Post parentPost, User poster, PostLayer layer, string title, string body, DateTime date, int? forcedPostId) {
