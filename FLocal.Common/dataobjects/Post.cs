@@ -28,7 +28,10 @@ namespace FLocal.Common.dataobjects {
 			public static readonly TableSpec instance = new TableSpec();
 			public string name { get { return TABLE; } }
 			public string idName { get { return FIELD_ID; } }
-			public void refreshSqlObject(int id) { Refresh(id); }
+			public void refreshSqlObject(int id) {
+				Refresh(id);
+				LoadById(id).latestRevision_Reset();
+			}
 		}
 
 		protected override ISqlObjectTableSpec table { get { return TableSpec.instance; } }
@@ -70,30 +73,38 @@ namespace FLocal.Common.dataobjects {
 				return this._revision;
 			}
 		}
+
+		private readonly object latestRevision_locker = new object();
 		public Revision latestRevision {
 			get {
-				return Revision.LoadById(
-					int.Parse(
-						Config.instance.mainConnection.LoadIdsByConditions(
-							Revision.TableSpec.instance,
-							new ComplexCondition(
-								ConditionsJoinType.AND,
-								new ComparisonCondition(
-									Revision.TableSpec.instance.getColumnSpec(Revision.TableSpec.FIELD_POSTID),
-									ComparisonType.EQUAL,
-									this.id.ToString()
+				return Cache<Revision>.instance.get(
+					this.latestRevision_locker,
+					() => Revision.LoadById(
+						int.Parse(
+							Config.instance.mainConnection.LoadIdsByConditions(
+								Revision.TableSpec.instance,
+								new ComplexCondition(
+									ConditionsJoinType.AND,
+									new ComparisonCondition(
+										Revision.TableSpec.instance.getColumnSpec(Revision.TableSpec.FIELD_POSTID),
+										ComparisonType.EQUAL,
+										this.id.ToString()
+									),
+									new ComparisonCondition(
+										Revision.TableSpec.instance.getColumnSpec(Revision.TableSpec.FIELD_NUMBER),
+										ComparisonType.EQUAL,
+										this.revision.Value.ToString()
+									)
 								),
-								new ComparisonCondition(
-									Revision.TableSpec.instance.getColumnSpec(Revision.TableSpec.FIELD_NUMBER),
-									ComparisonType.EQUAL,
-									this.revision.Value.ToString()
-								)
-							),
-							Diapasone.unlimited
-						).Single()
+								Diapasone.unlimited
+							).Single()
+						)
 					)
 				);
 			}
+		}
+		internal void latestRevision_Reset() {
+			Cache<Revision>.instance.delete(this.latestRevision_locker);
 		}
 		
 		private int _layerId;
