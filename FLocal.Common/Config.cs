@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Collections.Specialized;
 using Web.Core;
+using System.IO;
 
 namespace FLocal.Common {
 
@@ -49,6 +50,8 @@ namespace FLocal.Common {
 		public readonly string DefaultLegacySkin;
 		public readonly string DefaultMachichara;
 
+		public readonly ILogger Logger;
+
 		protected Config(NameValueCollection data) : base(data) {
 			this.InitTime = DateTime.Now.ToLongTimeString();
 			this.mainConnection = new MySQLConnector.Connection(data["ConnectionString"], MySQLConnector.PostgresDBTraits.instance);
@@ -71,15 +74,16 @@ namespace FLocal.Common {
 			this.DefaultLegacySkin = data["DefaultLegacySkin"];
 			this.DefaultModernSkin = data["DefaultModernSkin"];
 			this.DefaultMachichara = data["DefaultMachichara"];
+			this.Logger = new SingleFileLogger(this);
 		}
 
 		public static void Init(NameValueCollection data) {
 			doInit(() => new Config(data));
 		}
 
-		public static void ReInit(NameValueCollection data) {
+		/*public static void ReInit(NameValueCollection data) {
 			doReInit(() => new Config(data));
-		}
+		}*/
 
 		public override void Dispose() {
 			this.mainConnection.Dispose();
@@ -100,6 +104,25 @@ namespace FLocal.Common {
 					throw;
 				}
 			}
+		}
+
+		private class SingleFileLogger : ILogger {
+
+			private readonly StreamWriter writer;
+
+			private readonly object locker = new object();
+
+			public SingleFileLogger(Config config) {
+				this.writer = new StreamWriter(config.dataDir + "Logs\\" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".mainlog.txt");
+			}
+
+			void ILogger.Log(string message) {
+				lock(this.locker) {
+					this.writer.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.ffffff") + ": " + message);
+					this.writer.Flush();
+				}
+			}
+
 		}
 
 	}

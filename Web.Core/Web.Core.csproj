@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Cache.cs" />
     <Compile Include="Config.cs" />
+    <Compile Include="Counter.cs" />
     <Compile Include="DataObject.cs" />
     <Compile Include="DB\conditions\AbstractCondition.cs" />
     <Compile Include="DB\ColumnOrValue.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="extensions\Extensions.cs" />
     <Compile Include="extensions\String.cs" />
     <Compile Include="IDataObject.cs" />
+    <Compile Include="ILogger.cs" />
     <Compile Include="Network\IPv4.cs" />
     <Compile Include="Network\IPv4Subnet.cs" />
     <Compile Include="Network\IPv4Address.cs" />

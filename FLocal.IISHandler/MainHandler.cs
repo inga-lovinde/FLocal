@@ -4,18 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Configuration;
+using Web.Core;
 using FLocal.Common;
 
 namespace FLocal.IISHandler {
 	public class MainHandler : IHttpHandler {
+
+		private static readonly Counter counter = new Counter();
 
 		public bool IsReusable {
 			get { return true; }
 		}
 
 		private void doProcessRequest(HttpContext httpcontext) {
-
-			Initializer.instance.Initialize();
 
 			Uri current = httpcontext.Request.Url;
 			if(!current.Host.EndsWith(Config.instance.BaseHost)) {
@@ -40,9 +41,16 @@ namespace FLocal.IISHandler {
 		}
 
 		public void ProcessRequest(HttpContext context) {
+			Initializer.instance.Initialize();
+
+			DateTime start = DateTime.Now;
+			int requestNumber = counter.GetCurrentValueAndIncrement();
 			try {
+				Config.instance.Logger.Log("Began serving request #" + requestNumber + ": " + context.Request.Url.AbsoluteUri);
 				this.doProcessRequest(context);
+				Config.instance.Logger.Log("Done serving request #" + requestNumber + "; " + (DateTime.Now-start).TotalSeconds + " seconds spent");
 			} catch(RedirectException e) {
+				Config.instance.Logger.Log("Done serving request #" + requestNumber + "; " + (DateTime.Now-start).TotalSeconds + " seconds spent (redirected)");
 				context.Response.Redirect(e.newUrl);
 			}
 		}
