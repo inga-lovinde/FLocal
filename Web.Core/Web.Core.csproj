@@ -81,6 +81,7 @@
     <Compile Include="extensions\Extensions.cs" />
     <Compile Include="extensions\String.cs" />
     <Compile Include="IDataObject.cs" />
+    <Compile Include="IInteractiveConsole.cs" />
     <Compile Include="ILogger.cs" />
     <Compile Include="Network\IPv4.cs" />
     <Compile Include="Network\IPv4Subnet.cs" />

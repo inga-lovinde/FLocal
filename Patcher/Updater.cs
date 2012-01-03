@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using NConsoler;
+using Web.Core;
 using Patcher.Data;
 using Patcher.Data.Patch;
 using Patcher.DB;
@@ -12,61 +13,45 @@ using System.IO;
 
 namespace Patcher
 {
-	public sealed class ConsoleProcessor
+	public sealed class Updater
 	{
 
 		private const string STATUS_INSTALLING = "installing";
 		private const string STATUS_INSTALLED = "installed";
 	
-		private static readonly Regex PatchName = new Regex("^Patch_(?<version>[01-9]+)_(?<author>[a-z]+)\\.xml$", RegexOptions.Compiled | RegexOptions.ExplicitCapture);
-
 		private readonly Context context;
 
-		private ConsoleProcessor(Context context)
-		{
-			this.context = context;
-		}
-	
-		public static int Process(IConfig config, Func<IEnumerable<PatchId>> getPatchesList, Func<PatchId, Stream> loadPatch, string[] args)
-		{
-			using(new CultureReplacementWrapper(System.Globalization.CultureInfo.InvariantCulture))
-			{
-				return Consolery.RunInstance(new ConsoleProcessor(new Context(config, getPatchesList, loadPatch)), args);
-			}
+		public Updater(IUpdateParams updateParams, IInteractiveConsole console) {
+			this.context = new Context(updateParams, console);
 		}
 
-		private static int Wrap(bool interactive, Action action)
-		{
+		private int Wrap(Action action) {
 			bool success = false;
-			try
-			{
+			try {
 				action();
 				success = true;
-			} catch(Exception e)
-			{
-				Console.WriteLine();
-				Console.WriteLine(e);
+			} catch(Exception e) {
+				this.context.console.Report(e.ToString());
 			}
-			if(interactive)
-			{
-				Console.WriteLine("Press any key to exit...");
-				Console.ReadKey(true);
+			if(this.context.console.IsInteractive) {
+				this.context.console.Report("Press any key to exit...");
+				this.context.console.WaitForUserAction();
 			}
 			return success ? 0 : 1;
 		}
-		
+
 		private void InstallPatch(PatchId patchId)
 		{
 		
 			AbstractPatch patch = AbstractPatch.LoadById(patchId, this.context);
 			
-			if(!patch.DoesSupportEnvironment(context.config.EnvironmentName))
+			if(!patch.DoesSupportEnvironment(this.context.EnvironmentName))
 			{
-				Console.Write(" (skipping because of unsupported environment) ");
+				this.context.console.Report(" (skipping because of unsupported environment) ");
 				return;
 			}
 
-			using(var transaction = TransactionFactory.Create(context))
+			using(var transaction = this.context.CreateTransaction())
 			{
 
 				bool patchExistsInDB;
@@ -75,17 +60,17 @@ namespace Patcher
 				var patchDBData = transaction.ExecuteReader(
 					string.Format(
 						"select {1} from {0} where {2} = {3} and {4} = {5}",
-						transaction.EscapeName(context.config.PatchesTable),
+						transaction.EscapeName(this.context.PatchesTable),
 						transaction.EscapeName("STATUS"),
 						transaction.EscapeName("VERSION"),
 						transaction.MarkParam("pversion"),
-						transaction.EscapeName("AUTHOR"),
-						transaction.MarkParam("pauthor")
+						transaction.EscapeName("NAME"),
+						transaction.MarkParam("pname")
 					),
 					new Dictionary<string, object>
 					{
 						{ "pversion", patchId.version },
-						{ "pauthor", patchId.author },
+						{ "pname", patchId.name },
 					}
 				).ToList();
 
@@ -135,11 +120,11 @@ namespace Patcher
 							? "update {0} set {5} = {6}, {7} = {8} where {1} = {2} and {3} = {4}"
 							: "insert into {0}({1}, {3}, {5}, {7}) values({2}, {4}, {6}, {8})"
 						,
-						transaction.EscapeName(context.config.PatchesTable),
+						transaction.EscapeName(this.context.PatchesTable),
 						transaction.EscapeName("VERSION"),
 						transaction.MarkParam("pversion"),
-						transaction.EscapeName("AUTHOR"),
-						transaction.MarkParam("pauthor"),
+						transaction.EscapeName("NAME"),
+						transaction.MarkParam("pname"),
 						transaction.EscapeName("ROLLBACK_DATA"),
 						transaction.MarkParam("prollbackdata"),
 						transaction.EscapeName("STATUS"),
@@ -148,7 +133,7 @@ namespace Patcher
 					new Dictionary<string, object>
 					{
 						{ "pversion", patchId.version },
-						{ "pauthor", patchId.author },
+						{ "pname", patchId.name },
 						{ "prollbackdata", rollbackData.ToString() },
 						{ "pstatus", STATUS_INSTALLED },
 					}
@@ -163,23 +148,23 @@ namespace Patcher
 		
 		private void UninstallPatch(PatchId patchId)
 		{
-			using(var transaction = TransactionFactory.Create(context))
+			using(var transaction = this.context.CreateTransaction())
 			{
 				AbstractPatch patch = AbstractPatch.LoadById(patchId, context);
 				var patchInstallInfo = transaction.ExecuteReader(
 					String.Format(
 						"select {1} from {0} where {2} = {4} and {3} = {5} for update",
-						context.config.PatchesTable,
+						this.context.PatchesTable,
 						"ROLLBACK_DATA",
 						"VERSION",
-						"AUTHOR",
+						"NAME",
 						transaction.MarkParam("pversion"),
-						transaction.MarkParam("pauthor")
+						transaction.MarkParam("pname")
 					),
 					new Dictionary<string, object>
 					{
 						{ "pversion", patchId.version },
-						{ "pauthor", patchId.author },
+						{ "pname", patchId.name },
 					}
 				).Single();
 				patch.Rollback(transaction, XDocument.Parse(patchInstallInfo["ROLLBACK_DATA"]));
@@ -187,16 +172,16 @@ namespace Patcher
 				int affectedRows = transaction.ExecuteNonQuery(
 					String.Format(
 						"delete from {0} where {1} = {3} and {2} = {4}",
-						transaction.EscapeName(context.config.PatchesTable),
+						transaction.EscapeName(this.context.PatchesTable),
 						transaction.EscapeName("VERSION"),
-						transaction.EscapeName("AUTHOR"),
+						transaction.EscapeName("NAME"),
 						transaction.MarkParam("pversion"),
-						transaction.MarkParam("pauthor")
+						transaction.MarkParam("pname")
 					),
 					new Dictionary<string, object>
 					{
 						{ "pversion", patchId.version },
-						{ "pauthor", patchId.author },
+						{ "pname", patchId.name },
 					}
 				);
 				if(affectedRows != 1)
@@ -207,27 +192,26 @@ namespace Patcher
 			}
 		}
 		
-		[Action]
-		public int Apply([Optional(false)] bool firstPatchOnly, [Optional(true)] bool interactive)
+		private int _Apply(bool firstPatchOnly)
 		{
-			return Wrap(interactive, () => {
-				Console.WriteLine("begin");
+			return Wrap(() => {
+				this.context.console.Report("begin");
 				List<PatchId> patchesToInstall;
 				List<PatchId> inputPatches = context.getPatchesList();
 				foreach (var patch in inputPatches)
 				{
-					Console.WriteLine("Found patch number {0:version}; author is {0:author}", patch);
+					this.context.console.Report("Found patch number {0:version}; name is {0:name}", patch);
 				}
-				using (Transaction transaction = TransactionFactory.Create(context))
+				using (Transaction transaction = this.context.CreateTransaction())
 				{
 					patchesToInstall = (
 											//We should install patches that didn't finished installing in the first place
 	                                 		from row in transaction.ExecuteReader(
 	                                 			string.Format(
 	                                 				"select {1}, {2} from {0} where {3} = {4} for update",
-	                                 				transaction.EscapeName(context.config.PatchesTable),
+	                                 				transaction.EscapeName(this.context.PatchesTable),
 	                                 				transaction.EscapeName("VERSION"),
-	                                 				transaction.EscapeName("AUTHOR"),
+	                                 				transaction.EscapeName("NAME"),
 	                                 				transaction.EscapeName("STATUS"),
 	                                 				transaction.MarkParam("pstatus")
 	                                 			),
@@ -236,7 +220,7 @@ namespace Patcher
 	                                 				{ "pstatus", STATUS_INSTALLING },
 	                                 			}
 	                                 		)
-		                                 	let patch = new PatchId(int.Parse(row["VERSION"]), row["AUTHOR"])
+		                                 	let patch = new PatchId(int.Parse(row["VERSION"]), row["NAME"])
 	                                 		orderby patch ascending
 	                                 		select patch
 										)
@@ -247,12 +231,12 @@ namespace Patcher
 		                                 		from row in transaction.ExecuteReader(
 		                                 			string.Format(
 		                                 				"select {1}, {2} from {0} for update",
-		                                 				transaction.EscapeName(context.config.PatchesTable),
+		                                 				transaction.EscapeName(this.context.PatchesTable),
 		                                 				transaction.EscapeName("VERSION"),
-		                                 				transaction.EscapeName("AUTHOR")
+		                                 				transaction.EscapeName("NAME")
 		                                 			)
 		                                 		)
-			                                 	let patch = new PatchId(int.Parse(row["VERSION"]), row["AUTHOR"])
+			                                 	let patch = new PatchId(int.Parse(row["VERSION"]), row["NAME"])
 		                                 		orderby patch ascending
 		                                 		select patch
 											)
@@ -265,54 +249,48 @@ namespace Patcher
 				}
 				foreach (var patch in patchesToInstall)
 				{
-					Console.WriteLine("Going to install patch number {0:version}; author is {0:author}", patch);
+					this.context.console.Report("Going to install patch number {0:version}; name is {0:name}", patch);
 				}
 				if (patchesToInstall.Count == 0)
 				{
-					Console.WriteLine("No patches to install");
+					this.context.console.Report("No patches to install");
 				} else
 				{
-					bool shouldInstall = true;
-					if (interactive)
+					this.context.console.Report("Installing {0} patches...", patchesToInstall.Count);
+					foreach (var patch in patchesToInstall)
 					{
-						Console.WriteLine("Press Enter to install {0} patches or any key to exit", patchesToInstall.Count);
-						var info = Console.ReadKey(true);
-						if (info.Key != ConsoleKey.Enter) shouldInstall = false;
+						this.context.console.Report("Installing patch #{0:version} from {0:name}...", patch);
+						InstallPatch(patch);
+						this.context.console.Report("done!");
 					}
-					if (shouldInstall)
-					{
-						Console.WriteLine("Installing {0} patches...", patchesToInstall.Count);
-						foreach (var patch in patchesToInstall)
-						{
-							Console.Write("Installing patch #{0:version} from {0:author}...", patch);
-							InstallPatch(patch);
-							Console.WriteLine("done!");
-						}
-						Console.WriteLine("Finished installing patches");
-					} else
-					{
-						Console.WriteLine("Installation cancelled");
-					}
+					this.context.console.Report("Finished installing patches");
 				}
 			});
 		}
+
+		public int ApplyAll() {
+			return this._Apply(false);
+		}
+
+		public int ApplyFirstPatch() {
+			return this._Apply(true);
+		}
 		
-		[Action]
-		public int Rollback([Optional(false)] bool lastPatchOnly, [Optional(true)] bool interactive)
+		private int _Rollback(bool lastPatchOnly)
 		{
-			return Wrap(interactive, () => {
-				Console.WriteLine("begin");
+			return Wrap(() => {
+				this.context.console.Report("begin");
 				List<PatchId> patchesToRemove;
-				using (Transaction transaction = TransactionFactory.Create(context))
+				using (Transaction transaction = this.context.CreateTransaction())
 				{
 
 					var patchesInstalling = (
 		                                 		from row in transaction.ExecuteReader(
 		                                 			string.Format(
 		                                 				"select {1}, {2} from {0} where {3} = {4} for update",
-		                                 				transaction.EscapeName(context.config.PatchesTable),
+		                                 				transaction.EscapeName(this.context.PatchesTable),
 		                                 				transaction.EscapeName("VERSION"),
-		                                 				transaction.EscapeName("AUTHOR"),
+		                                 				transaction.EscapeName("NAME"),
 		                                 				transaction.EscapeName("STATUS"),
 		                                 				transaction.MarkParam("pstatus")
 		                                 			),
@@ -321,7 +299,7 @@ namespace Patcher
 		                                 				{ "pstatus", STATUS_INSTALLING },
 		                                 			}
 		                                 		)
-			                                 	let patch = new PatchId(int.Parse(row["VERSION"]), row["AUTHOR"])
+			                                 	let patch = new PatchId(int.Parse(row["VERSION"]), row["NAME"])
 		                                 		orderby patch ascending
 		                                 		select patch
 					                        ).ToList();
@@ -329,7 +307,7 @@ namespace Patcher
 					{
 						foreach(var patchInstalling in patchesInstalling)
 						{
-							Console.WriteLine("Patch #{0:version} from {0:author} is already installing", patchInstalling);
+							this.context.console.Report("Patch #{0:version} from {0:name} is already installing", patchInstalling);
 						}
 						throw new ApplicationException("Cannot uninstall patches while there are not installed ones");
 					}
@@ -338,13 +316,13 @@ namespace Patcher
 										from row in transaction.ExecuteReader(
 											string.Format(
 												"select {1}, {2} from {0} for update order by {3} desc",
-												transaction.EscapeName(context.config.PatchesTable),
+												transaction.EscapeName(this.context.PatchesTable),
 												transaction.EscapeName("VERSION"),
-												transaction.EscapeName("AUTHOR"),
+												transaction.EscapeName("NAME"),
 												transaction.EscapeName("INSTALL_DATE")
 											)
 										)
-										let patch = new PatchId(int.Parse(row["VERSION"]), row["AUTHOR"])
+										let patch = new PatchId(int.Parse(row["VERSION"]), row["NAME"])
 										select patch
 									  ).ToList();
 				}
@@ -354,36 +332,31 @@ namespace Patcher
 				}
 				foreach (var patch in patchesToRemove)
 				{
-					Console.WriteLine("Going to uninstall patch number {0:version}; author is {0:author}", patch);
+					this.context.console.Report("Going to uninstall patch number {0:version}; name is {0:name}", patch);
 				}
 				if (patchesToRemove.Count == 0)
 				{
-					Console.WriteLine("No patches to uninstall");
+					this.context.console.Report("No patches to uninstall");
 				} else
 				{
-					bool shouldInstall = true;
-					if (interactive)
+					this.context.console.Report("Uninstalling {0} patches...", patchesToRemove.Count);
+					foreach (var patch in patchesToRemove)
 					{
-						Console.WriteLine("Press Enter to uninstall {0} patches or any key to exit", patchesToRemove.Count);
-						var info = Console.ReadKey(true);
-						if (info.Key != ConsoleKey.Enter) shouldInstall = false;
+						this.context.console.Report("Uninstalling patch #{0:version} from {0:name}...", patch);
+						UninstallPatch(patch);
+						this.context.console.Report("done!");
 					}
-					if (shouldInstall)
-					{
-						Console.WriteLine("Uninstalling {0} patches...", patchesToRemove.Count);
-						foreach (var patch in patchesToRemove)
-						{
-							Console.Write("Uninstalling patch #{0:version} from {0:author}...", patch);
-							UninstallPatch(patch);
-							Console.WriteLine("done!");
-						}
-						Console.WriteLine("Finished uninstalling patches");
-					} else
-					{
-						Console.WriteLine("Uninstallation cancelled");
-					}
+					this.context.console.Report("Finished uninstalling patches");
 				}
 			});
+		}
+
+		public int RollbackAll() {
+			return this._Rollback(false);
+		}
+
+		public int RollbackLastPatch() {
+			return this._Rollback(true);
 		}
 
 	}

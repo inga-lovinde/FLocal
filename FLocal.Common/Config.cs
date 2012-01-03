@@ -10,6 +10,8 @@ namespace FLocal.Common {
 
 	public class Config : Config<Config> {
 
+		public readonly string AppInfo;
+
 		public readonly string InitTime;
 
 		public readonly Web.Core.DB.IDBConnection mainConnection;
@@ -52,8 +54,9 @@ namespace FLocal.Common {
 
 		public readonly ILogger Logger;
 
-		protected Config(NameValueCollection data) : base(data) {
+		protected Config(NameValueCollection data) : base() {
 			this.InitTime = DateTime.Now.ToLongTimeString();
+			this.AppInfo = data["AppInfo"];
 			this.dataDir = data["DataDir"];
 			this.DirSeparator = System.IO.Path.DirectorySeparatorChar.ToString();
 			this.SaltMigration = data["SaltMigration"];

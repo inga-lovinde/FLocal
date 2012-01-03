@@ -6,6 +6,7 @@ using System.Web;
 using System.Configuration;
 using Web.Core;
 using FLocal.Common;
+using FLocal.Patcher.Common;
 
 namespace FLocal.IISHandler {
 	public class MainHandler : IHttpHandler {
@@ -18,12 +19,16 @@ namespace FLocal.IISHandler {
 
 		private void doProcessRequest(HttpContext httpcontext) {
 
+			if(PatcherInfo.instance.IsNeedsPatching) {
+				throw new FLocalException("DB is outdated");
+			}
+
 			Uri current = httpcontext.Request.Url;
 			if(!current.Host.EndsWith(Config.instance.BaseHost)) {
-				throw new Web.Core.FLocalException("Wrong host: " + current.Host + " (expected *" + Config.instance.BaseHost + ")");
+				throw new FLocalException("Wrong host: " + current.Host + " (expected *" + Config.instance.BaseHost + ")");
 			}
 			if(Config.instance.forceHttps && !httpcontext.Request.IsSecureConnection) {
-				throw new Web.Core.FLocalException("Only HTTPS connections are allowed");
+				throw new FLocalException("Only HTTPS connections are allowed");
 			}
 
 			Uri referer = httpcontext.Request.UrlReferrer;

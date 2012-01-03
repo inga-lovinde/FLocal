@@ -9,6 +9,7 @@ using FLocal.Common;
 using FLocal.Common.dataobjects;
 using System.IO;
 using System.Threading;
+using FLocal.Patcher.Common;
 
 namespace FLocal.IISHandler {
 	class Initializer {
@@ -39,6 +40,7 @@ namespace FLocal.IISHandler {
 
 		private void DoInitialize() {
 			Config.Init(ConfigurationManager.AppSettings);
+			PatcherConfiguration.Init(ConfigurationManager.AppSettings);
 
 			string dir = FLocal.Common.Config.instance.dataDir + "Logs\\";
 			using(StreamWriter writer = new StreamWriter(dir + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".INITIALIZE.txt")) {

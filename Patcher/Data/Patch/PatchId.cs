@@ -9,12 +9,12 @@ namespace Patcher.Data.Patch
 	{
 		
 		public readonly int version;
-		public readonly string author;
+		public readonly string name;
 		
-		public PatchId(int version, string author)
+		public PatchId(int version, string name)
 		{
 			this.version = version;
-			this.author = author;
+			this.name = name;
 		}
 
 		private int _CompareTo(PatchId other)
@@ -22,7 +22,7 @@ namespace Patcher.Data.Patch
 			int result = this.version.CompareTo(other.version);
 			if(result == 0)
 			{
-				result = this.author.CompareTo(other.author);
+				result = this.name.CompareTo(other.name);
 			}
 			return result;
 		}
@@ -50,8 +50,8 @@ namespace Patcher.Data.Patch
 			{
 				case "version":
 					return this.version.ToString(formatProvider);
-				case "author":
-					return this.author.ToString(formatProvider);
+				case "name":
+					return this.name.ToString(formatProvider);
 				default:
 					throw new ApplicationException(String.Format("Unknown format {0}", format));
 			}

@@ -9,15 +9,10 @@ namespace Patcher.DB
 	{
 
 	
-		private static Transaction Create(IDBTraits DbDriver, string ConnectionString)
+		public static Transaction Create(string DbDriverName, string ConnectionString)
 		{
-			return new Transaction(DbDriver, ConnectionString);
+			return new Transaction(DBTraitsFactory.GetTraits(DbDriverName), ConnectionString);
 		}
 		
-		public static Transaction Create(Context context)
-		{
-			return Create(context.DbDriver, context.config.ConnectionString);
-		}
-
 	}
 }

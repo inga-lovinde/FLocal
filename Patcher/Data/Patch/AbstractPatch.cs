@@ -6,6 +6,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Schema;
+using Web.Core;
 using Patcher.Data.Command;
 using Patcher.DB;
 
@@ -41,7 +42,7 @@ namespace Patcher.Data.Patch
 		
 		public static AbstractPatch LoadById(PatchId id, Context context)
 		{
-			return Cache<KeyValuePair<PatchId, Context>, AbstractPatch>.instance.GetValue(new KeyValuePair<PatchId, Context>(id, context), () => _LoadById(id, context));
+			return Cache<AbstractPatch>.instance.get(new KeyValuePair<PatchId, Context>(id, context), () => _LoadById(id, context));
 		}
 	
 		private static AbstractPatch _LoadById(PatchId id, Context context)
@@ -58,9 +59,9 @@ namespace Patcher.Data.Patch
 			XElement version = data.Root.Element("version");
 			string number = version.Element("number").Value;
 			string author = version.Element("author").Value;
-			if((number != id.version.ToString()) || (author != id.author))
+			if((number != id.version.ToString()) || (author != id.name))
 			{
-				throw new ApplicationException(string.Format("Versions mismatch on patch #{0} from {1} (got #{2} from {3})", id.version, id.author, number, author));
+				throw new ApplicationException(string.Format("Versions mismatch on patch #{0} from {1} (got #{2} from {3})", id.version, id.name, number, author));
 			}
 
 			HashSet<string> restrictToEnvironments;

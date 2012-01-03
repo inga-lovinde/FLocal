@@ -12,10 +12,12 @@ namespace FLocal.Migration.Console {
 			Consolery.Run(typeof(Program), args);
 		}
 
+		private static bool isConfigInitialized = false;
+		private static object initializeConfig_locker = new object();
 		private static void initializeConfig() {
-			if(!Config.isInitialized) {
-				lock(typeof(Config)) {
-					if(!Config.isInitialized) {
+			if(!isConfigInitialized) {
+				lock(initializeConfig_locker) {
+					if(!isConfigInitialized) {
 						Config.Init(ConfigurationManager.AppSettings);
 					}
 				}

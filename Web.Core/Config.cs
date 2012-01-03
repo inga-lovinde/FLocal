@@ -17,16 +17,7 @@ namespace Web.Core {
 			}
 		}
 
-		private NameValueCollection data;
-
-		public string AppInfo {
-			get {
-				return data["AppInfo"];
-			}
-		}
-
-		protected Config(NameValueCollection data) {
-			this.data = data;
+		protected Config() {
 		}
 
 		protected static void doInit(Func<T> configCreator) {
@@ -37,7 +28,7 @@ namespace Web.Core {
 			}
 		}
 
-		protected static void doReInit(Func<T> configCreator) {
+		/*protected static void doReInit(Func<T> configCreator) {
 			lock(typeof(Config<T>)) {
 				_instance = configCreator();
 			}
@@ -47,7 +38,7 @@ namespace Web.Core {
 			get {
 				return _instance != null;
 			}
-		}
+		}*/
 
 		public virtual void Dispose() {
 		}

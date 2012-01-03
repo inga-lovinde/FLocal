@@ -132,6 +132,14 @@
       <Project>{CE888859-9E46-41F7-91CE-8EC106F3A625}</Project>
       <Name>Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FLocal.Patcher.Common\FLocal.Patcher.Common.csproj">
+      <Project>{AD931A4B-F62A-4095-B185-BAA9C991FBFF}</Project>
+      <Name>FLocal.Patcher.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Patcher.Web\Patcher.Web.csproj">
+      <Project>{FB3DDF5A-E31D-4763-9633-5EEC6462DAED}</Project>
+      <Name>Patcher.Web</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Web.Core\Web.Core.csproj">
       <Project>{6F532626-E9F8-498E-9683-1538E7CD62CB}</Project>
       <Name>Core</Name>

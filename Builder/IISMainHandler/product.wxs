@@ -87,6 +87,30 @@
 			<Component Id="TexCompiler.pdb" Guid="707304A1-9774-446F-B672-FA25EAD8E4F{targetId}">
 				<File Id="TexCompiler.pdb" Source="..\..\TexCompiler\bin\Release\TexCompiler.pdb" KeyPath="yes" Checksum="yes"/>
 			</Component>
+			<Component Id="FLocal.Patcher.IISHandler.dll" Guid="FD81CC31-D95B-437C-83A9-AE4C05B1A5D{targetId}">
+				<File Id="FLocal.Patcher.IISHandler.dll" Source="..\..\FLocal.Patcher.IISHandler\bin\Release\FLocal.Patcher.IISHandler.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="FLocal.Patcher.IISHandler.pdb" Guid="DE40CE70-21D8-4C5B-95F6-C861FC185EB{targetId}">
+				<File Id="FLocal.Patcher.IISHandler.pdb" Source="..\..\FLocal.Patcher.IISHandler\bin\Release\FLocal.Patcher.IISHandler.pdb" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="FLocal.Patcher.Common.dll" Guid="9ADCE502-78D1-44F9-9267-0FD1E02E7AE{targetId}">
+				<File Id="FLocal.Patcher.Common.dll" Source="..\..\FLocal.Patcher.Common\bin\Release\FLocal.Patcher.Common.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="FLocal.Patcher.Common.pdb" Guid="2A5EA0F4-D43C-4277-A2B2-F4EFA778943{targetId}">
+				<File Id="FLocal.Patcher.Common.pdb" Source="..\..\FLocal.Patcher.Common\bin\Release\FLocal.Patcher.Common.pdb" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="Patcher.dll" Guid="B8F10219-2D29-49EC-8FE0-0834586C6B4{targetId}">
+				<File Id="Patcher.dll" Source="..\..\Patcher\bin\Release\Patcher.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="Patcher.pdb" Guid="A8EFE5CE-51B5-432E-974F-7056CEF4D40{targetId}">
+				<File Id="Patcher.pdb" Source="..\..\Patcher\bin\Release\Patcher.pdb" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="Patcher.Web.dll" Guid="F5FEC45F-A24D-4C8F-85A2-B6AC8F3BCDE{targetId}">
+				<File Id="Patcher.Web.dll" Source="..\..\Patcher.Web\bin\Release\Patcher.Web.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="Patcher.Web.pdb" Guid="038ADB30-4F4A-419E-A8E3-949D3F04D39{targetId}">
+				<File Id="Patcher.Web.pdb" Source="..\..\Patcher.Web\bin\Release\Patcher.Web.pdb" KeyPath="yes" Checksum="yes"/>
+			</Component>
 		</DirectoryRef>
 		<DirectoryRef Id="ARCHIVEDIRECTORY">
 			<Component Id="Resources.FLocal.Templates.7z" Guid="B41F4142-A39C-43BE-8D20-F31BFFA9B48{targetId}">
@@ -99,27 +123,21 @@
 				<File Id="_7z.exe" Name="7z.exe" Source="7z.exe" KeyPath="yes" Checksum="yes"/>
 			</Component>
 		</DirectoryRef>
-		<Feature Id='FLocal.IISHandler' Title='IISMainHandler' Level='1'>
-			<ComponentRef Id='FLocal.IISHandler.dll' />
-			<ComponentRef Id='FLocal.IISHandler.pdb' />
-		</Feature>
-		<Feature Id='FLocal.Migration.Gateway' Title='Import utilities' Level='1'>
-			<Feature Id='Importer' Title='Importer library' Level='1'>
-				<ComponentRef Id='FLocal.Migration.Gateway.dll' />
-				<ComponentRef Id='FLocal.Migration.Gateway.pdb' />
-			</Feature>
-			<Feature Id='FLocal.Migration.Console' Title='Import console' Level='1'>
-				<ComponentRef Id='FLocal.Migration.Console.exe' />
-				<ComponentRef Id='FLocal.Migration.Console.pdb' />
+		<Feature Id='Web' Title='Web' Level='1'>
+			<Feature Id='Web.Core' Title='Core library' Level='1'>
+				<ComponentRef Id='Web.Core.dll' />
+				<ComponentRef Id='Web.Core.pdb' />
 			</Feature>
 		</Feature>
-		<Feature Id='Web.Core' Title='Core library' Level='1'>
-			<ComponentRef Id='Web.Core.dll' />
-			<ComponentRef Id='Web.Core.pdb' />
-		</Feature>
-		<Feature Id='FLocal.Common' Title='Common FLocal libraries' Level='1'>
-			<ComponentRef Id='FLocal.Common.dll' />
-			<ComponentRef Id='FLocal.Common.pdb' />
+		<Feature Id='Patcher' Title='Patcher' Level='1'>
+			<Feature Id='Patcher.Patcher' Title='patcher core libraries' Level='1'>
+				<ComponentRef Id='Patcher.dll' />
+				<ComponentRef Id='Patcher.pdb' />
+			</Feature>
+			<Feature Id='Patcher.Web' Title='patcher web interop' Level='1'>
+				<ComponentRef Id='Patcher.Web.dll' />
+				<ComponentRef Id='Patcher.Web.pdb' />
+			</Feature>
 		</Feature>
 		<Feature Id='MySQLConnector' Title='Adapter to DbConnection' Level='1'>
 			<ComponentRef Id='MySQLConnector.dll' />
@@ -128,6 +146,36 @@
 		<Feature Id='TexCompiler' Title='Compiler of TeX code' Level='1'>
 			<ComponentRef Id='TexCompiler.dll' />
 			<ComponentRef Id='TexCompiler.pdb' />
+		</Feature>
+		<Feature Id='FLocal' Title='FLocal' Level='1'>
+			<Feature Id='FLocal.Migration' Title='Import utilities' Level='1'>
+				<Feature Id='FLocal.Migration.Gateway' Title='Importer library' Level='1'>
+					<ComponentRef Id='FLocal.Migration.Gateway.dll' />
+					<ComponentRef Id='FLocal.Migration.Gateway.pdb' />
+				</Feature>
+				<Feature Id='FLocal.Migration.Console' Title='Import console' Level='1'>
+					<ComponentRef Id='FLocal.Migration.Console.exe' />
+					<ComponentRef Id='FLocal.Migration.Console.pdb' />
+				</Feature>
+			</Feature>
+			<Feature Id='FLocal.Common' Title='Common FLocal libraries' Level='1'>
+				<ComponentRef Id='FLocal.Common.dll' />
+				<ComponentRef Id='FLocal.Common.pdb' />
+			</Feature>
+			<Feature Id='FLocal.Patcher' Title='FLocal patcher' Level='1'>
+				<Feature Id='FLocal.Patcher.Common' Title='flocal patches/settings' Level='1'>
+					<ComponentRef Id='FLocal.Patcher.Common.dll' />
+					<ComponentRef Id='FLocal.Patcher.Common.pdb' />
+				</Feature>
+				<Feature Id='FLocal.Patcher.IISHandler' Title='flocal patcher handler' Level='1'>
+					<ComponentRef Id='FLocal.Patcher.IISHandler.dll' />
+					<ComponentRef Id='FLocal.Patcher.IISHandler.pdb' />
+				</Feature>
+			</Feature>
+			<Feature Id='FLocal.IISHandler' Title='IISMainHandler' Level='1'>
+				<ComponentRef Id='FLocal.IISHandler.dll' />
+				<ComponentRef Id='FLocal.IISHandler.pdb' />
+			</Feature>
 		</Feature>
 		<Feature Id='ThirdParty' Title='ThirdParty libraries/tools' Level='1'>
 			<Feature Id='NConsoler' Title='NConsoler' Level='1'>

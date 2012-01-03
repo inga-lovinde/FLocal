@@ -6,13 +6,8 @@ using Patcher.Data.Patch;
 
 namespace Patcher
 {
-	public interface IConfig
+	public interface ICheckParams
 	{
-
-		string EnvironmentName
-		{
-			get;
-		}
 
 		string DbDriverName
 		{
@@ -28,6 +23,8 @@ namespace Patcher
 		{
 			get;
 		}
+
+		IEnumerable<PatchId> getPatchesList();
 
 	}
 }
