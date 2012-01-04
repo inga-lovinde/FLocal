@@ -13,22 +13,30 @@ namespace FLocal.Patcher.Common {
 
 		private readonly string _DbDriverName;
 		public string DbDriverName {
-			get { throw new NotImplementedException(); }
+			get {
+				return this._DbDriverName;
+			}
 		}
 
 		private readonly string _GuestConnectionString;
 		public string GuestConnectionString {
-			get { throw new NotImplementedException(); }
+			get {
+				return this._GuestConnectionString;
+			}
 		}
 
 		private readonly string _PatchesTable;
 		public string PatchesTable {
-			get { throw new NotImplementedException(); }
+			get {
+				return this._PatchesTable;
+			}
 		}
 
 		private readonly string _EnvironmentName;
 		public string EnvironmentName {
-			get { throw new NotImplementedException(); }
+			get {
+				return this._EnvironmentName;
+			}
 		}
 
 		public IEnumerable<PatchId> getPatchesList() {
@@ -40,10 +48,10 @@ namespace FLocal.Patcher.Common {
 		}
 
 		protected PatcherConfiguration(NameValueCollection data) : base() {
-			this._DbDriverName = data["Patcher.DbDriver"];
-			this._EnvironmentName = data["Patcher.EnvironmentName"];
-			this._GuestConnectionString = data["ConnectionString"];
-			this._PatchesTable = data["Patcher.PatchesTable"];
+			this._DbDriverName = data["Patcher.DbDriver"].ToString();
+			this._EnvironmentName = data["Patcher.EnvironmentName"].ToString();
+			this._GuestConnectionString = data["ConnectionString"].ToString();
+			this._PatchesTable = data["Patcher.PatchesTable"].ToString();
 		}
 
 		public static void Init(NameValueCollection data) {

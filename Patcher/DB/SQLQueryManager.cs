@@ -253,6 +253,10 @@ namespace Patcher.DB
 			);
 		}
 
+		private string _ModifyColumnDefinitionPostgresStyle(ColumnDescription description) {
+			throw new NotImplementedException();
+		}
+
 		private string _TableElementList(TableDescription table) {
 			return string.Format(
 				"({0})",
@@ -292,12 +296,16 @@ namespace Patcher.DB
 		{
 			return _AlterTableStatement(column.tableName, _DropColumnDefinition(column));
 		}
-		
+
 		public string ModifyColumnOracleStyle(ColumnDescription description)
 		{
 			return _AlterTableStatement(description.column.tableName, _ModifyColumnDefinitionOracleStyle(description));
 		}
-		
+
+		public string ModifyColumnPostgresStyle(ColumnDescription description) {
+			return _AlterTableStatement(description.column.tableName, _ModifyColumnDefinitionPostgresStyle(description));
+		}
+
 		public string CreateConstraint(AbstractConstraint constraint)
 		{
 			return _AlterTableStatement(constraint.table, _AddTableConstraintDefinition(constraint));

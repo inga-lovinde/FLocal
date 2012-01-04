@@ -15,7 +15,7 @@ namespace FLocal.Patcher.IISHandler {
 		}
 
 		protected override string GetAdminConnectionString(HttpContext context) {
-			throw new NotImplementedException();
+			return System.Configuration.ConfigurationManager.AppSettings["Patcher.AdminConnectionString"].Replace("{password}", context.Request.Form["data"]);
 		}
 
 	}

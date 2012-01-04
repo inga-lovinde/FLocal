@@ -12,6 +12,8 @@ namespace Patcher.DB {
 					return OracleDBTraits.instance;
 				case "oracle-faketransactional":
 					return OracleFakeTransactionalDBTraits.instance;
+				case "postgres":
+					return PostgresDBTraits.instance;
 				default:
 					throw new NotImplementedException();
 			}

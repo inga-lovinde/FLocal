@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Npgsql, Version=2.0.8.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdParty\Npgsql\Npgsql.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -80,6 +84,7 @@
     <Compile Include="DB\IDBTraits.cs" />
     <Compile Include="DB\OracleDBTraits.cs" />
     <Compile Include="DB\OracleFakeTransactionalDBTraits.cs" />
+    <Compile Include="DB\PostgresDBTraits.cs" />
     <Compile Include="DB\SQLQueryManager.cs" />
     <Compile Include="DB\StoredProcedureBody.cs" />
     <Compile Include="DB\StoredProcedureReference.cs" />

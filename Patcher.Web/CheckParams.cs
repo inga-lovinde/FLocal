@@ -7,7 +7,7 @@ using Patcher.Data.Patch;
 namespace Patcher.Web {
 	class CheckParams : ICheckParams {
 
-		private readonly IPatcherConfiguration configuration;
+		protected readonly IPatcherConfiguration configuration;
 
 		public CheckParams(IPatcherConfiguration configuration) {
 			this.configuration = configuration;
@@ -19,7 +19,7 @@ namespace Patcher.Web {
 			}
 		}
 
-		public string ConnectionString {
+		public virtual string ConnectionString {
 			get {
 				return this.configuration.GuestConnectionString;
 			}
