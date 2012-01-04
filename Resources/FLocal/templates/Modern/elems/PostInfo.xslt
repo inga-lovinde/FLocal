@@ -28,7 +28,7 @@
 			</div>
 			<div class="linkscontainer" style="float:right;text-align:right;">
 				<a>
-					<xsl:if test="$isReplyDisabled='false'">
+					<xsl:if test="$isReplyDisabled='false' or isPunishmentEnabled = 'true'">
 						<xsl:if test="/root/session/sessionKey">
 							<xsl:attribute name="href">/Post/<xsl:value-of select="id"/>/Reply/</xsl:attribute>
 							<xsl:attribute name="onclick">submitSelText(this.href);return false;</xsl:attribute>
