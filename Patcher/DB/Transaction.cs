@@ -162,6 +162,7 @@ namespace Patcher.DB
 		{
 			using(DbCommand command = this.CreateCommand(commandText, parameters))
 			{
+				Logger.instance.Log(commandText);
 				using(DbDataReader reader = command.ExecuteReader())
 				{
 					//Console.WriteLine(String.Join(";", (from i in Enumerable.Range(0, reader.FieldCount) select i + ":" + reader.GetName(i)).ToArray()));
@@ -182,6 +183,7 @@ namespace Patcher.DB
 		{
 			using(DbCommand command = this.CreateCommand(commandText, parameters))
 			{
+				Logger.instance.Log(commandText);
 				return command.ExecuteNonQuery();
 			}
 		}

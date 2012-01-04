@@ -8,22 +8,33 @@ namespace Patcher.Web {
 
 		internal readonly IPatcherConfiguration configuration;
 
-		public readonly bool IsContainsNewPatches;
+		internal readonly bool IsContainsNewPatches;
 
-		public bool AreNewPatchesInstalled {
+		internal bool AreNewPatchesInstalled {
 			get;
-			internal set;
+			private set;
 		}
+
+		private bool IsMainHandlerDisallowed;
 
 		public bool IsNeedsPatching {
 			get {
-				return this.IsContainsNewPatches && !this.AreNewPatchesInstalled;
+				return (this.IsContainsNewPatches && !this.AreNewPatchesInstalled) || this.IsMainHandlerDisallowed;
 			}
+		}
+
+		internal void PatchesInstalled() {
+			this.AreNewPatchesInstalled = true;
+		}
+
+		internal void DisallowMainHandler() {
+			this.IsMainHandlerDisallowed = true;
 		}
 
 		protected PatcherInfo(IPatcherConfiguration configuration) {
 			this.configuration = configuration;
 			this.IsContainsNewPatches = (new Checker(new CheckParams(configuration))).IsNeedsPatching();
+			this.IsMainHandlerDisallowed = false;
 		}
 
 	}

@@ -49,4 +49,26 @@ namespace Patcher
 		}
 
 	}
+
+	class Logger : ILogger {
+
+		public static readonly ILogger instance = new Logger();
+
+		private readonly StreamWriter writer;
+
+		private readonly object locker = new object();
+
+		private Logger() {
+			this.writer = new StreamWriter("C:\\Program Files\\FLocal\\main\\debug\\data\\Logs\\" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".patcher.txt");
+		}
+
+		void ILogger.Log(string message) {
+			lock(this.locker) {
+				this.writer.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.ffffff") + ": " + message);
+				this.writer.Flush();
+			}
+		}
+
+	}
+
 }

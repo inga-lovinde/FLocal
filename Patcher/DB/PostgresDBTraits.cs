@@ -13,6 +13,16 @@ namespace Patcher.DB {
 
 	class PostgresDBTraits : IDBTraits {
 
+		private static DbDataReader ExecuteReader(DbCommand command) {
+			Logger.instance.Log(command.CommandText);
+			return command.ExecuteReader();
+		}
+
+		private static int ExecuteNonQuery(DbCommand command) {
+			Logger.instance.Log(command.CommandText);
+			return command.ExecuteNonQuery();
+		}
+
 		public static readonly IDBTraits instance = new PostgresDBTraits();
 
 		protected PostgresDBTraits() {
@@ -61,6 +71,15 @@ namespace Patcher.DB {
 					return true;
 				default:
 					throw new ApplicationException(string.Format("Unknown value {0}", value));
+			}
+		}
+
+		private static string ParseTypeString(string type) {
+			switch(type.ToLower()) {
+				case "int4":
+					return "integer";
+				default:
+					return type;
 			}
 		}
 
@@ -115,29 +134,42 @@ namespace Patcher.DB {
 		}
 
 		ColumnOptions IDBTraits.GetColumnOptions(Func<DbCommand> commandCreator, ColumnReference column) {
-			throw new NotImplementedException();
+			using(DbCommand command = commandCreator()) {
+				command.CommandText = "SELECT a.attnum, a.attname AS field, t.typname AS type, a.attlen AS length, a.atttypmod AS lengthvar, a.attnotnull AS notnull, d.adsrc AS defaultvalue FROM pg_attribute a JOIN pg_class c ON a.attrelid = c.oid JOIN pg_type t ON a.atttypid = t.oid LEFT JOIN pg_attrdef d ON c.oid = d.adrelid AND a.attnum = d.adnum WHERE a.attnum > 0 AND c.relname = :ptable and a.attname = :pcolumn";
+				AddParam(command, "ptable", DbType.String, column.tableName);
+				AddParam(command, "pcolumn", DbType.String, column.columnName);
+				using(DbDataReader reader = ExecuteReader(command)) {
+					if(!reader.Read()) {
+						throw new ApplicationException("Column not found");
+					}
+
+					return new ColumnOptions(
+						ParseTypeString(reader.GetString(reader.GetOrdinal("type"))),
+						reader.GetString(reader.GetOrdinal("defaultvalue")),
+						reader.GetBoolean(reader.GetOrdinal("notnull"))
+					);
+				}
+			}
 		}
 
 		void IDBTraits.RemoveColumn(Func<DbCommand> commandCreator, ColumnReference column) {
 			using(DbCommand command = commandCreator()) {
 				command.CommandText = _SQLQueryManager.RemoveColumn(column);
-				command.ExecuteNonQuery();
+				ExecuteNonQuery(command);
 			}
 		}
 
 		void IDBTraits.CreateColumn(Func<DbCommand> commandCreator, ColumnDescription description) {
 			using(DbCommand command = commandCreator()) {
 				command.CommandText = _SQLQueryManager.CreateColumn(description);
-				command.ExecuteNonQuery();
+				ExecuteNonQuery(command);
 			}
 		}
 
 		void IDBTraits.ModifyColumn(Func<DbCommand> commandCreator, ColumnDescription description) {
 			using(DbCommand command = commandCreator()) {
 				command.CommandText = _SQLQueryManager.ModifyColumnPostgresStyle(description);
-				Console.WriteLine();
-				Console.WriteLine(command.CommandText);
-				command.ExecuteNonQuery();
+				ExecuteNonQuery(command);
 			}
 		}
 
@@ -157,14 +189,53 @@ namespace Patcher.DB {
 		}
 
 		private void CheckConstraint(Func<DbCommand> commandCreator, ForeignKeyConstraint constraint) {
+			using(DbCommand command = commandCreator()) {
+				command.CommandText = string.Format("\\d {0}", _EscapeName(constraint.name));
+				using(var reader = ExecuteReader(command)) {
+					int row = 0;
+					while(reader.Read()) {
+						Logger.instance.Log("Row #" + row);
+						for(int j=0; j<reader.FieldCount; j++) {
+							Logger.instance.Log(reader.GetName(j) + "='" + reader.GetValue(j) + "'");
+						}
+						row++;
+					}
+				}
+			}
 			throw new NotImplementedException();
 		}
 
 		private void CheckConstraint(Func<DbCommand> commandCreator, UniqueConstraint constraint) {
+			using(DbCommand command = commandCreator()) {
+				command.CommandText = string.Format("\\d {0}", _EscapeName(constraint.name));
+				using(var reader = ExecuteReader(command)) {
+					int row = 0;
+					while(reader.Read()) {
+						Logger.instance.Log("Row #" + row);
+						for(int j=0; j<reader.FieldCount; j++) {
+							Logger.instance.Log(reader.GetName(j) + "='" + reader.GetValue(j) + "'");
+						}
+						row++;
+					}
+				}
+			}
 			throw new NotImplementedException();
 		}
 
 		private void CheckConstraint(Func<DbCommand> commandCreator, CheckConstraint constraint) {
+			using(DbCommand command = commandCreator()) {
+				command.CommandText = string.Format("\\d {0}", _EscapeName(constraint.name));
+				using(var reader = ExecuteReader(command)) {
+					int row = 0;
+					while(reader.Read()) {
+						Logger.instance.Log("Row #" + row);
+						for(int j=0; j<reader.FieldCount; j++) {
+							Logger.instance.Log(reader.GetName(j) + "='" + reader.GetValue(j) + "'");
+						}
+						row++;
+					}
+				}
+			}
 			throw new NotImplementedException();
 		}
 
@@ -176,41 +247,78 @@ namespace Patcher.DB {
 			CheckConstraint(commandCreator, constraint);
 			using(DbCommand command = commandCreator()) {
 				command.CommandText = _SQLQueryManager.DropConstraint(constraint);
-				Console.WriteLine();
-				Console.WriteLine(command.CommandText);
-				command.ExecuteNonQuery();
+				ExecuteNonQuery(command);
 			}
 		}
 
 		public void CreateConstraint(Func<DbCommand> commandCreator, AbstractConstraint constraint) {
 			using(DbCommand command = commandCreator()) {
 				command.CommandText = _SQLQueryManager.CreateConstraint(constraint);
-				Console.WriteLine();
-				Console.WriteLine(command.CommandText);
-				command.ExecuteNonQuery();
+				ExecuteNonQuery(command);
 			}
 		}
 
 		public void CreateTable(Func<DbCommand> commandCreator, TableDescription table) {
 			using(DbCommand command = commandCreator()) {
 				command.CommandText = _SQLQueryManager.CreateTable(table);
-				Console.WriteLine();
-				Console.WriteLine(command.CommandText);
-				command.ExecuteNonQuery();
+				ExecuteNonQuery(command);
 			}
 		}
 
 		private void CheckTable(Func<DbCommand> commandCreator, TableDescription table) {
-			throw new NotImplementedException();
+			HashSet<string> columns = new HashSet<string>(from column in table.columns select column.column.columnName);
+			columns.Add(table.primaryKey.column.columnName);
+
+			using(DbCommand command = commandCreator())
+			{
+				command.CommandText = "SELECT attname FROM pg_attribute, pg_class WHERE pg_class.oid = attrelid AND attnum>0 AND relname = ':ptable'";
+				AddParam(command, "ptable", DbType.String, table.table);
+				
+				using(var reader = ExecuteReader(command))
+				{
+					HashSet<string> dbColumns = new HashSet<string>();
+					while(reader.Read())
+					{
+						dbColumns.Add(reader.GetValue("attname").ToString());
+					}
+					
+					if(!dbColumns.IsSubsetOf(columns))
+					{
+						throw new FormattableException("Some columns are not mentioned in table definition: {0}", string.Join(",", dbColumns.Except(columns).ToArray()));
+					}
+					if(!dbColumns.IsSupersetOf(columns))
+					{
+						throw new FormattableException("Some columns are missed in DB: {0}", string.Join(",", columns.Except(dbColumns).ToArray()));
+					}
+				}
+			}
+
+			var options = (this as IDBTraits).GetColumnOptions(commandCreator, table.primaryKey.column);
+			/*Console.WriteLine();
+			Console.WriteLine("'{0}' vs '{1}'", table.primaryKey.options.type, options.type);
+			Console.WriteLine("'{0}' vs '{1}'", table.primaryKey.options.defaultValue, options.defaultValue);
+			Console.WriteLine("'{0}' vs '{1}'", table.primaryKey.options.isNotNull, options.isNotNull);*/
+			if(!table.primaryKey.options.Equals((this as IDBTraits).GetColumnOptions(commandCreator, table.primaryKey.column))) {
+				throw new FormattableException("Column {0} definition mismatch", table.primaryKey.column.columnName);
+			}
+
+			foreach(var column in table.columns) {
+				options = (this as IDBTraits).GetColumnOptions(commandCreator, column.column);
+				/*Console.WriteLine();
+				Console.WriteLine("'{0}' vs '{1}'", column.options.type, options.type);
+				Console.WriteLine("'{0}' vs '{1}'", column.options.defaultValue, options.defaultValue);
+				Console.WriteLine("'{0}' vs '{1}'", column.options.isNotNull, options.isNotNull);*/
+				if(!column.options.Equals((this as IDBTraits).GetColumnOptions(commandCreator, column.column))) {
+					throw new FormattableException("Column {0} definition mismatch", column.column.columnName);
+				}
+			}
 		}
 
 		void IDBTraits.RemoveTable(Func<DbCommand> commandCreator, TableDescription table) {
 			this.CheckTable(commandCreator, table);
 			using(DbCommand command = commandCreator()) {
 				command.CommandText = _SQLQueryManager.DropTable(table.table);
-				Console.WriteLine();
-				Console.WriteLine(command.CommandText);
-				command.ExecuteNonQuery();
+				ExecuteNonQuery(command);
 			}
 		}
 

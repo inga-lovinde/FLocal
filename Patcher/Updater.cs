@@ -154,10 +154,10 @@ namespace Patcher
 				var patchInstallInfo = transaction.ExecuteReader(
 					String.Format(
 						"select {1} from {0} where {2} = {4} and {3} = {5} for update",
-						this.context.PatchesTable,
-						"ROLLBACK_DATA",
-						"VERSION",
-						"NAME",
+						transaction.EscapeName(this.context.PatchesTable),
+						transaction.EscapeName("ROLLBACK_DATA"),
+						transaction.EscapeName("VERSION"),
+						transaction.EscapeName("NAME"),
 						transaction.MarkParam("pversion"),
 						transaction.MarkParam("pname")
 					),
@@ -168,7 +168,6 @@ namespace Patcher
 					}
 				).Single();
 				patch.Rollback(transaction, XDocument.Parse(patchInstallInfo["ROLLBACK_DATA"]));
-				System.Threading.Thread.Sleep(1000);
 				int affectedRows = transaction.ExecuteNonQuery(
 					String.Format(
 						"delete from {0} where {1} = {3} and {2} = {4}",
@@ -315,7 +314,7 @@ namespace Patcher
 					patchesToRemove = (
 										from row in transaction.ExecuteReader(
 											string.Format(
-												"select {1}, {2} from {0} for update order by {3} desc",
+												"select {1}, {2} from {0} order by {3} desc for update",
 												transaction.EscapeName(this.context.PatchesTable),
 												transaction.EscapeName("VERSION"),
 												transaction.EscapeName("NAME"),

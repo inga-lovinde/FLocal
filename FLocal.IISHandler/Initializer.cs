@@ -17,6 +17,7 @@ namespace FLocal.IISHandler {
 		public static readonly Initializer instance = new Initializer();
 
 		private bool isInitialized;
+		private bool isCached;
 
 		private readonly object locker = new object();
 
@@ -25,6 +26,7 @@ namespace FLocal.IISHandler {
 		/// </summary>
 		private Initializer() {
 			this.isInitialized = false;
+			this.isCached = false;
 		}
 
 		public void Initialize() {
@@ -36,21 +38,33 @@ namespace FLocal.IISHandler {
 					}
 				}
 			}
+
+			if(!this.isCached) {
+				lock(this.locker) {
+					if(!this.isCached) {
+						this.DoCache();
+						this.isCached = true;
+					}
+				}
+			}
 		}
 
 		private void DoInitialize() {
 			Config.Init(ConfigurationManager.AppSettings);
 			PatcherConfiguration.Init(ConfigurationManager.AppSettings);
+		}
 
-			string dir = FLocal.Common.Config.instance.dataDir + "Logs\\";
-			using(StreamWriter writer = new StreamWriter(dir + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".INITIALIZE.txt")) {
-				writer.WriteLine("###INITIALIZE###");
-				foreach(var cacher in this.cachers) {
-					System.Threading.ThreadPool.QueueUserWorkItem(this.GetCacheWrapper(cacher));
-					writer.WriteLine("Pending " + cacher.Key);
+		private void DoCache() {
+			if(!PatcherInfo.instance.IsNeedsPatching) {
+				string dir = FLocal.Common.Config.instance.dataDir + "Logs\\";
+				using(StreamWriter writer = new StreamWriter(dir + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".INITIALIZE.txt")) {
+					writer.WriteLine("###INITIALIZE###");
+					foreach(var cacher in this.cachers) {
+						System.Threading.ThreadPool.QueueUserWorkItem(this.GetCacheWrapper(cacher));
+						writer.WriteLine("Pending " + cacher.Key);
+					}
 				}
 			}
-	
 		}
 
 		private IEnumerable<KeyValuePair<string, Action>> cachers {
