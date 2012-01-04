@@ -15,6 +15,7 @@ namespace Patcher {
 		private readonly ICheckParams checkParams;
 
 		public Checker(ICheckParams checkParams) {
+			Logger.LogDir = checkParams.LogDir;
 			this.checkParams = checkParams;
 		}
 

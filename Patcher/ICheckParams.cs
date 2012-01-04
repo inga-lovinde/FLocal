@@ -26,5 +26,9 @@ namespace Patcher
 
 		IEnumerable<PatchId> getPatchesList();
 
+		string LogDir {
+			get;
+		}
+
 	}
 }

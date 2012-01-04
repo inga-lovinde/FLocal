@@ -96,6 +96,7 @@
     <Compile Include="Exceptions\ResourceNotFoundException.cs" />
     <Compile Include="Exceptions\XmlResourceNotFoundException.cs" />
     <Compile Include="IUpdateParams.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="Updater.cs" />
     <Compile Include="ICheckParams.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

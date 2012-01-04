@@ -39,6 +39,13 @@ namespace FLocal.Patcher.Common {
 			}
 		}
 
+		private readonly string _LogDir;
+		public string LogDir {
+			get {
+				return this._LogDir;
+			}
+		}
+
 		public IEnumerable<PatchId> getPatchesList() {
 			return PatchesLoader.getPatchesList();
 		}
@@ -52,6 +59,7 @@ namespace FLocal.Patcher.Common {
 			this._EnvironmentName = data["Patcher.EnvironmentName"].ToString();
 			this._GuestConnectionString = data["ConnectionString"].ToString();
 			this._PatchesTable = data["Patcher.PatchesTable"].ToString();
+			this._LogDir = Path.Combine(data["DataDir"], "Logs");
 		}
 
 		public static void Init(NameValueCollection data) {

@@ -28,5 +28,9 @@ namespace Patcher.Web {
 
 		Stream loadPatch(PatchId patchId);
 
+		string LogDir {
+			get;
+		}
+
 	}
 }

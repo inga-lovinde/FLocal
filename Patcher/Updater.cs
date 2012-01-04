@@ -22,6 +22,7 @@ namespace Patcher
 		private readonly Context context;
 
 		public Updater(IUpdateParams updateParams, IInteractiveConsole console) {
+			Logger.LogDir = updateParams.LogDir;
 			this.context = new Context(updateParams, console);
 		}
 

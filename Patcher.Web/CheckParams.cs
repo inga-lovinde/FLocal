@@ -35,5 +35,11 @@ namespace Patcher.Web {
 			return this.configuration.getPatchesList();
 		}
 
+		public string LogDir {
+			get {
+				return this.configuration.LogDir;
+			}
+		}
+
 	}
 }
