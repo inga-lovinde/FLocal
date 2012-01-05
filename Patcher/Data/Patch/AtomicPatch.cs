@@ -51,7 +51,6 @@ namespace Patcher.Data.Patch
 				}
 				rollbackInfos.Add(new XElement("command", new XAttribute("num", i), commandRollbackInfoContent));
 			}
-			throw new ApplicationException("safety switch");
 			return new XDocument(new XElement("rollbackInfo", rollbackInfos.ToArray()));
 		}
 		
