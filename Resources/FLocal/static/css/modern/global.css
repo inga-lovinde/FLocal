@@ -1,4 +1,4 @@
-body { font-size:11pt; }
+body { font-size:13.5pt; }
 
 FORM{
 	DISPLAY:inline;
@@ -130,11 +130,12 @@ input {
 }
 blockquote {
 	border:none;
+	margin-right:56px;
+	font-size:0.8em;
 }
 blockquote .quotecontent {
 	display:block;
 	border:solid 2px;
-	font-size:0.8em;
 }
 blockquote blockquote {
 	font-size:1em;
@@ -178,9 +179,9 @@ BLOCKQUOTE BR {FONT-SIZE:1px}
 }
 .boardcontainer {
 	display:inline-block;
-	width:13em;
+	width:14.5em;
 	vertical-align:top;
-	font-size:1.25em;
+	font-size:1em;
 	margin:5pt;
 }
 .boardcontainer_info {
@@ -190,6 +191,9 @@ BLOCKQUOTE BR {FONT-SIZE:1px}
 	font-size:1.5em;
 	margin:0px;
 	font-weight:normal;
+}
+.boardcontainer_description {
+	font-size:1.25em;
 }
 .board_additionalcontainer {
 	height:0px;
