@@ -40,7 +40,6 @@
 						<xsl:with-param name="alt">Ответ</xsl:with-param>
 					</xsl:apply-templates>
 				</a>
-				<xsl:text> </xsl:text>
 				<a>
 					<xsl:if test="/root/session/sessionKey">
 						<xsl:attribute name="href">/Post/<xsl:value-of select="id"/>/PMReply/</xsl:attribute>
@@ -52,7 +51,6 @@
 						<xsl:with-param name="alt">Ответить в ПМ</xsl:with-param>
 					</xsl:apply-templates>
 				</a>
-				<xsl:text> </xsl:text>
 				<xsl:choose>
 					<xsl:when test="isPunishmentEnabled='true'">
 						<a>
