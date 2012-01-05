@@ -24,6 +24,7 @@ namespace Patcher.DB
 			Cascade,
 			SetNull,
 			SetDefault,
+			Restrict,
 		}
 
 		public readonly string column;

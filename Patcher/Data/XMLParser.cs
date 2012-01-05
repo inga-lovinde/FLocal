@@ -25,6 +25,8 @@ namespace Patcher.Data
 					return ForeignKeyConstraint.ReferentialAction.SetNull;
 				case "setDefault":
 					return ForeignKeyConstraint.ReferentialAction.SetDefault;
+				case "restrict":
+					return ForeignKeyConstraint.ReferentialAction.Restrict;
 				default:
 					throw new FormattableException("Unknown referential action {0}", element.Value);
 			}

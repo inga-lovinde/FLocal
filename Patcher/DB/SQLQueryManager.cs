@@ -95,6 +95,7 @@ namespace Patcher.DB
 		
 		/// <summary>
 		/// SQL-92, page 274
+		/// SQL:1999 added a support for ON DELETE RESTRICT, and both Postgres and Oracle support it in their current versions
 		/// </summary>
 		private static string _ReferentialAction(ForeignKeyConstraint.ReferentialAction action)
 		{
@@ -108,6 +109,8 @@ namespace Patcher.DB
 					return "SET NULL";
 				case ForeignKeyConstraint.ReferentialAction.SetDefault:
 					return "SET DEFAULT";
+				case ForeignKeyConstraint.ReferentialAction.Restrict:
+					return "RESTRICT";
 				default:
 					throw new ApplicationException(string.Format("Unknown action {0}", action));
 			}

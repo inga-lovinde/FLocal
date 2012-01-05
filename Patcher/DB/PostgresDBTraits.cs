@@ -176,67 +176,161 @@ namespace Patcher.DB {
 		private static string GetStringRepresentation(ForeignKeyConstraint.ReferentialAction action) {
 			switch(action) {
 				case ForeignKeyConstraint.ReferentialAction.NoAction:
-					return "NO ACTION";
+					return "a";
 				case ForeignKeyConstraint.ReferentialAction.Cascade:
-					return "CASCADE";
+					return "c";
 				case ForeignKeyConstraint.ReferentialAction.SetNull:
-					return "SET NULL";
+					return "n";
 				case ForeignKeyConstraint.ReferentialAction.SetDefault:
-					return "SET DEFAULT";
+					return "d";
+				case ForeignKeyConstraint.ReferentialAction.Restrict:
+					return "r";
 				default:
 					throw new ApplicationException("Unknown referential action");
 			}
 		}
 
 		private void CheckConstraint(Func<DbCommand> commandCreator, ForeignKeyConstraint constraint) {
+
+			Int64 referencedTableOid;
+
+			Int16[] attnums;
+			Int16[] fattnums;
+
 			using(DbCommand command = commandCreator()) {
-				command.CommandText = string.Format("\\d {0}", _EscapeName(constraint.name));
+				command.CommandText = "select c.* from pg_constraint c join pg_class r on c.conrelid = r.oid where r.relname = :ptable and c.conname = :pconstraint";
+				AddParam(command, "ptable", DbType.String, constraint.table);
+				AddParam(command, "pconstraint", DbType.String, constraint.name);
+
 				using(var reader = ExecuteReader(command)) {
-					int row = 0;
-					while(reader.Read()) {
-						Logger.instance.Log("Row #" + row);
-						for(int j=0; j<reader.FieldCount; j++) {
-							Logger.instance.Log(reader.GetName(j) + "='" + reader.GetValue(j) + "'");
-						}
-						row++;
+					if(!reader.Read()) {
+						throw new FormattableException("Constraint {0}.{1} not found", constraint.table, constraint.name);
+					}
+
+					if(reader.GetValue("contype").ToString() != "f") {
+						throw new FormattableException("Constraint {0}.{1} wrong type: expected {2}, got {3}", constraint.table, constraint.name, "C", reader.GetValue("contype"));
+					}
+
+					if(reader.GetValue("confdeltype").ToString() != GetStringRepresentation(constraint.onDelete)) {
+						throw new FormattableException("Constraint {0}.{1} wrong on delete action: expected {2}, got {3}", constraint.table, constraint.name, GetStringRepresentation(constraint.onDelete), reader.GetValue("confdeltype"));
+					}
+
+					if(reader.GetValue("confupdtype").ToString() != GetStringRepresentation(constraint.onUpdate)) {
+						throw new FormattableException("Constraint {0}.{1} wrong on update action: expected {2}, got {3}", constraint.table, constraint.name, GetStringRepresentation(constraint.onUpdate), reader.GetValue("confupdtype"));
+					}
+
+					attnums = (Int16[])reader.GetValue("conkey");
+					fattnums = (Int16[])reader.GetValue("confkey");
+
+					referencedTableOid = (Int64)reader.GetValue("confrelid");
+				}
+
+				if(attnums.Length != 1 || fattnums.Length != 1) {
+					throw new FormattableException("More than one field participating in {0}.{1}", constraint.table, constraint.name);
+				}
+
+			}
+
+			using(DbCommand command = commandCreator()) {
+				command.CommandText = "select c.*, r.relname relname from pg_constraint c join pg_class r on c.conrelid = r.oid where r.oid = :prelid and c.contype = :ptype";
+				AddParam(command, "prelid", DbType.Int64, referencedTableOid);
+				AddParam(command, "ptype", DbType.String, "p");
+
+				using(var reader = ExecuteReader(command)) {
+					reader.Read();
+					if(reader.GetValue("relname").ToString() != constraint.referencedTable) {
+						throw new FormattableException("Constraint {0}.{1} wrong referenced table: expected {2}, got {3}", constraint.table, constraint.name, reader.GetValue("relname"), constraint.referencedTable);
+					}
+
+					Int16[] rattnums = (Int16[])reader.GetValue("conkey");
+					if(rattnums.Length != 1) {
+						throw new FormattableException("Referenced table {0} primary key consists of {1} columns", constraint.referencedTable, rattnums.Length);
+					}
+
+					if(rattnums[0] != fattnums[0]) {
+						throw new FormattableException("Referenced column {2} for constraint {0}.{1} differs from column {3} used in a primary key of referenced table", constraint.table, constraint.name, fattnums[0], rattnums[0]);
 					}
 				}
 			}
-			throw new NotImplementedException();
+
+			using(DbCommand command = commandCreator()) {
+				command.CommandText = "SELECT a.attnum, a.attname AS field, t.typname AS type, a.attlen AS length, a.atttypmod AS lengthvar, a.attnotnull AS notnull, d.adsrc AS defaultvalue FROM pg_attribute a JOIN pg_class c ON a.attrelid = c.oid JOIN pg_type t ON a.atttypid = t.oid LEFT JOIN pg_attrdef d ON c.oid = d.adrelid AND a.attnum = d.adnum WHERE c.relname = :ptable and a.attnum = :pattnum";
+				AddParam(command, "ptable", DbType.String, constraint.table);
+				AddParam(command, "pattnum", DbType.Int16, attnums[0]);
+
+				using(var reader = ExecuteReader(command)) {
+					reader.Read();
+					if(reader.GetValue("field").ToString() != constraint.column) {
+						throw new FormattableException("Constraint {0}.{1} wrong column: expected {2}, got {3}", constraint.table, constraint.name, constraint.column, reader.GetValue("field"));
+					}
+				}
+			}
 		}
 
 		private void CheckConstraint(Func<DbCommand> commandCreator, UniqueConstraint constraint) {
+
+			Int16[] attnums = null;
+
 			using(DbCommand command = commandCreator()) {
-				command.CommandText = string.Format("\\d {0}", _EscapeName(constraint.name));
+				command.CommandText = "select c.* from pg_constraint c join pg_class r on c.conrelid = r.oid where r.relname = :ptable and c.conname = :pconstraint";
+				AddParam(command, "ptable", DbType.String, constraint.table);
+				AddParam(command, "pconstraint", DbType.String, constraint.name);
+
 				using(var reader = ExecuteReader(command)) {
-					int row = 0;
+					if(!reader.Read()) {
+						throw new FormattableException("Constraint {0}.{1} not found", constraint.table, constraint.name);
+					}
+
+					if(reader.GetValue("contype").ToString() != "u") {
+						throw new FormattableException("Constraint {0}.{1} wrong type: expected {2}, got {3}", constraint.table, constraint.name, "C", reader.GetValue("contype"));
+					}
+
+					attnums = (Int16[])reader.GetValue("conkey");
+				}
+			}
+
+			using(DbCommand command = commandCreator()) {
+				command.CommandText = string.Format("SELECT a.attnum, a.attname AS field, t.typname AS type, a.attlen AS length, a.atttypmod AS lengthvar, a.attnotnull AS notnull, d.adsrc AS defaultvalue FROM pg_attribute a JOIN pg_class c ON a.attrelid = c.oid JOIN pg_type t ON a.atttypid = t.oid LEFT JOIN pg_attrdef d ON c.oid = d.adrelid AND a.attnum = d.adnum WHERE c.relname = :ptable and a.attnum in ({0})", string.Join(", ", (from i in Enumerable.Range(0, attnums.Length) select ":pattnum" + i).ToArray()));
+				AddParam(command, "ptable", DbType.String, constraint.table);
+				for(int i=0; i<attnums.Length; i++) {
+					AddParam(command, "pattnum" + i, DbType.Int16, attnums[i]);
+				}
+
+				using(var reader = ExecuteReader(command)) {
+					HashSet<string> dbColumns = new HashSet<string>();
 					while(reader.Read()) {
-						Logger.instance.Log("Row #" + row);
-						for(int j=0; j<reader.FieldCount; j++) {
-							Logger.instance.Log(reader.GetName(j) + "='" + reader.GetValue(j) + "'");
-						}
-						row++;
+						dbColumns.Add(reader.GetValue("field").ToString());
+					}
+
+					if(!dbColumns.IsSubsetOf(constraint.columns)) {
+						throw new FormattableException("Some columns are not mentioned in constraint definition: {0}", string.Join(",", dbColumns.Except(constraint.columns).ToArray()));
+					}
+					if(!dbColumns.IsSupersetOf(constraint.columns)) {
+						throw new FormattableException("Some columns are missed in DB: {0}", string.Join(",", constraint.columns.Except(dbColumns).ToArray()));
 					}
 				}
 			}
-			throw new NotImplementedException();
 		}
 
 		private void CheckConstraint(Func<DbCommand> commandCreator, CheckConstraint constraint) {
 			using(DbCommand command = commandCreator()) {
-				command.CommandText = string.Format("\\d {0}", _EscapeName(constraint.name));
+				command.CommandText = "select c.* from pg_constraint c join pg_class r on c.conrelid = r.oid where r.relname = :ptable and c.conname = :pconstraint";
+				AddParam(command, "ptable", DbType.String, constraint.table);
+				AddParam(command, "pconstraint", DbType.String, constraint.name);
 				using(var reader = ExecuteReader(command)) {
-					int row = 0;
-					while(reader.Read()) {
-						Logger.instance.Log("Row #" + row);
-						for(int j=0; j<reader.FieldCount; j++) {
-							Logger.instance.Log(reader.GetName(j) + "='" + reader.GetValue(j) + "'");
-						}
-						row++;
+					if(!reader.Read()) {
+						throw new FormattableException("Constraint {0}.{1} not found", constraint.table, constraint.name);
+					}
+
+					if(reader.GetValue("contype").ToString() != "c") {
+						throw new FormattableException("Constraint {0}.{1} wrong type: expected {2}, got {3}", constraint.table, constraint.name, "C", reader.GetValue("contype"));
+					}
+
+					if(reader.GetValue("consrc").ToString() != constraint.condition) {
+						throw new FormattableException("Constraint {0}.{1} wrong condition: expected {2}, got {3}", constraint.table, constraint.name, constraint.condition, reader.GetValue("consrc"));
 					}
 				}
 			}
-			throw new NotImplementedException();
 		}
 
 		private void CheckConstraint(Func<DbCommand> commandCreator, AbstractConstraint constraint) {

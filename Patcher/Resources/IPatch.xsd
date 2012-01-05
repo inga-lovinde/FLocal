@@ -15,7 +15,7 @@
 
 	<xs:simpleType name="dbName">
 		<xs:restriction base="longDbName">
-			<xs:pattern value=".{2,30}"/>
+			<xs:pattern value=".{2,300}"/>
 		</xs:restriction>
 	</xs:simpleType>
 
@@ -38,6 +38,7 @@
 			<xs:enumeration value="cascade"/>
 			<xs:enumeration value="setNull"/>
 			<xs:enumeration value="setDefault"/>
+			<xs:enumeration value="restrict"/>
 		</xs:restriction>
 	</xs:simpleType>
 
