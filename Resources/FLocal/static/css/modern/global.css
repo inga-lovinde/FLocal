@@ -128,6 +128,9 @@ input {
 	padding-bottom:5pt;
 	padding-top:5pt;
 }
+blockquote {
+	border:none;
+}
 blockquote .quotecontent {
 	display:block;
 	border:solid 2px;
