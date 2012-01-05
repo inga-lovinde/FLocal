@@ -84,7 +84,7 @@
 				<xsl:attribute name="onmouseover">showChildren(this);</xsl:attribute>
 				<xsl:attribute name="onmouseout">hideChildren(this);</xsl:attribute>
 				<div class="pseudolink" default="default" style="z-index:1;">
-					<img src="/static/images/woocons/ButtonWhiteInfo.png" width="16" height="16" alt="info" border="0" style="vertical-align: text-bottom;" />
+					<img src="/static/images/metro.icons/white/i.png" width="16" height="16" alt="info" border="0" style="vertical-align: text-bottom;" />
 				</div>
 				<div class="threadcontainer_additionalcontainer" style="display:none;">
 					<div class="threadcontainer_additional" style="right:-5pt;">

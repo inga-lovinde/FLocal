@@ -36,7 +36,7 @@
 						</xsl:if>
 					</xsl:if>
 					<xsl:apply-templates select="postDate/date" mode="navigationImageFor">
-						<xsl:with-param name="src">woocons/Comment.png</xsl:with-param>
+						<xsl:with-param name="src">add</xsl:with-param>
 						<xsl:with-param name="alt">Ответ</xsl:with-param>
 					</xsl:apply-templates>
 				</a>
@@ -48,7 +48,7 @@
 						<xsl:attribute name="onmousedown">submitSelText(this.href);return false;</xsl:attribute>
 					</xsl:if>
 					<xsl:apply-templates select="postDate/date" mode="navigationImageFor">
-						<xsl:with-param name="src">woocons/Mail.png</xsl:with-param>
+						<xsl:with-param name="src">mail</xsl:with-param>
 						<xsl:with-param name="alt">Ответить в ПМ</xsl:with-param>
 					</xsl:apply-templates>
 				</a>
@@ -58,7 +58,7 @@
 						<a>
 							<xsl:attribute name="href">/Post/<xsl:value-of select="id"/>/Punish/</xsl:attribute>
 							<xsl:apply-templates select="postDate/date" mode="navigationImageFor">
-								<xsl:with-param name="src">woocons/Stop2.png</xsl:with-param>
+								<xsl:with-param name="src">settings</xsl:with-param>
 								<xsl:with-param name="alt">Модерировать</xsl:with-param>
 							</xsl:apply-templates>
 						</a>
@@ -66,7 +66,7 @@
 					<xsl:otherwise>
 						<a>
 							<xsl:apply-templates select="postDate/date" mode="navigationImageFor">
-								<xsl:with-param name="src">woocons/SignWarning.png</xsl:with-param>
+								<xsl:with-param name="src">cancel</xsl:with-param>
 								<xsl:with-param name="alt">Известить модератора</xsl:with-param>
 							</xsl:apply-templates>
 						</a>
@@ -77,7 +77,7 @@
 					<a>
 						<xsl:attribute name="href">/Post/<xsl:value-of select="id"/>/Edit/</xsl:attribute>
 						<xsl:apply-templates select="postDate/date" mode="navigationImageFor">
-							<xsl:with-param name="src">woocons/CommentEdit.png</xsl:with-param>
+							<xsl:with-param name="src">edit</xsl:with-param>
 							<xsl:with-param name="alt">Правка</xsl:with-param>
 						</xsl:apply-templates>
 					</a>

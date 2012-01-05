@@ -30,7 +30,7 @@ PRE{background-color:#303030;border-color:#999999;color:white}
 .pmcontainer.unread {
 	background-color:#200000;
 }
-blockquote {
+blockquote .quotecontent {
 	border:solid 1px #606060;
 	background-color:#303030;
 }
@@ -80,3 +80,20 @@ blockquote {
 	color:black !important;
 	background-color:white !important;
 }
+
+.metroicon-add {
+	background-image:url(/static/images/metro.icons/white/add.png);
+}
+.metroicon-cancel {
+	background-image:url(/static/images/metro.icons/white/cancel.png);
+}
+.metroicon-edit {
+	background-image:url(/static/images/metro.icons/white/edit.png);
+}
+.metroicon-mail {
+	background-image:url(/static/images/metro.icons/white/mail.png);
+}
+.metroicon-settings {
+	background-image:url(/static/images/metro.icons/white/settings.png);
+}
+

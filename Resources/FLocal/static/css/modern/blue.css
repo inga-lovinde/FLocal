@@ -41,7 +41,7 @@ pre {
 .pmcontainer.unread {
 	background-color:#bbcddf;
 }
-blockquote {
+blockquote .quotecontent {
 	border:solid 1px #9f9f9f;
 	background-color:#cfcfcf;
 }
@@ -100,3 +100,20 @@ blockquote {
 .UG_Administrators {
 	color:black !important;
 }
+
+.metroicon-add {
+	background-image:url(/static/images/metro.icons/black/add.png);
+}
+.metroicon-cancel {
+	background-image:url(/static/images/metro.icons/black/cancel.png);
+}
+.metroicon-edit {
+	background-image:url(/static/images/metro.icons/black/edit.png);
+}
+.metroicon-mail {
+	background-image:url(/static/images/metro.icons/black/mail.png);
+}
+.metroicon-settings {
+	background-image:url(/static/images/metro.icons/black/settings.png);
+}
+

@@ -13,7 +13,7 @@
 					<link rel="stylesheet" href="/static/css/modern/iefixes.css?v6.3" type="text/css" />
 				]]>&lt;![endif]</xsl:comment>
 				<link rel="stylesheet" type="text/css" skin="skin">
-					<xsl:attribute name="href">/static/css/modern/<xsl:value-of select="modernSkin/name"/>.css?v6.3</xsl:attribute>
+					<xsl:attribute name="href">/static/css/modern/<xsl:value-of select="modernSkin/name"/>.css?v6.4</xsl:attribute>
 				</link>
 				<link rel="shortcut icon" href="/static/favicons/smirk.ico" type="image/x-icon" />
 				<script language="Javascript" type="text/javascript" src="/static/js/common.js"><xsl:text> </xsl:text></script>
@@ -132,16 +132,19 @@
 		<xsl:param name="alt"/>
 		<xsl:param name="src"/>
 		<img border="0" style="vertical-align: text-bottom">
-			<xsl:attribute name="src">
-				<xsl:text>/static/images/</xsl:text>
+			<xsl:attribute name="class">
+				<xsl:text>metroicon-</xsl:text>
 				<xsl:choose>
 					<xsl:when test="year = /root/current/date/year">
 						<xsl:value-of select="$src"/>
 					</xsl:when>
 					<xsl:otherwise>
-						<xsl:text>slowpoke-32.png</xsl:text>
+						<xsl:text>slowpoke</xsl:text>
 					</xsl:otherwise>
 				</xsl:choose>
+			</xsl:attribute>
+			<xsl:attribute name="src">
+				<xsl:text>/static/images/metro.icons/placeholder.png</xsl:text>
 			</xsl:attribute>
 			<xsl:attribute name="alt">
 				<xsl:value-of select="$alt"/>

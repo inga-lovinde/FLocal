@@ -20,7 +20,7 @@
 					<xsl:attribute name="onclick">submitSelText(this.href);return false;</xsl:attribute>
 					<xsl:attribute name="onmousedown">submitSelText(this.href);return false;</xsl:attribute>
 					<xsl:apply-templates select="postDate/date" mode="navigationImageFor">
-						<xsl:with-param name="src">woocons/MailReply.png</xsl:with-param>
+						<xsl:with-param name="src">mail</xsl:with-param>
 						<xsl:with-param name="alt">Ответ</xsl:with-param>
 					</xsl:apply-templates>
 				</a>

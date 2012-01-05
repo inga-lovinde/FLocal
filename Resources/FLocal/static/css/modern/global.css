@@ -128,7 +128,7 @@ input {
 	padding-bottom:5pt;
 	padding-top:5pt;
 }
-blockquote {
+blockquote .quotecontent {
 	display:block;
 	border:solid 2px;
 	font-size:0.8em;
@@ -255,3 +255,8 @@ a.external {
 	width:15em;
 	z-index:3000;
 }
+
+.metroicon-slowpoke {
+	background-image:url(/static/images/slowpoke-48.png);
+}
+
