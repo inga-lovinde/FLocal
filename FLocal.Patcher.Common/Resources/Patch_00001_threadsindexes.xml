@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<patch xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\Patcher\Resources\IPatch.xsd">
+	<version>
+		<number>1</number>
+		<author>threadsindexes</author>
+	</version>
+	<strictCommandSet>
+		<command>
+			<sql>
+				<installSql>
+					<query>DROP INDEX "Threads_FirstPostId_idx"</query>
+					<query>CREATE INDEX "Threads_FirstPostId_idx" on "Threads"("FirstPostId" asc)</query>
+				</installSql>
+				<uninstallSql/>
+			</sql>
+		</command>
+		<command>
+			<sql>
+				<installSql>
+					<query>DROP INDEX "Threads_LastPostId_idx"</query>
+					<query>CREATE INDEX "Threads_LastPostId_idx" on "Threads"("LastPostId" desc)</query>
+				</installSql>
+				<uninstallSql/>
+			</sql>
+		</command>
+		<command>
+			<sql>
+				<installSql>
+					<query>DROP INDEX "Threads_IsAnnouncement_LastPostId_idx"</query>
+					<query>CREATE INDEX "Threads_IsAnnouncement_LastPostId_idx" on "Threads"("IsAnnouncement" desc, "LastPostId" desc)</query>
+				</installSql>
+				<uninstallSql/>
+			</sql>
+		</command>
+	</strictCommandSet>
+</patch>
