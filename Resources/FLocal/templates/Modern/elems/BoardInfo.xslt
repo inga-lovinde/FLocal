@@ -30,10 +30,20 @@
 				<xsl:attribute name="onmouseover">showChildren(this);</xsl:attribute>
 				<xsl:attribute name="onmouseout">hideChildren(this);</xsl:attribute>
 				<div default="default">
-					<xsl:apply-templates select="lastPostInfo/post/postDate/date" mode="navigationImageFor">
-						<xsl:with-param name="src">i</xsl:with-param>
-						<xsl:with-param name="alt">Информация</xsl:with-param>
-					</xsl:apply-templates>
+					<xsl:choose>
+						<xsl:when test="lastPostInfo/post">
+							<xsl:apply-templates select="lastPostInfo/post/postDate/date" mode="navigationImageFor">
+								<xsl:with-param name="src">i</xsl:with-param>
+								<xsl:with-param name="alt">Информация</xsl:with-param>
+							</xsl:apply-templates>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:apply-templates select="/root/current/date" mode="navigationImageFor">
+								<xsl:with-param name="src">i</xsl:with-param>
+								<xsl:with-param name="alt">Информация</xsl:with-param>
+							</xsl:apply-templates>
+						</xsl:otherwise>
+					</xsl:choose>
 				</div>
 				<div class="board_additionalcontainer" style="display:none;">
 					<div class="board_additional" style="right:0px;">
