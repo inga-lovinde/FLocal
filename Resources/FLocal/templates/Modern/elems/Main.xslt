@@ -133,6 +133,8 @@
 		<xsl:param name="src"/>
 		<img border="0" style="vertical-align: text-bottom">
 			<xsl:attribute name="class">
+				<xsl:text>metroicon</xsl:text>
+				<xsl:text> </xsl:text>
 				<xsl:text>metroicon-</xsl:text>
 				<xsl:choose>
 					<xsl:when test="year = /root/current/date/year">

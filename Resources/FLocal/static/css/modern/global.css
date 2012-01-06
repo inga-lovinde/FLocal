@@ -263,6 +263,10 @@ a.external {
 	z-index:3000;
 }
 
+.metroicon {
+	margin:2px;
+}
+
 .metroicon-slowpoke {
 	background-image:url(/static/images/slowpoke-48.png);
 }
