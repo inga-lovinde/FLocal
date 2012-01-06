@@ -139,7 +139,7 @@
 				<xsl:text> </xsl:text>
 				<xsl:text>metroicon-</xsl:text>
 				<xsl:choose>
-					<xsl:when test="year = /root/current/date/year">
+					<xsl:when test="year &gt; 2009">
 						<xsl:value-of select="$src"/>
 					</xsl:when>
 					<xsl:otherwise>
