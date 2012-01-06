@@ -108,6 +108,12 @@ namespace FLocal.Common.dataobjects {
 			}
 		}
 
+		public int totalThreadsExcludingSubboards {
+			get {
+				return this.totalThreads - this.subBoards.Sum(board => board.totalThreads);
+			}
+		}
+
 		private string _name;
 		public string name {
 			get {
@@ -323,7 +329,7 @@ namespace FLocal.Common.dataobjects {
 		}
 
 		public IEnumerable<Thread> getThreads(Diapasone diapasone, SortSpec[] sortBy) {
-			diapasone.total = this.totalThreads;
+			diapasone.total = this.totalThreadsExcludingSubboards;
 			return Thread.LoadByIds(
 				from stringId in Config.instance.mainConnection.LoadIdsByConditions(
 					Thread.TableSpec.instance,
@@ -340,7 +346,7 @@ namespace FLocal.Common.dataobjects {
 		}
 
 		public IEnumerable<Thread> getThreads(Diapasone diapasone, bool isAscending) {
-			diapasone.total = this.totalThreads;
+			diapasone.total = this.totalThreadsExcludingSubboards;
 			return this.getThreads(
 				diapasone,
 				new SortSpec[] {
