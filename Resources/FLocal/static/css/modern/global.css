@@ -24,7 +24,7 @@ pre {
 	max-height:3.5em;
 	overflow:hidden;
 	text-align:right;
-	font-size:1em;
+	font-size:0.8em;
 }
 
 .zerosize { width:0px;height:0px;max-width:0px;max-height:0px; }
@@ -208,8 +208,8 @@ BLOCKQUOTE BR {FONT-SIZE:1px}
 .board_additional {
 	position:absolute;
 	padding:5pt;
-	font-size:0.8em;
-	width:16.25em;
+	font-size:1em;
+	width:14.5em;
 	z-index:3000;
 }
 a.external {
