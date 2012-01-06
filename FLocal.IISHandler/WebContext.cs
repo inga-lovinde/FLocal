@@ -198,6 +198,15 @@ namespace FLocal.IISHandler {
 			}
 		}
 
+		private static readonly Type BaseType = (new object()).GetType();
+		private string getFullTypeName(Type type, int allowedIterations) {
+			if(allowedIterations <= 0 || type.BaseType == null || type.BaseType.FullName == BaseType.FullName || type.BaseType.FullName == type.FullName) {
+				return type.FullName;
+			} else {
+				return type.FullName + " : " + getFullTypeName(type.BaseType, allowedIterations-1);
+			}
+		}
+
 		public void LogError(Exception e) {
 			string dir;
 			if(e is AccessDeniedException) {
@@ -218,7 +227,8 @@ namespace FLocal.IISHandler {
 					writer.WriteLine("Session: " + this.httprequest.Cookies[Config.instance.CookiesPrefix + "_session"].Value);
 				}
 				writer.WriteLine();
-				writer.WriteLine("Exception: " + e.GetType().FullName);
+
+				writer.WriteLine("Exception: " + getFullTypeName(e.GetType(), 20));
 				writer.WriteLine("Guid: " + e.GetGuid().ToString());
 				writer.WriteLine(e.Message);
 				if(e is FLocalException) {
@@ -226,6 +236,8 @@ namespace FLocal.IISHandler {
 				} else {
 					writer.WriteLine(e.StackTrace);
 				}
+				writer.WriteLine("==============================");
+				writer.WriteLine(e.ToString());
 			}
 		}
 

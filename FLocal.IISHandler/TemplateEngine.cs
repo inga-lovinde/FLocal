@@ -111,7 +111,14 @@ namespace FLocal.IISHandler {
 					lock(this.locker) {
 						if(!this.cache.ContainsKey(templateName)) {
 							XslCompiledTransform xslt = new XslCompiledTransform();
-							xslt.Load(FLocal.Common.Config.instance.dataDir + "Templates" + FLocal.Common.Config.instance.DirSeparator + templateName);
+							var path = FLocal.Common.Config.instance.dataDir + "Templates" + FLocal.Common.Config.instance.DirSeparator + templateName;
+							try {
+								xslt.Load(path);
+							} catch(XsltCompileException) {
+								throw;
+							} catch(XsltException e) {
+								throw new Exception("Unable to load xslt file: " + path, e);
+							}
 							this.cache[templateName] = xslt;
 						}
 					}

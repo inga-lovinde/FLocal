@@ -110,6 +110,9 @@ blockquote .quotecontent {
 .metroicon-edit {
 	background-image:url(/static/images/metro.icons/black/edit.png);
 }
+.metroicon-i {
+	background-image:url(/static/images/metro.icons/black/i.png);
+}
 .metroicon-mail {
 	background-image:url(/static/images/metro.icons/black/mail.png);
 }

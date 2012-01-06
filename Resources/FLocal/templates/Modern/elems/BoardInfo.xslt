@@ -6,7 +6,7 @@
 		<xsl:if test="((position() mod $maxPerLine) = 1) and (position() != 1)">
 			<br/>
 		</xsl:if>
-		<div>
+		<div style="clear:both">
 			<xsl:attribute name="class">
 				<xsl:text>boardcontainer</xsl:text>
 				<xsl:if test="(hasNewPosts='true') and not(lastPostInfo/post/poster/user/id = /root/session/user/id)">
@@ -25,30 +25,15 @@
 						</p>
 					</xsl:if>
 				</a>
-				<p>Тем: <xsl:value-of select="totalThreads"/></p>
-				<p>Сообщений: <xsl:value-of select="totalPosts"/></p>
 			</div>
-			<xsl:if test="subBoards/board">
-				<div style="float:left;text-align:left;">
-					<xsl:attribute name="onmouseover">showChildren(this);</xsl:attribute>
-					<xsl:attribute name="onmouseout">hideChildren(this);</xsl:attribute>
-					<div default="default">
-						<a class="pseudolink">Подразделы</a>
-					</div>
-					<div class="board_additionalcontainer" style="display:none">
-						<div class="board_additional" style="left:0px;">
-							<p>
-								<xsl:apply-templates select="subBoards/board"/>
-							</p>
-						</div>
-					</div>
-				</div>
-			</xsl:if>
-			<div style="float:right;text-align:right;">
+			<div style="float:right;clear:both;text-align:right;">
 				<xsl:attribute name="onmouseover">showChildren(this);</xsl:attribute>
 				<xsl:attribute name="onmouseout">hideChildren(this);</xsl:attribute>
 				<div default="default">
-					<a class="pseudolink">Информация</a>
+					<xsl:apply-templates select="lastPostInfo/post/postDate/date" mode="navigationImageFor">
+						<xsl:with-param name="src">i</xsl:with-param>
+						<xsl:with-param name="alt">Информация</xsl:with-param>
+					</xsl:apply-templates>
 				</div>
 				<div class="board_additionalcontainer" style="display:none;">
 					<div class="board_additional" style="right:0px;">
@@ -58,8 +43,18 @@
 							<br/>
 							<xsl:apply-templates select="administrator/user | moderators/user" mode="userLink"/>
 						</p>
+						<xsl:if test="subBoards/board">
+							<hr/>
+							<p>
+								<xsl:apply-templates select="subBoards/board"/>
+							</p>
+						</xsl:if>
 					</div>
 				</div>
+			</div>
+			<div class="boardcontainer_info">
+				<p>Тем: <xsl:value-of select="totalThreads"/></p>
+				<p>Сообщений: <xsl:value-of select="totalPosts"/></p>
 			</div>
 		</div>
 	</xsl:template>
