@@ -48,7 +48,7 @@
 						<xsl:call-template name="header"/>
 					</div>
 				</xsl:if>
-				<div style="float:left;width:99%;max-width:99%;overflow:visible;" id="contentContainer">
+				<div style="float:left;width:99%;max-width:99%;overflow:visible;position:relative;" id="contentContainer">
 					<xsl:call-template name="specific"/>
 				</div>
 				<xsl:if test="not(get/param[@name='headers'] = 'false')">
