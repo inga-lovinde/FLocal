@@ -232,6 +232,7 @@ namespace FLocal.Common.dataobjects {
 		}
 
 		public IEnumerable<Post> getPosts(Diapasone diapasone, bool isAscending) {
+			diapasone.total = this.totalPosts;
 			return Post.LoadByIds(
 				from stringId in Config.instance.mainConnection.LoadIdsByConditions(
 					Post.TableSpec.instance,
