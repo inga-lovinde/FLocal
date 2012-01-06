@@ -8,17 +8,14 @@
 				<xsl:with-param name="url">/Forum/Boards/</xsl:with-param>
 				<xsl:with-param name="text">Разделы</xsl:with-param>
 			</xsl:call-template>
-			<xsl:text>&#160;&#160;&#160;</xsl:text>
 			<xsl:call-template name="headerLink">
 				<xsl:with-param name="url">/Forum/AllThreads/</xsl:with-param>
 				<xsl:with-param name="text">Темы</xsl:with-param>
 			</xsl:call-template>
-			<xsl:text>&#160;&#160;&#160;</xsl:text>
 			<xsl:call-template name="headerLink">
 				<xsl:with-param name="url">/Forum/AllPosts/</xsl:with-param>
 				<xsl:with-param name="text">Сообщения</xsl:with-param>
 			</xsl:call-template>
-			<xsl:text>&#160;&#160;&#160;</xsl:text>
 			<xsl:call-template name="headerLink">
 				<xsl:with-param name="url">/Users/User/<xsl:value-of select="session/user/id"/>/Replies/</xsl:with-param>
 				<xsl:with-param name="text">Ответы</xsl:with-param>
@@ -27,7 +24,6 @@
 				</xsl:with-param>
 			</xsl:call-template>
 			<xsl:if test="currentLocation//board[not(name(../..)='board')]">
-				<xsl:text>&#160;&#160;&#160;</xsl:text>
 				<xsl:apply-templates select="currentLocation//board[not(name(../..)='board')]" mode="headerBoardLink"/>
 			</xsl:if>
 			<xsl:if test="currentLocation//board">

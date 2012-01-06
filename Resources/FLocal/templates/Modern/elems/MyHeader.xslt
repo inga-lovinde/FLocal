@@ -12,7 +12,6 @@
 					<xsl:if test="session/sessionKey">true</xsl:if>
 				</xsl:with-param>
 			</xsl:call-template>
-			<xsl:text>&#160;&#160;&#160;</xsl:text>
 			<xsl:call-template name="headerLink">
 				<xsl:with-param name="url">/My/Conversations/</xsl:with-param>
 				<xsl:with-param name="text">
@@ -33,7 +32,6 @@
 					<xsl:if test="not(session/sessionKey)">true</xsl:if>
 				</xsl:with-param>
 			</xsl:call-template>
-			<xsl:text>&#160;&#160;&#160;</xsl:text>
 			<xsl:call-template name="headerLink">
 				<xsl:with-param name="url">/My/Settings/</xsl:with-param>
 				<xsl:with-param name="text">Настройки</xsl:with-param>
@@ -41,7 +39,6 @@
 					<xsl:if test="not(session/sessionKey)">true</xsl:if>
 				</xsl:with-param>
 			</xsl:call-template>
-			<xsl:text>&#160;&#160;&#160;</xsl:text>
 			<xsl:call-template name="headerLink">
 				<xsl:with-param name="url">/My/UserData/</xsl:with-param>
 				<xsl:with-param name="text">Данные (?)</xsl:with-param>
@@ -49,7 +46,6 @@
 					<xsl:if test="not(session/sessionKey)">true</xsl:if>
 				</xsl:with-param>
 			</xsl:call-template>
-			<xsl:text>&#160;&#160;&#160;</xsl:text>
 			<xsl:call-template name="headerLink">
 				<xsl:with-param name="url">/My/Avatars/</xsl:with-param>
 				<xsl:with-param name="text">Аватарки</xsl:with-param>
@@ -57,7 +53,6 @@
 					<xsl:if test="not(session/sessionKey)">true</xsl:if>
 				</xsl:with-param>
 			</xsl:call-template>
-			<xsl:text>&#160;&#160;&#160;</xsl:text>
 			<xsl:call-template name="headerLink">
 				<xsl:with-param name="url">/Users/User/<xsl:value-of select="session/user/id"/>/Info/</xsl:with-param>
 				<xsl:with-param name="text">Профиль</xsl:with-param>
@@ -65,7 +60,6 @@
 					<xsl:if test="not(session/sessionKey)">true</xsl:if>
 				</xsl:with-param>
 			</xsl:call-template>
-			<xsl:text>&#160;&#160;&#160;</xsl:text>
 			<xsl:call-template name="headerLink">
 				<xsl:with-param name="url">/do/Logout/?sessionKey=<xsl:value-of select="session/sessionKey"/></xsl:with-param>
 				<xsl:with-param name="text">Выход</xsl:with-param>

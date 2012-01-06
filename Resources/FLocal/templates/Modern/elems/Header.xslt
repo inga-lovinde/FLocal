@@ -18,21 +18,24 @@
 		<xsl:param name="postfix"/>
 		<xsl:param name="skipDatePostfix"/>
 		<a target="_top">
-			<xsl:choose>
-				<xsl:when test="$isDisabled='true'">
-					<xsl:attribute name="class">disabled</xsl:attribute>
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:if test="starts-with(/root/currentUrl, $url)">
-						<xsl:attribute name="class">selected</xsl:attribute>
-					</xsl:if>
-					<xsl:attribute name="href">
-						<xsl:value-of select="$url"/>
-						<xsl:value-of select="$postfix"/>
-						<xsl:if test="not($skipDatePostfix='true')">?<xsl:value-of select="current/date/ticks"/></xsl:if>
-					</xsl:attribute>
-				</xsl:otherwise>
-			</xsl:choose>
+			<xsl:attribute name="class">
+				<xsl:text>headerLink</xsl:text>
+				<xsl:choose>
+					<xsl:when test="$isDisabled='true'">
+						<xsl:text> disabled</xsl:text>
+					</xsl:when>
+					<xsl:when test="starts-with(/root/currentUrl, $url)">
+						<xsl:text> selected</xsl:text>
+					</xsl:when>
+				</xsl:choose>
+			</xsl:attribute>
+			<xsl:if test="not($isDisabled='true')">
+				<xsl:attribute name="href">
+					<xsl:value-of select="$url"/>
+					<xsl:value-of select="$postfix"/>
+					<xsl:if test="not($skipDatePostfix='true')">?<xsl:value-of select="current/date/ticks"/></xsl:if>
+				</xsl:attribute>
+			</xsl:if>
 			<xsl:value-of select="$text"/>
 		</a>
 	</xsl:template>
@@ -141,12 +144,10 @@
 				<xsl:with-param name="url">/Forum/</xsl:with-param>
 				<xsl:with-param name="text">Форум</xsl:with-param>
 			</xsl:call-template>
-			<xsl:text>&#160;&#160;&#160;</xsl:text>
 			<xsl:call-template name="headerLink">
 				<xsl:with-param name="url">/Polls/</xsl:with-param>
 				<xsl:with-param name="text">Опросы</xsl:with-param>
 			</xsl:call-template>
-			<xsl:text>&#160;&#160;&#160;</xsl:text>
 			<xsl:call-template name="headerLink">
 				<xsl:with-param name="url">/Upload/</xsl:with-param>
 				<xsl:with-param name="text">Аплоад</xsl:with-param>
@@ -154,7 +155,6 @@
 					<xsl:if test="not(session/sessionKey)">true</xsl:if>
 				</xsl:with-param>
 			</xsl:call-template>
-			<xsl:text>&#160;&#160;&#160;</xsl:text>
 			<xsl:call-template name="headerLink">
 				<xsl:with-param name="url">/My/</xsl:with-param>
 				<xsl:with-param name="text">
@@ -164,12 +164,10 @@
 					</xsl:choose>
 				</xsl:with-param>
 			</xsl:call-template>
-			<xsl:text>&#160;&#160;&#160;</xsl:text>
 			<xsl:call-template name="headerLink">
 				<xsl:with-param name="url">/q/faq/</xsl:with-param>
 				<xsl:with-param name="text">FAQ</xsl:with-param>
 			</xsl:call-template>
-			<xsl:text>&#160;&#160;&#160;</xsl:text>
 			<xsl:call-template name="headerLink">
 				<xsl:with-param name="url">/Users/</xsl:with-param>
 				<xsl:with-param name="text">Пользователи</xsl:with-param>
@@ -190,7 +188,6 @@
 				<xsl:call-template name="pollsHeader"/>
 			</xsl:if>
 		</div>
-		<center>&#160;&#160;</center>
 	</xsl:template>
 </xsl:stylesheet>
 

@@ -23,7 +23,6 @@
 				</a>
 				<xsl:text> </xsl:text>
 				<xsl:value-of select="filename"/>
-				<xsl:text>&#160;&#160;</xsl:text>
 				<font style="font-size:0.6em">
 					<xsl:text>(</xsl:text>
 					<xsl:value-of select="$uploadDate"/>

@@ -8,18 +8,18 @@
 		<html>
 			<head>
 				<meta http-equiv="x-ua-compatible" content="IE=8"/>
-				<link rel="stylesheet" href="/static/css/modern/global.css?v6.5" type="text/css" />
+				<link rel="stylesheet" href="/static/css/modern/global.css?v6.6" type="text/css" />
 				<xsl:comment>[if lte IE 7]&gt;<![CDATA[
-					<link rel="stylesheet" href="/static/css/modern/iefixes.css?v6.5" type="text/css" />
+					<link rel="stylesheet" href="/static/css/modern/iefixes.css?v6.6" type="text/css" />
 				]]>&lt;![endif]</xsl:comment>
 				<link rel="stylesheet" type="text/css" skin="skin">
-					<xsl:attribute name="href">/static/css/modern/<xsl:value-of select="modernSkin/name"/>.css?v6.5</xsl:attribute>
+					<xsl:attribute name="href">/static/css/modern/<xsl:value-of select="modernSkin/name"/>.css?v6.6</xsl:attribute>
 				</link>
 				<link rel="shortcut icon" href="/static/favicons/smirk.ico" type="image/x-icon" />
-				<script language="Javascript" type="text/javascript" src="/static/js/common.js?v6.5"><xsl:text> </xsl:text></script>
-				<script language="Javascript" type="text/javascript" src="/static/js/modern.js?v6.5"><xsl:text> </xsl:text></script>
+				<script language="Javascript" type="text/javascript" src="/static/js/common.js?v6.6"><xsl:text> </xsl:text></script>
+				<script language="Javascript" type="text/javascript" src="/static/js/modern.js?v6.6"><xsl:text> </xsl:text></script>
 				<script language="Javascript" type="text/javascript" src="/static/js/machichara/complex.js?v1"><xsl:text> </xsl:text></script>
-				<script language="Javascript" type="text/javascript" src="/static/js/machichara/simple.js?v6.5"><xsl:text> </xsl:text></script>
+				<script language="Javascript" type="text/javascript" src="/static/js/machichara/simple.js?v6.6"><xsl:text> </xsl:text></script>
 				<script language="Javascript" type="text/javascript">
 					<xsl:attribute name="src">
 						<xsl:text>/static/js/machichara/</xsl:text>
@@ -48,7 +48,7 @@
 						<xsl:call-template name="header"/>
 					</div>
 				</xsl:if>
-				<div style="float:left;width:97%;max-width:97%;overflow:visible;" id="contentContainer">
+				<div style="float:left;width:99%;max-width:99%;overflow:visible;" id="contentContainer">
 					<xsl:call-template name="specific"/>
 				</div>
 				<xsl:if test="not(get/param[@name='headers'] = 'false')">

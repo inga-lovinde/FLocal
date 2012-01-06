@@ -7,7 +7,6 @@
 				<xsl:with-param name="url">/Upload/List/</xsl:with-param>
 				<xsl:with-param name="text">Список</xsl:with-param>
 			</xsl:call-template>
-			<xsl:text>&#160;&#160;&#160;</xsl:text>
 			<xsl:call-template name="headerLink">
 				<xsl:with-param name="url">/Upload/New/</xsl:with-param>
 				<xsl:with-param name="text">Новый</xsl:with-param>

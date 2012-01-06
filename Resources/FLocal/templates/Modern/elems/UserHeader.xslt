@@ -8,27 +8,22 @@
 				<xsl:with-param name="url"><xsl:value-of select="$baseLink"/>Info/</xsl:with-param>
 				<xsl:with-param name="text">Информация</xsl:with-param>
 			</xsl:call-template>
-			<xsl:text>&#160;&#160;&#160;</xsl:text>
 			<xsl:call-template name="headerLink">
 				<xsl:with-param name="url"><xsl:value-of select="$baseLink"/>Threads/</xsl:with-param>
 				<xsl:with-param name="text">Темы</xsl:with-param>
 			</xsl:call-template>
-			<xsl:text>&#160;&#160;&#160;</xsl:text>
 			<xsl:call-template name="headerLink">
 				<xsl:with-param name="url"><xsl:value-of select="$baseLink"/>Posts/</xsl:with-param>
 				<xsl:with-param name="text">Сообщения</xsl:with-param>
 			</xsl:call-template>
-			<xsl:text>&#160;&#160;&#160;</xsl:text>
 			<xsl:call-template name="headerLink">
 				<xsl:with-param name="url"><xsl:value-of select="$baseLink"/>Replies/</xsl:with-param>
 				<xsl:with-param name="text">Ответы</xsl:with-param>
 			</xsl:call-template>
-			<xsl:text>&#160;&#160;&#160;</xsl:text>
 			<xsl:call-template name="headerLink">
 				<xsl:with-param name="url"><xsl:value-of select="$baseLink"/>PollsParticipated/</xsl:with-param>
 				<xsl:with-param name="text">Опросы</xsl:with-param>
 			</xsl:call-template>
-			<xsl:text>&#160;&#160;&#160;</xsl:text>
 			<xsl:call-template name="headerLink">
 				<xsl:with-param name="url">/My/Conversations/Conversation/<xsl:value-of select="accountId"/>/</xsl:with-param>
 				<xsl:with-param name="text">История</xsl:with-param>
@@ -36,7 +31,6 @@
 					<xsl:if test="not(accountId)">true</xsl:if>
 				</xsl:with-param>
 			</xsl:call-template>
-			<xsl:text>&#160;&#160;&#160;</xsl:text>
 			<xsl:call-template name="headerLink">
 				<xsl:with-param name="url">/My/Conversations/PMSend/<xsl:value-of select="accountId"/>/</xsl:with-param>
 				<xsl:with-param name="text">Написать</xsl:with-param>

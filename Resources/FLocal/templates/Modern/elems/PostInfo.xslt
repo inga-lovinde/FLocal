@@ -113,7 +113,6 @@
 				<xsl:if test="not(parentPost/post/title = title) and not(concat('Re: ', parentPost/post/title) = title)">
 					<xsl:value-of select="title"/>
 				</xsl:if>
-				<xsl:text>&#160;&#160;</xsl:text>
 				<font style="font-size:0.6em">
 					<xsl:text>(</xsl:text>
 					<xsl:value-of select="$postDate"/>
