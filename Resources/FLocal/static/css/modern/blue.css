@@ -120,3 +120,6 @@ blockquote .quotecontent {
 	background-image:url(/static/images/metro.icons/black/settings.png);
 }
 
+.headerContainer {
+	border-color:black;
+}

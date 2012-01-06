@@ -275,3 +275,6 @@ a.external {
 	background-image:url(/static/images/slowpoke-48.png);
 }
 
+#headerContainer {
+	border-bottom:solid 1px;
+}

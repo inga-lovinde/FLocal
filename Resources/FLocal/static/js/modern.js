@@ -32,6 +32,7 @@ function makeMainboxScrollable() {
 	if(window.innerHeight > 0) {
 		var height = window.innerHeight;
 		height -= document.getElementById("headerContainer").clientHeight;
+		height -= 1; //headerContainer border
 		var width = window.innerWidth;
 		width -= document.getElementById("bjAndSlutsContainer").clientWidth;
 		var mainbox = document.getElementById("contentContainer");
