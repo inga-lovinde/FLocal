@@ -24,7 +24,7 @@ pre {
 	max-height:3.5em;
 	overflow:hidden;
 	text-align:right;
-	font-size:0.8em;
+	font-size:1em;
 }
 
 .zerosize { width:0px;height:0px;max-width:0px;max-height:0px; }
