@@ -31,10 +31,10 @@ namespace FLocal.Migration.Console {
 							id = raw;
 							break;
 						case "gif":
-							id = 500000 + raw;
+							id = 5000000 + raw;
 							break;
 						case "png":
-							id = 600000 + raw;
+							id = 6000000 + raw;
 							break;
 						default:
 							throw new FLocalException("wrong extension");
