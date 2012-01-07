@@ -22,10 +22,10 @@ namespace FLocal.Common.URL.upload {
 						iUploadId = rawFileNum;
 						break;
 					case "gif":
-						iUploadId = 500000 + rawFileNum;
+						iUploadId = 5000000 + rawFileNum;
 						break;
 					case "png":
-						iUploadId = 600000 + rawFileNum;
+						iUploadId = 6000000 + rawFileNum;
 						break;
 					default:
 						throw new FLocalException("wrong url");
