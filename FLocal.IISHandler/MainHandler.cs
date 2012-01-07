@@ -19,9 +19,7 @@ namespace FLocal.IISHandler {
 
 		private void doProcessRequest(HttpContext httpcontext) {
 
-			if(PatcherInfo.instance.IsNeedsPatching) {
-				throw new FLocalException("DB is outdated");
-			}
+			PatcherInfo.instance.CheckDBUpToDate();
 
 			Uri current = httpcontext.Request.Url;
 			if(!current.Host.EndsWith(Config.instance.BaseHost)) {

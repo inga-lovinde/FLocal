@@ -23,6 +23,12 @@ namespace Patcher.Web {
 			}
 		}
 
+		public void CheckDBUpToDate() {
+			if(this.IsNeedsPatching) {
+				throw new DBIsOutdatedException();
+			}
+		}
+
 		internal void PatchesInstalled() {
 			this.AreNewPatchesInstalled = true;
 		}

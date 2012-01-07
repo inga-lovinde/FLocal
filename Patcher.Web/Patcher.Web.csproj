@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CheckParams.cs" />
+    <Compile Include="DBIsOutdatedException.cs" />
     <Compile Include="InteractiveResponseStream.cs" />
     <Compile Include="MainHandler.cs" />
     <Compile Include="IPatcherConfiguration.cs" />
