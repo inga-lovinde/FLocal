@@ -13,6 +13,14 @@ namespace FLocal.Migration.Gateway {
 		public static readonly Encoding encoding = Encoding.GetEncoding(1251);
 		private const int BUFFER = 1024;
 
+		private static HttpWebResponse TryGetResponse(HttpWebRequest request) {
+			try {
+				return (HttpWebResponse)request.GetResponse();
+			} catch(WebException e) {
+				throw new ApplicationException("Unable to load " + request.Address, e);
+			}
+		}
+
 		public static FileInfo getPageInfo(string requestUrl, Dictionary<string, string> postData, CookieContainer cookies) {
 			string baseUrl = ConfigurationManager.AppSettings["Importer_BaseUrl"];
 			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(baseUrl + requestUrl);
@@ -43,7 +51,7 @@ namespace FLocal.Migration.Gateway {
 				stream.Close();
 			}
 			request.UserAgent = "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; FDM; .NET4.0C; .NET4.0E)";
-			using(HttpWebResponse response = (HttpWebResponse)request.GetResponse()) {
+			using(HttpWebResponse response = TryGetResponse(request)) {
 				cookies.Add(response.Cookies);
 
 				byte[] content;

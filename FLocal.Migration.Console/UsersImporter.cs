@@ -11,9 +11,9 @@ using FLocal.Common.actions;
 namespace FLocal.Migration.Console {
 	class UsersImporter {
 
-		public static void ImportUsers() {
+		public static void ImportUsers(int startFromPage) {
 
-			for(int i=1; i<800; i++) {
+			for(int i=startFromPage; i<1000; i++) {
 				System.Console.Write("[" + i + "]");
 				foreach(string userName in ShallerGateway.getUserNames(i)) {
 					User user;
@@ -30,10 +30,12 @@ namespace FLocal.Migration.Console {
 								{ User.TableSpec.FIELD_LOCATION, new ScalarFieldValue(userData["location"]) },
 								{ User.TableSpec.FIELD_SHOWPOSTSTOUSERS, new ScalarFieldValue("All") },
 								{ User.TableSpec.FIELD_SIGNATURE, new ScalarFieldValue(userData["signature"]) },
+								{ User.TableSpec.FIELD_SIGNATUREUBB, new ScalarFieldValue(userData["signature"]) },
 								{ User.TableSpec.FIELD_TITLE, new ScalarFieldValue(userData["title"]) },
 								{ User.TableSpec.FIELD_TOTALPOSTS, new ScalarFieldValue("0") },
 								{ User.TableSpec.FIELD_USERGROUPID, new ScalarFieldValue("1") },
 								{ User.TableSpec.FIELD_BIOGRAPHY, new ScalarFieldValue(userData["biography"]) },
+								{ User.TableSpec.FIELD_BIOGRAPHYUBB, new ScalarFieldValue(userData["biography"]) },
 							}
 						);
 						AbstractChange addAccount = new InsertChange(
@@ -42,6 +44,10 @@ namespace FLocal.Migration.Console {
 								{ Account.TableSpec.FIELD_NAME, new ScalarFieldValue(userName.ToLower()) },
 								{ Account.TableSpec.FIELD_NEEDSMIGRATION, new ScalarFieldValue("1") },
 								{ Account.TableSpec.FIELD_PASSWORDHASH, new ScalarFieldValue("*") },
+								{ Account.TableSpec.FIELD_IPADDRESS, new ScalarFieldValue("127.0.0.1") },
+								{ Account.TableSpec.FIELD_ISSTATUSHIDDEN, new ScalarFieldValue("0") },
+								{ Account.TableSpec.FIELD_ISDETAILEDSTATUSHIDDEN, new ScalarFieldValue("0") },
+								{ Account.TableSpec.FIELD_REGISTRATIONEMAIL, new ScalarFieldValue("migra@te.d") },
 								{ Account.TableSpec.FIELD_USERID, new ReferenceFieldValue(addUser) },
 							}
 						);

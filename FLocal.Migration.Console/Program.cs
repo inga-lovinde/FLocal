@@ -25,13 +25,15 @@ namespace FLocal.Migration.Console {
 		}
 
 		[Action]
-		public static void ImportUsers() {
+		public static void ImportUsers(int startFromPage) {
 			initializeConfig();
 			try {
-				UsersImporter.ImportUsers();
+				UsersImporter.ImportUsers(startFromPage);
 			} catch(Exception e) {
 				System.Console.WriteLine(e.GetType().FullName + ": " + e.Message);
 				System.Console.WriteLine(e.StackTrace);
+				System.Console.WriteLine("==============");
+				System.Console.WriteLine(e.ToString());
 			}
 		}
 
