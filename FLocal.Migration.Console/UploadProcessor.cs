@@ -24,7 +24,7 @@ namespace FLocal.Migration.Console {
 				} else {
 					string[] parts = info.Name.Split('.');
 					if(parts.Length != 2) throw new FLocalException("wrong file name");
-					int raw = int.Parse(parts[0].PHPSubstring(4));
+					int raw = int.Parse(parts[0].Substring(4));
 					int id;
 					switch(parts[1].ToLower()) {
 						case "jpg":
@@ -41,8 +41,9 @@ namespace FLocal.Migration.Console {
 					}
 					if(info != null) {
 						try {
-							Upload.LoadById(id);
+							Upload.LoadById(id).LoadIfNotLoaded();
 							System.Console.Write("-");
+							//System.Console.WriteLine("-" + id);
 						} catch(NotFoundInDBException) {
 							try {
 								UploadManager.UploadFile(

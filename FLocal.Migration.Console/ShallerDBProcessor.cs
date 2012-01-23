@@ -234,8 +234,10 @@ namespace FLocal.Migration.Console {
 												{ User.TableSpec.FIELD_REGDATE, new ScalarFieldValue(date.ToUTCString()) },
 												{ User.TableSpec.FIELD_SHOWPOSTSTOUSERS, new ScalarFieldValue(User.ENUM_SHOWPOSTSTOUSERS_ALL) },
 												{ User.TableSpec.FIELD_BIOGRAPHY, new ScalarFieldValue("") },
+												{ User.TableSpec.FIELD_BIOGRAPHYUBB, new ScalarFieldValue("") },
 												{ User.TableSpec.FIELD_LOCATION, new ScalarFieldValue("") },
 												{ User.TableSpec.FIELD_SIGNATURE, new ScalarFieldValue("") },
+												{ User.TableSpec.FIELD_SIGNATUREUBB, new ScalarFieldValue("") },
 												{ User.TableSpec.FIELD_TITLE, new ScalarFieldValue("") },
 												{ User.TableSpec.FIELD_TOTALPOSTS, new ScalarFieldValue("0") },
 												{ User.TableSpec.FIELD_USERGROUPID, new ScalarFieldValue("1") },
@@ -305,7 +307,9 @@ namespace FLocal.Migration.Console {
 				}
 			}
 
+			System.Console.WriteLine();
 			System.Console.WriteLine("Finished parsing");
+			System.Console.WriteLine("Total inserts: " + inserts.Count);
 			System.Console.ReadLine();
 			int j=0;
 			foreach(var insert in inserts) {
