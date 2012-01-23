@@ -423,14 +423,16 @@ namespace FLocal.Common.dataobjects {
 				{ Post.TableSpec.FIELD_PARENTPOSTID, new ScalarFieldValue(parentPostId) },
 				{ Post.TableSpec.FIELD_POSTERID, new ScalarFieldValue(poster.id.ToString()) },
 				{ Post.TableSpec.FIELD_POSTDATE, new ScalarFieldValue(date.ToUTCString()) },
-				{ Post.TableSpec.FIELD_REVISION, new ScalarFieldValue("0") },
+				//{ Post.TableSpec.FIELD_REVISION, new ScalarFieldValue("0") },
 				{ Post.TableSpec.FIELD_LASTCHANGEDATE, new ScalarFieldValue(date.ToUTCString()) },
 				{ Post.TableSpec.FIELD_LAYERID, new ScalarFieldValue(layer.id.ToString()) },
 				{ Post.TableSpec.FIELD_TITLE, new ScalarFieldValue(title) },
 				{ Post.TableSpec.FIELD_BODY, new ScalarFieldValue(bodyIntermediate) },
 				{ Post.TableSpec.FIELD_TOTALPUNISHMENTS, new ScalarFieldValue("0") },
 			};
-			if(forcedPostId.HasValue) {
+			if(!forcedPostId.HasValue) {
+				postInsertData[Post.TableSpec.FIELD_REVISION] = new ScalarFieldValue("0");
+			} else {
 				postInsertData[Post.TableSpec.FIELD_ID] = new ScalarFieldValue(forcedPostId.Value.ToString());
 			}
 			AbstractChange postInsert = new InsertChange(
@@ -472,12 +474,15 @@ namespace FLocal.Common.dataobjects {
 				},
 				poster.id
 			);
-			List<AbstractChange> changes = new List<AbstractChange> {
-				postInsert,
-				revisionInsert,
-				threadUpdate,
-				userUpdate,
-			};
+
+			List<AbstractChange> changes = new List<AbstractChange>();
+			changes.Add(postInsert);
+			if(!forcedPostId.HasValue) {
+				//dirty hack
+				changes.Add(revisionInsert);
+			}
+			changes.Add(threadUpdate);
+			changes.Add(userUpdate);
 
 
 			Dictionary<string, AbstractFieldValue> boardData = new Dictionary<string,AbstractFieldValue> {

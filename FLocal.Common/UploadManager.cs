@@ -29,7 +29,7 @@ namespace FLocal.Common {
 
 		}
 
-		private const int MAX_UPLOAD_FILESIZE = 1024*1024;
+		private const int MAX_UPLOAD_FILESIZE = 10*1024*1024;
 
 		private static HashSet<string> allowedExtensions = new HashSet<string>() {
 			"jpg",
