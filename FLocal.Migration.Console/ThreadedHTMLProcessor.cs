@@ -302,6 +302,7 @@ namespace FLocal.Migration.Console {
 						writer.WriteLine(
 							FLocal.Migration.Gateway.DictionaryConverter.ToDump(
 								new Dictionary<string, string> {
+									{ "Number", postId.ToString() },
 									{ "Subject", contentTitle },
 									{ "Board", contentBoard },
 									{ "UnixTime", ((int)(contentDate.ToUniversalTime().Subtract(UNIX).TotalSeconds)).ToString() },
