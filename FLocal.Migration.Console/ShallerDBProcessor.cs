@@ -253,12 +253,14 @@ namespace FLocal.Migration.Console {
 								layer = PostLayer.LoadById(int.Parse(data["Layer"]));
 							}
 							inserts[postId] = () => {
+								bool isDiscussion = false;
 								if(postId == main || postId == localMain) {
 									//first post in the thread
 									string legacyBoardName;
-									if(localMain != 0) {
+									if(discussions.ContainsKey(main) || (localMain != 0 && (localMain != postId || localMain != main))) {
 										discussionsIds.Add(main);
 										legacyBoardName = discussions[main];
+										isDiscussion = true;
 									} else {
 										legacyBoardName = data["Board"];
 									}
@@ -277,13 +279,18 @@ namespace FLocal.Migration.Console {
 											parentId = main;
 										}
 									}
-									Post post;
+									Post parent;
 									try {
-										post = Post.LoadById(parentId);
+										parent = Post.LoadById(parentId);
 									} catch(NotFoundInDBException) {
 										throw new ApplicationException("Cannot find parent post #" + parentId);
 									}
-									post.Reply(user, title, body, layer, date, postId);
+
+									if(!isDiscussion && parent.thread.firstPostId != localMain) {
+										System.Console.Write("d");
+									} else {
+										parent.Reply(user, title, body, layer, date, postId);
+									}
 								}
 							};
 							System.Console.Write("+");
