@@ -1,0 +1,1 @@
+Library taken from <http://www.mono-project.com/>

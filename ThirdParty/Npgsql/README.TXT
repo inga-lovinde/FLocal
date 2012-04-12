@@ -1,0 +1,1 @@
+Library taken from <http://npgsql.projects.postgresql.org/>

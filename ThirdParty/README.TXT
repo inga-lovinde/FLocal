@@ -1,0 +1,1 @@
+Note that the content of this folder is (mainly) written by some other people, and thus the author of the entire FLocal project has no author rights on the content of this folder.

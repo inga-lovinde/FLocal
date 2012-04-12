@@ -1,0 +1,9 @@
+For the code published in <https://github.com/inga-lovinde/FLocal/>
+
+There is no license on this code, actually.
+
+The author (creator) of the code in this project posesses an indefeasible exclusive author rights,
+which means that you have only that rights on the code which were explicitely given to you by the author.
+Here is the single right given: you can read the code published in this project. Full stop.
+
+PS: Read this Jeff Atwood article for an explanation: <http://www.codinghorror.com/blog/2007/04/pick-a-license-any-license.html>
