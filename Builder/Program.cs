@@ -30,7 +30,6 @@ namespace Builder {
 			try {
 
 				string WIXPATH = ConfigurationManager.AppSettings["WiXPath"];
-				string SVNPATH = ConfigurationManager.AppSettings["SVNPath"];
 				
 				if(args.Length < 1) throw new ApplicationException("You should specify project name first");
 
@@ -78,33 +77,11 @@ namespace Builder {
 						}
 					}
 				}
-				int buildNumber;
-				using(StreamReader reader = new StreamReader(buildNumberFile)) {
-					buildNumber = int.Parse(reader.ReadToEnd());
-				}
-				buildNumber++; //NO CONCURRENCY HERE
-				using(StreamWriter writer = new StreamWriter(buildNumberFile)) {
-					writer.Write(buildNumber);
-				}
 
-				int revNumber;
-				ProcessStartInfo svnInfo = new ProcessStartInfo(SVNPATH + "svn");
-				svnInfo.WorkingDirectory = (new DirectoryInfo(".")).Parent.FullName;
-				svnInfo.UseShellExecute = false;
-				svnInfo.RedirectStandardOutput = true;
-				svnInfo.Arguments = "up --depth=empty";
-				using(Process svn = Process.Start(svnInfo)) {
-					svn.WaitForExit();
-				}
-				svnInfo.Arguments = "info --xml";
-				using(Process svn = Process.Start(svnInfo)) {
-					svn.WaitForExit();
-					XmlDocument document = new XmlDocument();
-					document.Load(svn.StandardOutput);
-					revNumber = int.Parse(document.GetElementsByTagName("entry")[0].Attributes["revision"].Value);
-				}
+				DateTime now = DateTime.UtcNow;
+				string version = string.Format("{0:D2}{1}.{2}{3:D2}.{4:D2}{5:D2}{6}", now.Year % 100, (int)(now.Month / 2), now.Month % 2, now.Day, now.Hour, now.Minute, (int)(now.Second / 10));
 
-				Console.WriteLine("Version number: 1." + revNumber + "." + buildNumber + ".0");
+				Console.WriteLine("Version number: {0}.0", version);
 
 				using(TempFile tempFile = new TempFile()) {
 
@@ -112,7 +89,7 @@ namespace Builder {
 					using(StreamReader sourceReader = new StreamReader(sourceFile)) {
 						wxsData = sourceReader.ReadToEnd();
 					}
-					wxsData = wxsData.Replace("{rev}", revNumber.ToString()).Replace("{build}", buildNumber.ToString()).Replace("{target}", target).Replace("{targetId}", targetId);
+					wxsData = wxsData.Replace("{shortversion}", version).Replace("{target}", target).Replace("{targetId}", targetId);
 
 					using(StreamWriter tempWriter = tempFile.getWriter()) {
 						tempWriter.Write(wxsData);

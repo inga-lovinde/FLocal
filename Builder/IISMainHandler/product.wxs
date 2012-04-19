@@ -1,13 +1,13 @@
 <?xml version='1.0'?>
 <Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'>
 	<Product Id='*' Name='FLocal IISMainHandler {target}' Language='1033' 
-		Version='1.255.{build}.0' Manufacturer='inga-lovinde' UpgradeCode='3981e346-b07f-45aa-bb8e-263a01dee3f{targetId}' >
+		Version='{shortversion}.0' Manufacturer='inga-lovinde' UpgradeCode='3981e346-b07f-45aa-bb8e-263a01dee3f{targetId}' >
 		<Package Description='FLocal IISMainHandler {target}' Comments='FLocal IISMainHandler {target}' Manufacturer='inga-lovinde' InstallerVersion='300' Compressed='yes' Platform="x64" />
 		<Upgrade Id="3981e346-b07f-45aa-bb8e-263a01dee3f{targetId}">
-			<UpgradeVersion Minimum="1.0.0" IncludeMinimum="yes" Maximum="1.255.{build}" IncludeMaximum="no" Property="OLDERVERSIONBEINGUPGRADED" />
+			<UpgradeVersion Minimum="1.0.0" IncludeMinimum="yes" Maximum="{shortversion}" IncludeMaximum="no" Property="OLDERVERSIONBEINGUPGRADED" />
 		</Upgrade>
 		<Upgrade Id="3981e346-b07f-45aa-bb8e-263a01dee3f{targetId}">
-			<UpgradeVersion Minimum="1.255.{build}" IncludeMinimum="no" Property="NEWERVERSIONDETECTED" />
+			<UpgradeVersion Minimum="{shortversion}" IncludeMinimum="no" Property="NEWERVERSIONDETECTED" />
 		</Upgrade>
 		<InstallExecuteSequence>
 			<RemoveExistingProducts After="InstallInitialize"/>
