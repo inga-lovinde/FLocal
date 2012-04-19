@@ -21,7 +21,7 @@
 
 	<xs:simpleType name="dbType">
 		<xs:restriction base="xs:string">
-			<xs:pattern value="[a-zA-Z_][a-zA-Z_01-9]+(\([01-9]+(,[01-9]+)?\))?"/>
+			<xs:pattern value="[a-zA-Z_][a-zA-Z_01-9]+( [a-zA-Z_][a-zA-Z_01-9]+)*(\([01-9]+(,[01-9]+)?\))?"/>
 		</xs:restriction>
 	</xs:simpleType>
 
