@@ -391,17 +391,16 @@ namespace FLocal.Common.dataobjects {
 
 		private IEnumerable<int> mentionedUsersIds {
 			get {
-				return from mention in Mention.LoadByIds(
-					from stringId in Config.instance.mainConnection.LoadIdsByConditions(
-						Mention.TableSpec.instance,
-						new ComparisonCondition(
-							Mention.TableSpec.instance.getColumnSpec(Mention.TableSpec.FIELD_POSTID),
-							ComparisonType.EQUAL,
-							this.id.ToString()
-						),
-						Diapasone.unlimited
-					) select int.Parse(stringId)
-				) select mention.mentionedUserId;
+				return from stringId in Config.instance.mainConnection.LoadIdsByConditions(
+					Mention.TableSpec.instance,
+					new ComparisonCondition(
+						Mention.TableSpec.instance.getColumnSpec(Mention.TableSpec.FIELD_POSTID),
+						ComparisonType.EQUAL,
+						this.id.ToString()
+					),
+					Diapasone.unlimited,
+					Mention.TableSpec.instance.getColumnSpec(Mention.TableSpec.FIELD_MENTIONEDUSERID)
+				) select int.Parse(stringId);
 			}
 		}
 

@@ -41,6 +41,10 @@ namespace Web.Core.DB {
 			return connection.LoadIdsByConditions(table, conditions, diapasone, joins, new SortSpec[] { new SortSpec(table.getIdSpec(), true) });
 		}
 
+		public static List<string> LoadIdsByConditions(this IDBConnection connection, ITableSpec table, AbstractCondition conditions, Diapasone diapasone, ColumnSpec idSpec, params SortSpec[] sorts) {
+			return connection.LoadIdsByConditions(table, conditions, diapasone, new JoinSpec[0], sorts, idSpec, false);
+		}
+
 		public static Transaction beginTransaction(this IDBConnection connection) {
 			return connection.beginTransaction(System.Data.IsolationLevel.ReadCommitted);
 		}
