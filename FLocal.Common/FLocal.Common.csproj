@@ -68,6 +68,7 @@
     <Compile Include="BBCodes\Code.cs" />
     <Compile Include="BBCodes\FUrl.cs" />
     <Compile Include="BBCodes\helpers\TexProcessor.cs" />
+    <Compile Include="BBCodes\helpers\UserMentionProcessor.cs" />
     <Compile Include="BBCodes\Image.cs" />
     <Compile Include="BBCodes\List.cs" />
     <Compile Include="BBCodes\ListElem.cs" />
