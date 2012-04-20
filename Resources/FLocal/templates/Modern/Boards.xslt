@@ -53,7 +53,7 @@
 			<xsl:text>. </xsl:text>
 			<a>
 				<xsl:if test="session/user">
-					<xsl:attribute name="href">/Users/User/<xsl:value-of select="session/user/id"/>/Replies/</xsl:attribute>
+					<xsl:attribute name="href">/Users/User/<xsl:value-of select="session/user/id"/>/Mentions/</xsl:attribute>
 				</xsl:if>
 				<xsl:call-template name="Messages_LastReplies"/>
 			</a>

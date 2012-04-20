@@ -17,8 +17,8 @@
 				<xsl:with-param name="text">Сообщения</xsl:with-param>
 			</xsl:call-template>
 			<xsl:call-template name="headerLink">
-				<xsl:with-param name="url">/Users/User/<xsl:value-of select="session/user/id"/>/Replies/</xsl:with-param>
-				<xsl:with-param name="text">Ответы</xsl:with-param>
+				<xsl:with-param name="url">/Users/User/<xsl:value-of select="session/user/id"/>/Mentions/</xsl:with-param>
+				<xsl:with-param name="text">Отклики</xsl:with-param>
 				<xsl:with-param name="isDisabled">
 					<xsl:if test="not(session/sessionKey)">true</xsl:if>
 				</xsl:with-param>

@@ -183,7 +183,7 @@
     <Compile Include="URL\users\user\Info.cs" />
     <Compile Include="URL\users\user\PollsParticipated.cs" />
     <Compile Include="URL\users\user\Posts.cs" />
-    <Compile Include="URL\users\user\Replies.cs" />
+    <Compile Include="URL\users\user\Mentions.cs" />
     <Compile Include="URL\users\user\Threads.cs" />
     <Compile Include="UserContext.cs" />
     <Compile Include="UserSettingsGateway.cs" />

@@ -192,8 +192,8 @@
 											</a>
 											<xsl:text> | </xsl:text>
 											<a>
-												<xsl:attribute name="href">/Users/User/<xsl:value-of select="user/id"/>/Replies/</xsl:attribute>
-												<xsl:text>Ответы</xsl:text>
+												<xsl:attribute name="href">/Users/User/<xsl:value-of select="user/id"/>/Mentions/</xsl:attribute>
+												<xsl:text>Отклики</xsl:text>
 											</a>
 											<xsl:text> | </xsl:text>
 											<a>

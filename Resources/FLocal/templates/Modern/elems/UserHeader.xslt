@@ -17,8 +17,8 @@
 				<xsl:with-param name="text">Сообщения</xsl:with-param>
 			</xsl:call-template>
 			<xsl:call-template name="headerLink">
-				<xsl:with-param name="url"><xsl:value-of select="$baseLink"/>Replies/</xsl:with-param>
-				<xsl:with-param name="text">Ответы</xsl:with-param>
+				<xsl:with-param name="url"><xsl:value-of select="$baseLink"/>Mentions/</xsl:with-param>
+				<xsl:with-param name="text">Отклики</xsl:with-param>
 			</xsl:call-template>
 			<xsl:call-template name="headerLink">
 				<xsl:with-param name="url"><xsl:value-of select="$baseLink"/>PollsParticipated/</xsl:with-param>
