@@ -28,7 +28,7 @@ namespace FLocal.Common.BBCodes {
 				if(result == null || result == "") {
 					return null;
 				}
-				return result;
+				return this.Safe(result);
 			}
 		}
 
@@ -36,7 +36,7 @@ namespace FLocal.Common.BBCodes {
 			get {
 				string result = this.Default;
 				if(result == null) {
-					result = this.InnerText;
+					result = this.Safe(this.InnerText);
 				}
 				return result;
 			}
