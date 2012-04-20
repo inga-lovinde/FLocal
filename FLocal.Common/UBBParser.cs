@@ -69,6 +69,14 @@ namespace FLocal.Common {
 					return BBCodes.UrlProcessor.ProcessLink(url, null, true) + remainder;
 				}
 
+				private static readonly Regex USERS_MATCHER = new Regex("(?<start>^|\\W)@(?<username>\\w+)(?<end>\\W|$)", RegexOptions.Singleline | RegexOptions.Compiled);
+				private static string USERS_REPLACE(BBCodes.IPostParsingContext context, Match match) {
+					string start = match.Groups["start"].Value;
+					string username = match.Groups["username"].Value;
+					string end = match.Groups["end"].Value;
+					return start + BBCodes.UserMentionProcessor.ProcessUserMention(context, username) + end;
+				}
+
 				private static readonly Dictionary<Regex, MatchEvaluator> TYPOGRAPHICS = new Dictionary<Regex, MatchEvaluator> {
 					{ new Regex("(?<=\\s)--?(?=\\s)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => "–" },
 					{ new Regex("(?<=\\s)---(?=\\s)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => "—" },
@@ -95,6 +103,7 @@ namespace FLocal.Common {
 				public string Format(BBCodes.IPostParsingContext context, string source) {
 					string result = this.inner.Format(context, source).Replace("&nbsp;", " ");
 					result = LINKS_MATCHER.Replace(result, LINKS_REPLACE);
+					result = USERS_MATCHER.Replace(result, match => USERS_REPLACE(context, match));
 					foreach(var smile in SMILEYS_DATA) {
 						result = smile.Key.Replace(result, smile.Value);
 					}
