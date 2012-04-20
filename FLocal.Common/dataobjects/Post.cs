@@ -335,8 +335,8 @@ namespace FLocal.Common.dataobjects {
 				DateTime date = DateTime.Now;
 
 				HashSet<int> newMentionedUsersIds = new HashSet<int>();
-				if(parentPost != null && parentPost.poster.id != poster.id) {
-					newMentionedUsersIds.Add(parentPost.poster.id);
+				if(this.parentPostId != null && this.parentPost.poster.id != this.poster.id) {
+					newMentionedUsersIds.Add(this.parentPost.poster.id);
 				}
 				string newBodyIntermediate = UBBParser.UBBToIntermediate(
 					new DelegatePostParsingContext(mentionedUser => newMentionedUsersIds.Add(mentionedUser.id)),
