@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<patch xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\Patcher\Resources\IPatch.xsd">
+	<version>
+		<number>2</number>
+		<author>mentions</author>
+	</version>
+	<looseCommandSet>
+		<persistentCommand>
+			<createTable>
+				<table>Mentions</table>
+				<primaryKey>
+					<column>Id</column>
+					<type>serial</type>
+					<isNotNull/>
+				</primaryKey>
+				<column>
+					<column>MentionedUserId</column>
+					<type>int</type>
+					<isNotNull/>
+				</column>
+				<column>
+					<column>PostId</column>
+					<type>integer</type>
+					<isNotNull/>
+				</column>
+				<column>
+					<column>Date</column>
+					<type>timestamp with time zone</type>
+				</column>
+			</createTable>
+		</persistentCommand>
+		<persistentCommand>
+			<createConstraint>
+				<table>Mentions</table>
+				<constraintName>Mentions_MentionedUserId_PostId_key</constraintName>
+				<unique>
+					<column>MentionedUserId</column>
+					<column>PostId</column>
+				</unique>
+			</createConstraint>
+		</persistentCommand>
+		<persistentCommand>
+			<createConstraint>
+				<table>Mentions</table>
+				<constraintName>Mentions_MentionedUserId_fkey</constraintName>
+				<foreignKey>
+					<column>MentionedUserId</column>
+					<referencedTable>Users</referencedTable>
+					<onUpdate>restrict</onUpdate>
+					<onDelete>restrict</onDelete>
+				</foreignKey>
+			</createConstraint>
+		</persistentCommand>
+		<persistentCommand>
+			<createConstraint>
+				<table>Mentions</table>
+				<constraintName>Mentions_PostId_fkey</constraintName>
+				<foreignKey>
+					<column>PostId</column>
+					<referencedTable>Posts</referencedTable>
+					<onUpdate>restrict</onUpdate>
+					<onDelete>restrict</onDelete>
+				</foreignKey>
+			</createConstraint>
+		</persistentCommand>
+		<command>
+			<sql>
+				<installSql>
+					<query>
+						INSERT INTO
+							"Mentions"("MentionedUserId", "PostId", "Date")
+						(
+							SELECT
+								parent."PosterId" "MentionedUserId",
+								post."Id" "PostId",
+								post."LastChangeDate" "Date"
+							FROM "Posts" post
+							JOIN "Posts" parent
+								ON post."ParentPostId" = parent."Id"
+							WHERE
+								post."PosterId" != parent."PosterId"
+							ORDER BY
+								post."Id" asc
+						)
+					</query>
+				</installSql>
+				<uninstallSql/>
+			</sql>
+		</command>
+	</looseCommandSet>
+</patch>

@@ -41,6 +41,7 @@ namespace FLocal.Common.actions {
 						dataobjects.PunishmentLayerChange.TableSpec.TABLE,
 						dataobjects.Restriction.TableSpec.TABLE,
 						dataobjects.TexImage.TableSpec.TABLE,
+						dataobjects.Mention.TableSpec.TABLE,
 						dataobjects.Session.TableSpec.TABLE,
 					}
 				);

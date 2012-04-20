@@ -330,12 +330,21 @@ namespace FLocal.Common.dataobjects {
 				actualLayer = this.layer;
 			}
 			lock(this.Edit_locker) {
+
+				DateTime date = DateTime.Now;
+
+				HashSet<int> newMentionedUsersIds = new HashSet<int>();
+				if(parentPost != null && parentPost.poster.id != poster.id) {
+					newMentionedUsersIds.Add(parentPost.poster.id);
+				}
+				string newBodyIntermediate = UBBParser.UBBToIntermediate(newBody);
+
 				List<AbstractChange> changes = new List<AbstractChange> {
 					new InsertChange(
 						Revision.TableSpec.instance,
 						new Dictionary<string, AbstractFieldValue> {
 							{ Revision.TableSpec.FIELD_POSTID, new ScalarFieldValue(this.id.ToString()) },
-							{ Revision.TableSpec.FIELD_CHANGEDATE, new ScalarFieldValue(DateTime.Now.ToUTCString()) },
+							{ Revision.TableSpec.FIELD_CHANGEDATE, new ScalarFieldValue(date.ToUTCString()) },
 							{ Revision.TableSpec.FIELD_TITLE, new ScalarFieldValue(newTitle) },
 							{ Revision.TableSpec.FIELD_BODY, new ScalarFieldValue(newBody) },
 							{ Revision.TableSpec.FIELD_NUMBER, new ScalarFieldValue((this.revision + 1).ToString()) },
@@ -345,8 +354,8 @@ namespace FLocal.Common.dataobjects {
 						TableSpec.instance,
 						new Dictionary<string, AbstractFieldValue> {
 							{ TableSpec.FIELD_TITLE, new ScalarFieldValue(newTitle) },
-							{ TableSpec.FIELD_BODY, new ScalarFieldValue(UBBParser.UBBToIntermediate(newBody)) },
-							{ TableSpec.FIELD_LASTCHANGEDATE, new ScalarFieldValue(DateTime.Now.ToUTCString()) },
+							{ TableSpec.FIELD_BODY, new ScalarFieldValue(newBodyIntermediate) },
+							{ TableSpec.FIELD_LASTCHANGEDATE, new ScalarFieldValue(date.ToUTCString()) },
 							{ TableSpec.FIELD_REVISION, new IncrementFieldValue() },
 							{ TableSpec.FIELD_LAYERID, new ScalarFieldValue(actualLayer.id.ToString()) },
 						},
@@ -364,7 +373,35 @@ namespace FLocal.Common.dataobjects {
 						)
 					);
 				}
+				foreach(var mentionedUserId in newMentionedUsersIds.Except(this.mentionedUsersIds)) {
+					changes.Add(
+						new InsertChange(
+							Mention.TableSpec.instance,
+							new Dictionary<string, AbstractFieldValue> {
+								{ Mention.TableSpec.FIELD_MENTIONEDUSERID, new ScalarFieldValue(mentionedUserId.ToString()) },
+								{ Mention.TableSpec.FIELD_POSTID, new ScalarFieldValue(this.id.ToString()) },
+								{ Mention.TableSpec.FIELD_DATE, new ScalarFieldValue(date.ToUTCString()) },
+							}
+						)
+					);
+				}
 				ChangeSetUtil.ApplyChanges(changes.ToArray());
+			}
+		}
+
+		private IEnumerable<int> mentionedUsersIds {
+			get {
+				return from mention in Mention.LoadByIds(
+					from stringId in Config.instance.mainConnection.LoadIdsByConditions(
+						Mention.TableSpec.instance,
+						new ComparisonCondition(
+							Mention.TableSpec.instance.getColumnSpec(Mention.TableSpec.FIELD_POSTID),
+							ComparisonType.EQUAL,
+							this.id.ToString()
+						),
+						Diapasone.unlimited
+					) select int.Parse(stringId)
+				) select mention.mentionedUserId;
 			}
 		}
 

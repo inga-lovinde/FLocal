@@ -411,6 +411,10 @@ namespace FLocal.Common.dataobjects {
 			string parentPostId = null;
 			if(parentPost != null) parentPostId = parentPost.id.ToString();
 			bool isNewThread = (parentPost == null);
+			HashSet<int> mentionedUsersIds = new HashSet<int>();
+			if(parentPost != null && parentPost.poster.id != poster.id) {
+				mentionedUsersIds.Add(parentPost.poster.id);
+			}
 			string bodyIntermediate;
 			if(forcedPostId.HasValue) {
 				//dirty hack
@@ -484,6 +488,18 @@ namespace FLocal.Common.dataobjects {
 			changes.Add(threadUpdate);
 			changes.Add(userUpdate);
 
+			foreach(var mentionedUserId in mentionedUsersIds) {
+				changes.Add(
+					new InsertChange(
+						Mention.TableSpec.instance,
+						new Dictionary<string, AbstractFieldValue> {
+							{ Mention.TableSpec.FIELD_MENTIONEDUSERID, new ScalarFieldValue(mentionedUserId.ToString()) },
+							{ Mention.TableSpec.FIELD_POSTID, new ReferenceFieldValue(postInsert) },
+							{ Mention.TableSpec.FIELD_DATE, new ScalarFieldValue(date.ToUTCString()) },
+						}
+					)
+				);
+			}
 
 			Dictionary<string, AbstractFieldValue> boardData = new Dictionary<string,AbstractFieldValue> {
 				{ Board.TableSpec.FIELD_TOTALPOSTS, new IncrementFieldValue() },
