@@ -18,84 +18,84 @@
 ''' <summary>
 ''' Creates instances of <see cref="BBCodeElement"/>.
 ''' </summary>
-Friend NotInheritable Class BBCodeElementFactory
+Friend NotInheritable Class BBCodeElementFactory(Of TContext As Class)
 
-    Private __Parser As BBCodeParser
+	Private __Parser As BBCodeParser(Of TContext)
 
-    ''' <summary>Initializes an instance of the <see cref="BBCodeElementFactory" /> class.</summary>
-    ''' <param name="parser">The <see cref="BBCodeParser"/> that will utilize the new instance of the <see cref="BBCodeElementFactory"/>.</param>
-    Friend Sub New(ByVal parser As BBCodeParser)
-        __Parser = parser
-    End Sub
+	''' <summary>Initializes an instance of the <see cref="BBCodeElementFactory" /> class.</summary>
+	''' <param name="parser">The <see cref="BBCodeParser"/> that will utilize the new instance of the <see cref="BBCodeElementFactory"/>.</param>
+	Friend Sub New(ByVal parser As BBCodeParser(Of TContext))
+		__Parser = parser
+	End Sub
 
-    ''' <summary>
-    ''' Gets the <see cref="BBCodeParser"/> that utilizes this instance of the <see cref="BBCodeElementFactory"/>.
-    ''' </summary>
-    Public ReadOnly Property Parser() As BBCodeParser
-        Get
-            Return __Parser
-        End Get
-    End Property
+	''' <summary>
+	''' Gets the <see cref="BBCodeParser"/> that utilizes this instance of the <see cref="BBCodeElementFactory"/>.
+	''' </summary>
+	Public ReadOnly Property Parser() As BBCodeParser(Of TContext)
+		Get
+			Return __Parser
+		End Get
+	End Property
 
-    ''' <summary>
-    ''' Creates a new <see cref="BBCodeElement"/>.
-    ''' </summary>
-    ''' <param name="name">The name of the element.</param>
-    ''' <param name="attributes">The attributes of the element.</param>
-    ''' <returns>A new <see cref="BBCodeElement"/>.</returns>
-    Public Function CreateElement(ByVal name As String, ByVal attributes As BBCodeAttributeDictionary) As BBCodeElement
+	''' <summary>
+	''' Creates a new <see cref="BBCodeElement"/>.
+	''' </summary>
+	''' <param name="name">The name of the element.</param>
+	''' <param name="attributes">The attributes of the element.</param>
+	''' <returns>A new <see cref="BBCodeElement"/>.</returns>
+	Public Function CreateElement(ByVal name As String, ByVal attributes As BBCodeAttributeDictionary) As BBCodeElement(Of TContext)
 
-        Dim el As BBCodeElement
+		Dim el As BBCodeElement(Of TContext)
 
-        '*
-        '* Check if we have a different type to create
-        '*
-        If (Parser.ElementTypes.ContainsKey(name.ToUpperInvariant())) Then
-            '*
-            '* Gets the type of the element
-            '*
-            Dim type = Parser.ElementTypes(name.ToUpperInvariant()).Type
+		'*
+		'* Check if we have a different type to create
+		'*
+		If (Parser.ElementTypes.ContainsKey(name.ToUpperInvariant())) Then
+			'*
+			'* Gets the type of the element
+			'*
+			Dim type = Parser.ElementTypes(name.ToUpperInvariant()).Type
 
-            '*
-            '* Check if the type IS BBCodeElement
-            '*
-            If (type.Equals(GetType(BBCodeElement))) Then
-                el = New BBCodeElement()
-            Else
-                '*
-                '* Gets the default constructor
-                '*
-                Dim ctor = type.GetConstructor(New Type() {})
-                If (ctor Is Nothing) Then
-                    Throw New InvalidOperationException("The type " & type.FullName & " does not have a default constructor.")
-                End If
+			'*
+			'* Check if the type IS BBCodeElement
+			'*
+			If (type.Equals(GetType(BBCodeElement(Of TContext)))) Then
+				el = New BBCodeElement(Of TContext)()
+			Else
+				'*
+				'* Gets the default constructor
+				'*
+				Dim ctor = type.GetConstructor(New Type() {})
+				If (ctor Is Nothing) Then
+					Throw New InvalidOperationException("The type " & type.FullName & " does not have a default constructor.")
+				End If
 
-                '*
-                '* Creates the new element.
-                '*
-                el = TryCast(ctor.Invoke(New Object() {}), BBCodeElement)
-                If (el Is Nothing) Then
-                    Throw New InvalidOperationException("The type " & type.FullName & " could not be assingned to BBCodeElement.")
-                End If
-            End If
-        Else
-            el = New BBCodeElement()
-        End If
+				'*
+				'* Creates the new element.
+				'*
+				el = TryCast(ctor.Invoke(New Object() {}), BBCodeElement(Of TContext))
+				If (el Is Nothing) Then
+					Throw New InvalidOperationException("The type " & type.FullName & " could not be assingned to BBCodeElement.")
+				End If
+			End If
+		Else
+			el = New BBCodeElement(Of TContext)()
+		End If
 
-        '*
-        '* Set the element properties
-        '*
-        el.SetName(name)
-        el.SetParser(Parser)
-        For Each attr In attributes
-            el.Attributes.Add(attr.Key, attr.Value)
-        Next
+		'*
+		'* Set the element properties
+		'*
+		el.SetName(name)
+		el.SetParser(Parser)
+		For Each attr In attributes
+			el.Attributes.Add(attr.Key, attr.Value)
+		Next
 
-        '*
-        '* Returns the created element.
-        '*
-        Return el
+		'*
+		'* Returns the created element.
+		'*
+		Return el
 
-    End Function
+	End Function
 
 End Class

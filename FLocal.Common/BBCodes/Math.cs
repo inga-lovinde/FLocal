@@ -11,7 +11,7 @@ namespace FLocal.Common.BBCodes {
 			: base("math") {
 		}
 
-		public override string Format(ITextFormatter formatter) {
+		public override string Format(IPostParsingContext context, ITextFormatter formatter) {
 			string tex = "$$" + this.InnerBBCode + "$$";
 			var upload = helpers.TexProcessor.getCompiled(tex);
 			return "<f:img><f:src>/Upload/Item/" + upload.id.ToString() + "/</f:src><f:alt>" + this.Safe(tex) + "</f:alt></f:img>";

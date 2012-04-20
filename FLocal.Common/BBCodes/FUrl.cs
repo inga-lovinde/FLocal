@@ -11,11 +11,11 @@ namespace FLocal.Common.BBCodes {
 			: base("furl") {
 		}
 
-		public override string Format(ITextFormatter formatter) {
+		public override string Format(IPostParsingContext context, ITextFormatter formatter) {
 			string rawUrl = this.DefaultOrValue;
 			string title = null;
 			if(rawUrl.ToLower() != this.InnerText.ToLower()) {
-				title = this.GetInnerHTML(formatter);
+				title = this.GetInnerHTML(context, formatter);
 			}
 			return UrlProcessor.ProcessLink(rawUrl, title, false);
 		}

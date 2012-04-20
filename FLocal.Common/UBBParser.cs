@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using PJonDevelopment.BBCode;
 using System.IO;
 using Web.Core;
+using FLocal.Common.helpers;
 
 namespace FLocal.Common {
 	public static class UBBParser {
@@ -108,14 +109,14 @@ namespace FLocal.Common {
 
 			public static readonly BBParserGateway instance = new BBParserGateway();
 
-			private BBCodeParser parser;
+			private BBCodeParser<BBCodes.IPostParsingContext> parser;
 			private ITextFormatter formatter;
 
-			private BBCodeParser quotesParser;
+			private BBCodeParser<BBCodes.IPostParsingContext> quotesParser;
 			private ITextFormatter simpleFormatter;
 
 			private BBParserGateway() {
-				this.parser = new BBCodeParser();
+				this.parser = new BBCodeParser<BBCodes.IPostParsingContext>();
 				this.parser.ElementTypes.Add("b", typeof(BBCodes.B), true);
 				this.parser.ElementTypes.Add("code", typeof(BBCodes.Code), true);
 				this.parser.ElementTypes.Add("ecode", typeof(BBCodes.ECode), true);
@@ -145,30 +146,33 @@ namespace FLocal.Common {
 				this.parser.ElementTypes.Add("wiki", typeof(BBCodes.Wiki), true);
 				this.parser.ElementTypes.Add("ruwiki", typeof(BBCodes.RuWiki), true);
 				this.formatter = TextFormatter.instance;
-				
-				this.quotesParser = new BBCodeParser();
+
+				this.quotesParser = new BBCodeParser<BBCodes.IPostParsingContext>();
 				foreach(var elementType in this.parser.ElementTypes) {
 					this.quotesParser.ElementTypes.Add(elementType.Key, typeof(BBCodes.QuoteSkipper), elementType.Value.RequireClosingTag);
 				}
 				this.simpleFormatter = SimpleFormatter.instance;
 			}
 
-			public string Parse(string input) {
-				string result = this.parser.Parse(input).Format(this.formatter);
+			public string Parse(BBCodes.IPostParsingContext context, string input) {
+				string result = this.parser.Parse(input).Format(context, this.formatter);
 				if(result.EndsWith("<br/>")) result = result.Substring(0, result.Length - 5);
 				return result;
 			}
 
 			public string ParseQuote(string input) {
-				string result = this.quotesParser.Parse(input).Format(this.simpleFormatter);
+				string result = this.quotesParser.Parse(input).Format(new DelegatePostParsingContext(), this.simpleFormatter);
 				return result;
 			}
 
 		}
 
+		public static string UBBToIntermediate(BBCodes.IPostParsingContext context, string UBB) {
+			return BBParserGateway.instance.Parse(context, UBB);
+		}
+
 		public static string UBBToIntermediate(string UBB) {
-			//return HttpUtility.HtmlEncode(UBB).Replace(Util.EOL, "<br/>" + Util.EOL);
-			return BBParserGateway.instance.Parse(UBB);
+			return UBBToIntermediate(new DelegatePostParsingContext(), UBB);
 		}
 
 		public static string ShallerToUBB(string shaller) {

@@ -123,6 +123,8 @@
     <Compile Include="dataobjects\User.cs" />
     <Compile Include="dataobjects\AccountSettings.cs" />
     <Compile Include="dataobjects\UserGroup.cs" />
+    <Compile Include="helpers\DelegatePostParsingContext.cs" />
+    <Compile Include="BBCodes\helpers\IPostParsingContext.cs" />
     <Compile Include="IComplexSqlObjectTableSpec.cs" />
     <Compile Include="IOutputParams.cs" />
     <Compile Include="ISqlObjectTableSpec.cs" />

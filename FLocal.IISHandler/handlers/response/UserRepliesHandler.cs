@@ -22,7 +22,7 @@ namespace FLocal.IISHandler.handlers.response {
 
 		override protected IEnumerable<XElement> getUserSpecificData(WebContext context, User user) {
 			PageOuter pageOuter = PageOuter.createFromUrl(this.url, context.userSettings.postsPerPage);
-			IEnumerable<Post> posts = user.getReplies(pageOuter, pageOuter.descendingDirection);
+			IEnumerable<Post> posts = user.getMentions(pageOuter, pageOuter.descendingDirection);
 
 			return new XElement[] {
 				user.exportToXmlForViewing(context),

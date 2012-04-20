@@ -16,11 +16,11 @@ namespace FLocal.Common.BBCodes {
 			get;
 		}
 
-		public override string Format(ITextFormatter formatter) {
+		public override string Format(IPostParsingContext context, ITextFormatter formatter) {
 			var url = this.url;
 			var name = this.Safe(url.title);
 			if(this.Default != null) {
-				name = this.GetInnerHTML(formatter);
+				name = this.GetInnerHTML(context, formatter);
 			}
 			return string.Format("<a href=\"{0}\">{1}</a>", url.canonical, url.title);
 		}

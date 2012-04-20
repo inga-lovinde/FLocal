@@ -11,10 +11,10 @@ namespace FLocal.Common.BBCodes {
 			: base("spoiler") {
 		}
 
-		public override string Format(ITextFormatter formatter) {
+		public override string Format(IPostParsingContext context, ITextFormatter formatter) {
 			string marker = this.Default;
 			if(marker == null) marker = "Spoiler";
-			return "<blockquote spoiler><font opener class=\"small\" onClick=\"showSpoiler(this)\">" + marker + "</font><hr/><div inner name=\"inner\" style=\"display:none\">" + this.GetInnerHTML(formatter).Trim() + "</div><hr/></blockquote><br/>";
+			return "<blockquote spoiler><font opener class=\"small\" onClick=\"showSpoiler(this)\">" + marker + "</font><hr/><div inner name=\"inner\" style=\"display:none\">" + this.GetInnerHTML(context, formatter).Trim() + "</div><hr/></blockquote><br/>";
 		}
 
 	}

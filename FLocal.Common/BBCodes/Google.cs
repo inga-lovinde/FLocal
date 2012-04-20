@@ -12,8 +12,8 @@ namespace FLocal.Common.BBCodes {
 			: base("google") {
 		}
 
-		public override string Format(ITextFormatter formatter) {
-			return "<a href=\"http://lmgtfy.com/?q=" + HttpUtility.UrlPathEncode(this.DefaultOrValue) + "\">g:" + this.GetInnerHTML(formatter) + "</a>";
+		public override string Format(IPostParsingContext context, ITextFormatter formatter) {
+			return "<a href=\"http://lmgtfy.com/?q=" + HttpUtility.UrlPathEncode(this.DefaultOrValue) + "\">g:" + this.GetInnerHTML(context, formatter) + "</a>";
 		}
 
 	}

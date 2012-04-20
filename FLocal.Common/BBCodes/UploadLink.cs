@@ -11,11 +11,11 @@ namespace FLocal.Common.BBCodes {
 			: base("uploadlink") {
 		}
 
-		public override string Format(ITextFormatter formatter) {
+		public override string Format(IPostParsingContext context, ITextFormatter formatter) {
 			var upload = dataobjects.Upload.LoadById(int.Parse(this.DefaultOrValue));
 			var name = this.Safe(upload.filename);
 			if(this.Default != null) {
-				name = this.GetInnerHTML(formatter);
+				name = this.GetInnerHTML(context, formatter);
 			}
 			return "<a href=\"/Upload/Info/" + upload.id.ToString() + "/\">" + name + "</a>";
 		}

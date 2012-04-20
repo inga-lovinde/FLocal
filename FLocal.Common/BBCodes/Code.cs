@@ -11,7 +11,7 @@ namespace FLocal.Common.BBCodes {
 			: base("code") {
 		}
 
-		public override string Format(ITextFormatter formatter) {
+		public override string Format(IPostParsingContext context, ITextFormatter formatter) {
 			return "<pre>" + System.Web.HttpUtility.HtmlEncode(this.InnerBBCode) + "</pre><br/>";
 		}
 
