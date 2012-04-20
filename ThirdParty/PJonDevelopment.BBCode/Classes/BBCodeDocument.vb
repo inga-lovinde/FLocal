@@ -71,7 +71,7 @@ Public NotInheritable Class BBCodeDocument(Of TContext As Class)
 	''' </summary>
 	''' <returns>The formatted text.</returns>
 	Public Function Format(ByVal context As TContext) As String
-		Return Format(context, New BBCodeHtmlFormatter())
+		Return Format(context, New BBCodeHtmlFormatter(Of TContext)())
 	End Function
 
 	''' <summary>
@@ -79,7 +79,7 @@ Public NotInheritable Class BBCodeDocument(Of TContext As Class)
 	''' </summary>
 	''' <param name="formatter">An object that implements the <see cref="ITextFormatter"/> interface.</param>
 	''' <returns>The formatted text.</returns>
-	Public Function Format(ByVal context As TContext, ByVal formatter As ITextFormatter) As String
+	Public Function Format(ByVal context As TContext, ByVal formatter As ITextFormatter(Of TContext)) As String
 		Dim sb As New Text.StringBuilder()
 		For Each n In Nodes
 			sb.Append(n.Format(context, formatter))

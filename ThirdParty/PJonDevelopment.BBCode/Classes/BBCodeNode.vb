@@ -57,7 +57,7 @@ Public MustInherit Class BBCodeNode(Of TContext As Class)
 	''' </summary>
 	''' <param name="formatter">An object that implements the <see cref="ITextFormatter"/> interface.</param>
 	''' <returns>The text formatted by the <see cref="ITextFormatter"/>.</returns>
-	Public MustOverride Function Format(ByVal context As TContext, ByVal formatter As ITextFormatter) As String
+	Public MustOverride Function Format(ByVal context As TContext, ByVal formatter As ITextFormatter(Of TContext)) As String
 
 	''' <summary>
 	''' When implemented in a derived class, gets or sets the inner BBCode.

@@ -11,7 +11,7 @@ namespace FLocal.Common.BBCodes {
 			: base(name) {
 		}
 
-		protected string GetInnerHTML(IPostParsingContext context, PJonDevelopment.BBCode.ITextFormatter formatter) {
+		protected string GetInnerHTML(IPostParsingContext context, PJonDevelopment.BBCode.ITextFormatter<IPostParsingContext> formatter) {
 			StringBuilder builder = new StringBuilder();
 			foreach (var node in this.Nodes) {
 				builder.Append(node.Format(context, formatter));

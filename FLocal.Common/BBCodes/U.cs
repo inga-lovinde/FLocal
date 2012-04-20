@@ -11,7 +11,7 @@ namespace FLocal.Common.BBCodes {
 			: base("u") {
 		}
 
-		public override string Format(IPostParsingContext context, ITextFormatter formatter) {
+		public override string Format(IPostParsingContext context, ITextFormatter<IPostParsingContext> formatter) {
 			return "<u>" + this.GetInnerHTML(context, formatter) + "</u>";
 		}
 

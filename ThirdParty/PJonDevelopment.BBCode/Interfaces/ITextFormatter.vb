@@ -18,13 +18,13 @@
 ''' <summary>
 ''' Defines a generic text formatter.
 ''' </summary>
-Public Interface ITextFormatter
+Public Interface ITextFormatter(Of TContext As Class)
 
-    ''' <summary>
-    ''' Formats the specified text.
-    ''' </summary>
-    ''' <param name="source">The text to be formatted.</param>
-    ''' <returns>The formatted text.</returns>
-    Function Format(ByVal source As String) As String
+	''' <summary>
+	''' Formats the specified text.
+	''' </summary>
+	''' <param name="source">The text to be formatted.</param>
+	''' <returns>The formatted text.</returns>
+	Function Format(ByVal context As TContext, ByVal source As String) As String
 
 End Interface

@@ -11,7 +11,7 @@ namespace FLocal.Common.BBCodes {
 			: base("url") {
 		}
 
-		public override string Format(IPostParsingContext context, ITextFormatter formatter) {
+		public override string Format(IPostParsingContext context, ITextFormatter<IPostParsingContext> formatter) {
 			string rawUrl = this.DefaultOrValue;
 			string title = null;
 			if(rawUrl.ToLower() != this.InnerText.ToLower()) {

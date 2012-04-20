@@ -11,7 +11,7 @@ namespace FLocal.Common.BBCodes {
 			: base("color") {
 		}
 
-		public override string Format(IPostParsingContext context, ITextFormatter formatter) {
+		public override string Format(IPostParsingContext context, ITextFormatter<IPostParsingContext> formatter) {
 			return "<font color=\"" + this.Default + "\">" + this.GetInnerHTML(context, formatter) + "</font>";
 		}
 

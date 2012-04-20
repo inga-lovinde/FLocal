@@ -135,7 +135,7 @@ Public Class BBCodeElement(Of TContext As Class)
 	''' <summary>Transforms this instance of <see cref="BBCodeElement" /> into its desired text representation.</summary>
 	''' <param name="formatter">An object that implements the <see cref="ITextFormatter" /> interface.</param>
 	''' <returns>The text formatted by the <see cref="ITextFormatter" />.</returns>
-	Public Overrides Function Format(ByVal context As TContext, ByVal formatter As ITextFormatter) As String
+	Public Overrides Function Format(ByVal context As TContext, ByVal formatter As ITextFormatter(Of TContext)) As String
 		IsValueFormatted = False
 		Dim sb As New Text.StringBuilder(Me.ReplacementFormat)
 		Dim attribs = __RxAttribute.Matches(Me.ReplacementFormat)
@@ -241,7 +241,7 @@ Public Class BBCodeElement(Of TContext As Class)
 		End Set
 	End Property
 
-	Private Function GetAttribute(ByVal name As String, ByVal context As TContext, ByVal formatter As ITextFormatter) As String
+	Private Function GetAttribute(ByVal name As String, ByVal context As TContext, ByVal formatter As ITextFormatter(Of TContext)) As String
 		Dim attribs = name.ToUpperInvariant().Split("|".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
 		For Each attrib In attribs
 			If (String.CompareOrdinal(attrib, "VALUE") = 0) Then

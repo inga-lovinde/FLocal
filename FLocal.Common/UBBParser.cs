@@ -14,20 +14,20 @@ namespace FLocal.Common {
 
 		private class BBParserGateway {
 
-			private class SimpleFormatter : ITextFormatter {
+			private class SimpleFormatter : ITextFormatter<BBCodes.IPostParsingContext> {
 
 				public static readonly SimpleFormatter instance = new SimpleFormatter();
 
 				private SimpleFormatter() {
 				}
 
-				public string Format(string source) {
+				public string Format(BBCodes.IPostParsingContext context, string source) {
 					return source;
 				}
 
 			}
 
-			private class TextFormatter : ITextFormatter {
+			private class TextFormatter : ITextFormatter<BBCodes.IPostParsingContext> {
 
 				public static readonly TextFormatter instance = new TextFormatter();
 
@@ -86,14 +86,14 @@ namespace FLocal.Common {
 					{ new Regex("&lt;-", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => "←" },
 				};
 
-				private ITextFormatter inner;
+				private ITextFormatter<BBCodes.IPostParsingContext> inner;
 
 				private TextFormatter() {
-					this.inner = new BBCodeHtmlFormatter();
+					this.inner = new BBCodeHtmlFormatter<BBCodes.IPostParsingContext>();
 				}
 
-				public string Format(string source) {
-					string result = this.inner.Format(source).Replace("&nbsp;", " ");
+				public string Format(BBCodes.IPostParsingContext context, string source) {
+					string result = this.inner.Format(context, source).Replace("&nbsp;", " ");
 					result = LINKS_MATCHER.Replace(result, LINKS_REPLACE);
 					foreach(var smile in SMILEYS_DATA) {
 						result = smile.Key.Replace(result, smile.Value);
@@ -110,10 +110,10 @@ namespace FLocal.Common {
 			public static readonly BBParserGateway instance = new BBParserGateway();
 
 			private BBCodeParser<BBCodes.IPostParsingContext> parser;
-			private ITextFormatter formatter;
+			private ITextFormatter<BBCodes.IPostParsingContext> formatter;
 
 			private BBCodeParser<BBCodes.IPostParsingContext> quotesParser;
-			private ITextFormatter simpleFormatter;
+			private ITextFormatter<BBCodes.IPostParsingContext> simpleFormatter;
 
 			private BBParserGateway() {
 				this.parser = new BBCodeParser<BBCodes.IPostParsingContext>();

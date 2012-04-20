@@ -11,7 +11,7 @@ namespace FLocal.Common.BBCodes {
 			: base("user") {
 		}
 
-		public override string Format(IPostParsingContext context, ITextFormatter formatter) {
+		public override string Format(IPostParsingContext context, ITextFormatter<IPostParsingContext> formatter) {
 			return UserMentionProcessor.ProcessUserMention(context, this.DefaultOrValue);
 		}
 

@@ -12,7 +12,7 @@ namespace FLocal.Common.BBCodes {
 			: base("google") {
 		}
 
-		public override string Format(IPostParsingContext context, ITextFormatter formatter) {
+		public override string Format(IPostParsingContext context, ITextFormatter<IPostParsingContext> formatter) {
 			return "<a href=\"http://lmgtfy.com/?q=" + HttpUtility.UrlPathEncode(this.DefaultOrValue) + "\">g:" + this.GetInnerHTML(context, formatter) + "</a>";
 		}
 

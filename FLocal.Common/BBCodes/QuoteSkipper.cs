@@ -10,7 +10,7 @@ namespace FLocal.Common.BBCodes {
 		public QuoteSkipper() : base("quoteskipper") {
 		}
 
-		public override string Format(IPostParsingContext context, ITextFormatter formatter) {
+		public override string Format(IPostParsingContext context, ITextFormatter<IPostParsingContext> formatter) {
 			if(this.Name.ToLower() == "q" || this.Name.ToLower() == "quote") {
 				return "";
 			} else if(this.Name.ToLower() == "code") {

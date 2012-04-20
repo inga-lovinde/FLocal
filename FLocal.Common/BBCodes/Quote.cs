@@ -12,7 +12,7 @@ namespace FLocal.Common.BBCodes {
 			: base("quote") {
 		}
 
-		public override string Format(IPostParsingContext context, ITextFormatter formatter) {
+		public override string Format(IPostParsingContext context, ITextFormatter<IPostParsingContext> formatter) {
 			string inner = this.GetInnerHTML(context, formatter).TrimHtml();
 			if(inner == "") return "";
 			string marker = this.Default;

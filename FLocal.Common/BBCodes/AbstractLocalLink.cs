@@ -16,7 +16,7 @@ namespace FLocal.Common.BBCodes {
 			get;
 		}
 
-		public override string Format(IPostParsingContext context, ITextFormatter formatter) {
+		public override string Format(IPostParsingContext context, ITextFormatter<IPostParsingContext> formatter) {
 			var url = this.url;
 			var name = this.Safe(url.title);
 			if(this.Default != null) {

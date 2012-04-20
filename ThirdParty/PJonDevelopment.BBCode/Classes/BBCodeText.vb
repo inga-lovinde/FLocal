@@ -37,8 +37,8 @@ Public NotInheritable Class BBCodeText(Of TContext As Class)
 	''' <summary>Transforms this instance of <see cref="BBCodeText" /> into its desired text representation.</summary>
 	''' <param name="formatter">An object that implements the <see cref="ITextFormatter" /> interface.</param>
 	''' <returns>The text formatted by the <see cref="ITextFormatter" />.</returns>
-	Public Overrides Function Format(ByVal context As TContext, ByVal formatter As ITextFormatter) As String
-		Return formatter.Format(__InnerText)
+	Public Overrides Function Format(ByVal context As TContext, ByVal formatter As ITextFormatter(Of TContext)) As String
+		Return formatter.Format(context, __InnerText)
 	End Function
 
 	''' <summary>Gets or sets the inner BBCode.</summary>

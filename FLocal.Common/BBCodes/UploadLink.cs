@@ -11,7 +11,7 @@ namespace FLocal.Common.BBCodes {
 			: base("uploadlink") {
 		}
 
-		public override string Format(IPostParsingContext context, ITextFormatter formatter) {
+		public override string Format(IPostParsingContext context, ITextFormatter<IPostParsingContext> formatter) {
 			var upload = dataobjects.Upload.LoadById(int.Parse(this.DefaultOrValue));
 			var name = this.Safe(upload.filename);
 			if(this.Default != null) {
