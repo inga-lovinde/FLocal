@@ -95,7 +95,7 @@ namespace MySQLConnector {
 			}
 		}
 
-		private List<string> _LoadIdsByConditions(DbCommand command, ITableSpec table, Web.Core.DB.conditions.AbstractCondition conditions, Diapasone diapasone, JoinSpec[] joins, SortSpec[] sorts, bool allowHugeLists) {
+		private List<string> _LoadIdsByConditions(DbCommand command, ITableSpec table, Web.Core.DB.conditions.AbstractCondition conditions, Diapasone diapasone, JoinSpec[] joins, SortSpec[] sorts, ColumnSpec idSpec, bool allowHugeLists) {
 			using(var logger = this.CreateCommandExecutionLogger()) {
 
 				command.CommandType = System.Data.CommandType.Text;
@@ -164,7 +164,7 @@ namespace MySQLConnector {
 					if(diapasone.count >= 0) {
 						queryLimits = "LIMIT " + diapasone.count + " OFFSET " + diapasone.start;
 					}
-					command.CommandText = logger.commandText = "SELECT " + table.getIdSpec().compile(this.traits) + " " + queryMain + " " + querySorts + " " + queryLimits;
+					command.CommandText = logger.commandText = "SELECT " + idSpec.compile(this.traits) + " " + queryMain + " " + querySorts + " " + queryLimits;
 
 					List<string> result = new List<string>();
 					using(DbDataReader reader = command.ExecuteReader()) {
@@ -177,10 +177,10 @@ namespace MySQLConnector {
 			}
 		}
 
-		public List<string> LoadIdsByConditions(ITableSpec table, Web.Core.DB.conditions.AbstractCondition conditions, Diapasone diapasone, JoinSpec[] joins, SortSpec[] sorts, bool allowHugeLists) {
+		public List<string> LoadIdsByConditions(ITableSpec table, Web.Core.DB.conditions.AbstractCondition conditions, Diapasone diapasone, JoinSpec[] joins, SortSpec[] sorts, ColumnSpec idSpec, bool allowHugeLists) {
 			using(DbConnection connection = this.createConnection()) {
 				using(DbCommand command = connection.CreateCommand()) {
-					return this._LoadIdsByConditions(command, table, conditions, diapasone, joins, sorts, allowHugeLists);
+					return this._LoadIdsByConditions(command, table, conditions, diapasone, joins, sorts, idSpec, allowHugeLists);
 				}
 			}
 		}
@@ -274,7 +274,7 @@ namespace MySQLConnector {
 			lock(transaction) {
 				using(DbCommand command = transaction.sqlconnection.CreateCommand()) {
 					command.Transaction = transaction.sqltransaction;
-					return this._LoadIdsByConditions(command, table, conditions, diapasone, joins, sorts, allowHugeLists);
+					return this._LoadIdsByConditions(command, table, conditions, diapasone, joins, sorts, table.getIdSpec(), allowHugeLists);
 				}
 			}
 		}
