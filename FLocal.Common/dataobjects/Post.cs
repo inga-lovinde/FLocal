@@ -8,6 +8,7 @@ using Web.Core.DB;
 using Web.Core.DB.conditions;
 using FLocal.Common;
 using FLocal.Common.actions;
+using FLocal.Common.helpers;
 
 namespace FLocal.Common.dataobjects {
 	public class Post : SqlObject<Post> {
@@ -337,7 +338,10 @@ namespace FLocal.Common.dataobjects {
 				if(parentPost != null && parentPost.poster.id != poster.id) {
 					newMentionedUsersIds.Add(parentPost.poster.id);
 				}
-				string newBodyIntermediate = UBBParser.UBBToIntermediate(newBody);
+				string newBodyIntermediate = UBBParser.UBBToIntermediate(
+					new DelegatePostParsingContext(mentionedUser => newMentionedUsersIds.Add(mentionedUser.id)),
+					newBody
+				);
 
 				List<AbstractChange> changes = new List<AbstractChange> {
 					new InsertChange(

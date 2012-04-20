@@ -7,6 +7,7 @@ using Web.Core;
 using Web.Core.DB;
 using Web.Core.DB.conditions;
 using FLocal.Common.actions;
+using FLocal.Common.helpers;
 
 namespace FLocal.Common.dataobjects {
 	public class Thread : SqlObject<Thread> {
@@ -420,7 +421,10 @@ namespace FLocal.Common.dataobjects {
 				//dirty hack
 				bodyIntermediate = body;
 			} else {
-				bodyIntermediate = UBBParser.UBBToIntermediate(body);
+				bodyIntermediate = UBBParser.UBBToIntermediate(
+					new DelegatePostParsingContext(mentionedUser => mentionedUsersIds.Add(mentionedUser.id)),
+					body
+				);
 			}
 			var postInsertData = new Dictionary<string,AbstractFieldValue> {
 				{ Post.TableSpec.FIELD_THREADID, new ScalarFieldValue(threadId.ToString()) },

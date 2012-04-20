@@ -3,9 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using FLocal.Common.dataobjects;
-using FLocal.Common.BBCodes;
 
 namespace FLocal.Common.helpers {
-	class DelegatePostParsingContext : IPostParsingContext {
+	class DelegatePostParsingContext : BBCodes.IPostParsingContext {
+
+		private readonly Action<User> onUserMention;
+
+		public DelegatePostParsingContext(Action<User> onUserMention) {
+			this.onUserMention = onUserMention;
+		}
+
+		#region IPostParsingContext Members
+
+		public void OnUserMention(User user) {
+			this.onUserMention(user);
+		}
+
+		#endregion
+
 	}
 }

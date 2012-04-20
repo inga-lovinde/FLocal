@@ -161,10 +161,14 @@ namespace FLocal.Common {
 			}
 
 			public string ParseQuote(string input) {
-				string result = this.quotesParser.Parse(input).Format(new DelegatePostParsingContext(), this.simpleFormatter);
+				string result = this.quotesParser.Parse(input).Format(CreateStubContext(), this.simpleFormatter);
 				return result;
 			}
 
+		}
+
+		private static BBCodes.IPostParsingContext CreateStubContext() {
+			return new DelegatePostParsingContext(user => {});
 		}
 
 		public static string UBBToIntermediate(BBCodes.IPostParsingContext context, string UBB) {
@@ -172,7 +176,7 @@ namespace FLocal.Common {
 		}
 
 		public static string UBBToIntermediate(string UBB) {
-			return UBBToIntermediate(new DelegatePostParsingContext(), UBB);
+			return UBBToIntermediate(CreateStubContext(), UBB);
 		}
 
 		public static string ShallerToUBB(string shaller) {
