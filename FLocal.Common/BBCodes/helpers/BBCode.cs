@@ -2,18 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using FLocal.Common.helpers;
 
 namespace FLocal.Common.BBCodes {
-	abstract class BBCode : PJonDevelopment.BBCode.BBCodeElement {
+	abstract class BBCode : PJonDevelopment.BBCode.BBCodeElement<IPostParsingContext> {
 
 		public BBCode(string name)
 			: base(name) {
 		}
 
-		protected string GetInnerHTML(PJonDevelopment.BBCode.ITextFormatter formatter) {
+		protected string GetInnerHTML(IPostParsingContext context, PJonDevelopment.BBCode.ITextFormatter<IPostParsingContext> formatter) {
 			StringBuilder builder = new StringBuilder();
 			foreach (var node in this.Nodes) {
-				builder.Append(node.Format(formatter));
+				builder.Append(node.Format(context, formatter));
 			}
 			return builder.ToString();
 		}

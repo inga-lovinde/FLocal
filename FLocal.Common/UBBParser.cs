@@ -7,26 +7,27 @@ using System.Text.RegularExpressions;
 using PJonDevelopment.BBCode;
 using System.IO;
 using Web.Core;
+using FLocal.Common.helpers;
 
 namespace FLocal.Common {
 	public static class UBBParser {
 
 		private class BBParserGateway {
 
-			private class SimpleFormatter : ITextFormatter {
+			private class SimpleFormatter : ITextFormatter<BBCodes.IPostParsingContext> {
 
 				public static readonly SimpleFormatter instance = new SimpleFormatter();
 
 				private SimpleFormatter() {
 				}
 
-				public string Format(string source) {
+				public string Format(BBCodes.IPostParsingContext context, string source) {
 					return source;
 				}
 
 			}
 
-			private class TextFormatter : ITextFormatter {
+			private class TextFormatter : ITextFormatter<BBCodes.IPostParsingContext> {
 
 				public static readonly TextFormatter instance = new TextFormatter();
 
@@ -68,6 +69,14 @@ namespace FLocal.Common {
 					return BBCodes.UrlProcessor.ProcessLink(url, null, true) + remainder;
 				}
 
+				private static readonly Regex USERS_MATCHER = new Regex("(?<start>^|\\W)@(?<username>\\w+)(?<end>\\W|$)", RegexOptions.Singleline | RegexOptions.Compiled);
+				private static string USERS_REPLACE(BBCodes.IPostParsingContext context, Match match) {
+					string start = match.Groups["start"].Value;
+					string username = match.Groups["username"].Value;
+					string end = match.Groups["end"].Value;
+					return start + BBCodes.UserMentionProcessor.ProcessUserMention(context, username) + end;
+				}
+
 				private static readonly Dictionary<Regex, MatchEvaluator> TYPOGRAPHICS = new Dictionary<Regex, MatchEvaluator> {
 					{ new Regex("(?<=\\s)--?(?=\\s)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => "–" },
 					{ new Regex("(?<=\\s)---(?=\\s)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => "—" },
@@ -85,15 +94,16 @@ namespace FLocal.Common {
 					{ new Regex("&lt;-", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline), match => "←" },
 				};
 
-				private ITextFormatter inner;
+				private ITextFormatter<BBCodes.IPostParsingContext> inner;
 
 				private TextFormatter() {
-					this.inner = new BBCodeHtmlFormatter();
+					this.inner = new BBCodeHtmlFormatter<BBCodes.IPostParsingContext>();
 				}
 
-				public string Format(string source) {
-					string result = this.inner.Format(source).Replace("&nbsp;", " ");
+				public string Format(BBCodes.IPostParsingContext context, string source) {
+					string result = this.inner.Format(context, source).Replace("&nbsp;", " ");
 					result = LINKS_MATCHER.Replace(result, LINKS_REPLACE);
+					result = USERS_MATCHER.Replace(result, match => USERS_REPLACE(context, match));
 					foreach(var smile in SMILEYS_DATA) {
 						result = smile.Key.Replace(result, smile.Value);
 					}
@@ -108,14 +118,14 @@ namespace FLocal.Common {
 
 			public static readonly BBParserGateway instance = new BBParserGateway();
 
-			private BBCodeParser parser;
-			private ITextFormatter formatter;
+			private BBCodeParser<BBCodes.IPostParsingContext> parser;
+			private ITextFormatter<BBCodes.IPostParsingContext> formatter;
 
-			private BBCodeParser quotesParser;
-			private ITextFormatter simpleFormatter;
+			private BBCodeParser<BBCodes.IPostParsingContext> quotesParser;
+			private ITextFormatter<BBCodes.IPostParsingContext> simpleFormatter;
 
 			private BBParserGateway() {
-				this.parser = new BBCodeParser();
+				this.parser = new BBCodeParser<BBCodes.IPostParsingContext>();
 				this.parser.ElementTypes.Add("b", typeof(BBCodes.B), true);
 				this.parser.ElementTypes.Add("code", typeof(BBCodes.Code), true);
 				this.parser.ElementTypes.Add("ecode", typeof(BBCodes.ECode), true);
@@ -145,30 +155,37 @@ namespace FLocal.Common {
 				this.parser.ElementTypes.Add("wiki", typeof(BBCodes.Wiki), true);
 				this.parser.ElementTypes.Add("ruwiki", typeof(BBCodes.RuWiki), true);
 				this.formatter = TextFormatter.instance;
-				
-				this.quotesParser = new BBCodeParser();
+
+				this.quotesParser = new BBCodeParser<BBCodes.IPostParsingContext>();
 				foreach(var elementType in this.parser.ElementTypes) {
 					this.quotesParser.ElementTypes.Add(elementType.Key, typeof(BBCodes.QuoteSkipper), elementType.Value.RequireClosingTag);
 				}
 				this.simpleFormatter = SimpleFormatter.instance;
 			}
 
-			public string Parse(string input) {
-				string result = this.parser.Parse(input).Format(this.formatter);
+			public string Parse(BBCodes.IPostParsingContext context, string input) {
+				string result = this.parser.Parse(input).Format(context, this.formatter);
 				if(result.EndsWith("<br/>")) result = result.Substring(0, result.Length - 5);
 				return result;
 			}
 
 			public string ParseQuote(string input) {
-				string result = this.quotesParser.Parse(input).Format(this.simpleFormatter);
+				string result = this.quotesParser.Parse(input).Format(CreateStubContext(), this.simpleFormatter);
 				return result;
 			}
 
 		}
 
+		private static BBCodes.IPostParsingContext CreateStubContext() {
+			return new DelegatePostParsingContext(user => {});
+		}
+
+		public static string UBBToIntermediate(BBCodes.IPostParsingContext context, string UBB) {
+			return BBParserGateway.instance.Parse(context, UBB);
+		}
+
 		public static string UBBToIntermediate(string UBB) {
-			//return HttpUtility.HtmlEncode(UBB).Replace(Util.EOL, "<br/>" + Util.EOL);
-			return BBParserGateway.instance.Parse(UBB);
+			return UBBToIntermediate(CreateStubContext(), UBB);
 		}
 
 		public static string ShallerToUBB(string shaller) {

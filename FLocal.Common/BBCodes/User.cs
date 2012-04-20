@@ -11,10 +11,8 @@ namespace FLocal.Common.BBCodes {
 			: base("user") {
 		}
 
-		public override string Format(ITextFormatter formatter) {
-			var user = dataobjects.User.LoadByName(this.DefaultOrValue);
-			var url = new URL.users.user.Info(user.id.ToString(), null);
-			return String.Format("<a class=\"separate UG_{0}\" href=\"{1}\">{2}</a>", this.Safe(user.userGroup.name), url.canonical, this.Safe(user.name));
+		public override string Format(IPostParsingContext context, ITextFormatter<IPostParsingContext> formatter) {
+			return UserMentionProcessor.ProcessUserMention(context, this.DefaultOrValue);
 		}
 
 	}

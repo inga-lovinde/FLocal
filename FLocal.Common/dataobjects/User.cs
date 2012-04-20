@@ -253,38 +253,18 @@ namespace FLocal.Common.dataobjects {
 			);
 		}
 
-		public IEnumerable<Post> getReplies(Diapasone diapasone, bool isAscending) {
-			JoinSpec parent = new JoinSpec(
-				Post.TableSpec.instance.getColumnSpec(Post.TableSpec.FIELD_PARENTPOSTID),
-				Post.TableSpec.instance,
-				"parent"
-			);
+		public IEnumerable<Post> getMentions(Diapasone diapasone, bool isAscending) {
 			return Post.LoadByIds(
 				from stringId in Config.instance.mainConnection.LoadIdsByConditions(
-					Post.TableSpec.instance,
-					new ComplexCondition(
-						ConditionsJoinType.AND,
-						new ComparisonCondition(
-							parent.additionalTable.getColumnSpec(Post.TableSpec.FIELD_POSTERID),
-							ComparisonType.EQUAL,
-							this.id.ToString()
-						),
-						new ComparisonCondition(
-							Post.TableSpec.instance.getColumnSpec(Post.TableSpec.FIELD_POSTERID),
-							ComparisonType.NOTEQUAL,
-							this.id.ToString()
-						)
+					Mention.TableSpec.instance,
+					new ComparisonCondition(
+						Mention.TableSpec.instance.getColumnSpec(Mention.TableSpec.FIELD_MENTIONEDUSERID),
+						ComparisonType.EQUAL,
+						this.id.ToString()
 					),
 					diapasone,
-					new JoinSpec[] {
-						parent
-					},
-					new SortSpec[] {
-						new SortSpec(
-							Post.TableSpec.instance.getIdSpec(),
-							isAscending
-						),
-					}
+					Mention.TableSpec.instance.getColumnSpec(Mention.TableSpec.FIELD_POSTID),
+					new SortSpec(Mention.TableSpec.instance.getIdSpec(), isAscending)
 				) select int.Parse(stringId)
 			);
 		}

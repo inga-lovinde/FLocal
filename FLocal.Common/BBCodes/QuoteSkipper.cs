@@ -10,7 +10,7 @@ namespace FLocal.Common.BBCodes {
 		public QuoteSkipper() : base("quoteskipper") {
 		}
 
-		public override string Format(ITextFormatter formatter) {
+		public override string Format(IPostParsingContext context, ITextFormatter<IPostParsingContext> formatter) {
 			if(this.Name.ToLower() == "q" || this.Name.ToLower() == "quote") {
 				return "";
 			} else if(this.Name.ToLower() == "code") {
@@ -36,7 +36,7 @@ namespace FLocal.Common.BBCodes {
 				}
 				sb.Append("]");
 				if(this.RequireClosingTag) {
-					sb.Append(this.GetInnerHTML(formatter));
+					sb.Append(this.GetInnerHTML(context, formatter));
 					sb.Append("[/");
 					sb.Append(name);
 					sb.Append("]");

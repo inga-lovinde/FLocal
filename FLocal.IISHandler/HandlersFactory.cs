@@ -51,7 +51,7 @@ namespace FLocal.IISHandler {
 			{ typeof(URL.users.user.Info), CreateHandler<URL.users.user.Info, handlers.response.UserInfoHandler> },
 			{ typeof(URL.users.user.PollsParticipated), CreateHandler<URL.users.user.PollsParticipated, handlers.response.UserPollsParticipatedHandler> },
 			{ typeof(URL.users.user.Posts), CreateHandler<URL.users.user.Posts, handlers.response.UserPostsHandler> },
-			{ typeof(URL.users.user.Replies), CreateHandler<URL.users.user.Replies, handlers.response.UserRepliesHandler> },
+			{ typeof(URL.users.user.Mentions), CreateHandler<URL.users.user.Mentions, handlers.response.UserRepliesHandler> },
 			{ typeof(URL.users.user.Threads), CreateHandler<URL.users.user.Threads, handlers.response.UserThreadsHandler> },
 		};
 

@@ -9,7 +9,7 @@ namespace Web.Core.DB {
 
 		List<Dictionary<string, string>> LoadByIds(ITableSpec table, List<string> ids);
 
-		List<string> LoadIdsByConditions(ITableSpec table, AbstractCondition conditions, Diapasone diapasone, JoinSpec[] joins, SortSpec[] sorts, bool allowHugeLists);
+		List<string> LoadIdsByConditions(ITableSpec table, AbstractCondition conditions, Diapasone diapasone, JoinSpec[] joins, SortSpec[] sorts, ColumnSpec idSpec, bool allowHugeLists);
 
 		long GetCountByConditions(ITableSpec table, AbstractCondition conditions, params JoinSpec[] joins);
 
@@ -34,11 +34,15 @@ namespace Web.Core.DB {
 	public static class IDBConnectionExtensions {
 
 		public static List<string> LoadIdsByConditions(this IDBConnection connection, ITableSpec table, AbstractCondition conditions, Diapasone diapasone, JoinSpec[] joins, SortSpec[] sorts) {
-			return connection.LoadIdsByConditions(table, conditions, diapasone, joins, sorts, false);
+			return connection.LoadIdsByConditions(table, conditions, diapasone, joins, sorts, table.getIdSpec(), false);
 		}
 
 		public static List<string> LoadIdsByConditions(this IDBConnection connection, ITableSpec table, AbstractCondition conditions, Diapasone diapasone, params JoinSpec[] joins) {
 			return connection.LoadIdsByConditions(table, conditions, diapasone, joins, new SortSpec[] { new SortSpec(table.getIdSpec(), true) });
+		}
+
+		public static List<string> LoadIdsByConditions(this IDBConnection connection, ITableSpec table, AbstractCondition conditions, Diapasone diapasone, ColumnSpec idSpec, params SortSpec[] sorts) {
+			return connection.LoadIdsByConditions(table, conditions, diapasone, new JoinSpec[0], sorts, idSpec, false);
 		}
 
 		public static Transaction beginTransaction(this IDBConnection connection) {

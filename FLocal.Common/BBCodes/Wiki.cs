@@ -12,8 +12,8 @@ namespace FLocal.Common.BBCodes {
 			: base("wiki") {
 		}
 
-		public override string Format(ITextFormatter formatter) {
-			return "<a href=\"http://en.wikipedia.org/wiki/" + HttpUtility.UrlPathEncode(this.DefaultOrValue) + "\">w:" + this.GetInnerHTML(formatter) + "</a>";
+		public override string Format(IPostParsingContext context, ITextFormatter<IPostParsingContext> formatter) {
+			return "<a href=\"http://en.wikipedia.org/wiki/" + HttpUtility.UrlPathEncode(this.DefaultOrValue) + "\">w:" + this.GetInnerHTML(context, formatter) + "</a>";
 		}
 
 	}

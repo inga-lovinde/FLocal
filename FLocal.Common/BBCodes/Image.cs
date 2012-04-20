@@ -10,7 +10,7 @@ namespace FLocal.Common.BBCodes {
 		public Image() : base("image") {
 		}
 
-		public override string Format(ITextFormatter formatter) {
+		public override string Format(IPostParsingContext context, ITextFormatter<IPostParsingContext> formatter) {
 			var urlInfo = UrlProcessor.Process(this.InnerText);
 			if (urlInfo.isLocal && urlInfo.relativeUrl.StartsWith("/user/upload/")) {
 				return "<f:img><f:src>" + urlInfo.relativeUrl + "</f:src><f:alt>" + urlInfo.relativeUrl + "</f:alt></f:img>";

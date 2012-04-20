@@ -305,7 +305,8 @@ namespace FLocal.Common.URL {
 								case "posts":
 									return new users.user.Posts(requestParts[2], GetRemainder(requestParts, 4));
 								case "replies":
-									return new users.user.Replies(requestParts[2], GetRemainder(requestParts, 4));
+								case "mentions":
+									return new users.user.Mentions(requestParts[2], GetRemainder(requestParts, 4));
 								case "threads":
 									return new users.user.Threads(requestParts[2], GetRemainder(requestParts, 4));
 								default:

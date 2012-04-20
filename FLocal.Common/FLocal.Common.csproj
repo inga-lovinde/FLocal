@@ -68,6 +68,7 @@
     <Compile Include="BBCodes\Code.cs" />
     <Compile Include="BBCodes\FUrl.cs" />
     <Compile Include="BBCodes\helpers\TexProcessor.cs" />
+    <Compile Include="BBCodes\helpers\UserMentionProcessor.cs" />
     <Compile Include="BBCodes\Image.cs" />
     <Compile Include="BBCodes\List.cs" />
     <Compile Include="BBCodes\ListElem.cs" />
@@ -100,6 +101,7 @@
     <Compile Include="dataobjects\AnonymousUserSettings.cs" />
     <Compile Include="dataobjects\LocalNetwork.cs" />
     <Compile Include="dataobjects\Machichara.cs" />
+    <Compile Include="dataobjects\Mention.cs" />
     <Compile Include="dataobjects\Moderator.cs" />
     <Compile Include="dataobjects\ModernSkin.cs" />
     <Compile Include="dataobjects\PMConversation.cs" />
@@ -122,6 +124,8 @@
     <Compile Include="dataobjects\User.cs" />
     <Compile Include="dataobjects\AccountSettings.cs" />
     <Compile Include="dataobjects\UserGroup.cs" />
+    <Compile Include="helpers\DelegatePostParsingContext.cs" />
+    <Compile Include="BBCodes\helpers\IPostParsingContext.cs" />
     <Compile Include="IComplexSqlObjectTableSpec.cs" />
     <Compile Include="IOutputParams.cs" />
     <Compile Include="ISqlObjectTableSpec.cs" />
@@ -179,7 +183,7 @@
     <Compile Include="URL\users\user\Info.cs" />
     <Compile Include="URL\users\user\PollsParticipated.cs" />
     <Compile Include="URL\users\user\Posts.cs" />
-    <Compile Include="URL\users\user\Replies.cs" />
+    <Compile Include="URL\users\user\Mentions.cs" />
     <Compile Include="URL\users\user\Threads.cs" />
     <Compile Include="UserContext.cs" />
     <Compile Include="UserSettingsGateway.cs" />

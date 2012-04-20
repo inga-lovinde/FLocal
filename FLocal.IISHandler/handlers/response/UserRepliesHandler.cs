@@ -12,7 +12,7 @@ using Web.Core.DB.conditions;
 
 namespace FLocal.IISHandler.handlers.response {
 
-	class UserRepliesHandler : AbstractUserGetHandler<FLocal.Common.URL.users.user.Replies> {
+	class UserRepliesHandler : AbstractUserGetHandler<FLocal.Common.URL.users.user.Mentions> {
 
 		override protected string templateName {
 			get {
@@ -22,7 +22,7 @@ namespace FLocal.IISHandler.handlers.response {
 
 		override protected IEnumerable<XElement> getUserSpecificData(WebContext context, User user) {
 			PageOuter pageOuter = PageOuter.createFromUrl(this.url, context.userSettings.postsPerPage);
-			IEnumerable<Post> posts = user.getReplies(pageOuter, pageOuter.descendingDirection);
+			IEnumerable<Post> posts = user.getMentions(pageOuter, pageOuter.descendingDirection);
 
 			return new XElement[] {
 				user.exportToXmlForViewing(context),
