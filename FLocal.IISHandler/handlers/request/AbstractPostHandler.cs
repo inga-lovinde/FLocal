@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
@@ -41,14 +42,14 @@ namespace FLocal.IISHandler.handlers.request {
 		}
 
 		private XDocument getData(WebContext context) {
-			DateTime start = DateTime.Now;
+			var st = Stopwatch.StartNew();
 			var specificData = this.Do(context);
 			var commonData = this.getCommonData(context);
 			return new XDocument(
 				new XElement("root",
 					specificData,
 					commonData,
-					new XElement("processingTime", (DateTime.Now-start).TotalSeconds)
+					new XElement("processingTime", st.ElapsedMilliseconds)
 				)
 			);
 		}

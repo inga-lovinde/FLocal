@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -46,14 +47,14 @@ namespace FLocal.IISHandler {
 		public void ProcessRequest(HttpContext context) {
 			Initializer.instance.Initialize();
 
-			DateTime start = DateTime.Now;
+			Stopwatch st = Stopwatch.StartNew();
 			int requestNumber = counter.GetCurrentValueAndIncrement();
 			try {
 				Config.instance.Logger.Log("Began serving request #" + requestNumber + ": " + context.Request.Url.AbsoluteUri);
 				this.doProcessRequest(context);
-				Config.instance.Logger.Log("Done serving request #" + requestNumber + "; " + (DateTime.Now-start).TotalSeconds + " seconds spent");
+				Config.instance.Logger.Log("Done serving request #" + requestNumber + "; " + st.ElapsedMilliseconds + " ms spent");
 			} catch(RedirectException e) {
-				Config.instance.Logger.Log("Done serving request #" + requestNumber + "; " + (DateTime.Now-start).TotalSeconds + " seconds spent (redirected)");
+				Config.instance.Logger.Log("Done serving request #" + requestNumber + "; " + st.ElapsedMilliseconds + " ms spent (redirected)");
 				context.Response.Redirect(e.newUrl);
 			}
 		}
